@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  API+FineDust.swift
 //  FineDust
 //
 //  Created by Presto on 21/01/2019.
@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+extension API {
+  
+  /// 측정소 정보 조회.
+  // func getObservatoryPost(completion: @escaping )
+}

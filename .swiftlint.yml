@@ -1,10 +1,17 @@
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
+- nesting
 
 excluded:
- FineDust/Supporting Files/AppDelegate.swift
+- FineDust/Supporting Files/AppDelegate.swift
+- FineDust/Supporting Files/GeoConverter.swift
 
 line_length:
-warning: 99
-error: 120
+  warning: 99
+  error: 120
+
+identifier_name:
+  excluded:
+    - x
+    - y
