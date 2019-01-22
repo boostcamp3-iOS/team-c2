@@ -29,6 +29,14 @@
 		192CDAC521F6B2DF000CE35D /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAC421F6B2DF000CE35D /* Common.storyboard */; };
 		192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */; };
 		192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */; };
+		192CDACD21F6C85C000CE35D /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACC21F6C85C000CE35D /* ValueGraphView.swift */; };
+		192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACE21F6C865000CE35D /* RatioGraphView.swift */; };
+		192CDAD121F6C874000CE35D /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAD021F6C874000CE35D /* ValueGraphView.xib */; };
+		192CDAD321F6C87E000CE35D /* RatioGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAD221F6C87E000CE35D /* RatioGraphView.xib */; };
+		192CDADF21F6EA03000CE35D /* NSLayoutDimension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDADE21F6EA03000CE35D /* NSLayoutDimension+.swift */; };
+		192CDAE121F6F5B2000CE35D /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAE021F6F5B2000CE35D /* CALayer+.swift */; };
+		192CDAE321F6FEF9000CE35D /* StatisticsDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAE221F6FEF9000CE35D /* StatisticsDatePickerViewController.swift */; };
+		192CDAE521F70169000CE35D /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAE421F70169000CE35D /* Storyboard.swift */; };
 		1949B09921F5EB3200B22915 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1949B09821F5EB3200B22915 /* AppDelegate.swift */; };
 		1949B09E21F5EB3200B22915 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1949B09C21F5EB3200B22915 /* Main.storyboard */; };
 		1949B0A121F5EB3200B22915 /* FineDust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1949B09F21F5EB3200B22915 /* FineDust.xcdatamodeld */; };
@@ -60,6 +68,14 @@
 		192CDAC421F6B2DF000CE35D /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		192CDACC21F6C85C000CE35D /* ValueGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphView.swift; sourceTree = "<group>"; };
+		192CDACE21F6C865000CE35D /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
+		192CDAD021F6C874000CE35D /* ValueGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
+		192CDAD221F6C87E000CE35D /* RatioGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
+		192CDADE21F6EA03000CE35D /* NSLayoutDimension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutDimension+.swift"; sourceTree = "<group>"; };
+		192CDAE021F6F5B2000CE35D /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		192CDAE221F6FEF9000CE35D /* StatisticsDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsDatePickerViewController.swift; sourceTree = "<group>"; };
+		192CDAE421F70169000CE35D /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		1949B09521F5EB3200B22915 /* FineDust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineDust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1949B09821F5EB3200B22915 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1949B09D21F5EB3200B22915 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */,
+				192CDAE221F6FEF9000CE35D /* StatisticsDatePickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,6 +154,8 @@
 		192CDABA21F6B204000CE35D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				192CDAD421F6D7E9000CE35D /* Value Graph */,
+				192CDAD521F6D7EE000CE35D /* Ratio Graph */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +188,24 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		192CDAD421F6D7E9000CE35D /* Value Graph */ = {
+			isa = PBXGroup;
+			children = (
+				192CDAD021F6C874000CE35D /* ValueGraphView.xib */,
+				192CDACC21F6C85C000CE35D /* ValueGraphView.swift */,
+			);
+			path = "Value Graph";
+			sourceTree = "<group>";
+		};
+		192CDAD521F6D7EE000CE35D /* Ratio Graph */ = {
+			isa = PBXGroup;
+			children = (
+				192CDAD221F6C87E000CE35D /* RatioGraphView.xib */,
+				192CDACE21F6C865000CE35D /* RatioGraphView.swift */,
+			);
+			path = "Ratio Graph";
 			sourceTree = "<group>";
 		};
 		1949B08C21F5EB3200B22915 = {
@@ -229,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				192CDAC421F6B2DF000CE35D /* Common.storyboard */,
+				192CDAE421F70169000CE35D /* Storyboard.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -246,6 +284,8 @@
 				192CDAA621F60914000CE35D /* Date+.swift */,
 				192CDAB021F627A3000CE35D /* NSLayoutConstraint+.swift */,
 				192CDAB221F628C9000CE35D /* NSLayoutAnchor+.swift */,
+				192CDADE21F6EA03000CE35D /* NSLayoutDimension+.swift */,
+				192CDAE021F6F5B2000CE35D /* CALayer+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -333,11 +373,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				192CDAD321F6C87E000CE35D /* RatioGraphView.xib in Resources */,
 				1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */,
 				1949B0A621F5EB3600B22915 /* LaunchScreen.storyboard in Resources */,
 				1949B0A321F5EB3600B22915 /* Assets.xcassets in Resources */,
 				192CDAC521F6B2DF000CE35D /* Common.storyboard in Resources */,
 				192CDAC021F6B242000CE35D /* Statistics.storyboard in Resources */,
+				192CDAD121F6C874000CE35D /* ValueGraphView.xib in Resources */,
 				1949B09E21F5EB3200B22915 /* Main.storyboard in Resources */,
 				192CDAC221F6B24D000CE35D /* Feedback.storyboard in Resources */,
 			);
@@ -372,14 +414,20 @@
 			files = (
 				192CDAAA21F61D0C000CE35D /* GeoConverter.swift in Sources */,
 				192CDAA521F6046D000CE35D /* MainViewController.swift in Sources */,
+				192CDADF21F6EA03000CE35D /* NSLayoutDimension+.swift in Sources */,
 				192CDA9521F5EE11000CE35D /* UIAlertController+.swift in Sources */,
 				192CDA8F21F5EDFC000CE35D /* NSObject+.swift in Sources */,
 				192CDA9921F5EE1E000CE35D /* String+.swift in Sources */,
+				192CDACD21F6C85C000CE35D /* ValueGraphView.swift in Sources */,
+				192CDAE521F70169000CE35D /* Storyboard.swift in Sources */,
+				192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */,
 				192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */,
 				192CDA9321F5EE09000CE35D /* UIView+.swift in Sources */,
 				192CDAAF21F623ED000CE35D /* ObservatoryResponse.swift in Sources */,
 				192CDA9121F5EE04000CE35D /* UIViewController+.swift in Sources */,
 				1949B09921F5EB3200B22915 /* AppDelegate.swift in Sources */,
+				192CDAE321F6FEF9000CE35D /* StatisticsDatePickerViewController.swift in Sources */,
+				192CDAE121F6F5B2000CE35D /* CALayer+.swift in Sources */,
 				192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */,
 				192CDAB321F628C9000CE35D /* NSLayoutAnchor+.swift in Sources */,
 				192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */,

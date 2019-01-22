@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-523" y="-387"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Common Tab Bar Controller-->
         <scene sceneID="5lI-42-cJZ">
             <objects>
-                <tabBarController id="IlJ-X8-Ugh" sceneMemberID="viewController">
+                <tabBarController id="IlJ-X8-Ugh" customClass="CommonTabBarController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9CY-Ak-aqb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -56,7 +56,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBl-8w-zEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-535" y="-295"/>
+            <point key="canvasLocation" x="-535" y="-283"/>
         </scene>
     </scenes>
 </document>
