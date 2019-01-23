@@ -66,6 +66,9 @@ final class StatisticsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setConstraintsToSubviews()
+    API.shared.fetchObservatory { response, error in
+      print(response, error)
+    }
   }
 }
 
@@ -73,12 +76,7 @@ final class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: ValueGraphViewDelegate {
   func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton) {
-    UIViewController
-      .create(
-        fromStoryboard: Storyboard.statistics,
-        identifier: StatisticsDatePickerViewController.classNameToString
-      )
-      .present(to: self, transitionStyle: .crossDissolve)
+    
   }
 }
 

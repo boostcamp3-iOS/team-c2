@@ -69,41 +69,5 @@
             </objects>
             <point key="canvasLocation" x="-207" y="-6"/>
         </scene>
-        <!--Statistics Date Picker View Controller-->
-        <scene sceneID="vjf-qk-Qgg">
-            <objects>
-                <viewController storyboardIdentifier="StatisticsDatePickerViewController" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pAV-UO-Bwf" customClass="StatisticsDatePickerViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1hH-pp-x5P">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ccd-Jc-aCb">
-                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <date key="date" timeIntervalSinceReferenceDate="569834119.18702698">
-                                    <!--2019-01-22 07:15:19 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="568033200">
-                                    <!--2019-01-01 11:00:00 +0000-->
-                                </date>
-                                <locale key="locale" localeIdentifier="ko_KR"/>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="ccd-Jc-aCb" firstAttribute="bottom" secondItem="zCk-cm-Zkj" secondAttribute="bottom" id="FRM-VD-wdE"/>
-                            <constraint firstItem="ccd-Jc-aCb" firstAttribute="trailing" secondItem="zCk-cm-Zkj" secondAttribute="trailing" id="bGr-cN-wtG"/>
-                            <constraint firstItem="ccd-Jc-aCb" firstAttribute="leading" secondItem="zCk-cm-Zkj" secondAttribute="leading" id="nhF-Rg-rOD"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="zCk-cm-Zkj"/>
-                    </view>
-                    <connections>
-                        <outlet property="datePicker" destination="ccd-Jc-aCb" id="Ucv-jD-aAe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w7f-nX-bCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="470" y="-7"/>
-        </scene>
     </scenes>
 </document>

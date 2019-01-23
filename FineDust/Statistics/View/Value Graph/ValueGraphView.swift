@@ -16,6 +16,7 @@ protocol ValueGraphViewDelegate: class {
 /// 지정 날짜 기준 일주일 그래프 관련 뷰
 final class ValueGraphView: UIView {
 
+  /// 레이어 관련 상수 모음
   enum Layer {
     
     static let borderWidth: CGFloat = 1.0
@@ -24,6 +25,11 @@ final class ValueGraphView: UIView {
   // MARK: delegate
   
   weak var delegate: ValueGraphViewDelegate?
+  
+  // MARK: Property
+  
+  /// 비율 모음
+  var ratios: [CGFloat] = []
   
   // MARK: IBOutlet
   
@@ -48,7 +54,13 @@ final class ValueGraphView: UIView {
   }
 
   /// 그래프 높이 제약 모음
-  @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
+  @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]! {
+    didSet {
+      for (index, constraint) in graphViewHeightConstraints.enumerated() {
+        graphViewHeightConstraints[index] = constraint.changeMultiplier(to: 0.5)
+      }
+    }
+  }
   
   // MARK: Life Cycle
   
