@@ -10,13 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--통계-->
         <scene sceneID="hxl-bi-pes">
             <objects>
                 <navigationController id="rIq-fy-EBz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="통계" id="BxE-pT-soT"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="yLH-07-419" kind="relationship" relationship="rootViewController" id="D49-lV-vix"/>
@@ -33,10 +36,34 @@
                     <view key="view" contentMode="scaleToFill" id="cAa-p0-7jU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
+                                <rect key="frame" x="16" y="72" width="343" height="265"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
+                                <rect key="frame" x="16" y="345" width="343" height="265"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="5Me-tg-mTj"/>
+                            <constraint firstItem="Sca-OT-FiC" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="5pt-9S-gdd"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="Sca-OT-FiC" secondAttribute="trailing" constant="16" id="Btq-Sh-eTx"/>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="height" secondItem="Sca-OT-FiC" secondAttribute="height" id="ZU7-Rt-NH8"/>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="Sca-OT-FiC" secondAttribute="bottom" constant="8" id="Zh2-Y8-YlE"/>
+                            <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="8" id="gcX-Nf-gdB"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="8" id="q0m-bH-Z4m"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="b6f-az-Uoz" secondAttribute="trailing" constant="16" id="vhB-m3-S59"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="66h-Qh-c5I"/>
                     </view>
                     <navigationItem key="navigationItem" id="q9l-Ys-TA3"/>
+                    <connections>
+                        <outlet property="ratioGraphBackgroundView" destination="b6f-az-Uoz" id="8jY-xt-nWU"/>
+                        <outlet property="valueGraphBackgroundView" destination="Sca-OT-FiC" id="aA3-rP-Vwm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktn-rj-baA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

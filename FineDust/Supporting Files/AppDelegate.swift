@@ -106,21 +106,22 @@ extension AppDelegate: CLLocationManagerDelegate {
     let locale = Locale(identifier: "ko_KR")
     guard let location = locations.last else { return }
     let coordinate = location.coordinate
-    print(coordinate.latitude, coordinate.longitude)
     let convertedCoordinate = GeoConverter().convert(
       sourceType: .WGS_84,
       destinationType: .TM,
       geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
     )
-    print(convertedCoordinate?.x, convertedCoordinate?.y)
     GeoInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
+//    API.shared.getObservatoryPost { response, error in
+//      print(response, error)
+//    }
     CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
       if let error = error {
         print(error.localizedDescription)
         return
       }
-      guard let placeMark = placeMarks?.last else { return }
-      print(placeMark.administrativeArea, placeMark.country, placeMark.locality, placeMark.name)
+      // administrativeArea / country / locality / name
+      // 서울특별시 / 대한민국 / 강남구 / 강남대로 382
     }
     manager.stopUpdatingLocation()
   }

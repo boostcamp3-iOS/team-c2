@@ -16,10 +16,12 @@ final class GeoInfo {
   static let shared = GeoInfo()
   
   // MARK: Property
+
+  var x: Double = 0
   
-  private var x: Double = 0
+  var y: Double = 0
   
-  private var y: Double = 0
+  var observatory: String = ""
   
   // MARK: Method
   

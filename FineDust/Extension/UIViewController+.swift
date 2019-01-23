@@ -16,9 +16,13 @@ extension UIViewController {
   }
   
   @discardableResult
-  func deliver(_ closure: (UIViewController) -> Void) -> UIViewController {
-    closure(self)
-    return self
+  func deliver<T: UIViewController>(
+    _ dictionary: [String: Any],
+    ofType type: T.Type
+  ) -> UIViewController {
+    guard let casted = self as? T else { fatalError("type must be UIViewController.") }
+    dictionary.forEach { casted.setValue($0.value, forKey: $0.key) }
+    return casted
   }
   
   func present(
