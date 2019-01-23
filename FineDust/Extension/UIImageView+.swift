@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView {
   func setRounded() {
-    self.layer.cornerRadius = self.frame.height / 2
-    self.layer.masksToBounds = true
+    layer.cornerRadius = frame.height / 2
+    layer.masksToBounds = true
   }
 }
