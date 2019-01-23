@@ -11,38 +11,29 @@ import Foundation
 /// 측정소 정보 조회 응답 객체.
 struct ObservatoryResponse: Codable {
   
-  struct Item: Codable {
+  struct List: Codable {
     
-    let stationName: String
-    
+    /// 관측소 주소
     let address: String
     
+    /// 관측소 이름
+    let stationName: String
+    
+    /// 현재 위치에서 관측소까지의 거리. km
     let distance: Double
     
     enum CodingKeys: String, CodingKey {
       
-      case stationName
-      
       case address = "addr"
       
       case distance = "tm"
+      
+      case stationName
     }
   }
   
-  let numberOfRows: Int
+  let list: [List]
   
-  let pageNumber: Int
-  
+  /// 응답 개수
   let totalCount: Int
-  
-  let items: [Item]
-  
-  enum CodingKeys: String, CodingKey {
-    
-    case numberOfRows = "numOfRows"
-    
-    case pageNumber = "pageNo"
-    
-    case totalCount, items
-  }
 }
