@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension UIAlertController {
+extension UIAlertController {
   static func alert(
     title: String?,
     message: String?,
