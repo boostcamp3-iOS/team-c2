@@ -11,4 +11,5 @@ import UIKit
 class FeedbackCollectionViewCell: UICollectionViewCell {
 
   @IBOutlet weak var feedbackImageView: UIImageView!
+  @IBOutlet weak var feedbackTitleLabel: UILabel!
 }
