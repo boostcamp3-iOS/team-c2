@@ -66,9 +66,6 @@ final class StatisticsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setConstraintsToSubviews()
-    API.shared.fetchObservatory { response, error in
-      print(response, error)
-    }
   }
 }
 

@@ -42,8 +42,6 @@
 		1949B0A321F5EB3600B22915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0A221F5EB3600B22915 /* Assets.xcassets */; };
 		1949B0A621F5EB3600B22915 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0A421F5EB3600B22915 /* LaunchScreen.storyboard */; };
 		1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */; };
-		199C197A21F73DD600ED439F /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C197921F73DD600ED439F /* FineDustResponse.swift */; };
-		199C197C21F7433C00ED439F /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C197B21F7433C00ED439F /* Grade.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,8 +82,6 @@
 		1949B0A521F5EB3600B22915 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1949B0A721F5EB3600B22915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		199C197921F73DD600ED439F /* FineDustResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
-		199C197B21F7433C00ED439F /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +105,7 @@
 		192CDAAD21F623DC000CE35D /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				199C197B21F7433C00ED439F /* Grade.swift */,
 				192CDAAE21F623ED000CE35D /* ObservatoryResponse.swift */,
-				199C197921F73DD600ED439F /* FineDustResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -425,8 +419,6 @@
 				192CDAE521F70169000CE35D /* Storyboard.swift in Sources */,
 				192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */,
 				192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */,
-				199C197C21F7433C00ED439F /* Grade.swift in Sources */,
-				199C197A21F73DD600ED439F /* FineDustResponse.swift in Sources */,
 				192CDA9321F5EE09000CE35D /* UIView+.swift in Sources */,
 				192CDAAF21F623ED000CE35D /* ObservatoryResponse.swift in Sources */,
 				192CDA9121F5EE04000CE35D /* UIViewController+.swift in Sources */,
