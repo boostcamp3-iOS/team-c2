@@ -10,27 +10,98 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Feedback View Controller-->
+        <!--Feedback Collection View Controller-->
         <scene sceneID="rBX-S8-JcQ">
             <objects>
-                <viewController id="SJf-BD-jk7" customClass="FeedbackViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SJf-BD-jk7" customClass="FeedbackCollectionViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="61v-n6-cUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Eb-K8-Eau">
+                                    <size key="itemSize" width="179" height="230"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="feedbackCell" reuseIdentifier="feedbackCell" id="Tva-RU-VTV" customClass="FeedbackCollectionViewCell" customModule="FineDust" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="230"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="179" height="230"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="179" height="230"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <connections>
+                                            <outlet property="feedbackImageView" destination="rCT-91-ej0" id="FoY-qm-i32"/>
+                                            <segue destination="pse-81-DNc" kind="show" id="Adu-Nj-gN6"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="SJf-BD-jk7" id="JWY-Ca-diZ"/>
+                                    <outlet property="delegate" destination="SJf-BD-jk7" id="5ZG-TL-BaG"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GBK-iT-3lb" firstAttribute="bottom" secondItem="msG-Ue-EPf" secondAttribute="bottom" id="Phc-DS-0fP"/>
+                            <constraint firstItem="msG-Ue-EPf" firstAttribute="top" secondItem="GBK-iT-3lb" secondAttribute="top" id="bfk-hy-egu"/>
+                            <constraint firstItem="GBK-iT-3lb" firstAttribute="trailing" secondItem="msG-Ue-EPf" secondAttribute="trailing" id="pzU-G0-xkY"/>
+                            <constraint firstItem="msG-Ue-EPf" firstAttribute="leading" secondItem="GBK-iT-3lb" secondAttribute="leading" id="wj2-Su-He4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="GBK-iT-3lb"/>
                     </view>
                     <navigationItem key="navigationItem" id="bLQ-ID-bQi"/>
+                    <connections>
+                        <outlet property="feedbackCollectionView" destination="msG-Ue-EPf" id="VBw-CS-hXe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NH6-7M-RbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="-201"/>
+            <point key="canvasLocation" x="944.79999999999995" y="-201.04947526236884"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--View Controller-->
+        <scene sceneID="RgD-T9-blT">
+            <objects>
+                <viewController id="pse-81-DNc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6F9-JH-VeS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="글글글" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujn-aX-e4G">
+                                <rect key="frame" x="165" y="333" width="45" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dFJ-Z9-WbG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RR0-d7-rnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1709.5999999999999" y="-201.04947526236884"/>
+        </scene>
+        <!--정보-->
         <scene sceneID="wl7-tx-Ipj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fMM-kt-kZo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="정보" id="Yse-Ig-ExT"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iPc-BG-6oF">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -45,4 +116,7 @@
             <point key="canvasLocation" x="124" y="-201.04947526236884"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="info1" width="320" height="320"/>
+    </resources>
 </document>
