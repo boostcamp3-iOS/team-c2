@@ -1,5 +1,5 @@
 //
-//  API.swift
+//  HTTPMethod.swift
 //  FineDust
 //
 //  Created by Presto on 21/01/2019.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-final class API {
+enum HTTPMethod: String {
   
-  static let shared = API()
+  case get = "GET"
   
+  case post = "POST"
 }

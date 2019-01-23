@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		192CDA8B21F5EC8D000CE35D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA8A21F5EC8D000CE35D /* MainViewController.swift */; };
 		192CDA8D21F5ED9C000CE35D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA8C21F5ED9C000CE35D /* Network.swift */; };
 		192CDA8F21F5EDFC000CE35D /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA8E21F5EDFC000CE35D /* NSObject+.swift */; };
 		192CDA9121F5EE04000CE35D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9021F5EE04000CE35D /* UIViewController+.swift */; };
@@ -14,21 +15,7 @@
 		192CDA9521F5EE11000CE35D /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9421F5EE11000CE35D /* UIAlertController+.swift */; };
 		192CDA9721F5EE17000CE35D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9621F5EE17000CE35D /* UIColor+.swift */; };
 		192CDA9921F5EE1E000CE35D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9821F5EE1E000CE35D /* String+.swift */; };
-		192CDA9F21F603A9000CE35D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9E21F603A9000CE35D /* API.swift */; };
-		192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAA021F603C5000CE35D /* API+FineDust.swift */; };
-		192CDAA521F6046D000CE35D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAA421F6046D000CE35D /* MainViewController.swift */; };
-		192CDAA721F60914000CE35D /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAA621F60914000CE35D /* Date+.swift */; };
-		192CDAAA21F61D0C000CE35D /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAA921F61D0C000CE35D /* GeoConverter.swift */; };
-		192CDAAC21F61F35000CE35D /* GeoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAAB21F61F35000CE35D /* GeoInfo.swift */; };
-		192CDAAF21F623ED000CE35D /* ObservatoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAAE21F623ED000CE35D /* ObservatoryResponse.swift */; };
-		192CDAB121F627A3000CE35D /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAB021F627A3000CE35D /* NSLayoutConstraint+.swift */; };
-		192CDAB321F628C9000CE35D /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAB221F628C9000CE35D /* NSLayoutAnchor+.swift */; };
-		192CDAB521F62A5D000CE35D /* UIView+NSLayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAB421F62A5D000CE35D /* UIView+NSLayoutAnchor.swift */; };
-		192CDAC021F6B242000CE35D /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDABF21F6B242000CE35D /* Statistics.storyboard */; };
-		192CDAC221F6B24D000CE35D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAC121F6B24D000CE35D /* Feedback.storyboard */; };
-		192CDAC521F6B2DF000CE35D /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAC421F6B2DF000CE35D /* Common.storyboard */; };
-		192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */; };
-		192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */; };
+		192CDA9D21F5F27A000CE35D /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDA9C21F5F27A000CE35D /* HTTPMethod.swift */; };
 		1949B09921F5EB3200B22915 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1949B09821F5EB3200B22915 /* AppDelegate.swift */; };
 		1949B09E21F5EB3200B22915 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1949B09C21F5EB3200B22915 /* Main.storyboard */; };
 		1949B0A121F5EB3200B22915 /* FineDust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1949B09F21F5EB3200B22915 /* FineDust.xcdatamodeld */; };
@@ -38,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		192CDA8A21F5EC8D000CE35D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		192CDA8C21F5ED9C000CE35D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		192CDA8E21F5EDFC000CE35D /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		192CDA9021F5EE04000CE35D /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -45,21 +33,7 @@
 		192CDA9421F5EE11000CE35D /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		192CDA9621F5EE17000CE35D /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		192CDA9821F5EE1E000CE35D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		192CDA9E21F603A9000CE35D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		192CDAA021F603C5000CE35D /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
-		192CDAA421F6046D000CE35D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		192CDAA621F60914000CE35D /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		192CDAA921F61D0C000CE35D /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
-		192CDAAB21F61F35000CE35D /* GeoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoInfo.swift; sourceTree = "<group>"; };
-		192CDAAE21F623ED000CE35D /* ObservatoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservatoryResponse.swift; sourceTree = "<group>"; };
-		192CDAB021F627A3000CE35D /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
-		192CDAB221F628C9000CE35D /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
-		192CDAB421F62A5D000CE35D /* UIView+NSLayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutAnchor.swift"; sourceTree = "<group>"; };
-		192CDABF21F6B242000CE35D /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
-		192CDAC121F6B24D000CE35D /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
-		192CDAC421F6B2DF000CE35D /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
-		192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		192CDA9C21F5F27A000CE35D /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		1949B09521F5EB3200B22915 /* FineDust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineDust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1949B09821F5EB3200B22915 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1949B09D21F5EB3200B22915 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,96 +55,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		192CDAA821F60A1C000CE35D /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HealthKit;
-			sourceTree = "<group>";
-		};
-		192CDAAD21F623DC000CE35D /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				192CDAAE21F623ED000CE35D /* ObservatoryResponse.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		192CDAB621F6B1D0000CE35D /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				1949B09C21F5EB3200B22915 /* Main.storyboard */,
-				192CDABE21F6B212000CE35D /* View */,
-				192CDABD21F6B20F000CE35D /* Controller */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		192CDAB721F6B1DD000CE35D /* Statistics */ = {
-			isa = PBXGroup;
-			children = (
-				192CDABF21F6B242000CE35D /* Statistics.storyboard */,
-				192CDABA21F6B204000CE35D /* View */,
-				192CDAB921F6B200000CE35D /* Controller */,
-			);
-			path = Statistics;
-			sourceTree = "<group>";
-		};
-		192CDAB821F6B1F2000CE35D /* Feedback */ = {
-			isa = PBXGroup;
-			children = (
-				192CDAC121F6B24D000CE35D /* Feedback.storyboard */,
-				192CDAC321F6B296000CE35D /* View */,
-				192CDABB21F6B208000CE35D /* Controller */,
-			);
-			path = Feedback;
-			sourceTree = "<group>";
-		};
-		192CDAB921F6B200000CE35D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		192CDABA21F6B204000CE35D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		192CDABB21F6B208000CE35D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		192CDABD21F6B20F000CE35D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				192CDAA421F6046D000CE35D /* MainViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		192CDABE21F6B212000CE35D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		192CDAC321F6B296000CE35D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		1949B08C21F5EB3200B22915 = {
 			isa = PBXGroup;
 			children = (
@@ -192,15 +76,12 @@
 			isa = PBXGroup;
 			children = (
 				1949B0A721F5EB3600B22915 /* Info.plist */,
-				1949B0B221F5EBB900B22915 /* Common */,
-				192CDAA821F60A1C000CE35D /* HealthKit */,
 				1949B0B421F5EBC900B22915 /* Core Data */,
 				1949B0B021F5EBB000B22915 /* Network */,
-				192CDAAD21F623DC000CE35D /* Response */,
+				1949B0B221F5EBB900B22915 /* Common */,
 				1949B0B121F5EBB500B22915 /* Model */,
-				192CDAB621F6B1D0000CE35D /* Main */,
-				192CDAB721F6B1DD000CE35D /* Statistics */,
-				192CDAB821F6B1F2000CE35D /* Feedback */,
+				1949B09C21F5EB3200B22915 /* Main.storyboard */,
+				192CDA8A21F5EC8D000CE35D /* MainViewController.swift */,
 				1949B0B521F5EBD900B22915 /* Supporting Files */,
 				1949B0B321F5EBC200B22915 /* Extension */,
 			);
@@ -210,9 +91,8 @@
 		1949B0B021F5EBB000B22915 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				192CDA9C21F5F27A000CE35D /* HTTPMethod.swift */,
 				192CDA8C21F5ED9C000CE35D /* Network.swift */,
-				192CDA9E21F603A9000CE35D /* API.swift */,
-				192CDAA021F603C5000CE35D /* API+FineDust.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -220,7 +100,6 @@
 		1949B0B121F5EBB500B22915 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				192CDAAB21F61F35000CE35D /* GeoInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,7 +107,6 @@
 		1949B0B221F5EBB900B22915 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				192CDAC421F6B2DF000CE35D /* Common.storyboard */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -239,13 +117,9 @@
 				192CDA8E21F5EDFC000CE35D /* NSObject+.swift */,
 				192CDA9021F5EE04000CE35D /* UIViewController+.swift */,
 				192CDA9221F5EE09000CE35D /* UIView+.swift */,
-				192CDAB421F62A5D000CE35D /* UIView+NSLayoutAnchor.swift */,
 				192CDA9421F5EE11000CE35D /* UIAlertController+.swift */,
 				192CDA9621F5EE17000CE35D /* UIColor+.swift */,
 				192CDA9821F5EE1E000CE35D /* String+.swift */,
-				192CDAA621F60914000CE35D /* Date+.swift */,
-				192CDAB021F627A3000CE35D /* NSLayoutConstraint+.swift */,
-				192CDAB221F628C9000CE35D /* NSLayoutAnchor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -263,7 +137,6 @@
 			children = (
 				1949B0A421F5EB3600B22915 /* LaunchScreen.storyboard */,
 				1949B09821F5EB3200B22915 /* AppDelegate.swift */,
-				192CDAA921F61D0C000CE35D /* GeoConverter.swift */,
 				1949B0A221F5EB3600B22915 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
@@ -302,11 +175,6 @@
 				TargetAttributes = {
 					1949B09421F5EB3200B22915 = {
 						CreatedOnToolsVersion = 10.1;
-						SystemCapabilities = {
-							com.apple.BackgroundModes = {
-								enabled = 0;
-							};
-						};
 					};
 				};
 			};
@@ -336,10 +204,7 @@
 				1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */,
 				1949B0A621F5EB3600B22915 /* LaunchScreen.storyboard in Resources */,
 				1949B0A321F5EB3600B22915 /* Assets.xcassets in Resources */,
-				192CDAC521F6B2DF000CE35D /* Common.storyboard in Resources */,
-				192CDAC021F6B242000CE35D /* Statistics.storyboard in Resources */,
 				1949B09E21F5EB3200B22915 /* Main.storyboard in Resources */,
-				192CDAC221F6B24D000CE35D /* Feedback.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,27 +235,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				192CDAAA21F61D0C000CE35D /* GeoConverter.swift in Sources */,
-				192CDAA521F6046D000CE35D /* MainViewController.swift in Sources */,
 				192CDA9521F5EE11000CE35D /* UIAlertController+.swift in Sources */,
 				192CDA8F21F5EDFC000CE35D /* NSObject+.swift in Sources */,
 				192CDA9921F5EE1E000CE35D /* String+.swift in Sources */,
-				192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */,
+				192CDA9D21F5F27A000CE35D /* HTTPMethod.swift in Sources */,
+				192CDA8B21F5EC8D000CE35D /* MainViewController.swift in Sources */,
 				192CDA9321F5EE09000CE35D /* UIView+.swift in Sources */,
-				192CDAAF21F623ED000CE35D /* ObservatoryResponse.swift in Sources */,
 				192CDA9121F5EE04000CE35D /* UIViewController+.swift in Sources */,
 				1949B09921F5EB3200B22915 /* AppDelegate.swift in Sources */,
-				192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */,
-				192CDAB321F628C9000CE35D /* NSLayoutAnchor+.swift in Sources */,
-				192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */,
 				192CDA8D21F5ED9C000CE35D /* Network.swift in Sources */,
 				1949B0A121F5EB3200B22915 /* FineDust.xcdatamodeld in Sources */,
-				192CDAA721F60914000CE35D /* Date+.swift in Sources */,
-				192CDA9F21F603A9000CE35D /* API.swift in Sources */,
-				192CDAB521F62A5D000CE35D /* UIView+NSLayoutAnchor.swift in Sources */,
 				192CDA9721F5EE17000CE35D /* UIColor+.swift in Sources */,
-				192CDAAC21F61F35000CE35D /* GeoInfo.swift in Sources */,
-				192CDAB121F627A3000CE35D /* NSLayoutConstraint+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = FineDust/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -558,7 +413,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H79MF628K3;
 				INFOPLIST_FILE = FineDust/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

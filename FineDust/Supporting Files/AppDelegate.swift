@@ -6,27 +6,17 @@
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
-import CoreData
-import CoreLocation
 import UIKit
-
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  
+
   var window: UIWindow?
-  
-  private lazy var locationManager: CLLocationManager = {
-    let manager = CLLocationManager()
-    manager.desiredAccuracy = kCLLocationAccuracyBest
-    manager.distanceFilter = kCLDistanceFilterNone
-    manager.delegate = self
-    return manager    
-  }()
+
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    locationManager.requestAlwaysAuthorization()
     return true
   }
 
@@ -98,41 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           }
       }
   }
+
 }
 
-extension AppDelegate: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print("위치 갱신됨")
-    let locale = Locale(identifier: "ko_KR")
-    guard let location = locations.last else { return }
-    let coordinate = location.coordinate
-    print(coordinate.latitude, coordinate.longitude)
-    let convertedCoordinate = GeoConverter().convert(
-      sourceType: .WGS_84,
-      destinationType: .TM,
-      geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
-    )
-    print(convertedCoordinate?.x, convertedCoordinate?.y)
-    GeoInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-    CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      guard let placeMark = placeMarks?.last else { return }
-      print(placeMark.administrativeArea, placeMark.country, placeMark.locality, placeMark.name)
-    }
-    manager.stopUpdatingLocation()
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print("GPS Error: \(error.localizedDescription)")
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    print("권한 허가 상태 변경: \(status)")
-    if status == .authorizedWhenInUse || status == .authorizedAlways {
-      locationManager.startUpdatingLocation()
-    }
-  }
-}

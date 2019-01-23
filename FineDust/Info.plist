@@ -20,14 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>위치 정보를 사용하여 현재 위치의 미세먼지 농도를 가져옵니다.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>위치 정보를 사용하여 현재 위치의 미세먼지 농도를 가져옵니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Common</string>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
