@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let reuseIdentifier = ["feedbackCell", "feedbackListCell"]
-
 final class FeedbackListViewController: UIViewController {
 
   @IBOutlet weak var feedbackCollectionView: UICollectionView!
@@ -23,6 +21,7 @@ final class FeedbackListViewController: UIViewController {
     feedbackListTabelView.reloadData()
   }
 
+  private let reuseIdentifiers = ["feedbackCell", "feedbackListCell"]
   private var count = 10
   private let cornerRadius: CGFloat = 7
 
@@ -46,7 +45,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       cellForItemAt indexPath: IndexPath
       ) -> UICollectionViewCell {
 
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier[0], for: indexPath)
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[0], for: indexPath)
         as? FeedbackCollectionViewCell else {
           return UICollectionViewCell()
       }
@@ -76,7 +75,7 @@ extension FeedbackListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(
-      withIdentifier: reuseIdentifier[1],
+      withIdentifier: reuseIdentifiers[1],
       for: indexPath
       ) as? FeedbackListTableViewCell else {
         return UITableViewCell()
