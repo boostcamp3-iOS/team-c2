@@ -35,19 +35,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="270" height="267"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="267"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="226"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물 - 틸란드시아" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-Mz-REd">
+                                                    <rect key="frame" x="39" y="235" width="192" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="0hZ-Mz-REd" firstAttribute="centerX" secondItem="Tva-RU-VTV" secondAttribute="centerX" id="5u2-Ly-WyU"/>
+                                            <constraint firstItem="0hZ-Mz-REd" firstAttribute="top" secondItem="rCT-91-ej0" secondAttribute="bottom" constant="9" id="HKD-86-w8w"/>
                                             <constraint firstItem="rCT-91-ej0" firstAttribute="top" secondItem="Tva-RU-VTV" secondAttribute="top" id="YSe-im-sfi"/>
                                             <constraint firstItem="rCT-91-ej0" firstAttribute="leading" secondItem="Tva-RU-VTV" secondAttribute="leading" id="aRV-hu-YTs"/>
-                                            <constraint firstAttribute="bottom" secondItem="rCT-91-ej0" secondAttribute="bottom" id="cbv-ac-vWM"/>
+                                            <constraint firstAttribute="bottom" secondItem="0hZ-Mz-REd" secondAttribute="bottom" priority="999" constant="14" id="ncg-ZZ-aEU"/>
                                             <constraint firstAttribute="trailing" secondItem="rCT-91-ej0" secondAttribute="trailing" id="wfp-Vy-qOp"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="feedbackImageView" destination="rCT-91-ej0" id="FoY-qm-i32"/>
+                                            <outlet property="feedbackTitleLabel" destination="0hZ-Mz-REd" id="L8e-JW-Oyc"/>
                                             <segue destination="pse-81-DNc" kind="show" id="Adu-Nj-gN6"/>
                                         </connections>
                                     </collectionViewCell>
@@ -137,10 +146,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zy8-Zz-Dej" firstAttribute="leading" secondItem="GBK-iT-3lb" secondAttribute="leading" id="028-ne-jWA"/>
-                            <constraint firstItem="zy8-Zz-Dej" firstAttribute="top" secondItem="msG-Ue-EPf" secondAttribute="bottom" constant="15" id="IuS-q2-AFo"/>
                             <constraint firstItem="GBK-iT-3lb" firstAttribute="trailing" secondItem="zy8-Zz-Dej" secondAttribute="trailing" id="Odx-aN-CEq"/>
                             <constraint firstItem="zy8-Zz-Dej" firstAttribute="bottom" secondItem="GBK-iT-3lb" secondAttribute="bottom" id="Sf3-JQ-hM4"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="top" secondItem="GBK-iT-3lb" secondAttribute="top" id="bfk-hy-egu"/>
+                            <constraint firstItem="zy8-Zz-Dej" firstAttribute="top" secondItem="msG-Ue-EPf" secondAttribute="bottom" constant="15" id="ljM-S7-GvL"/>
                             <constraint firstItem="GBK-iT-3lb" firstAttribute="trailing" secondItem="msG-Ue-EPf" secondAttribute="trailing" id="pzU-G0-xkY"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="height" secondItem="61v-n6-cUP" secondAttribute="height" multiplier="0.4" id="sz4-Vq-eYe"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="leading" secondItem="GBK-iT-3lb" secondAttribute="leading" id="wj2-Su-He4"/>
