@@ -16,19 +16,18 @@ final class FeedbackListViewController: UIViewController {
   @IBOutlet weak var feedbackListTabelView: UITableView!
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.title = "먼지 정보"
+    super.viewDidLoad()
+    navigationItem.title = "먼지 정보"
 
-        feedbackCollectionView.reloadData()
-        feedbackListTabelView.reloadData()
-    
-    }
+    feedbackCollectionView.reloadData()
+    feedbackListTabelView.reloadData()
+  }
 
   private var count = 10
   private let cornerRadius: CGFloat = 7
 
 }
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
 extension FeedbackListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -62,9 +61,9 @@ extension FeedbackListViewController: UICollectionViewDataSource {
         return cell
     }
   }
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
-    // MARK: UITabelViewDataSource
+    // MARK: - UITabelViewDataSource
 
 extension FeedbackListViewController: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,7 +95,7 @@ extension FeedbackListViewController: UITableViewDataSource {
   }
 }
 
-// MARK: UITableViewDelegate
+// MARK: - UITableViewDelegate
 
 extension FeedbackListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
