@@ -25,7 +25,7 @@ final class RatioGraphView: UIView {
   
   weak var delegate: RatioGraphViewDelegate?
   
-  // MARK: Private Property
+  // MARK: Private Properties
   
   /// 비율을 저장하는  프로퍼티
   private var ratio: CGFloat {
@@ -42,12 +42,12 @@ final class RatioGraphView: UIView {
     return backgroundView.bounds.height - Constant.entireSectionViewHeightDifference
   }
   
-  // MARK: IBOutlet
+  // MARK: IBOutlets
   
   /// 배경 뷰
   @IBOutlet private weak var backgroundView: UIView!
   
-  // MARK: View
+  // MARK: Views
   
   /// 원 그래프의 전체 비율 부분 뷰
   private var entireSectionView: UIView!
@@ -58,7 +58,7 @@ final class RatioGraphView: UIView {
   /// 퍼센트 레이블
   private var percentLabel: UILabel!
   
-  // MARK: Method
+  // MARK: Methods
   
   override func awakeFromNib() {
     super.awakeFromNib()

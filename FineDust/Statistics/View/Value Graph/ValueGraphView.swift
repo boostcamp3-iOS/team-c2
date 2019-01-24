@@ -31,11 +31,11 @@ final class ValueGraphView: UIView {
     static let option: UIView.AnimationOptions = .curveEaseInOut
   }
   
-  // MARK: delegate
+  // MARK: Delegate
 
   weak var delegate: ValueGraphViewDelegate?
   
-  // MARK: Private Property
+  // MARK: Private Properties
   
   /// 값 모음
   private var values: [CGFloat] {
@@ -57,7 +57,7 @@ final class ValueGraphView: UIView {
     return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
   }
   
-  // MARK: IBOutlet
+  // MARK: IBOutlets
   
   /// 제목 레이블
   @IBOutlet private weak var titleLabel: UILabel!
@@ -92,7 +92,7 @@ final class ValueGraphView: UIView {
   /// 그래프 높이 제약 모음
   @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
   
-  // MARK: Method
+  // MARK: Methods
   
   override func awakeFromNib() {
     super.awakeFromNib()

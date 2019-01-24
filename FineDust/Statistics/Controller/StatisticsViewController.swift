@@ -19,7 +19,7 @@ final class StatisticsViewController: UIViewController {
     static let borderWidth: CGFloat = 1.0
   }
   
-  // MARK: IBOutlet
+  // MARK: IBOutlets
   
   /// 값 그래프 배경 뷰
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
@@ -43,7 +43,7 @@ final class StatisticsViewController: UIViewController {
     }
   }
   
-  // MARK: View
+  // MARK: Views
   
   /// 값 그래프
   private var valueGraphView: ValueGraphView! {
@@ -59,7 +59,7 @@ final class StatisticsViewController: UIViewController {
     }
   }
   
-  // MARK: Property
+  // MARK: Properties
   
   /// 7일간의 미세먼지 농도 값 모음
   var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
@@ -95,7 +95,6 @@ extension StatisticsViewController: ValueGraphViewDelegate {
   }
   
   var values: [CGFloat] {
-    //return [18, 67, 176, 135, 96, 79, 51]
     return fineDustValues
   }
   
@@ -110,7 +109,6 @@ extension StatisticsViewController: ValueGraphViewDelegate {
 extension StatisticsViewController: RatioGraphViewDelegate {
   
   var ratio: CGFloat {
-    //return 0.64
     return fineDustLastValueRatio
   }
 }
