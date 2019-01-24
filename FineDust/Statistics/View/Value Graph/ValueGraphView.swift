@@ -22,6 +22,20 @@ final class ValueGraphView: UIView {
     static let borderWidth: CGFloat = 1.0
   }
   
+  /// 애니메이션 관련 상수 모음
+  enum Animation {
+    
+    static let duration: TimeInterval = 0.5
+    
+    static let delay: TimeInterval = 0.0
+    
+    static let damping: CGFloat = 0.4
+    
+    static let springVelocity: CGFloat = 0.5
+    
+    static let option: UIView.AnimationOptions = .curveEaseInOut
+  }
+  
   // MARK: delegate
   
   weak var delegate: ValueGraphViewDelegate?
@@ -29,7 +43,7 @@ final class ValueGraphView: UIView {
   // MARK: Property
   
   /// 비율 모음
-  var ratios: [CGFloat] = []
+  var ratios: [CGFloat] = [0.8, 0.25, 0.86, 0.18, 0.45, 0.36, 0.74]
   
   // MARK: IBOutlet
   
@@ -54,13 +68,7 @@ final class ValueGraphView: UIView {
   }
 
   /// 그래프 높이 제약 모음
-  @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]! {
-    didSet {
-      for (index, constraint) in graphViewHeightConstraints.enumerated() {
-        graphViewHeightConstraints[index] = constraint.changeMultiplier(to: 0.5)
-      }
-    }
-  }
+  @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
   
   // MARK: Life Cycle
   
@@ -82,7 +90,31 @@ final class ValueGraphView: UIView {
   }
   
   /// 그래프 뷰 높이 제약에 애니메이션 효과 설정
-  private func animateHeights() {
-    
+  func animateHeights() {
+    for (index, ratio) in ratios.enumerated() {
+      let plusTime = DispatchTime.now()// + DispatchTimeInterval.milliseconds(index * 100)
+      var heightConstraint = graphViewHeightConstraints[index]
+      DispatchQueue.main.asyncAfter(deadline: plusTime) { [weak self] in
+        UIView.animate(
+          withDuration: Animation.duration,
+          delay: Animation.delay,
+          usingSpringWithDamping: Animation.damping,
+          initialSpringVelocity: Animation.springVelocity,
+          options: .curveEaseInOut,
+          animations: {
+            heightConstraint = heightConstraint.changedMultiplier(to: ratio)
+            self?.layoutIfNeeded()
+        },
+          completion: nil
+        )
+      }
+    }
+  }
+  
+  func initializeHeights() {
+    for (index, constraint) in graphViewHeightConstraints.enumerated() {
+      graphViewHeightConstraints[index] = constraint.changedMultiplier(to: 1.0)
+    }
+    layoutIfNeeded()
   }
 }
