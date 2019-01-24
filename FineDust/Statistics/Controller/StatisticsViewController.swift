@@ -53,7 +53,23 @@ final class StatisticsViewController: UIViewController {
   }
   
   /// 비율 그래프
-  private var ratioGraphView: RatioGraphView!
+  private var ratioGraphView: RatioGraphView! {
+    didSet {
+      ratioGraphView.delegate = self
+    }
+  }
+  
+  // MARK: Property
+  
+  /// 7일간의 미세먼지 농도 값 모음
+  var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
+  
+  /// 전체에 대한 마지막 값의 비율
+  private var fineDustLastValueRatio: CGFloat {
+    let sum = fineDustValues.reduce(0, +)
+    let max = fineDustValues.max() ?? 0.0
+    return max / sum
+  }
   
   // MARK: Life Cycle
   
@@ -66,20 +82,40 @@ final class StatisticsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setConstraintsToSubviews()
-    valueGraphView.initializeHeights()
-    valueGraphView.animateHeights()
+    initializeValueGraphView()
+    initializeRatioGraphView()
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
+  var day: Date {
+    return Date()
+  }
+  
+  var values: [CGFloat] {
+    //return [18, 67, 176, 135, 96, 79, 51]
+    return fineDustValues
+  }
+  
   func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton) {
     
+    print(day.isToday)
   }
 }
 
-// MARK: - private extension
+// MARK: - RatioGraphView Delegate 구현
+
+extension StatisticsViewController: RatioGraphViewDelegate {
+  
+  var ratio: CGFloat {
+    //return 0.64
+    return fineDustLastValueRatio
+  }
+}
+
+// MARK: - Private Extension
 
 private extension StatisticsViewController {
   /// 서브뷰 생성하여 프로퍼티에 할당
@@ -104,5 +140,17 @@ private extension StatisticsViewController {
       ratioGraphView.trailing.equal(to: ratioGraphBackgroundView.trailing),
       ratioGraphView.bottom.equal(to: ratioGraphBackgroundView.bottom)
       ])
+  }
+}
+
+// MARK: - Value Graph Private Extension
+
+private extension StatisticsViewController {
+  func initializeValueGraphView() {
+    valueGraphView.setup()
+  }
+  
+  func initializeRatioGraphView() {
+    ratioGraphView.setup()
   }
 }

@@ -52,6 +52,8 @@
 		199C19B921F9572000ED439F /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C19B821F9572000ED439F /* UIImageView+.swift */; };
 		19DC8D2D21F96B7D00B9E37C /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D2B21F96B7D00B9E37C /* Storyboard.swift */; };
 		19DC8D2E21F96B7D00B9E37C /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D2C21F96B7D00B9E37C /* Assets.swift */; };
+		19DC8D3021F98C1C00B9E37C /* ValueGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D2F21F98C1C00B9E37C /* ValueGraphViewDelegate.swift */; };
+		19DC8D3221F98C5000B9E37C /* RatioGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC8D3121F98C5000B9E37C /* RatioGraphViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		199C19B821F9572000ED439F /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		19DC8D2B21F96B7D00B9E37C /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		19DC8D2C21F96B7D00B9E37C /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		19DC8D2F21F98C1C00B9E37C /* ValueGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDelegate.swift; sourceTree = "<group>"; };
+		19DC8D3121F98C5000B9E37C /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +219,7 @@
 			children = (
 				192CDAD021F6C874000CE35D /* ValueGraphView.xib */,
 				192CDACC21F6C85C000CE35D /* ValueGraphView.swift */,
+				19DC8D2F21F98C1C00B9E37C /* ValueGraphViewDelegate.swift */,
 			);
 			path = "Value Graph";
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			children = (
 				192CDAD221F6C87E000CE35D /* RatioGraphView.xib */,
 				192CDACE21F6C865000CE35D /* RatioGraphView.swift */,
+				19DC8D3121F98C5000B9E37C /* RatioGraphViewDelegate.swift */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */,
 				1949B09721F5EB3200B22915 /* FineDust */,
 				1949B09621F5EB3200B22915 /* Products */,
+				19DC8D3421F9913600B9E37C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -340,6 +347,13 @@
 			path = SwiftGen;
 			sourceTree = "<group>";
 		};
+		19DC8D3421F9913600B9E37C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -375,6 +389,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
 								enabled = 0;
 							};
 						};
@@ -471,11 +488,13 @@
 				192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */,
 				19DC8D2E21F96B7D00B9E37C /* Assets.swift in Sources */,
 				192CDA8D21F5ED9C000CE35D /* Network.swift in Sources */,
+				19DC8D3221F98C5000B9E37C /* RatioGraphViewDelegate.swift in Sources */,
 				1949B0A121F5EB3200B22915 /* FineDust.xcdatamodeld in Sources */,
 				192CDAA721F60914000CE35D /* Date+.swift in Sources */,
 				192CDA9F21F603A9000CE35D /* API.swift in Sources */,
 				192CDAB521F62A5D000CE35D /* UIView+NSLayoutAnchor.swift in Sources */,
 				19DC8D2D21F96B7D00B9E37C /* Storyboard.swift in Sources */,
+				19DC8D3021F98C1C00B9E37C /* ValueGraphViewDelegate.swift in Sources */,
 				192CDA9721F5EE17000CE35D /* UIColor+.swift in Sources */,
 				192CDAAC21F61F35000CE35D /* GeoInfo.swift in Sources */,
 				192CDAB121F627A3000CE35D /* NSLayoutConstraint+.swift in Sources */,
