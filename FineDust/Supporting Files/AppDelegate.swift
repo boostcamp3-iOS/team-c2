@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    window?.tintColor = Asset.graph1.color
+    UINavigationBar.appearance().tintColor = Asset.graph1.color
+    UINavigationBar.appearance().barTintColor = Asset.graph1.color
+    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    UITabBar.appearance().tintColor = .white
+    UITabBar.appearance().barTintColor = Asset.graph1.color
     locationManager.requestAlwaysAuthorization()
 //    FineDustHK.shared.requestAuthorization()
     return true

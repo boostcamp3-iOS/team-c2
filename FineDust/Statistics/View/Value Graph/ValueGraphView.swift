@@ -8,12 +8,6 @@
 
 import UIKit
 
-/// ValueGraphView Delegate
-protocol ValueGraphViewDelegate: class {
-  
-  func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton)
-}
-
 /// 지정 날짜 기준 일주일 그래프 관련 뷰
 final class ValueGraphView: UIView {
 
@@ -26,27 +20,44 @@ final class ValueGraphView: UIView {
   /// 애니메이션 관련 상수 모음
   enum Animation {
     
-    static let duration: TimeInterval = 0.5
+    static let duration: TimeInterval = 0.3
     
     static let delay: TimeInterval = 0.0
     
-    static let damping: CGFloat = 0.4
+    static let damping: CGFloat = 0.7
     
     static let springVelocity: CGFloat = 0.5
     
     static let option: UIView.AnimationOptions = .curveEaseInOut
   }
   
-  // MARK: delegate
-  
+  // MARK: Delegate
+
   weak var delegate: ValueGraphViewDelegate?
   
-  // MARK: Property
+  // MARK: Private Properties
   
-  /// 비율 모음
-  var ratios: [CGFloat] = [0.8, 0.25, 0.86, 0.18, 0.45, 0.36, 0.74]
+  /// 값 모음
+  private var values: [CGFloat] {
+    return delegate?.values ?? []
+  }
   
-  // MARK: IBOutlet
+  /// 최대값
+  private var maxValue: CGFloat {
+    return (values.max() ?? 0.0) + 1.0
+  }
+  
+  /// 값 모음을 최대값에 대한 비율로 산출. `1 - (비율)`
+  private var ratios: [CGFloat] {
+    return values.map { 1.0 - $0 / maxValue }
+  }
+  
+  /// 주축 레이블
+  private var unitTexts: [String] {
+    return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
+  }
+  
+  // MARK: IBOutlets
   
   /// 제목 레이블
   @IBOutlet private weak var titleLabel: UILabel!
@@ -64,36 +75,56 @@ final class ValueGraphView: UIView {
   /// 그래프 뷰 모음
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
-      graphViews.forEach { $0.layer.setBorder(color: .black, width: Layer.borderWidth) }
+      for (index, view) in graphViews.enumerated() {
+        view.layer.setBorder(
+          color: .black,
+          width: 0,
+          radius: 2.0
+        )
+        view.backgroundColor = graphBackgroundColor(at: index)
+      }
     }
   }
-
+  
+  /// 단위 레이블 모음
+  @IBOutlet var unitLabels: [UILabel]!
+  
   /// 그래프 높이 제약 모음
   @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
   
-  // MARK: Life Cycle
+  // MARK: Methods
   
   override func awakeFromNib() {
     super.awakeFromNib()
   }
   
-  // MARK: @objc Method
+  func setup() {
+    initializeHeights()
+    animateHeights()
+    setUnitLabels()
+    setTitleDayLabels()
+  }
   
   @objc private func dateButtonDidTap(_ sender: UIButton) {
     delegate?.valueGraphView(self, didTapDateButton: sender)
   }
-  
-  // MARK: Method
-  
-  /// 요일 레이블 텍스트 설정
-  private func setTitleDayLabels() {
-    
+}
+
+// MARK: - Private Extension
+
+private extension ValueGraphView {
+  /// 그래프 뷰 높이 초기화
+  func initializeHeights() {
+    for (index, constraint) in graphViewHeightConstraints.enumerated() {
+      graphViewHeightConstraints[index] = constraint.changedMultiplier(to: 1.0)
+    }
+    layoutIfNeeded()
   }
   
   /// 그래프 뷰 높이 제약에 애니메이션 효과 설정
   func animateHeights() {
     for (index, ratio) in ratios.enumerated() {
-      let plusTime = DispatchTime.now()// + DispatchTimeInterval.milliseconds(index * 100)
+      let plusTime = DispatchTime.now()
       var heightConstraint = graphViewHeightConstraints[index]
       DispatchQueue.main.asyncAfter(deadline: plusTime) { [weak self] in
         UIView.animate(
@@ -112,10 +143,27 @@ final class ValueGraphView: UIView {
     }
   }
   
-  func initializeHeights() {
-    for (index, constraint) in graphViewHeightConstraints.enumerated() {
-      graphViewHeightConstraints[index] = constraint.changedMultiplier(to: 1.0)
+  /// 주축 레이블 설정
+  func setUnitLabels() {
+    zip(unitLabels, unitTexts).forEach { (label, text) in
+      label.text = text
     }
-    layoutIfNeeded()
+  }
+  
+  /// 요일 레이블 텍스트 설정
+  func setTitleDayLabels() {
+    
+  }
+  
+  /// 그래프 색상 설정
+  func graphBackgroundColor(at index: Int) -> UIColor? {
+    if index == 6 {
+      return Asset.graphToday.color
+    }
+    if index % 2 == 0 {
+      return Asset.graph1.color
+    } else {
+      return Asset.graph2.color
+    }
   }
 }
