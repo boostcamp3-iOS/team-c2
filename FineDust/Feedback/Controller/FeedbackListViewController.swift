@@ -10,16 +10,16 @@ import UIKit
 
 final class FeedbackListViewController: UIViewController {
   
-  // Mark: IBOutlet
+  // MARK: IBOutlet
   @IBOutlet private weak var feedbackCollectionView: UICollectionView!
   @IBOutlet private weak var feedbackListTabelView: UITableView!
   
-  // Mark: Properties
+  // MARK: Properties
   private let reuseIdentifiers = ["feedbackCell", "feedbackListCell"]
   private var count = 10
   private let cornerRadius: CGFloat = 7
   
-  // Mark: - LifeCycle
+  // MARK: - LifeCycle
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보"
@@ -57,9 +57,9 @@ extension FeedbackListViewController: UICollectionViewDataSource {
     cell.feedbackImageView.layer.masksToBounds = true
     cell.feedbackImageView.image = UIImage(named: "info1")
     
-    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
-    cell.feedbackTitleLabel.layer.cornerRadius = cornerRadius
-    cell.feedbackTitleLabel.layer.masksToBounds = true
+//    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
+//    cell.feedbackTitleLabel.layer.cornerRadius = cornerRadius
+//    cell.feedbackTitleLabel.layer.masksToBounds = true
     
     return cell
   }
@@ -83,17 +83,30 @@ extension FeedbackListViewController: UITableViewDataSource {
       ) as? FeedbackListTableViewCell else {
         return UITableViewCell()
     }
+    
+    if indexPath.row != 0 {
+      cell.feedbackListTitleLabel.isHidden = true
+    } else {
+      cell.feedbackListTitleLabel.isHidden = false
+    }
     cell.feedbackImageView.image = UIImage(named: "info1")
+    cell.feedbackImageView.layer.applySketchShadow(
+      color: UIColor.gray,
+      alpha: 0.2,
+      x: 48,
+      y: 3,
+      blur: 5,
+      spread: 3
+    )
     cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
     cell.feedbackSourceLabel.text = "KTV 국민 방송"
     
     cell.feedbackImageView.setRounded()
-    
     cell.feedbackListShadowView.layer.applySketchShadow(
       color: UIColor.gray,
       alpha: 0.2,
-      x: 0,
-      y: 0,
+      x: 2,
+      y: 2,
       blur: 5,
       spread: 3
     )
@@ -107,6 +120,6 @@ extension FeedbackListViewController: UITableViewDataSource {
 
 extension FeedbackListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 150
+    return 165
   }
 }

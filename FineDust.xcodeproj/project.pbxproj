@@ -495,9 +495,9 @@
 				BD5CD8B8D765B77C2BE845AAFB2C42B0 /* Network.swift in Sources */,
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				9C21C55458FC610F7CA4A5A0C74647BD /* RatioGraphView.swift in Sources */,
-				29A289A83A4898356104FF9E3E9EB1F9 /* RatioGraphViewDelegate.swift in Sources */,
 				3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */,
-				832B647735EF13B88E5340906E69A682 /* Storyboard.swift in Sources */,
+				E2CFE27647E37FEB1D3750B742AEEA9B /* Storyboard.swift in Sources */,
+				29A289A83A4898356104FF9E3E9EB1F9 /* RatioGraphViewDelegate.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
 				902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */,
 				A0221EFCD87D0BA93CDD31C167E4DF2E /* UIColor+.swift in Sources */,
@@ -654,7 +654,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U3H8GE38E;
+				DEVELOPMENT_TEAM = R78643UTJ5;
 				INFOPLIST_FILE = FineDust/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -675,7 +675,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U3H8GE38E;
+				DEVELOPMENT_TEAM = R78643UTJ5;
 				INFOPLIST_FILE = FineDust/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

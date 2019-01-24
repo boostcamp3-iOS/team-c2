@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="267"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Eb-K8-Eau">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="15" id="0Eb-K8-Eau">
                                     <size key="itemSize" width="270" height="267"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -35,28 +35,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="270" height="267"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="267"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="226"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="공기 정화 식물" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsb-ca-K21">
-                                                    <rect key="frame" x="0.0" y="202" width="270" height="68"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물 - 틸란드시아" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-Mz-REd">
+                                                    <rect key="frame" x="39" y="235" width="192" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="0hZ-Mz-REd" firstAttribute="centerX" secondItem="Tva-RU-VTV" secondAttribute="centerX" id="5u2-Ly-WyU"/>
+                                            <constraint firstItem="0hZ-Mz-REd" firstAttribute="top" secondItem="rCT-91-ej0" secondAttribute="bottom" constant="9" id="HKD-86-w8w"/>
                                             <constraint firstItem="rCT-91-ej0" firstAttribute="top" secondItem="Tva-RU-VTV" secondAttribute="top" id="YSe-im-sfi"/>
                                             <constraint firstItem="rCT-91-ej0" firstAttribute="leading" secondItem="Tva-RU-VTV" secondAttribute="leading" id="aRV-hu-YTs"/>
-                                            <constraint firstAttribute="bottom" secondItem="rCT-91-ej0" secondAttribute="bottom" id="cbv-ac-vWM"/>
+                                            <constraint firstAttribute="bottom" secondItem="0hZ-Mz-REd" secondAttribute="bottom" priority="999" constant="14" id="ncg-ZZ-aEU"/>
                                             <constraint firstAttribute="trailing" secondItem="rCT-91-ej0" secondAttribute="trailing" id="wfp-Vy-qOp"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="feedbackImageView" destination="rCT-91-ej0" id="FoY-qm-i32"/>
-                                            <outlet property="feedbackTitleLabel" destination="qsb-ca-K21" id="WMf-rr-wxj"/>
+                                            <outlet property="feedbackTitleLabel" destination="0hZ-Mz-REd" id="L8e-JW-Oyc"/>
                                             <segue destination="pse-81-DNc" kind="show" id="Adu-Nj-gN6"/>
                                         </connections>
                                     </collectionViewCell>
@@ -70,25 +70,25 @@
                                 <rect key="frame" x="0.0" y="346" width="375" height="272"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="feedbackListCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedbackListCell" rowHeight="150" id="A1f-td-iGf" customClass="FeedbackListTableViewCell" customModule="FineDust" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="feedbackListCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedbackListCell" rowHeight="165" id="A1f-td-iGf" customClass="FeedbackListTableViewCell" customModule="FineDust" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A1f-td-iGf" id="sZd-PZ-2PD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGw-6q-nXE">
-                                                    <rect key="frame" x="67" y="31" width="279" height="109"/>
+                                                    <rect key="frame" x="67" y="41" width="279" height="109"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="sdA-f8-q7b">
-                                                            <rect key="frame" x="79" y="22" width="126" height="65"/>
+                                                            <rect key="frame" x="62" y="22" width="126" height="65"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toI-26-T8z">
                                                                     <rect key="frame" x="0.0" y="0.0" width="126" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" red="0.37254901960784315" green="0.43529411764705883" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KTV 국민방송" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-R2-2Mu">
@@ -105,6 +105,12 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hd8-bJ-yT0">
+                                                            <rect key="frame" x="223" y="41" width="26" height="26"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="heart"/>
+                                                            <state key="selected" image="redheart"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -116,17 +122,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-BU-376">
-                                                    <rect key="frame" x="27" y="43" width="85" height="85"/>
+                                                    <rect key="frame" x="27" y="53" width="85" height="85"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkButton" destination="Hd8-bJ-yT0" id="0F2-BC-XGf"/>
                                             <outlet property="feedbackImageView" destination="QDy-BU-376" id="bZC-ep-Y0m"/>
                                             <outlet property="feedbackListShadowView" destination="bGw-6q-nXE" id="QIu-Pi-qgW"/>
+                                            <outlet property="feedbackListTitleLabel" destination="4Nv-H4-Snr" id="X3A-FX-g7Y"/>
                                             <outlet property="feedbackSourceLabel" destination="pKI-R2-2Mu" id="Iu2-2q-AZ0"/>
                                             <outlet property="feedbackTitleLabel" destination="toI-26-T8z" id="8q3-0w-Ciy"/>
-                                            <segue destination="pse-81-DNc" kind="show" id="VAg-qW-W3h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -139,10 +146,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zy8-Zz-Dej" firstAttribute="leading" secondItem="GBK-iT-3lb" secondAttribute="leading" id="028-ne-jWA"/>
-                            <constraint firstItem="zy8-Zz-Dej" firstAttribute="top" secondItem="msG-Ue-EPf" secondAttribute="bottom" constant="15" id="IuS-q2-AFo"/>
                             <constraint firstItem="GBK-iT-3lb" firstAttribute="trailing" secondItem="zy8-Zz-Dej" secondAttribute="trailing" id="Odx-aN-CEq"/>
                             <constraint firstItem="zy8-Zz-Dej" firstAttribute="bottom" secondItem="GBK-iT-3lb" secondAttribute="bottom" id="Sf3-JQ-hM4"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="top" secondItem="GBK-iT-3lb" secondAttribute="top" id="bfk-hy-egu"/>
+                            <constraint firstItem="zy8-Zz-Dej" firstAttribute="top" secondItem="msG-Ue-EPf" secondAttribute="bottom" constant="15" id="ljM-S7-GvL"/>
                             <constraint firstItem="GBK-iT-3lb" firstAttribute="trailing" secondItem="msG-Ue-EPf" secondAttribute="trailing" id="pzU-G0-xkY"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="height" secondItem="61v-n6-cUP" secondAttribute="height" multiplier="0.4" id="sz4-Vq-eYe"/>
                             <constraint firstItem="msG-Ue-EPf" firstAttribute="leading" secondItem="GBK-iT-3lb" secondAttribute="leading" id="wj2-Su-He4"/>
@@ -189,7 +196,7 @@
         <scene sceneID="wl7-tx-Ipj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fMM-kt-kZo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="정보" id="Yse-Ig-ExT"/>
+                    <tabBarItem key="tabBarItem" title="정보" image="infoTabIcon" id="Yse-Ig-ExT"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iPc-BG-6oF">
@@ -207,9 +214,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart" width="48" height="48"/>
         <image name="info1" width="320" height="320"/>
+        <image name="infoTabIcon" width="48" height="48"/>
+        <image name="redheart" width="48" height="48"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="VAg-qW-W3h"/>
-    </inferredMetricsTieBreakers>
 </document>

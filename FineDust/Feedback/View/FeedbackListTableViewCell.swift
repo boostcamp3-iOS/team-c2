@@ -14,5 +14,6 @@ class FeedbackListTableViewCell: UITableViewCell {
   @IBOutlet weak var feedbackTitleLabel: UILabel!
   @IBOutlet weak var feedbackSourceLabel: UILabel!
   @IBOutlet weak var feedbackListShadowView: UIView!
-  
+  @IBOutlet weak var feedbackListTitleLabel: UILabel!
+  @IBOutlet weak var bookmarkButton: UIButton!
 }
