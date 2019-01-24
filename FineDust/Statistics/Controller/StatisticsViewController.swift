@@ -14,18 +14,18 @@ final class StatisticsViewController: UIViewController {
   /// CALayer 관련 상수 정의
   enum Layer {
     
-    static let cornerRadius: CGFloat = 15.0
+    static let cornerRadius: CGFloat = 8.0
     
     static let borderWidth: CGFloat = 1.0
   }
   
-  // MARK: IBOutlet
+  // MARK: IBOutlets
   
   /// 값 그래프 배경 뷰
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
     didSet {
       valueGraphBackgroundView.layer.setBorder(
-        color: .black,
+        color: UIColor(red: 239, green: 239, blue: 244),
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )
@@ -36,14 +36,14 @@ final class StatisticsViewController: UIViewController {
   @IBOutlet private weak var ratioGraphBackgroundView: UIView! {
     didSet {
       ratioGraphBackgroundView.layer.setBorder(
-        color: .black,
+        color: UIColor(red: 239, green: 239, blue: 244),
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )
     }
   }
   
-  // MARK: View
+  // MARK: Views
   
   /// 값 그래프
   private var valueGraphView: ValueGraphView! {
@@ -53,7 +53,23 @@ final class StatisticsViewController: UIViewController {
   }
   
   /// 비율 그래프
-  private var ratioGraphView: RatioGraphView!
+  private var ratioGraphView: RatioGraphView! {
+    didSet {
+      ratioGraphView.delegate = self
+    }
+  }
+  
+  // MARK: Properties
+  
+  /// 7일간의 미세먼지 농도 값 모음
+  var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
+  
+  /// 전체에 대한 마지막 값의 비율
+  private var fineDustLastValueRatio: CGFloat {
+    let sum = fineDustValues.reduce(0, +)
+    let max = fineDustValues.max() ?? 0.0
+    return max / sum
+  }
   
   // MARK: Life Cycle
   
@@ -66,20 +82,38 @@ final class StatisticsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setConstraintsToSubviews()
-    valueGraphView.initializeHeights()
-    valueGraphView.animateHeights()
+    initializeValueGraphView()
+    initializeRatioGraphView()
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
+  var day: Date {
+    return Date()
+  }
+  
+  var values: [CGFloat] {
+    return fineDustValues
+  }
+  
   func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton) {
     
+    print(day.isToday)
   }
 }
 
-// MARK: - private extension
+// MARK: - RatioGraphView Delegate 구현
+
+extension StatisticsViewController: RatioGraphViewDelegate {
+  
+  var ratio: CGFloat {
+    return fineDustLastValueRatio
+  }
+}
+
+// MARK: - Private Extension
 
 private extension StatisticsViewController {
   /// 서브뷰 생성하여 프로퍼티에 할당
@@ -104,5 +138,17 @@ private extension StatisticsViewController {
       ratioGraphView.trailing.equal(to: ratioGraphBackgroundView.trailing),
       ratioGraphView.bottom.equal(to: ratioGraphBackgroundView.bottom)
       ])
+  }
+}
+
+// MARK: - Value Graph Private Extension
+
+private extension StatisticsViewController {
+  func initializeValueGraphView() {
+    valueGraphView.setup()
+  }
+  
+  func initializeRatioGraphView() {
+    ratioGraphView.setup()
   }
 }

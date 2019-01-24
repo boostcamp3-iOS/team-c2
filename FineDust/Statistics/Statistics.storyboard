@@ -19,7 +19,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="yLH-07-419" kind="relationship" relationship="rootViewController" id="D49-lV-vix"/>
@@ -38,24 +37,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
-                                <rect key="frame" x="16" y="72" width="343" height="265"/>
+                                <rect key="frame" x="32" y="96" width="311" height="237"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
-                                <rect key="frame" x="16" y="345" width="343" height="265"/>
+                                <rect key="frame" x="32" y="349" width="311" height="237"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="b6f-az-Uoz" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="5Me-tg-mTj"/>
-                            <constraint firstItem="Sca-OT-FiC" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="5pt-9S-gdd"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="Sca-OT-FiC" secondAttribute="trailing" constant="16" id="Btq-Sh-eTx"/>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="32" id="5Me-tg-mTj"/>
+                            <constraint firstItem="Sca-OT-FiC" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="32" id="5pt-9S-gdd"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="Sca-OT-FiC" secondAttribute="trailing" constant="32" id="Btq-Sh-eTx"/>
                             <constraint firstItem="b6f-az-Uoz" firstAttribute="height" secondItem="Sca-OT-FiC" secondAttribute="height" id="ZU7-Rt-NH8"/>
-                            <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="Sca-OT-FiC" secondAttribute="bottom" constant="8" id="Zh2-Y8-YlE"/>
-                            <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="8" id="gcX-Nf-gdB"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="8" id="q0m-bH-Z4m"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="b6f-az-Uoz" secondAttribute="trailing" constant="16" id="vhB-m3-S59"/>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="Sca-OT-FiC" secondAttribute="bottom" constant="16" id="Zh2-Y8-YlE"/>
+                            <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="32" id="gcX-Nf-gdB"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="32" id="q0m-bH-Z4m"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="b6f-az-Uoz" secondAttribute="trailing" constant="32" id="vhB-m3-S59"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="66h-Qh-c5I"/>
                     </view>
