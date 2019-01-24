@@ -66,7 +66,7 @@
                                     <outlet property="delegate" destination="SJf-BD-jk7" id="5ZG-TL-BaG"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zy8-Zz-Dej">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zy8-Zz-Dej">
                                 <rect key="frame" x="0.0" y="346" width="375" height="272"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -126,6 +126,7 @@
                                             <outlet property="feedbackListShadowView" destination="bGw-6q-nXE" id="QIu-Pi-qgW"/>
                                             <outlet property="feedbackSourceLabel" destination="pKI-R2-2Mu" id="Iu2-2q-AZ0"/>
                                             <outlet property="feedbackTitleLabel" destination="toI-26-T8z" id="8q3-0w-Ciy"/>
+                                            <segue destination="pse-81-DNc" kind="show" id="VAg-qW-W3h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -208,4 +209,7 @@
     <resources>
         <image name="info1" width="320" height="320"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VAg-qW-W3h"/>
+    </inferredMetricsTieBreakers>
 </document>
