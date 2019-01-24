@@ -43,6 +43,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>사용자의 건강 데이터를 사용하여 미세먼지 섭취량을 계산합니다.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

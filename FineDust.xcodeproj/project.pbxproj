@@ -51,6 +51,7 @@
 		AFF183AC21F97C8D00C600C1 /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AA21F97C8D00C600C1 /* FineDustResponse.swift */; };
 		AFF183AE21F97DE600C600C1 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AD21F97DE600C600C1 /* FeedbackListViewController.swift */; };
 		AFF183B021F97E6E00C600C1 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AF21F97E6E00C600C1 /* UIImageView+.swift */; };
+		AFF183B721F9886F00C600C1 /* FineDustHK.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183B621F9886F00C600C1 /* FineDustHK.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		AFF183AA21F97C8D00C600C1 /* FineDustResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
 		AFF183AD21F97DE600C600C1 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
 		AFF183AF21F97E6E00C600C1 /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		AFF183B621F9886F00C600C1 /* FineDustHK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustHK.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +113,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		192CDAA821F60A1C000CE35D /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HealthKit;
-			sourceTree = "<group>";
-		};
 		192CDAAD21F623DC000CE35D /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +228,7 @@
 				1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */,
 				1949B09721F5EB3200B22915 /* FineDust */,
 				1949B09621F5EB3200B22915 /* Products */,
+				AFF183B921F9908B00C600C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -248,8 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				1949B0A721F5EB3600B22915 /* Info.plist */,
+				AFF183B321F9869100C600C1 /* HealthKit */,
 				1949B0B221F5EBB900B22915 /* Common */,
-				192CDAA821F60A1C000CE35D /* HealthKit */,
 				1949B0B421F5EBC900B22915 /* Core Data */,
 				1949B0B021F5EBB000B22915 /* Network */,
 				192CDAAD21F623DC000CE35D /* Response */,
@@ -337,6 +333,21 @@
 			path = SwiftGen;
 			sourceTree = "<group>";
 		};
+		AFF183B321F9869100C600C1 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				AFF183B621F9886F00C600C1 /* FineDustHK.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		AFF183B921F9908B00C600C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -372,6 +383,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
 								enabled = 0;
 							};
 						};
@@ -453,6 +467,7 @@
 				192CDACD21F6C85C000CE35D /* ValueGraphView.swift in Sources */,
 				AFF183A821F97BDB00C600C1 /* FeedbackCollectionViewCell.swift in Sources */,
 				192CDAE521F70169000CE35D /* Storyboard.swift in Sources */,
+				AFF183B721F9886F00C600C1 /* FineDustHK.swift in Sources */,
 				192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */,
 				192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */,
 				199C199021F8276100ED439F /* (null) in Sources */,
@@ -620,8 +635,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H79MF628K3;
+				DEVELOPMENT_TEAM = 3U3H8GE38E;
 				INFOPLIST_FILE = FineDust/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -630,6 +646,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.kr.boostcamp3rd.FineDust;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -639,8 +656,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H79MF628K3;
+				DEVELOPMENT_TEAM = 3U3H8GE38E;
 				INFOPLIST_FILE = FineDust/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -649,6 +667,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.kr.boostcamp3rd.FineDust;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
