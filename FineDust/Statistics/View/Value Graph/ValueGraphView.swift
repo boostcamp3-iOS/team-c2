@@ -10,6 +10,7 @@ import UIKit
 
 /// ValueGraphView Delegate
 protocol ValueGraphViewDelegate: class {
+  
   func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton)
 }
 

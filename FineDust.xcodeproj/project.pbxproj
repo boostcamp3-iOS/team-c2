@@ -44,6 +44,7 @@
 		1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */; };
 		199C197A21F73DD600ED439F /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C197921F73DD600ED439F /* FineDustResponse.swift */; };
 		199C197C21F7433C00ED439F /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C197B21F7433C00ED439F /* Grade.swift */; };
+		199C19A821F9441200ED439F /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 199C19A721F9441200ED439F /* swiftgen.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		199C197921F73DD600ED439F /* FineDustResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
 		199C197B21F7433C00ED439F /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		199C19A721F9441200ED439F /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		1949B08C21F5EB3200B22915 = {
 			isa = PBXGroup;
 			children = (
+				199C19A721F9441200ED439F /* swiftgen.yml */,
 				1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */,
 				1949B09721F5EB3200B22915 /* FineDust */,
 				1949B09621F5EB3200B22915 /* Products */,
@@ -304,12 +307,20 @@
 		1949B0B521F5EBD900B22915 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				199C19A921F944BD00ED439F /* SwiftGen */,
 				1949B0A421F5EB3600B22915 /* LaunchScreen.storyboard */,
 				1949B09821F5EB3200B22915 /* AppDelegate.swift */,
 				192CDAA921F61D0C000CE35D /* GeoConverter.swift */,
 				1949B0A221F5EB3600B22915 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		199C19A921F944BD00ED439F /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SwiftGen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				192CDAD321F6C87E000CE35D /* RatioGraphView.xib in Resources */,
+				199C19A821F9441200ED439F /* swiftgen.yml in Resources */,
 				1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */,
 				1949B0A621F5EB3600B22915 /* LaunchScreen.storyboard in Resources */,
 				1949B0A321F5EB3600B22915 /* Assets.xcassets in Resources */,

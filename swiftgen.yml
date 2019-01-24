@@ -1,0 +1,11 @@
+xcassets:
+  inputs: FineDust/Supporting Files/Assets.xcassets
+  outputs:
+    templateName: swift4
+    output: Assets.swift
+
+ib:
+  inputs: FineDust
+  outputs:
+    templateName: scenes-swift4
+    output: Storyboard.swift
