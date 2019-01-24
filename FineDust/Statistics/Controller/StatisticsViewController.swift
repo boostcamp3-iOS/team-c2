@@ -66,7 +66,8 @@ final class StatisticsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setConstraintsToSubviews()
- 
+    valueGraphView.initializeHeights()
+    valueGraphView.animateHeights()
   }
 }
 

@@ -15,14 +15,11 @@ extension UIViewController {
     return controller
   }
   
+  // 클로저 내에서 해당 타입으로 캐스팅하여 값 전달하기
   @discardableResult
-  func deliver<T: UIViewController>(
-    _ dictionary: [String: Any],
-    ofType type: T.Type
-  ) -> UIViewController {
-    guard let casted = self as? T else { fatalError("type must be UIViewController.") }
-    dictionary.forEach { casted.setValue($0.value, forKey: $0.key) }
-    return casted
+  func deliver(_ closure: (UIViewController) -> Void) -> UIViewController {
+    closure(self)
+    return self
   }
   
   func present(

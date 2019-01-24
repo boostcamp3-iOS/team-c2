@@ -9,7 +9,7 @@
 import UIKit
 
 extension NSLayoutConstraint {
-  func changeMultiplier(to value: CGFloat) -> NSLayoutConstraint {
+  func changedMultiplier(to value: CGFloat) -> NSLayoutConstraint {
     let constraint = NSLayoutConstraint(
       item: firstItem as Any,
       attribute: firstAttribute,
