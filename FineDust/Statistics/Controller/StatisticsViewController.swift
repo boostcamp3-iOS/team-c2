@@ -14,7 +14,7 @@ final class StatisticsViewController: UIViewController {
   /// CALayer 관련 상수 정의
   enum Layer {
     
-    static let cornerRadius: CGFloat = 15.0
+    static let cornerRadius: CGFloat = 8.0
     
     static let borderWidth: CGFloat = 1.0
   }
@@ -25,7 +25,7 @@ final class StatisticsViewController: UIViewController {
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
     didSet {
       valueGraphBackgroundView.layer.setBorder(
-        color: .black,
+        color: UIColor(red: 239, green: 239, blue: 244),
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )
@@ -36,7 +36,7 @@ final class StatisticsViewController: UIViewController {
   @IBOutlet private weak var ratioGraphBackgroundView: UIView! {
     didSet {
       ratioGraphBackgroundView.layer.setBorder(
-        color: .black,
+        color: UIColor(red: 239, green: 239, blue: 244),
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )

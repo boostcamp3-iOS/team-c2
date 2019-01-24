@@ -41,10 +41,14 @@ final class ValueGraphView: UIView {
   
   weak var delegate: ValueGraphViewDelegate?
   
-  // MARK: Property
+  // MARK: API
   
   /// 비율 모음
   var ratios: [CGFloat] = [0.8, 0.25, 0.86, 0.18, 0.45, 0.36, 0.74]
+  
+  // MARK: Common Property
+  
+  
   
   // MARK: IBOutlet
   
@@ -64,10 +68,20 @@ final class ValueGraphView: UIView {
   /// 그래프 뷰 모음
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
-      graphViews.forEach { $0.layer.setBorder(color: .black, width: Layer.borderWidth) }
+      for (index, view) in graphViews.enumerated() {
+        view.layer.setBorder(
+          color: .black,
+          width: 0,
+          radius: 2.0
+        )
+        view.backgroundColor = graphBackgroundColor(at: index)
+      }
     }
   }
-
+  
+  /// 단위 레이블 모음
+  @IBOutlet var unitLabels: [UILabel]!
+  
   /// 그래프 높이 제약 모음
   @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
   
@@ -93,7 +107,7 @@ final class ValueGraphView: UIView {
   /// 그래프 뷰 높이 제약에 애니메이션 효과 설정
   func animateHeights() {
     for (index, ratio) in ratios.enumerated() {
-      let plusTime = DispatchTime.now()// + DispatchTimeInterval.milliseconds(index * 100)
+      let plusTime = DispatchTime.now()
       var heightConstraint = graphViewHeightConstraints[index]
       DispatchQueue.main.asyncAfter(deadline: plusTime) { [weak self] in
         UIView.animate(
@@ -117,5 +131,20 @@ final class ValueGraphView: UIView {
       graphViewHeightConstraints[index] = constraint.changedMultiplier(to: 1.0)
     }
     layoutIfNeeded()
+  }
+}
+
+// MARK: - Private Extension
+
+private extension ValueGraphView {
+  func graphBackgroundColor(at index: Int) -> UIColor? {
+    if index == 6 {
+      return Asset.graphToday.color
+    }
+    if index % 2 == 0 {
+      return Asset.graph1.color
+    } else {
+      return Asset.graph2.color
+    }
   }
 }

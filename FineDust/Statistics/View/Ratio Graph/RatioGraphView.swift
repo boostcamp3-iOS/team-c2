@@ -11,16 +11,33 @@ import UIKit
 /// 비율 그래프 뷰
 final class RatioGraphView: UIView {
   
+  /// 상수 정리
+  enum Constant {
+    
+    /// 배경 뷰 높이와 전체 비율 섹션 뷰 높이의 차이
+    static let entireSectionViewHeightDifference: CGFloat = 64.0
+    
+    /// 가운데 원형 뷰 반지름의 전체 비율 섹션 뷰 반지름과의 비율
+    static let centerHoleViewRadiusRatio: CGFloat = 1.2
+  }
+  
+  // MARK: API
+  
   /// 비율을 저장하는  프로퍼티
-  var ratio: CGFloat = 0.0 {
+  var ratio: CGFloat = 0.68 {
     didSet {
       // 원 그래프 비율 변경하는 코드 추가
     }
   }
+
+  /// 비율을 각도로 변환
+  var endAngle: CGFloat {
+    return ratio * 2 * .pi - .pi / 2
+  }
   
   /// 배경 뷰 높이
   private var backgroundViewHeight: CGFloat {
-    return backgroundView.bounds.height - 20
+    return backgroundView.bounds.height - Constant.entireSectionViewHeightDifference
   }
   
   // MARK: IBOutlet
@@ -58,7 +75,7 @@ final class RatioGraphView: UIView {
   }
 }
 
-// MARK: - Private Extension
+// MARK: - View Drawing
 
 private extension RatioGraphView {
   /// 초기 설정
@@ -71,7 +88,7 @@ private extension RatioGraphView {
   
   /// 전체 비율 부분 뷰 그리기
   private func drawEntireSectionView() {
-    entireSectionView.backgroundColor = .lightGray
+    entireSectionView.backgroundColor = Asset.graph1.color
     entireSectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       entireSectionView.width.equal(toConstant: backgroundViewHeight),
@@ -95,13 +112,21 @@ private extension RatioGraphView {
       withCenter: entireSectionView.center,
       radius: backgroundViewHeight,
       startAngle: -.pi / 2,
-      endAngle: -.pi / 4,
+      endAngle: endAngle,
       clockwise: true
     )
     path.close()
     let shapeLayer = CAShapeLayer()
     shapeLayer.path = path.cgPath
-    shapeLayer.fillColor = UIColor.black.cgColor
+    shapeLayer.fillColor = Asset.graphToday.color.cgColor
+    shapeLayer.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 0, blur: 8, spread: 0)
+    
+    let animation = CABasicAnimation(keyPath: "strokeEnd")
+    animation.fromValue = 0
+    animation.toValue = 1
+    animation.duration = 15
+    shapeLayer.add(animation, forKey: nil)
+
     entireSectionView.layer.addSublayer(shapeLayer)
   }
   
@@ -112,19 +137,24 @@ private extension RatioGraphView {
     backgroundView.addSubview(centerHoleView)
     centerHoleView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      centerHoleView.width.equal(toConstant: backgroundViewHeight / 2),
-      centerHoleView.height.equal(toConstant: backgroundViewHeight / 2),
+      centerHoleView.width.equal(
+        toConstant: backgroundViewHeight / Constant.centerHoleViewRadiusRatio
+      ),
+      centerHoleView.height.equal(
+        toConstant: backgroundViewHeight / Constant.centerHoleViewRadiusRatio
+      ),
       centerHoleView.centerX.equal(to: backgroundView.centerX),
       centerHoleView.centerY.equal(to: backgroundView.centerY)
       ])
     centerHoleView.clipsToBounds = true
-    centerHoleView.layer.cornerRadius = backgroundViewHeight / 2 / 2
+    centerHoleView.layer.cornerRadius
+      = backgroundViewHeight / 2 / Constant.centerHoleViewRadiusRatio
   }
 
   /// 비어 있는 원 안에 퍼센트 레이블 설정하기
   private func setPercentLabel() {
     percentLabel = UILabel()
-    percentLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    percentLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
     percentLabel.text = "\(Int(ratio * 100))%"
     percentLabel.translatesAutoresizingMaskIntoConstraints = false
     centerHoleView.addSubview(percentLabel)
