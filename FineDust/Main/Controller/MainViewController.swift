@@ -13,7 +13,6 @@ final class MainViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    tabBarItem.title = "홈"
   }
   
   override func viewWillAppear(_ animated: Bool) {

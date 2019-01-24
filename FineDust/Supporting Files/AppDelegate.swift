@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().tintColor = .white
     UITabBar.appearance().barTintColor = Asset.graph1.color
     locationManager.requestAlwaysAuthorization()
+//    FineDustHK.shared.requestAuthorization()
     return true
   }
 
