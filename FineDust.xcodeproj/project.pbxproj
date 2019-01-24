@@ -28,7 +28,6 @@
 		192CDAC221F6B24D000CE35D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAC121F6B24D000CE35D /* Feedback.storyboard */; };
 		192CDAC521F6B2DF000CE35D /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAC421F6B2DF000CE35D /* Common.storyboard */; };
 		192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */; };
-		192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */; };
 		192CDACD21F6C85C000CE35D /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACC21F6C85C000CE35D /* ValueGraphView.swift */; };
 		192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192CDACE21F6C865000CE35D /* RatioGraphView.swift */; };
 		192CDAD121F6C874000CE35D /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192CDAD021F6C874000CE35D /* ValueGraphView.xib */; };
@@ -42,10 +41,16 @@
 		1949B0A321F5EB3600B22915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0A221F5EB3600B22915 /* Assets.xcassets */; };
 		1949B0A621F5EB3600B22915 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0A421F5EB3600B22915 /* LaunchScreen.storyboard */; };
 		1949B0AF21F5EB9F00B22915 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */; };
-		199C19A821F9441200ED439F /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 199C19A721F9441200ED439F /* swiftgen.yml */; };
-		199C198E21F8275700ED439F /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C198D21F8275700ED439F /* Grade.swift */; };
-		199C199021F8276100ED439F /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C198F21F8276100ED439F /* FineDustResponse.swift */; };
+		199C198E21F8275700ED439F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		199C199021F8276100ED439F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		199C199221F82BBF00ED439F /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C199121F82BBF00ED439F /* DataTerm.swift */; };
+		199C19A821F9441200ED439F /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 199C19A721F9441200ED439F /* swiftgen.yml */; };
+		AFF183A721F97BDB00C600C1 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183A521F97BDB00C600C1 /* FeedbackListTableViewCell.swift */; };
+		AFF183A821F97BDB00C600C1 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183A621F97BDB00C600C1 /* FeedbackCollectionViewCell.swift */; };
+		AFF183AB21F97C8D00C600C1 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183A921F97C8D00C600C1 /* Grade.swift */; };
+		AFF183AC21F97C8D00C600C1 /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AA21F97C8D00C600C1 /* FineDustResponse.swift */; };
+		AFF183AE21F97DE600C600C1 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AD21F97DE600C600C1 /* FeedbackListViewController.swift */; };
+		AFF183B021F97E6E00C600C1 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF183AF21F97E6E00C600C1 /* UIImageView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +75,6 @@
 		192CDAC121F6B24D000CE35D /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		192CDAC421F6B2DF000CE35D /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		192CDAC821F6B61D000CE35D /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		192CDACC21F6C85C000CE35D /* ValueGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphView.swift; sourceTree = "<group>"; };
 		192CDACE21F6C865000CE35D /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		192CDAD021F6C874000CE35D /* ValueGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
@@ -86,10 +90,14 @@
 		1949B0A521F5EB3600B22915 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1949B0A721F5EB3600B22915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1949B0AE21F5EB9F00B22915 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		199C197921F73DD600ED439F /* FineDustResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
-		199C197B21F7433C00ED439F /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
-		199C19A721F9441200ED439F /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
 		199C199121F82BBF00ED439F /* DataTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTerm.swift; sourceTree = "<group>"; };
+		199C19A721F9441200ED439F /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
+		AFF183A521F97BDB00C600C1 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		AFF183A621F97BDB00C600C1 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCollectionViewCell.swift; path = FineDust/Feedback/View/FeedbackCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		AFF183A921F97C8D00C600C1 /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		AFF183AA21F97C8D00C600C1 /* FineDustResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
+		AFF183AD21F97DE600C600C1 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
+		AFF183AF21F97E6E00C600C1 /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +121,10 @@
 		192CDAAD21F623DC000CE35D /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				199C198D21F8275700ED439F /* Grade.swift */,
+				AFF183AA21F97C8D00C600C1 /* FineDustResponse.swift */,
+				AFF183A921F97C8D00C600C1 /* Grade.swift */,
 				199C199121F82BBF00ED439F /* DataTerm.swift */,
 				192CDAAE21F623ED000CE35D /* ObservatoryResponse.swift */,
-				199C198F21F8276100ED439F /* FineDustResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -171,7 +179,7 @@
 		192CDABB21F6B208000CE35D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				192CDACA21F6B62E000CE35D /* FeedbackViewController.swift */,
+				AFF183AD21F97DE600C600C1 /* FeedbackListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +202,8 @@
 		192CDAC321F6B296000CE35D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AFF183A621F97BDB00C600C1 /* FeedbackCollectionViewCell.swift */,
+				AFF183A521F97BDB00C600C1 /* FeedbackListTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				192CDA8E21F5EDFC000CE35D /* NSObject+.swift */,
+				AFF183AF21F97E6E00C600C1 /* UIImageView+.swift */,
 				192CDA9021F5EE04000CE35D /* UIViewController+.swift */,
 				192CDA9221F5EE09000CE35D /* UIView+.swift */,
 				192CDAB421F62A5D000CE35D /* UIView+NSLayoutAnchor.swift */,
@@ -432,25 +443,30 @@
 			files = (
 				192CDAAA21F61D0C000CE35D /* GeoConverter.swift in Sources */,
 				199C199221F82BBF00ED439F /* DataTerm.swift in Sources */,
+				AFF183AC21F97C8D00C600C1 /* FineDustResponse.swift in Sources */,
 				192CDAA521F6046D000CE35D /* MainViewController.swift in Sources */,
 				192CDADF21F6EA03000CE35D /* NSLayoutDimension+.swift in Sources */,
 				192CDA9521F5EE11000CE35D /* UIAlertController+.swift in Sources */,
+				AFF183B021F97E6E00C600C1 /* UIImageView+.swift in Sources */,
 				192CDA8F21F5EDFC000CE35D /* NSObject+.swift in Sources */,
 				192CDA9921F5EE1E000CE35D /* String+.swift in Sources */,
 				192CDACD21F6C85C000CE35D /* ValueGraphView.swift in Sources */,
+				AFF183A821F97BDB00C600C1 /* FeedbackCollectionViewCell.swift in Sources */,
 				192CDAE521F70169000CE35D /* Storyboard.swift in Sources */,
 				192CDACF21F6C865000CE35D /* RatioGraphView.swift in Sources */,
 				192CDAA121F603C5000CE35D /* API+FineDust.swift in Sources */,
-				199C199021F8276100ED439F /* FineDustResponse.swift in Sources */,
+				199C199021F8276100ED439F /* (null) in Sources */,
+				AFF183A721F97BDB00C600C1 /* FeedbackListTableViewCell.swift in Sources */,
 				192CDA9321F5EE09000CE35D /* UIView+.swift in Sources */,
-				199C198E21F8275700ED439F /* Grade.swift in Sources */,
+				199C198E21F8275700ED439F /* (null) in Sources */,
 				192CDAAF21F623ED000CE35D /* ObservatoryResponse.swift in Sources */,
 				192CDA9121F5EE04000CE35D /* UIViewController+.swift in Sources */,
 				1949B09921F5EB3200B22915 /* AppDelegate.swift in Sources */,
+				AFF183AB21F97C8D00C600C1 /* Grade.swift in Sources */,
 				192CDAE121F6F5B2000CE35D /* CALayer+.swift in Sources */,
-				192CDACB21F6B62E000CE35D /* FeedbackViewController.swift in Sources */,
 				192CDAB321F628C9000CE35D /* NSLayoutAnchor+.swift in Sources */,
 				192CDAC921F6B61D000CE35D /* StatisticsViewController.swift in Sources */,
+				AFF183AE21F97DE600C600C1 /* FeedbackListViewController.swift in Sources */,
 				192CDA8D21F5ED9C000CE35D /* Network.swift in Sources */,
 				1949B0A121F5EB3200B22915 /* FineDust.xcdatamodeld in Sources */,
 				192CDAA721F60914000CE35D /* Date+.swift in Sources */,
