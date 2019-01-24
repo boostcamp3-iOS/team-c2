@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 스토리보드 상수 모음
 enum Storyboard {
   
   static let main = "Main"
