@@ -25,7 +25,7 @@ final class GeoInfo {
   
   // MARK: Method
   
-  func set(x: Double, y: Double) {
+  func setLocation(x: Double, y: Double) {
     self.x = x
     self.y = y
   }

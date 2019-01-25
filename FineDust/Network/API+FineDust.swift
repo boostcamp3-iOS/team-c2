@@ -47,10 +47,10 @@ extension API {
     numberOfRows numOfRows: Int = 10,
     completion: @escaping (FineDustResponse?, Error?) -> Void
   ) {
-    let encodedStationName = "강남대로".percentEncoded
+    let observatory = GeoInfo.shared.observatory.percentEncoded
     let urlString = baseURL
       .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")
-      .appending("?stationName=\(encodedStationName)")
+      .appending("?stationName=\(observatory)")
       .appending("&dataTerm=\(dataTerm.rawValue)")
       .appending("&pageNo=\(pageNo)")
       .appending("&numOfRows=\(numOfRows)")

@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     UITabBar.appearance().tintColor = .white
     UITabBar.appearance().barTintColor = Asset.graph1.color
+    UITextField.appearance().tintColor = .white
     locationManager.requestAlwaysAuthorization()
 //    FineDustHK.shared.requestAuthorization()
     return true
@@ -118,10 +119,7 @@ extension AppDelegate: CLLocationManagerDelegate {
       destinationType: .TM,
       geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
     )
-    GeoInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-//    API.shared.getObservatoryPost { response, error in
-//      print(response, error)
-//    }
+    GeoInfo.shared.setLocation(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
     CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
       if let error = error {
         print(error.localizedDescription)
