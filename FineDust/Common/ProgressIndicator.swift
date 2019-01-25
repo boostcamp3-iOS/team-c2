@@ -11,12 +11,16 @@ import UIKit
 /// 네트워크 인디케이터 뷰
 final class ProgressIndicator: UIView {
   
+  // MARK: Singleton Object
+  static let shared = ProgressIndicator(frame: UIScreen.main.bounds)
+  
   /// 배경 뷰
   private var backgroundView: UIView! {
     didSet {
-      backgroundView.backgroundColor = .black
+      backgroundView.backgroundColor = .lightGray
       backgroundView.clipsToBounds = true
       backgroundView.layer.cornerRadius = 10
+      backgroundView.translatesAutoresizingMaskIntoConstraints = false
       addSubview(backgroundView)
       NSLayoutConstraint.activate([
         backgroundView.centerX.equal(to: centerX),
@@ -31,6 +35,9 @@ final class ProgressIndicator: UIView {
   private var indicator: UIActivityIndicatorView! {
     didSet {
       indicator.style = .whiteLarge
+      indicator.color = .black
+      indicator.hidesWhenStopped = true
+      indicator.translatesAutoresizingMaskIntoConstraints = false
       backgroundView.addSubview(indicator)
       NSLayoutConstraint.activate([
         indicator.centerX.equal(to: backgroundView.centerX),
@@ -50,28 +57,30 @@ final class ProgressIndicator: UIView {
   }
   
   private func setup() {
-    backgroundColor = .clear
+    backgroundColor = UIColor.black.withAlphaComponent(0.3)
     backgroundView = UIView()
     indicator = UIActivityIndicatorView()
   }
   
-  /// `ProgressIndicator.show()`로 인디케이터 표시
+  /// `ProgressIndicator.shared.show()`로 인디케이터 표시
   func show() {
     DispatchQueue.main.async { [weak self] in
       guard let `self` = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
+      self.indicator.startAnimating()
       if let window = UIApplication.shared.keyWindow {
-        window.addSubview(self.backgroundView)
+        window.addSubview(self)
       }
     }
   }
   
-  /// `ProgressIndicator.hide()`로 인디케이터 표시
+  /// `ProgressIndicator.shared.hide()`로 인디케이터 표시
   func hide() {
     DispatchQueue.main.async { [weak self] in
       guard let `self` = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = false
-      self.backgroundView.removeFromSuperview()
+      self.indicator.stopAnimating()
+      self.removeFromSuperview()
     }
   }
 }
