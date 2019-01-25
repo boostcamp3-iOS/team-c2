@@ -11,7 +11,6 @@
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		0A6CD6CC5EF0CB96915A1717214C71DB /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */; };
 		0CD1740E330718AD9F6C5C529AD7B10F /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */; };
-		19AF279021FAD625000DDF9E /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF278F21FAD625000DDF9E /* Notification.Name+.swift */; };
 		1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		204B29640C67AFB04114BBFBF8CD2FA0 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */; };
@@ -28,6 +27,7 @@
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
 		5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */; };
 		5FDA8F214C6E9BDDA2C64DBB2ED640BD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E3D8169E0F1D9CFF3A6A227748F01 /* UIViewController+.swift */; };
+		63E1084724B6FC24B6AC7F1C57CEDBFB /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF7D101FBB1B823A1C8D8B4D842060 /* Notification.Name+.swift */; };
 		67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */; };
 		740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
 		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
@@ -64,7 +64,6 @@
 		149E1E1DBA2DF694E0AE33D493CDE8F9 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
-		19AF278F21FAD625000DDF9E /* Notification.Name+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		235AB303D49A333807A979D37516363E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
 		25EFE2DF09F5F59424280903F831C1B3 /* ValueGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +100,7 @@
 		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D247F6F3851E8A9D8F03470A313986A4 /* FineDust.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FineDust.xcdatamodel; sourceTree = "<group>"; };
+		D4FF7D101FBB1B823A1C8D8B4D842060 /* Notification.Name+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTerm.swift; sourceTree = "<group>"; };
@@ -322,13 +322,13 @@
 		B3C2FE06B8909518407804448A15547A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				19AF278F21FAD625000DDF9E /* Notification.Name+.swift */,
 				AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */,
 				804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */,
 				978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */,
 				475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */,
 				C0BD575BEB17D9D2493F29578956C779 /* NSLayoutDimension+.swift */,
 				5DE7F648E3F1AFEF8F2E912807BD956C /* NSObject+.swift */,
+				D4FF7D101FBB1B823A1C8D8B4D842060 /* Notification.Name+.swift */,
 				43A9E8FB49A9FF5D6049F1AA935B3EAD /* String+.swift */,
 				499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */,
 				DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */,
@@ -490,9 +490,9 @@
 				C33546D723737ADFD171EBB0CD18C1BF /* NSLayoutDimension+.swift in Sources */,
 				2E0344EDA34A627A756BC20F9B2A791F /* NSObject+.swift in Sources */,
 				BD5CD8B8D765B77C2BE845AAFB2C42B0 /* Network.swift in Sources */,
+				63E1084724B6FC24B6AC7F1C57CEDBFB /* Notification.Name+.swift in Sources */,
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				9C21C55458FC610F7CA4A5A0C74647BD /* RatioGraphView.swift in Sources */,
-				19AF279021FAD625000DDF9E /* Notification.Name+.swift in Sources */,
 				29A289A83A4898356104FF9E3E9EB1F9 /* RatioGraphViewDelegate.swift in Sources */,
 				3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
