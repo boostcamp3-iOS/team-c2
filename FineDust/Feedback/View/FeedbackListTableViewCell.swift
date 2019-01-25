@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedbackListTableViewCell: UITableViewCell {
+final class FeedbackListTableViewCell: UITableViewCell {
 
   @IBOutlet weak var feedbackImageView: UIImageView!
   @IBOutlet weak var feedbackTitleLabel: UILabel!
