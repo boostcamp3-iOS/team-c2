@@ -30,18 +30,19 @@ final class Network {
   class func request(
     _ url: URL,
     method: HTTPMethod,
-    parameters: [String: Any] = [:],
+    parameters: [String: Any]? = nil,
     headers: [String: String] = [:],
-    completion: @escaping (Data?, Int?, Error?) -> Void
+    completion: @escaping (Data?, Error?) -> Void
   ) {
     let session = URLSession(configuration: .default)
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = method.rawValue
-    urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+    if let parameters = parameters {
+      urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+    }
     headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
-    let task = session.dataTask(with: urlRequest) { data, response, error in
-      guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return }
-      completion(data, statusCode, error)
+    let task = session.dataTask(with: urlRequest) { data, _, error in
+      completion(data, error)
       session.finishTasksAndInvalidate()
     }
     task.resume()

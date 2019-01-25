@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 미세먼지 정보 응답 객체.
 struct FineDustResponse: Codable {
   
   struct List: Codable {
@@ -15,48 +16,88 @@ struct FineDustResponse: Codable {
     let dataTime: String
     
     /// 미세먼지 농도
-    let fineDustValue: Int
+    private let fineDustValueResponse: String
     
     /// 미세먼지 24시간 예측 이동 농도
-    let fineDustValue24: Int
+    private let fineDustValue24Response: String
     
     /// 미세먼지 24시간 등급
-    let fineDustGrade: Int
+    private let fineDustGradeResponse: String
     
     /// 미세먼지 1시간 등급
-    let fineDustGrade1h: Int
+    private let fineDustGrade1hResponse: String
     
     /// 초미세먼지 농도
-    let ultrafineDustValue: Int
+    private let ultraFineDustValueResponse: String
     
     /// 초미세먼지 24시간 예측 이동 농도
-    let ultrafineDustValue24: Int
+    private let ultraFineDustValue24Response: String
     
     /// 초미세먼지 24시간 등급
-    let ultrafineDustGrade: Int
+    private let ultraFineDustGradeResponse: String
     
     /// 초미세먼지 1시간 등급
-    let ultrafineDustGrade1h: Int
+    private let ultraFineDustGrade1hResponse: String
     
     enum CodingKeys: String, CodingKey {
       
       case dataTime
       
-      case fineDustValue = "pm10Value"
+      case fineDustValueResponse = "pm10Value"
       
-      case fineDustValue24 = "pm10Value24"
+      case fineDustValue24Response = "pm10Value24"
       
-      case fineDustGrade = "pm10Grade"
+      case fineDustGradeResponse = "pm10Grade"
       
-      case fineDustGrade1h = "pm10Grade1h"
+      case fineDustGrade1hResponse = "pm10Grade1h"
       
-      case ultrafineDustValue = "pm25Value"
+      case ultraFineDustValueResponse = "pm25Value"
       
-      case ultrafineDustValue24 = "pm25Value24"
+      case ultraFineDustValue24Response = "pm25Value24"
       
-      case ultrafineDustGrade = "pm25Grade"
+      case ultraFineDustGradeResponse = "pm25Grade"
       
-      case ultrafineDustGrade1h = "pm25Grade1h"
+      case ultraFineDustGrade1hResponse = "pm25Grade1h"
+    }
+    
+    /// 미세먼지 농도
+    var fineDustValue: Int {
+      return Int(fineDustValueResponse) ?? 0
+    }
+    
+    /// 미세먼지 24시간 예측 이동 농도
+    var fineDustValue24: Int {
+      return Int(fineDustValue24Response) ?? 0
+    }
+    
+    /// 미세먼지 24시간 등급
+    var fineDustGrade: Int {
+      return Int(fineDustGradeResponse) ?? 0
+    }
+    
+    /// 미세먼지 1시간 등급
+    var fineDustGrade1h: Int {
+      return Int(fineDustGrade1hResponse) ?? 0
+    }
+    
+    /// 초미세먼지 농도
+    var ultraFineDustValue: Int {
+      return Int(ultraFineDustValueResponse) ?? 0
+    }
+    
+    /// 초미세먼지 24시간 예측 이동 농도
+    var ultraFineDustValue24: Int {
+      return Int(ultraFineDustValue24Response) ?? 0
+    }
+    
+    /// 초미세먼지 24시간 등급
+    var ultraFineDustGrade: Int {
+      return Int(ultraFineDustGradeResponse) ?? 0
+    }
+    
+    /// 초미세먼지 1시간 등급
+    var ultraFineDustGrade1h: Int {
+      return Int(ultraFineDustGrade1hResponse) ?? 0
     }
   }
   
@@ -64,4 +105,9 @@ struct FineDustResponse: Codable {
   
   /// 응답 개수
   let totalCount: Int
+  
+  /// 서브스크립트로 리스트의 값에 접근. `response[1]`
+  subscript(index: Int) -> List {
+    return list[index]
+  }
 }

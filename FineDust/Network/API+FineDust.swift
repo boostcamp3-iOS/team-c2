@@ -26,15 +26,17 @@ extension API {
       .appending("&serviceKey=\(serviceKey)")
       .appending("&_returnType=json")
     guard let url = URL(string: urlString) else { return }
-    Network.request(url, method: .get) { data, statusCode, error in
-      guard let data = data else { return }
+    Network.request(url, method: .get) { data, error in
+      guard let data = data else {
+        completion(nil, error)
+        return
+      }
       do {
         let response = try JSONDecoder().decode(ObservatoryResponse.self, from: data)
         completion(response, nil)
       } catch {
         completion(nil, error)
       }
-      completion(nil, error)
     }
   }
 
@@ -45,10 +47,10 @@ extension API {
     numberOfRows numOfRows: Int = 10,
     completion: @escaping (FineDustResponse?, Error?) -> Void
   ) {
-    let encodedStationName = "강남대로".percentEncoded
+    let observatory = FineDustInfo.shared.observatory.percentEncoded
     let urlString = baseURL
       .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")
-      .appending("?stationName=\(encodedStationName)")
+      .appending("?stationName=\(observatory)")
       .appending("&dataTerm=\(dataTerm.rawValue)")
       .appending("&pageNo=\(pageNo)")
       .appending("&numOfRows=\(numOfRows)")
@@ -56,15 +58,17 @@ extension API {
       .appending("&ver=1.1")
       .appending("&_returnType=json")
     guard let url = URL(string: urlString) else { return }
-    Network.request(url, method: .get) { data, statusCode, error in
-      guard let data = data else { return }
+    Network.request(url, method: .get) { data, error in
+      guard let data = data else {
+        completion(nil, error)
+        return
+      }
       do {
         let response = try JSONDecoder().decode(FineDustResponse.self, from: data)
         completion(response, nil)
       } catch {
         completion(nil, error)
       }
-      completion(nil, error)
     }
   }
 }

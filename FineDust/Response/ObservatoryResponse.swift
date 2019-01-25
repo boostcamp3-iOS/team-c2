@@ -17,7 +17,7 @@ struct ObservatoryResponse: Codable {
     let address: String
     
     /// 관측소 이름
-    let stationName: String
+    let observatory: String
     
     /// 현재 위치에서 관측소까지의 거리. km
     let distance: Double
@@ -28,7 +28,7 @@ struct ObservatoryResponse: Codable {
       
       case distance = "tm"
       
-      case stationName
+      case observatory = "stationName"
     }
   }
   
@@ -36,4 +36,8 @@ struct ObservatoryResponse: Codable {
   
   /// 응답 개수
   let totalCount: Int
+  
+  var observatory: String? {
+    return list.first?.observatory
+  }
 }

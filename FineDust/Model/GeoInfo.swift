@@ -15,18 +15,24 @@ final class GeoInfo {
   
   static let shared = GeoInfo()
   
-  // MARK: Property
+  // MARK: Properties
 
-  var x: Double = 0
+  private var xLocation: Double = 0
   
-  var y: Double = 0
+  private var yLocation: Double = 0
   
-  var observatory: String = ""
+  var x: Double {
+    return xLocation
+  }
   
-  // MARK: Method
+  var y: Double {
+    return yLocation
+  }
   
-  func set(x: Double, y: Double) {
-    self.x = x
-    self.y = y
+  // MARK: Methods
+  
+  func setLocation(x: Double, y: Double) {
+    xLocation = x
+    yLocation = y
   }
 }
