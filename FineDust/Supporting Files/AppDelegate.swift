@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     manager.delegate = self
     return manager    
   }()
-
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
     UINavigationBar.appearance().tintColor = Asset.graph1.color
@@ -31,70 +31,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     UITabBar.appearance().tintColor = .white
     UITabBar.appearance().barTintColor = Asset.graph1.color
-    UITextField.appearance().tintColor = .white
+    UITextField.appearance().tintColor = .clear
     locationManager.requestAlwaysAuthorization()
     FineDustHK.shared.requestAuthorization()
+    toggleFirstExecutionFlag()
     fetchAPI()
     return true
   }
-
+  
   func applicationWillResignActive(_ application: UIApplication) { }
-
+  
   func applicationDidEnterBackground(_ application: UIApplication) { }
-
+  
   func applicationWillEnterForeground(_ application: UIApplication) {
     fetchAPI()
   }
-
+  
   func applicationDidBecomeActive(_ application: UIApplication) { }
-
+  
   func applicationWillTerminate(_ application: UIApplication) {
     self.saveContext()
   }
-
+  
   // MARK: - Core Data stack
-
+  
   lazy var persistentContainer: NSPersistentContainer = {
-      /*
-       The persistent container for the application. This implementation
-       creates and returns a container, having loaded the store for the
-       application to it. This property is optional since there are legitimate
-       error conditions that could cause the creation of the store to fail.
-      */
-      let container = NSPersistentContainer(name: "FineDust")
-      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-          if let error = error as NSError? {
-              // Replace this implementation with code to handle the error appropriately.
-              // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-               
-              /*
-               Typical reasons for an error here include:
-               * The parent directory does not exist, cannot be created, or disallows writing.
-               * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-               * The device is out of space.
-               * The store could not be migrated to the current model version.
-               Check the error message to determine what the actual problem was.
-               */
-              fatalError("Unresolved error \(error), \(error.userInfo)")
-          }
-      })
-      return container
-  }()
-
-  // MARK: - Core Data Saving support
-
-  func saveContext () {
-      let context = persistentContainer.viewContext
-      if context.hasChanges {
-          do {
-              try context.save()
-          } catch {
-              // Replace this implementation with code to handle the error appropriately.
-              // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-              let nserror = error as NSError
-              fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-          }
+    let container = NSPersistentContainer(name: "FineDust")
+    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+      if let error = error as NSError? {
+        // Replace this implementation with code to handle the error appropriately.
+        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        
+        /*
+         Typical reasons for an error here include:
+         * The parent directory does not exist, cannot be created, or disallows writing.
+         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+         * The device is out of space.
+         * The store could not be migrated to the current model version.
+         Check the error message to determine what the actual problem was.
+         */
+        fatalError("Unresolved error \(error), \(error.userInfo)")
       }
+    })
+    return container
+  }()
+  
+  // MARK: - Core Data Saving support
+  
+  func saveContext () {
+    let context = persistentContainer.viewContext
+    if context.hasChanges {
+      do {
+        try context.save()
+      } catch {
+        // Replace this implementation with code to handle the error appropriately.
+        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        let nserror = error as NSError
+        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+      }
+    }
   }
 }
 
@@ -138,7 +133,10 @@ extension AppDelegate: CLLocationManagerDelegate {
 private extension AppDelegate {
   /// API 호출하는 메소드
   func fetchAPI() {
-    fetchObservatory(fetchFineDustConcentration)
+    DispatchQueue.global(qos: .background).async { [weak self] in
+      guard let `self` = self else { return }
+      self.fetchObservatory(self.fetchFineDustConcentration)
+    }
   }
   
   /// 관측소 정보를 가져오는 메소드
@@ -171,6 +169,23 @@ private extension AppDelegate {
       }
       guard let response = response else { return }
       FineDustInfo.shared.set(fineDustResponse: response)
+    }
+  }
+}
+
+// MARK: - 첫 실행시에만 호출
+
+extension AppDelegate {
+  /// 첫 실행시에만 날짜를 저장하도록 함
+  func toggleFirstExecutionFlag() {
+    if !UserDefaults.standard.bool(forKey: "isFirstExecution") {
+      CoreDataHelper.shared.save([User.installedDate: Date()], forType: User.self) { error in
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+        UserDefaults.standard.set(true, forKey: "isFirstExecution")
+      }
     }
   }
 }
