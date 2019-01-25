@@ -17,16 +17,32 @@ final class GeoInfo {
   
   // MARK: Property
 
-  var x: Double = 0
+  private var xLocation: Double = 0
   
-  var y: Double = 0
+  private var yLocation: Double = 0
   
-  var observatory: String = ""
+  private var stationName: String = ""
+  
+  var x: Double {
+    return xLocation
+  }
+  
+  var y: Double {
+    return yLocation
+  }
+  
+  var observatory: String {
+    return stationName
+  }
   
   // MARK: Method
   
   func setLocation(x: Double, y: Double) {
-    self.x = x
-    self.y = y
+    xLocation = x
+    yLocation = y
+  }
+  
+  func setObservatory(_ observatory: String) {
+    stationName = observatory
   }
 }
