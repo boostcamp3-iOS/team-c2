@@ -67,10 +67,10 @@ final class FineDustHK: OpenHealthDelegate {
         )
         .action(
           title: "건강 App",
-          style: .default,
-          handler: { _, _ in
+          style: .default
+          ) { _, _ in
             UIApplication.shared.open(URL(string: "x-apple-health://")!)
-        })
+        }
         .action(
           title: "취소", style: .cancel, handler: nil
         )
