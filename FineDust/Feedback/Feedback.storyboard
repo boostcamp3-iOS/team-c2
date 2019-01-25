@@ -78,11 +78,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGw-6q-nXE">
-                                                    <rect key="frame" x="67" y="41" width="279" height="109"/>
+                                                    <rect key="frame" x="67" y="41" width="279" height="107"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="sdA-f8-q7b">
-                                                            <rect key="frame" x="62" y="22" width="126" height="65"/>
+                                                            <rect key="frame" x="83" y="22" width="126" height="65"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toI-26-T8z">
@@ -106,11 +106,15 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hd8-bJ-yT0">
-                                                            <rect key="frame" x="223" y="41" width="26" height="26"/>
+                                                            <rect key="frame" x="244" y="46" width="17" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" image="heart"/>
                                                             <state key="selected" image="redheart"/>
                                                         </button>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-BU-376">
+                                                            <rect key="frame" x="-43" y="0.0" width="107" height="107"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -121,10 +125,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-BU-376">
-                                                    <rect key="frame" x="27" y="53" width="85" height="85"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -180,11 +180,11 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="AXq-ts-j2Z">
-                                        <rect key="frame" x="-1" y="47" width="376" height="376"/>
+                                        <rect key="frame" x="-1" y="47" width="169" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gnI-an-Cas">
-                                        <rect key="frame" x="23" y="442" width="329" height="317"/>
+                                        <rect key="frame" x="23" y="233" width="329" height="526"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text"> 틸란드시아는 공기 중에 있는 수분과 먼지를 흡수합니다. 자일렌 제거량이 ‘최상’이고, 포름알데히드 제거량은 ‘상’등급으로 평가될 정도로 우수한 공기정화식물입니다. 이처럼 포름알데히드와 자일렌 등의 새집 증후군 원인 물질 제거 효과에 우수하기 때문에 거실에 놓을 경우 새집증후군 완화 효과가 탁월합니다.    틸란드시아는 착생식물로, 나무 같은 곳에 착생하여 공중에 매달려 살기 때문에 ‘공중 식물’이라고도 불리기도 합니다.  &lt;키우는 법&gt; 

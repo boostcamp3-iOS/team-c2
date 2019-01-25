@@ -11,8 +11,9 @@ import UIKit
 final class PagingPerCellFlowLayout: UICollectionViewFlowLayout {
   
   /// 스크롤이 멈출 지점을 반환하는 함수
-  override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
-                                    withScrollingVelocity velocity: CGPoint
+  override func targetContentOffset(
+    forProposedContentOffset proposedContentOffset: CGPoint,
+    withScrollingVelocity velocity: CGPoint
     ) -> CGPoint {
     if let collectionViewBounds = self.collectionView?.bounds {
       let halfWidthOfVC = collectionViewBounds.size.width * 0.5
