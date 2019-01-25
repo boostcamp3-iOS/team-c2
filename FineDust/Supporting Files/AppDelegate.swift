@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     UITabBar.appearance().tintColor = .white
     UITabBar.appearance().barTintColor = Asset.graph1.color
-    UITextField.appearance().tintColor = .white
+    UITextField.appearance().tintColor = .clear
     locationManager.requestAlwaysAuthorization()
 //    FineDustHK.shared.requestAuthorization()
     fetchAPI()

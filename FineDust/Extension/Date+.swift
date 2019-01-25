@@ -26,6 +26,14 @@ extension Date {
     return Calendar.current.date(byAdding: components, to: date) ?? Date()
   }
   
+  func day(beforeDays days: Int) -> Date {
+    return Calendar.current.date(byAdding: .day, value: -days, to: self) ?? Date()
+  }
+  
+  func day(afterDays days: Int) -> Date {
+    return Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
+  }
+  
   var isToday: Bool {
     return Calendar.current.isDateInToday(self)
   }
