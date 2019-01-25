@@ -8,6 +8,17 @@
 
 import UIKit
 
+/// Ratio Graph View Data Source
+protocol RatioGraphViewDataSource: class {
+  
+  var ratio: CGFloat { get }
+}
+
+/// Ratio Graph View Delegate
+protocol RatioGraphViewDelegate: class {
+  
+}
+
 /// 비율 그래프 뷰
 final class RatioGraphView: UIView {
   
@@ -23,13 +34,15 @@ final class RatioGraphView: UIView {
   
   // MARK: Delegate
   
+  weak var dataSource: RatioGraphViewDataSource?
+  
   weak var delegate: RatioGraphViewDelegate?
   
   // MARK: Private Properties
   
   /// 비율을 저장하는  프로퍼티
   private var ratio: CGFloat {
-    return delegate?.ratio ?? 0.0
+    return dataSource?.ratio ?? 0.0
   }
   
   /// 비율을 각도로 변환
@@ -72,6 +85,7 @@ final class RatioGraphView: UIView {
     drawPortionSectionView()
     drawCenterHoleView()
     setPercentLabel()
+    print(ratio, endAngle)
   }
 }
 

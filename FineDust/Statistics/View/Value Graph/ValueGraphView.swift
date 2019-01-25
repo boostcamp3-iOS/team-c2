@@ -8,6 +8,24 @@
 
 import UIKit
 
+/// Value Graph View Data Source
+protocol ValueGraphViewDataSource: class {
+  
+  var day: Date { get }
+  
+  var values: [CGFloat] { get }
+}
+
+/// Value Graph View Delegate
+protocol ValueGraphViewDelegate: class {
+  
+  func valueGraphView(
+    _ valueGraphView: ValueGraphView,
+    didTapDoneButton button: UIBarButtonItem,
+    for date: Date
+  )
+}
+
 /// 지정 날짜 기준 일주일 그래프 관련 뷰
 final class ValueGraphView: UIView {
 
@@ -32,14 +50,45 @@ final class ValueGraphView: UIView {
   }
   
   // MARK: Delegate
+  
+  weak var dataSource: ValueGraphViewDataSource?
 
   weak var delegate: ValueGraphViewDelegate?
   
+  // MARK: Lazy Property
+  
+  /// DatePicker 프로퍼티
+  private lazy var datePicker: UIDatePicker = {
+    let picker = UIDatePicker()
+    picker.calendar = Calendar.current
+    picker.date = Date()
+    picker.datePickerMode = .date
+    picker.maximumDate = Date()
+    picker.minimumDate = Calendar.current.date(from: DateComponents(year: 2019, month: 1, day: 1))
+    picker.locale = Locale(identifier: "ko_KR")
+    return picker
+  }()
+  
+  /// DateFormatter 프로퍼티
+  private lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
+    return formatter
+  }()
+  
   // MARK: Private Properties
+  
+  /// 선택된 날짜
+  private var selectedDate: Date = Date() {
+    didSet {
+      dateTextField.text = dateFormatter.string(from: selectedDate)
+    }
+  }
   
   /// 값 모음
   private var values: [CGFloat] {
-    return delegate?.values ?? []
+    return dataSource?.values ?? []
   }
   
   /// 최대값
@@ -53,21 +102,55 @@ final class ValueGraphView: UIView {
   }
   
   /// 주축 레이블
-  private var unitTexts: [String] {
+  private var axisTexts: [String] {
     return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
+  }
+  
+  /// 일 텍스트
+  private var dayTexts: [String] {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.dateFormat = "d"
+    var array = [Date].init(repeating: selectedDate, count: 7)
+    for (index, element) in array.enumerated() {
+      array[index] = element.day(beforeDays: index)
+    }
+    return array.map { dateFormatter.string(from: $0) }.reversed()
   }
   
   // MARK: IBOutlets
   
-  /// 제목 레이블
-  @IBOutlet private weak var titleLabel: UILabel!
-  
-  /// 날짜 선택 버튼
-  @IBOutlet private weak var dateButton: UIButton! {
+  /// 날짜 표시 텍스트 필드
+  @IBOutlet private weak var dateTextField: UITextField! {
     didSet {
-      dateButton.addTarget(self, action: #selector(dateButtonDidTap(_:)), for: .touchUpInside)
+      let toolBar = UIToolbar(
+        frame: CGRect(
+          x: 0,
+          y: 0,
+          width: UIScreen.main.bounds.width,
+          height: 44
+        )
+      )
+      toolBar.items = [
+        UIBarButtonItem(
+          barButtonSystemItem: .flexibleSpace,
+          target: nil,
+          action: nil
+        ),
+        UIBarButtonItem(
+          barButtonSystemItem: .done,
+          target: self,
+          action: #selector(doneButtonDidTap(_:))
+        )
+      ]
+      selectedDate = Date()
+      dateTextField.inputView = datePicker
+      dateTextField.inputAccessoryView = toolBar
     }
   }
+  
+  /// 제목 레이블
+  @IBOutlet private weak var titleLabel: UILabel!
   
   /// 요일 레이블 모음
   @IBOutlet private var dayLabels: [UILabel]!
@@ -87,10 +170,10 @@ final class ValueGraphView: UIView {
   }
   
   /// 단위 레이블 모음
-  @IBOutlet var unitLabels: [UILabel]!
+  @IBOutlet private var unitLabels: [UILabel]!
   
   /// 그래프 높이 제약 모음
-  @IBOutlet var graphViewHeightConstraints: [NSLayoutConstraint]!
+  @IBOutlet private var graphViewHeightConstraints: [NSLayoutConstraint]!
   
   // MARK: Methods
   
@@ -103,10 +186,16 @@ final class ValueGraphView: UIView {
     animateHeights()
     setUnitLabels()
     setTitleDayLabels()
+    print(values, maxValue, ratios)
   }
   
-  @objc private func dateButtonDidTap(_ sender: UIButton) {
-    delegate?.valueGraphView(self, didTapDateButton: sender)
+  /// 키보드에 달린 완료 버튼을 눌렀을 때의 동작 정의
+  @objc private func doneButtonDidTap(_ sender: UIBarButtonItem) {
+    dateTextField.resignFirstResponder()
+    dateTextField.text = dateFormatter.string(from: datePicker.date)
+    selectedDate = datePicker.date
+    setup()
+    delegate?.valueGraphView(self, didTapDoneButton: sender, for: datePicker.date)
   }
 }
 
@@ -124,9 +213,8 @@ private extension ValueGraphView {
   /// 그래프 뷰 높이 제약에 애니메이션 효과 설정
   func animateHeights() {
     for (index, ratio) in ratios.enumerated() {
-      let plusTime = DispatchTime.now()
       var heightConstraint = graphViewHeightConstraints[index]
-      DispatchQueue.main.asyncAfter(deadline: plusTime) { [weak self] in
+      DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
         UIView.animate(
           withDuration: Animation.duration,
           delay: Animation.delay,
@@ -145,14 +233,16 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정
   func setUnitLabels() {
-    zip(unitLabels, unitTexts).forEach { (label, text) in
+    zip(unitLabels, axisTexts).forEach { (label, text) in
       label.text = text
     }
   }
   
   /// 요일 레이블 텍스트 설정
   func setTitleDayLabels() {
-    
+    zip(dayLabels, dayTexts).forEach { (label, text) in
+      label.text = text
+    }
   }
   
   /// 그래프 색상 설정
