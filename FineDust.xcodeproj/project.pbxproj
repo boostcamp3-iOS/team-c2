@@ -315,9 +315,9 @@
 		B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */,
-				235AB303D49A333807A979D37516363E /* API.swift */,
 				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
+				235AB303D49A333807A979D37516363E /* API.swift */,
+				15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
