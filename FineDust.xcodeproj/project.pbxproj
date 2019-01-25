@@ -29,7 +29,6 @@
 		67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */; };
 		740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
 		78460935F8D933BB0B289AF0A2352619 /* UIView+NSLayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */; };
-		832B647735EF13B88E5340906E69A682 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEBFFD6A784CAE7AF3FE0C51FAA0714 /* Storyboard.swift */; };
 		902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */; };
 		959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */; };
 		985C8431533A0B199E9938798F4B225C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235AB303D49A333807A979D37516363E /* API.swift */; };
@@ -86,13 +85,13 @@
 		911E3D8169E0F1D9CFF3A6A227748F01 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutAnchor.swift"; sourceTree = "<group>"; };
+		9BC232264EA056BE9DD192A0E0CD37DA /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
 		9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCollectionViewCell.swift; path = FineDust/Feedback/View/FeedbackCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservatoryResponse.swift; sourceTree = "<group>"; };
 		B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		9BC232264EA056BE9DD192A0E0CD37DA /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
 		BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		C0BD575BEB17D9D2493F29578956C779 /* NSLayoutDimension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutDimension+.swift"; sourceTree = "<group>"; };
 		CEDC11CBF6CF397C8B884B856EB0695C /* GeoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoInfo.swift; sourceTree = "<group>"; };
@@ -118,34 +117,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HealthKit;
-			sourceTree = "<group>";
-		};
-		99C815E84F2B6462022153ED674E25F2 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */,
-				6D2A9DF5E234F0ACFA0BA27369F27AB6 /* FineDustResponse.swift */,
-				17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */,
-				AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		6BD00A070861AD554C16D14235787222 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				07A2D5AE5AA53222F7A4CD29100E6E05 /* Controller */,
-				6C27DD5B3B700C34D7307711A4F1A1FD /* View */,
-				EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		010570675998A4B1D218BEBD271435D3 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,85 +125,6 @@
 				DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */,
 			);
 			path = Statistics;
-			sourceTree = "<group>";
-		};
-		98FC53B1C8D628A70A4BDB0A2693A42F /* Feedback */ = {
-			isa = PBXGroup;
-			children = (
-				6AC19CD7DDEBD8345E7C6A3745E98017 /* Controller */,
-				C683749A4618A81E1E0F1CF2A8180BCB /* View */,
-				907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */,
-			);
-			path = Feedback;
-			sourceTree = "<group>";
-		};
-		5EF2A4B3205B6DFFF576B0628D40B3CD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				10F8F9F0BB8AECA24E182EBED21006A1 /* StatisticsViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2A5D5F519E02A93D262BAB837E65CA3A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5D0F49B2B1B9455CA1580B57C0DE56C0 /* Ratio Graph */,
-				333205C85D3BC78F21F3FA6B9932825F /* Value Graph */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		6AC19CD7DDEBD8345E7C6A3745E98017 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		07A2D5AE5AA53222F7A4CD29100E6E05 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		6C27DD5B3B700C34D7307711A4F1A1FD /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C683749A4618A81E1E0F1CF2A8180BCB /* View */ = {
-			isa = PBXGroup;
-			children = (
-				AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */,
-				B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		333205C85D3BC78F21F3FA6B9932825F /* Value Graph */ = {
-			isa = PBXGroup;
-			children = (
-				404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */,
-				78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */,
-				25EFE2DF09F5F59424280903F831C1B3 /* ValueGraphViewDelegate.swift */,
-			);
-			path = "Value Graph";
-			sourceTree = "<group>";
-		};
-		5D0F49B2B1B9455CA1580B57C0DE56C0 /* Ratio Graph */ = {
-			isa = PBXGroup;
-			children = (
-				5C1A5681695EF53FED3A78954492680E /* RatioGraphView.swift */,
-				24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */,
-				9BC232264EA056BE9DD192A0E0CD37DA /* RatioGraphViewDelegate.swift */,
-			);
-			path = "Ratio Graph";
 			sourceTree = "<group>";
 		};
 		03539B93491D052777A42E866616EFFC = {
@@ -246,12 +138,56 @@
 			);
 			sourceTree = "<group>";
 		};
+		07A2D5AE5AA53222F7A4CD29100E6E05 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		10F15CFF826B6B000B3C9C0973EA612B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */,
+				1C949182C047C9E0DC007C131468C2D3 /* Storyboard.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		249684EBDBAFA57925A702F7F2706E9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				6CB7A59C01A6BEA73951091DC6C6C60F /* FineDust.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2A5D5F519E02A93D262BAB837E65CA3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5D0F49B2B1B9455CA1580B57C0DE56C0 /* Ratio Graph */,
+				333205C85D3BC78F21F3FA6B9932825F /* Value Graph */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2F83400986839F304CBBA92DC52E3AD2 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		333205C85D3BC78F21F3FA6B9932825F /* Value Graph */ = {
+			isa = PBXGroup;
+			children = (
+				404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */,
+				78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */,
+				25EFE2DF09F5F59424280903F831C1B3 /* ValueGraphViewDelegate.swift */,
+			);
+			path = "Value Graph";
 			sourceTree = "<group>";
 		};
 		481AEAA395D9C3B4FF33E868D70E8D0B /* FineDust */ = {
@@ -273,14 +209,62 @@
 			path = FineDust;
 			sourceTree = "<group>";
 		};
-		B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */ = {
+		5D0F49B2B1B9455CA1580B57C0DE56C0 /* Ratio Graph */ = {
 			isa = PBXGroup;
 			children = (
-				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
-				235AB303D49A333807A979D37516363E /* API.swift */,
-				15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */,
+				5C1A5681695EF53FED3A78954492680E /* RatioGraphView.swift */,
+				24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */,
+				9BC232264EA056BE9DD192A0E0CD37DA /* RatioGraphViewDelegate.swift */,
 			);
-			path = Network;
+			path = "Ratio Graph";
+			sourceTree = "<group>";
+		};
+		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				07EDFAF0DF8D1A91CF045DFB46C9217C /* FineDustHK.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		5EF2A4B3205B6DFFF576B0628D40B3CD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				10F8F9F0BB8AECA24E182EBED21006A1 /* StatisticsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6AC19CD7DDEBD8345E7C6A3745E98017 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6BD00A070861AD554C16D14235787222 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				07A2D5AE5AA53222F7A4CD29100E6E05 /* Controller */,
+				6C27DD5B3B700C34D7307711A4F1A1FD /* View */,
+				EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		6C27DD5B3B700C34D7307711A4F1A1FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6FEB335CB38ABE1473DC1DA5339DF46B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8C212B1139E96B3BA74BF5B54AB9EF23 /* Model */ = {
@@ -291,13 +275,35 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		10F15CFF826B6B000B3C9C0973EA612B /* Common */ = {
+		98FC53B1C8D628A70A4BDB0A2693A42F /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
-				837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */,
-				1C949182C047C9E0DC007C131468C2D3 /* Storyboard.swift */,
+				6AC19CD7DDEBD8345E7C6A3745E98017 /* Controller */,
+				C683749A4618A81E1E0F1CF2A8180BCB /* View */,
+				907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */,
 			);
-			path = Common;
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		99C815E84F2B6462022153ED674E25F2 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */,
+				6D2A9DF5E234F0ACFA0BA27369F27AB6 /* FineDustResponse.swift */,
+				17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */,
+				AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
+				235AB303D49A333807A979D37516363E /* API.swift */,
+				15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		B3C2FE06B8909518407804448A15547A /* Extension */ = {
@@ -320,14 +326,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		2F83400986839F304CBBA92DC52E3AD2 /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-				17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */,
-			);
-			path = "Core Data";
-			sourceTree = "<group>";
-		};
 		C5254E221717B2B3CDB72F67E9F3234C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +338,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C683749A4618A81E1E0F1CF2A8180BCB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */,
+				B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D34D0BF401BCE0A50883253A7201B68D /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,21 +354,6 @@
 				6CEBFFD6A784CAE7AF3FE0C51FAA0714 /* Storyboard.swift */,
 			);
 			path = SwiftGen;
-			sourceTree = "<group>";
-		};
-		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-				07EDFAF0DF8D1A91CF045DFB46C9217C /* FineDustHK.swift */,
-			);
-			path = HealthKit;
-			sourceTree = "<group>";
-		};
-		6FEB335CB38ABE1473DC1DA5339DF46B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,7 +488,6 @@
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				9C21C55458FC610F7CA4A5A0C74647BD /* RatioGraphView.swift in Sources */,
 				3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */,
-				E2CFE27647E37FEB1D3750B742AEEA9B /* Storyboard.swift in Sources */,
 				29A289A83A4898356104FF9E3E9EB1F9 /* RatioGraphViewDelegate.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
 				902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */,
@@ -513,20 +504,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D764E2C19ACD93F21236E2C52D091FFB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				067E449E7BAAA91C4EE4A2715980EAFD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -648,27 +639,6 @@
 			};
 			name = Release;
 		};
-		E56408CD67CACF8A0E4588BFF2593817 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R78643UTJ5;
-				INFOPLIST_FILE = FineDust/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.kr.boostcamp3rd.FineDust;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
 		DE8F4696B51F4C9747D985CC9765375B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -689,6 +659,27 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
+		};
+		E56408CD67CACF8A0E4588BFF2593817 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R78643UTJ5;
+				INFOPLIST_FILE = FineDust/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.kr.boostcamp3rd.FineDust;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 

@@ -14,7 +14,7 @@
         <scene sceneID="hxl-bi-pes">
             <objects>
                 <navigationController id="rIq-fy-EBz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="통계" id="BxE-pT-soT"/>
+                    <tabBarItem key="tabBarItem" title="통계" image="barChartTabIcon" id="BxE-pT-soT"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -69,4 +69,7 @@
             <point key="canvasLocation" x="-207" y="-6"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="barChartTabIcon" width="48" height="48"/>
+    </resources>
 </document>
