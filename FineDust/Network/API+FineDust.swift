@@ -47,7 +47,7 @@ extension API {
     numberOfRows numOfRows: Int = 10,
     completion: @escaping (FineDustResponse?, Error?) -> Void
   ) {
-    let observatory = GeoInfo.shared.observatory.percentEncoded
+    let observatory = FineDustInfo.shared.observatory.percentEncoded
     let urlString = baseURL
       .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")
       .appending("?stationName=\(observatory)")

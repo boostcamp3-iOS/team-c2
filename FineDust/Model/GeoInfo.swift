@@ -21,8 +21,6 @@ final class GeoInfo {
   
   private var yLocation: Double = 0
   
-  private var stationName: String = ""
-  
   var x: Double {
     return xLocation
   }
@@ -31,18 +29,10 @@ final class GeoInfo {
     return yLocation
   }
   
-  var observatory: String {
-    return stationName
-  }
-  
   // MARK: Method
   
   func setLocation(x: Double, y: Double) {
     xLocation = x
     yLocation = y
-  }
-  
-  func setObservatory(_ observatory: String) {
-    stationName = observatory
   }
 }
