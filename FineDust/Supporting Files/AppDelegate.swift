@@ -136,10 +136,12 @@ extension AppDelegate: CLLocationManagerDelegate {
 // MARK: - API 응답 초기화
 
 private extension AppDelegate {
+  /// API 호출하는 메소드
   func fetchAPI() {
     fetchObservatory(fetchFineDustConcentration)
   }
   
+  /// 관측소 정보를 가져오는 메소드
   func fetchObservatory(_ completion: @escaping () -> Void) {
     API.shared.fetchObservatory { response, error in
       if let error = error {
@@ -156,6 +158,7 @@ private extension AppDelegate {
     }
   }
   
+  /// 미세먼지 농도 정보를 가져오는 메소드
   func fetchFineDustConcentration() {
     API.shared.fetchFineDustConcentration(term: .daily) { response, error in
       if let error = error {

@@ -11,6 +11,7 @@
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		0A6CD6CC5EF0CB96915A1717214C71DB /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */; };
 		0CD1740E330718AD9F6C5C529AD7B10F /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */; };
+		19AF278E21FAD559000DDF9E /* FineDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AF278D21FAD558000DDF9E /* FineDustInfo.swift */; };
 		1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		204B29640C67AFB04114BBFBF8CD2FA0 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */; };
@@ -62,6 +63,7 @@
 		149E1E1DBA2DF694E0AE33D493CDE8F9 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		19AF278D21FAD558000DDF9E /* FineDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustInfo.swift; sourceTree = "<group>"; };
 		235AB303D49A333807A979D37516363E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
 		25EFE2DF09F5F59424280903F831C1B3 /* ValueGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDelegate.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		8C212B1139E96B3BA74BF5B54AB9EF23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19AF278D21FAD558000DDF9E /* FineDustInfo.swift */,
 				CEDC11CBF6CF397C8B884B856EB0695C /* GeoInfo.swift */,
 			);
 			path = Model;
@@ -496,6 +499,7 @@
 				5FDA8F214C6E9BDDA2C64DBB2ED640BD /* UIViewController+.swift in Sources */,
 				0A6CD6CC5EF0CB96915A1717214C71DB /* ValueGraphView.swift in Sources */,
 				FA70CD246623C9206F4CE2C0FAD7AB47 /* ValueGraphViewDelegate.swift in Sources */,
+				19AF278E21FAD559000DDF9E /* FineDustInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
