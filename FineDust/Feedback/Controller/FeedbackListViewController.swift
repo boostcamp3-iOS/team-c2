@@ -11,13 +11,13 @@ import UIKit
 final class FeedbackListViewController: UIViewController {
   
   // MARK: IBOutlet
-  @IBOutlet private weak var feedbackCollectionView: UICollectionView!
+  @IBOutlet private weak var feedbackCollectionView: CarouselView!
   @IBOutlet private weak var feedbackListTabelView: UITableView!
   
   // MARK: Properties
   private let reuseIdentifiers = ["feedbackCell", "feedbackListCell"]
   private var count = 10
-  private let cornerRadius: CGFloat = 7
+  private let cornerRadius: CGFloat = 5
   
   // MARK: - LifeCycle
   override func viewDidLoad() {
@@ -26,6 +26,12 @@ final class FeedbackListViewController: UIViewController {
     
     feedbackCollectionView.reloadData()
     feedbackListTabelView.reloadData()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    feedbackCollectionView.updateLayout()
   }
 }
 // MARK: - UICollectionViewDataSource
@@ -38,7 +44,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   func collectionView(
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
-  ) -> Int {
+    ) -> Int {
     return 3
   }
   
@@ -50,16 +56,16 @@ extension FeedbackListViewController: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: reuseIdentifiers[0],
       for: indexPath
-    ) as? FeedbackCollectionViewCell
-    else { return UICollectionViewCell() }
+      ) as? FeedbackCollectionViewCell
+      else { return UICollectionViewCell() }
     
     cell.feedbackImageView.layer.cornerRadius = cornerRadius
     cell.feedbackImageView.layer.masksToBounds = true
     cell.feedbackImageView.image = UIImage(named: "info1")
-    
-//    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
-//    cell.feedbackTitleLabel.layer.cornerRadius = cornerRadius
-//    cell.feedbackTitleLabel.layer.masksToBounds = true
+
+    //    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
+    //    cell.feedbackTitleLabel.layer.cornerRadius = cornerRadius
+    //    cell.feedbackTitleLabel.layer.masksToBounds = true
     
     return cell
   }
@@ -90,14 +96,6 @@ extension FeedbackListViewController: UITableViewDataSource {
       cell.feedbackListTitleLabel.isHidden = false
     }
     cell.feedbackImageView.image = UIImage(named: "info1")
-    cell.feedbackImageView.layer.applySketchShadow(
-      color: UIColor.gray,
-      alpha: 0.2,
-      x: 48,
-      y: 3,
-      blur: 5,
-      spread: 3
-    )
     cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
     cell.feedbackSourceLabel.text = "KTV 국민 방송"
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0000AF1821FB690F00C0F144 /* PagingPerCellFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000AF1721FB690F00C0F144 /* PagingPerCellFlowLayout.swift */; };
+		0000AF1A21FB693800C0F144 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000AF1921FB693800C0F144 /* CarouselView.swift */; };
 		0340ABA98AAE5B4F754E2E330CD05303 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */; };
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		0A6CD6CC5EF0CB96915A1717214C71DB /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */; };
@@ -61,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0000AF1721FB690F00C0F144 /* PagingPerCellFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingPerCellFlowLayout.swift; sourceTree = "<group>"; };
+		0000AF1921FB693800C0F144 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		05FC303D1FA77029C0B18B8C19A66650 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		067E449E7BAAA91C4EE4A2715980EAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07EDFAF0DF8D1A91CF045DFB46C9217C /* FineDustHK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustHK.swift; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 			children = (
 				AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */,
 				B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */,
+				0000AF1721FB690F00C0F144 /* PagingPerCellFlowLayout.swift */,
+				0000AF1921FB693800C0F144 /* CarouselView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +491,8 @@
 				F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */,
 				985C8431533A0B199E9938798F4B225C /* API.swift in Sources */,
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
+				0000AF1821FB690F00C0F144 /* PagingPerCellFlowLayout.swift in Sources */,
+				0000AF1A21FB693800C0F144 /* CarouselView.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
 				9535489E45838F5BFB1250529AD35C43 /* CoreDataHelper.swift in Sources */,

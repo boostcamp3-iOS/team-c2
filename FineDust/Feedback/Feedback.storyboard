@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf" customClass="CarouselView" customModule="FineDust" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="267"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="15" id="0Eb-K8-Eau">
@@ -187,9 +187,9 @@
                                         <rect key="frame" x="23" y="442" width="329" height="317"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <mutableString key="text"> 틸란드시아는 공기 중에 있는 수분과 먼지를 흡수합니다. 자일렌 제거량이 ‘최상’이고, 포름알데히드 제거량은 ‘상’등급으로 평가될 정도로 우수한 공기정화식물입니다. 이처럼 포름알데히드와 자일렌 등의 새집 증후군 원인 물질 제거 효과에 우수하기 때문에 거실에 놓을 경우 새집증후군 완화 효과가 탁월합니다.    틸란드시아는 착생식물로, 나무 같은 곳에 착생하여 공중에 매달려 살기 때문에 ‘공중 식물’이라고도 불리기도 합니다.  &lt;키우는 법&gt; 
+                                        <string key="text"> 틸란드시아는 공기 중에 있는 수분과 먼지를 흡수합니다. 자일렌 제거량이 ‘최상’이고, 포름알데히드 제거량은 ‘상’등급으로 평가될 정도로 우수한 공기정화식물입니다. 이처럼 포름알데히드와 자일렌 등의 새집 증후군 원인 물질 제거 효과에 우수하기 때문에 거실에 놓을 경우 새집증후군 완화 효과가 탁월합니다.    틸란드시아는 착생식물로, 나무 같은 곳에 착생하여 공중에 매달려 살기 때문에 ‘공중 식물’이라고도 불리기도 합니다.  &lt;키우는 법&gt; 
  흙이나 물 없이 걸어두거나 수반 등에 얹어 키울 수 있습니다. 반음지에서도 잘 자라지만, 꽃을 피우거나 오래 키우기 위해서는 평소보다 많은 양의 햇빛이 필요합니다. 하지만 직사광선은 피해야 합니다.
-  </mutableString>
+  </string>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
