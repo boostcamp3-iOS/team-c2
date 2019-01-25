@@ -60,17 +60,21 @@ final class FineDustHK: OpenHealthDelegate {
     if !isAuthorized {
       //이 코드로 인해 alert가 1번만 뜨게된다.
       isAuthorized = true
-      UIAlertController.alert(
-        title: "건강 App에 대한 권한이 없습니다.",
-        message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요"
-        ).action(
+      UIAlertController
+        .alert(
+          title: "건강 App에 대한 권한이 없습니다.",
+          message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요"
+        )
+        .action(
           title: "건강 App",
           style: .default,
           handler: { _, _ in
             UIApplication.shared.open(URL(string: "x-apple-health://")!)
-        }).action(
+        })
+        .action(
           title: "취소", style: .cancel, handler: nil
-        ).present(to: viewController)
+        )
+        .present(to: viewController)
     }
   }
 }
