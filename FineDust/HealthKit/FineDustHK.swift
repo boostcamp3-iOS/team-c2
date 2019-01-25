@@ -9,7 +9,7 @@
 import UIKit
 import HealthKit
 
-class FineDustHK: OpenHealthDelegate {
+final class FineDustHK: OpenHealthDelegate {
   
   // MARK: - Properties
   
@@ -22,7 +22,7 @@ class FineDustHK: OpenHealthDelegate {
     forIdentifier: HKQuantityTypeIdentifier.stepCount
   )
   ///Health App 권한을 나타내는 변수
-  private var isAuthorization = true
+  private var isAuthorized = true
   
   // MARK: - Methods
   
@@ -36,7 +36,7 @@ class FineDustHK: OpenHealthDelegate {
     
     //권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정
     if healthStore.authorizationStatus(for: stepCount) == .sharingDenied {
-      isAuthorization = false
+      isAuthorized = false
       return
     }
     
@@ -57,9 +57,9 @@ class FineDustHK: OpenHealthDelegate {
   
   //권한이 없을경우 건강 App으로 이동시키는 메소드
   func openHealth(_ viewController: UIViewController) {
-    if !isAuthorization {
+    if !isAuthorized {
       //이 코드로 인해 alert가 1번만 뜨게된다.
-      isAuthorization = true
+      isAuthorized = true
       UIAlertController.alert(
         title: "건강 App에 대한 권한이 없습니다.",
         message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요"
@@ -67,10 +67,10 @@ class FineDustHK: OpenHealthDelegate {
           title: "건강 App",
           style: .default,
           handler: { _, _ in
-            if #available(iOS 10.0, *) {
-              UIApplication.shared.open(URL(string: "x-apple-health://")!)
-            }
-        }).action(title: "취소", style: .cancel, handler: nil).present(to: viewController)
+            UIApplication.shared.open(URL(string: "x-apple-health://")!)
+        }).action(
+          title: "취소", style: .cancel, handler: nil
+        ).present(to: viewController)
     }
   }
 }

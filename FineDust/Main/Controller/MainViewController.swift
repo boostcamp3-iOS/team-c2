@@ -35,7 +35,7 @@ final class MainViewController: UIViewController {
 // MARK: - Functions
 
 extension MainViewController {
-  func setup() {
+  private func setup() {
     delegate = FineDustHK.shared
   }
 }
