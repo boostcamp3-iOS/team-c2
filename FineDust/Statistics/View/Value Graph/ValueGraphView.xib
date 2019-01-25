@@ -76,16 +76,6 @@
                     <color key="textColor" name="black45"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpH-9B-Cv5">
-                    <rect key="frame" x="107" y="52" width="161" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="R5C-TH-o5a"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                    <state key="normal" title="2019.1.21. ~ 2019.1.27.">
-                        <color key="titleColor" name="graph1"/>
-                    </state>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20z-Zt-1BP" userLabel="Wrapper View">
                     <rect key="frame" x="50" y="90" width="309" height="264"/>
                     <subviews>
@@ -205,16 +195,27 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2019년 1월 27일 금요일" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nbM-Br-WP4">
+                    <rect key="frame" x="16" y="52" width="343" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="w3p-BY-rgQ"/>
+                    </constraints>
+                    <color key="textColor" name="graph1"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="b1Z-1P-4RR" firstAttribute="centerX" secondItem="Ga6-lO-UmU" secondAttribute="centerX" id="1ub-R6-xc6"/>
-                <constraint firstItem="JpH-9B-Cv5" firstAttribute="top" secondItem="zGk-lF-LjL" secondAttribute="bottom" constant="8" id="4sJ-Qw-T2Y"/>
                 <constraint firstItem="zGk-lF-LjL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="5q4-D5-k16"/>
+                <constraint firstItem="20z-Zt-1BP" firstAttribute="top" secondItem="nbM-Br-WP4" secondAttribute="bottom" constant="8" id="Azr-EJ-HH9"/>
                 <constraint firstItem="TNY-bg-eYG" firstAttribute="centerY" secondItem="DX7-wZ-7jT" secondAttribute="centerY" id="Cmq-mm-lA8"/>
                 <constraint firstItem="gjd-4Y-DFt" firstAttribute="width" secondItem="1UC-f1-uZa" secondAttribute="width" multiplier="0.3" id="H2E-5b-LuL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nbM-Br-WP4" secondAttribute="trailing" constant="16" id="I3s-13-TJ1"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fwk-6a-M5I" secondAttribute="trailing" constant="16" id="ITp-3p-b0d"/>
                 <constraint firstItem="fwk-6a-M5I" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="JP5-Nl-QID"/>
+                <constraint firstItem="nbM-Br-WP4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="LCR-Is-Dw1"/>
                 <constraint firstItem="uoD-Vs-whU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Nrm-hF-Vfm"/>
                 <constraint firstItem="8Xw-k6-T3B" firstAttribute="centerX" secondItem="AyM-rU-hZW" secondAttribute="centerX" id="SF0-fU-DIh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fwk-6a-M5I" secondAttribute="bottom" constant="20" id="SfL-j2-Ron"/>
@@ -231,20 +232,19 @@
                 <constraint firstItem="20z-Zt-1BP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="cfJ-aW-6yk"/>
                 <constraint firstItem="uoD-Vs-whU" firstAttribute="centerY" secondItem="tAe-68-5kf" secondAttribute="centerY" id="dNR-IU-dxr"/>
                 <constraint firstItem="jz7-nI-Efx" firstAttribute="centerX" secondItem="ut0-Oh-X0i" secondAttribute="centerX" id="e5V-PJ-k6e"/>
+                <constraint firstItem="nbM-Br-WP4" firstAttribute="top" secondItem="zGk-lF-LjL" secondAttribute="bottom" constant="8" id="f44-8c-5pb"/>
                 <constraint firstItem="b1Z-1P-4RR" firstAttribute="width" secondItem="Ga6-lO-UmU" secondAttribute="width" multiplier="0.3" id="gXe-bB-Csk"/>
                 <constraint firstItem="fwk-6a-M5I" firstAttribute="top" secondItem="20z-Zt-1BP" secondAttribute="bottom" constant="8" id="jcD-JB-xPH"/>
                 <constraint firstItem="XuB-Qm-FeC" firstAttribute="width" secondItem="73I-Fp-nyO" secondAttribute="width" multiplier="0.3" id="kko-Rr-FT1"/>
                 <constraint firstItem="TFD-lI-xxu" firstAttribute="width" secondItem="6dG-l2-TLS" secondAttribute="width" multiplier="0.3" id="m6u-ja-1kg"/>
-                <constraint firstItem="JpH-9B-Cv5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oEj-0e-qSo"/>
                 <constraint firstItem="XuB-Qm-FeC" firstAttribute="centerX" secondItem="73I-Fp-nyO" secondAttribute="centerX" id="pV0-u7-ynh"/>
-                <constraint firstItem="20z-Zt-1BP" firstAttribute="top" secondItem="JpH-9B-Cv5" secondAttribute="bottom" constant="8" id="pZu-OY-dG6"/>
                 <constraint firstItem="TNY-bg-eYG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="sW3-NK-EdV"/>
                 <constraint firstItem="IIM-JL-cY6" firstAttribute="centerX" secondItem="SlF-r1-i3D" secondAttribute="centerX" id="zh0-nm-jUy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="dateButton" destination="JpH-9B-Cv5" id="KPt-KQ-6th"/>
+                <outlet property="dateTextField" destination="nbM-Br-WP4" id="w18-QB-P06"/>
                 <outlet property="titleLabel" destination="zGk-lF-LjL" id="r9I-gg-ejq"/>
                 <outletCollection property="dayLabels" destination="SlF-r1-i3D" collectionClass="NSMutableArray" id="JIF-Ya-FgF"/>
                 <outletCollection property="dayLabels" destination="AyM-rU-hZW" collectionClass="NSMutableArray" id="y3n-xh-UXh"/>

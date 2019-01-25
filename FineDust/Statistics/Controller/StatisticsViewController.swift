@@ -25,7 +25,7 @@ final class StatisticsViewController: UIViewController {
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
     didSet {
       valueGraphBackgroundView.layer.setBorder(
-        color: UIColor(red: 239, green: 239, blue: 244),
+        color: Asset.graphBorder.color,
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )
@@ -36,7 +36,7 @@ final class StatisticsViewController: UIViewController {
   @IBOutlet private weak var ratioGraphBackgroundView: UIView! {
     didSet {
       ratioGraphBackgroundView.layer.setBorder(
-        color: UIColor(red: 239, green: 239, blue: 244),
+        color: Asset.graphBorder.color,
         width: Layer.borderWidth,
         radius: Layer.cornerRadius
       )
@@ -48,6 +48,7 @@ final class StatisticsViewController: UIViewController {
   /// 값 그래프
   private var valueGraphView: ValueGraphView! {
     didSet {
+      valueGraphView.dataSource = self
       valueGraphView.delegate = self
     }
   }
@@ -55,6 +56,7 @@ final class StatisticsViewController: UIViewController {
   /// 비율 그래프
   private var ratioGraphView: RatioGraphView! {
     didSet {
+      ratioGraphView.dataSource = self
       ratioGraphView.delegate = self
     }
   }
@@ -67,9 +69,11 @@ final class StatisticsViewController: UIViewController {
   /// 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: CGFloat {
     let sum = fineDustValues.reduce(0, +)
-    let max = fineDustValues.max() ?? 0.0
-    return max / sum
+    let last = fineDustValues.last ?? 0.0
+    return last / sum
   }
+  
+  private var selectedDate: Date = Date()
   
   // MARK: Life Cycle
   
@@ -77,30 +81,63 @@ final class StatisticsViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "미세먼지 분석"
     createSubviews()
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(didFetchFineDustConcentration(_:)),
+      name: .fetchFineDustConcentrationDidSuccess,
+      object: nil
+    )
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    var array = [CGFloat]()
+    for _ in 0..<7 {
+      array.append(CGFloat.random(in: 10...200))
+    }
+    fineDustValues = array
     setConstraintsToSubviews()
     initializeValueGraphView()
     initializeRatioGraphView()
+  }
+  
+  @objc private func didFetchFineDustConcentration(_ notification: Notification) {
+    print(notification.userInfo?["data"])
+  }
+}
+
+// MARK: - ValueGraphView Data Source 구현
+
+extension StatisticsViewController: ValueGraphViewDataSource {
+  
+  var day: Date {
+    return selectedDate
+  }
+  
+  var values: [CGFloat] {
+    return fineDustValues
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
-  var day: Date {
-    return Date()
-  }
   
-  var values: [CGFloat] {
-    return fineDustValues
+  func valueGraphView(
+    _ valueGraphView: ValueGraphView,
+    didTapDoneButton button: UIBarButtonItem,
+    for date: Date
+  ) {
+    selectedDate = date
   }
+}
+
+// MARK: - RatioGraphView Data Source 구현
+
+extension StatisticsViewController: RatioGraphViewDataSource {
   
-  func valueGraphView(_ view: ValueGraphView, didTapDateButton button: UIButton) {
-    
-    print(day.isToday)
+  var ratio: CGFloat {
+    return fineDustLastValueRatio
   }
 }
 
@@ -108,9 +145,7 @@ extension StatisticsViewController: ValueGraphViewDelegate {
 
 extension StatisticsViewController: RatioGraphViewDelegate {
   
-  var ratio: CGFloat {
-    return fineDustLastValueRatio
-  }
+  
 }
 
 // MARK: - Private Extension
