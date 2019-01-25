@@ -10,9 +10,16 @@ import CoreLocation
 import UIKit
 
 final class MainViewController: UIViewController {
+  
+  // MARK: - Properties
+  
+  weak var delegate: OpenHealthDelegate?
+  
+  // MARK: - Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -21,5 +28,14 @@ final class MainViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    delegate?.openHealth(self)
+  }
+}
+
+// MARK: - Functions
+
+extension MainViewController {
+  func setup() {
+    delegate = FineDustHK.shared
   }
 }
