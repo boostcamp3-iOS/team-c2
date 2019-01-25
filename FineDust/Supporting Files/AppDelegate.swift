@@ -26,10 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
-    UINavigationBar.appearance().tintColor = Asset.graph1.color
+    UINavigationBar.appearance().tintColor = UIColor.white
     UINavigationBar.appearance().barTintColor = Asset.graph1.color
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     UITabBar.appearance().tintColor = .white
+    UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
     locationManager.requestAlwaysAuthorization()
