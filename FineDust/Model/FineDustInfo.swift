@@ -15,7 +15,7 @@ final class FineDustInfo {
   
   static let shared = FineDustInfo()
   
-  // MARK: Property
+  // MARK: Properties
   
   private var stationName: String = ""
   
@@ -37,7 +37,7 @@ final class FineDustInfo {
     return fineDustResponse
   }
   
-  // MARK: Method
+  // MARK: Methods
   
   func set(observatory: String) {
     stationName = observatory

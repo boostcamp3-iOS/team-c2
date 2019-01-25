@@ -15,7 +15,7 @@ final class GeoInfo {
   
   static let shared = GeoInfo()
   
-  // MARK: Property
+  // MARK: Properties
 
   private var xLocation: Double = 0
   
@@ -29,7 +29,7 @@ final class GeoInfo {
     return yLocation
   }
   
-  // MARK: Method
+  // MARK: Methods
   
   func setLocation(x: Double, y: Double) {
     xLocation = x
