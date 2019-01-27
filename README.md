@@ -1,7 +1,6 @@
 # Project FineDust
 
 ![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
-
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 
 부스트캠프 3기 iOS과정 C-2팀
@@ -18,17 +17,18 @@
 
 ### 현재까지 구현된 뷰
 
-![1](./images/1.png)
-
-![2](./images/2.png)
-
-![3](./images/3.png)
+![1](./images/1.PNG)
+![2](./images/2.PNG)
+![3](./images/3.PNG)
 
 ### 컬러칩
 
-- **<span style="color:#5f6fee">컬러1</span>**
-- **<span style="color:#649af8">컬러2</span>**
-- **<span style="color:#ff5561">컬러3</span>**
+- **<p style="color:#5f6fee">컬러1</span>**
+- **<p style="color:#649af8">컬러2</span>**
+- **<p style="color:#ff5561">컬러3</span>**
+- ![#5f6fee](https://placehold.it/15/5f6fee/000000?text=+) 컬러1
+- ![#649af8](https://placehold.it/15/649af8/000000?text=+) 컬러2
+- ![#ff5561](https://placehold.it/15/ff5561/000000?text=+) 컬러3
 
 ## 개발
 
@@ -36,7 +36,7 @@
 
 - **HealthKit** 사용하여 사용자의 걸음 수 및 거리 가져오기
 - **국가대기오염정보 Open API** 사용하여 미세먼지 및 초미세먼지 정보 가져오기
-- **Core Location** 사용핳여 현재 위치의 위도 및 경도, 주소 가져오기
+- **Core Location** 사용여 현재 위치의 위도 및 경도, 주소 가져오기
 - **Core Data** 사용하여 미세먼지 축적량을 앱 내부에 보존하기
 
 ---
