@@ -199,8 +199,8 @@
 		333205C85D3BC78F21F3FA6B9932825F /* Value Graph */ = {
 			isa = PBXGroup;
 			children = (
-				78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */,
 				404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */,
+				78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */,
 			);
 			path = "Value Graph";
 			sourceTree = "<group>";
@@ -229,8 +229,8 @@
 		5D0F49B2B1B9455CA1580B57C0DE56C0 /* Ratio Graph */ = {
 			isa = PBXGroup;
 			children = (
-				24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */,
 				5C1A5681695EF53FED3A78954492680E /* RatioGraphView.swift */,
+				24FFACFCD6E51584FC511AB3F6734B3C /* RatioGraphView.xib */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -510,8 +510,8 @@
 				63E1084724B6FC24B6AC7F1C57CEDBFB /* Notification.Name+.swift in Sources */,
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				F3759152B8C93999F833E6356811950C /* OpenHealthDelegate.swift in Sources */,
-				9C21C55458FC610F7CA4A5A0C74647BD /* RatioGraphView.swift in Sources */,
 				61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */,
+				9C21C55458FC610F7CA4A5A0C74647BD /* RatioGraphView.swift in Sources */,
 				3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
 				902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */,
