@@ -23,9 +23,9 @@
 
 ### 컬러칩
 
-- ![#5f6fee](https://placehold.it/15/5f6fee/000000?text=+) 컬러1
-- ![#649af8](https://placehold.it/15/649af8/000000?text=+) 컬러2
-- ![#ff5561](https://placehold.it/15/ff5561/000000?text=+) 컬러3
+- ![#5f6fee](https://placehold.it/15/5f6fee/000000?text=+) #5F6FEE
+- ![#649af8](https://placehold.it/15/649af8/000000?text=+) #649AF8
+- ![#ff5561](https://placehold.it/15/ff5561/000000?text=+) #FF5561
 
 ## 개발
 
@@ -33,7 +33,7 @@
 
 - **HealthKit** 사용하여 사용자의 걸음 수 및 거리 가져오기
 - **국가대기오염정보 Open API** 사용하여 미세먼지 및 초미세먼지 정보 가져오기
-- **Core Location** 사용여 현재 위치의 위도 및 경도, 주소 가져오기
+- **Core Location** 사용하여 현재 위치의 위도 및 경도, 주소 가져오기
 - **Core Data** 사용하여 미세먼지 축적량을 앱 내부에 보존하기
 
 ---
