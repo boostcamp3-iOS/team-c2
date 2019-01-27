@@ -23,9 +23,6 @@
 
 ### 컬러칩
 
-- **<p style="color:#5f6fee">컬러1</span>**
-- **<p style="color:#649af8">컬러2</span>**
-- **<p style="color:#ff5561">컬러3</span>**
 - ![#5f6fee](https://placehold.it/15/5f6fee/000000?text=+) 컬러1
 - ![#649af8](https://placehold.it/15/649af8/000000?text=+) 컬러2
 - ![#ff5561](https://placehold.it/15/ff5561/000000?text=+) 컬러3
