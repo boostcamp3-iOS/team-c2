@@ -10,6 +10,12 @@ import UIKit
 
 final class FeedbackCollectionViewCell: UICollectionViewCell {
 
-  @IBOutlet weak var feedbackImageView: UIImageView!
-  @IBOutlet weak var feedbackTitleLabel: UILabel!
+  @IBOutlet private weak var feedbackImageView: UIImageView!
+  @IBOutlet private weak var feedbackTitleLabel: UILabel!
+
+  func setProperties() {
+    feedbackImageView.layer.cornerRadius = 5
+    feedbackImageView.layer.masksToBounds = true
+    feedbackImageView.image = UIImage(named: "info1")
+  }
 }
