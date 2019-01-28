@@ -11,10 +11,6 @@ import Foundation
 extension Double {
   /// kilometer 변환하기.
   var kilometer: Double {
-    if self < 1000 {
-      return self
-    } else {
       return self / 1000
     }
-  }
 }
