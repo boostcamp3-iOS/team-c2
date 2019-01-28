@@ -12,7 +12,7 @@ extension CALayer {
   /// 경계선 관련 설정.
   func setBorder(
     color borderColor: UIColor = .black,
-    width borderWidth: CGFloat = 1,
+    width borderWidth: CGFloat = 0,
     radius cornerRadius: CGFloat = 0
   ) {
     masksToBounds = true
