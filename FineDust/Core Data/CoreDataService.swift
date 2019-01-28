@@ -10,13 +10,22 @@ import CoreData
 import Foundation
 import UIKit
 
-/// Core Data Manager
-final class CoreDataManager {
+protocol CoreDataServiceType {
+  associatedtype Entity
+  func fetch(forType type: Entity.Type, completion: (Entity?, Error?) -> Void)
+  func save(_ dictionary: [String: Any], forType type: Entity.Type, completion: (Error?) -> Void)
   
+}
+
+/// Core Data Service
+final class CoreDataService: CoreDataServiceType {
+  
+  typealias Entity = NSManagedObject
+
   // MARK: Singleton Object
   
-  /// CoreDataManager의 싱글톤 객체.
-  static let shared = CoreDataManager()
+  /// CoreDataService의 싱글톤 객체.
+  static let shared = CoreDataService()
   
   // MARK: Private Initializer
   
@@ -33,7 +42,7 @@ final class CoreDataManager {
   // MARK: Method
   
   /// 특정 타입의 데이터를 가져오기.
-  func fetch<T: NSManagedObject>(forType type: T.Type, _ completion: (T?, Error?) -> Void) {
+  func fetch<T: NSManagedObject>(forType type: T.Type, completion: (T?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: T.classNameToString)
     do {
       let results = try context.fetch(request) as? [T]
@@ -46,7 +55,7 @@ final class CoreDataManager {
   func save<T: NSManagedObject>(
     _ dictionary: [String: Any],
     forType type: T.Type,
-    _ completion: (Error?) -> Void
+    completion: (Error?) -> Void
   ) {
     guard let entity = NSEntityDescription.entity(forEntityName: T.classNameToString, in: context)
     else { return }

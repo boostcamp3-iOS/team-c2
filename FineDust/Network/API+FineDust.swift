@@ -8,8 +8,22 @@
 
 import Foundation
 
+protocol APIFineDustType: APIType {
+  func fetchObservatory(
+    pageNumber pageNo: Int,
+    numberOfRows numOfRows: Int,
+    completion: @escaping (ObservatoryResponse?, Error?) -> Void
+  )
+  func fetchFineDustConcentration(
+    term dataTerm: DataTerm,
+    pageNumber pageNo: Int,
+    numberOfRows numOfRows: Int,
+    completion: @escaping (FineDustResponse?, Error?) -> Void
+  )
+}
+
 /// 미세먼지 API 관련 API 정의.
-extension API {
+extension API: APIFineDustType {
   /// 측정소 정보 조회.
   ///
   /// - Parameters:
