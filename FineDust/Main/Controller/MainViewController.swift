@@ -19,12 +19,13 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
   
   weak var delegate: OpenHealthDelegate?
-  private var healthKitManager = HealthKitManager()
+  var healthKitManager: HealthKitManagerType?
   
   // MARK: - Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.title = "내먼지".localized
     setup()
   }
   
@@ -36,6 +37,7 @@ final class MainViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     delegate?.openHealth(self)
+    
   }
 }
 
@@ -44,15 +46,16 @@ final class MainViewController: UIViewController {
 extension MainViewController {
   private func setup() {
     delegate = FineDustHK.shared
+    healthKitManager = HealthKitManager()
   }
-  
+  /// 걸은 거리와 걸음 수 label에 나오게 함.
   private func putHealthKitValue() {
-    healthKitManager.fetchDistanceValue { value in
+    healthKitManager?.fetchDistanceValue { value in
       DispatchQueue.main.async {
         self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
       }
     }
-    healthKitManager.fetchStepCountValue { value in
+    healthKitManager?.fetchStepCountValue { value in
       DispatchQueue.main.async {
         self.stepCountLabel.text = "\(Int(value)) 걸음"
       }

@@ -23,7 +23,7 @@ final class FeedbackListViewController: UIViewController {
   // MARK: - LifeCycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "먼지 정보"
+    navigationItem.title = "먼지 정보".localized
     
     feedbackCollectionView.reloadData()
     feedbackListTabelView.reloadData()

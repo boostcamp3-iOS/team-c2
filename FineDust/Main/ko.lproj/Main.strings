@@ -1,0 +1,117 @@
+
+/* Class = "UILabel"; text = "2409 걸음"; ObjectID = "0D7-oi-jfT"; */
+"0D7-oi-jfT.text" = "2409 걸음";
+
+/* Class = "UILabel"; text = "현재 미세먼지 농도"; ObjectID = "1ul-VR-AkC"; */
+"1ul-VR-AkC.text" = "현재 미세먼지 농도";
+
+/* Class = "UILabel"; text = "20µg"; ObjectID = "4dz-QF-pJu"; */
+"4dz-QF-pJu.text" = "20µg";
+
+/* Class = "UILabel"; text = "좋음"; ObjectID = "5YA-xB-thV"; */
+"5YA-xB-thV.text" = "좋음";
+
+/* Class = "UILabel"; text = "57µg"; ObjectID = "6aD-dS-mao"; */
+"6aD-dS-mao.text" = "57µg";
+
+/* Class = "UILabel"; text = "오전 10시"; ObjectID = "75W-qI-j9B"; */
+"75W-qI-j9B.text" = "오전 10시";
+
+/* Class = "UILabel"; text = "현재위치"; ObjectID = "958-IJ-tbF"; */
+"958-IJ-tbF.text" = "현재위치";
+
+/* Class = "UINavigationItem"; title = "홈"; ObjectID = "ATk-Bj-qUY"; */
+"ATk-Bj-qUY.title" = "홈";
+
+/* Class = "UILabel"; text = "현재 걸은 거리 "; ObjectID = "Akz-ud-YeW"; */
+"Akz-ud-YeW.text" = "현재 걸은 거리 ";
+
+/* Class = "UILabel"; text = "57µg"; ObjectID = "C5I-ua-O0d"; */
+"C5I-ua-O0d.text" = "57µg";
+
+/* Class = "UILabel"; text = "오늘 마신"; ObjectID = "C5o-N1-C5n"; */
+"C5o-N1-C5n.text" = "오늘 마신";
+
+/* Class = "UILabel"; text = "좋음"; ObjectID = "C8E-Ac-rwl"; */
+"C8E-Ac-rwl.text" = "좋음";
+
+/* Class = "UILabel"; text = "64µg"; ObjectID = "CNp-Nz-GeF"; */
+"CNp-Nz-GeF.text" = "64µg";
+
+/* Class = "UILabel"; text = "미세먼지"; ObjectID = "Ds6-xd-sxd"; */
+"Ds6-xd-sxd.text" = "미세먼지";
+
+/* Class = "UILabel"; text = "AM 11 : 26"; ObjectID = "GKE-l6-uTF"; */
+"GKE-l6-uTF.text" = "AM 11 : 26";
+
+/* Class = "UILabel"; text = "좋음"; ObjectID = "LZZ-IR-6Lv"; */
+"LZZ-IR-6Lv.text" = "좋음";
+
+/* Class = "UILabel"; text = "20µg"; ObjectID = "LfR-NG-QYj"; */
+"LfR-NG-QYj.text" = "20µg";
+
+/* Class = "UILabel"; text = "농도값"; ObjectID = "LrR-Hj-2jR"; */
+"LrR-Hj-2jR.text" = "농도값";
+
+/* Class = "UILabel"; text = "오늘 마신 미세먼지"; ObjectID = "NVF-Xj-H9Z"; */
+"NVF-Xj-H9Z.text" = "오늘 마신 미세먼지";
+
+/* Class = "UILabel"; text = "좋음"; ObjectID = "O6P-xl-4ZT"; */
+"O6P-xl-4ZT.text" = "좋음";
+
+/* Class = "UILabel"; text = "오전 10시"; ObjectID = "OVF-dN-Jp3"; */
+"OVF-dN-Jp3.text" = "오전 10시";
+
+/* Class = "UILabel"; text = "151"; ObjectID = "Oe2-r3-hY0"; */
+"Oe2-r3-hY0.text" = "151";
+
+/* Class = "UILabel"; text = "3km "; ObjectID = "Os6-Ee-Kik"; */
+"Os6-Ee-Kik.text" = "3km ";
+
+/* Class = "UILabel"; text = "좋음"; ObjectID = "QN2-1Y-awK"; */
+"QN2-1Y-awK.text" = "좋음";
+
+/* Class = "UILabel"; text = "오전 10시"; ObjectID = "S4E-rL-arO"; */
+"S4E-rL-arO.text" = "오전 10시";
+
+/* Class = "UILabel"; text = "오전 10시"; ObjectID = "SSu-0F-8OC"; */
+"SSu-0F-8OC.text" = "오전 10시";
+
+/* Class = "UILabel"; text = "현재 걸음 수"; ObjectID = "Wcm-Sj-Egu"; */
+"Wcm-Sj-Egu.text" = "현재 걸음 수";
+
+/* Class = "UILabel"; text = "오늘 마신"; ObjectID = "XaE-Bf-rSy"; */
+"XaE-Bf-rSy.text" = "오늘 마신";
+
+/* Class = "UILabel"; text = "강남구 강남대로는 현재"; ObjectID = "Xzq-YG-k4e"; */
+"Xzq-YG-k4e.text" = "강남구 강남대로는 현재";
+
+/* Class = "UILabel"; text = "오전 10시"; ObjectID = "aJa-CQ-Wtl"; */
+"aJa-CQ-Wtl.text" = "오전 10시";
+
+/* Class = "UILabel"; text = "초미세먼지"; ObjectID = "e1g-Ua-6Qg"; */
+"e1g-Ua-6Qg.text" = "초미세먼지";
+
+/* Class = "UITabBarItem"; title = "메인"; ObjectID = "eKZ-hs-mwr"; */
+"eKZ-hs-mwr.title" = "메인";
+
+/* Class = "UILabel"; text = "나쁜 공기"; ObjectID = "ehv-Kz-X1j"; */
+"ehv-Kz-X1j.text" = "나쁜 공기";
+
+/* Class = "UILabel"; text = "강남구"; ObjectID = "gPa-0T-Cyi"; */
+"gPa-0T-Cyi.text" = "강남구";
+
+/* Class = "UILabel"; text = "오늘 걸음 거리 : 3km  마신 먼지량 : 100µg"; ObjectID = "gZ2-YR-kmR"; */
+"gZ2-YR-kmR.text" = "오늘 걸음 거리 : 3km  마신 먼지량 : 100µg";
+
+/* Class = "UILabel"; text = "시간대별 예보"; ObjectID = "m8B-Uj-9cz"; */
+"m8B-Uj-9cz.text" = "시간대별 예보";
+
+/* Class = "UINavigationItem"; title = "내먼지"; ObjectID = "oZo-0S-gGs"; */
+"oZo-0S-gGs.title" = "내먼지";
+
+/* Class = "UILabel"; text = "미세먼지"; ObjectID = "rCc-Wt-7du"; */
+"rCc-Wt-7du.text" = "미세먼지";
+
+/* Class = "UILabel"; text = "초미세먼지"; ObjectID = "rZf-eo-4aw"; */
+"rZf-eo-4aw.text" = "초미세먼지";
