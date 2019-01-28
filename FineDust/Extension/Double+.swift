@@ -12,5 +12,5 @@ extension Double {
   /// kilometer 변환하기.
   var kilometer: Double {
       return self / 1000
-    }
+  }
 }
