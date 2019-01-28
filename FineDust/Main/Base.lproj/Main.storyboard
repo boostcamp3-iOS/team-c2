@@ -556,7 +556,7 @@
                     <navigationItem key="navigationItem" title="내먼지" id="oZo-0S-gGs"/>
                     <connections>
                         <outlet property="distanceLabel" destination="Os6-Ee-Kik" id="zLO-ZP-CBl"/>
-                        <outlet property="stepLabel" destination="0D7-oi-jfT" id="tfe-Ic-P17"/>
+                        <outlet property="stepCountLabel" destination="0D7-oi-jfT" id="eMR-qZ-dcc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-oc-hRO" userLabel="First Responder" sceneMemberID="firstResponder"/>

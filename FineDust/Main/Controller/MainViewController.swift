@@ -14,7 +14,7 @@ final class MainViewController: UIViewController {
   // MARK: - IBOutlets
   
   @IBOutlet weak var distanceLabel: UILabel!
-  @IBOutlet weak var stepLabel: UILabel!
+  @IBOutlet weak var stepCountLabel: UILabel!
   
   // MARK: - Properties
   
@@ -54,7 +54,7 @@ extension MainViewController {
     }
     healthKitManager.returnStepCountValue { value in
       DispatchQueue.main.async {
-        self.stepLabel.text = "\(value.int) 걸음"
+        self.stepCountLabel.text = "\(Int(value)) 걸음"
       }
     }
   }
