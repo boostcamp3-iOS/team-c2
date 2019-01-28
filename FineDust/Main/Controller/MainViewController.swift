@@ -13,13 +13,13 @@ final class MainViewController: UIViewController {
   
   // MARK: - IBOutlets
   
-  @IBOutlet weak var distanceLabel: UILabel!
-  @IBOutlet weak var stepCountLabel: UILabel!
+  @IBOutlet private weak var distanceLabel: UILabel!
+  @IBOutlet private weak var stepCountLabel: UILabel!
   
   // MARK: - Properties
   
   weak var delegate: OpenHealthDelegate?
-  fileprivate var healthKitManager = HealthKitManager()
+  private var healthKitManager = HealthKitManager()
   
   // MARK: - Life Cycle
 
@@ -47,12 +47,12 @@ extension MainViewController {
   }
   
   private func putHealthKitValue() {
-    healthKitManager.returnDistanceValue { value in
+    healthKitManager.fetchDistanceValue { value in
       DispatchQueue.main.async {
         self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
       }
     }
-    healthKitManager.returnStepCountValue { value in
+    healthKitManager.fetchStepCountValue { value in
       DispatchQueue.main.async {
         self.stepCountLabel.text = "\(Int(value)) 걸음"
       }
