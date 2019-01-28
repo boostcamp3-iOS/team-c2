@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -246,13 +242,13 @@
             <connections>
                 <outlet property="dateTextField" destination="nbM-Br-WP4" id="w18-QB-P06"/>
                 <outlet property="titleLabel" destination="zGk-lF-LjL" id="r9I-gg-ejq"/>
-                <outletCollection property="dayLabels" destination="SlF-r1-i3D" collectionClass="NSMutableArray" id="JIF-Ya-FgF"/>
-                <outletCollection property="dayLabels" destination="AyM-rU-hZW" collectionClass="NSMutableArray" id="y3n-xh-UXh"/>
-                <outletCollection property="dayLabels" destination="1UC-f1-uZa" collectionClass="NSMutableArray" id="hVB-ib-REv"/>
-                <outletCollection property="dayLabels" destination="Ga6-lO-UmU" collectionClass="NSMutableArray" id="7Sv-LP-xcF"/>
-                <outletCollection property="dayLabels" destination="6dG-l2-TLS" collectionClass="NSMutableArray" id="l1D-NI-eh8"/>
-                <outletCollection property="dayLabels" destination="73I-Fp-nyO" collectionClass="NSMutableArray" id="OiY-sw-ud7"/>
-                <outletCollection property="dayLabels" destination="ut0-Oh-X0i" collectionClass="NSMutableArray" id="ilm-xr-P1e"/>
+                <outletCollection property="dateLabels" destination="SlF-r1-i3D" collectionClass="NSMutableArray" id="JIF-Ya-FgF"/>
+                <outletCollection property="dateLabels" destination="AyM-rU-hZW" collectionClass="NSMutableArray" id="y3n-xh-UXh"/>
+                <outletCollection property="dateLabels" destination="1UC-f1-uZa" collectionClass="NSMutableArray" id="hVB-ib-REv"/>
+                <outletCollection property="dateLabels" destination="Ga6-lO-UmU" collectionClass="NSMutableArray" id="7Sv-LP-xcF"/>
+                <outletCollection property="dateLabels" destination="6dG-l2-TLS" collectionClass="NSMutableArray" id="l1D-NI-eh8"/>
+                <outletCollection property="dateLabels" destination="73I-Fp-nyO" collectionClass="NSMutableArray" id="OiY-sw-ud7"/>
+                <outletCollection property="dateLabels" destination="ut0-Oh-X0i" collectionClass="NSMutableArray" id="ilm-xr-P1e"/>
                 <outletCollection property="graphViewHeightConstraints" destination="lsT-Z2-Gaq" collectionClass="NSMutableArray" id="UMV-hu-cwb"/>
                 <outletCollection property="graphViewHeightConstraints" destination="DE9-Ct-2Q3" collectionClass="NSMutableArray" id="VQW-gD-q81"/>
                 <outletCollection property="graphViewHeightConstraints" destination="cR1-8m-jU0" collectionClass="NSMutableArray" id="dN3-qC-JQN"/>

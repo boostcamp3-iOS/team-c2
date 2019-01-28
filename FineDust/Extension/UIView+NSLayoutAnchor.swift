@@ -9,35 +9,30 @@
 import UIKit
 
 extension UIView {
-  var top: NSLayoutYAxisAnchor {
-    return topAnchor
+  /// anchor 정보를 담는 구조체.
+  struct Anchor {
+    let view: UIView
+    let top: NSLayoutYAxisAnchor
+    let bottom: NSLayoutYAxisAnchor
+    let leading: NSLayoutXAxisAnchor
+    let trailing: NSLayoutXAxisAnchor
+    let centerX: NSLayoutXAxisAnchor
+    let centerY: NSLayoutYAxisAnchor
+    let width: NSLayoutDimension
+    let height: NSLayoutDimension
   }
-  
-  var bottom: NSLayoutYAxisAnchor {
-    return bottomAnchor
-  }
-  
-  var leading: NSLayoutXAxisAnchor {
-    return leadingAnchor
-  }
-  
-  var trailing: NSLayoutXAxisAnchor {
-    return trailingAnchor
-  }
-  
-  var centerX: NSLayoutXAxisAnchor {
-    return centerXAnchor
-  }
-  
-  var centerY: NSLayoutYAxisAnchor {
-    return centerYAnchor
-  }
-  
-  var width: NSLayoutDimension {
-    return widthAnchor
-  }
-  
-  var height: NSLayoutDimension {
-    return heightAnchor
+  /// `UIView`의 `Anchor` 정보.
+  var anchor: Anchor {
+    return Anchor(
+      view: self,
+      top: topAnchor,
+      bottom: bottomAnchor,
+      leading: leadingAnchor,
+      trailing: trailingAnchor,
+      centerX: centerXAnchor,
+      centerY: centerYAnchor,
+      width: widthAnchor,
+      height: heightAnchor
+    )
   }
 }

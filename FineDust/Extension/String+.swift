@@ -9,6 +9,11 @@
 import Foundation
 
 extension String {
+  /// 문자열 로컬라이징.
+  var localized: String {
+    return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+  }
+  /// 문자열 퍼센트 인코딩.
   var percentEncoded: String {
     return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
   }

@@ -20,29 +20,34 @@ final class FineDustInfo {
   private var stationName: String = ""
   
   private var fineDustResponse: FineDustResponse? {
+    // API 호출 후 미세먼지 응답을 싱글톤에 담을 때마다 노티피케이션을 쏴줌.
     didSet {
       NotificationCenter.default.post(
         name: .fetchFineDustConcentrationDidSuccess,
         object: nil,
-        userInfo: ["data": fineDustResponse]
+        userInfo: ["data": fineDustResponse as Any]
       )
     }
   }
   
+  /// 관측소.
   var observatory: String {
     return stationName
   }
   
+  /// 미세먼지 응답.
   var response: FineDustResponse? {
     return fineDustResponse
   }
   
   // MARK: Methods
   
+  /// 관측소 정보 설정.
   func set(observatory: String) {
     stationName = observatory
   }
   
+  /// 응답 정보 설정.
   func set(fineDustResponse response: FineDustResponse?) {
     fineDustResponse = response
   }

@@ -8,10 +8,14 @@
 
 import Foundation
 
-/// 미세먼지 API 관련 API 정의
+/// 미세먼지 API 관련 API 정의.
 extension API {
-  
   /// 측정소 정보 조회.
+  ///
+  /// - Parameters:
+  ///   - pageNo: 페이지 인덱스.
+  ///   - numOfRows: 한 페이지에 노출되는 정보량.
+  ///   - completion: 컴플리션 핸들러.
   func fetchObservatory(
     pageNumber pageNo: Int = 1,
     numberOfRows numOfRows: Int = 10,
@@ -39,8 +43,13 @@ extension API {
       }
     }
   }
-
   /// 미세먼지 농도 조회.
+  ///
+  /// - Parameters:
+  ///   - dataTerm: 데이터 기간. daily 또는 month.
+  ///   - pageNo: 페이지 인덱스.
+  ///   - numOfRows: 한 페이지에 노출되는 정보량.
+  ///   - completion: 컴플리션 핸들러.
   func fetchFineDustConcentration(
     term dataTerm: DataTerm,
     pageNumber pageNo: Int = 1,
