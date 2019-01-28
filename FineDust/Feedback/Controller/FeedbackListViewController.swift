@@ -18,6 +18,7 @@ final class FeedbackListViewController: UIViewController {
   private let reuseIdentifiers = ["feedbackCell", "feedbackListCell"]
   private var count = 10
   private let cornerRadius: CGFloat = 5
+  private let screenSize = UIScreen.main.bounds
   
   // MARK: - LifeCycle
   override func viewDidLoad() {
