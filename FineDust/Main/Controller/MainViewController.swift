@@ -11,9 +11,15 @@ import UIKit
 
 final class MainViewController: UIViewController {
   
+  // MARK: - IBOutlets
+  
+  @IBOutlet weak var distanceLabel: UILabel!
+  @IBOutlet weak var stepLabel: UILabel!
+  
   // MARK: - Properties
   
   weak var delegate: OpenHealthDelegate?
+  fileprivate var healthKitManager = HealthKitManager()
   
   // MARK: - Life Cycle
 
@@ -24,6 +30,7 @@ final class MainViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    putHealthKitValue()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -37,5 +44,18 @@ final class MainViewController: UIViewController {
 extension MainViewController {
   private func setup() {
     delegate = FineDustHK.shared
+  }
+  
+  private func putHealthKitValue() {
+    healthKitManager.returnDistanceValue { value in
+      DispatchQueue.main.async {
+        self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+      }
+    }
+    healthKitManager.returnStepCountValue { value in
+      DispatchQueue.main.async {
+        self.stepLabel.text = "\(value.int) 걸음"
+      }
+    }
   }
 }
