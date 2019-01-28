@@ -10,6 +10,6 @@ import UIKit
 
 final class FeedbackCollectionViewCell: UICollectionViewCell {
 
-  @IBOutlet weak var feedbackImageView: UIImageView!
-  @IBOutlet weak var feedbackTitleLabel: UILabel!
+  @IBOutlet private weak var feedbackImageView: UIImageView!
+  @IBOutlet private weak var feedbackTitleLabel: UILabel!
 }

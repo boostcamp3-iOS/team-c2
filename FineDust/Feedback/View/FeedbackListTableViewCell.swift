@@ -10,10 +10,10 @@ import UIKit
 
 final class FeedbackListTableViewCell: UITableViewCell {
 
-  @IBOutlet weak var feedbackImageView: UIImageView!
-  @IBOutlet weak var feedbackTitleLabel: UILabel!
-  @IBOutlet weak var feedbackSourceLabel: UILabel!
-  @IBOutlet weak var feedbackListShadowView: UIView!
-  @IBOutlet weak var feedbackListTitleLabel: UILabel!
-  @IBOutlet weak var bookmarkButton: UIButton!
+  @IBOutlet private weak var feedbackImageView: UIImageView!
+  @IBOutlet private weak var feedbackTitleLabel: UILabel!
+  @IBOutlet private weak var feedbackSourceLabel: UILabel!
+  @IBOutlet private weak var feedbackListShadowView: UIView!
+  @IBOutlet private weak var feedbackListTitleLabel: UILabel!
+  @IBOutlet private weak var bookmarkButton: UIButton!
 }
