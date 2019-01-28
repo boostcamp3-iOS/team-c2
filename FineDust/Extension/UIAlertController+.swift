@@ -8,7 +8,8 @@
 
 import UIKit
 
-public extension UIAlertController {
+extension UIAlertController {
+  /// `UIAlertController` Helper.
   static func alert(
     title: String?,
     message: String?,
@@ -17,13 +18,13 @@ public extension UIAlertController {
     let alert = UIAlertController(title: title, message: message, preferredStyle: style)
     return alert
   }
-  
+  /// `addTextField(_:)` Helper.
   @discardableResult
   func textField(_ configuration: ((UITextField) -> Void)? = nil) -> UIAlertController {
     addTextField(configurationHandler: configuration)
     return self
   }
-  
+  /// `UIAlertAction` Helper.
   @discardableResult
   func action(
     title: String?,
@@ -39,7 +40,7 @@ public extension UIAlertController {
     addAction(action)
     return self
   }
-  
+  /// 빌더 패턴을 통해 만들어진 `UIAlertController` present.
   func present(
     to viewController: UIViewController?,
     animated: Bool = true,
