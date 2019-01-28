@@ -180,7 +180,7 @@ extension AppDelegate {
   /// 첫 실행시에만 날짜를 저장하도록 함
   func toggleFirstExecutionFlag() {
     if !UserDefaults.standard.bool(forKey: "isFirstExecution") {
-      CoreDataHelper.shared.save([User.installedDate: Date()], forType: User.self) { error in
+      CoreDataManager.shared.save([User.installedDate: Date()], forType: User.self) { error in
         if let error = error {
           print(error.localizedDescription)
           return

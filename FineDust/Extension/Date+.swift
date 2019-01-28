@@ -9,31 +9,23 @@
 import Foundation
 
 extension Date {
-  static func day(beforeDays days: Int) -> Date {
-    return Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
+  /// 기준 날짜 이전의 날짜 구하기.
+  static func before(days: Int, since date: Date = Date()) -> Date {
+    return Calendar.current.date(byAdding: .day, value: -days, to: date) ?? Date()
   }
-  
-  static func day(afterDays days: Int) -> Date {
-    return Calendar.current.date(byAdding: .day, value: days, to: Date()) ?? Date()
+  /// 기준 날짜 이후의 날짜 구하기.
+  static func after(days: Int, since date: Date = Date()) -> Date {
+    return Calendar.current.date(byAdding: .day, value: days, to: date) ?? Date()
   }
-  
-  static func start(of date: Date) -> Date {
-    return Calendar.current.startOfDay(for: date)
-  }
-  
-  static func end(of date: Date) -> Date {
-    let components = DateComponents(day: 1, second: -1)
-    return Calendar.current.date(byAdding: components, to: date) ?? Date()
-  }
-  
-  func day(beforeDays days: Int) -> Date {
+  /// 이전 날짜 구하기.
+  func before(days: Int) -> Date {
     return Calendar.current.date(byAdding: .day, value: -days, to: self) ?? Date()
   }
-  
-  func day(afterDays days: Int) -> Date {
+  /// 이후 날짜 구하기.
+  func after(days: Int) -> Date {
     return Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
   }
-  
+  /// 주어진 날짜가 오늘인지 구하기.
   var isToday: Bool {
     return Calendar.current.isDateInToday(self)
   }

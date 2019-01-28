@@ -10,21 +10,29 @@ import CoreData
 import Foundation
 import UIKit
 
-
-/// Core Data Helper
-final class CoreDataHelper {
+/// Core Data Manager
+final class CoreDataManager {
   
   // MARK: Singleton Object
   
-  static let shared = CoreDataHelper()
+  /// CoreDataManager의 싱글톤 객체.
+  static let shared = CoreDataManager()
   
-  /// AppDelegate에 있는 viewContext 가져옴
+  // MARK: Private Initializer
+  
+  private init() { }
+  
+  // MARK: Property
+  
+  /// AppDelegate에 있는 viewContext 가져오기.
   private lazy var context: NSManagedObjectContext = {
     guard let delegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
     return delegate.persistentContainer.viewContext
   }()
   
-  /// 특정 타입의 데이터 fetch하는 메소드
+  // MARK: Method
+  
+  /// 특정 타입의 데이터를 가져오기.
   func fetch<T: NSManagedObject>(forType type: T.Type, _ completion: (T?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: T.classNameToString)
     do {
@@ -34,8 +42,7 @@ final class CoreDataHelper {
       completion(nil, error)
     }
   }
-  
-  /// 특정 타입에 전달된 데이터를 저장하는 메소드
+  /// 특정 타입에 전달된 데이터를 저장하기.
   func save<T: NSManagedObject>(
     _ dictionary: [String: Any],
     forType type: T.Type,

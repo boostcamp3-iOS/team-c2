@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// User Entity Attribute 상수 정리
+/// `User` Entity Attribute 상수 정리
 extension User {
-  
+  /// 설치 날짜 Attribute
   static let installedDate = "installedDate"
 }

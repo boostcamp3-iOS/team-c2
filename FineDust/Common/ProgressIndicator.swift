@@ -23,10 +23,10 @@ final class ProgressIndicator: UIView {
       backgroundView.translatesAutoresizingMaskIntoConstraints = false
       addSubview(backgroundView)
       NSLayoutConstraint.activate([
-        backgroundView.centerX.equal(to: centerX),
-        backgroundView.centerY.equal(to: centerY),
-        backgroundView.width.equal(toConstant: 100),
-        backgroundView.height.equal(toConstant: 100)
+        backgroundView.anchor.centerX.equal(to: anchor.centerX),
+        backgroundView.anchor.centerY.equal(to: anchor.centerY),
+        backgroundView.anchor.width.equal(toConstant: 100),
+        backgroundView.anchor.height.equal(toConstant: 100)
         ])
     }
   }
@@ -40,8 +40,8 @@ final class ProgressIndicator: UIView {
       indicator.translatesAutoresizingMaskIntoConstraints = false
       backgroundView.addSubview(indicator)
       NSLayoutConstraint.activate([
-        indicator.centerX.equal(to: backgroundView.centerX),
-        indicator.centerY.equal(to: backgroundView.centerY)
+        indicator.anchor.centerX.equal(to: backgroundView.anchor.centerX),
+        indicator.anchor.centerY.equal(to: backgroundView.anchor.centerY)
         ])
     }
   }
