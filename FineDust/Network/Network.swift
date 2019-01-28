@@ -39,10 +39,14 @@ final class Network {
       urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
     }
     headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
-    ProgressIndicator.shared.show()
+    DispatchQueue.main.async {
+      ProgressIndicator.shared.show()
+    }
     let task = session.dataTask(with: urlRequest) { data, _, error in
       completion(data, error)
-      ProgressIndicator.shared.hide()
+      DispatchQueue.main.async {
+        ProgressIndicator.shared.hide()
+      }
       session.finishTasksAndInvalidate()
     }
     task.resume()
