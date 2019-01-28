@@ -5,6 +5,16 @@
 
 부스트캠프 3기 iOS과정 C-2팀
 
+## 팀원 정보
+
+**[intmain](https://github.com/intmain)**
+
+[Jae-eun](https://github.com/Jae-eun)
+
+[zunzunzun](https://github.com/zunzunzun)
+
+[presto95](https://github.com/presto95)
+
 ## 기획
 
 ### 본인이 마신 미세먼지량을 알려주는 미세먼지 정보 앱
