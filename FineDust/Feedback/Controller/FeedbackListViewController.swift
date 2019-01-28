@@ -29,6 +29,7 @@ final class FeedbackListViewController: UIViewController {
     feedbackListTabelView.reloadData()
   }
 }
+
 // MARK: - UICollectionViewDataSource
 
 extension FeedbackListViewController: UICollectionViewDataSource {
@@ -52,12 +53,9 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       withReuseIdentifier: reuseIdentifiers[0],
       for: indexPath
     ) as? FeedbackCollectionViewCell
-    else { return UICollectionViewCell() }
+      else { return UICollectionViewCell() }
     
-    cell.feedbackImageView.layer.cornerRadius = cornerRadius
-    cell.feedbackImageView.layer.masksToBounds = true
-    cell.feedbackImageView.image = UIImage(named: "info1")
-    
+    cell.setProperties()
     //    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
     //    cell.feedbackTitleLabel.layer.cornerRadius = cornerRadius
     //    cell.feedbackTitleLabel.layer.masksToBounds = true
@@ -81,29 +79,11 @@ extension FeedbackListViewController: UITableViewDataSource {
     guard let cell = tableView.dequeueReusableCell(
       withIdentifier: reuseIdentifiers[1],
       for: indexPath
-      ) as? FeedbackListTableViewCell else {
+    ) as? FeedbackListTableViewCell else {
         return UITableViewCell()
     }
     
-    if indexPath.row != 0 {
-      cell.feedbackListTitleLabel.isHidden = true
-    } else {
-      cell.feedbackListTitleLabel.isHidden = false
-    }
-    cell.feedbackImageView.image = UIImage(named: "info1")
-    cell.feedbackTitleLabel.text = "미세먼지 정화 식물"
-    cell.feedbackSourceLabel.text = "KTV 국민 방송"
-    
-    cell.feedbackImageView.setRounded()
-    cell.feedbackListShadowView.layer.applySketchShadow(
-      color: UIColor.gray,
-      alpha: 0.2,
-      x: 2,
-      y: 2,
-      blur: 5,
-      spread: 3
-    )
-    cell.feedbackListShadowView.layer.cornerRadius = 5
+    cell.setProperties(at: indexPath.row)
     
     return cell
   }

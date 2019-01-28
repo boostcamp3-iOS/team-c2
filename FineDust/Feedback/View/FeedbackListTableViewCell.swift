@@ -16,4 +16,22 @@ final class FeedbackListTableViewCell: UITableViewCell {
   @IBOutlet private weak var feedbackListShadowView: UIView!
   @IBOutlet private weak var feedbackListTitleLabel: UILabel!
   @IBOutlet private weak var bookmarkButton: UIButton!
+  
+  func setProperties(at index: Int) {
+    feedbackListTitleLabel.isHidden = index != 0 ? true : false
+    feedbackImageView.image = UIImage(named: "info1")
+    feedbackTitleLabel.text = "미세먼지 정화 식물"
+    feedbackSourceLabel.text = "KTV 국민 방송"
+    
+    feedbackImageView.setRounded()
+    feedbackListShadowView.layer.applySketchShadow(
+      color: UIColor.gray,
+      alpha: 0.2,
+      x: 2,
+      y: 2,
+      blur: 5,
+      spread: 3
+    )
+    feedbackListShadowView.layer.cornerRadius = 5
+  }
 }
