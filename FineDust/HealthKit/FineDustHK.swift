@@ -17,9 +17,13 @@ final class FineDustHK: OpenHealthDelegate {
   
   ///Health 앱 데이터 권한을 요청하기 위한 프로퍼티
   private let healthStore = HKHealthStore()
-  ///Health 앱 데이터 중 걸음을 가져오기 위한 프로퍼티
+  ///Health 앱 데이터 중 걸음 수를 가져오기 위한 프로퍼티
   private let stepCount = HKObjectType.quantityType(
     forIdentifier: HKQuantityTypeIdentifier.stepCount
+  )
+  ///Health 앱 데이터 중 걸은 거리를 가져오기 위한 프로퍼티
+  private let distance = HKObjectType.quantityType(
+    forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
   )
   ///Health App 권한을 나타내는 변수
   private var isAuthorized = true
@@ -30,18 +34,22 @@ final class FineDustHK: OpenHealthDelegate {
   
   func requestAuthorization() {
     guard let stepCount = stepCount else {
-      print("step count error")
+      print("step count request error")
       return
     }
-    
+    guard let distance = distance else {
+      print("distance request error")
+      return
+    }
     //권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정
-    if healthStore.authorizationStatus(for: stepCount) == .sharingDenied {
+    if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
+      || healthStore.authorizationStatus(for: distance) == .sharingDenied {
       isAuthorized = false
       return
     }
     
     //걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
-    let healthKitTypes: Set = [stepCount]
+    let healthKitTypes: Set = [stepCount, distance]
     
     healthStore.requestAuthorization(
       toShare: healthKitTypes,
