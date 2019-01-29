@@ -6,6 +6,7 @@
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
+import UIKit
 import HealthKit
 
 /// HealthKit Service를 총괄하는 Singleton 클래스
@@ -35,6 +36,39 @@ final class HealthKitServiceManager {
   
   private init() { }
   
+  // MARK : Method
   
-  
+  ///App 시작시 권한을 얻기 위한 메소드
+  func requestAuthorization() {
+    guard let stepCount = stepCount else {
+      print("step count request error")
+      return
+    }
+    guard let distance = distance else {
+      print("distance request error")
+      return
+    }
+    
+    //권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정
+    if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
+      || healthStore.authorizationStatus(for: distance) == .sharingDenied {
+      isAuthorized = false
+      return
+    }
+    
+    //걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
+    let healthKitTypes: Set = [stepCount, distance]
+    
+    healthStore.requestAuthorization(
+      toShare: healthKitTypes,
+      read: healthKitTypes
+    ) { _, error in
+      if let err = error {
+        print("request authorization error : \(err.localizedDescription)")
+      } else {
+        print("complete request authorization")
+      }
+    }
+  }
 }
+
