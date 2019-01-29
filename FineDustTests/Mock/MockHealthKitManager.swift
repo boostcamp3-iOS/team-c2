@@ -14,23 +14,26 @@ import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
   
-  var distance: Double = 2375
-  
-  var steps: Double = 5712
-  
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double) -> Void) {
-    completion(5)
+    switch quantityTypeIdentifier {
+    case .distanceWalkingRunning:
+      completion(1409.53)
+    case .stepCount:
+      completion(2314.0)
+    default: 0
+    }
   }
   
   func fetchDistanceValue(_ completion: @escaping (Double) -> Void) {
-    completion(distance)
+    completion(1000.0)
   }
   
   func fetchStepCountValue(_ completion: @escaping (Double) -> Void) {
-    completion(steps)
+    completion(2174.0)
   }
 }
+
