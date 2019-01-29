@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		001A3D0E21FF7AB1005D81A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 001A3D1021FF7AB1005D81A4 /* Localizable.strings */; };
+		001A3D1B22003252005D81A4 /* HealthKitStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A3D1A22003252005D81A4 /* HealthKitStatusCode.swift */; };
 		007C0D8821FEE03700D19796 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C0D8721FEE03700D19796 /* HealthKitManager.swift */; };
 		007C0D8A21FEE4EC00D19796 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C0D8921FEE4EC00D19796 /* Double+.swift */; };
 		0275B02EDF3C2DFDB6A00E742F931121 /* FineDustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0570DA836BCD4B477526BB294F8A2C18 /* FineDustTests.swift */; };
@@ -80,6 +81,7 @@
 		001A3D0D21FF7AA3005D81A4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		001A3D0F21FF7AB1005D81A4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		001A3D1121FF7AB4005D81A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		001A3D1A22003252005D81A4 /* HealthKitStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitStatusCode.swift; sourceTree = "<group>"; };
 		007C0D8721FEE03700D19796 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		007C0D8921FEE4EC00D19796 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		0570DA836BCD4B477526BB294F8A2C18 /* FineDustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustTests.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				07EDFAF0DF8D1A91CF045DFB46C9217C /* FineDustHK.swift */,
 				1128B77185BC231E96C69A5D15A96842 /* OpenHealthDelegate.swift */,
 				007C0D8721FEE03700D19796 /* HealthKitManager.swift */,
+				001A3D1A22003252005D81A4 /* HealthKitStatusCode.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				608B6E48665600090634A3AB9AECC709 /* API+FineDust.swift in Sources */,
+				001A3D1B22003252005D81A4 /* HealthKitStatusCode.swift in Sources */,
 				13240249FF2FAEEC9CF3EF4870C8C3A1 /* API.swift in Sources */,
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
