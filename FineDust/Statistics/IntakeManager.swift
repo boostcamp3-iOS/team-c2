@@ -9,15 +9,17 @@
 import Foundation
 
 // 1. IntakeGeneratorType 만들어서 함수 정의
-protocol IntakesGeneratorType {
+protocol IntakeManagerType {
+  
   /// 평균 보폭
   var averageStride: Double { get }
+  
   /// 최근 7일의 흡입량 계산하여 컴플리션 핸들러에 넘겨줌
   func calculateIntakesInWeek(since date: Date, completion: @escaping ([Double]) -> Void)
 }
 
 // 2. IntakeGenerator가 1의 프로토콜을 준수하고 빌드가 가능하게만 구현해둠
-class IntakeGenerator: IntakesGeneratorType {
+class IntakeManager: IntakeManagerType {
   
   var healthKitManager: HealthKitManagerType
   

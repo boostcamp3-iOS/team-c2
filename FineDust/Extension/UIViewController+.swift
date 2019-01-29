@@ -18,12 +18,16 @@ extension UIViewController {
     let controller = storyboard.instantiateViewController(withIdentifier: identifier)
     return controller
   }
-  /// 클로저 내에서 해당 타입으로 캐스팅하여 구성하기.
+  
+  /// instantiate된 `UIViewController` 구성
   @discardableResult
-  func configure(_ configureHandler: (UIViewController) -> Void) -> UIViewController {
-    configureHandler(self)
+  func configure<T: UIViewController>(_ configureHandler: (T) -> Void) -> UIViewController {
+    if let casted = self as? T {
+      configureHandler(casted)
+    }
     return self
   }
+  
   /// 빌더 패턴을 통해 만들어진 `UIViewController`를 모달 present.
   func present(
     to viewController: UIViewController,
@@ -34,6 +38,7 @@ extension UIViewController {
     modalTransitionStyle = style
     viewController.present(self, animated: animated, completion: completion)
   }
+  
   /// 빌더 패턴을 통해 만들어진 `UIViewController`를 내비게이션 스택에 추가.
   func push(at viewController: UIViewController?, animated: Bool = true) {
     if let navigationController = viewController?.navigationController {

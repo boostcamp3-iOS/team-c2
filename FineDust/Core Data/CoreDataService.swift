@@ -14,7 +14,6 @@ protocol CoreDataServiceType {
   associatedtype Entity
   func fetch(forType type: Entity.Type, completion: (Entity?, Error?) -> Void)
   func save(_ dictionary: [String: Any], forType type: Entity.Type, completion: (Error?) -> Void)
-  
 }
 
 /// Core Data Service

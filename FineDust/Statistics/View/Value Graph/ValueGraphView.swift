@@ -10,14 +10,17 @@ import UIKit
 
 /// Value Graph View Data Source.
 protocol ValueGraphViewDataSource: class {
+  
   /// 기준 날짜.
   var referenceDate: Date { get }
+  
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   var intakeAmounts: [CGFloat] { get }
 }
 
 /// Value Graph View Delegate.
 protocol ValueGraphViewDelegate: class {
+  
   /// DatePicker의 Done 버튼을 눌렀을 때의 동작 정의.
   func valueGraphView(
     _ valueGraphView: ValueGraphView,
@@ -33,19 +36,26 @@ final class ValueGraphView: UIView {
   
   /// 레이어 관련 상수 모음.
   enum Layer {
+    
     /// 경계선 두께.
     static let borderWidth: CGFloat = 1.0
   }
+  
   /// 애니메이션 관련 상수 모음.
   enum Animation {
+    
     /// 애니메이션 기간.
     static let duration: TimeInterval = 0.3
+    
     /// 애니메이션 지연.
     static let delay: TimeInterval = 0.0
+    
     /// 용수철 효과 정도.
     static let damping: CGFloat = 0.7
+    
     /// 용수철 효과 시작 속도.
     static let springVelocity: CGFloat = 0.5
+    
     /// 애니메이션 옵션.
     static let option: UIView.AnimationOptions = [.curveEaseInOut]
   }
@@ -54,6 +64,7 @@ final class ValueGraphView: UIView {
   
   /// Value Graph View Data Source.
   weak var dataSource: ValueGraphViewDataSource?
+  
   /// Value Graph View Delegate.
   weak var delegate: ValueGraphViewDelegate?
   
@@ -67,13 +78,14 @@ final class ValueGraphView: UIView {
     picker.datePickerMode = .date
     picker.maximumDate = Date()
     picker.minimumDate = Calendar.current.date(from: DateComponents(year: 2019, month: 1, day: 1))
-    picker.locale = Locale(identifier: "ko_KR")
+    picker.locale = Locale.current
     return picker
   }()
+  
   /// DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.locale = Locale.current
     formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
   }()
@@ -86,23 +98,28 @@ final class ValueGraphView: UIView {
       dateTextField.text = dateFormatter.string(from: selectedDate)
     }
   }
+  
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
     return dataSource?.intakeAmounts ?? []
   }
+  
   /// 미세먼지 흡입량의 최대값.
   private var maxValue: CGFloat {
     let max = intakeAmounts.max() ?? 0.0
     return max + 1.0
   }
+  
   /// 흡입량 모음을 최대값에 대한 비율로 산출. `1.0 - (비율)`.
   private var intakeRatios: [CGFloat] {
     return intakeAmounts.map { 1.0 - $0 / maxValue }
   }
+  
   /// 주축 레이블.
   private var axisTexts: [String] {
     return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
   }
+  
   /// 일 텍스트.
   private var dateTexts: [String] {
     let dateFormatter = DateFormatter()
@@ -146,10 +163,13 @@ final class ValueGraphView: UIView {
       dateTextField.inputAccessoryView = toolBar
     }
   }
+  
   /// 제목 레이블.
   @IBOutlet private weak var titleLabel: UILabel!
+  
   /// 요일 레이블 모음.
   @IBOutlet private var dateLabels: [UILabel]!
+  
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
@@ -161,8 +181,10 @@ final class ValueGraphView: UIView {
       }
     }
   }
+  
   /// 단위 레이블 모음.
   @IBOutlet private var unitLabels: [UILabel]!
+  
   /// 그래프 높이 제약 모음.
   @IBOutlet private var graphViewHeightConstraints: [NSLayoutConstraint]!
   
@@ -171,6 +193,7 @@ final class ValueGraphView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
   }
+  
   /// 뷰 전체 설정.
   func setup() {
     initializeHeights()
@@ -179,6 +202,7 @@ final class ValueGraphView: UIView {
     setDateLabelsTitle()
     print(intakeAmounts, maxValue, intakeRatios)
   }
+  
   /// 키보드에 달린 완료 버튼을 눌렀을 때의 동작 정의.
   @objc private func doneButtonDidTap(_ sender: UIBarButtonItem) {
     dateTextField.resignFirstResponder()
@@ -192,6 +216,7 @@ final class ValueGraphView: UIView {
 // MARK: - Private Extension
 
 private extension ValueGraphView {
+  
   /// 그래프 뷰 높이 초기화.
   func initializeHeights() {
     for (index, constraint) in graphViewHeightConstraints.enumerated() {
@@ -199,6 +224,7 @@ private extension ValueGraphView {
     }
     layoutIfNeeded()
   }
+  
   /// 그래프 뷰 높이 제약에 애니메이션 효과 설정.
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
@@ -219,18 +245,21 @@ private extension ValueGraphView {
       }
     }
   }
+  
   /// 주축 레이블 설정.
   func setUnitLabels() {
     zip(unitLabels, axisTexts).forEach { (label, text) in
       label.text = text
     }
   }
+  
   /// 요일 레이블 텍스트 설정.
   func setDateLabelsTitle() {
     zip(dateLabels, dateTexts).forEach { (label, text) in
       label.text = text
     }
   }
+  
   /// 그래프 색상 구하기.
   func graphBackgroundColor(at index: Int) -> UIColor? {
     if index == 6 {

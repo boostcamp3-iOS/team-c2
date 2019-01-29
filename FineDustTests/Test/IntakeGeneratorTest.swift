@@ -11,7 +11,7 @@ import XCTest
 
 class IntakeGeneratorTest: XCTestCase {
   
-  var intakeGenerator = IntakeGenerator()
+  var intakeGenerator = IntakeManager()
   
   var mockHealthKitManager = MockHealthKitManager()
   
