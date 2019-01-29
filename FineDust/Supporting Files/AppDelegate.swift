@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
     locationManager.requestAlwaysAuthorization()
-    FineDustHK.shared.requestAuthorization()
+    HealthKitServiceManager.shared.requestAuthorization()
     toggleFirstExecutionFlag()
     fetchAPI()
     return true

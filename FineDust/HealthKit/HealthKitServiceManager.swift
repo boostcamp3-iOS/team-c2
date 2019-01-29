@@ -29,10 +29,6 @@ final class HealthKitServiceManager {
     forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
   )
   
-  /// 테스트를 위한 임시 프로퍼티
-  let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())
-  let endDate = Date()
-  
   /// Health App 권한을 나타내는 변수.
   private var isAuthorized = true
   
@@ -40,7 +36,7 @@ final class HealthKitServiceManager {
   
   private init() { }
   
-  // MARK : - Method
+  // MARK: - Method
   
   /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
   func requestAuthorization() {
@@ -77,7 +73,6 @@ final class HealthKitServiceManager {
   }
 }
 
-
 // MARK: - Protocol Implement
 
 extension HealthKitServiceManager: HealthKitServiceType {
@@ -107,12 +102,20 @@ extension HealthKitServiceManager: HealthKitServiceType {
   /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
   func fetchHealthKitValue(label: UILabel,
                            quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+    guard let startDate = Calendar.current.date(bySettingHour: 0,
+                                                minute: 0,
+                                                second: 0,
+                                                of: Date())
+      else {
+        print("startDate error")
+        return
+    }
     
-    guard let startDate = startDate else { return }
-    
+    let endDate = Date()
     let quantityFor: HKUnit
     let completion: (Double) -> Void
     
+    // Indentifier의 값이 걸음 혹은 걸은 거리이냐에 따라 변수들을 설정.
     if quantityTypeIdentifier == .stepCount {
       quantityFor = HKUnit.count()
       completion = { value in
@@ -129,6 +132,7 @@ extension HealthKitServiceManager: HealthKitServiceType {
       }
     }
     
+    // 위에서 설정한 값을 토대로 HealthKit App에서 값을 찾음.
     findHealthKitValue(startDate: startDate,
                                    endDate: endDate,
                                    quantityFor: quantityFor,
@@ -171,7 +175,7 @@ extension HealthKitServiceManager: HealthKitServiceType {
             completion(0)
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
-            results.enumerateStatistics(from: startDate, to: endDate) { statistics, stop in
+            results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
               // 쿼리와 일치하는 모든 값을 더함.
               if let quantity = statistics.sumQuantity() {
                 let quantityValue = quantity.doubleValue(for: quantityFor)
@@ -187,4 +191,3 @@ extension HealthKitServiceManager: HealthKitServiceType {
     }
   }
 }
-
