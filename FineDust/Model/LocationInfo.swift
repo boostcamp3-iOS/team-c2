@@ -8,13 +8,13 @@
 
 import Foundation
 
-/// 좌표 정보를 담는 싱글톤 객체.
-final class GeoInfo {
+/// 위치 정보를 담는 싱글톤 객체.
+final class LocationInfo {
   
   // MARK: Singleton Object
   
-  /// 좌표 정보의 싱글톤 객체
-  static let shared = GeoInfo()
+  /// 위치 정보의 싱글톤 객체
+  static let shared = LocationInfo()
   
   // MARK: Private Initializer
   
@@ -26,6 +26,8 @@ final class GeoInfo {
   
   private var yLocation: Double = 0
   
+  private var addressInfo: String = ""
+  
   /// X 좌표
   var x: Double {
     return xLocation
@@ -36,11 +38,20 @@ final class GeoInfo {
     return yLocation
   }
   
+  var address: String {
+    return addressInfo
+  }
+  
   // MARK: Methods
   
   /// 좌표 설정
-  func setLocation(x: Double, y: Double) {
+  func setCoordinate(x: Double, y: Double) {
     xLocation = x
     yLocation = y
+  }
+  
+  /// 주소 설정
+  func setAddress(_ address: String) {
+    addressInfo = address
   }
 }
