@@ -14,7 +14,7 @@ final class HealthKitServiceManager {
   
   // MARK: - Properties
   
-  static let shared = HealthKitManager()
+  static let shared = HealthKitServiceManager()
   
   /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
@@ -28,6 +28,10 @@ final class HealthKitServiceManager {
   private let distance = HKObjectType.quantityType(
     forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
   )
+  
+  /// 테스트를 위한 임시 프로퍼티
+  let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())
+  let endDate = Date()
   
   /// Health App 권한을 나타내는 변수.
   private var isAuthorized = true
@@ -77,7 +81,7 @@ final class HealthKitServiceManager {
 // MARK: - Protocol Implement
 
 extension HealthKitServiceManager: HealthKitServiceType {
-  /// 권한이 없을경우 건강 App으로 이동시키는 메소드
+  /// 권한이 없을경우 건강 App으로 이동시키는 메소드.
   func openHealth(_ viewController: UIViewController) {
     if !isAuthorized {
       // 앱 실행중 알람을 한번만 띄우게 하는 코드. isAuthorized는 이후로 false로 다시는 변경되지 않음.
@@ -100,7 +104,39 @@ extension HealthKitServiceManager: HealthKitServiceType {
     }
   }
   
-  ///HealthKit 값을 가져오는 메소드
+  /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
+  func fetchHealthKitValue(label: UILabel,
+                           quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+    
+    guard let startDate = startDate else { return }
+    
+    let quantityFor: HKUnit
+    let completion: (Double) -> Void
+    
+    if quantityTypeIdentifier == .stepCount {
+      quantityFor = HKUnit.count()
+      completion = { value in
+        DispatchQueue.main.async {
+          label.text = "\(Int(value)) 걸음"
+        }
+      }
+    } else {
+      quantityFor = HKUnit.meter()
+      completion = { value in
+        DispatchQueue.main.async {
+          label.text = String(format: "%.1f", value.kilometer) + "km"
+        }
+      }
+    }
+    
+    findHealthKitValue(startDate: startDate,
+                                   endDate: endDate,
+                                   quantityFor: quantityFor,
+                                   quantityTypeIdentifier: quantityTypeIdentifier,
+                                   completion: completion)
+  }
+  
+  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,

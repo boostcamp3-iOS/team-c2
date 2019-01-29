@@ -19,7 +19,8 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
   
   weak var delegate: OpenHealthDelegate?
-  private var healthKitManager = HealthKitManager()
+  weak var healthKitServiceType: HealthKitServiceType?
+//  private var healthKitManager = HealthKitManager()
   
   // MARK: - Life Cycle
 
@@ -36,6 +37,10 @@ final class MainViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     delegate?.openHealth(self)
+    healthKitServiceType?.fetchHealthKitValue(label: stepCountLabel,
+                                              quantityTypeIdentifier: .stepCount)
+    healthKitServiceType?.fetchHealthKitValue(label: distanceLabel,
+                                              quantityTypeIdentifier: .distanceWalkingRunning)
   }
 }
 
@@ -44,18 +49,19 @@ final class MainViewController: UIViewController {
 extension MainViewController {
   private func setup() {
     delegate = FineDustHK.shared
+    healthKitServiceType = HealthKitServiceManager.shared
   }
   
   private func putHealthKitValue() {
-    healthKitManager.fetchDistanceValue { value in
-      DispatchQueue.main.async {
-        self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
-      }
-    }
-    healthKitManager.fetchStepCountValue { value in
-      DispatchQueue.main.async {
-        self.stepCountLabel.text = "\(Int(value)) 걸음"
-      }
-    }
+//    healthKitManager.fetchDistanceValue { value in
+//      DispatchQueue.main.async {
+//        self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+//      }
+//    }
+//    healthKitManager.fetchStepCountValue { value in
+//      DispatchQueue.main.async {
+//        self.stepCountLabel.text = "\(Int(value)) 걸음"
+//      }
+//    }
   }
 }
