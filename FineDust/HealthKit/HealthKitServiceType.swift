@@ -10,12 +10,6 @@ import UIKit
 import HealthKit
 
 protocol HealthKitServiceType {
-  ///Health App으로 이동시켜주는 메소드
+  /// 권한이 없을경우 건강 App으로 이동시키는 메소드
   func openHealth(_ viewController: UIViewController)
-  func findHealthKitValue(startDate: Date,
-                          endDate: Date,
-                          quantityFor: HKUnit,
-                          quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void)
-  
 }

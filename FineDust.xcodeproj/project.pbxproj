@@ -291,10 +291,10 @@
 		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
-				347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */,
-				E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */,
 				07EDFAF0DF8D1A91CF045DFB46C9217C /* FineDustHK.swift */,
+				347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */,
 				B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */,
+				E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */,
 				1128B77185BC231E96C69A5D15A96842 /* OpenHealthDelegate.swift */,
 			);
 			path = HealthKit;
