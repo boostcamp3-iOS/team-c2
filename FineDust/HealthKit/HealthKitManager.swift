@@ -9,7 +9,7 @@
 import Foundation
 import HealthKit
 /// HealthKitManagerType 프로토콜 선언
-protocol HealthKitManagerType {
+protocol HealthKitManagerType1 {
   func findHealthKitValue(
     startDate: Date,
     endDate: Date,
@@ -20,7 +20,7 @@ protocol HealthKitManagerType {
   func fetchStepCountValue(_ completion: @escaping (Double) -> Void)
 }
 /// HealthKitManager 기능 구현 부분
-struct HealthKitManager: HealthKitManagerType {
+struct HealthKitManager: HealthKitManagerType1 {
   // HealthKit Data에 접근하는 지점.
   private let healthStore = HKHealthStore()
   private let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
