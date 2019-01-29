@@ -13,31 +13,31 @@ struct FineDustResponse: Codable {
   
   struct List: Codable {
     
-    var dataTime: String = ""
+    let dataTime: String
     
     /// 미세먼지 농도
-    var fineDustValue: Int = 0
+    let fineDustValue: Int
     
     /// 미세먼지 24시간 예측 이동 농도
-    var fineDustValue24: Int = 0
+    let fineDustValue24: Int
     
     /// 미세먼지 24시간 등급
-    var fineDustGrade: Int = 0
+    let fineDustGrade: Int
     
     /// 미세먼지 1시간 등급
-    var fineDustGrade1h: Int = 0
+    let fineDustGrade1h: Int
     
     /// 초미세먼지 농도
-    var ultraFineDustValue: Int = 0
+    let ultraFineDustValue: Int
     
     /// 초미세먼지 24시간 예측 이동 농도
-    var ultraFineDustValue24: Int = 0
+    let ultraFineDustValue24: Int
     
     /// 초미세먼지 24시간 등급
-    var ultraFineDustGrade: Int = 0
+    let ultraFineDustGrade: Int
     
     /// 초미세먼지 1시간 등급
-    var ultraFineDustGrade1h: Int = 0
+    let ultraFineDustGrade1h: Int
     
     enum CodingKeys: String, CodingKey {
       
@@ -60,7 +60,25 @@ struct FineDustResponse: Codable {
       case ultraFineDustGrade1h = "pm25Grade1h"
     }
     
-    init() { }
+    init(dataTime: String,
+         fineDustValue: Int,
+         fineDustValue24: Int,
+         fineDustGrade: Int,
+         fineDustGrade1h: Int,
+         ultraFineDustValue: Int,
+         ultraFineDustValue24: Int,
+         ultraFineDustGrade: Int,
+         ultraFineDustGrade1h: Int) {
+      self.dataTime = dataTime
+      self.fineDustValue = fineDustValue
+      self.fineDustValue24 = fineDustValue24
+      self.fineDustGrade = fineDustGrade
+      self.fineDustGrade1h = fineDustGrade1h
+      self.ultraFineDustValue = ultraFineDustValue
+      self.ultraFineDustValue24 = ultraFineDustValue24
+      self.ultraFineDustGrade = ultraFineDustGrade
+      self.ultraFineDustGrade1h = ultraFineDustGrade1h
+    }
     
     init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -78,6 +96,7 @@ struct FineDustResponse: Codable {
     }
   }
   
+  /// 결과 리스트
   let list: [List]
   
   /// 응답 개수

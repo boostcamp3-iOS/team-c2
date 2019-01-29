@@ -22,13 +22,13 @@ final class MockAPI: APIFineDustType {
   func fetchObservatory(pageNumber pageNo: Int,
                         numberOfRows numOfRows: Int,
                         completion: @escaping (ObservatoryResponse?, Error?) -> Void) {
-    completion(observatoryResponse, nil)
+    completion(observatoryResponse, error)
   }
   
   func fetchFineDustConcentration(term dataTerm: DataTerm,
                                   pageNumber pageNo: Int,
                                   numberOfRows numOfRows: Int,
                                   completion: @escaping (FineDustResponse?, Error?) -> Void) {
-    completion(fineDustResponse, nil)
+    completion(fineDustResponse, error)
   }
 }
