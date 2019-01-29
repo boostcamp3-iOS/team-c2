@@ -13,91 +13,68 @@ struct FineDustResponse: Codable {
   
   struct List: Codable {
     
-    let dataTime: String
+    var dataTime: String = ""
     
     /// 미세먼지 농도
-    private let fineDustValueResponse: String
+    var fineDustValue: Int = 0
     
     /// 미세먼지 24시간 예측 이동 농도
-    private let fineDustValue24Response: String
+    var fineDustValue24: Int = 0
     
     /// 미세먼지 24시간 등급
-    private let fineDustGradeResponse: String
+    var fineDustGrade: Int = 0
     
     /// 미세먼지 1시간 등급
-    private let fineDustGrade1hResponse: String
+    var fineDustGrade1h: Int = 0
     
     /// 초미세먼지 농도
-    private let ultraFineDustValueResponse: String
+    var ultraFineDustValue: Int = 0
     
     /// 초미세먼지 24시간 예측 이동 농도
-    private let ultraFineDustValue24Response: String
+    var ultraFineDustValue24: Int = 0
     
     /// 초미세먼지 24시간 등급
-    private let ultraFineDustGradeResponse: String
+    var ultraFineDustGrade: Int = 0
     
     /// 초미세먼지 1시간 등급
-    private let ultraFineDustGrade1hResponse: String
+    var ultraFineDustGrade1h: Int = 0
     
     enum CodingKeys: String, CodingKey {
       
       case dataTime
       
-      case fineDustValueResponse = "pm10Value"
+      case fineDustValue = "pm10Value"
       
-      case fineDustValue24Response = "pm10Value24"
+      case fineDustValue24 = "pm10Value24"
       
-      case fineDustGradeResponse = "pm10Grade"
+      case fineDustGrade = "pm10Grade"
       
-      case fineDustGrade1hResponse = "pm10Grade1h"
+      case fineDustGrade1h = "pm10Grade1h"
       
-      case ultraFineDustValueResponse = "pm25Value"
+      case ultraFineDustValue = "pm25Value"
       
-      case ultraFineDustValue24Response = "pm25Value24"
+      case ultraFineDustValue24 = "pm25Value24"
       
-      case ultraFineDustGradeResponse = "pm25Grade"
+      case ultraFineDustGrade = "pm25Grade"
       
-      case ultraFineDustGrade1hResponse = "pm25Grade1h"
+      case ultraFineDustGrade1h = "pm25Grade1h"
     }
     
-    /// 미세먼지 농도
-    var fineDustValue: Int {
-      return Int(fineDustValueResponse) ?? 0
-    }
+    init() { }
     
-    /// 미세먼지 24시간 예측 이동 농도
-    var fineDustValue24: Int {
-      return Int(fineDustValue24Response) ?? 0
-    }
-    
-    /// 미세먼지 24시간 등급
-    var fineDustGrade: Int {
-      return Int(fineDustGradeResponse) ?? 0
-    }
-    
-    /// 미세먼지 1시간 등급
-    var fineDustGrade1h: Int {
-      return Int(fineDustGrade1hResponse) ?? 0
-    }
-    
-    /// 초미세먼지 농도
-    var ultraFineDustValue: Int {
-      return Int(ultraFineDustValueResponse) ?? 0
-    }
-    
-    /// 초미세먼지 24시간 예측 이동 농도
-    var ultraFineDustValue24: Int {
-      return Int(ultraFineDustValue24Response) ?? 0
-    }
-    
-    /// 초미세먼지 24시간 등급
-    var ultraFineDustGrade: Int {
-      return Int(ultraFineDustGradeResponse) ?? 0
-    }
-    
-    /// 초미세먼지 1시간 등급
-    var ultraFineDustGrade1h: Int {
-      return Int(ultraFineDustGrade1hResponse) ?? 0
+    init(from decoder: Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      dataTime = try values.decode(String.self, forKey: .dataTime)
+      fineDustValue = Int(try values.decode(String.self, forKey: .fineDustValue)) ?? 0
+      fineDustValue24 = Int(try values.decode(String.self, forKey: .fineDustValue24)) ?? 0
+      fineDustGrade = Int(try values.decode(String.self, forKey: .fineDustGrade)) ?? 0
+      fineDustGrade1h = Int(try values.decode(String.self, forKey: .fineDustGrade1h)) ?? 0
+      ultraFineDustValue = Int(try values.decode(String.self, forKey: .ultraFineDustValue)) ?? 0
+      ultraFineDustValue24
+        = Int(try values.decode(String.self, forKey: .ultraFineDustValue24)) ?? 0
+      ultraFineDustGrade = Int(try values.decode(String.self, forKey: .ultraFineDustGrade)) ?? 0
+      ultraFineDustGrade1h
+        = Int(try values.decode(String.self, forKey: .ultraFineDustGrade1h)) ?? 0
     }
   }
   
