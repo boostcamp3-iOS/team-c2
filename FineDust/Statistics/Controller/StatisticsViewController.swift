@@ -13,8 +13,10 @@ final class StatisticsViewController: UIViewController {
   
   /// CALayer 관련 상수 정의.
   enum Layer {
+    
     /// 경계선 라운드 반지름.
     static let cornerRadius: CGFloat = 8.0
+    
     /// 경계선 두께.
     static let borderWidth: CGFloat = 1.0
   }
@@ -31,6 +33,7 @@ final class StatisticsViewController: UIViewController {
       )
     }
   }
+  
   /// 비율 그래프 배경 뷰.
   @IBOutlet private weak var ratioGraphBackgroundView: UIView! {
     didSet {
@@ -51,6 +54,7 @@ final class StatisticsViewController: UIViewController {
       valueGraphView.delegate = self
     }
   }
+  
   /// 비율 그래프.
   private var ratioGraphView: RatioGraphView! {
     didSet {
@@ -60,14 +64,19 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: Property
   
+  private lazy var intakeGenerator: IntakeManagerType
+    = IntakeManager(healthKitManager: HealthKitManager(), apiService: API.shared)
+  
   /// 7일간의 미세먼지 농도 값 모음.
   var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
+  
   /// 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: CGFloat {
     let sum = fineDustValues.reduce(0, +)
     let last = fineDustValues.last ?? 0.0
     return last / sum
   }
+  
   /// 선택된 날짜.
   private var selectedDate: Date = Date()
   
@@ -96,6 +105,9 @@ final class StatisticsViewController: UIViewController {
     setConstraintsToSubviews()
     initializeValueGraphView()
     initializeRatioGraphView()
+    intakeGenerator.calculateIntakesInWeek(since: Date.today) { values in
+      print(values)
+    }
   }
   
   // MARK: Method
@@ -143,6 +155,7 @@ extension StatisticsViewController: RatioGraphViewDataSource {
 // MARK: - Private Extension
 
 private extension StatisticsViewController {
+  
   /// 서브뷰 생성하여 프로퍼티에 할당.
   func createSubviews() {
     valueGraphView
@@ -154,6 +167,7 @@ private extension StatisticsViewController {
     valueGraphBackgroundView.addSubview(valueGraphView)
     ratioGraphBackgroundView.addSubview(ratioGraphView)
   }
+  
   /// 서브뷰에 오토레이아웃 설정.
   func setConstraintsToSubviews() {
     NSLayoutConstraint.activate([
@@ -172,10 +186,12 @@ private extension StatisticsViewController {
 // MARK: - Value Graph Private Extension
 
 private extension StatisticsViewController {
+  
   /// 값 그래프 뷰 초기화.
   func initializeValueGraphView() {
     valueGraphView.setup()
   }
+  
   /// 비율 그래프 뷰 초기화.
   func initializeRatioGraphView() {
     ratioGraphView.setup()

@@ -9,6 +9,10 @@
 import Foundation
 
 extension Date {
+  static var today: Date {
+    return Date()
+  }
+  
   /// 기준 날짜 이전의 `Date` 구하기.
   static func before(days: Int, since date: Date = Date()) -> Date {
     return Calendar.current.date(byAdding: .day, value: -days, to: date) ?? Date()
