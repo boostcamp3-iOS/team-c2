@@ -78,14 +78,14 @@ final class ValueGraphView: UIView {
     picker.datePickerMode = .date
     picker.maximumDate = Date()
     picker.minimumDate = Calendar.current.date(from: DateComponents(year: 2019, month: 1, day: 1))
-    picker.locale = Locale.current
+    picker.locale = Locale(identifier: "ko_KR")
     return picker
   }()
   
   /// DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale.current
+    formatter.locale = Locale(identifier: "ko_KR")
     formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
   }()

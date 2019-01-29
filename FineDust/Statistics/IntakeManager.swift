@@ -45,7 +45,7 @@ class IntakeManager: IntakeManagerType {
         self?.api.fetchFineDustConcentration(term: .daily, pageNumber: 1, numberOfRows: 24) { response, error in
           let distance = distance
           let steps = steps
-          let fineDustValue = Double(response?.list.first?.fineDustValue ?? 0)
+          let fineDustValue = Double(response?.items.first?.fineDustValue ?? 0)
           completion(distance * steps * fineDustValue)
         }
       }

@@ -1,44 +1,74 @@
 //
-//  ObservatoryResponse.swift
+//  ObservatoryResponseXML.swift
 //  FineDust
 //
-//  Created by Presto on 22/01/2019.
+//  Created by Presto on 29/01/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
 import Foundation
 
-/// 측정소 정보 조회 응답 객체.
-struct ObservatoryResponse: Codable {
+import SWXMLHash
+
+/// 관측소 응답 객체.
+struct ObservatoryResponse: XMLIndexerDeserializable {
   
-  struct List: Codable {
+  /// 미세먼지 API 결과 객체.
+  struct Result: XMLIndexerDeserializable {
     
-    /// 관측소 주소
-    let address: String
+    /// 상태 코드.
+    let code: Int
     
-    /// 관측소 이름
-    let observatory: String
+    /// 상태 메세지.
+    let message: String
     
-    /// 현재 위치에서 관측소까지의 거리. km
-    let distance: Double
-    
-    enum CodingKeys: String, CodingKey {
-      
-      case address = "addr"
-      
-      case distance = "tm"
-      
-      case observatory = "stationName"
+    static func deserialize(_ node: XMLIndexer) throws -> Result {
+      return try Result(code: node["resultCode"].value(),
+                        message: node["resultMsg"].value())
     }
   }
   
-  /// 결과 리스트
-  let list: [List]
+  /// 관측소 응답 관련 정보.
+  struct Item: XMLIndexerDeserializable {
+    
+    /// 관측소 주소.
+    let address: String
+    
+    /// 관측소 이름.
+    let observatory: String
+    
+    /// 현재 위치로부터 관측소까지의 거리.
+    let distance: Double
+    
+    static func deserialize(_ node: XMLIndexer) throws -> Item {
+      return try Item(address: node["addr"].value(),
+                      observatory: node["stationName"].value(),
+                      distance: node["tm"].value())
+    }
+  }
   
-  /// 응답 개수
+  /// 결과 객체.
+  let result: Result
+  
+  /// 총 정보량.
   let totalCount: Int
   
+  /// 관측소 관련 정보들.
+  let items: [Item]
+  
+  static func deserialize(_ node: XMLIndexer) throws -> ObservatoryResponse {
+    return try ObservatoryResponse(result: node["response"]["header"].value(),
+                                   totalCount: node["response"]["body"]["totalCount"].value(),
+                                   items: node["response"]["body"]["items"]["item"].value())
+  }
+  
+  /// 관측소.
   var observatory: String? {
-    return list.first?.observatory
+    return items.first?.observatory
+  }
+  
+  /// 미세먼지 API 상태 코드.
+  var statusCode: FineDustStatusCode {
+    return FineDustStatusCode(rawValue: result.code) ?? .default
   }
 }

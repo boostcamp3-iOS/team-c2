@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     print("위치 갱신됨")
-    let locale = Locale.current
+    let locale = Locale(identifier: "ko_KR")
     guard let location = locations.last else { return }
     let coordinate = location.coordinate
     let convertedCoordinate = GeoConverter().convert(
@@ -104,7 +104,7 @@ extension AppDelegate: CLLocationManagerDelegate {
       destinationType: .TM,
       geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
     )
-    GeoInfo.shared.setLocation(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
+    LocationInfo.shared.setCoordinate(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
     CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
       if let error = error {
         print(error.localizedDescription)
@@ -168,7 +168,7 @@ private extension AppDelegate {
         return
       }
       guard let response = response else { return }
-      FineDustInfo.shared.set(fineDustResponse: response)
+      // 미세먼지 농도 정보 주물주물
     }
   }
 }
