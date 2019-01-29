@@ -32,6 +32,7 @@ struct ObservatoryResponse: Codable {
     }
   }
   
+  /// 결과 리스트
   let list: [List]
   
   /// 응답 개수
