@@ -24,7 +24,6 @@
 		254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */; };
 		28515AFBD665A7DED5FD92669009E4BD /* FineDustStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */; };
 		2E0344EDA34A627A756BC20F9B2A791F /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7F648E3F1AFEF8F2E912807BD956C /* NSObject+.swift */; };
-		2FC57FC5467572C6F9A2562357B38D01 /* Pods_FineDustTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3D10262DF1641D3E3C56E6B707FAD0 /* Pods_FineDustTests.framework */; };
 		3571FE608CDD57F75773A492941F00D4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */; };
 		3A89DBC74C55C2198ADB55DFFC957511 /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */; };
 		3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F8F9F0BB8AECA24E182EBED21006A1 /* StatisticsViewController.swift */; };
@@ -57,7 +56,6 @@
 		B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */; };
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
 		BD5CD8B8D765B77C2BE845AAFB2C42B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */; };
-		BDFDE1F15B83ABDFD79A01F6BD188F8C /* Pods_FineDust.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C03519E3F71E91D0157CA50457DC659 /* Pods_FineDust.framework */; };
 		BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9E8FB49A9FF5D6049F1AA935B3EAD /* String+.swift */; };
 		C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */; };
 		C33546D723737ADFD171EBB0CD18C1BF /* NSLayoutDimension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD575BEB17D9D2493F29578956C779 /* NSLayoutDimension+.swift */; };
@@ -112,7 +110,6 @@
 		5334EFD5FD1ABA67CF0ABBA8D3035AEC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5C1A5681695EF53FED3A78954492680E /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		5DE7F648E3F1AFEF8F2E912807BD956C /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
-		5EFB08369F0FBF8B7A03279D22066EF7 /* Pods-FineDustTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDustTests.release.xcconfig"; path = "Target Support Files/Pods-FineDustTests/Pods-FineDustTests.release.xcconfig"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
 		6647CE1606E3F04A904663D01E53B70C /* FineDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustInfo.swift; sourceTree = "<group>"; };
 		6CB7A59C01A6BEA73951091DC6C6C60F /* FineDust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineDust.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,19 +117,16 @@
 		6EE85B4F75DE3462288EAEC749E40305 /* IntakeManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeManagerType.swift; sourceTree = "<group>"; };
 		78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
 		7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustStatusCode.swift; sourceTree = "<group>"; };
-		7E90E42B5FC282AEC368DC78BE40EAD3 /* Pods-FineDustTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDustTests.debug.xcconfig"; path = "Target Support Files/Pods-FineDustTests/Pods-FineDustTests.debug.xcconfig"; sourceTree = "<group>"; };
 		804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
-		8C54A97401E68A21EE5199E95F9FCC04 /* Pods-FineDust.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDust.release.xcconfig"; path = "Target Support Files/Pods-FineDust/Pods-FineDust.release.xcconfig"; sourceTree = "<group>"; };
 		90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		911E3D8169E0F1D9CFF3A6A227748F01 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		986780C6CD66A004B310FDEEC0E52DE5 /* FineDustTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FineDustTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutAnchor.swift"; sourceTree = "<group>"; };
-		9C03519E3F71E91D0157CA50457DC659 /* Pods_FineDust.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FineDust.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCollectionViewCell.swift; path = FineDust/Feedback/View/FeedbackCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -144,7 +138,6 @@
 		B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		C0BD575BEB17D9D2493F29578956C779 /* NSLayoutDimension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutDimension+.swift"; sourceTree = "<group>"; };
-		CC3D10262DF1641D3E3C56E6B707FAD0 /* Pods_FineDustTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FineDustTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D247F6F3851E8A9D8F03470A313986A4 /* FineDust.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FineDust.xcdatamodel; sourceTree = "<group>"; };
@@ -156,7 +149,6 @@
 		E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
 		EE964A647923AF379EC11C6CAC23D9FD /* FineDustError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustError.swift; sourceTree = "<group>"; };
-		F1ACC2DAD57E26225CB1C2E0570AE3A0 /* Pods-FineDust.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDust.debug.xcconfig"; path = "Target Support Files/Pods-FineDust/Pods-FineDust.debug.xcconfig"; sourceTree = "<group>"; };
 		F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -168,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */,
-				2FC57FC5467572C6F9A2562357B38D01 /* Pods_FineDustTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +168,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3571FE608CDD57F75773A492941F00D4 /* HealthKit.framework in Frameworks */,
-				BDFDE1F15B83ABDFD79A01F6BD188F8C /* Pods_FineDust.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +249,6 @@
 		25C29C13C7CFE05B67DC0260FEEC7B93 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F1ACC2DAD57E26225CB1C2E0570AE3A0 /* Pods-FineDust.debug.xcconfig */,
-				8C54A97401E68A21EE5199E95F9FCC04 /* Pods-FineDust.release.xcconfig */,
-				7E90E42B5FC282AEC368DC78BE40EAD3 /* Pods-FineDustTests.debug.xcconfig */,
-				5EFB08369F0FBF8B7A03279D22066EF7 /* Pods-FineDustTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -372,8 +358,6 @@
 			isa = PBXGroup;
 			children = (
 				1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */,
-				9C03519E3F71E91D0157CA50457DC659 /* Pods_FineDust.framework */,
-				CC3D10262DF1641D3E3C56E6B707FAD0 /* Pods_FineDustTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -498,7 +482,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 817692B8CF28B7C46B6F2323E4248D6C /* Build configuration list for PBXNativeTarget "FineDustTests" */;
 			buildPhases = (
-				F8D8F292CDD84605C1FF0928172CC1C7 /* [CP] Check Pods Manifest.lock */,
 				B2A27D1E2A5A7D7E39E74D3B5D2D6AF8 /* Sources */,
 				E87754171430F44C0EC85EEBB4802850 /* Frameworks */,
 				B0FB61B8DDA5BA2B81EA081952928FD8 /* Resources */,
@@ -603,28 +586,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		F8D8F292CDD84605C1FF0928172CC1C7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FineDustTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -787,7 +748,6 @@
 		};
 		31A568A58C1334B2A5028262683C9B8D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E90E42B5FC282AEC368DC78BE40EAD3 /* Pods-FineDustTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -864,7 +824,6 @@
 		};
 		BC40E531EFF08EFBBA68D28952F6DCFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EFB08369F0FBF8B7A03279D22066EF7 /* Pods-FineDustTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -886,7 +845,6 @@
 		};
 		DE8F4696B51F4C9747D985CC9765375B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C54A97401E68A21EE5199E95F9FCC04 /* Pods-FineDust.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FineDust/FineDust.entitlements;
@@ -909,7 +867,6 @@
 		};
 		E56408CD67CACF8A0E4588BFF2593817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1ACC2DAD57E26225CB1C2E0570AE3A0 /* Pods-FineDust.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FineDust/FineDust.entitlements;
