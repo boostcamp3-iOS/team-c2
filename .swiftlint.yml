@@ -6,6 +6,7 @@ disabled_rules:
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
+- Pods/
 
 line_length:
   warning: 99
