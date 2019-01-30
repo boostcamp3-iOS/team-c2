@@ -12,7 +12,7 @@
 import Foundation
 import HealthKit
 
-final class MockHealthKitManager: HealthKitManagerType {
+final class MockHealthKitManager: HealthKitServiceManagerType {
   
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
@@ -36,4 +36,3 @@ final class MockHealthKitManager: HealthKitManagerType {
     completion(2174.0)
   }
 }
-
