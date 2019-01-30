@@ -89,10 +89,6 @@ extension HealthKitServiceManager: HealthKitServiceType {
     }
   }
   
-//  static func start(of date: Date = Date()) -> Date {
-//    return Calendar.current.startOfDay(for: date)
-//  }
-  
   /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
   func fetchHealthKitValue(label: UILabel,
                            quantityTypeIdentifier: HKQuantityTypeIdentifier) {
