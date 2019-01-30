@@ -65,7 +65,7 @@ final class StatisticsViewController: UIViewController {
   // MARK: Property
   
   private lazy var intakeGenerator: IntakeManagerType
-    = IntakeManager(healthKitManager: HealthKitManager(), apiService: API.shared)
+    = IntakeManager(healthKitManager: HealthKitServiceManager.shared, apiService: API.shared)
   
   /// 7일간의 미세먼지 농도 값 모음.
   var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
