@@ -108,6 +108,8 @@ final class StatisticsViewController: UIViewController {
     intakeGenerator.calculateIntakesInWeek(since: Date.today) { values in
       print(values)
     }
+    
+    LocationManager.shared.requestAuthorization()
   }
   
   // MARK: Method

@@ -33,9 +33,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
-    locationManager.requestAlwaysAuthorization()
+    //locationManager.requestAlwaysAuthorization()
     HealthKitServiceManager.shared.requestAuthorization()
     fetchAPI()
+    // Location Manager Configuration
+    LocationManager.shared.configure { manager in
+      manager.authorizationChangeHandler = { status in
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+          LocationManager.shared.startUpdatingLocation()
+        default:
+          break
+        }
+      }
+      manager.updateLocationHandler = { location in
+        print(location)
+      }
+      manager.errorHandler = { error in
+        print(error.localizedDescription)
+      }
+    }
     return true
   }
   
