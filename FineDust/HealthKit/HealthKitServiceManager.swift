@@ -20,14 +20,10 @@ final class HealthKitServiceManager {
   private let healthStore = HKHealthStore()
   
   /// Health 앱 데이터 중 걸음 수를 가져오기 위한 프로퍼티.
-  private let stepCount = HKObjectType.quantityType(
-    forIdentifier: HKQuantityTypeIdentifier.stepCount
-  )
+  private let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount)
   
   /// Health 앱 데이터 중 걸은 거리를 가져오기 위한 프로퍼티.
-  private let distance = HKObjectType.quantityType(
-    forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning
-  )
+  private let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
   
   /// Health App 권한을 나타내는 변수.
   private var isAuthorized = true
@@ -82,36 +78,24 @@ extension HealthKitServiceManager: HealthKitServiceType {
       // 앱 실행중 알람을 한번만 띄우게 하는 코드. isAuthorized는 이후로 false로 다시는 변경되지 않음.
       isAuthorized = true
       UIAlertController
-        .alert(
-          title: "건강 App에 대한 권한이 없습니다.",
-          message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요"
-        )
-        .action(
-          title: "건강 App",
-          style: .default
-        ) { _, _ in
+        .alert(title: "건강 App에 대한 권한이 없습니다.",
+               message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요")
+        .action(title: "건강 App",
+                style: .default) { _, _ in
           UIApplication.shared.open(URL(string: "x-apple-health://")!)
         }
-        .action(
-          title: "취소", style: .cancel, handler: nil
-        )
+        .action(title: "취소", style: .cancel, handler: nil)
         .present(to: viewController)
     }
   }
   
+//  static func start(of date: Date = Date()) -> Date {
+//    return Calendar.current.startOfDay(for: date)
+//  }
+  
   /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
   func fetchHealthKitValue(label: UILabel,
                            quantityTypeIdentifier: HKQuantityTypeIdentifier) {
-    guard let startDate = Calendar.current.date(bySettingHour: 0,
-                                                minute: 0,
-                                                second: 0,
-                                                of: Date())
-      else {
-        print("startDate error")
-        return
-    }
-    
-    let endDate = Date()
     let quantityFor: HKUnit
     let completion: (Double) -> Void
     
@@ -133,11 +117,11 @@ extension HealthKitServiceManager: HealthKitServiceType {
     }
     
     // 위에서 설정한 값을 토대로 HealthKit App에서 값을 찾음.
-    findHealthKitValue(startDate: startDate,
-                                   endDate: endDate,
-                                   quantityFor: quantityFor,
-                                   quantityTypeIdentifier: quantityTypeIdentifier,
-                                   completion: completion)
+    findHealthKitValue(startDate: Date.start(),
+                       endDate: Date(),
+                       quantityFor: quantityFor,
+                       quantityTypeIdentifier: quantityTypeIdentifier,
+                       completion: completion)
   }
   
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
