@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 미세먼지 API 오류 정의.
 enum FineDustError: Error {
   
   /// 제공기관 서비스 상태가 원활하지 않음.

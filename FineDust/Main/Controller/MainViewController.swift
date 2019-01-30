@@ -18,7 +18,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  weak var healthKitServiceType: HealthKitServiceType?
+  weak var healthKitServiceType: HealthKitServiceManagerType?
   
   // MARK: - Life Cycle
 

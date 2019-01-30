@@ -11,7 +11,7 @@ import Foundation
 // 2. IntakeGenerator가 1의 프로토콜을 준수하고 빌드가 가능하게만 구현해둠
 class IntakeManager: IntakeManagerType {
   
-  var healthKitManager: HealthKitServiceManagerType
+  var healthKitServiceManager: HealthKitServiceManagerType
   
   var api: APIFineDustType
   
@@ -20,9 +20,9 @@ class IntakeManager: IntakeManagerType {
     return 60
   }
 
-  init(healthKitManager: HealthKitServiceManagerType = HealthKitManager.shared,
+  init(healthKitManager: HealthKitServiceManagerType = HealthKitServiceManager.shared,
        apiService: APIFineDustType = API.shared) {
-    self.healthKitManager = healthKitManager
+    self.healthKitServiceManager = healthKitManager
     self.api = apiService
   }
   
@@ -30,17 +30,17 @@ class IntakeManager: IntakeManagerType {
     // 헬스킷매니저에서 걸음수 및 걸음거리 받아옴
     // API에서 미세먼지 농도 받아옴
     // 둘 사이에 어떠한 알고리즘 적용하여 값 넘겨줌
-    healthKitManager.fetchDistanceValue { [weak self] distance in
-      self?.healthKitManager.fetchStepCountValue { steps in
-        self?.api.fetchFineDustConcentration(term: .daily,
-                                             pageNumber: 1,
-                                             numberOfRows: 24) { response, error in
-          let distance = distance
-          let steps = steps
-          let fineDustValue = Double(response?.items.first?.fineDustValue ?? 0)
-          completion(distance * steps * fineDustValue)
-        }
-      }
-    }
+//    healthKitServiceManager.fetchDistanceValue { [weak self] distance in
+//      self?.healthKitManager.fetchStepCountValue { steps in
+//        self?.api.fetchFineDustConcentration(term: .daily,
+//                                             pageNumber: 1,
+//                                             numberOfRows: 24) { response, error in
+//          let distance = distance
+//          let steps = steps
+//          let fineDustValue = Double(response?.items.first?.fineDustValue ?? 0)
+//          completion(distance * steps * fineDustValue)
+//        }
+//      }
+//    }
   }
 }
