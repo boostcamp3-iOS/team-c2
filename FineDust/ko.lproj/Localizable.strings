@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  FineDust
+
+  Created by 이재은 on 29/01/2019.
+  Copyright © 2019 boostcamp3rd. All rights reserved.
+*/
+
+"My Dust" = "내먼지";
+"Fine Dust Reporting" = "미세먼지 분석";
+"Dust Info" = "먼지 정보";

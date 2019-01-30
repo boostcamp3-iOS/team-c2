@@ -24,6 +24,7 @@ final class MainViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.title = "내먼지".localized
     setup()
   }
   
