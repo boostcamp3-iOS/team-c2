@@ -8,102 +8,83 @@
 
 import Foundation
 
+import SWXMLHash
+
 /// 미세먼지 정보 응답 객체.
-struct FineDustResponse: Codable {
-  
-  struct List: Codable {
+struct FineDustResponse: XMLIndexerDeserializable {
+ 
+  /// 미세먼지 API 결과 객체.
+  struct Result: XMLIndexerDeserializable {
     
-    let dataTime: String
+    /// 상태 코드.
+    let code: Int
     
-    /// 미세먼지 농도
-    let fineDustValue: Int
+    /// 상태 메세지;.
+    let message: String
     
-    /// 미세먼지 24시간 예측 이동 농도
-    let fineDustValue24: Int
-    
-    /// 미세먼지 24시간 등급
-    let fineDustGrade: Int
-    
-    /// 미세먼지 1시간 등급
-    let fineDustGrade1h: Int
-    
-    /// 초미세먼지 농도
-    let ultraFineDustValue: Int
-    
-    /// 초미세먼지 24시간 예측 이동 농도
-    let ultraFineDustValue24: Int
-    
-    /// 초미세먼지 24시간 등급
-    let ultraFineDustGrade: Int
-    
-    /// 초미세먼지 1시간 등급
-    let ultraFineDustGrade1h: Int
-    
-    enum CodingKeys: String, CodingKey {
-      
-      case dataTime
-      
-      case fineDustValue = "pm10Value"
-      
-      case fineDustValue24 = "pm10Value24"
-      
-      case fineDustGrade = "pm10Grade"
-      
-      case fineDustGrade1h = "pm10Grade1h"
-      
-      case ultraFineDustValue = "pm25Value"
-      
-      case ultraFineDustValue24 = "pm25Value24"
-      
-      case ultraFineDustGrade = "pm25Grade"
-      
-      case ultraFineDustGrade1h = "pm25Grade1h"
-    }
-    
-    init(dataTime: String,
-         fineDustValue: Int,
-         fineDustValue24: Int,
-         fineDustGrade: Int,
-         fineDustGrade1h: Int,
-         ultraFineDustValue: Int,
-         ultraFineDustValue24: Int,
-         ultraFineDustGrade: Int,
-         ultraFineDustGrade1h: Int) {
-      self.dataTime = dataTime
-      self.fineDustValue = fineDustValue
-      self.fineDustValue24 = fineDustValue24
-      self.fineDustGrade = fineDustGrade
-      self.fineDustGrade1h = fineDustGrade1h
-      self.ultraFineDustValue = ultraFineDustValue
-      self.ultraFineDustValue24 = ultraFineDustValue24
-      self.ultraFineDustGrade = ultraFineDustGrade
-      self.ultraFineDustGrade1h = ultraFineDustGrade1h
-    }
-    
-    init(from decoder: Decoder) throws {
-      let values = try decoder.container(keyedBy: CodingKeys.self)
-      dataTime = try values.decode(String.self, forKey: .dataTime)
-      fineDustValue = Int(try values.decode(String.self, forKey: .fineDustValue)) ?? 0
-      fineDustValue24 = Int(try values.decode(String.self, forKey: .fineDustValue24)) ?? 0
-      fineDustGrade = Int(try values.decode(String.self, forKey: .fineDustGrade)) ?? 0
-      fineDustGrade1h = Int(try values.decode(String.self, forKey: .fineDustGrade1h)) ?? 0
-      ultraFineDustValue = Int(try values.decode(String.self, forKey: .ultraFineDustValue)) ?? 0
-      ultraFineDustValue24
-        = Int(try values.decode(String.self, forKey: .ultraFineDustValue24)) ?? 0
-      ultraFineDustGrade = Int(try values.decode(String.self, forKey: .ultraFineDustGrade)) ?? 0
-      ultraFineDustGrade1h
-        = Int(try values.decode(String.self, forKey: .ultraFineDustGrade1h)) ?? 0
+    static func deserialize(_ node: XMLIndexer) throws -> Result {
+      return try Result(code: node["resultCode"].value(),
+                        message: node["resultMsg"].value())
     }
   }
   
-  /// 결과 리스트
-  let list: [List]
+  /// 미세먼지 정보 응답 관련 정보.
+  struct Item: XMLIndexerDeserializable {
+    
+    /// 관측 시간. `2019-01-29 16:00`
+    let dataTime: String
+    
+    /// 미세먼지 현재 농도.
+    let fineDustValue: Int
+    
+    /// 미세먼지 24시간 농도.
+    let fineDustValue24: Int
+    
+    /// 미세먼지 현재 등급.
+    let fineDustGrade: Int
+    
+    /// 초미세먼지 현재 농도.
+    let ultraFineDustValue: Int
+    
+    /// 초미세먼지 24시간 농도.
+    let ultraFineDustValue24: Int
+    
+    /// 초미세먼지 현재 등급.
+    let ultraFineDustGrade: Int
+    
+    static func deserialize(_ node: XMLIndexer) throws -> Item {
+      return try Item(dataTime: node["dataTime"].value(),
+                      fineDustValue: node["pm10Value"].value(),
+                      fineDustValue24: node["pm10Value24"].value(),
+                      fineDustGrade: node["pm10Grade"].value(),
+                      ultraFineDustValue: node["pm25Value"].value(),
+                      ultraFineDustValue24: node["pm25Value24"].value(),
+                      ultraFineDustGrade: node["pm25Grade"].value())
+    }
+  }
   
-  /// 응답 개수
+  /// 결과 객체.
+  let result: Result
+  
+  /// 총 정보량.
   let totalCount: Int
   
+  /// 관측소 관련 정보들.
+  let items: [Item]
+  
+  static func deserialize(_ node: XMLIndexer) throws -> FineDustResponse {
+    return try FineDustResponse(result: node["response"]["header"].value(),
+                                totalCount: node["response"]["body"]["totalCount"].value(),
+                                items: node["response"]["body"]["items"]["item"].value())
+  }
+    
   /// 서브스크립트로 리스트의 값에 접근. `response[1]`
-  subscript(index: Int) -> List {
-    return list[index]
+  subscript(index: Int) -> Item {
+    return items[index]
+  }
+  
+  /// 미세먼지 API 상태 코드.
+  var statusCode: FineDustStatusCode {
+    return FineDustStatusCode(rawValue: result.code) ?? .default
   }
 }

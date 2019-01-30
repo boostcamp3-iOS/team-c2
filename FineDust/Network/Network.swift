@@ -30,7 +30,7 @@ final class Network {
     method: HTTPMethod,
     parameters: [String: Any]? = nil,
     headers: [String: String] = [:],
-    completion: @escaping (Data?, Error?) -> Void
+    completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void
   ) {
     let session = URLSession(configuration: .default)
     var urlRequest = URLRequest(url: url)
@@ -42,8 +42,10 @@ final class Network {
     DispatchQueue.main.async {
       ProgressIndicator.shared.show()
     }
-    let task = session.dataTask(with: urlRequest) { data, _, error in
-      completion(data, error)
+    let task = session.dataTask(with: urlRequest) { data, response, error in
+      let statusCodeRawValue = (response as? HTTPURLResponse)?.statusCode ?? 0
+      let statusCode = HTTPStatusCode(rawValue: statusCodeRawValue) ?? .default
+      completion(data, statusCode, error)
       DispatchQueue.main.async {
         ProgressIndicator.shared.hide()
       }
