@@ -13,6 +13,7 @@ extension String {
   var localized: String {
     return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
   }
+  
   /// 문자열 퍼센트 인코딩.
   var percentEncoded: String {
     return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""

@@ -13,6 +13,7 @@ extension NSObject {
   var classNameToString: String {
     return NSStringFromClass(type(of: self))
   }
+  
   /// 클래스 이름을 문자열로 변환.
   static var classNameToString: String {
     return NSStringFromClass(self).components(separatedBy: ".").last ?? ""

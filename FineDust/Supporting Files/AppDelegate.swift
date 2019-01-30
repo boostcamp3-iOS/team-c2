@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITextField.appearance().tintColor = .clear
     locationManager.requestAlwaysAuthorization()
     HealthKitServiceManager.shared.requestAuthorization()
-    toggleFirstExecutionFlag()
     fetchAPI()
     return true
   }
@@ -97,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     print("위치 갱신됨")
-    let locale = Locale(identifier: "ko_KR")
+    let locale = Locale.current
     guard let location = locations.last else { return }
     let coordinate = location.coordinate
     let convertedCoordinate = GeoConverter().convert(
@@ -170,23 +169,6 @@ private extension AppDelegate {
       }
       guard let response = response else { return }
       FineDustInfo.shared.set(fineDustResponse: response)
-    }
-  }
-}
-
-// MARK: - 첫 실행시에만 호출
-
-extension AppDelegate {
-  /// 첫 실행시에만 날짜를 저장하도록 함
-  func toggleFirstExecutionFlag() {
-    if !UserDefaults.standard.bool(forKey: "isFirstExecution") {
-      CoreDataManager.shared.save([User.installedDate: Date()], forType: User.self) { error in
-        if let error = error {
-          print(error.localizedDescription)
-          return
-        }
-        UserDefaults.standard.set(true, forKey: "isFirstExecution")
-      }
     }
   }
 }

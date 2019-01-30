@@ -10,6 +10,7 @@ import UIKit
 
 /// Ratio Graph View Data Source Protocol.
 protocol RatioGraphViewDataSource: class {
+  
   /// 전체에 대한 부분의 비율.
   var intakeRatio: CGFloat { get }
 }
@@ -21,8 +22,10 @@ final class RatioGraphView: UIView {
   
   /// 상수 정리.
   enum Constant {
+    
     /// 배경 뷰 높이와 전체 비율 섹션 뷰 높이의 차이.
     static let entireSectionViewHeightDifference: CGFloat = 64.0
+    
     /// 가운데 원형 뷰 반지름의 전체 비율 섹션 뷰 반지름과의 비율.
     static let centerHoleViewRadiusRatio: CGFloat = 1.2
   }
@@ -38,10 +41,12 @@ final class RatioGraphView: UIView {
   private var ratio: CGFloat {
     return dataSource?.intakeRatio ?? 0.0
   }
+  
   /// 비율을 각도로 변환.
   private var endAngle: CGFloat {
     return ratio * 2 * .pi - .pi / 2
   }
+  
   /// 배경 뷰 높이.
   private var backgroundViewHeight: CGFloat {
     return backgroundView.bounds.height - Constant.entireSectionViewHeightDifference
@@ -56,8 +61,10 @@ final class RatioGraphView: UIView {
   
   /// 원 그래프의 전체 비율 부분 뷰.
   private var entireSectionView: UIView!
+  
   /// 가운데 비어 있는 원.
   private var centerHoleView: UIView!
+  
   /// 퍼센트 레이블.
   private var percentLabel: UILabel!
   
@@ -78,12 +85,14 @@ final class RatioGraphView: UIView {
 // MARK: - View Drawing
 
 private extension RatioGraphView {
+  
   /// 서브뷰 초기화.
   func deinitializeSubviews() {
     entireSectionView.removeFromSuperview()
     centerHoleView.removeFromSuperview()
     percentLabel.removeFromSuperview()
   }
+  
   /// 전체 비율 뷰 그리기.
   func drawEntireSectionView() {
     entireSectionView = UIView(frame: CGRect(
@@ -104,6 +113,7 @@ private extension RatioGraphView {
     entireSectionView.clipsToBounds = true
     entireSectionView.layer.cornerRadius = backgroundViewHeight / 2
   }
+  
   /// 부분 비율 뷰 그리기.
   func drawPortionSectionView() {
     let path = UIBezierPath()
@@ -126,6 +136,7 @@ private extension RatioGraphView {
     shapeLayer.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 0, blur: 8, spread: 0)
     entireSectionView.layer.addSublayer(shapeLayer)
   }
+  
   /// 가운데 빈 효과 내는 원 그리기.
   func drawCenterHoleView() {
     centerHoleView = UIView()
@@ -146,6 +157,7 @@ private extension RatioGraphView {
     centerHoleView.layer.cornerRadius
       = backgroundViewHeight / 2 / Constant.centerHoleViewRadiusRatio
   }
+  
   /// 비어 있는 원 안에 퍼센트 레이블 설정하기.
   func setPercentLabel() {
     percentLabel = UILabel()

@@ -8,6 +8,8 @@
 
 import Foundation
 
+protocol APIType { }
+
 /// API 정의.
 final class API {
   
