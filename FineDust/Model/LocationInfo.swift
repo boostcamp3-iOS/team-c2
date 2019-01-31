@@ -38,6 +38,7 @@ final class LocationInfo {
     return yLocation
   }
   
+  /// 주소
   var address: String {
     return addressInfo
   }
@@ -45,13 +46,13 @@ final class LocationInfo {
   // MARK: Methods
   
   /// 좌표 설정
-  func setCoordinate(x: Double, y: Double) {
+  func set(x: Double, y: Double) {
     xLocation = x
     yLocation = y
   }
   
   /// 주소 설정
-  func setAddress(_ address: String) {
+  func set(_ address: String) {
     addressInfo = address
   }
 }
