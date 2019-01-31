@@ -24,10 +24,18 @@ final class GeocoderManager {
 
 extension GeocoderManager: GeocoderManagerType {
   func fetchAddress(_ location: CLLocation,
-                    preferredLocale locale: Locale?,
-                    completionHandler: @escaping ([CLPlacemark]?, Error?) -> Void) {
-    CLGeocoder().reverseGeocodeLocation(location,
-                                        preferredLocale: Locale(identifier: "ko_KR"),
-                                        completionHandler: completionHandler)
+                    completion: @escaping (String?, Error?) -> Void) {
+    CLGeocoder().reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in
+      if let error = error {
+        completion(nil, error)
+        return
+      }
+      guard let placemark = placemarks?.first else { return }
+      let administrativeArea = placemark.administrativeArea ?? ""
+      let locality = placemark.locality ?? ""
+      let name = placemark.name ?? ""
+      let address = "\(administrativeArea) \(locality) \(name)"
+      completion(address, nil)
+    }
   }
 }

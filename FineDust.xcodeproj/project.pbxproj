@@ -10,6 +10,8 @@
 		204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */; };
 		F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */; };
 		985C8431533A0B199E9938798F4B225C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235AB303D49A333807A979D37516363E /* API.swift */; };
+		A7273964C3672D95324EF6EDDA371523 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A3078776F6DEB0275F746D2229764 /* APIService.swift */; };
+		78866AEA604ED4993C2BC4BB957688BA /* APIServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */; };
 		DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */; };
 		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
 		740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
@@ -41,18 +43,15 @@
 		7AC2D40E8C9A0AF8BB6897D03DF88400 /* HealthKitServiceManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
 		B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */; };
-		201EB906659096DAF27B985F5BA82C23 /* IntakeManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634937B0048D445676E4A7E809FE9674 /* IntakeManagerTest.swift */; };
 		F699EA97D6E620A5D0441C747CF24EA9 /* IntakeManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE85B4F75DE3462288EAEC749E40305 /* IntakeManagerType.swift */; };
 		A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D764E2C19ACD93F21236E2C52D091FFB /* LaunchScreen.storyboard */; };
 		54490CA2C42B7F32D9C9A6E96F60E27E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69215BD6EBE412230647DC447AF9459C /* Localizable.strings */; };
 		8A09362D5049DC7AD11AC95D4EB56C31 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */; };
 		4CE4896570D07C30AB896D1FD8149D1E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */; };
-		7589BB20B1444203174036371BB29374 /* LocationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C3CF4948CB2CFF68845563238BE94 /* LocationManagerTest.swift */; };
 		9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */; };
 		5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */; };
 		DDF20BF1181CF217DC8739371363142A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */; };
-		B2770D5D0E5F35614A288A3DFF329C6F /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15915DB7D03BFFBBAE478D8E3A7D5C7 /* MockAPI.swift */; };
-		8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */; };
+		4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */; };
 		4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */; };
 		1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */; };
 		41057EA496BADCA9B72504DFC9FFA23B /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */; };
@@ -95,6 +94,8 @@
 		90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
 		235AB303D49A333807A979D37516363E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		F68A3078776F6DEB0275F746D2229764 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTest.swift; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -133,15 +134,12 @@
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeManager.swift; sourceTree = "<group>"; };
-		634937B0048D445676E4A7E809FE9674 /* IntakeManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeManagerTest.swift; sourceTree = "<group>"; };
 		6EE85B4F75DE3462288EAEC749E40305 /* IntakeManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeManagerType.swift; sourceTree = "<group>"; };
 		0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		818C3CF4948CB2CFF68845563238BE94 /* LocationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTest.swift; sourceTree = "<group>"; };
 		DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerType.swift; sourceTree = "<group>"; };
 		384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		E15915DB7D03BFFBBAE478D8E3A7D5C7 /* MockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
-		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
+		0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
@@ -316,8 +314,7 @@
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				634937B0048D445676E4A7E809FE9674 /* IntakeManagerTest.swift */,
-				818C3CF4948CB2CFF68845563238BE94 /* LocationManagerTest.swift */,
+				0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */,
 				DFACF8D7E983BEE2187B34C71705DB6B /* UnitTestREADME.md */,
 			);
 			path = Test;
@@ -410,8 +407,7 @@
 		8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				E15915DB7D03BFFBBAE478D8E3A7D5C7 /* MockAPI.swift */,
-				EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */,
+				0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */,
 				C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */,
 			);
 			path = Mock;
@@ -461,6 +457,7 @@
 			children = (
 				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
 				235AB303D49A333807A979D37516363E /* API.swift */,
+				F68A3078776F6DEB0275F746D2229764 /* APIService.swift */,
 				EE964A647923AF379EC11C6CAC23D9FD /* FineDustError.swift */,
 				7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */,
 				B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */,
@@ -722,6 +719,7 @@
 			files = (
 				F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */,
 				985C8431533A0B199E9938798F4B225C /* API.swift in Sources */,
+				A7273964C3672D95324EF6EDDA371523 /* APIService.swift in Sources */,
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
@@ -779,10 +777,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				201EB906659096DAF27B985F5BA82C23 /* IntakeManagerTest.swift in Sources */,
-				7589BB20B1444203174036371BB29374 /* LocationManagerTest.swift in Sources */,
-				B2770D5D0E5F35614A288A3DFF329C6F /* MockAPI.swift in Sources */,
-				8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */,
+				78866AEA604ED4993C2BC4BB957688BA /* APIServiceTest.swift in Sources */,
+				4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */,
 				4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
