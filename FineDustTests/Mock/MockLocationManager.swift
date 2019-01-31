@@ -12,17 +12,25 @@ import CoreLocation
 
 class MockLocationManager: LocationManagerType {
   
-  var status: CLAuthorizationStatus?
+  var error: Error?
   
-  var location: CLLocation?
+  var status: CLAuthorizationStatus = .authorizedAlways
   
-  var authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)?
+  var location: CLLocation = CLLocation(latitude: 0.1, longitude: 0.1)
   
-  var locationUpdateHandler: ((CLLocation) -> Void)?
+  // MARK: - 프로토콜 구현부
+  
+  var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)?
+  
+  var locationUpdatingHandler: ((CLLocation) -> Void)?
   
   var errorHandler: ((Error) -> Void)?
   
-  func configure(_ configureHandler: @escaping (LocationManagerType) -> Void) {
+  func configure(_ configurationHandler: @escaping (LocationManagerType) -> Void) {
+    
+  }
+  
+  func requestAuthorization() {
     
   }
   
@@ -30,7 +38,7 @@ class MockLocationManager: LocationManagerType {
     
   }
   
-  func requestAuthorization() {
+  func stopUpdatingLocation() {
     
   }
 }
