@@ -32,6 +32,7 @@
 		232662E5D1D5338B147FF05959D797E1 /* FineDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647CE1606E3F04A904663D01E53B70C /* FineDustInfo.swift */; };
 		9B87020C83CE101BD244F0BFF6F082BE /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2A9DF5E234F0ACFA0BA27369F27AB6 /* FineDustResponse.swift */; };
 		28515AFBD665A7DED5FD92669009E4BD /* FineDustStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */; };
+		0275B02EDF3C2DFDB6A00E742F931121 /* FineDustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0570DA836BCD4B477526BB294F8A2C18 /* FineDustTests.swift */; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */; };
 		04A572D5E9209E88FC7B31057CCE14ED /* GeocoderManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */; };
@@ -40,11 +41,13 @@
 		0F99D43AFB7714E3367A58D454482FC1 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */; };
 		519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */; };
 		8903960C73B090519A51E81AD39FAFE5 /* HealthKitServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */; };
+		AB55E489FB0490A4234BEAC1541FADE5 /* HealthKitServiceManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */; };
 		7AC2D40E8C9A0AF8BB6897D03DF88400 /* HealthKitServiceManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
 		B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */; };
 		F699EA97D6E620A5D0441C747CF24EA9 /* IntakeManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE85B4F75DE3462288EAEC749E40305 /* IntakeManagerType.swift */; };
 		A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D764E2C19ACD93F21236E2C52D091FFB /* LaunchScreen.storyboard */; };
+		54490CA2C42B7F32D9C9A6E96F60E27E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69215BD6EBE412230647DC447AF9459C /* Localizable.strings */; };
 		8A09362D5049DC7AD11AC95D4EB56C31 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */; };
 		4CE4896570D07C30AB896D1FD8149D1E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */; };
 		9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */; };
@@ -120,6 +123,7 @@
 		6647CE1606E3F04A904663D01E53B70C /* FineDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustInfo.swift; sourceTree = "<group>"; };
 		6D2A9DF5E234F0ACFA0BA27369F27AB6 /* FineDustResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
 		7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustStatusCode.swift; sourceTree = "<group>"; };
+		0570DA836BCD4B477526BB294F8A2C18 /* FineDustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustTests.swift; sourceTree = "<group>"; };
 		986780C6CD66A004B310FDEEC0E52DE5 /* FineDustTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FineDustTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManager.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManager.swift; sourceTree = "<group>"; };
+		A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerTest.swift; sourceTree = "<group>"; };
 		B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerType.swift; sourceTree = "<group>"; };
 		768ED33DE8C563664122534CC0337E8E /* Hour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,7 +175,10 @@
 		DFACF8D7E983BEE2187B34C71705DB6B /* UnitTestREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = UnitTestREADME.md; sourceTree = "<group>"; };
 		404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphView.swift; sourceTree = "<group>"; };
 		78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
-		B6B9FBF03B54E21323A5C3F3116D33A6 /* ko.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ko.lproj; sourceTree = "<group>"; };
+		F969F555DE063A2E758A5E3FFDD96BFC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		18565C03190EC81ED411F90F18F99195 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2438ADE4C4013CF08714AC5A8FAF6DDB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F662A8A63093F1D01EF42971AD9BFA93 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -245,7 +253,6 @@
 		0E84DD7C0F0B4677567895878824A5A4 /* FineDustTests */ = {
 			isa = PBXGroup;
 			children = (
-				8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */,
 				449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */,
 				254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */,
 			);
@@ -325,6 +332,7 @@
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */,
 				0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */,
 				DFACF8D7E983BEE2187B34C71705DB6B /* UnitTestREADME.md */,
 			);
@@ -431,6 +439,14 @@
 				0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		912C52520833D8990E79BE53BA837043 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				3559D89120CDC8582209006FAE92E765 /* API+FineDust.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		98FC53B1C8D628A70A4BDB0A2693A42F /* Feedback */ = {
