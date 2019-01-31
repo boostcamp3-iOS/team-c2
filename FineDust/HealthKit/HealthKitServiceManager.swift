@@ -36,12 +36,8 @@ final class HealthKitServiceManager {
   
   /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
   func requestAuthorization() {
-    guard let stepCount = stepCount else {
-      print("step count request error")
-      return
-    }
-    guard let distance = distance else {
-      print("distance request error")
+    guard let stepCount = stepCount, let distance = distance else {
+      print("stepCount, distance properties error")
       return
     }
     
@@ -56,12 +52,10 @@ final class HealthKitServiceManager {
     let healthKitTypes: Set = [stepCount, distance]
     
     // 권한요청.
-    healthStore.requestAuthorization(
-      toShare: healthKitTypes,
-      read: healthKitTypes
-    ) { _, error in
-      if let err = error {
-        print("request authorization error : \(err.localizedDescription)")
+    healthStore.requestAuthorization(toShare: healthKitTypes,
+                                     read: healthKitTypes) { _, error in
+      if let error = error {
+        print("request authorization error : \(error.localizedDescription)")
       } else {
         print("complete request authorization")
       }
@@ -87,6 +81,11 @@ extension HealthKitServiceManager: HealthKitServiceManagerType {
         .action(title: "취소", style: .cancel, handler: nil)
         .present(to: viewController)
     }
+  }
+  
+  func updateHealthKitLabel(label: UILabel,
+                            quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+    
   }
   
   /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
