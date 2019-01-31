@@ -83,31 +83,46 @@ extension HealthKitServiceManager: HealthKitServiceManagerType {
     }
   }
   
+  /// HealthKit App의 특정 자료를 가져와 Label을 업데이트하는 UI 업데이트 메소드.
   func updateHealthKitLabel(label: UILabel,
                             quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+    var text: String = ""
     
+    fetchHealthKitValue(quantityTypeIdentifier: quantityTypeIdentifier) {
+      text = $0
+    }
+    
+    DispatchQueue.main.async {
+      label.text = text
+    }
   }
   
-  /// HealthKit App의 특정 자료를 가져와 label을 업데이트하는 메소드.
-  func fetchHealthKitValue(label: UILabel,
-                           quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+  /// label을 업데이트 시킬 적절한 string 값을 찾기 위해 초기 설정해주는 메소드.
+  func fetchHealthKitValue(quantityTypeIdentifier: HKQuantityTypeIdentifier,
+                           completion: @escaping (String) -> Void) {
+    /// 걸음 혹은 걸은거리에 따른 적절한 String 리턴.
+    var text: String = "" {
+      didSet {
+        completion(text)
+      }
+    }
+    
+    /// 걸음이냐 걸은 거리냐에 따른 단위를 설정하는 프로퍼티.
     let quantityFor: HKUnit
-    let completion: (Double) -> Void
+    
+    /// findHealthKitValue에 보내줄 completion 프로퍼티.
+    let sentCompletion: (Double) -> Void
     
     // Indentifier의 값이 걸음 혹은 걸은 거리이냐에 따라 변수들을 설정.
     if quantityTypeIdentifier == .stepCount {
       quantityFor = HKUnit.count()
-      completion = { value in
-        DispatchQueue.main.async {
-          label.text = "\(Int(value)) 걸음"
-        }
+      sentCompletion = {
+        text = "\(Int($0)) 걸음"
       }
     } else {
       quantityFor = HKUnit.meter()
-      completion = { value in
-        DispatchQueue.main.async {
-          label.text = String(format: "%.1f", value.kilometer) + "km"
-        }
+      sentCompletion = {
+        text = String(format: "%.1f", $0.kilometer) + "km"
       }
     }
     
@@ -116,7 +131,7 @@ extension HealthKitServiceManager: HealthKitServiceManagerType {
                        endDate: Date(),
                        quantityFor: quantityFor,
                        quantityTypeIdentifier: quantityTypeIdentifier,
-                       completion: completion)
+                       completion: sentCompletion)
   }
   
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
