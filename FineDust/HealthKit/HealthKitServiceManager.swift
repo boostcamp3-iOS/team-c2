@@ -86,14 +86,19 @@ extension HealthKitServiceManager: HealthKitServiceManagerType {
   /// HealthKit App의 특정 자료를 가져와 Label을 업데이트하는 UI 업데이트 메소드.
   func updateHealthKitLabel(label: UILabel,
                             quantityTypeIdentifier: HKQuantityTypeIdentifier) {
-    var text: String = ""
+    var text: String?
     
     fetchHealthKitValue(quantityTypeIdentifier: quantityTypeIdentifier) {
       text = $0
     }
     
     DispatchQueue.main.async {
-      label.text = text
+      if let text = text {
+        label.text = text
+      } else {
+        label.text = "0"
+      }
+      
     }
   }
   
