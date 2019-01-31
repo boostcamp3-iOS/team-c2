@@ -13,6 +13,7 @@
 		001A3D3F22016D10005D81A4 /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A3D3A22016D10005D81A4 /* MockHealthKitManager.swift */; };
 		001A3D4022016D10005D81A4 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A3D3B22016D10005D81A4 /* MockAPI.swift */; };
 		001A3D4422017705005D81A4 /* HealthKitServiceManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A3D4322017705005D81A4 /* HealthKitServiceManagerTest.swift */; };
+		001A3D4E22017F17005D81A4 /* ko.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 001A3D4D22017F17005D81A4 /* ko.lproj */; };
 		0340ABA98AAE5B4F754E2E330CD05303 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E654EDC242A66C1EC19FE34A7991FF /* Grade.swift */; };
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		0A6CD6CC5EF0CB96915A1717214C71DB /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F34397AB2620EFA2BD9E023064BF9 /* ValueGraphView.swift */; };
@@ -93,6 +94,7 @@
 		001A3D3A22016D10005D81A4 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
 		001A3D3B22016D10005D81A4 /* MockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
 		001A3D4322017705005D81A4 /* HealthKitServiceManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerTest.swift; sourceTree = "<group>"; };
+		001A3D4D22017F17005D81A4 /* ko.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ko.lproj; sourceTree = "<group>"; };
 		05FC303D1FA77029C0B18B8C19A66650 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		067E449E7BAAA91C4EE4A2715980EAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
@@ -312,11 +314,14 @@
 		481AEAA395D9C3B4FF33E868D70E8D0B /* FineDust */ = {
 			isa = PBXGroup;
 			children = (
+				001A3D4D22017F17005D81A4 /* ko.lproj */,
 				10F15CFF826B6B000B3C9C0973EA612B /* Common */,
 				2F83400986839F304CBBA92DC52E3AD2 /* Core Data */,
 				B3C2FE06B8909518407804448A15547A /* Extension */,
 				98FC53B1C8D628A70A4BDB0A2693A42F /* Feedback */,
+				DC90C952E7EA68296C391AC855C57729 /* FineDust.entitlements */,
 				5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */,
+				82887C16FE58890774E3F9057F98EFDF /* Info.plist */,
 				6BD00A070861AD554C16D14235787222 /* Main */,
 				8C212B1139E96B3BA74BF5B54AB9EF23 /* Model */,
 				B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */,
@@ -324,8 +329,6 @@
 				010570675998A4B1D218BEBD271435D3 /* Statistics */,
 				C5254E221717B2B3CDB72F67E9F3234C /* Supporting Files */,
 				A9020D623D8916FA746D8E891134F78E /* SwiftGen */,
-				DC90C952E7EA68296C391AC855C57729 /* FineDust.entitlements */,
-				82887C16FE58890774E3F9057F98EFDF /* Info.plist */,
 			);
 			path = FineDust;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */,
+				001A3D4E22017F17005D81A4 /* ko.lproj in Resources */,
 				740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */,
 				BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */,
 				AF73755646D309F02637E4EE66CD23C5 /* Feedback.storyboard in Resources */,
