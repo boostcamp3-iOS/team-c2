@@ -134,6 +134,11 @@ private extension RatioGraphView {
     shapeLayer.path = path.cgPath
     shapeLayer.fillColor = Asset.graphToday.color.cgColor
     shapeLayer.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 0, blur: 8, spread: 0)
+    let animation = CABasicAnimation(keyPath: "strokeEnd")
+    animation.fromValue = 0
+    animation.toValue = 0.4
+    animation.duration = 15
+    shapeLayer.add(animation, forKey: "strokeEnd")
     entireSectionView.layer.addSublayer(shapeLayer)
   }
   
