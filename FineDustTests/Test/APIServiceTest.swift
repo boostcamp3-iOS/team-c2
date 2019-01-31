@@ -19,7 +19,8 @@ class APIServiceTest: XCTestCase {
   var mockGeocoderManager = MockGeocoderManager()
   
   override func setUp() {
-    apiService = APIService(locationManager: mockLocationManager, geocoderManager: mockGeocoderManager)
+    apiService = APIService(locationManager: mockLocationManager,
+                            geocoderManager: mockGeocoderManager)
   }
   
   override func tearDown() {
@@ -27,8 +28,8 @@ class APIServiceTest: XCTestCase {
   }
   
   func test_fetchCurrentObservatory() {
-    var errorValue: Error? = nil
-    var observatoryValue: String? = nil
+    var errorValue: Error?
+    var observatoryValue: String? 
     apiService.fetchCurrentObservatory { observatory, error in
       observatoryValue = observatory
       errorValue = error

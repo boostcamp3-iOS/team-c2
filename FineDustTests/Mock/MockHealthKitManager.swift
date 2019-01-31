@@ -18,7 +18,6 @@ final class MockHealthKitManager: HealthKitServiceManagerType {
   var distance = 1000.0
   var stepCount = 2174.0
   
-  
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
@@ -49,4 +48,3 @@ final class MockHealthKitManager: HealthKitServiceManagerType {
     
   }
 }
-

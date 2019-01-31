@@ -60,9 +60,7 @@ extension API: APIFineDustType {
         completion(nil, error)
         return
       }
-      let xml = SWXMLHash.config { config in
-        config.detectParsingErrors = true
-      }
+      let xml = SWXMLHash.config { $0.detectParsingErrors = true }
       let parsed = xml.parse(data)
       do {
         // 미세먼지 응답 코드가 00인지 확인. 그렇지 않으면 응답 코드에 따른 에러를 발생시켜 넘겨줌.
@@ -118,9 +116,7 @@ extension API: APIFineDustType {
         completion(nil, error)
         return
       }
-      let xml = SWXMLHash.config { config in
-        config.detectParsingErrors = true
-      }
+      let xml = SWXMLHash.config { $0.detectParsingErrors = true }
       let parsed = xml.parse(data)
       do {
         let response: FineDustResponse = try parsed.value()
