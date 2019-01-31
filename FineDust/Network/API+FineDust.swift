@@ -72,13 +72,27 @@ extension API: APIFineDustType {
           return
         }
         completion(response, nil)
+      } catch let error as XMLDeserializationError {
+        switch error {
+        case let .implementationIsMissing(method):
+          completion(nil, XMLError.implementationIsMissing(method))
+        case let .nodeIsInvalid(node):
+          completion(nil, XMLError.nodeIsInvalid(node))
+        case .nodeHasNoValue:
+          completion(nil, XMLError.nodeHasNoValue)
+        case let .typeConversionFailed(type, node):
+          completion(nil, XMLError.typeConversionFailed(type, node))
+        case let .attributeDoesNotExist(node, attribute):
+          completion(nil, XMLError.attributeDoesNotExist(node, attribute))
+        case let .attributeDeserializationFailed(type, attribute):
+          completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
+        }
       } catch {
-        // XML 파싱에서 에러가 발생한 경우 그 에러를 넘겨줌.
-        completion(nil, error)
+        completion(nil, XMLError.default)
       }
     }
   }
- 
+  
   func fetchFineDustConcentration(term dataTerm: DataTerm,
                                   pageNumber pageNo: Int = 1,
                                   numberOfRows numOfRows: Int = 24,
@@ -116,9 +130,23 @@ extension API: APIFineDustType {
           return
         }
         completion(response, nil)
+      } catch let error as XMLDeserializationError {
+        switch error {
+        case let .implementationIsMissing(method):
+          completion(nil, XMLError.implementationIsMissing(method))
+        case let .nodeIsInvalid(node):
+          completion(nil, XMLError.nodeIsInvalid(node))
+        case .nodeHasNoValue:
+          completion(nil, XMLError.nodeHasNoValue)
+        case let .typeConversionFailed(type, node):
+          completion(nil, XMLError.typeConversionFailed(type, node))
+        case let .attributeDoesNotExist(node, attribute):
+          completion(nil, XMLError.attributeDoesNotExist(node, attribute))
+        case let .attributeDeserializationFailed(type, attribute):
+          completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
+        }
       } catch {
-        // XML 파싱에서 에러가 발생한 경우 그 에러를 넘겨줌.
-        completion(nil, error)
+        completion(nil, XMLError.default)
       }
     }
   }

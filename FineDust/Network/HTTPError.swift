@@ -16,7 +16,7 @@ enum HTTPError: Error {
 
 // MARK: - 에러 디스크립션
 
-extension HTTPError: LocalizedError {
+extension HTTPError {
   var localizedDescription: String {
     switch self {
     case .default:

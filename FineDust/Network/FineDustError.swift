@@ -56,7 +56,7 @@ enum FineDustError: Error {
 
 // MARK: - 에러 디스크립션
 
-extension FineDustError: LocalizedError {
+extension FineDustError {
   var localizedDescription: String {
     switch self {
     case .applicationError, .dbError, .httpError, .serviceTimeOut:

@@ -10,7 +10,9 @@ import Foundation
 
 protocol APIServiceType {
   func fetchCurrentObservatory(completion: @escaping (String?, Error?) -> Void)
-  func fetchFineDust(in date: Date, for days: Int, completion: @escaping ([Hour: Int]?, [Hour: Int]?, Error?) -> Void)
+  func fetchFineDust(in date: Date,
+                     for days: Int,
+                     completion: @escaping ([Hour: Int]?, [Hour: Int]?, Error?) -> Void)
 }
 
 final class APIService: APIServiceType {
@@ -35,8 +37,12 @@ final class APIService: APIServiceType {
     }
   }
   
-  func fetchFineDust(in date: Date, for days: Int, completion: @escaping ([Hour : Int]?, [Hour: Int]?, Error?) -> Void) {
-    API.shared.fetchFineDustConcentration(term: .daily, pageNumber: 1, numberOfRows: 1) { response, error in
+  func fetchFineDust(in date: Date,
+                     for days: Int,
+                     completion: @escaping ([Hour : Int]?, [Hour: Int]?, Error?) -> Void) {
+    API.shared.fetchFineDustConcentration(term: .daily,
+                                          pageNumber: 1,
+                                          numberOfRows: 1) { response, error in
       if let error = error {
         completion(nil, nil, error)
         return
