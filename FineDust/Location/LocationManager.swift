@@ -9,24 +9,15 @@
 import CoreLocation
 import Foundation
 
-protocol LocationManagerType: class {
+/// Location Manager
+final class LocationManager: NSObject {
   
-  var authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)? { get set }
+  // MARK: Singleton Object
   
-  var updateLocationHandler: ((CLLocation) -> Void)? { get set }
-  
-  var errorHandler: ((Error) -> Void)? { get set }
-  
-  func configure(_ configureHandler: @escaping (LocationManagerType) -> Void)
-  
-  func startUpdatingLocation()
-  
-  func requestAuthorization()
-}
-
-class LocationManager: NSObject {
-  
+  /// Location Manager의 싱글톤 객체.
   static let shared = LocationManager()
+  
+  // MARK: Private Property
   
   private var _authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)?
   
@@ -34,6 +25,7 @@ class LocationManager: NSObject {
   
   private var _errorHandler: ((Error) -> Void)?
   
+  /// Core Location의 Location Manager
   private let locationManager: CLLocationManager = {
     let manager = CLLocationManager()
     manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -41,15 +33,19 @@ class LocationManager: NSObject {
     return manager
   }()
   
+  // MARK: Private Initializer
+  
   private override init() {
     super.init()
     locationManager.delegate = self
   }
 }
 
+// MARK: - LocationManagerType 구현
+
 extension LocationManager: LocationManagerType {
   
-  var authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)? {
+  var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)? {
     get {
       return _authorizationChangeHandler
     }
@@ -58,7 +54,7 @@ extension LocationManager: LocationManagerType {
     }
   }
   
-  var updateLocationHandler: ((CLLocation) -> Void)? {
+  var locationUpdatingHandler: ((CLLocation) -> Void)? {
     get {
       return _updateLocationHandler
     }
@@ -87,13 +83,18 @@ extension LocationManager: LocationManagerType {
   func startUpdatingLocation() {
     locationManager.startUpdatingLocation()
   }
+  
+  func stopUpdatingLocation() {
+    locationManager.stopUpdatingLocation()
+  }
 }
+
+// MARK: - CLLocationManagerDelegate 구현
 
 extension LocationManager: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.first else { return }
-    updateLocationHandler?(location)
-    locationManager.stopUpdatingLocation()
+    locationUpdatingHandler?(location)
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -102,6 +103,6 @@ extension LocationManager: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager,
                        didChangeAuthorization status: CLAuthorizationStatus) {
-    authorizationChangeHandler?(status)
+    authorizationChangingHandler?(status)
   }
 }

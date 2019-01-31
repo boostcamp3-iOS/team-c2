@@ -18,7 +18,7 @@ class MockLocationManager: LocationManagerType {
   
   var authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)?
   
-  var updateLocationHandler: ((CLLocation) -> Void)?
+  var locationUpdateHandler: ((CLLocation) -> Void)?
   
   var errorHandler: ((Error) -> Void)?
   

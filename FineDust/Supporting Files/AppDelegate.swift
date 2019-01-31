@@ -15,15 +15,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  
-  private lazy var locationManager: CLLocationManager = {
-    let manager = CLLocationManager()
-    manager.desiredAccuracy = kCLLocationAccuracyBest
-    manager.distanceFilter = kCLDistanceFilterNone
-    manager.delegate = self
-    return manager    
-  }()
-  
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
     UINavigationBar.appearance().tintColor = UIColor.white
@@ -33,26 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
-    //locationManager.requestAlwaysAuthorization()
     HealthKitServiceManager.shared.requestAuthorization()
+    LocationManager.shared.configure(configureLocationManager(_:))
+    LocationManager.shared.requestAuthorization()
     fetchAPI()
-    // Location Manager Configuration
-    LocationManager.shared.configure { manager in
-      manager.authorizationChangeHandler = { status in
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-          LocationManager.shared.startUpdatingLocation()
-        default:
-          break
-        }
-      }
-      manager.updateLocationHandler = { location in
-        print(location)
-      }
-      manager.errorHandler = { error in
-        print(error.localizedDescription)
-      }
-    }
+    
     return true
   }
   
@@ -110,41 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-extension AppDelegate: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print("위치 갱신됨")
-    let locale = Locale.current
-    guard let location = locations.last else { return }
-    let coordinate = location.coordinate
-    let convertedCoordinate = GeoConverter().convert(
-      sourceType: .WGS_84,
-      destinationType: .TM,
-      geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
-    )
-    LocationInfo.shared.setCoordinate(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-    CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      // administrativeArea / country / locality / name
-      // 서울특별시 / 대한민국 / 강남구 / 강남대로 382
-    }
-    manager.stopUpdatingLocation()
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print("GPS Error: \(error.localizedDescription)")
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    print("권한 허가 상태 변경: \(status)")
-    if status == .authorizedWhenInUse || status == .authorizedAlways {
-      locationManager.startUpdatingLocation()
-    }
-  }
-}
-
 // MARK: - API 응답 초기화
 
 private extension AppDelegate {
@@ -186,6 +128,59 @@ private extension AppDelegate {
       }
       guard let response = response else { return }
       // 미세먼지 농도 정보 주물주물
+    }
+  }
+}
+
+// MARK: - Location Manager Configuration
+
+private extension AppDelegate {
+  
+  /// Location Manager 환경설정
+  func configureLocationManager(_ manager: LocationManagerType) {
+    manager.authorizationChangingHandler = { status in
+      switch status {
+      case .authorizedAlways, .authorizedWhenInUse:
+        manager.startUpdatingLocation()
+      case .denied:
+        print("거부됨")
+      case .notDetermined:
+        print("결정되지 않음")
+      case .restricted:
+        print("제한됨")
+      }
+    }
+    manager.locationUpdatingHandler = { location in
+      let coordinate = location.coordinate
+      let convertedCoordinate
+        = GeoConverter().convert(sourceType: .WGS_84,
+                                 destinationType: .TM,
+                                 geoPoint: GeographicPoint(x: coordinate.longitude,
+                                                           y: coordinate.latitude))
+      LocationInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
+      GeocoderManager.shared
+        .fetchAddress(location,
+                      preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in
+                        if let error = error {
+                          // 에러 처리
+                          print(error.localizedDescription)
+                          return
+                        }
+                        guard let placemark = placemarks?.first else { return }
+                        let administrativeArea = placemark.administrativeArea ?? ""
+                        let locality = placemark.locality ?? ""
+                        let name = placemark.name ?? ""
+                        let address = "\(administrativeArea) \(locality) \(name)"
+                        print(address)
+                        LocationInfo.shared.set(address)
+                        // administrativeArea / country / locality / name
+                        // 서울특별시 / 대한민국 / 강남구 / 강남대로 382
+      }
+      manager.stopUpdatingLocation()
+    }
+    manager.errorHandler = { error in
+      // 에러 처리
+      print("Core Location Error: ", error.localizedDescription)
     }
   }
 }
