@@ -1,5 +1,5 @@
 
-어떠한 기능에 대하여...
+## 어떠한 기능에 대하여...
 
 1. 프로토콜을 만들고 요구 메소드 및 프로퍼티 등 정의
 2. 클래스는 1에서 만들어진 프로토콜을 준수하고 빌드가 가능하게끔만 구현
@@ -9,6 +9,7 @@
 6. 테스트 실패를 먼저 확인
 7. 테스트가 성공하도록 2의 함수 구현 변경.
 
+---
 
 IntakesGenerator 테스트 클래스 만들어서 테스트하기
 
@@ -22,10 +23,6 @@ coverage
 
 ViewController를 Controller가 아닌 View로 바라보아, Controller에 위치한 비즈니스 로직을 Manager(Service / Helper)로 옮김
 ViewModel 개념으로 생각해도 괜찮음
-
-
-
-
 
 # heatlKit에서 나오는 에러 적어 놓겠습니다.
 
@@ -61,5 +58,3 @@ HKErrorAnotherWorkoutSessionStarted = 9
 
 // 세션이 동작하고 있는 중에 사용자가 앱을 종료함
 HKErrorUserExitedWorkoutSession = 10
-
-
