@@ -10,7 +10,6 @@
 		204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */; };
 		F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */; };
 		985C8431533A0B199E9938798F4B225C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235AB303D49A333807A979D37516363E /* API.swift */; };
-		A7273964C3672D95324EF6EDDA371523 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A3078776F6DEB0275F746D2229764 /* APIService.swift */; };
 		78866AEA604ED4993C2BC4BB957688BA /* APIServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */; };
 		DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */; };
 		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
@@ -94,7 +93,6 @@
 		90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
 		235AB303D49A333807A979D37516363E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		F68A3078776F6DEB0275F746D2229764 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		0FD40F7F78497BC9727F3388B3E56176 /* APIServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTest.swift; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -195,20 +193,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
-		8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mock;
-			sourceTree = "<group>";
-		};
 		010570675998A4B1D218BEBD271435D3 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +452,6 @@
 			children = (
 				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
 				235AB303D49A333807A979D37516363E /* API.swift */,
-				F68A3078776F6DEB0275F746D2229764 /* APIService.swift */,
 				EE964A647923AF379EC11C6CAC23D9FD /* FineDustError.swift */,
 				7ACCCDBDEA5D4370268FAA8A5B56841E /* FineDustStatusCode.swift */,
 				B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */,
@@ -730,7 +713,6 @@
 			files = (
 				F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */,
 				985C8431533A0B199E9938798F4B225C /* API.swift in Sources */,
-				A7273964C3672D95324EF6EDDA371523 /* APIService.swift in Sources */,
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
