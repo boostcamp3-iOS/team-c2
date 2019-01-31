@@ -11,8 +11,13 @@
 
 import Foundation
 import HealthKit
+import UIKit
 
 final class MockHealthKitManager: HealthKitServiceManagerType {
+
+  var distance = 1000.0
+  var stepCount = 2174.0
+  
   
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
@@ -29,10 +34,19 @@ final class MockHealthKitManager: HealthKitServiceManagerType {
   }
   
   func fetchDistanceValue(_ completion: @escaping (Double) -> Void) {
-    completion(1000.0)
+    completion(distance)
   }
   
   func fetchStepCountValue(_ completion: @escaping (Double) -> Void) {
-    completion(2174.0)
+    completion(stepCount)
+  }
+  
+  func openHealth(_ viewController: UIViewController) {
+    
+  }
+  
+  func fetchHealthKitValue(label: UILabel, quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+    
   }
 }
+

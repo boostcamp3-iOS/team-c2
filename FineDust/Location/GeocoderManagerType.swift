@@ -13,7 +13,5 @@ import Foundation
 protocol GeocoderManagerType: class {
   
   /// 위경도를 주소로 바꿈.
-  func fetchAddress(_ location: CLLocation,
-                    preferredLocale locale: Locale?,
-                    completionHandler: @escaping ([CLPlacemark]?, Error?) -> Void)
+  func fetchAddress(_ location: CLLocation, completion: @escaping (String?, Error?) -> Void)
 }

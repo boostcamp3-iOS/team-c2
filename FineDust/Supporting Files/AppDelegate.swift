@@ -158,25 +158,17 @@ private extension AppDelegate {
                                  geoPoint: GeographicPoint(x: coordinate.longitude,
                                                            y: coordinate.latitude))
       LocationInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-      GeocoderManager.shared
-        .fetchAddress(location,
-                      preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in
-                        if let error = error {
-                          // 에러 처리
-                          print(error.localizedDescription)
-                          return
-                        }
-                        guard let placemark = placemarks?.first else { return }
-                        let administrativeArea = placemark.administrativeArea ?? ""
-                        let locality = placemark.locality ?? ""
-                        let name = placemark.name ?? ""
-                        let address = "\(administrativeArea) \(locality) \(name)"
-                        print(address)
-                        LocationInfo.shared.set(address)
-                        // administrativeArea / country / locality / name
-                        // 서울특별시 / 대한민국 / 강남구 / 강남대로 382
+      GeocoderManager.shared.fetchAddress(location) { address, error in
+        defer {
+          manager.stopUpdatingLocation()
+        }
+        if let error = error {
+          // 에러 처리
+          print(error.localizedDescription)
+          return
+        }
+        LocationInfo.shared.set(address ?? "")
       }
-      manager.stopUpdatingLocation()
     }
     manager.errorHandler = { error in
       // 에러 처리
