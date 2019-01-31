@@ -31,7 +31,7 @@ struct FineDustResponse: XMLIndexerDeserializable {
   /// 미세먼지 정보 응답 관련 정보.
   struct Item: XMLIndexerDeserializable {
     
-    /// 관측 시간. `2019-01-29 16:00`
+    /// 관측 시간. `2019-01-29 16:00`. Format: `yyyy-MM-dd HH:mm`
     let dataTime: String
     
     /// 미세먼지 현재 농도.

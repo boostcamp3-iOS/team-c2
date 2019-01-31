@@ -50,10 +50,12 @@ extension API: APIFineDustType {
       .appending("&serviceKey=\(serviceKey)")
     guard let url = URL(string: urlString) else { return }
     Network.request(url, method: .get) { data, httpStatusCode, error in
+      // HTTP 통신의 상태 코드가 200인지 확인. 그렇지 않으면 HTTP 에러를 발생시켜 넘겨줌.
       guard httpStatusCode == .success else {
         completion(nil, httpStatusCode?.error)
         return
       }
+      // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
       guard let data = data else {
         completion(nil, error)
         return
@@ -63,6 +65,7 @@ extension API: APIFineDustType {
       }
       let parsed = xml.parse(data)
       do {
+        // 미세먼지 응답 코드가 00인지 확인. 그렇지 않으면 응답 코드에 따른 에러를 발생시켜 넘겨줌.
         let response: ObservatoryResponse = try parsed.value()
         guard response.statusCode == .success else {
           completion(nil, response.statusCode.error)
@@ -70,11 +73,12 @@ extension API: APIFineDustType {
         }
         completion(response, nil)
       } catch {
+        // XML 파싱에서 에러가 발생한 경우 그 에러를 넘겨줌.
         completion(nil, error)
       }
     }
   }
-  
+ 
   func fetchFineDustConcentration(term dataTerm: DataTerm,
                                   pageNumber pageNo: Int = 1,
                                   numberOfRows numOfRows: Int = 24,
@@ -90,10 +94,12 @@ extension API: APIFineDustType {
       .appending("&ver=1.1")
     guard let url = URL(string: urlString) else { return }
     Network.request(url, method: .get) { data, httpStatusCode, error in
+      // HTTP 통신의 상태 코드가 200인지 확인. 그렇지 않으면 HTTP 에러를 발생시켜 넘겨줌.
       guard httpStatusCode == .success else {
         completion(nil, httpStatusCode?.error)
         return
       }
+      // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
       guard let data = data else {
         completion(nil, error)
         return
@@ -104,12 +110,14 @@ extension API: APIFineDustType {
       let parsed = xml.parse(data)
       do {
         let response: FineDustResponse = try parsed.value()
+        // 미세먼지 응답 코드가 00인지 확인. 그렇지 않으면 응답 코드에 따른 에러를 발생시켜 넘겨줌.
         guard response.statusCode == .success else {
           completion(nil, response.statusCode.error)
           return
         }
         completion(response, nil)
       } catch {
+        // XML 파싱에서 에러가 발생한 경우 그 에러를 넘겨줌.
         completion(nil, error)
       }
     }
