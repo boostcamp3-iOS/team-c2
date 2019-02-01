@@ -6,7 +6,6 @@
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
-import CoreLocation
 import UIKit
 
 final class MainViewController: UIViewController {
