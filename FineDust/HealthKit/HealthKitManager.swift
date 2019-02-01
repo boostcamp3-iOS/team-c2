@@ -2,19 +2,23 @@
 //  HealthKitManager.swift
 //  FineDust
 //
-//  Created by zun on 01/02/2019.
+//  Created by 이재은 on 01/02/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
 import Foundation
 import HealthKit
 
-/// HealthKit Service를 구현하는 Singleton 클래스.
-final class HealthKitManager {
+/// HealthKit Service를 구현하는  클래스.
+final class HealthKitManager: HealthKitManagerType {
   
   // MARK: - Properties
   
-  static let shared = HealthKitManager()
+  let healthKitManager: HealthKitManagerType
+  
+  init(healthKitManager: HealthKitManagerType) {
+    self.healthKitManager = healthKitManager
+  }
   
   /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
@@ -27,10 +31,6 @@ final class HealthKitManager {
   
   /// Health App 권한을 나타내는 변수.
   private var isAuthorized = true
-  
-  // MARK: - Private Initializer
-  
-  private init() { }
   
   // MARK: - Method
   
@@ -47,7 +47,7 @@ final class HealthKitManager {
       isAuthorized = false
       return
     }
-    
+
     // 걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
     let healthKitTypes: Set = [stepCount, distance]
     
@@ -62,7 +62,8 @@ final class HealthKitManager {
       }
     }
   }
-  
+
+  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
@@ -111,33 +112,5 @@ final class HealthKitManager {
       }
       healthStore.execute(query)
     }
-  }
-}
-
-extension HealthKitManager: HealthKitManagerType {
-  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-    if startDate > endDate {
-      completion(nil)
-      return
-    }
-    
-    findHealthKitValue(startDate: startDate,
-                       endDate: endDate,
-                       quantityFor: .count(),
-                       quantityTypeIdentifier: .stepCount,
-                       completion: completion)
-  }
-  
-  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-    if startDate > endDate {
-      completion(nil)
-      return
-    }
-    
-    findHealthKitValue(startDate: startDate,
-                       endDate: endDate,
-                       quantityFor: .meter(),
-                       quantityTypeIdentifier: .distanceWalkingRunning,
-                       completion: completion)
   }
 }
