@@ -3,7 +3,6 @@ osx_image: xcode10.1
 xcode_workspace: FineDust.xcworkspace
 xcode_scheme:
   - FineDust
-  - FineDustTests
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
 notifications:
   slack:
