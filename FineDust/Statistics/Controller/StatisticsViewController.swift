@@ -64,9 +64,6 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: Property
   
-  private lazy var intakeGenerator: IntakeManagerType
-    = IntakeManager(healthKitManager: HealthKitServiceManager.shared, apiService: API.shared)
-  
   /// 7일간의 미세먼지 농도 값 모음.
   var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
   
@@ -86,12 +83,6 @@ final class StatisticsViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "미세먼지 분석".localized
     createSubviews()
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(didFetchFineDustConcentration(_:)),
-      name: .fetchFineDustConcentrationDidSuccess,
-      object: nil
-    )
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -105,18 +96,13 @@ final class StatisticsViewController: UIViewController {
     setConstraintsToSubviews()
     initializeValueGraphView()
     initializeRatioGraphView()
-    intakeGenerator.calculateIntakesInWeek(since: Date.today) { values in
-      print(values)
-    }
-    
-    LocationManager.shared.requestAuthorization()
   }
   
   // MARK: Method
   
   /// 미세먼지 농도 조회 통신이 완료된 노티피케이션을 받았을 경우 동작 정의.
   @objc private func didFetchFineDustConcentration(_ notification: Notification) {
-    if let response = notification.userInfo?["data"] as? FineDustResponse {
+    if let response = notification.userInfo?["data"] as? DustResponse {
       print(response)
     }
   }

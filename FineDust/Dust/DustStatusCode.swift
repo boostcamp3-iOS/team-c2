@@ -7,7 +7,7 @@
 //
 
 /// 미세먼지 API가 내려주는 Result Code.
-enum FineDustStatusCode: Int {
+enum DustStatusCode: Int {
   
   /// 성공.
   case success = 0
@@ -54,8 +54,7 @@ enum FineDustStatusCode: Int {
   /// 나머지.
   case `default`
   
-  /// 각 상태 코드에 대응하는 에러.
-  var error: FineDustError? {
+  var error: DustError? {
     switch self {
     case .applicationError:
       return .applicationError

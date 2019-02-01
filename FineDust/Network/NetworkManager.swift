@@ -9,14 +9,12 @@
 import Foundation
 
 /// 네트워크 요청 관련 클래스.
-final class Network {
-  /// HTTP 메소드를 정의한 열거형.
-  enum HTTPMethod: String {
-    /// GET 메소드.
-    case get = "GET"
-    /// POST 메소드.
-    case post = "POST"
-  }
+final class NetworkManager: NetworkManagerType {
+  
+  static let shared = NetworkManager()
+  
+  private init() { }
+  
   /// 네트워크 요청.
   ///
   /// - Parameters:
@@ -25,7 +23,7 @@ final class Network {
   ///   - parameters: HTTP Body에 들어갈 키/값 쌍. 기본값은 `[:]`.
   ///   - headers: HTTP Header에 들어갈 키/값 쌍. 기본값은 `[:]`.
   ///   - completion: 컴플리션 핸들러.
-  class func request(
+  func request(
     _ url: URL,
     method: HTTPMethod,
     parameters: [String: Any]? = nil,

@@ -68,7 +68,7 @@ struct ObservatoryResponse: XMLIndexerDeserializable {
   }
   
   /// 미세먼지 API 상태 코드.
-  var statusCode: FineDustStatusCode {
-    return FineDustStatusCode(rawValue: result.code) ?? .default
+  var statusCode: DustStatusCode {
+    return DustStatusCode(rawValue: result.code) ?? .default
   }
 }
