@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */; };
-		F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */; };
-		985C8431533A0B199E9938798F4B225C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235AB303D49A333807A979D37516363E /* API.swift */; };
 		DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */; };
 		79FA1BC2B28A5791551DB2A9C84D68F1 /* AppDelegateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4ED79C7D7F3FC4CEDF4240FB6E499A /* AppDelegateError.swift */; };
 		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
@@ -105,8 +103,6 @@
 
 /* Begin PBXFileReference section */
 		90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
-		235AB303D49A333807A979D37516363E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E4ED79C7D7F3FC4CEDF4240FB6E499A /* AppDelegateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateError.swift; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -242,7 +238,6 @@
 				6FEB335CB38ABE1473DC1DA5339DF46B /* Frameworks */,
 				25C29C13C7CFE05B67DC0260FEEC7B93 /* Pods */,
 				249684EBDBAFA57925A702F7F2706E9E /* Products */,
-				912C52520833D8990E79BE53BA837043 /* Recovered References */,
 				90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */,
 				FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */,
 			);
@@ -454,13 +449,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		912C52520833D8990E79BE53BA837043 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		98FC53B1C8D628A70A4BDB0A2693A42F /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,8 +482,6 @@
 		B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */,
-				235AB303D49A333807A979D37516363E /* API.swift */,
 				B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */,
 				A7D1CBCB05A905AE4917A0CEA861699F /* HTTPMethod.swift */,
 				809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */,
@@ -680,7 +666,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F8D8F292CDD84605C1FF0928172CC1C7 /* [CP] Check Pods Manifest.lock */ = {
+		59E6F24E5A0452919461496142A9094D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -695,12 +681,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FineDustTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FineDust-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		7228FB920B244F6FEED29E43DBB069BD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		898FFE11B3D86AC1B923ADEA7D14B67C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -724,24 +727,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FineDust/Pods-FineDust-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7228FB920B244F6FEED29E43DBB069BD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		59E6F24E5A0452919461496142A9094D /* [CP] Check Pods Manifest.lock */ = {
+		F8D8F292CDD84605C1FF0928172CC1C7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -756,7 +742,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FineDust-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FineDustTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -770,8 +756,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F25981E03638955CA115F83012353666 /* API+FineDust.swift in Sources */,
-				985C8431533A0B199E9938798F4B225C /* API.swift in Sources */,
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				79FA1BC2B28A5791551DB2A9C84D68F1 /* AppDelegateError.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
