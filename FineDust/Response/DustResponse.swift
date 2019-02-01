@@ -11,7 +11,7 @@ import Foundation
 import SWXMLHash
 
 /// 미세먼지 정보 응답 객체.
-struct FineDustResponse: XMLIndexerDeserializable {
+struct DustResponse: XMLIndexerDeserializable {
  
   /// 미세먼지 API 결과 객체.
   struct Result: XMLIndexerDeserializable {
@@ -72,8 +72,8 @@ struct FineDustResponse: XMLIndexerDeserializable {
   /// 관측소 관련 정보들.
   let items: [Item]
   
-  static func deserialize(_ node: XMLIndexer) throws -> FineDustResponse {
-    return try FineDustResponse(result: node["response"]["header"].value(),
+  static func deserialize(_ node: XMLIndexer) throws -> DustResponse {
+    return try DustResponse(result: node["response"]["header"].value(),
                                 totalCount: node["response"]["body"]["totalCount"].value(),
                                 items: node["response"]["body"]["items"]["item"].value())
   }
@@ -84,7 +84,7 @@ struct FineDustResponse: XMLIndexerDeserializable {
   }
   
   /// 미세먼지 API 상태 코드.
-  var statusCode: FineDustStatusCode {
-    return FineDustStatusCode(rawValue: result.code) ?? .default
+  var statusCode: DustStatusCode {
+    return DustStatusCode(rawValue: result.code) ?? .default
   }
 }

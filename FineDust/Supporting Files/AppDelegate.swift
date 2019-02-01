@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     HealthKitServiceManager.shared.requestAuthorization()
     LocationManager.shared.configure(configureLocationManager(_:))
     LocationManager.shared.requestAuthorization()
-    fetchAPI()
-    
     return true
   }
   
@@ -38,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) { }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
-    fetchAPI()
+    LocationManager.shared.startUpdatingLocation()
   }
   
   func applicationDidBecomeActive(_ application: UIApplication) { }
@@ -87,51 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-// MARK: - API 응답 초기화
-
-private extension AppDelegate {
-  /// API 호출하는 메소드
-  func fetchAPI() {
-    DispatchQueue.global(qos: .background).async { [weak self] in
-      guard let `self` = self else { return }
-      self.fetchObservatory(self.fetchFineDustConcentration)
-    }
-  }
-  
-  /// 관측소 정보를 가져오는 메소드
-  func fetchObservatory(_ completion: @escaping () -> Void) {
-    API.shared.fetchObservatory { response, error in
-      if let error = error {
-        NotificationCenter.default.post(
-          name: .fetchObservatoryDidError,
-          object: nil,
-          userInfo: ["error": error]
-        )
-        return
-      }
-      guard let response = response else { return }
-      FineDustInfo.shared.set(observatory: response.observatory ?? "")
-      completion()
-    }
-  }
-  
-  /// 미세먼지 농도 정보를 가져오는 메소드
-  func fetchFineDustConcentration() {
-    API.shared.fetchFineDustConcentration(term: .daily) { response, error in
-      if let error = error {
-        NotificationCenter.default.post(
-          name: .fetchFineDustConcentrationDidError,
-          object: nil,
-          userInfo: ["error": error]
-        )
-        return
-      }
-      guard let response = response else { return }
-      // 미세먼지 농도 정보 주물주물
-    }
-  }
-}
-
 // MARK: - Location Manager Configuration
 
 private extension AppDelegate {
@@ -142,6 +95,7 @@ private extension AppDelegate {
       switch status {
       case .authorizedAlways, .authorizedWhenInUse:
         manager.startUpdatingLocation()
+      // 에러 처리
       case .denied:
         print("거부됨")
       case .notDetermined:
@@ -151,28 +105,51 @@ private extension AppDelegate {
       }
     }
     manager.locationUpdatingHandler = { location in
+      // 위치 정보가 갱신되면
+      // 위경도를 변환하여 LocationInfo 싱글톤 객체에 저장하고
+      // GeocoderManager를 통해 주소를 얻어 LocationInfo 싱글톤 객체에 저장하고
+      // DustManager를 통해 관측소를 얻어 FineDustInfo 싱글톤 객체에 저장한다
+      // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
+      // 에러 발생시 해당하는 에러 정보를 포함하여 노티피케이션을 쏴준다
       let coordinate = location.coordinate
       let convertedCoordinate
         = GeoConverter().convert(sourceType: .WGS_84,
                                  destinationType: .TM,
                                  geoPoint: GeographicPoint(x: coordinate.longitude,
                                                            y: coordinate.latitude))
-      LocationInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
+      SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
       GeocoderManager.shared.fetchAddress(location) { address, error in
         defer {
           manager.stopUpdatingLocation()
         }
         if let error = error {
-          // 에러 처리
-          print(error.localizedDescription)
+          NotificationCenter.default
+            .post(name: .didFailUpdatingAllLocationTasks,
+                  object: nil,
+                  userInfo: ["error": AppDelegateError.geoencodingError(error)])
           return
         }
-        LocationInfo.shared.set(address ?? "")
+        SharedInfo.shared.set(address: address ?? "")
+        let dustManager = DustManager()
+        dustManager.fetchObservatory { response, error in
+          if let error = error {
+            NotificationCenter.default
+              .post(name: .didUpdateAllLocationTasks,
+                    object: nil,
+                    userInfo: ["error": AppDelegateError.networkingError(error)])
+            return
+          }
+          guard let observatory = response?.observatory else { return }
+          SharedInfo.shared.set(observatory: observatory)
+          NotificationCenter.default.post(name: .didUpdateAllLocationTasks, object: nil)
+        }
       }
     }
     manager.errorHandler = { error in
-      // 에러 처리
-      print("Core Location Error: ", error.localizedDescription)
+      NotificationCenter.default
+        .post(name: .didFailUpdatingAllLocationTasks,
+              object: nil,
+              userInfo: ["error": AppDelegateError.coreLocationError(error)])
     }
   }
 }

@@ -7,13 +7,20 @@
 //
 
 /// 미세먼지 API 응답에 의한 대기 등급 정의
-enum Grade: Int {
+enum DustGrade: Int {
   
+  /// 좋음
   case good = 1
   
+  /// 보통
   case normal
   
+  /// 나쁨
   case bad
   
+  /// 매우나쁨
   case veryBad
+  
+  /// 기타
+  case `default`
 }

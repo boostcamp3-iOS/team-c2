@@ -9,17 +9,10 @@
 import Foundation
 
 extension Notification.Name {
-  /// 관측소 조회 통신이 성공했을 때의 노티피케이션 이름.
-  static let fetchObservatoryDidSuccess = Notification.Name("fetchObservatoryDidSuccess")
+
+  /// 위치정보 갱신 작업 완료 노티피케이션
+  static let didUpdateAllLocationTasks = Notification.Name("didUpdateAllLocationTasks")
   
-  /// 미세먼지 농도 조회 통신이 성공했을 때의 노티피케이션 이름.
-  static let fetchFineDustConcentrationDidSuccess
-    = Notification.Name("fetchFineDustConcentrationDidSuccess")
-  
-  /// 관측소 조회 통신이 실패했을 때의 노티피케이션 이름.
-  static let fetchObservatoryDidError = Notification.Name("fetchObservatoryDidError")
-  
-  /// 미세먼지 농도 조회 통신이 실패했을 때의 노티피케이션 이름.
-  static let fetchFineDustConcentrationDidError
-    = Notification.Name("fetchFineDustConcentrationDidError")
+  /// 위치정보 갱신 작업중 실패 노티피케이션
+  static let didFailUpdatingAllLocationTasks = Notification.Name("didFailUpdatingAllLocationTasks")
 }
