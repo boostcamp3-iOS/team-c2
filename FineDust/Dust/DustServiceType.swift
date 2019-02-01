@@ -15,5 +15,5 @@ protocol DustServiceType: class {
   func fetchCurrentResponse(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void)
   
   /// 하루의 미세먼지 관련 정보를 fetch하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
-  func fetchTodayDust(_ completion: @escaping ([Hour: Int]?, [Hour: Int]? ,Error?) -> Void)
+  func fetchTodayDust(_ completion: @escaping ([Hour: Int]?, [Hour: Int]?, Error?) -> Void)
 }

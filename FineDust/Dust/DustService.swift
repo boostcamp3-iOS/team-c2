@@ -8,17 +8,25 @@
 
 import Foundation
 
+/// 미세먼지 서비스.
 final class DustService: DustServiceType {
 
+  // MARK: Property
+  
+  /// 데이트 포매터
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     return formatter
   }()
   
+  /// 네트워크 매니저 프로토콜을 준수하는 프로퍼티.
   let networkManager: NetworkManagerType
   
+  /// 미세먼지 매니저 프로토콜을 준수하는 프로퍼티.
   let dustManager: DustManagerType
+  
+  // MARK: Dependency Injection
   
   init(dustManager: DustManagerType, networkManager: NetworkManagerType = NetworkManager.shared) {
     self.networkManager = networkManager
@@ -27,8 +35,8 @@ final class DustService: DustServiceType {
   
   func fetchCurrentResponse(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
     dustManager.fetchDustInfo(term: .daily,
-                                           numberOfRows: 1,
-                                           pageNumber: 1) { [weak self] response, error in
+                              numberOfRows: 1,
+                              pageNumber: 1) { [weak self] response, error in
       if let error = error {
         completion(nil, error)
         return
@@ -49,9 +57,9 @@ final class DustService: DustServiceType {
     }
   }
   
-  func fetchTodayDust(_ completion: ([Hour : Int]?, [Hour: Int]?, Error?) -> Void) -> Void {
+  func fetchTodayDust(_ completion: ([Hour: Int]?, [Hour: Int]?, Error?) -> Void) {
     let fineDust: [Hour: Int] = [.zero: 1, .one: 2]
     let ultraFineDust: [Hour: Int] = [.zero: 1, .one: 2]
-  completion(fineDust, ultraFineDust, nil)
+    completion(fineDust, ultraFineDust, nil)
   }
 }

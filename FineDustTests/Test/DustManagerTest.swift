@@ -29,6 +29,7 @@ class DustManagerTest: XCTestCase {
     
   }
   
+  /// 관측소 데이터를 가져온 것을 테스트
   func test_fetchObservatory() {
     let json = """
     { "key": "keykey", "value": "valuevalue" }
@@ -45,6 +46,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 미세먼지 데이터를 가져온 것을 테스트
   func test_fetchDustInfo() {
     let json = """
     { "key": "keykey", "value": "valuevalue" }
@@ -61,6 +63,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 관측소 데이터가 없는 것을 테스트
   func test_fetchObservatory_noData() {
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
@@ -74,6 +77,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 미세먼지 데이터가 없는 것을 테스트
   func test_fetchDustInfo_noData() {
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
@@ -87,6 +91,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 관측소 호출 중 네트워킹 에러 발생을 테스트
   func test_fetchObservatory_httpError() {
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
@@ -102,6 +107,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 미세먼지 호출 중 네트워킹 에러 발생을 테스트
   func test_fetchDustInfo_httpError() {
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
@@ -117,6 +123,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 관측소 호출 중 응답 관련 에러 발생을 테스트
   func test_fetchObservatory_dustError() {
     let json = """
     { "key": "keykey", "value": "valuevalue" }
@@ -135,6 +142,7 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  /// 미세먼지 호출 중 응답 관련 에러 발생을 테스트
   func test_fetchDustInfo_dustError() {
     let json = """
     { "key": "keykey", "value": "valuevalue" }
@@ -153,3 +161,4 @@ class DustManagerTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
 }
+ㅊ
