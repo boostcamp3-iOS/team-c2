@@ -74,8 +74,8 @@ struct DustResponse: XMLIndexerDeserializable {
   
   static func deserialize(_ node: XMLIndexer) throws -> DustResponse {
     return try DustResponse(result: node["response"]["header"].value(),
-                                totalCount: node["response"]["body"]["totalCount"].value(),
-                                items: node["response"]["body"]["items"]["item"].value())
+                            totalCount: node["response"]["body"]["totalCount"].value(),
+                            items: node["response"]["body"]["items"]["item"].value())
   }
     
   /// 서브스크립트로 리스트의 값에 접근. `response[1]`

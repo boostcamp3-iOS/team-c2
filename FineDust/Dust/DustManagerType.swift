@@ -29,7 +29,7 @@ protocol DustManagerType: class {
   ///   - numOfRows: 한 페이지에 노출되는 정보량.
   ///   - completion: 컴플리션 핸들러.
   func fetchDustInfo(term dataTerm: DataTerm,
-                                  numberOfRows numOfRows: Int,
-                                  pageNumber pageNo: Int,
-                                  completion: @escaping (DustResponse?, Error?) -> Void)
+                     numberOfRows numOfRows: Int,
+                     pageNumber pageNo: Int,
+                     completion: @escaping (DustResponse?, Error?) -> Void)
 }
