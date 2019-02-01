@@ -82,4 +82,7 @@ enum Hour: Int {
   
   /// 23 ~ 24시
   case twentyThree
+  
+  /// 오류
+  case `default`
 }

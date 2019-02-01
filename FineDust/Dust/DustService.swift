@@ -14,9 +14,15 @@ final class DustService: DustServiceType {
   // MARK: Property
   
   /// 데이트 포매터
-  private lazy var dateFormatter: DateFormatter = {
+  private lazy var fullDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
+    return formatter
+  }()
+  
+  private lazy var monthDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH"
     return formatter
   }()
   
@@ -50,16 +56,34 @@ final class DustService: DustServiceType {
           currentUltraFineDustGrade: DustGrade(
             rawValue: currentResponse.ultraFineDustGrade
             ) ?? .default,
-          recentUpdatingTime: self.dateFormatter.date(from: currentResponse.dataTime) ?? Date()
+          recentUpdatingTime: self.fullDateFormatter.date(from: currentResponse.dataTime) ?? Date()
         )
         completion(currentDustInfo, nil)
       }
     }
   }
   
-  func fetchTodayDust(_ completion: ([Hour: Int]?, [Hour: Int]?, Error?) -> Void) {
-    let fineDust: [Hour: Int] = [.zero: 1, .one: 2]
-    let ultraFineDust: [Hour: Int] = [.zero: 1, .one: 2]
-    completion(fineDust, ultraFineDust, nil)
+  func fetchTodayDust(_ completion: @escaping ([Hour: Int]?, [Hour: Int]?, Error?) -> Void) {
+    dustManager.fetchDustInfo(term: .daily,
+                              numberOfRows: 24,
+                              pageNumber: 1) { [weak self] response, error in
+      var fineDust: [Hour: Int] = [:]
+      var ultraFineDust: [Hour: Int] = [:]
+      guard let self = self else { return }
+      if let error = error {
+        completion(nil, nil, error)
+        return
+      }
+      response?.items.forEach { item in
+        let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) ?? Date()
+        let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
+        let hourToInt = Int(hourToString) ?? 0
+        let hour = Hour(rawValue: hourToInt) ?? .default
+        fineDust[hour] = item.fineDustValue
+        ultraFineDust[hour] = item.ultraFineDustValue
+        if hour == .zero { return }
+      }
+      completion(fineDust, ultraFineDust, nil)
+    }
   }
 }

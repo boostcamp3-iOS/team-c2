@@ -41,3 +41,9 @@ extension XMLError {
     return "알 수 없는 오류가 발생하였습니다."
   }
 }
+
+extension XMLError: Equatable {
+  static func == (lhs: XMLError, rhs: XMLError) -> Bool {
+    return lhs.localizedDescription == rhs.localizedDescription
+  }
+}

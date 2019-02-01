@@ -160,5 +160,40 @@ class DustManagerTest: XCTestCase {
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
+  
+  func test_fetchObservatory_xmlError1() {
+    let json = """
+    { "key": "keykey", "value": "valuevalue" }
+    """
+    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.error = XMLError.implementationIsMissing("asdf")
+    let expect = expectation(description: "test")
+    dustManager.fetchObservatory { response, error in
+      XCTAssertNil(response)
+      if let err = error as? XMLError {
+        XCTAssertEqual(err, XMLError.implementationIsMissing("asdf"))
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_fetchObservatory_xmlError2() {
+    let json = """
+    { "key": "keykey", "value": "valuevalue" }
+    """
+    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.error = XMLError.nodeHasNoValue
+    let expect = expectation(description: "test")
+    dustManager.fetchObservatory { response, error in
+      XCTAssertNil(response)
+      if let err = error as? XMLError {
+        XCTAssertEqual(err, XMLError.nodeHasNoValue)
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
 }
-ㅊ

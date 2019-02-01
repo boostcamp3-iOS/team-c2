@@ -36,9 +36,9 @@ struct DustManagerInfo {
     totalCount: 1,
     items: [DustResponse.Item(dataTime: "2018-01-23 17:00",
                               fineDustValue: 1,
-                              fineDustValue24: 2,
+                              fineDustValue24: 1,
                               fineDustGrade: 1,
-                              ultraFineDustValue: 2,
+                              ultraFineDustValue: 1,
                               ultraFineDustValue24: 1,
-                              ultraFineDustGrade: 2)])
+                              ultraFineDustGrade: 1)])
 }
