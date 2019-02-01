@@ -11,12 +11,12 @@ import Foundation
 protocol APIType { }
 
 /// API 정의.
-final class API {
+final class DustManager {
   
   // MARK: Singleton Object
   
   /// API의 싱글톤 객체
-  static let shared = API()
+  static let shared = DustManager()
   
   // MARK: Private Initializer
   
