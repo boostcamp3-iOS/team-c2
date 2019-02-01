@@ -18,14 +18,13 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  weak var healthKitManagerType: HealthKitManagerType?
+  var healthKitService: HealthKitServiceType?
   
   // MARK: - Life Cycle
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "내먼지".localized
-    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -41,29 +40,24 @@ final class MainViewController: UIViewController {
 // MARK: - Functions
 
 extension MainViewController {
-  private func setup() {
-    healthKitManagerType = HealthKitManager.shared
-  }
   
-  private func updateViewController() {
+  func updateViewController() {
     var value: Double?
-    healthKitManagerType?.fetchStepCount(startDate: Date.start(),
-                                         endDate: Date()
-    ) {
-       value = $0
-    }
-    
-    healthKitManagerType?.fetchDistance(startDate: Date.start(),
-                                        endDate: Date()
-    ) {
+    healthKitService?.fetchStepCount(startDate: Date.start(), endDate: Date()) {
       value = $0
+      if let value = value {
+        DispatchQueue.main.async {
+          self.stepCountLabel.text = "\(value)"
+        }
+      }
     }
     
-//    healthKitServiceType?.openHealth(self)
-//    healthKitServiceType?.updateHealthKitLabel(label: stepCountLabel,
-//                                               quantityTypeIdentifier: .stepCount)
-//    healthKitServiceType?.updateHealthKitLabel(
-//      label: distanceLabel,
-//      quantityTypeIdentifier: .distanceWalkingRunning)
+    healthKitService?.fetchDistance(startDate: Date.start(), endDate: Date()) {       value = $0
+      if let value = value {
+        DispatchQueue.main.async {
+          self.stepCountLabel.text = "\(value)"
+        }
+      }
+    }
   }
 }
