@@ -116,24 +116,19 @@ private extension RatioGraphView {
   
   /// 부분 비율 뷰 그리기.
   func drawPortionSectionView() {
-    let path = UIBezierPath()
-    path.move(to: entireSectionView.center)
-    path.addLine(to: CGPoint(
-      x: entireSectionView.frame.width / 2,
-      y: entireSectionView.frame.height
-    ))
-    path.addArc(
-      withCenter: entireSectionView.center,
-      radius: backgroundViewHeight,
-      startAngle: -.pi / 2,
-      endAngle: endAngle,
-      clockwise: true
-    )
-    path.close()
+    let startPath = arcPath(endAngle: -.pi / 2)
+    let endPath = arcPath(endAngle: endAngle)
     let shapeLayer = CAShapeLayer()
-    shapeLayer.path = path.cgPath
+    shapeLayer.path = startPath.cgPath
     shapeLayer.fillColor = Asset.graphToday.color.cgColor
     shapeLayer.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 0, blur: 8, spread: 0)
+    let animation = CABasicAnimation(keyPath: "path")
+    animation.toValue = endPath.cgPath
+    animation.duration = Double(ratio * 5)
+    animation.timingFunction = CAMediaTimingFunction(name: .linear)
+    animation.fillMode = .forwards
+    animation.isRemovedOnCompletion = false
+    shapeLayer.add(animation, forKey: animation.keyPath)
     entireSectionView.layer.addSublayer(shapeLayer)
   }
   
@@ -162,12 +157,42 @@ private extension RatioGraphView {
   func setPercentLabel() {
     percentLabel = UILabel()
     percentLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-    percentLabel.text = "\(Int(ratio * 100))%"
     percentLabel.translatesAutoresizingMaskIntoConstraints = false
     centerHoleView.addSubview(percentLabel)
     NSLayoutConstraint.activate([
       percentLabel.anchor.centerX.equal(to: centerHoleView.anchor.centerX),
       percentLabel.anchor.centerY.equal(to: centerHoleView.anchor.centerY)
       ])
+    var startValue: Int = 0
+    let endValue = Int(ratio * 100)
+    let interval = Double(ratio) / 10
+    let timer = Timer.scheduledTimer(withTimeInterval: interval,
+                                     repeats: true) { [weak self] timer in
+      startValue += 1
+      self?.percentLabel.text = "\(startValue)%"
+      if startValue == endValue {
+        timer.invalidate()
+      }
+    }
+    timer.fire()
+  }
+}
+
+// MARK: - arc 그리기
+
+private extension RatioGraphView {
+  func arcPath(endAngle: CGFloat) -> UIBezierPath {
+    let path = UIBezierPath()
+    path.move(to: entireSectionView.center)
+    path.addLine(
+      to: CGPoint(x: entireSectionView.frame.width / 2, y: entireSectionView.frame.height)
+    )
+    path.addArc(withCenter: entireSectionView.center,
+                radius: backgroundViewHeight,
+                startAngle: -.pi / 2,
+                endAngle: endAngle,
+                clockwise: true)
+    path.close()
+    return path
   }
 }

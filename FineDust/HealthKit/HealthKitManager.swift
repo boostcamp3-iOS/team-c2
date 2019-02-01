@@ -1,20 +1,20 @@
 //
-//  HealthKitServiceManager.swift
+//  HealthKitManager.swift
 //  FineDust
 //
-//  Created by zun on 29/01/2019.
+//  Created by zun on 01/02/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import HealthKit
 
-/// HealthKit Service를 총괄하는 Singleton 클래스.
-final class HealthKitServiceManager {
+/// HealthKit Service를 구현하는 Singleton 클래스.
+final class HealthKitManager {
   
   // MARK: - Properties
   
-  static let shared = HealthKitServiceManager()
+  static let shared = HealthKitManager()
   
   /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
@@ -53,7 +53,8 @@ final class HealthKitServiceManager {
     
     // 권한요청.
     healthStore.requestAuthorization(toShare: healthKitTypes,
-                                     read: healthKitTypes) { _, error in
+                                     read: healthKitTypes
+    ) { _, error in
       if let error = error {
         print("request authorization error : \(error.localizedDescription)")
       } else {
@@ -61,85 +62,7 @@ final class HealthKitServiceManager {
       }
     }
   }
-}
-
-// MARK: - Protocol Implement
-
-extension HealthKitServiceManager: HealthKitServiceManagerType {
-  /// 권한이 없을경우 건강 App으로 이동시키는 메소드.
-  func openHealth(_ viewController: UIViewController) {
-    if !isAuthorized {
-      // 앱 실행중 알람을 한번만 띄우게 하는 코드. isAuthorized는 이후로 false로 다시는 변경되지 않음.
-      isAuthorized = true
-      UIAlertController
-        .alert(title: "건강 App에 대한 권한이 없습니다.",
-               message: "App을 이용하려면 건강 App에 대한 권한이 필요합니다. 건강 -> 3번째 탭 데이터 소스 -> FineDust -> 권한허용을 해주세요")
-        .action(title: "건강 App",
-                style: .default) { _, _ in
-          UIApplication.shared.open(URL(string: "x-apple-health://")!)
-        }
-        .action(title: "취소", style: .cancel, handler: nil)
-        .present(to: viewController)
-    }
-  }
   
-  /// HealthKit App의 특정 자료를 가져와 Label을 업데이트하는 UI 업데이트 메소드.
-  func updateHealthKitLabel(label: UILabel,
-                            quantityTypeIdentifier: HKQuantityTypeIdentifier) {
-    var text: String?
-    
-    fetchHealthKitValue(quantityTypeIdentifier: quantityTypeIdentifier) {
-      text = $0
-    }
-    
-    DispatchQueue.main.async {
-      if let text = text {
-        label.text = text
-      } else {
-        label.text = "0"
-      }
-      
-    }
-  }
-  
-  /// label을 업데이트 시킬 적절한 string 값을 찾기 위해 초기 설정해주는 메소드.
-  func fetchHealthKitValue(quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                           completion: @escaping (String) -> Void) {
-    /// 걸음 혹은 걸은거리에 따른 적절한 String 리턴.
-    var text: String = "" {
-      didSet {
-        completion(text)
-      }
-    }
-    
-    /// 걸음이냐 걸은 거리냐에 따른 단위를 설정하는 프로퍼티.
-    let quantityFor: HKUnit
-    
-    /// findHealthKitValue에 보내줄 completion 프로퍼티.
-    let sentCompletion: (Double) -> Void
-    
-    // Indentifier의 값이 걸음 혹은 걸은 거리이냐에 따라 변수들을 설정.
-    if quantityTypeIdentifier == .stepCount {
-      quantityFor = HKUnit.count()
-      sentCompletion = {
-        text = "\(Int($0)) 걸음"
-      }
-    } else {
-      quantityFor = HKUnit.meter()
-      sentCompletion = {
-        text = String(format: "%.1f", $0.kilometer) + "km"
-      }
-    }
-    
-    // 위에서 설정한 값을 토대로 HealthKit App에서 값을 찾음.
-    findHealthKitValue(startDate: Date.start(),
-                       endDate: Date(),
-                       quantityFor: quantityFor,
-                       quantityTypeIdentifier: quantityTypeIdentifier,
-                       completion: sentCompletion)
-  }
-  
-  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
@@ -188,5 +111,33 @@ extension HealthKitServiceManager: HealthKitServiceManagerType {
       }
       healthStore.execute(query)
     }
+  }
+}
+
+extension HealthKitManager: HealthKitManagerType {
+  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+    if startDate > endDate {
+      completion(nil)
+      return
+    }
+    
+    findHealthKitValue(startDate: startDate,
+                       endDate: endDate,
+                       quantityFor: .count(),
+                       quantityTypeIdentifier: .stepCount,
+                       completion: completion)
+  }
+  
+  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+    if startDate > endDate {
+      completion(nil)
+      return
+    }
+    
+    findHealthKitValue(startDate: startDate,
+                       endDate: endDate,
+                       quantityFor: .meter(),
+                       quantityTypeIdentifier: .distanceWalkingRunning,
+                       completion: completion)
   }
 }
