@@ -2,7 +2,7 @@
 //  HealthKitManager.swift
 //  FineDust
 //
-//  Created by 이재은 on 01/02/2019.
+//  Created by zun on 01/02/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
