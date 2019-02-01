@@ -15,6 +15,7 @@ enum HTTPStatusCode: Int {
   /// 나머지.
   case `default`
   
+  /// 각 상태 코드에 대응하는 에러.
   var error: HTTPError? {
     switch self {
     case .default:

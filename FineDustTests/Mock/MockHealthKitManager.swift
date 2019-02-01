@@ -68,4 +68,3 @@ final class MockHealthKitManager: HealthKitManagerType {
 //
 //  }
 }
-
