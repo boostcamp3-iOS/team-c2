@@ -9,5 +9,6 @@
 import Foundation
 
 protocol HealthKitManagerType: class {
-  
+  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) 
+  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void)
 }
