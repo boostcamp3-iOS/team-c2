@@ -12,6 +12,27 @@ import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
   
+  var input: Double?
+  
+  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+    if startDate > endDate {
+      completion(nil)
+      return
+    }
+    
+    completion(input)
+  }
+  
+  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+    if startDate > endDate {
+      completion(nil)
+      return
+    }
+    
+    completion(input)
+  }
+  
+  
 
 //  var distance = 1000.0
 //  var stepCount = 2174.0

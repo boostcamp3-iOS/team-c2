@@ -18,7 +18,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  weak var healthKitServiceType: HealthKitServiceManagerType?
+  weak var healthKitServiceType: HealthKitManagerType?
   
   // MARK: - Life Cycle
 
@@ -42,15 +42,15 @@ final class MainViewController: UIViewController {
 
 extension MainViewController {
   private func setup() {
-    healthKitServiceType = HealthKitServiceManager.shared
+    healthKitServiceType = HealthKitManager.shared
   }
   
   private func updateViewController() {
-    healthKitServiceType?.openHealth(self)
-    healthKitServiceType?.updateHealthKitLabel(label: stepCountLabel,
-                                               quantityTypeIdentifier: .stepCount)
-    healthKitServiceType?.updateHealthKitLabel(
-      label: distanceLabel,
-      quantityTypeIdentifier: .distanceWalkingRunning)
+//    healthKitServiceType?.openHealth(self)
+//    healthKitServiceType?.updateHealthKitLabel(label: stepCountLabel,
+//                                               quantityTypeIdentifier: .stepCount)
+//    healthKitServiceType?.updateHealthKitLabel(
+//      label: distanceLabel,
+//      quantityTypeIdentifier: .distanceWalkingRunning)
   }
 }

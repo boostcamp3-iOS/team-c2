@@ -10,6 +10,9 @@
 import CoreLocation
 
 class MockGeocoderManager: GeocoderManagerType {
+  func fetchAddress(_ location: CLLocation, completion: @escaping (String?, Error?) -> Void) {
+    
+  }
   
   var error: Error?
   

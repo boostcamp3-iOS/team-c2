@@ -27,10 +27,11 @@
 		3A89DBC74C55C2198ADB55DFFC957511 /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78DE7E5C7B780CC106B8E11859B67759 /* ValueGraphView.xib */; };
 		3D136B981C1EC99B4D6488FCAC846E16 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F8F9F0BB8AECA24E182EBED21006A1 /* StatisticsViewController.swift */; };
 		41057EA496BADCA9B72504DFC9FFA23B /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */; };
-		4249381F7854DCC8BF8689F51497172D /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A58F1A544D86F9E88F29211D330FD6 /* MockLocationManager.swift */; };
 		4314DED2BDF2BE3ED8B846345E9C58B5 /* Pods_FineDustTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3D10262DF1641D3E3C56E6B707FAD0 /* Pods_FineDustTests.framework */; };
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
 		4CE4896570D07C30AB896D1FD8149D1E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */; };
+		4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */; };
+		4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */; };
 		519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */; };
 		5BF160CCADAB359002B99C3FC6EEB91A /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */; };
 		5C0B072736FC009353CB278EC1168C4F /* Pods_FineDust.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C03519E3F71E91D0157CA50457DC659 /* Pods_FineDust.framework */; };
@@ -47,6 +48,7 @@
 		7B28D176B8026581EE3B56141483C34D /* HealthKitManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */; };
 		8903960C73B090519A51E81AD39FAFE5 /* HealthKitServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */; };
 		8A09362D5049DC7AD11AC95D4EB56C31 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */; };
+		8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */; };
 		902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */; };
 		959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */; };
 		985C8431533A0B199E9938798F4B225C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235AB303D49A333807A979D37516363E /* API.swift */; };
@@ -57,14 +59,11 @@
 		A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D764E2C19ACD93F21236E2C52D091FFB /* LaunchScreen.storyboard */; };
 		A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */; };
 		AF73755646D309F02637E4EE66CD23C5 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */; };
-		AFB097C52204223A00A1AD1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB097C22204223A00A1AD1E /* MockHealthKitManager.swift */; };
-		AFB097C62204223A00A1AD1E /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB097C32204223A00A1AD1E /* MockLocationManager.swift */; };
-		AFB097C72204223A00A1AD1E /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB097C42204223A00A1AD1E /* MockGeocoderManager.swift */; };
+		AFB097C92204253500A1AD1E /* HealthKitManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB097C82204253500A1AD1E /* HealthKitManagerTests.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
 		B500997103DB43D02E812611C3454782 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */; };
 		B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */; };
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
-		BC45E90EE7C6D4092ED99D5D802A347D /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB060F21DA92A23C8F476EEF16AE7C4 /* MockGeocoderManager.swift */; };
 		BD5CD8B8D765B77C2BE845AAFB2C42B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B738736AAAF1EF22743A4F13EB1C98 /* Network.swift */; };
 		BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9E8FB49A9FF5D6049F1AA935B3EAD /* String+.swift */; };
 		C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */; };
@@ -97,6 +96,7 @@
 		067E449E7BAAA91C4EE4A2715980EAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B6F72AA93F4A4B608C122C21773E1F5 /* LocationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManagerType.swift; sourceTree = "<group>"; };
+		0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		10F8F9F0BB8AECA24E182EBED21006A1 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		149E1E1DBA2DF694E0AE33D493CDE8F9 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -116,7 +116,6 @@
 		499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		5C1A5681695EF53FED3A78954492680E /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
-		5DB060F21DA92A23C8F476EEF16AE7C4 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		5DE7F648E3F1AFEF8F2E912807BD956C /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		5EFB08369F0FBF8B7A03279D22066EF7 /* Pods-FineDustTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDustTests.release.xcconfig"; path = "Target Support Files/Pods-FineDustTests/Pods-FineDustTests.release.xcconfig"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
@@ -149,16 +148,14 @@
 		AC7653C776E1A3E19A919FF1CA3E8B01 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCollectionViewCell.swift; path = FineDust/Feedback/View/FeedbackCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservatoryResponse.swift; sourceTree = "<group>"; };
-		AFB097C22204223A00A1AD1E /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
-		AFB097C32204223A00A1AD1E /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
-		AFB097C42204223A00A1AD1E /* MockGeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
+		AFB097C82204253500A1AD1E /* HealthKitManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManagerTests.swift; sourceTree = "<group>"; };
 		B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerType.swift; sourceTree = "<group>"; };
 		B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManager.swift; sourceTree = "<group>"; };
 		BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
-		C0A58F1A544D86F9E88F29211D330FD6 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		C0BD575BEB17D9D2493F29578956C779 /* NSLayoutDimension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutDimension+.swift"; sourceTree = "<group>"; };
+		C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		CC3D10262DF1641D3E3C56E6B707FAD0 /* Pods_FineDustTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FineDustTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13602279EADEC6C9B2D17E00176B298 /* API+FineDust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+FineDust.swift"; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +169,7 @@
 		DFACF8D7E983BEE2187B34C71705DB6B /* UnitTestREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = UnitTestREADME.md; sourceTree = "<group>"; };
 		E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
+		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
 		EE964A647923AF379EC11C6CAC23D9FD /* FineDustError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineDustError.swift; sourceTree = "<group>"; };
 		F1ACC2DAD57E26225CB1C2E0570AE3A0 /* Pods-FineDust.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineDust.debug.xcconfig"; path = "Target Support Files/Pods-FineDust/Pods-FineDust.debug.xcconfig"; sourceTree = "<group>"; };
 		F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
@@ -237,7 +235,7 @@
 		0E84DD7C0F0B4677567895878824A5A4 /* FineDustTests */ = {
 			isa = PBXGroup;
 			children = (
-				AFB097C12204223A00A1AD1E /* Mock */,
+				8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */,
 				449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */,
 				254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */,
 			);
@@ -319,6 +317,7 @@
 			children = (
 				A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */,
 				DFACF8D7E983BEE2187B34C71705DB6B /* UnitTestREADME.md */,
+				AFB097C82204253500A1AD1E /* HealthKitManagerTests.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -408,6 +407,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */,
+				EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */,
+				C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		8C212B1139E96B3BA74BF5B54AB9EF23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,8 +429,6 @@
 		912C52520833D8990E79BE53BA837043 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				5DB060F21DA92A23C8F476EEF16AE7C4 /* MockGeocoderManager.swift */,
-				C0A58F1A544D86F9E88F29211D330FD6 /* MockLocationManager.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -454,16 +461,6 @@
 				149E1E1DBA2DF694E0AE33D493CDE8F9 /* Storyboard.swift */,
 			);
 			path = SwiftGen;
-			sourceTree = "<group>";
-		};
-		AFB097C12204223A00A1AD1E /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				AFB097C22204223A00A1AD1E /* MockHealthKitManager.swift */,
-				AFB097C32204223A00A1AD1E /* MockLocationManager.swift */,
-				AFB097C42204223A00A1AD1E /* MockGeocoderManager.swift */,
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 		B2ACC9D9D6B0CB2A2D45D027C9177A26 /* Network */ = {
@@ -790,11 +787,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC45E90EE7C6D4092ED99D5D802A347D /* MockGeocoderManager.swift in Sources */,
-				4249381F7854DCC8BF8689F51497172D /* MockLocationManager.swift in Sources */,
-				AFB097C62204223A00A1AD1E /* MockLocationManager.swift in Sources */,
-				AFB097C72204223A00A1AD1E /* MockGeocoderManager.swift in Sources */,
-				AFB097C52204223A00A1AD1E /* MockHealthKitManager.swift in Sources */,
+				4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */,
+				8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */,
+				AFB097C92204253500A1AD1E /* HealthKitManagerTests.swift in Sources */,
+				4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
