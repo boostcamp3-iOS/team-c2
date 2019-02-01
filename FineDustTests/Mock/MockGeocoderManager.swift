@@ -15,7 +15,8 @@ class MockGeocoderManager: GeocoderManagerType {
   
   var placemarks: [CLPlacemark]?
   
-  func fetchAddress(_ location: CLLocation, preferredLocale locale: Locale?, completionHandler: @escaping ([CLPlacemark]?, Error?) -> Void) {
+  func fetchAddress(_ location: CLLocation, preferredLocale locale: Locale?,
+                    completionHandler: @escaping ([CLPlacemark]?, Error?) -> Void) {
     completionHandler(placemarks, error)
   }
 }
