@@ -47,9 +47,10 @@ extension MainViewController {
   
   private func updateViewController() {
     healthKitServiceType?.openHealth(self)
-    healthKitServiceType?.fetchHealthKitValue(label: stepCountLabel,
-                                              quantityTypeIdentifier: .stepCount)
-    healthKitServiceType?.fetchHealthKitValue(label: distanceLabel,
-                                              quantityTypeIdentifier: .distanceWalkingRunning)
+    healthKitServiceType?.updateHealthKitLabel(label: stepCountLabel,
+                                               quantityTypeIdentifier: .stepCount)
+    healthKitServiceType?.updateHealthKitLabel(
+      label: distanceLabel,
+      quantityTypeIdentifier: .distanceWalkingRunning)
   }
 }
