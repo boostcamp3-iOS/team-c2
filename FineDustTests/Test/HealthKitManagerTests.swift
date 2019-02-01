@@ -34,6 +34,19 @@ class HealthKitManagerTests: XCTestCase {
     
   }
   
+  func testFetchStepCountDate() {
+    var value: Double?
+    let expt = expectation(description: "Waiting...")
+    mockHealthKitManager.input = 1
+    mockHealthKitManager.fetchStepCount(startDate: Date(), endDate: Date.start()) {
+      value = $0
+      XCTAssertEqual(value, nil)
+      expt.fulfill()
+    }
+    
+    waitForExpectations(timeout: 5.0, handler: nil)
+  }
+  
   func testExample() {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
