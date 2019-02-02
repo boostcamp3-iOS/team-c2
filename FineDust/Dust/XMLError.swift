@@ -10,17 +10,29 @@ import Foundation
 
 import SWXMLHash
 
+/// XML 파싱 에러 정의.
 enum XMLError: Error {
+  
   case implementationIsMissing(String)
+  
   case nodeIsInvalid(XMLIndexer)
+  
   case nodeHasNoValue
+  
   case typeConversionFailed(String, XMLElement)
+  
   case attributeDoesNotExist(XMLElement, String)
+  
   case attributeDeserializationFailed(String, XMLAttribute)
+  
   case `default`
 }
 
+// MARK: - XMLError Extension
+
 extension XMLError {
+  
+  /// 에러 디스크립션.
   var localizedDescription: String {
     switch self {
     case let .implementationIsMissing(method):
@@ -42,7 +54,11 @@ extension XMLError {
   }
 }
 
+// MARK: - Equatable 준수
+
 extension XMLError: Equatable {
+  
+  /// 동등 비교 연산자 구현.
   static func == (lhs: XMLError, rhs: XMLError) -> Bool {
     return lhs.localizedDescription == rhs.localizedDescription
   }

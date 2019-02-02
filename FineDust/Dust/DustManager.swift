@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// Dust Manager.
 final class DustManager: DustManagerType {
   
@@ -43,6 +41,7 @@ final class DustManager: DustManagerType {
                            method: .get,
                            parameters: nil,
                            headers: [:]) { data, httpStatusCode, error in
+      // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
       guard httpStatusCode == .success else {
         completion(nil, httpStatusCode?.error)
         return
@@ -52,33 +51,10 @@ final class DustManager: DustManagerType {
         completion(nil, error)
         return
       }
-      let xml = SWXMLHash.config { $0.detectParsingErrors = true }
-      let parsed = xml.parse(data)
-      do {
-        // 미세먼지 응답 코드가 00인지 확인. 그렇지 않으면 응답 코드에 따른 에러를 발생시켜 넘겨줌.
-        let response: ObservatoryResponse = try parsed.value()
-        guard response.statusCode == .success else {
-          completion(nil, response.statusCode.error)
-          return
-        }
-        completion(response, nil)
-      } catch let error as XMLDeserializationError {
-        switch error {
-        case let .implementationIsMissing(method):
-          completion(nil, XMLError.implementationIsMissing(method))
-        case let .nodeIsInvalid(node):
-          completion(nil, XMLError.nodeIsInvalid(node))
-        case .nodeHasNoValue:
-          completion(nil, XMLError.nodeHasNoValue)
-        case let .typeConversionFailed(type, node):
-          completion(nil, XMLError.typeConversionFailed(type, node))
-        case let .attributeDoesNotExist(node, attribute):
-          completion(nil, XMLError.attributeDoesNotExist(node, attribute))
-        case let .attributeDeserializationFailed(type, attribute):
-          completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
-        }
-      } catch {
-        completion(nil, XMLError.default)
+      // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
+      XMLManager<ObservatoryResponse>().parse(data) { parsingType, error in
+        let response = parsingType as? ObservatoryResponse
+        completion(response, error)
       }
     }
   }
@@ -101,6 +77,7 @@ final class DustManager: DustManagerType {
                            method: .get,
                            parameters: nil,
                            headers: [:]) { data, httpStatusCode, error in
+      // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
       guard httpStatusCode == .success else {
         completion(nil, httpStatusCode?.error)
         return
@@ -110,32 +87,10 @@ final class DustManager: DustManagerType {
         completion(nil, error)
         return
       }
-      let xml = SWXMLHash.config { $0.detectParsingErrors = true }
-      let parsed = xml.parse(data)
-      do {
-        let response: DustResponse = try parsed.value()
-        guard response.statusCode == .success else {
-          completion(nil, response.statusCode.error)
-          return
-        }
-        completion(response, nil)
-      } catch let error as XMLDeserializationError {
-        switch error {
-        case let .implementationIsMissing(method):
-          completion(nil, XMLError.implementationIsMissing(method))
-        case let .nodeIsInvalid(node):
-          completion(nil, XMLError.nodeIsInvalid(node))
-        case .nodeHasNoValue:
-          completion(nil, XMLError.nodeHasNoValue)
-        case let .typeConversionFailed(type, node):
-          completion(nil, XMLError.typeConversionFailed(type, node))
-        case let .attributeDoesNotExist(node, attribute):
-          completion(nil, XMLError.attributeDoesNotExist(node, attribute))
-        case let .attributeDeserializationFailed(type, attribute):
-          completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
-        }
-      } catch {
-        completion(nil, XMLError.default)
+      // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
+      XMLManager<DustResponse>().parse(data) { parsingType, error in
+        let response = parsingType as? DustResponse
+        completion(response, error)
       }
     }
   }
