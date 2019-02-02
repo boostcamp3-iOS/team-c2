@@ -16,9 +16,13 @@
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
 		E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */; };
 		254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */; };
+		2D1B78BB008EFE83A558370B3BB1C0FB /* CoreDataIntakeManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */; };
 		58FABA83FEFC33CBA9C0A3DA3DE2BEEE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */; };
+		39E12E1416980561A0B4853AFA96897D /* CoreDataManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */; };
 		D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */; };
+		8A50A4A55D3EDA2B001B2E863B74014B /* CoreDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */; };
 		534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */; };
+		F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */; };
 		BFDF1F66670D86A5303EDBE7ED671061 /* CurrentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */; };
 		959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */; };
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
@@ -58,10 +62,10 @@
 		9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */; };
 		5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */; };
 		DDF20BF1181CF217DC8739371363142A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */; };
+		E46EDE542421E732585214FD6AEF79DF /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */; };
 		2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */; };
 		4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */; };
 		8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */; };
-		4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */; };
 		D266A0E2725337BABF52594D5099A298 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */; };
 		1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */; };
 		41057EA496BADCA9B72504DFC9FFA23B /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */; };
@@ -115,9 +119,13 @@
 		837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Intake.swift"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
+		AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntakeManagerType.swift; sourceTree = "<group>"; };
 		ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerType.swift; sourceTree = "<group>"; };
 		AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTest.swift; sourceTree = "<group>"; };
 		D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceType.swift; sourceTree = "<group>"; };
+		6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserManagerType.swift; sourceTree = "<group>"; };
 		3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDustInfo.swift; sourceTree = "<group>"; };
 		DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTerm.swift; sourceTree = "<group>"; };
 		804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -161,10 +169,10 @@
 		15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerType.swift; sourceTree = "<group>"; };
 		384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDustManager.swift; sourceTree = "<group>"; };
 		0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
-		C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
@@ -321,9 +329,12 @@
 			children = (
 				35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */,
 				608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */,
+				AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */,
 				ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */,
+				E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */,
 				AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */,
 				D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */,
+				6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */,
 				17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */,
 			);
 			path = "Core Data";
@@ -341,6 +352,7 @@
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */,
 				A03176C99958DD1E499EECC89D6CE76D /* DustManagerTest.swift */,
 				2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */,
 				CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */,
@@ -438,10 +450,10 @@
 		8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */,
 				A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */,
 				0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */,
 				EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */,
-				C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */,
 				D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */,
 			);
 			path = Mock;
@@ -768,9 +780,12 @@
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
 				E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */,
 				254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */,
+				2D1B78BB008EFE83A558370B3BB1C0FB /* CoreDataIntakeManagerType.swift in Sources */,
 				58FABA83FEFC33CBA9C0A3DA3DE2BEEE /* CoreDataManager.swift in Sources */,
+				39E12E1416980561A0B4853AFA96897D /* CoreDataManagerType.swift in Sources */,
 				D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */,
 				534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */,
+				F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */,
 				BFDF1F66670D86A5303EDBE7ED671061 /* CurrentDustInfo.swift in Sources */,
 				959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */,
 				485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */,
@@ -831,13 +846,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A50A4A55D3EDA2B001B2E863B74014B /* CoreDataServiceTest.swift in Sources */,
 				91780083CD30872CF3EA07321EAEF492 /* DustManagerTest.swift in Sources */,
 				2FB067BA61B116DED749D2AD3DF92C24 /* DustServiceTest.swift in Sources */,
 				FE6BA77554559F85CF4E6FF79286BEEE /* HealthKitManagerTests.swift in Sources */,
+				E46EDE542421E732585214FD6AEF79DF /* MockCoreDataManager.swift in Sources */,
 				2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */,
 				4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */,
 				8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */,
-				4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */,
 				D266A0E2725337BABF52594D5099A298 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
