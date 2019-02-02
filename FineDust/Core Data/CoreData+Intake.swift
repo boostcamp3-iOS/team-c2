@@ -22,8 +22,10 @@ extension Intake {
 
 extension Intake: CoreDataIntakeManagerType {
   
+  /// 프로토콜 연관 타입을 `Intake` 엔티티 타입으로 사용
   typealias Entity = Intake
   
+  /// READ
   func fetch(completion: (Entity?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.classNameToString)
     do {
@@ -34,6 +36,7 @@ extension Intake: CoreDataIntakeManagerType {
     }
   }
   
+  /// CREATE
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
     guard let entity = NSEntityDescription.entity(forEntityName: Entity.classNameToString,
                                                   in: context)

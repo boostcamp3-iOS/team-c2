@@ -20,8 +20,10 @@ extension User {
 
 extension User: CoreDataUserManagerType {
   
+  /// 프로토콜 연관 타입을 `User` 엔티티 타입으로 사용
   typealias Entity = User
   
+  /// READ
   func fetch(completion: (Entity?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.classNameToString)
     do {
@@ -32,6 +34,7 @@ extension User: CoreDataUserManagerType {
     }
   }
   
+  /// CREATE
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
     guard let entity = NSEntityDescription.entity(forEntityName: Entity.classNameToString,
                                                   in: context)

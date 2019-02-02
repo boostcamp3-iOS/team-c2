@@ -11,5 +11,6 @@ import Foundation
 /// Core Data Service
 final class CoreDataManager: CoreDataManagerType {
   
+  /// CoreDataManager의 싱글톤 객체.
   static let shared = CoreDataManager()
 }
