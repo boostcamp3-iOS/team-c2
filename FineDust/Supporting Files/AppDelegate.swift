@@ -130,7 +130,7 @@ private extension AppDelegate {
           return
         }
         SharedInfo.shared.set(address: address ?? "")
-        let dustManager = DustManager()
+        let dustManager = DustManager<ObservatoryResponse>()
         dustManager.fetchObservatory { response, error in
           if let error = error {
             NotificationCenter.default

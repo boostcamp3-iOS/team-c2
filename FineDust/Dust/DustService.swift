@@ -26,16 +26,12 @@ final class DustService: DustServiceType {
     return formatter
   }()
   
-  /// 네트워크 매니저 프로토콜을 준수하는 프로퍼티.
-  let networkManager: NetworkManagerType
-  
   /// 미세먼지 매니저 프로토콜을 준수하는 프로퍼티.
   let dustManager: DustManagerType
   
   // MARK: Dependency Injection
   
-  init(dustManager: DustManagerType, networkManager: NetworkManagerType = NetworkManager.shared) {
-    self.networkManager = networkManager
+  init(dustManager: DustManagerType) {
     self.dustManager = dustManager
   }
   

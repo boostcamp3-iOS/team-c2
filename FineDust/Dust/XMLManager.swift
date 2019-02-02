@@ -11,7 +11,7 @@ import Foundation
 import SWXMLHash
 
 /// XML 매니저.
-final class XMLManager<T: XMLParsingType>: XMLManagerType {
+final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
   
   let xmlConfig: SWXMLHash
 

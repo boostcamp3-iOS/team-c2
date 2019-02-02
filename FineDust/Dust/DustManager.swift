@@ -9,12 +9,16 @@
 import Foundation
 
 /// Dust Manager.
-final class DustManager: DustManagerType {
+final class DustManager<T>: DustManagerType where T: XMLParsingType {
   
   let networkManager: NetworkManagerType
   
-  init(networkManager: NetworkManagerType = NetworkManager.shared) {
+  let xmlManager: XMLManagerType
+  
+  init(networkManager: NetworkManagerType = NetworkManager.shared,
+       xmlManager: XMLManagerType = XMLManager<T>()) {
     self.networkManager = networkManager
+    self.xmlManager = xmlManager
   }
   
   // MARK: Property
@@ -37,25 +41,26 @@ final class DustManager: DustManagerType {
       .appending("&pageNo=\(pageNo)")
       .appending("&serviceKey=\(serviceKey)")
     guard let url = URL(string: urlString) else { return }
-    networkManager.request(url,
-                           method: .get,
-                           parameters: nil,
-                           headers: [:]) { data, httpStatusCode, error in
-      // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
-      guard httpStatusCode == .success else {
-        completion(nil, httpStatusCode?.error)
-        return
-      }
-      // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
-      guard let data = data else {
-        completion(nil, error)
-        return
-      }
-      // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
-      XMLManager<ObservatoryResponse>().parse(data) { parsingType, error in
-        let response = parsingType as? ObservatoryResponse
-        completion(response, error)
-      }
+    networkManager
+      .request(url,
+               method: .get,
+               parameters: nil,
+               headers: [:]) { data, status, error in
+                // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
+                guard status == .success else {
+                  completion(nil, status?.error)
+                  return
+                }
+                // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
+                guard let data = data else {
+                  completion(nil, error)
+                  return
+                }
+                // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
+                XMLManager<ObservatoryResponse>().parse(data) { parsingType, error in
+                  let response = parsingType as? ObservatoryResponse
+                  completion(response, error)
+                }
     }
   }
   
@@ -73,25 +78,26 @@ final class DustManager: DustManagerType {
       .appending("&serviceKey=\(serviceKey)")
       .appending("&ver=1.1")
     guard let url = URL(string: urlString) else { return }
-    networkManager.request(url,
-                           method: .get,
-                           parameters: nil,
-                           headers: [:]) { data, httpStatusCode, error in
-      // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
-      guard httpStatusCode == .success else {
-        completion(nil, httpStatusCode?.error)
-        return
-      }
-      // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
-      guard let data = data else {
-        completion(nil, error)
-        return
-      }
-      // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
-      XMLManager<DustResponse>().parse(data) { parsingType, error in
-        let response = parsingType as? DustResponse
-        completion(response, error)
-      }
+    networkManager
+      .request(url,
+               method: .get,
+               parameters: nil,
+               headers: [:]) { data, status, error in
+                // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
+                guard status == .success else {
+                  completion(nil, status?.error)
+                  return
+                }
+                // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
+                guard let data = data else {
+                  completion(nil, error)
+                  return
+                }
+                // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
+                XMLManager<DustResponse>().parse(data) { parsingType, error in
+                  let response = parsingType as? DustResponse
+                  completion(response, error)
+                }
     }
   }
 }
