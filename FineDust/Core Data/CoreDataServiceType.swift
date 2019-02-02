@@ -1,5 +1,5 @@
 //
-//  CoreDataService.swift
+//  CoreDataServiceType.swift
 //  FineDust
 //
 //  Created by Presto on 03/02/2019.
