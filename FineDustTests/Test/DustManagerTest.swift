@@ -21,7 +21,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 데이터를 가져온 것을 테스트
   func test_fetchObservatory() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -39,7 +39,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 데이터를 가져온 것을 테스트
   func test_fetchDustInfo() {
-    let dustManager = DustManager<DustResponse>()
+    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -57,7 +57,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 데이터가 없는 것을 테스트
   func test_fetchObservatory_noData() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
@@ -72,7 +72,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 데이터가 없는 것을 테스트
   func test_fetchDustInfo_noData() {
-    let dustManager = DustManager<DustResponse>()
+    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
@@ -87,7 +87,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 호출 중 네트워킹 에러 발생을 테스트
   func test_fetchObservatory_httpError() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
@@ -104,7 +104,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 호출 중 네트워킹 에러 발생을 테스트
   func test_fetchDustInfo_httpError() {
-    let dustManager = DustManager<DustResponse>()
+    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
@@ -121,7 +121,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 호출 중 응답 관련 에러 발생을 테스트
   func test_fetchObservatory_dustError() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -141,7 +141,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 호출 중 응답 관련 에러 발생을 테스트
   func test_fetchDustInfo_dustError() {
-    let dustManager = DustManager<DustResponse>()
+    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -160,7 +160,7 @@ class DustManagerTest: XCTestCase {
   }
   
   func test_fetchObservatory_xmlError1() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -179,7 +179,7 @@ class DustManagerTest: XCTestCase {
   }
   
   func test_fetchObservatory_xmlError2() {
-    let dustManager = DustManager<ObservatoryResponse>()
+    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
