@@ -16,6 +16,8 @@ extension User {
   static let installedDate = "installedDate"
 }
 
+// MARK - CoreDataUserManager 프로토콜 구현
+
 extension User: CoreDataUserManagerType {
   
   typealias Entity = User

@@ -10,6 +10,7 @@ import CoreData
 import Foundation
 import UIKit
 
+/// 코어데이터 매니저 베이스 프로토콜.
 protocol CoreDataManagerType {
   
   var context: NSManagedObjectContext { get }

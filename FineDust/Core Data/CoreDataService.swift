@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
 
   static let shared = CoreDataService()

@@ -9,6 +9,7 @@
 import CoreData
 import Foundation
 
+/// `User` Entity에 대한 프로토콜.
 protocol CoreDataUserManagerType: CoreDataManagerType {
   
   associatedtype Entity: NSManagedObject

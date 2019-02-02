@@ -9,6 +9,7 @@
 import CoreData
 import Foundation
 
+/// `Intake` Entity에 대한 Manager 프로토콜.
 protocol CoreDataIntakeManagerType: CoreDataManagerType {
   
   associatedtype Entity: NSManagedObject

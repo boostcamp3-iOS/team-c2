@@ -18,6 +18,8 @@ extension Intake {
   static let value = "value"
 }
 
+// MARK: - CoreDataIntakeManager 프로토콜 구현
+
 extension Intake: CoreDataIntakeManagerType {
   
   typealias Entity = Intake
