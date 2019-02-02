@@ -96,9 +96,6 @@ final class StatisticsViewController: UIViewController {
     setConstraintsToSubviews()
     initializeValueGraphView()
     initializeRatioGraphView()
-    CoreDataManager<User>().fetch { (user, error) in
-      print(user, error)
-    }
   }
   
   // MARK: Method

@@ -20,7 +20,6 @@
 		58FABA83FEFC33CBA9C0A3DA3DE2BEEE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */; };
 		39E12E1416980561A0B4853AFA96897D /* CoreDataManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */; };
 		D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */; };
-		8A50A4A55D3EDA2B001B2E863B74014B /* CoreDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */; };
 		534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */; };
 		F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */; };
 		BFDF1F66670D86A5303EDBE7ED671061 /* CurrentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */; };
@@ -62,7 +61,6 @@
 		9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */; };
 		5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */; };
 		DDF20BF1181CF217DC8739371363142A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */; };
-		E46EDE542421E732585214FD6AEF79DF /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */; };
 		2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */; };
 		4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */; };
 		8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */; };
@@ -123,7 +121,6 @@
 		ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerType.swift; sourceTree = "<group>"; };
 		AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTest.swift; sourceTree = "<group>"; };
 		D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceType.swift; sourceTree = "<group>"; };
 		6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserManagerType.swift; sourceTree = "<group>"; };
 		3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDustInfo.swift; sourceTree = "<group>"; };
@@ -169,7 +166,6 @@
 		15B06554BF855E43B5A5C172F404B7D5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerType.swift; sourceTree = "<group>"; };
 		384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDustManager.swift; sourceTree = "<group>"; };
 		0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
@@ -352,7 +348,6 @@
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				76DD0CC5B3E59AA5DCCBF35247292896 /* CoreDataServiceTest.swift */,
 				A03176C99958DD1E499EECC89D6CE76D /* DustManagerTest.swift */,
 				2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */,
 				CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */,
@@ -450,7 +445,6 @@
 		8139D2AFF09C6FDA7EBB4647E5AD90D7 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				8D3FCFC0541EB93889CA32BD56C3F1D5 /* MockCoreDataManager.swift */,
 				A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */,
 				0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */,
 				EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */,
@@ -846,11 +840,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A50A4A55D3EDA2B001B2E863B74014B /* CoreDataServiceTest.swift in Sources */,
 				91780083CD30872CF3EA07321EAEF492 /* DustManagerTest.swift in Sources */,
 				2FB067BA61B116DED749D2AD3DF92C24 /* DustServiceTest.swift in Sources */,
 				FE6BA77554559F85CF4E6FF79286BEEE /* HealthKitManagerTests.swift in Sources */,
-				E46EDE542421E732585214FD6AEF79DF /* MockCoreDataManager.swift in Sources */,
 				2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */,
 				4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */,
 				8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */,
