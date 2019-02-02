@@ -13,13 +13,14 @@ final class DustService: DustServiceType {
 
   // MARK: Property
   
-  /// 데이트 포매터
+  /// `yyyy-MM-dd HH:mm` 형식으로 포매팅하는 데이트 포매터.
   private lazy var fullDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     return formatter
   }()
   
+  /// `HH` 형식으로 포매팅하는 데이트 포매터.
   private lazy var monthDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH"
