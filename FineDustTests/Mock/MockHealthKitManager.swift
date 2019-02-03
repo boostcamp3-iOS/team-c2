@@ -16,12 +16,12 @@ final class MockHealthKitManager: HealthKitManagerType {
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void) {
+                          completion: @escaping (Double?, Error?) -> Void) {
     switch quantityTypeIdentifier {
     case .distanceWalkingRunning:
-      completion(1409.53)
+      completion(1409.53, nil)
     case .stepCount:
-      completion(2314.0)
+      completion(2314.0, nil)
     default: 0
     }
   }
