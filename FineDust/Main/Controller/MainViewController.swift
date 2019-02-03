@@ -49,6 +49,7 @@ extension MainViewController {
           self.stepCountLabel.text = "0 걸음"
         }
         print(error)
+        return
       }
       if let value = value {
         DispatchQueue.main.async {
@@ -65,6 +66,7 @@ extension MainViewController {
             self.distanceLabel.text = "0 km"
           }
           print(error)
+          return
         }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"

@@ -82,9 +82,9 @@ final class HealthKitManager: HealthKitManagerType {
       
       //query 첫 결과에 대한 hanlder
       query.initialResultsHandler = { query, results, error in
-        if error != nil {
-          print("findHealthKitValue error: \(String(describing: error?.localizedDescription))")
+        if let error = error {
           completion(nil, error)
+          return
         }
         if let results = results {
           if results.statistics().count == 0 {

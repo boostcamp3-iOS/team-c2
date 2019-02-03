@@ -9,7 +9,7 @@
 import Foundation
 
 /// HealthKit 서비스를 구현하는 클래스
-class HealthKitService: HealthKitServiceType {
+final class HealthKitService: HealthKitServiceType {
   
   let healthKitManager: HealthKitManagerType? 
   
@@ -24,7 +24,7 @@ class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          quantityFor: .count(),
                                          quantityTypeIdentifier: .stepCount
-    ){ value, error in
+    ) { value, error in
       if let error = error {
         completion(nil, error)
         return
@@ -41,7 +41,7 @@ class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
-    ){ value, error in
+    ) { value, error in
       if let error = error {
         completion(nil, error)
         return
