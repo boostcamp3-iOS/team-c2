@@ -11,13 +11,36 @@ import Foundation
 
 /// `User` Entity에 대한 프로토콜.
 protocol CoreDataUserManagerType: CoreDataManagerType {
-  
-  /// 연관 타입. `NSManagedObject` 준수.
-  associatedtype Entity: NSManagedObject
-  
+
   /// READ
-  func fetch(completion: (Entity?, Error?) -> Void)
+  func fetch(completion: (User?, Error?) -> Void)
+}
+
+// MARK: - CoreDataUserManagerType 프로토콜 초기 구현
+
+extension CoreDataUserManagerType {
   
-  /// CREATE
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void)
+  func fetch(completion: (User?, Error?) -> Void) {
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: User.classNameToString)
+    do {
+      let results = try context.fetch(request) as? [User]
+      completion(results?.first, nil)
+    } catch {
+      completion(nil, error)
+    }
+  }
+  
+  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
+    guard let entity = NSEntityDescription.entity(forEntityName: User.classNameToString,
+                                                  in: context)
+      else { return }
+    let newInstance = NSManagedObject(entity: entity, insertInto: context)
+    dictionary.forEach { newInstance.setValue($0.value, forKey: $0.key) }
+    do {
+      try context.save()
+    } catch {
+      completion(error)
+    }
+  }
+  
 }

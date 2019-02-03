@@ -13,8 +13,14 @@ import UIKit
 /// 코어데이터 매니저 베이스 프로토콜.
 protocol CoreDataManagerType {
   
+  /// 코어 데이터 컨텍스트.
   var context: NSManagedObjectContext { get }
+  
+  /// CREATE
+  func save(_ dictionary: [String: Any], completion: (Error?) -> Void)
 }
+
+// MARK: - CoreDataManagerType 프로토콜 초기 구현
 
 extension CoreDataManagerType {
   
@@ -22,4 +28,6 @@ extension CoreDataManagerType {
     guard let delegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
     return delegate.persistentContainer.viewContext
   }
+  
+  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) { }
 }

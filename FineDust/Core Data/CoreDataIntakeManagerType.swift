@@ -12,12 +12,35 @@ import Foundation
 /// `Intake` Entity에 대한 Manager 프로토콜.
 protocol CoreDataIntakeManagerType: CoreDataManagerType {
   
-  /// 연관 타입. `NSManagedObject` 준수
-  associatedtype Entity: NSManagedObject
-  
   /// READ
-  func fetch(completion: (Entity?, Error?) -> Void)
+  func fetch(completion: (Intake?, Error?) -> Void)
+}
+
+// MARK: - CoreDataIntakeManagerType 프로토콜 초기 구현
+
+extension CoreDataIntakeManagerType {
+  
+  func fetch(completion: (Intake?, Error?) -> Void) {
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: Intake.classNameToString)
+    do {
+      let results = try context.fetch(request) as? [Intake]
+      completion(results?.first, nil)
+    } catch {
+      completion(nil, error)
+    }
+  }
   
   /// CREATE
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void)
+  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
+    guard let entity = NSEntityDescription.entity(forEntityName: Intake.classNameToString,
+                                                  in: context)
+      else { return }
+    let newInstance = NSManagedObject(entity: entity, insertInto: context)
+    dictionary.forEach { newInstance.setValue($0.value, forKey: $0.key) }
+    do {
+      try context.save()
+    } catch {
+      completion(error)
+    }
+  }
 }
