@@ -2,7 +2,7 @@
 //  MockHealthKitManager.swift
 //  FineDustTests
 //
-//  Created by Presto on 28/01/2019.
+//  Created by 이재은 on 03/02/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
@@ -11,23 +11,25 @@ import Foundation
 import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
+
+  var error: Error?
+  var stepCount = 2314.0
+  var distance = 1409.53
   
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void) {
+                          completion: @escaping (Double?, Error?) -> Void) {
     switch quantityTypeIdentifier {
     case .distanceWalkingRunning:
-      completion(1409.53)
+      completion(distance, error)
     case .stepCount:
-      completion(2314.0)
+      completion(stepCount, error)
     default: 0
     }
   }
   
-  func requestAuthorization() {
-    print(" ")
-  }
-  
+  func requestAuthorization() {}
+
 }
