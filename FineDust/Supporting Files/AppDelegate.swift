@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
 
-  var healthKitManager: HealthKitManagerType?
+  var healthKitManager = HealthKitManager()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
-    healthKitManager?.requestAuthorization()
+    healthKitManager.requestAuthorization()
     LocationManager.shared.configure(configureLocationManager(_:))
     LocationManager.shared.requestAuthorization()
     return true
