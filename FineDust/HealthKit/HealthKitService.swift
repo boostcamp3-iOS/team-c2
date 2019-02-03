@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// HealthKit 서비스를 구현하는 클래스
 class HealthKitService: HealthKitServiceType {
   
   let healthKitManager: HealthKitManagerType? 
@@ -15,30 +16,39 @@ class HealthKitService: HealthKitServiceType {
   init(healthKit: HealthKitManagerType) {
     self.healthKitManager = healthKit
   }
-
-  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-        if startDate > endDate {
-          completion(nil)
-          return
-        }
+  
+  /// 오늘 걸음 수 가져오는 함수
+  func fetchTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          quantityFor: .count(),
-                                         quantityTypeIdentifier: .stepCount,
-                                         completion: completion)
+                                         quantityTypeIdentifier: .stepCount) {
+                                          value, error in
+                                          if let error = error {
+                                            completion(nil, error)
+                                            return
+                                          }
+                                          if let value = value {
+                                            completion(value, nil)
+                                          }         
+    }
   }
   
-  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-        if startDate > endDate {
-          completion(nil)
-          return
-        }
-    
+  /// 오늘 걸은 거리 가져오는 함수
+  func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          quantityFor: .meter(),
-                                    quantityTypeIdentifier: .distanceWalkingRunning,
-                                         completion: completion)
+                                         quantityTypeIdentifier: .distanceWalkingRunning) {
+                                          value, error in
+                                          if let error = error {
+                                            completion(nil, error)
+                                            return
+                                          }
+                                          if let value = value {
+                                            completion(value, nil)
+                                          }
+    }
   }
 }
