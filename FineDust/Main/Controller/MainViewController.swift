@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  var healthKitService: HealthKitServiceType?
+  var healthKitService = HealthKitService(healthKit: HealthKitManager())
   
   // MARK: - Life Cycle
   
@@ -40,21 +40,21 @@ final class MainViewController: UIViewController {
 
 extension MainViewController {
   
-  func updateViewController() {
-    var value: Double?
-    healthKitService?.fetchStepCount(startDate: Date.start(), endDate: Date()) {
-      value = $0
+  private func updateViewController() {
+    healthKitService.fetchStepCount(startDate: Date.start(),
+                                    endDate: Date()) { value in
       if let value = value {
         DispatchQueue.main.async {
-          self.stepCountLabel.text = "\(value)"
+          self.stepCountLabel.text = "\(Int(value)) 걸음"
         }
       }
     }
     
-    healthKitService?.fetchDistance(startDate: Date.start(), endDate: Date()) {       value = $0
+    healthKitService.fetchDistance(startDate: Date.start(),
+                                   endDate: Date()) { value in
       if let value = value {
         DispatchQueue.main.async {
-          self.stepCountLabel.text = "\(value)"
+          self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
       }
     }
