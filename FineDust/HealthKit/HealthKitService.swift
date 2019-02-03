@@ -23,15 +23,15 @@ class HealthKitService: HealthKitServiceType {
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          quantityFor: .count(),
-                                         quantityTypeIdentifier: .stepCount) {
-                                          value, error in
-                                          if let error = error {
-                                            completion(nil, error)
-                                            return
-                                          }
-                                          if let value = value {
-                                            completion(value, nil)
-                                          }         
+                                         quantityTypeIdentifier: .stepCount
+    ){ value, error in
+      if let error = error {
+        completion(nil, error)
+        return
+      }
+      if let value = value {
+        completion(value, nil)
+      }
     }
   }
   
@@ -40,15 +40,15 @@ class HealthKitService: HealthKitServiceType {
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning) {
-                                          value, error in
-                                          if let error = error {
-                                            completion(nil, error)
-                                            return
-                                          }
-                                          if let value = value {
-                                            completion(value, nil)
-                                          }
+                                         quantityTypeIdentifier: .distanceWalkingRunning
+    ){ value, error in
+      if let error = error {
+        completion(nil, error)
+        return
+      }
+      if let value = value {
+        completion(value, nil)
+      }
     }
   }
 }
