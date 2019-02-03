@@ -11,6 +11,9 @@ import Foundation
 /// 미세먼지 서비스.
 final class DustService: DustServiceType {
 
+  /// 시간대별 섭취량 타입 별칭 정의.
+  typealias IntakesByHour = [Hour: Int]
+  
   // MARK: Property
   
   /// `yyyy-MM-dd HH:mm` 형식으로 포매팅하는 데이트 포매터.
@@ -60,7 +63,7 @@ final class DustService: DustServiceType {
     }
   }
   
-  func fetchTodayDust(_ completion: @escaping ([Hour: Int]?, [Hour: Int]?, Error?) -> Void) {
+  func fetchTodayDust(_ completion: @escaping (IntakesByHour?, IntakesByHour?, Error?) -> Void) {
     dustManager.fetchDustInfo(term: .daily,
                               numberOfRows: 24,
                               pageNumber: 1) { [weak self] response, error in
