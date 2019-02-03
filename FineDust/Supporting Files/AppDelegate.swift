@@ -110,7 +110,7 @@ private extension AppDelegate {
       // GeocoderManager를 통해 주소를 얻어 LocationInfo 싱글톤 객체에 저장하고
       // DustManager를 통해 관측소를 얻어 FineDustInfo 싱글톤 객체에 저장한다
       // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
-      // 에러 발생시 해당하는 에러 정보를 포함하여 노티피케이션을 쏴준다
+      // 에러 발생시 해당하는 에러 정보를 포함하여(AppDelegateError) 노티피케이션을 쏴준다
       let coordinate = location.coordinate
       let convertedCoordinate
         = GeoConverter().convert(sourceType: .WGS_84,
@@ -130,8 +130,8 @@ private extension AppDelegate {
           return
         }
         SharedInfo.shared.set(address: address ?? "")
-        let dustManager = DustManager<ObservatoryResponse>()
-        dustManager.fetchObservatory { response, error in
+        let dustObservatoryManager = DustObservatoryManager()
+        dustObservatoryManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
           if let error = error {
             NotificationCenter.default
               .post(name: .didUpdateAllLocationTasks,

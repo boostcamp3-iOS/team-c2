@@ -21,7 +21,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 데이터를 가져온 것을 테스트
   func testFetchObservatory() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -29,7 +29,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNotNil(error)
       expect.fulfill()
@@ -39,7 +39,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 데이터를 가져온 것을 테스트
   func testFetchDustInfo() {
-    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustInfoManager(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -47,7 +47,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1) { response, error in
+    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNotNil(error)
       expect.fulfill()
@@ -57,12 +57,12 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 데이터가 없는 것을 테스트
   func testFetchObservatoryNoData() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNil(error)
       expect.fulfill()
@@ -72,12 +72,12 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 데이터가 없는 것을 테스트
   func testFetchDustInfoNoData() {
-    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustInfoManager(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1) { response, error in
+    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNil(error)
       expect.fulfill()
@@ -87,12 +87,12 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 호출 중 네트워킹 에러 발생을 테스트
   func testFetchObservatoryHTTPError() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? HTTPError {
         XCTAssertEqual(error, HTTPError.default)
@@ -104,12 +104,12 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 호출 중 네트워킹 에러 발생을 테스트
   func testFetchDustInfoHTTPError() {
-    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustInfoManager(networkManager: mockNetworkManager)
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1) { response, error in
+    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? HTTPError {
         XCTAssertEqual(error, HTTPError.default)
@@ -121,7 +121,7 @@ class DustManagerTest: XCTestCase {
   
   /// 관측소 호출 중 응답 관련 에러 발생을 테스트
   func testFetchObservatoryDustError() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -129,7 +129,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
@@ -141,7 +141,7 @@ class DustManagerTest: XCTestCase {
   
   /// 미세먼지 호출 중 응답 관련 에러 발생을 테스트
   func testFetchDustInfoDustError() {
-    let dustManager = DustManager<DustResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustInfoManager(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -149,7 +149,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1) { response, error in
+    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
@@ -160,7 +160,7 @@ class DustManagerTest: XCTestCase {
   }
   
   func testFetchObservatoryXMLError1() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -168,7 +168,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.implementationIsMissing("asdf")
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.implementationIsMissing("asdf"))
@@ -179,7 +179,8 @@ class DustManagerTest: XCTestCase {
   }
   
   func testFetchObservatoryXMLError2() {
-    let dustManager = DustManager<ObservatoryResponse>(networkManager: mockNetworkManager)
+    let dustManager = DustObservatoryManager(networkManager: mockNetworkManager)
+    dustManager.networkManager = mockNetworkManager
     let json = """
     { "key": "keykey", "value": "valuevalue" }
     """
@@ -187,7 +188,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.nodeHasNoValue
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory { response, error in
+    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.nodeHasNoValue)

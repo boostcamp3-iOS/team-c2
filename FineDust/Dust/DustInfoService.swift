@@ -8,11 +8,8 @@
 
 import Foundation
 
-/// 미세먼지 서비스.
-final class DustService: DustServiceType {
-
-  /// 시간대별 섭취량 타입 별칭 정의.
-  typealias IntakesByHour = [Hour: Int]
+/// 미세먼지 정보 서비스.
+final class DustInfoService: DustInfoServiceType {
   
   // MARK: Property
   
@@ -31,16 +28,16 @@ final class DustService: DustServiceType {
   }()
   
   /// 미세먼지 매니저 프로토콜을 준수하는 프로퍼티.
-  let dustManager: DustManagerType
+  let dustInfoManager: DustInfoManagerType
   
   // MARK: Dependency Injection
   
-  init(dustManager: DustManagerType) {
-    self.dustManager = dustManager
+  init(dustManager: DustInfoManagerType = DustInfoManager()) {
+    self.dustInfoManager = dustManager
   }
   
-  func fetchCurrentResponse(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
-    dustManager.fetchDustInfo(term: .daily,
+  func fetchCurrentInfo(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
+    dustInfoManager.fetchDustInfo(term: .daily,
                               numberOfRows: 1,
                               pageNumber: 1) { [weak self] response, error in
       if let error = error {
@@ -63,8 +60,8 @@ final class DustService: DustServiceType {
     }
   }
   
-  func fetchTodayDust(_ completion: @escaping (IntakesByHour?, IntakesByHour?, Error?) -> Void) {
-    dustManager.fetchDustInfo(term: .daily,
+  func fetchTodayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
+    dustInfoManager.fetchDustInfo(term: .daily,
                               numberOfRows: 24,
                               pageNumber: 1) { [weak self] response, error in
       var fineDust: [Hour: Int] = [:]

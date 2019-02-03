@@ -9,7 +9,7 @@
 @testable import FineDust
 import Foundation
 
-class MockDustManager: DustManagerType {
+class MockDustManager: DustInfoManagerType {
   
   var error: Error?
   

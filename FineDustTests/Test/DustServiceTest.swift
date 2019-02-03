@@ -12,7 +12,7 @@ import Foundation
 
 class DustServiceTest: XCTestCase {
   
-  var dustService: DustService!
+  var dustService: DustInfoService!
   
   let mockDustManager = MockDustManager()
   
@@ -23,7 +23,7 @@ class DustServiceTest: XCTestCase {
   }()
   
   override func setUp() {
-    dustService = DustService(dustManager: mockDustManager)
+    dustService = DustInfoService(dustManager: mockDustManager)
     
   }
   
@@ -34,7 +34,7 @@ class DustServiceTest: XCTestCase {
   func test_fetchCurrentDustInfo() {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
-    dustService?.fetchCurrentResponse { dustInfo, error in
+    dustService?.fetchCurrentInfo { dustInfo, error in
       XCTAssertEqual(dustInfo?.currentFineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.currentUltraFineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.currentFineDustValue ?? 0, 1)
@@ -50,7 +50,7 @@ class DustServiceTest: XCTestCase {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = nil
     mockDustManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
-    dustService.fetchCurrentResponse { dustInfo, error in
+    dustService.fetchCurrentInfo { dustInfo, error in
       XCTAssertNil(dustInfo)
       XCTAssertNotNil(error)
       expect.fulfill()
@@ -61,7 +61,7 @@ class DustServiceTest: XCTestCase {
   func test_fetchTodayDust() {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
-    dustService.fetchTodayDust { fineDustDictionary, ultrafineDustDictionary, error in
+    dustService.fetchTodayInfo { fineDustDictionary, ultrafineDustDictionary, error in
       XCTAssertEqual(fineDustDictionary, [.seventeen: 1])
       XCTAssertEqual(ultrafineDustDictionary, [.seventeen: 1])
       XCTAssertNil(error)
@@ -74,7 +74,7 @@ class DustServiceTest: XCTestCase {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
     mockDustManager.error = NSError(domain: "", code: 0, userInfo: nil)
-    dustService.fetchTodayDust { fineDustDictionary, ultrafineDustDictionary, error in
+    dustService.fetchTodayInfo { fineDustDictionary, ultrafineDustDictionary, error in
       XCTAssertNil(fineDustDictionary)
       XCTAssertNil(ultrafineDustDictionary)
       XCTAssertNotNil(error)
