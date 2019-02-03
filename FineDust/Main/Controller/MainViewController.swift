@@ -41,6 +41,7 @@ final class MainViewController: UIViewController {
 extension MainViewController {
   
   private func updateViewController() {
+    // 걸음 수 label에 표시
     healthKitService.fetchStepCount(startDate: Date.start(),
                                     endDate: Date()) { value in
       if let value = value {
@@ -50,6 +51,7 @@ extension MainViewController {
       }
     }
     
+    // 걸은 거리 label에 표시
     healthKitService.fetchDistance(startDate: Date.start(),
                                    endDate: Date()) { value in
       if let value = value {
