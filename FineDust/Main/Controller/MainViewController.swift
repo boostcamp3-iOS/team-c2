@@ -40,10 +40,16 @@ final class MainViewController: UIViewController {
 
 extension MainViewController {
   
+  /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateViewController() {
     // 걸음 수 label에 표시
-    healthKitService.fetchStepCount(startDate: Date.start(),
-                                    endDate: Date()) { value in
+    healthKitService.fetchTodayStepCount { value, error in
+      if let error = error {
+        DispatchQueue.main.async {
+          self.stepCountLabel.text = "0 걸음"
+        }
+        print(error)
+      }
       if let value = value {
         DispatchQueue.main.async {
           self.stepCountLabel.text = "\(Int(value)) 걸음"
@@ -52,9 +58,14 @@ extension MainViewController {
     }
     
     // 걸은 거리 label에 표시
-    healthKitService.fetchDistance(startDate: Date.start(),
-                                   endDate: Date()) { value in
+    healthKitService.fetchTodayDistance { value, error in
       if let value = value {
+        if let error = error {
+          DispatchQueue.main.async {
+            self.distanceLabel.text = "0 km"
+          }
+          print(error)
+        }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
