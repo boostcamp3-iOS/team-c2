@@ -9,13 +9,15 @@
 import Foundation
 import HealthKit
 
+/// HealthKit Manager Type.
 protocol HealthKitManagerType: class {
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void)
+                          completion: @escaping (Double?, Error?) -> Void)
   
-  func requestAuthorization() 
+  /// HealthKit 권한 요청 함수.
+  func requestAuthorization()
 }

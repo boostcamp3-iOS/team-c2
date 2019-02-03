@@ -9,16 +9,10 @@
 import Foundation
 import HealthKit
 
-/// HealthKit Service를 구현하는  클래스.
+/// HealthKit 매니저를 구현하는  클래스.
 final class HealthKitManager: HealthKitManagerType {
   
   // MARK: - Properties
-  
-  let healthKitManager: HealthKitManagerType
-  
-  init(healthKitManager: HealthKitManagerType) {
-    self.healthKitManager = healthKitManager
-  }
   
   /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
@@ -47,7 +41,7 @@ final class HealthKitManager: HealthKitManagerType {
       isAuthorized = false
       return
     }
-
+    
     // 걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
     let healthKitTypes: Set = [stepCount, distance]
     
@@ -62,13 +56,13 @@ final class HealthKitManager: HealthKitManagerType {
       }
     }
   }
-
+  
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void) {
+                          completion: @escaping (Double?, Error?) -> Void) {
     if let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeIdentifier) {
       
       // 시작 및 끝 날짜가 지정된 시간 간격 내에 있는 샘플에 대한 자료의 서술을 반환함
@@ -91,18 +85,18 @@ final class HealthKitManager: HealthKitManagerType {
       query.initialResultsHandler = { query, results, error in
         if error != nil {
           print("findHealthKitValue error: \(String(describing: error?.localizedDescription))")
-          return
+          completion(nil, error)
         }
         if let results = results {
           if results.statistics().count == 0 {
-            completion(0)
+            completion(0, error)
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
             results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
               // 쿼리와 일치하는 모든 값을 더함.
               if let quantity = statistics.sumQuantity() {
                 let quantityValue = quantity.doubleValue(for: quantityFor)
-                completion(quantityValue)
+                completion(quantityValue, nil)
               }
             }
           }
