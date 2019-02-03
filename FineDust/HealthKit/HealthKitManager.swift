@@ -70,9 +70,8 @@ final class HealthKitManager: HealthKitManagerType {
                                                   end: endDate,
                                                   options: .strictStartDate)
       
-      // 가져올 날짜 단위 변수.
-      var interval = DateComponents()
-      interval.day = 1
+      // 가져올 날짜 하루 단위 변수.
+      let interval = DateComponents(day: 1)
       
       // 설정한 시간대에 대한 정보를 가져오는 query에 대한 결과문 반환
       let query = HKStatisticsCollectionQuery(quantityType: quantityType,
