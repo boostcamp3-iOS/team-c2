@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  var healthKitService = HealthKitService(healthKit: HealthKitManager())
+  let healthKitService = HealthKitService(healthKit: HealthKitManager())
   
   // MARK: - Life Cycle
   

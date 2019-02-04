@@ -87,8 +87,9 @@ final class HealthKitManager: HealthKitManagerType {
           return
         }
         if let results = results {
+          // 결과가 0일 때
           if results.statistics().count == 0 {
-            completion(0, error)
+            completion(0, nil)
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
             results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
@@ -100,7 +101,9 @@ final class HealthKitManager: HealthKitManagerType {
             }
           }
         } else {
+          // 결과가 nil일 때
           print("HKStatisticsCollectionQuery failed!")
+          completion(0, nil)
         }
       }
       healthStore.execute(query)

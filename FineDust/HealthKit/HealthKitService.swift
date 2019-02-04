@@ -26,7 +26,7 @@ final class HealthKitService: HealthKitServiceType {
                                          quantityTypeIdentifier: .stepCount
     ) { value, error in
       if let error = error {
-        completion(nil, error)
+        completion(0, error)
         return
       }
       if let value = value {
@@ -43,7 +43,7 @@ final class HealthKitService: HealthKitServiceType {
                                          quantityTypeIdentifier: .distanceWalkingRunning
     ) { value, error in
       if let error = error {
-        completion(nil, error)
+        completion(0, error)
         return
       }
       if let value = value {
