@@ -23,13 +23,11 @@ final class NetworkManager: NetworkManagerType {
   ///   - parameters: HTTP Body에 들어갈 키/값 쌍. 기본값은 `[:]`.
   ///   - headers: HTTP Header에 들어갈 키/값 쌍. 기본값은 `[:]`.
   ///   - completion: 컴플리션 핸들러.
-  func request(
-    _ url: URL,
-    method: HTTPMethod,
-    parameters: [String: Any]? = nil,
-    headers: [String: String] = [:],
-    completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void
-  ) {
+  func request(_ url: URL,
+               method: HTTPMethod,
+               parameters: [String: Any]? = nil,
+               headers: [String: String] = [:],
+               completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void) {
     let session = URLSession(configuration: .default)
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = method.rawValue
