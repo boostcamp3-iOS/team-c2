@@ -95,12 +95,10 @@ private extension RatioGraphView {
   
   /// 전체 비율 뷰 그리기.
   func drawEntireSectionView() {
-    entireSectionView = UIView(frame: CGRect(
-      x: 0,
-      y: 0,
-      width: backgroundViewHeight,
-      height: backgroundViewHeight
-    ))
+    entireSectionView = UIView(frame: CGRect(x: 0,
+                                             y: 0,
+                                             width: backgroundViewHeight,
+                                             height: backgroundViewHeight))
     backgroundView.addSubview(entireSectionView)
     entireSectionView.backgroundColor = Asset.graph1.color
     entireSectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -184,9 +182,8 @@ private extension RatioGraphView {
   func arcPath(endAngle: CGFloat) -> UIBezierPath {
     let path = UIBezierPath()
     path.move(to: entireSectionView.center)
-    path.addLine(
-      to: CGPoint(x: entireSectionView.frame.width / 2, y: entireSectionView.frame.height)
-    )
+    path.addLine(to: CGPoint(x: entireSectionView.frame.width / 2,
+                             y: entireSectionView.frame.height))
     path.addArc(withCenter: entireSectionView.center,
                 radius: backgroundViewHeight,
                 startAngle: -.pi / 2,
