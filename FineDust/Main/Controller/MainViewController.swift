@@ -6,7 +6,6 @@
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
-import CoreLocation
 import UIKit
 
 final class MainViewController: UIViewController {
@@ -18,14 +17,13 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  weak var healthKitManagerType: HealthKitManagerType?
+  let healthKitService = HealthKitService(healthKit: HealthKitManager())
   
   // MARK: - Life Cycle
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "내먼지".localized
-    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -41,29 +39,39 @@ final class MainViewController: UIViewController {
 // MARK: - Functions
 
 extension MainViewController {
-  private func setup() {
-    healthKitManagerType = HealthKitManager.shared
-  }
   
+  /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateViewController() {
-    var value: Double?
-    healthKitManagerType?.fetchStepCount(startDate: Date.start(),
-                                         endDate: Date()
-    ) {
-       value = $0
+    // 걸음 수 label에 표시
+    healthKitService.fetchTodayStepCount { value, error in
+      if let error = error {
+        DispatchQueue.main.async {
+          self.stepCountLabel.text = "0 걸음"
+        }
+        print(error)
+        return
+      }
+      if let value = value {
+        DispatchQueue.main.async {
+          self.stepCountLabel.text = "\(Int(value)) 걸음"
+        }
+      }
     }
     
-    healthKitManagerType?.fetchDistance(startDate: Date.start(),
-                                        endDate: Date()
-    ) {
-      value = $0
+    // 걸은 거리 label에 표시
+    healthKitService.fetchTodayDistance { value, error in
+      if let value = value {
+        if let error = error {
+          DispatchQueue.main.async {
+            self.distanceLabel.text = "0 km"
+          }
+          print(error)
+          return
+        }
+        DispatchQueue.main.async {
+          self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+        }
+      }
     }
-    
-//    healthKitServiceType?.openHealth(self)
-//    healthKitServiceType?.updateHealthKitLabel(label: stepCountLabel,
-//                                               quantityTypeIdentifier: .stepCount)
-//    healthKitServiceType?.updateHealthKitLabel(
-//      label: distanceLabel,
-//      quantityTypeIdentifier: .distanceWalkingRunning)
   }
 }

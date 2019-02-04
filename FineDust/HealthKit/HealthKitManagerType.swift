@@ -7,8 +7,17 @@
 //
 
 import Foundation
+import HealthKit
 
+/// HealthKit Manager Type.
 protocol HealthKitManagerType: class {
-  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) 
-  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void)
+  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
+  func findHealthKitValue(startDate: Date,
+                          endDate: Date,
+                          quantityFor: HKUnit,
+                          quantityTypeIdentifier: HKQuantityTypeIdentifier,
+                          completion: @escaping (Double?, Error?) -> Void)
+  
+  /// HealthKit 권한 요청 함수.
+  func requestAuthorization()
 }

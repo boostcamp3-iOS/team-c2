@@ -9,12 +9,10 @@
 import Foundation
 import HealthKit
 
-/// HealthKit Service를 구현하는 Singleton 클래스.
-final class HealthKitManager {
+/// HealthKit 매니저를 구현하는  클래스.
+final class HealthKitManager: HealthKitManagerType {
   
   // MARK: - Properties
-  
-  static let shared = HealthKitManager()
   
   /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
@@ -27,10 +25,6 @@ final class HealthKitManager {
   
   /// Health App 권한을 나타내는 변수.
   private var isAuthorized = true
-  
-  // MARK: - Private Initializer
-  
-  private init() { }
   
   // MARK: - Method
   
@@ -63,11 +57,12 @@ final class HealthKitManager {
     }
   }
   
+  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double) -> Void) {
+                          completion: @escaping (Double?, Error?) -> Void) {
     if let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeIdentifier) {
       
       // 시작 및 끝 날짜가 지정된 시간 간격 내에 있는 샘플에 대한 자료의 서술을 반환함
@@ -75,9 +70,8 @@ final class HealthKitManager {
                                                   end: endDate,
                                                   options: .strictStartDate)
       
-      // 가져올 날짜 단위 변수.
-      var interval = DateComponents()
-      interval.day = 1
+      // 가져올 날짜 하루 단위 변수.
+      let interval = DateComponents(day: 1)
       
       // 설정한 시간대에 대한 정보를 가져오는 query에 대한 결과문 반환
       let query = HKStatisticsCollectionQuery(quantityType: quantityType,
@@ -88,56 +82,31 @@ final class HealthKitManager {
       
       //query 첫 결과에 대한 hanlder
       query.initialResultsHandler = { query, results, error in
-        if error != nil {
-          print("findHealthKitValue error: \(String(describing: error?.localizedDescription))")
+        if let error = error {
+          completion(nil, error)
           return
         }
         if let results = results {
+          // 결과가 0일 때
           if results.statistics().count == 0 {
-            completion(0)
+            completion(0, nil)
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
             results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
               // 쿼리와 일치하는 모든 값을 더함.
               if let quantity = statistics.sumQuantity() {
                 let quantityValue = quantity.doubleValue(for: quantityFor)
-                completion(quantityValue)
+                completion(quantityValue, nil)
               }
             }
           }
         } else {
+          // 결과가 nil일 때
           print("HKStatisticsCollectionQuery failed!")
+          completion(0, nil)
         }
       }
       healthStore.execute(query)
     }
-  }
-}
-
-extension HealthKitManager: HealthKitManagerType {
-  func fetchStepCount(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-    if startDate > endDate {
-      completion(nil)
-      return
-    }
-    
-    findHealthKitValue(startDate: startDate,
-                       endDate: endDate,
-                       quantityFor: .count(),
-                       quantityTypeIdentifier: .stepCount,
-                       completion: completion)
-  }
-  
-  func fetchDistance(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
-    if startDate > endDate {
-      completion(nil)
-      return
-    }
-    
-    findHealthKitValue(startDate: startDate,
-                       endDate: endDate,
-                       quantityFor: .meter(),
-                       quantityTypeIdentifier: .distanceWalkingRunning,
-                       completion: completion)
   }
 }

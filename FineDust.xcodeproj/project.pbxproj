@@ -46,8 +46,9 @@
 		618DA42D0AAE01B72083D5BB17E8919C /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */; };
 		FE6BA77554559F85CF4E6FF79286BEEE /* HealthKitManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */; };
 		7B28D176B8026581EE3B56141483C34D /* HealthKitManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */; };
-		8903960C73B090519A51E81AD39FAFE5 /* HealthKitServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */; };
-		7AC2D40E8C9A0AF8BB6897D03DF88400 /* HealthKitServiceManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */; };
+		CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */; };
+		C3EB264857C89CE148FC8F56EF9E4265 /* HealthKitServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0BFFF937C6E0E33E1A6A6B616B269 /* HealthKitServiceTest.swift */; };
+		DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
 		B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D3130C92D65B62991005E4252D27B /* IntakeManager.swift */; };
 		F699EA97D6E620A5D0441C747CF24EA9 /* IntakeManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE85B4F75DE3462288EAEC749E40305 /* IntakeManagerType.swift */; };
@@ -59,7 +60,6 @@
 		2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */; };
 		4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */; };
 		8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */; };
-		4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */; };
 		D266A0E2725337BABF52594D5099A298 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */; };
 		1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */; };
 		41057EA496BADCA9B72504DFC9FFA23B /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */; };
@@ -146,9 +146,10 @@
 		347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManagerTests.swift; sourceTree = "<group>"; };
 		80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManagerType.swift; sourceTree = "<group>"; };
-		B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManager.swift; sourceTree = "<group>"; };
+		2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerTest.swift; sourceTree = "<group>"; };
-		B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceManagerType.swift; sourceTree = "<group>"; };
+		0CD0BFFF937C6E0E33E1A6A6B616B269 /* HealthKitServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceTest.swift; sourceTree = "<group>"; };
+		E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceType.swift; sourceTree = "<group>"; };
 		768ED33DE8C563664122534CC0337E8E /* Hour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +161,6 @@
 		A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDustManager.swift; sourceTree = "<group>"; };
 		0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGeocoderManager.swift; sourceTree = "<group>"; };
 		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
-		C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
@@ -339,6 +339,7 @@
 				2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */,
 				CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */,
 				A3E67389FCAA35D095252849C551B9D2 /* HealthKitServiceManagerTest.swift */,
+				0CD0BFFF937C6E0E33E1A6A6B616B269 /* HealthKitServiceTest.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -380,8 +381,8 @@
 			children = (
 				347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */,
 				80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */,
-				B968E42441AAF83418FE9AA7D42C2677 /* HealthKitServiceManager.swift */,
-				B3E2A5720513D2F41675CB66AE9EC4C7 /* HealthKitServiceManagerType.swift */,
+				2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */,
+				E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -435,7 +436,6 @@
 				A5B813B64E488908717B179AA6CD5B2E /* MockDustManager.swift */,
 				0D1FF2B4DC7591F9C2AC894E1FF93DE1 /* MockGeocoderManager.swift */,
 				EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */,
-				C95209C9DDDDA29C5150ED3AA8F55CE5 /* MockLocationManager.swift */,
 				D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */,
 			);
 			path = Mock;
@@ -787,8 +787,8 @@
 				0F99D43AFB7714E3367A58D454482FC1 /* HTTPStatusCode.swift in Sources */,
 				618DA42D0AAE01B72083D5BB17E8919C /* HealthKitManager.swift in Sources */,
 				7B28D176B8026581EE3B56141483C34D /* HealthKitManagerType.swift in Sources */,
-				8903960C73B090519A51E81AD39FAFE5 /* HealthKitServiceManager.swift in Sources */,
-				7AC2D40E8C9A0AF8BB6897D03DF88400 /* HealthKitServiceManagerType.swift in Sources */,
+				CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */,
+				DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */,
 				B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */,
 				B5849E887DA5B6E5988294B77DD10192 /* IntakeManager.swift in Sources */,
 				F699EA97D6E620A5D0441C747CF24EA9 /* IntakeManagerType.swift in Sources */,
@@ -826,10 +826,10 @@
 				91780083CD30872CF3EA07321EAEF492 /* DustManagerTest.swift in Sources */,
 				2FB067BA61B116DED749D2AD3DF92C24 /* DustServiceTest.swift in Sources */,
 				FE6BA77554559F85CF4E6FF79286BEEE /* HealthKitManagerTests.swift in Sources */,
+				C3EB264857C89CE148FC8F56EF9E4265 /* HealthKitServiceTest.swift in Sources */,
 				2D54296D00B94C0FD9866B3A4D24CA21 /* MockDustManager.swift in Sources */,
 				4DF39D26F8C8548B582A2CE590D6B769 /* MockGeocoderManager.swift in Sources */,
 				8A417846DD692018FCA21EF813914B1E /* MockHealthKitManager.swift in Sources */,
-				4CFFC7223D045BA6EAC8658B6BCA9946 /* MockLocationManager.swift in Sources */,
 				D266A0E2725337BABF52594D5099A298 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
