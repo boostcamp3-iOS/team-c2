@@ -33,7 +33,7 @@ extension CoreDataUserManagerType {
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
     guard let entity = NSEntityDescription.entity(forEntityName: User.classNameToString,
                                                   in: context)
-      else { return }
+    else { return }
     let newInstance = NSManagedObject(entity: entity, insertInto: context)
     dictionary.forEach { newInstance.setValue($0.value, forKey: $0.key) }
     do {
@@ -42,5 +42,4 @@ extension CoreDataUserManagerType {
       completion(error)
     }
   }
-  
 }
