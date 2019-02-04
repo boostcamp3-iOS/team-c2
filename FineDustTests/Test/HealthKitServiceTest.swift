@@ -22,7 +22,8 @@ class HealthKitServiceTest: XCTestCase {
   
   /// 오늘 걸음 수 데이터 받아오는 함수 테스트
   func testFetchTodayStepCount() {
-    let expect = expectation(description: "fetch today step counCollectionalthKitService?.fetchTodayStepCount { result, error in
+    let expect = expectation(description: "fetch today step count")
+    healthKitService?.fetchTodayStepCount { result, error in
       XCTAssertEqual(result, self.mockHealthKitManager.stepCount)
       expect.fulfill()
     }
