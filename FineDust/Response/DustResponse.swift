@@ -11,7 +11,7 @@ import Foundation
 import SWXMLHash
 
 /// 미세먼지 정보 응답 객체.
-struct DustResponse: XMLIndexerDeserializable {
+struct DustResponse: XMLParsingType {
  
   /// 미세먼지 API 결과 객체.
   struct Result: XMLIndexerDeserializable {

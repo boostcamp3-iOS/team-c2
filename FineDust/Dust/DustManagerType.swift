@@ -8,28 +8,27 @@
 
 import Foundation
 
-/// Dust Manager Type.
-protocol DustManagerType: class {
+/// Dust Manager 기반 프로토콜.
+protocol DustManagerType {
   
-  /// 측정소 정보 조회.
-  ///
-  /// - Parameters:
-  ///   - pageNo: 페이지 인덱스.
-  ///   - numOfRows: 한 페이지에 노출되는 정보량.
-  ///   - completion: 컴플리션 핸들러.
-  func fetchObservatory(numberOfRows numOfRows: Int,
-                        pageNumber pageNo: Int,
-                        completion: @escaping (ObservatoryResponse?, Error?) -> Void)
+  var baseURL: String { get }
   
-  /// 미세먼지 농도 조회.
-  ///
-  /// - Parameters:
-  ///   - dataTerm: 데이터 기간. daily 또는 month.
-  ///   - pageNo: 페이지 인덱스.
-  ///   - numOfRows: 한 페이지에 노출되는 정보량.
-  ///   - completion: 컴플리션 핸들러.
-  func fetchDustInfo(term dataTerm: DataTerm,
-                     numberOfRows numOfRows: Int,
-                     pageNumber pageNo: Int,
-                     completion: @escaping (DustResponse?, Error?) -> Void)
+  var serviceKey: String { get }
+  
+  var networkManager: NetworkManagerType { get }
+}
+
+// MARK: - DustManagerType 프로토콜 초기 구현
+
+extension DustManagerType {
+  
+  var baseURL: String {
+    return "http://openapi.airkorea.or.kr/openapi/services/rest"
+  }
+  
+  var serviceKey: String {
+    return """
+    BfJjA4%2BuaBHhfAzyF2Ni6xoVDaf%2FhsZylifmFKdW3kyaZECH6c2Lua05fV%2F%2BYgbzPBaSl0YLZwI%2BW%2FK2xzO7sw%3D%3D
+    """
+  }
 }

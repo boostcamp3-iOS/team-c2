@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// NetworkManager 프로토콜.
 protocol NetworkManagerType: class {
+  
+  /// 네트워크 요청.
   func request(_ url: URL,
                method: HTTPMethod,
                parameters: [String: Any]?,
