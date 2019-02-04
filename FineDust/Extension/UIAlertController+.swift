@@ -10,11 +10,9 @@ import UIKit
 
 extension UIAlertController {
   /// `UIAlertController` Helper.
-  static func alert(
-    title: String?,
-    message: String?,
-    style: UIAlertController.Style = .alert
-  ) -> UIAlertController {
+  static func alert(title: String?,
+                    message: String?,
+                    style: UIAlertController.Style = .alert) -> UIAlertController {
     let alert = UIAlertController(title: title, message: message, preferredStyle: style)
     return alert
   }
@@ -28,29 +26,25 @@ extension UIAlertController {
   
   /// `UIAlertAction` Helper.
   @discardableResult
-  func action(
-    title: String?,
-    style: UIAlertAction.Style = .default,
-    handler: ((UIAlertAction, [UITextField]?) -> Void)? = nil
-  ) -> UIAlertController {
+  func action(title: String?,
+              style: UIAlertAction.Style = .default,
+              completion: ((UIAlertAction, [UITextField]?) -> Void)? = nil) -> UIAlertController {
     guard let textFields = textFields else {
-      let action = UIAlertAction(title: title, style: style) { handler?($0, nil) }
+      let action = UIAlertAction(title: title, style: style) { completion?($0, nil) }
       addAction(action)
       return self
     }
-    let action = UIAlertAction(title: title, style: style) { handler?($0, textFields) }
+    let action = UIAlertAction(title: title, style: style) { completion?($0, textFields) }
     addAction(action)
     return self
   }
   
   /// 빌더 패턴을 통해 만들어진 `UIAlertController` present.
-  func present(
-    to viewController: UIViewController?,
-    animated: Bool = true,
-    handler: (() -> Void)? = nil
-  ) {
+  func present(to viewController: UIViewController?,
+               animated: Bool = true,
+               completion: (() -> Void)? = nil) {
     DispatchQueue.main.async {
-      viewController?.present(self, animated: animated, completion: handler)
+      viewController?.present(self, animated: animated, completion: completion)
     }
   }
 }

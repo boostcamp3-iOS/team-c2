@@ -10,10 +10,8 @@ import UIKit
 
 extension UIViewController {
   /// `UIViewController` instantiate.
-  static func instantiate(
-    fromStoryboard storyboard: String,
-    identifier: String
-  ) -> UIViewController {
+  static func instantiate(fromStoryboard storyboard: String,
+                          identifier: String) -> UIViewController {
     let storyboard = UIStoryboard(name: storyboard, bundle: nil)
     let controller = storyboard.instantiateViewController(withIdentifier: identifier)
     return controller
@@ -29,12 +27,9 @@ extension UIViewController {
   }
   
   /// 빌더 패턴을 통해 만들어진 `UIViewController`를 모달 present.
-  func present(
-    to viewController: UIViewController,
-    transitionStyle style: UIModalTransitionStyle = .coverVertical,
-    animated: Bool = true,
-    completion: (() -> Void)? = nil
-  ) {
+  func present(to viewController: UIViewController,
+               transitionStyle style: UIModalTransitionStyle = .coverVertical,
+               animated: Bool = true,completion: (() -> Void)? = nil) {
     modalTransitionStyle = style
     viewController.present(self, animated: animated, completion: completion)
   }
