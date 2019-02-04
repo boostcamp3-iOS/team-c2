@@ -36,51 +36,61 @@ final class DustInfoService: DustInfoServiceType {
     self.dustInfoManager = dustManager
   }
   
-  func fetchCurrentInfo(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
-    dustInfoManager.fetchDustInfo(term: .daily,
-                              numberOfRows: 1,
-                              pageNumber: 1) { [weak self] response, error in
-      if let error = error {
-        completion(nil, error)
-        return
-      }
-      guard let self = self else { return }
-      if let currentResponse = response?.items.first {
-        let currentDustInfo = CurrentDustInfo(
-          currentFineDustValue: currentResponse.fineDustValue,
-          currentUltraFineDustValue: currentResponse.ultraFineDustValue,
-          currentFineDustGrade: DustGrade(rawValue: currentResponse.fineDustGrade) ?? .default,
-          currentUltraFineDustGrade: DustGrade(
-            rawValue: currentResponse.ultraFineDustGrade
-            ) ?? .default,
-          recentUpdatingTime: self.fullDateFormatter.date(from: currentResponse.dataTime) ?? Date()
-        )
-        completion(currentDustInfo, nil)
-      }
+  func fetchRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
+    dustInfoManager
+      .fetchDustInfo(
+        term: .daily,
+        numberOfRows: 1,
+        pageNumber: 1) { [weak self] response, error in
+          if let error = error {
+            completion(nil, error)
+            return
+          }
+          guard let self = self else { return }
+          if let recentResponse = response?.items.first {
+            let dustInfo = RecentDustInfo(
+              fineDustValue: recentResponse.fineDustValue,
+              ultrafineDustValue: recentResponse.ultrafineDustValue,
+              fineDustGrade: DustGrade(rawValue: recentResponse.fineDustGrade) ?? .default,
+              ultrafineDustGrade: DustGrade(rawValue: recentResponse.ultrafineDustGrade) ?? .default,
+              updatingTime: self.fullDateFormatter.date(from: recentResponse.dataTime) ?? Date()
+            )
+            completion(dustInfo, nil)
+          }
     }
   }
   
   func fetchTodayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
-    dustInfoManager.fetchDustInfo(term: .daily,
-                              numberOfRows: 24,
-                              pageNumber: 1) { [weak self] response, error in
-      var fineDust: [Hour: Int] = [:]
-      var ultraFineDust: [Hour: Int] = [:]
-      guard let self = self else { return }
-      if let error = error {
-        completion(nil, nil, error)
-        return
-      }
-      response?.items.forEach { item in
-        let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) ?? Date()
-        let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
-        let hourToInt = Int(hourToString) ?? 0
-        let hour = Hour(rawValue: hourToInt) ?? .default
-        fineDust[hour] = item.fineDustValue
-        ultraFineDust[hour] = item.ultraFineDustValue
-        if hour == .zero { return }
-      }
-      completion(fineDust, ultraFineDust, nil)
+    dustInfoManager
+      .fetchDustInfo(
+        term: .daily,
+        numberOfRows: 24,
+        pageNumber: 1) { [weak self] response, error in
+          var fineDust: [Hour: Int] = [:]
+          var ultrafineDust: [Hour: Int] = [:]
+          guard let self = self else { return }
+          if let error = error {
+            completion(nil, nil, error)
+            return
+          }
+          response?.items.forEach { item in
+            let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) ?? Date()
+            let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
+            let hourToInt = Int(hourToString) ?? 0
+            let hour = Hour(rawValue: hourToInt) ?? .default
+            fineDust[hour] = item.fineDustValue
+            ultrafineDust[hour] = item.ultrafineDustValue
+            if hour == .zero { return }
+          }
+          Hour.allCases.forEach { hour in
+            if fineDust[hour] == nil {
+              fineDust[hour] = 0
+            }
+            if ultrafineDust[hour] == nil {
+              ultrafineDust[hour] = 0
+            }
+          }
+          completion(fineDust, ultrafineDust, nil)
     }
   }
 }

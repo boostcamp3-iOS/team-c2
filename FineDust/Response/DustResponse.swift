@@ -44,22 +44,22 @@ struct DustResponse: XMLParsingType {
     let fineDustGrade: Int
     
     /// 초미세먼지 현재 농도.
-    let ultraFineDustValue: Int
+    let ultrafineDustValue: Int
     
     /// 초미세먼지 24시간 농도.
-    let ultraFineDustValue24: Int
+    let ultrafineDustValue24: Int
     
     /// 초미세먼지 현재 등급.
-    let ultraFineDustGrade: Int
+    let ultrafineDustGrade: Int
     
     static func deserialize(_ node: XMLIndexer) throws -> Item {
       return try Item(dataTime: node["dataTime"].value(),
                       fineDustValue: node["pm10Value"].value(),
                       fineDustValue24: node["pm10Value24"].value(),
                       fineDustGrade: node["pm10Grade"].value(),
-                      ultraFineDustValue: node["pm25Value"].value(),
-                      ultraFineDustValue24: node["pm25Value24"].value(),
-                      ultraFineDustGrade: node["pm25Grade"].value())
+                      ultrafineDustValue: node["pm25Value"].value(),
+                      ultrafineDustValue24: node["pm25Value24"].value(),
+                      ultrafineDustGrade: node["pm25Grade"].value())
     }
   }
   

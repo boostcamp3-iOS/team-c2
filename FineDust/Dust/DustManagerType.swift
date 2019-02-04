@@ -31,4 +31,8 @@ extension DustManagerType {
     BfJjA4%2BuaBHhfAzyF2Ni6xoVDaf%2FhsZylifmFKdW3kyaZECH6c2Lua05fV%2F%2BYgbzPBaSl0YLZwI%2BW%2FK2xzO7sw%3D%3D
     """
   }
+  
+  var networkManager: NetworkManagerType {
+    return NetworkManager.shared
+  }
 }

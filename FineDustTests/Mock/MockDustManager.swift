@@ -38,7 +38,7 @@ struct DustManagerInfo {
                               fineDustValue: 1,
                               fineDustValue24: 1,
                               fineDustGrade: 1,
-                              ultraFineDustValue: 1,
-                              ultraFineDustValue24: 1,
-                              ultraFineDustGrade: 1)])
+                              ultrafineDustValue: 1,
+                              ultrafineDustValue24: 1,
+                              ultrafineDustGrade: 1)])
 }
