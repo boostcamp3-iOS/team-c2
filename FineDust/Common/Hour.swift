@@ -9,7 +9,7 @@
 import Foundation
 
 /// 시간대 정의
-enum Hour: Int {
+enum Hour: Int, CaseIterable {
   
   /// 0 ~ 1시
   case zero
