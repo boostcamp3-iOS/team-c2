@@ -2,6 +2,7 @@
 
 ![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+[![Build Status](https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop)](https://travis-ci.org/boostcamp3-iOS/team-c2)
 
 부스트캠프 3기 iOS과정 C-2팀
 

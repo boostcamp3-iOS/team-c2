@@ -15,14 +15,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  
-  private lazy var locationManager: CLLocationManager = {
-    let manager = CLLocationManager()
-    manager.desiredAccuracy = kCLLocationAccuracyBest
-    manager.distanceFilter = kCLDistanceFilterNone
-    manager.delegate = self
-    return manager    
-  }()
+
+  var healthKitManager = HealthKitManager()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
@@ -33,10 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
-    locationManager.requestAlwaysAuthorization()
-    FineDustHK.shared.requestAuthorization()
-    toggleFirstExecutionFlag()
-    fetchAPI()
+    healthKitManager.requestAuthorization()
+    LocationManager.shared.configure(configureLocationManager(_:))
+    LocationManager.shared.requestAuthorization()
     return true
   }
   
@@ -45,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) { }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
-    fetchAPI()
+    LocationManager.shared.startUpdatingLocation()
   }
   
   func applicationDidBecomeActive(_ application: UIApplication) { }
@@ -94,99 +87,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-extension AppDelegate: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print("위치 갱신됨")
-    let locale = Locale(identifier: "ko_KR")
-    guard let location = locations.last else { return }
-    let coordinate = location.coordinate
-    let convertedCoordinate = GeoConverter().convert(
-      sourceType: .WGS_84,
-      destinationType: .TM,
-      geoPoint: GeographicPoint(x: coordinate.longitude, y: coordinate.latitude)
-    )
-    GeoInfo.shared.setLocation(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-    CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placeMarks, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      // administrativeArea / country / locality / name
-      // 서울특별시 / 대한민국 / 강남구 / 강남대로 382
-    }
-    manager.stopUpdatingLocation()
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print("GPS Error: \(error.localizedDescription)")
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    print("권한 허가 상태 변경: \(status)")
-    if status == .authorizedWhenInUse || status == .authorizedAlways {
-      locationManager.startUpdatingLocation()
-    }
-  }
-}
-
-// MARK: - API 응답 초기화
+// MARK: - Location Manager Configuration
 
 private extension AppDelegate {
-  /// API 호출하는 메소드
-  func fetchAPI() {
-    DispatchQueue.global(qos: .background).async { [weak self] in
-      guard let `self` = self else { return }
-      self.fetchObservatory(self.fetchFineDustConcentration)
-    }
-  }
   
-  /// 관측소 정보를 가져오는 메소드
-  func fetchObservatory(_ completion: @escaping () -> Void) {
-    API.shared.fetchObservatory { response, error in
-      if let error = error {
-        NotificationCenter.default.post(
-          name: .fetchObservatoryDidError,
-          object: nil,
-          userInfo: ["error": error]
-        )
-        return
+  /// Location Manager 환경설정
+  func configureLocationManager(_ manager: LocationManagerType) {
+    manager.authorizationChangingHandler = { status in
+      // 권한이 주어지면 위치 정보 갱신 작업을 시작하고
+      // 그렇지 않으면 관련 상태를 포함하여 노티피케이션을 쏴준다
+      switch status {
+      case .authorizedAlways, .authorizedWhenInUse:
+        manager.startUpdatingLocation()
+      default:
+        NotificationCenter.default
+          .post(name: .locationPermissionDenied, object: nil, userInfo: ["status": status])
       }
-      guard let response = response else { return }
-      FineDustInfo.shared.set(observatory: response.observatory ?? "")
-      completion()
     }
-  }
-  
-  /// 미세먼지 농도 정보를 가져오는 메소드
-  func fetchFineDustConcentration() {
-    API.shared.fetchFineDustConcentration(term: .daily) { response, error in
-      if let error = error {
-        NotificationCenter.default.post(
-          name: .fetchFineDustConcentrationDidError,
-          object: nil,
-          userInfo: ["error": error]
-        )
-        return
-      }
-      guard let response = response else { return }
-      FineDustInfo.shared.set(fineDustResponse: response)
-    }
-  }
-}
-
-// MARK: - 첫 실행시에만 호출
-
-extension AppDelegate {
-  /// 첫 실행시에만 날짜를 저장하도록 함
-  func toggleFirstExecutionFlag() {
-    if !UserDefaults.standard.bool(forKey: "isFirstExecution") {
-      CoreDataManager.shared.save([User.installedDate: Date()], forType: User.self) { error in
+    manager.locationUpdatingHandler = { location in
+      // 위치 정보가 갱신되면
+      // 위경도를 변환하여 SharedInfo 싱글톤 객체에 저장하고
+      // GeocoderManager를 통해 주소를 얻어 SharedInfo 싱글톤 객체에 저장하고
+      // DustManager를 통해 관측소를 얻어 SharedInfo 싱글톤 객체에 저장한다
+      // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
+      // 에러 발생시 해당하는 에러 정보를 포함하여(AppDelegateError) 노티피케이션을 쏴준다
+      let coordinate = location.coordinate
+      let convertedCoordinate
+        = GeoConverter().convert(sourceType: .WGS_84,
+                                 destinationType: .TM,
+                                 geoPoint: GeographicPoint(x: coordinate.longitude,
+                                                           y: coordinate.latitude))
+      SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
+      GeocoderManager.shared.fetchAddress(location) { address, error in
+        defer {
+          manager.stopUpdatingLocation()
+        }
         if let error = error {
-          print(error.localizedDescription)
+          NotificationCenter.default
+            .post(name: .didFailUpdatingAllLocationTasks,
+                  object: nil,
+                  userInfo: ["error": AppDelegateError.geoencodingError(error)])
           return
         }
-        UserDefaults.standard.set(true, forKey: "isFirstExecution")
+        SharedInfo.shared.set(address: address ?? "")
+        let dustObservatoryManager = DustObservatoryManager()
+        dustObservatoryManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+          if let error = error {
+            NotificationCenter.default
+              .post(name: .didSuccessUpdatingAllLocationTasks,
+                    object: nil,
+                    userInfo: ["error": AppDelegateError.networkingError(error)])
+            return
+          }
+          guard let observatory = response?.observatory else { return }
+          SharedInfo.shared.set(observatory: observatory)
+          NotificationCenter.default.post(name: .didSuccessUpdatingAllLocationTasks, object: nil)
+        }
       }
+    }
+    manager.errorHandler = { error in
+      // 작업중 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
+      NotificationCenter.default
+        .post(name: .didFailUpdatingAllLocationTasks,
+              object: nil,
+              userInfo: ["error": AppDelegateError.coreLocationError(error)])
     }
   }
 }

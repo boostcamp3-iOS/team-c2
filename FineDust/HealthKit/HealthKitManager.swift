@@ -2,100 +2,111 @@
 //  HealthKitManager.swift
 //  FineDust
 //
-//  Created by 이재은 on 28/01/2019.
+//  Created by zun on 01/02/2019.
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
 import Foundation
 import HealthKit
-/// HealthKitManagerType 프로토콜 선언
-protocol HealthKitManagerType {
-  func findHealthKitValue(
-    startDate: Date,
-    endDate: Date,
-    quantityFor: HKUnit,
-    quantityTypeIdentifier: HKQuantityTypeIdentifier,
-    completion: @escaping (Double) -> Void)
-  func fetchDistanceValue(_ completion: @escaping (Double) -> Void)
-  func fetchStepCountValue(_ completion: @escaping (Double) -> Void)
-}
-/// HealthKitManager 기능 구현 부분
-struct HealthKitManager: HealthKitManagerType {
-  // HealthKit Data에 접근하는 지점.
+
+/// HealthKit 매니저를 구현하는  클래스.
+final class HealthKitManager: HealthKitManagerType {
+  
+  // MARK: - Properties
+  
+  /// Health 앱 데이터 권한을 요청하기 위한 프로퍼티.
   private let healthStore = HKHealthStore()
-  private let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-  let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())
-  let endDate = Date()
-  /// HealthKit 값 가져오는 함수.
-  func findHealthKitValue(
-    startDate: Date,
-    endDate: Date,
-    quantityFor: HKUnit,
-    quantityTypeIdentifier: HKQuantityTypeIdentifier,
-    completion: @escaping (Double) -> Void
-  ) {
+  
+  /// Health 앱 데이터 중 걸음 수를 가져오기 위한 프로퍼티.
+  private let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount)
+  
+  /// Health 앱 데이터 중 걸은 거리를 가져오기 위한 프로퍼티.
+  private let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
+  
+  /// Health App 권한을 나타내는 변수.
+  private var isAuthorized = true
+  
+  // MARK: - Method
+  
+  /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
+  func requestAuthorization() {
+    guard let stepCount = stepCount, let distance = distance else {
+      print("stepCount, distance properties error")
+      return
+    }
+    
+    // 권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정.
+    if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
+      || healthStore.authorizationStatus(for: distance) == .sharingDenied {
+      isAuthorized = false
+      return
+    }
+    
+    // 걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
+    let healthKitTypes: Set = [stepCount, distance]
+    
+    // 권한요청.
+    healthStore.requestAuthorization(toShare: healthKitTypes,
+                                     read: healthKitTypes
+    ) { _, error in
+      if let error = error {
+        print("request authorization error : \(error.localizedDescription)")
+      } else {
+        print("complete request authorization")
+      }
+    }
+  }
+  
+  /// HealthKit App의 저장된 자료를 찾아주는 메소드.
+  func findHealthKitValue(startDate: Date,
+                          endDate: Date,
+                          quantityFor: HKUnit,
+                          quantityTypeIdentifier: HKQuantityTypeIdentifier,
+                          completion: @escaping (Double?, Error?) -> Void) {
     if let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeIdentifier) {
-      // 시작 및 끝 날짜가 지정된 시간 간격 내에 있는 샘플에 대한 서술을 반환함
-      let predicate = HKQuery.predicateForSamples(
-        withStart: startDate,
-        end: endDate,
-        options: .strictStartDate)
-      // 가져올 날짜 단위 변수.
-      var interval: DateComponents = DateComponents()
-      interval.day = 1
-      // 정한 시간에 대한 통계 쿼리를 수행하고 결과를 반환함.
-      let query = HKStatisticsCollectionQuery(
-        quantityType: quantityType,
-        quantitySamplePredicate: predicate,
-        options: [.cumulativeSum],
-        anchorDate: startDate,
-        intervalComponents: interval
-      )
+      
+      // 시작 및 끝 날짜가 지정된 시간 간격 내에 있는 샘플에 대한 자료의 서술을 반환함
+      let predicate = HKQuery.predicateForSamples(withStart: startDate,
+                                                  end: endDate,
+                                                  options: .strictStartDate)
+      
+      // 가져올 날짜 하루 단위 변수.
+      let interval = DateComponents(day: 1)
+      
+      // 설정한 시간대에 대한 정보를 가져오는 query에 대한 결과문 반환
+      let query = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                              quantitySamplePredicate: predicate,
+                                              options: [.cumulativeSum],
+                                              anchorDate: startDate,
+                                              intervalComponents: interval)
+      
+      //query 첫 결과에 대한 hanlder
       query.initialResultsHandler = { query, results, error in
-        if error != nil {
-          print("findHealthKitValue error: \(String(describing: error?.localizedDescription))")
+        if let error = error {
+          completion(nil, error)
           return
         }
         if let results = results {
+          // 결과가 0일 때
           if results.statistics().count == 0 {
-            completion(0)
+            completion(0, nil)
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
-            results.enumerateStatistics(from: startDate, to: endDate) { statistics, stop in
+            results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
               // 쿼리와 일치하는 모든 값을 더함.
               if let quantity = statistics.sumQuantity() {
                 let quantityValue = quantity.doubleValue(for: quantityFor)
-                completion(quantityValue)
+                completion(quantityValue, nil)
               }
             }
           }
         } else {
+          // 결과가 nil일 때
           print("HKStatisticsCollectionQuery failed!")
+          completion(0, nil)
         }
       }
       healthStore.execute(query)
     }
-  }
-  /// 걸은 거리 가져오기.
-  func fetchDistanceValue(_ completion: @escaping (Double) -> Void) {
-    guard let startDate = startDate else { return }
-    findHealthKitValue(
-      startDate: startDate,
-      endDate: endDate,
-      quantityFor: HKUnit.meter(),
-      quantityTypeIdentifier: .distanceWalkingRunning,
-      completion: completion
-    )
-  }
-  /// 걸음 수 가져오기.
-  func fetchStepCountValue(_ completion: @escaping (Double) -> Void) {
-    guard let startDate = startDate else { return }
-    findHealthKitValue(
-      startDate: startDate,
-      endDate: endDate,
-      quantityFor: HKUnit.count(),
-      quantityTypeIdentifier: .stepCount,
-      completion: completion
-    )
   }
 }
