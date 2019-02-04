@@ -15,6 +15,8 @@ extension Notification.Name {
     = Notification.Name("didSuccessUpdatingAllLocationTasks")
   
   /// 위치정보 갱신 작업중 실패 노티피케이션
-  static let didFailUpdatingAllLocationTasks
-    = Notification.Name("didFailUpdatingAllLocationTasks")
+  static let didFailUpdatingAllLocationTasks = Notification.Name("didFailUpdatingAllLocationTasks")
+  
+  /// 위치정보 권한 성공 이외 노티피케이션
+  static let locationPermissionDenied = Notification.Name("locationPermissionDenied")
 }

@@ -94,23 +94,21 @@ private extension AppDelegate {
   /// Location Manager 환경설정
   func configureLocationManager(_ manager: LocationManagerType) {
     manager.authorizationChangingHandler = { status in
+      // 권한이 주어지면 위치 정보 갱신 작업을 시작하고
+      // 그렇지 않으면 관련 상태를 포함하여 노티피케이션을 쏴준다
       switch status {
       case .authorizedAlways, .authorizedWhenInUse:
         manager.startUpdatingLocation()
-      // 에러 처리
-      case .denied:
-        print("거부됨")
-      case .notDetermined:
-        print("결정되지 않음")
-      case .restricted:
-        print("제한됨")
+      default:
+        NotificationCenter.default
+          .post(name: .locationPermissionDenied, object: nil, userInfo: ["status": status])
       }
     }
     manager.locationUpdatingHandler = { location in
       // 위치 정보가 갱신되면
-      // 위경도를 변환하여 LocationInfo 싱글톤 객체에 저장하고
-      // GeocoderManager를 통해 주소를 얻어 LocationInfo 싱글톤 객체에 저장하고
-      // DustManager를 통해 관측소를 얻어 FineDustInfo 싱글톤 객체에 저장한다
+      // 위경도를 변환하여 SharedInfo 싱글톤 객체에 저장하고
+      // GeocoderManager를 통해 주소를 얻어 SharedInfo 싱글톤 객체에 저장하고
+      // DustManager를 통해 관측소를 얻어 SharedInfo 싱글톤 객체에 저장한다
       // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
       // 에러 발생시 해당하는 에러 정보를 포함하여(AppDelegateError) 노티피케이션을 쏴준다
       let coordinate = location.coordinate
@@ -148,6 +146,7 @@ private extension AppDelegate {
       }
     }
     manager.errorHandler = { error in
+      // 작업중 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
       NotificationCenter.default
         .post(name: .didFailUpdatingAllLocationTasks,
               object: nil,
