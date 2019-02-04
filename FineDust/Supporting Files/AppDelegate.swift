@@ -136,14 +136,14 @@ private extension AppDelegate {
         dustObservatoryManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
           if let error = error {
             NotificationCenter.default
-              .post(name: .didUpdateAllLocationTasks,
+              .post(name: .didSuccessUpdatingAllLocationTasks,
                     object: nil,
                     userInfo: ["error": AppDelegateError.networkingError(error)])
             return
           }
           guard let observatory = response?.observatory else { return }
           SharedInfo.shared.set(observatory: observatory)
-          NotificationCenter.default.post(name: .didUpdateAllLocationTasks, object: nil)
+          NotificationCenter.default.post(name: .didSuccessUpdatingAllLocationTasks, object: nil)
         }
       }
     }
