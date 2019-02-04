@@ -34,12 +34,12 @@ class DustServiceTest: XCTestCase {
   func test_fetchCurrentDustInfo() {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
-    dustService?.fetchCurrentInfo { dustInfo, error in
-      XCTAssertEqual(dustInfo?.currentFineDustGrade ?? .default, DustGrade.good)
-      XCTAssertEqual(dustInfo?.currentUltraFineDustGrade ?? .default, DustGrade.good)
-      XCTAssertEqual(dustInfo?.currentFineDustValue ?? 0, 1)
-      XCTAssertEqual(dustInfo?.currentUltraFineDustValue ?? 0, 1)
-      XCTAssertEqual(dustInfo?.recentUpdatingTime ?? Date(),
+    dustService?.fetchRecentTimeInfo { dustInfo, error in
+      XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.good)
+      XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.good)
+      XCTAssertEqual(dustInfo?.fineDustValue ?? 0, 1)
+      XCTAssertEqual(dustInfo?.ultrafineDustValue ?? 0, 1)
+      XCTAssertEqual(dustInfo?.updatingTime ?? Date(),
                      self.dateFormatter.date(from: "2018-01-23 17:00"))
       expect.fulfill()
     }
@@ -50,7 +50,7 @@ class DustServiceTest: XCTestCase {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = nil
     mockDustManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
-    dustService.fetchCurrentInfo { dustInfo, error in
+    dustService.fetchRecentTimeInfo { dustInfo, error in
       XCTAssertNil(dustInfo)
       XCTAssertNotNil(error)
       expect.fulfill()

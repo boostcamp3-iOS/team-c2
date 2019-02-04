@@ -22,7 +22,6 @@
 		D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */; };
 		534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */; };
 		F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */; };
-		BFDF1F66670D86A5303EDBE7ED671061 /* CurrentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */; };
 		959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */; };
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
 		E59BB0B0FBA7D57D24E6E247BE01272A /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */; };
@@ -87,6 +86,7 @@
 		61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */; };
 		9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */; };
 		2B8D866B39C9DD1EBE276B9E25957797 /* RatioGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */; };
+		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */; };
 		B500997103DB43D02E812611C3454782 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */; };
 		28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */; };
@@ -136,7 +136,6 @@
 		AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceType.swift; sourceTree = "<group>"; };
 		6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserManagerType.swift; sourceTree = "<group>"; };
-		3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDustInfo.swift; sourceTree = "<group>"; };
 		DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTerm.swift; sourceTree = "<group>"; };
 		804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
@@ -209,6 +208,7 @@
 		F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
+		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
 		DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +319,15 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		210EE93514800517A8F4C0AED0A4BE35 /* Ratio Graph */ = {
+			isa = PBXGroup;
+			children = (
+				41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */,
+				4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */,
+			);
+			path = "Ratio Graph";
+			sourceTree = "<group>";
+		};
 		249684EBDBAFA57925A702F7F2706E9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,15 +362,6 @@
 				17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */,
 			);
 			path = "Core Data";
-			sourceTree = "<group>";
-		};
-		53A54E60DE3CB9FAEC67B9A153930A34 /* Value Graph */ = {
-			isa = PBXGroup;
-			children = (
-				BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */,
-				6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */,
-			);
-			path = "Value Graph";
 			sourceTree = "<group>";
 		};
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
@@ -400,13 +400,13 @@
 			path = FineDust;
 			sourceTree = "<group>";
 		};
-		210EE93514800517A8F4C0AED0A4BE35 /* Ratio Graph */ = {
+		53A54E60DE3CB9FAEC67B9A153930A34 /* Value Graph */ = {
 			isa = PBXGroup;
 			children = (
-				41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */,
-				4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */,
+				BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */,
+				6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */,
 			);
-			path = "Ratio Graph";
+			path = "Value Graph";
 			sourceTree = "<group>";
 		};
 		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
@@ -566,7 +566,6 @@
 		F90893B611F0A8BF26DDCC2358A0891D /* Dust */ = {
 			isa = PBXGroup;
 			children = (
-				3FEFB75CC7CF7717F45623747303CC7A /* CurrentDustInfo.swift */,
 				91DFB176E6D3CE407FBD2EA7289881AF /* DustError.swift */,
 				F9E7157DC9FD660275C049CF786F487E /* DustInfoManager.swift */,
 				ED585E71752C3FCEFC3DB7DEAEAF68A2 /* DustInfoManagerType.swift */,
@@ -577,6 +576,7 @@
 				75A186092B1BADAC944224E6C56830FE /* DustObservatoryManager.swift */,
 				3DC209D25C37C66A4575AE2D9DF76130 /* DustObservatoryManagerType.swift */,
 				F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */,
+				FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */,
 				50271B13372C2F87ABAADF29353AEDEC /* XMLError.swift */,
 				6DEEE5C27474765434A333169934EB80 /* XMLManager.swift */,
 				E4060A3D7997001798FC10629858A3AE /* XMLManagerType.swift */,
@@ -803,7 +803,6 @@
 				D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */,
 				534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */,
 				F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */,
-				BFDF1F66670D86A5303EDBE7ED671061 /* CurrentDustInfo.swift in Sources */,
 				959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */,
 				485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */,
 				E59BB0B0FBA7D57D24E6E247BE01272A /* Double+.swift in Sources */,
@@ -849,6 +848,7 @@
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */,
 				9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */,
+				A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */,
 				C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */,
 				28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,

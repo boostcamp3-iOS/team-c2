@@ -13,13 +13,13 @@ class MockDustInfoService: DustInfoServiceType {
   
   var error: Error?
   
-  var currentDustInfo: CurrentDustInfo?
+  var currentDustInfo: RecentDustInfo?
   
   var fineDustIntakeByHour: HourIntakePair?
   
   var ultrafineDustIntakeByHour: HourIntakePair?
   
-  func fetchRecentTimeInfo(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
+  func fetchRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
     completion(currentDustInfo, error)
   }
   

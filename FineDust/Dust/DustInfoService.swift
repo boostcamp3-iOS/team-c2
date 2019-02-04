@@ -36,7 +36,7 @@ final class DustInfoService: DustInfoServiceType {
     self.dustInfoManager = dustManager
   }
   
-  func fetchRecentTimeInfo(_ completion: @escaping (CurrentDustInfo?, Error?) -> Void) {
+  func fetchRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
     dustInfoManager
       .fetchDustInfo(
         term: .daily,
@@ -47,17 +47,15 @@ final class DustInfoService: DustInfoServiceType {
             return
           }
           guard let self = self else { return }
-          if let currentResponse = response?.items.first {
-            let currentDustInfo = CurrentDustInfo(
-              currentFineDustValue: currentResponse.fineDustValue,
-              currentUltraFineDustValue: currentResponse.ultraFineDustValue,
-              currentFineDustGrade: DustGrade(rawValue: currentResponse.fineDustGrade) ?? .default,
-              currentUltraFineDustGrade: DustGrade(
-                rawValue: currentResponse.ultraFineDustGrade) ?? .default,
-              recentUpdatingTime: self.fullDateFormatter.date(
-                from: currentResponse.dataTime) ?? Date()
+          if let recentResponse = response?.items.first {
+            let dustInfo = RecentDustInfo(
+              fineDustValue: recentResponse.fineDustValue,
+              ultrafineDustValue: recentResponse.ultrafineDustValue,
+              fineDustGrade: DustGrade(rawValue: recentResponse.fineDustGrade) ?? .default,
+              ultrafineDustGrade: DustGrade(rawValue: recentResponse.ultrafineDustGrade) ?? .default,
+              updatingTime: self.fullDateFormatter.date(from: recentResponse.dataTime) ?? Date()
             )
-            completion(currentDustInfo, nil)
+            completion(dustInfo, nil)
           }
     }
   }
@@ -69,7 +67,7 @@ final class DustInfoService: DustInfoServiceType {
         numberOfRows: 24,
         pageNumber: 1) { [weak self] response, error in
           var fineDust: [Hour: Int] = [:]
-          var ultraFineDust: [Hour: Int] = [:]
+          var ultrafineDust: [Hour: Int] = [:]
           guard let self = self else { return }
           if let error = error {
             completion(nil, nil, error)
@@ -81,18 +79,18 @@ final class DustInfoService: DustInfoServiceType {
             let hourToInt = Int(hourToString) ?? 0
             let hour = Hour(rawValue: hourToInt) ?? .default
             fineDust[hour] = item.fineDustValue
-            ultraFineDust[hour] = item.ultraFineDustValue
+            ultrafineDust[hour] = item.ultrafineDustValue
             if hour == .zero { return }
           }
           Hour.allCases.forEach { hour in
             if fineDust[hour] == nil {
               fineDust[hour] = 0
             }
-            if ultraFineDust[hour] == nil {
-              ultraFineDust[hour] = 0
+            if ultrafineDust[hour] == nil {
+              ultrafineDust[hour] = 0
             }
           }
-          completion(fineDust, ultraFineDust, nil)
+          completion(fineDust, ultrafineDust, nil)
     }
   }
 }
