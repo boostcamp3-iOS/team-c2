@@ -8,25 +8,6 @@
 
 import UIKit
 
-/// Value Graph View Data Source.
-protocol ValueGraphViewDataSource: class {
-  
-  /// 기준 날짜.
-  var referenceDate: Date { get }
-  
-  /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
-  var intakeAmounts: [CGFloat] { get }
-}
-
-/// Value Graph View Delegate.
-protocol ValueGraphViewDelegate: class {
-  
-  /// DatePicker의 Done 버튼을 눌렀을 때의 동작 정의.
-  func valueGraphView(_ valueGraphView: ValueGraphView,
-                      didTapDoneButton button: UIBarButtonItem,
-                      in datePicker: UIDatePicker)
-}
-
 /// 지정 날짜 기준 일주일 그래프 관련 뷰.
 final class ValueGraphView: UIView {
 
@@ -55,13 +36,10 @@ final class ValueGraphView: UIView {
     static let springVelocity: CGFloat = 0.5
     
     /// 애니메이션 옵션.
-    static let option: UIView.AnimationOptions = [.curveEaseInOut]
+    static let options: UIView.AnimationOptions = [.curveEaseInOut]
   }
   
   // MARK: Delegate
-  
-  /// Value Graph View Data Source.
-  weak var dataSource: ValueGraphViewDataSource?
   
   /// Value Graph View Delegate.
   weak var delegate: ValueGraphViewDelegate?
@@ -99,7 +77,7 @@ final class ValueGraphView: UIView {
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
-    return dataSource?.intakeAmounts ?? []
+    return delegate?.intakeAmounts ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.
@@ -123,7 +101,7 @@ final class ValueGraphView: UIView {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.dateFormat = "d"
-    var array = [Date].init(repeating: selectedDate, count: 7)
+    var array = [Date](repeating: selectedDate, count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
@@ -172,9 +150,7 @@ final class ValueGraphView: UIView {
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(
-          radius: 2.0
-        )
+        view.layer.setBorder(radius: 2.0)
         view.backgroundColor = graphBackgroundColor(at: index)
       }
     }
@@ -226,14 +202,14 @@ private extension ValueGraphView {
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
       var heightConstraint = graphViewHeightConstraints[index]
-      DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
         UIView.animate(
           withDuration: Animation.duration,
           delay: Animation.delay,
           usingSpringWithDamping: Animation.damping,
           initialSpringVelocity: Animation.springVelocity,
-          options: .curveEaseInOut,
-          animations: {
+          options: Animation.options,
+          animations: { [weak self] in
             heightConstraint = heightConstraint.changedMultiplier(to: ratio)
             self?.layoutIfNeeded()
           },
@@ -245,14 +221,14 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정.
   func setUnitLabels() {
-    zip(unitLabels, axisTexts).forEach { (label, text) in
+    zip(unitLabels, axisTexts).forEach { label, text in
       label.text = text
     }
   }
   
   /// 요일 레이블 텍스트 설정.
   func setDateLabelsTitle() {
-    zip(dateLabels, dateTexts).forEach { (label, text) in
+    zip(dateLabels, dateTexts).forEach { label, text in
       label.text = text
     }
   }

@@ -15,6 +15,8 @@ protocol LocationObserver: class {
   
   func handleIfFail(_ notification: Notification)
   
+  func handleIfAuthorizationDenied(_ notification: Notification)
+  
   func registerLocationObserver()
   
   func unregisterLocationObserver()
@@ -34,6 +36,12 @@ extension LocationObserver where Self: UIViewController {
       queue: nil) { [weak self] notification in
         self?.handleIfFail(notification)
     }
+    NotificationCenter.default.addObserver(
+      forName: .locationPermissionDenied,
+      object: nil,
+      queue: nil) { [weak self] notification in
+        self?.handleIfAuthorizationDenied(notification)
+    }
   }
   
   func unregisterLocationObserver() {
@@ -45,6 +53,11 @@ extension LocationObserver where Self: UIViewController {
     NotificationCenter.default.removeObserver(
       self,
       name: .didFailUpdatingAllLocationTasks,
+      object: nil
+    )
+    NotificationCenter.default.removeObserver(
+      self,
+      name: .locationPermissionDenied,
       object: nil
     )
   }

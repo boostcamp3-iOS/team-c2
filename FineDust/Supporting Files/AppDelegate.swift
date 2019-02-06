@@ -106,11 +106,13 @@ private extension AppDelegate {
     }
     manager.locationUpdatingHandler = { location in
       // 위치 정보가 갱신되면
+      // 일단 위치 정보 갱신을 멈춘다
       // 위경도를 변환하여 SharedInfo 싱글톤 객체에 저장하고
       // GeocoderManager를 통해 주소를 얻어 SharedInfo 싱글톤 객체에 저장하고
       // DustManager를 통해 관측소를 얻어 SharedInfo 싱글톤 객체에 저장한다
       // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
       // 에러 발생시 해당하는 에러 정보를 포함하여(LocationTaskError) 노티피케이션을 쏴준다
+      manager.stopUpdatingLocation()
       let coordinate = location.coordinate
       let convertedCoordinate
         = GeoConverter().convert(sourceType: .WGS_84,
@@ -119,9 +121,6 @@ private extension AppDelegate {
                                                            y: coordinate.latitude))
       SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
       GeocoderManager.shared.fetchAddress(location) { address, error in
-        defer {
-          manager.stopUpdatingLocation()
-        }
         if let error = error {
           NotificationCenter.default
             .post(name: .didFailUpdatingAllLocationTasks,

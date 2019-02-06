@@ -88,6 +88,7 @@
 		61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */; };
 		9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */; };
 		2B8D866B39C9DD1EBE276B9E25957797 /* RatioGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */; };
+		69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */; };
 		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */; };
 		B500997103DB43D02E812611C3454782 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */; };
@@ -103,6 +104,7 @@
 		3A77C8B9693322DF25FF0762A1ECF2AE /* UnitTestREADME.md in Resources */ = {isa = PBXBuildFile; fileRef = 1BA0A52F0ED2A919EC586D53EA6365F7 /* UnitTestREADME.md */; };
 		E58FADEFDCD685742F03D94196FDB227 /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */; };
 		563A95DB8198B51C3DC0B7B6BE64DDA3 /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */; };
+		1CB26EE568A3DDD41D49D6A341F76DC1 /* ValueGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */; };
 		0D7D9170D64C59CBFDF5B3B699E135B9 /* XMLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50271B13372C2F87ABAADF29353AEDEC /* XMLError.swift */; };
 		98FA95AD469CE9B02B82BCE3C4F16F3E /* XMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEEE5C27474765434A333169934EB80 /* XMLManager.swift */; };
 		BF5FC1431BDC92705CCF4D4560AF99BB /* XMLManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4060A3D7997001798FC10629858A3AE /* XMLManagerType.swift */; };
@@ -212,6 +214,7 @@
 		F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
+		ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
 		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
 		DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 		1BA0A52F0ED2A919EC586D53EA6365F7 /* UnitTestREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = UnitTestREADME.md; sourceTree = "<group>"; };
 		BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphView.swift; sourceTree = "<group>"; };
 		6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
+		D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDelegate.swift; sourceTree = "<group>"; };
 		50271B13372C2F87ABAADF29353AEDEC /* XMLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLError.swift; sourceTree = "<group>"; };
 		6DEEE5C27474765434A333169934EB80 /* XMLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLManager.swift; sourceTree = "<group>"; };
 		E4060A3D7997001798FC10629858A3AE /* XMLManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLManagerType.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 			children = (
 				41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */,
 				4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */,
+				ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 			children = (
 				BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */,
 				6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */,
+				D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */,
 			);
 			path = "Value Graph";
 			sourceTree = "<group>";
@@ -856,6 +862,7 @@
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */,
 				9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */,
+				69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */,
 				A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */,
 				C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */,
 				28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */,
@@ -868,6 +875,7 @@
 				78460935F8D933BB0B289AF0A2352619 /* UIView+NSLayoutAnchor.swift in Sources */,
 				5FDA8F214C6E9BDDA2C64DBB2ED640BD /* UIViewController+.swift in Sources */,
 				E58FADEFDCD685742F03D94196FDB227 /* ValueGraphView.swift in Sources */,
+				1CB26EE568A3DDD41D49D6A341F76DC1 /* ValueGraphViewDelegate.swift in Sources */,
 				0D7D9170D64C59CBFDF5B3B699E135B9 /* XMLError.swift in Sources */,
 				98FA95AD469CE9B02B82BCE3C4F16F3E /* XMLManager.swift in Sources */,
 				BF5FC1431BDC92705CCF4D4560AF99BB /* XMLManagerType.swift in Sources */,

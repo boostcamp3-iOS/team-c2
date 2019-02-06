@@ -8,13 +8,6 @@
 
 import UIKit
 
-/// Ratio Graph View Data Source Protocol.
-protocol RatioGraphViewDataSource: class {
-  
-  /// 전체에 대한 부분의 비율.
-  var intakeRatio: CGFloat { get }
-}
-
 /// 비율 그래프 뷰.
 final class RatioGraphView: UIView {
   
@@ -23,23 +16,23 @@ final class RatioGraphView: UIView {
   /// 상수 정리.
   enum Constant {
     
+    /// 레이어 선 두께.
+    static let lineWidth: CGFloat = 10.0
+    
     /// 배경 뷰 높이와 전체 비율 섹션 뷰 높이의 차이.
     static let entireSectionViewHeightDifference: CGFloat = 64.0
-    
-    /// 가운데 원형 뷰 반지름의 전체 비율 섹션 뷰 반지름과의 비율.
-    static let centerHoleViewRadiusRatio: CGFloat = 1.2
   }
   
   // MARK: Delegate
   
   /// Ratio Graph View Data Source.
-  weak var dataSource: RatioGraphViewDataSource?
+  weak var delegate: RatioGraphViewDelegate?
   
   // MARK: Private Properties
   
   /// 전체에 대한 부분의 비율.
   private var ratio: CGFloat {
-    return dataSource?.intakeRatio ?? 0.0
+    return delegate?.intakeRatio ?? 0.0
   }
   
   /// 비율을 각도로 변환.
@@ -59,25 +52,28 @@ final class RatioGraphView: UIView {
   
   // MARK: View
   
-  /// 원 그래프의 전체 비율 부분 뷰.
-  private var entireSectionView: UIView!
-  
-  /// 가운데 비어 있는 원.
-  private var centerHoleView: UIView!
-  
   /// 퍼센트 레이블.
-  private var percentLabel: UILabel!
+  private lazy var percentLabel: UILabel! = {
+    let label = UILabel()
+    label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    backgroundView.addSubview(label)
+    NSLayoutConstraint.activate([
+      label.anchor.centerX.equal(to: backgroundView.anchor.centerX),
+      label.anchor.centerY.equal(to: backgroundView.anchor.centerY)
+      ])
+    return label
+  }()
+  
+  /// 타이머.
+  private var timer: Timer?
   
   // MARK: Method
   
   /// 뷰 전체 설정.
   func setup() {
-    if entireSectionView != nil {
-      deinitializeSubviews()
-    }
-    drawEntireSectionView()
-    drawPortionSectionView()
-    drawCenterHoleView()
+    deinitializeElements()
+    drawRatioGraph()
     setPercentLabel()
   }
 }
@@ -87,109 +83,58 @@ final class RatioGraphView: UIView {
 private extension RatioGraphView {
   
   /// 서브뷰 초기화.
-  func deinitializeSubviews() {
-    entireSectionView.removeFromSuperview()
-    centerHoleView.removeFromSuperview()
-    percentLabel.removeFromSuperview()
+  func deinitializeElements() {
+    timer?.invalidate()
+    backgroundView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
   }
   
-  /// 전체 비율 뷰 그리기.
-  func drawEntireSectionView() {
-    entireSectionView = UIView(frame: CGRect(x: 0,
-                                             y: 0,
-                                             width: backgroundViewHeight,
-                                             height: backgroundViewHeight))
-    backgroundView.addSubview(entireSectionView)
-    entireSectionView.backgroundColor = Asset.graph1.color
-    entireSectionView.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      entireSectionView.anchor.width.equal(toConstant: backgroundViewHeight),
-      entireSectionView.anchor.height.equal(toConstant: backgroundViewHeight),
-      entireSectionView.anchor.centerX.equal(to: backgroundView.anchor.centerX),
-      entireSectionView.anchor.centerY.equal(to: backgroundView.anchor.centerY)
-      ])
-    entireSectionView.clipsToBounds = true
-    entireSectionView.layer.cornerRadius = backgroundViewHeight / 2
-  }
-  
-  /// 부분 비율 뷰 그리기.
-  func drawPortionSectionView() {
-    let startPath = arcPath(endAngle: -.pi / 2)
-    let endPath = arcPath(endAngle: endAngle)
-    let shapeLayer = CAShapeLayer()
-    shapeLayer.path = startPath.cgPath
-    shapeLayer.fillColor = Asset.graphToday.color.cgColor
-    shapeLayer.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 0, blur: 8, spread: 0)
-    let animation = CABasicAnimation(keyPath: "path")
-    animation.toValue = endPath.cgPath
-    animation.duration = Double(ratio * 5)
-    animation.timingFunction = CAMediaTimingFunction(name: .linear)
-    animation.fillMode = .forwards
-    animation.isRemovedOnCompletion = false
-    shapeLayer.add(animation, forKey: animation.keyPath)
-    entireSectionView.layer.addSublayer(shapeLayer)
-  }
-  
-  /// 가운데 빈 효과 내는 원 그리기.
-  func drawCenterHoleView() {
-    centerHoleView = UIView()
-    centerHoleView.backgroundColor = .white
-    backgroundView.addSubview(centerHoleView)
-    centerHoleView.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      centerHoleView.anchor.width.equal(
-        toConstant: backgroundViewHeight / Constant.centerHoleViewRadiusRatio
-      ),
-      centerHoleView.anchor.height.equal(
-        toConstant: backgroundViewHeight / Constant.centerHoleViewRadiusRatio
-      ),
-      centerHoleView.anchor.centerX.equal(to: backgroundView.anchor.centerX),
-      centerHoleView.anchor.centerY.equal(to: backgroundView.anchor.centerY)
-      ])
-    centerHoleView.clipsToBounds = true
-    centerHoleView.layer.cornerRadius
-      = backgroundViewHeight / 2 / Constant.centerHoleViewRadiusRatio
+  /// 비율 원 그래프 그리기.
+  func drawRatioGraph() {
+    let path = UIBezierPath(arcCenter: .init(x: backgroundView.bounds.width / 2,
+                                             y: backgroundView.bounds.height / 2),
+                            radius: backgroundViewHeight / 2,
+                            startAngle: -.pi / 2,
+                            endAngle: .pi * 3 / 2,
+                            clockwise: true)
+    // 전체 레이어
+    let entireLayer = CAShapeLayer()
+    entireLayer.path = path.cgPath
+    entireLayer.lineWidth = Constant.lineWidth
+    entireLayer.fillColor = UIColor.clear.cgColor
+    entireLayer.strokeColor = Asset.graph1.color.cgColor
+    backgroundView.layer.addSublayer(entireLayer)
+    // 부분 레이어
+    let portionLayer = CAShapeLayer()
+    portionLayer.path = path.cgPath
+    portionLayer.lineWidth = Constant.lineWidth
+    portionLayer.fillColor = UIColor.clear.cgColor
+    portionLayer.strokeColor = Asset.graphToday.color.cgColor
+    portionLayer.strokeEnd = 0
+    backgroundView.layer.addSublayer(portionLayer)
+    // 부분 레이어에 애니메이션
+    let animation = CABasicAnimation(keyPath: "strokeEnd")
+    animation.fromValue = 0
+    animation.toValue = ratio
+    animation.duration = 1
+    portionLayer.strokeEnd = ratio
+    portionLayer.add(animation, forKey: animation.keyPath)
   }
   
   /// 비어 있는 원 안에 퍼센트 레이블 설정하기.
   func setPercentLabel() {
-    percentLabel = UILabel()
-    percentLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-    percentLabel.translatesAutoresizingMaskIntoConstraints = false
-    centerHoleView.addSubview(percentLabel)
-    NSLayoutConstraint.activate([
-      percentLabel.anchor.centerX.equal(to: centerHoleView.anchor.centerX),
-      percentLabel.anchor.centerY.equal(to: centerHoleView.anchor.centerY)
-      ])
     var startValue: Int = 0
     let endValue = Int(ratio * 100)
-    let interval = Double(ratio) / 10
-    let timer = Timer.scheduledTimer(withTimeInterval: interval,
-                                     repeats: true) { [weak self] timer in
-      startValue += 1
-      self?.percentLabel.text = "\(startValue)%"
-      if startValue == endValue {
-        timer.invalidate()
-      }
+    let interval = 1.0 / Double(endValue)
+    backgroundView.addSubview(percentLabel)
+    timer = Timer
+      .scheduledTimer(withTimeInterval: interval,
+                      repeats: true) { [weak self] timer in
+                        startValue += 1
+                        self?.percentLabel.text = "\(startValue)%"
+                        if startValue == endValue {
+                          timer.invalidate()
+                        }
     }
-    timer.fire()
-  }
-}
-
-// MARK: - arc 그리기
-
-private extension RatioGraphView {
-  func arcPath(endAngle: CGFloat) -> UIBezierPath {
-    let path = UIBezierPath()
-    path.move(to: entireSectionView.center)
-    path.addLine(to: CGPoint(x: entireSectionView.frame.width / 2,
-                             y: entireSectionView.frame.height))
-    path.addArc(withCenter: entireSectionView.center,
-                radius: backgroundViewHeight,
-                startAngle: -.pi / 2,
-                endAngle: endAngle,
-                clockwise: true)
-    path.close()
-    return path
+    timer?.fire()
   }
 }

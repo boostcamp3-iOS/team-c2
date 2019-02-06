@@ -50,7 +50,6 @@ final class StatisticsViewController: UIViewController {
   /// 값 그래프.
   private var valueGraphView: ValueGraphView! {
     didSet {
-      valueGraphView.dataSource = self
       valueGraphView.delegate = self
     }
   }
@@ -58,19 +57,19 @@ final class StatisticsViewController: UIViewController {
   /// 비율 그래프.
   private var ratioGraphView: RatioGraphView! {
     didSet {
-      ratioGraphView.dataSource = self
+      ratioGraphView.delegate = self
     }
   }
   
   // MARK: Property
   
   /// 7일간의 미세먼지 농도 값 모음.
-  var fineDustValues: [CGFloat] = [0, 0, 0, 0, 0, 0, 12]
+  var dustIntakes: [CGFloat] = [17, 27, 68, 74, 127, 67, 183]
   
   /// 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: CGFloat {
-    let sum = fineDustValues.reduce(0, +)
-    let last = fineDustValues.last ?? 0.0
+  private var dustLastValueRatio: CGFloat {
+    let sum = dustIntakes.reduce(0, +)
+    let last = dustIntakes.last ?? 0.0
     return last / sum
   }
   
@@ -83,15 +82,18 @@ final class StatisticsViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "미세먼지 분석".localized
     createSubviews()
+    setConstraintsToSubviews()
     registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     // 값 새로 받아오고 서브뷰 초기화
-    requestDustTodayInfo()
-    setConstraintsToSubviews()
     initializeValueGraphView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     initializeRatioGraphView()
   }
   
@@ -102,13 +104,9 @@ final class StatisticsViewController: UIViewController {
   private func requestDustTodayInfo() {
     DustInfoService().fetchTodayInfo { fineDust, ultrafineDust, error in
       if let error = error {
-        UIAlertController
-          .alert(title: "", message: error.localizedDescription)
-          .action(title: "확인")
-          .present(to: self)
+        print(error.localizedDescription)
         return
       }
-      print(fineDust?.sorted { $0.key < $1.key })
     }
   }
 }
@@ -126,37 +124,35 @@ extension StatisticsViewController: LocationObserver {
       .action(title: "확인")
       .present(to: self)
   }
-}
-
-// MARK: - ValueGraphView Data Source 구현
-
-extension StatisticsViewController: ValueGraphViewDataSource {
-  var referenceDate: Date {
-    return selectedDate
-  }
-  var intakeAmounts: [CGFloat] {
-    return fineDustValues
+  
+  func handleIfAuthorizationDenied(_ notification: Notification) {
+    print("authorization denied")
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
-  func valueGraphView(
-    _ valueGraphView: ValueGraphView,
-    didTapDoneButton button: UIBarButtonItem,
-    in datePicker: UIDatePicker
-  ) {
+  func valueGraphView(_ valueGraphView: ValueGraphView,
+                      didTapDoneButton button: UIBarButtonItem,
+                      in datePicker: UIDatePicker) {
     selectedDate = datePicker.date
+  }
+  
+  var referenceDate: Date {
+    return selectedDate
+  }
+  var intakeAmounts: [CGFloat] {
+    return dustIntakes
   }
 }
 
 // MARK: - RatioGraphView Data Source 구현
 
-extension StatisticsViewController: RatioGraphViewDataSource {
+extension StatisticsViewController: RatioGraphViewDelegate {
   /// 흡입량 비율
   var intakeRatio: CGFloat {
-    return fineDustLastValueRatio
+    return dustLastValueRatio
   }
 }
 
