@@ -13,35 +13,31 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: IBOutlet
   
-  @IBOutlet private weak var feedbackListTabelView: UITableView!
+  @IBOutlet private weak var feedbackListTableView: UITableView!
   
   // MARK: Properties
   
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var count = 10
-  private let cornerRadius: CGFloat = 5
-  private let screenSize = UIScreen.main.bounds
   
   // MARK: - LifeCycle
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
-    feedbackListTabelView.reloadData()
+    feedbackListTableView.reloadData()
   }
 }
 
 // MARK: - UITabelViewDataSource
 
 extension FeedbackListViewController: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView
-    ) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 2
   }
   
   func tableView(_ tableView: UITableView,
-                 numberOfRowsInSection section: Int
-    ) -> Int {
+                 numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
       return 1
     } else {
@@ -50,12 +46,12 @@ extension FeedbackListViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView,
-                 cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-    
-    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section])
+                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView
+      .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
+                           for: indexPath)
 
-    return cell ?? UITableViewCell()
+    return cell
   }
 }
 
@@ -63,12 +59,12 @@ extension FeedbackListViewController: UITableViewDataSource {
 
 extension FeedbackListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView,
-                 heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
+                 heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 300
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+  func tableView(_ tableView: UITableView,
+                 titleForHeaderInSection section: Int) -> String? {
     if section == 0 {
       return "추천"
     } else {
@@ -85,14 +81,12 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView,
-                      numberOfItemsInSection section: Int
-    ) -> Int {
+                      numberOfItemsInSection section: Int) -> Int {
     return 3
   }
   
   func collectionView(_ collectionView: UICollectionView,
-                      cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "recommendCell",

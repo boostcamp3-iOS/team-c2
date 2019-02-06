@@ -162,7 +162,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="5JZ-gj-Ofj"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="feedbackListTabelView" destination="zy8-Zz-Dej" id="PoK-gR-HDP"/>
+                        <outlet property="feedbackListTableView" destination="zy8-Zz-Dej" id="fUb-Ge-yn1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NH6-7M-RbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
