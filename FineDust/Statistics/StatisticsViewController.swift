@@ -65,7 +65,7 @@ final class StatisticsViewController: UIViewController {
   // MARK: Property
   
   /// 7일간의 미세먼지 농도 값 모음.
-  var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
+  var fineDustValues: [CGFloat] = [0, 0, 0, 0, 0, 0, 12]
   
   /// 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: CGFloat {
@@ -83,28 +83,48 @@ final class StatisticsViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "미세먼지 분석".localized
     createSubviews()
+    registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     // 값 새로 받아오고 서브뷰 초기화
-    var array = [CGFloat]()
-    for _ in 0..<7 {
-      array.append(CGFloat.random(in: 10...200))
-    }
-    fineDustValues = array
+    requestDustTodayInfo()
     setConstraintsToSubviews()
     initializeValueGraphView()
     initializeRatioGraphView()
   }
   
-  // MARK: Method
+  deinit {
+    unregisterLocationObserver()
+  }
   
-  /// 미세먼지 농도 조회 통신이 완료된 노티피케이션을 받았을 경우 동작 정의.
-  @objc private func didFetchFineDustConcentration(_ notification: Notification) {
-    if let response = notification.userInfo?["data"] as? DustResponse {
-      print(response)
+  private func requestDustTodayInfo() {
+    DustInfoService().fetchTodayInfo { fineDust, ultrafineDust, error in
+      if let error = error {
+        UIAlertController
+          .alert(title: "", message: error.localizedDescription)
+          .action(title: "확인")
+          .present(to: self)
+        return
+      }
+      print(fineDust?.sorted { $0.key < $1.key })
     }
+  }
+}
+
+// MARK: - LocationObserver 구현
+
+extension StatisticsViewController: LocationObserver {
+  func handleIfSuccess(_ notification: Notification) {
+    requestDustTodayInfo()
+  }
+  
+  func handleIfFail(_ notification: Notification) {
+    UIAlertController
+      .alert(title: "", message: notification.locationTaskError?.localizedDescription)
+      .action(title: "확인")
+      .present(to: self)
   }
 }
 

@@ -41,12 +41,11 @@ final class DustInfoService: DustInfoServiceType {
       .fetchDustInfo(
         term: .daily,
         numberOfRows: 1,
-        pageNumber: 1) { [weak self] response, error in
+        pageNumber: 1) { response, error in
           if let error = error {
             completion(nil, error)
             return
           }
-          guard let self = self else { return }
           if let recentResponse = response?.items.first {
             let dustInfo = RecentDustInfo(
               fineDustValue: recentResponse.fineDustValue,
@@ -65,22 +64,26 @@ final class DustInfoService: DustInfoServiceType {
       .fetchDustInfo(
         term: .daily,
         numberOfRows: 24,
-        pageNumber: 1) { [weak self] response, error in
+        pageNumber: 1) { response, error in
           var fineDust: [Hour: Int] = [:]
           var ultrafineDust: [Hour: Int] = [:]
-          guard let self = self else { return }
           if let error = error {
             completion(nil, nil, error)
             return
           }
-          response?.items.forEach { item in
-            let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) ?? Date()
-            let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
-            let hourToInt = Int(hourToString) ?? 0
-            let hour = Hour(rawValue: hourToInt) ?? .default
+          guard let items = response?.items else { return }
+          for item in items {
+            let hour: Hour
+            if let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) {
+              let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
+              let hourToInt = Int(hourToString) ?? 0
+              hour = Hour(rawValue: hourToInt) ?? .default
+            } else {
+              hour = Hour(rawValue: 0) ?? .default
+            }
             fineDust[hour] = item.fineDustValue
             ultrafineDust[hour] = item.ultrafineDustValue
-            if hour == .zero { return }
+            if hour == .zero { break }
           }
           Hour.allCases.forEach { hour in
             if fineDust[hour] == nil {

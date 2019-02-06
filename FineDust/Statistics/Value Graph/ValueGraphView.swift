@@ -198,7 +198,6 @@ final class ValueGraphView: UIView {
     animateHeights()
     setUnitLabels()
     setDateLabelsTitle()
-    print(intakeAmounts, maxValue, intakeRatios)
   }
   
   /// 키보드에 달린 완료 버튼을 눌렀을 때의 동작 정의.
@@ -237,7 +236,7 @@ private extension ValueGraphView {
           animations: {
             heightConstraint = heightConstraint.changedMultiplier(to: ratio)
             self?.layoutIfNeeded()
-        },
+          },
           completion: nil
         )
       }
