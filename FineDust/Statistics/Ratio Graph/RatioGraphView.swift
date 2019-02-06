@@ -25,7 +25,7 @@ final class RatioGraphView: UIView {
   
   // MARK: Delegate
   
-  /// Ratio Graph View Data Source.
+  /// Ratio Graph View Delegate.
   weak var delegate: RatioGraphViewDelegate?
   
   // MARK: Private Properties
