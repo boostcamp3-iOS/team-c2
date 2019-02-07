@@ -8,17 +8,17 @@
 
 import UIKit
 
+/// 3번째 탭 하단 정보 목록 테이블뷰셀.
 final class FeedbackListTableViewCell: UITableViewCell {
 
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
   @IBOutlet private weak var feedbackListShadowView: UIView!
-  @IBOutlet private weak var feedbackListTitleLabel: UILabel!
   @IBOutlet private weak var bookmarkButton: UIButton!
   
+  /// 셀 데이터 및 UI 설정
   func setProperties(at index: Int) {
-    feedbackListTitleLabel.isHidden = index != 0 ? true : false
     feedbackImageView.image = UIImage(named: "info1")
     feedbackTitleLabel.text = "미세먼지 정화 식물"
     feedbackSourceLabel.text = "KTV 국민 방송"
