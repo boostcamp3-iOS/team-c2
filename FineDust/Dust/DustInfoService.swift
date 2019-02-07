@@ -101,7 +101,7 @@ final class DustInfoService: DustInfoServiceType {
             if hour == .zero { break }
           }
           // 딕셔너리의 길이를 맞추기 위한 코드
-          Hour.allCases.forEach { hour in
+          Hour.allCases.filter { $0 == .default }.forEach { hour in
             if fineDust[hour] == nil {
               fineDust[hour] = 0
             }
@@ -120,10 +120,8 @@ final class DustInfoService: DustInfoServiceType {
   ) {
     // 시작 날짜와 끝 날짜의 간격 구하기
     let calendar = Calendar.current
-    let dateComponentBetweenDates
-      = calendar.dateComponents([.day], from: startDate.start, to: endDate.start)
-    let daysBetweenDates = dateComponentBetweenDates.day ?? 0
-    //
+    let daysBetweenDates
+      = calendar.dateComponents([.day], from: startDate.start, to: endDate.start).day ?? 0
     dustInfoManager
       .fetchDustInfo(
         term: .month,
@@ -138,6 +136,7 @@ final class DustInfoService: DustInfoServiceType {
           guard let items = response?.items else { return }
           for item in items {
             let hour: Hour
+            // 현재 요소의 `dataTime`의 0시 날짜
             let currentStartDate: Date
             if let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) {
               // 24:00 형식이 아니어서 데이트 파싱이 잘 되는 경우
@@ -156,7 +155,9 @@ final class DustInfoService: DustInfoServiceType {
               hour = Hour(rawValue: 0) ?? .default
               currentStartDate = nextMidnight
             }
+            // 인자로 들어온 Date의 구간 내에 포함되어 있지 않으면 필요 없으므로 continue
             if !(startDate.start...endDate.start).contains(currentStartDate) { continue }
+            // 시작 날짜의 전날과 현재 요소의 시작 날짜가 같으면 필요한 처리를 다 한 것이므로 break
             if startDate.before(days: 1).start == currentStartDate { break }
             if fineDustPerDate[currentStartDate] == nil {
               fineDustPerDate[currentStartDate] = [:]
