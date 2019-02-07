@@ -18,13 +18,7 @@ final class LocationManager: NSObject {
   static let shared = LocationManager()
   
   // MARK: Private Property
-  
-  private var _authorizationChangeHandler: ((CLAuthorizationStatus) -> Void)?
-  
-  private var _updateLocationHandler: ((CLLocation) -> Void)?
-  
-  private var _errorHandler: ((Error) -> Void)?
-  
+
   /// Core Location의 Location Manager
   private let locationManager: CLLocationManager = {
     let manager = CLLocationManager()
@@ -44,38 +38,7 @@ final class LocationManager: NSObject {
 // MARK: - LocationManagerType 구현
 
 extension LocationManager: LocationManagerType {
-  
-  var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)? {
-    get {
-      return _authorizationChangeHandler
-    }
-    set {
-      _authorizationChangeHandler = newValue
-    }
-  }
-  
-  var locationUpdatingHandler: ((CLLocation) -> Void)? {
-    get {
-      return _updateLocationHandler
-    }
-    set {
-      _updateLocationHandler = newValue
-    }
-  }
-  
-  var errorHandler: ((Error) -> Void)? {
-    get {
-      return _errorHandler
-    }
-    set {
-      _errorHandler = newValue
-    }
-  }
-  
-  func configure(_ configureHandler: @escaping (LocationManagerType) -> Void) {
-    configureHandler(self)
-  }
-  
+
   func requestAuthorization() {
     locationManager.requestAlwaysAuthorization()
   }
