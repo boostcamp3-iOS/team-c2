@@ -202,7 +202,7 @@ private extension ValueGraphView {
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
       var heightConstraint = graphViewHeightConstraints[index]
-      DispatchQueue.main.asyncAfter(deadline: .now()) {
+      DispatchQueue.main.async {
         UIView.animate(
           withDuration: Animation.duration,
           delay: Animation.delay,
