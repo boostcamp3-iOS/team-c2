@@ -46,18 +46,6 @@ final class ValueGraphView: UIView {
   
   // MARK: Property
   
-  /// DatePicker 프로퍼티.
-  private lazy var datePicker: UIDatePicker = {
-    let picker = UIDatePicker()
-    picker.calendar = Calendar.current
-    picker.date = Date()
-    picker.datePickerMode = .date
-    picker.maximumDate = Date()
-    picker.minimumDate = Calendar.current.date(from: DateComponents(year: 2019, month: 1, day: 1))
-    picker.locale = Locale(identifier: "ko_KR")
-    return picker
-  }()
-  
   /// DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -67,13 +55,6 @@ final class ValueGraphView: UIView {
   }()
   
   // MARK: Private Properties
-  
-  /// 선택된 날짜.
-  private var selectedDate: Date = Date() {
-    didSet {
-      dateTextField.text = dateFormatter.string(from: selectedDate)
-    }
-  }
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
@@ -101,7 +82,7 @@ final class ValueGraphView: UIView {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.dateFormat = "d"
-    var array = [Date](repeating: selectedDate, count: 7)
+    var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
@@ -110,41 +91,14 @@ final class ValueGraphView: UIView {
   
   // MARK: IBOutlets
   
-  /// 날짜 표시 텍스트 필드.
-  @IBOutlet private weak var dateTextField: UITextField! {
-    didSet {
-      let toolBar = UIToolbar(
-        frame: CGRect(
-          x: 0,
-          y: 0,
-          width: UIScreen.main.bounds.width,
-          height: 44
-        )
-      )
-      toolBar.items = [
-        UIBarButtonItem(
-          barButtonSystemItem: .flexibleSpace,
-          target: nil,
-          action: nil
-        ),
-        UIBarButtonItem(
-          barButtonSystemItem: .done,
-          target: self,
-          action: #selector(doneButtonDidTap(_:))
-        )
-      ]
-      // 선택된 날짜 초기화
-      selectedDate = Date()
-      dateTextField.inputView = datePicker
-      dateTextField.inputAccessoryView = toolBar
-    }
-  }
-  
+  /// 날짜 레이블.
+  @IBOutlet private weak var dateLabel: UILabel!
+
   /// 제목 레이블.
   @IBOutlet private weak var titleLabel: UILabel!
   
   /// 요일 레이블 모음.
-  @IBOutlet private var dateLabels: [UILabel]!
+  @IBOutlet private var dayLabels: [UILabel]!
   
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
@@ -173,16 +127,8 @@ final class ValueGraphView: UIView {
     initializeHeights()
     animateHeights()
     setUnitLabels()
-    setDateLabelsTitle()
-  }
-  
-  /// 키보드에 달린 완료 버튼을 눌렀을 때의 동작 정의.
-  @objc private func doneButtonDidTap(_ sender: UIBarButtonItem) {
-    dateTextField.resignFirstResponder()
-    dateTextField.text = dateFormatter.string(from: datePicker.date)
-    selectedDate = datePicker.date
-    setup()
-    delegate?.valueGraphView(self, didTapDoneButton: sender, in: datePicker)
+    setDayLabelsTitle()
+    setDateLabel()
   }
 }
 
@@ -227,10 +173,14 @@ private extension ValueGraphView {
   }
   
   /// 요일 레이블 텍스트 설정.
-  func setDateLabelsTitle() {
-    zip(dateLabels, dateTexts).forEach { label, text in
+  func setDayLabelsTitle() {
+    zip(dayLabels, dateTexts).forEach { label, text in
       label.text = text
     }
+  }
+  
+  func setDateLabel() {
+    dateLabel.text = dateFormatter.string(from: Date())
   }
   
   /// 그래프 색상 구하기.
