@@ -107,6 +107,7 @@ final class StatisticsViewController: UIViewController {
         print(error.localizedDescription)
         return
       }
+      print(fineDust, ultrafineDust)
     }
   }
 }
