@@ -22,6 +22,7 @@ final class HealthKitService: HealthKitServiceType {
     
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
+                                         hourInterval: 24,
                                          quantityFor: .count(),
                                          quantityTypeIdentifier: .stepCount
     ) { value, error in
@@ -39,6 +40,7 @@ final class HealthKitService: HealthKitServiceType {
   func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
+                                         hourInterval: 24,
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
     ) { value, error in

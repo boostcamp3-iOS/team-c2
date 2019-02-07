@@ -60,6 +60,7 @@ final class HealthKitManager: HealthKitManagerType {
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
+                          hourInterval: Int,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Error?) -> Void) {
@@ -71,7 +72,7 @@ final class HealthKitManager: HealthKitManagerType {
                                                   options: .strictStartDate)
       
       // 가져올 날짜 하루 단위 변수.
-      let interval = DateComponents(day: 1)
+      let interval = DateComponents(hour: hourInterval)
       
       // 설정한 시간대에 대한 정보를 가져오는 query에 대한 결과문 반환
       let query = HKStatisticsCollectionQuery(quantityType: quantityType,
