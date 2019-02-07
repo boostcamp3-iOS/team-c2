@@ -63,6 +63,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     return 300
   }
   
+  /// 테이블뷰 헤더 이름 설정.
   func tableView(_ tableView: UITableView,
                  titleForHeaderInSection section: Int) -> String? {
     if section == 0 {
@@ -93,8 +94,6 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       for: indexPath
       ) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
-    
-    cell.setProperties()
     
     return cell
   }
