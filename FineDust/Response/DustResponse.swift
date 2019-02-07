@@ -34,44 +34,44 @@ struct DustResponse: XMLParsingType {
     /// 관측 시간. `2019-01-29 16:00`. Format: `yyyy-MM-dd HH:mm`
     let dataTime: String
     
+    private let fineDustValueString: String
+    
+    private let fineDustValue24String: String
+    
+    private let fineDustGradeString: String
+    
+    private let ultrafineDustValueString: String
+    
+    private let ultrafineDustValue24String: String
+    
+    private let ultrafineDustGradeString: String
+    
     /// 미세먼지 현재 농도.
-    let fineDustValueString: String
-    
-    /// 미세먼지 24시간 농도.
-    let fineDustValue24String: String
-    
-    /// 미세먼지 현재 등급.
-    let fineDustGradeString: String
-    
-    /// 초미세먼지 현재 농도.
-    let ultrafineDustValueString: String
-    
-    /// 초미세먼지 24시간 농도.
-    let ultrafineDustValue24String: String
-    
-    /// 초미세먼지 현재 등급.
-    let ultrafineDustGradeString: String
-    
     var fineDustValue: Int {
       return Int(fineDustValueString) ?? 0
     }
     
+    /// 미세먼지 24시간 농도.
     var fineDustValue24: Int {
       return Int(fineDustValue24String) ?? 0
     }
     
+    /// 미세먼지 현재 등급.
     var fineDustGrade: Int {
       return Int(fineDustGradeString) ?? 0
     }
     
+    /// 초미세먼지 현재 농도.
     var ultrafineDustValue: Int {
       return Int(ultrafineDustValueString) ?? 0
     }
     
+    /// 초미세먼지 24시간 농도.
     var ultrafineDustValue24: Int {
       return Int(ultrafineDustValue24String) ?? 0
     }
     
+    /// 초미세먼지 현재 등급.
     var ultrafineDustGrade: Int {
       return Int(ultrafineDustGradeString) ?? 0
     }
