@@ -16,4 +16,7 @@ protocol HealthKitServiceType: class {
   
   /// 오늘 걸은 거리 값 fetch.
   func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void)
+  
+  /// 날짜 범위가 주어질 때 그 사이에 시간당 걸음거리를 fetch.
+  func fetchDistancePerHour(from startDate: Date, to endDate: Date)
 }
