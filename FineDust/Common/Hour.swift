@@ -84,5 +84,15 @@ enum Hour: Int, CaseIterable {
   case twentyThree
   
   /// 오류
-  case `default`
+  case `default` 
+}
+
+extension Hour: Comparable {
+  static func < (lhs: Hour, rhs: Hour) -> Bool {
+    return lhs.rawValue < rhs.rawValue
+  }
+  
+  static func == (lhs: Hour, rhs: Hour) -> Bool {
+    return lhs.rawValue == rhs.rawValue
+  }
 }

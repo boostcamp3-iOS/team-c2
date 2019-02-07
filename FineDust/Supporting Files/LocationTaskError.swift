@@ -9,7 +9,7 @@
 import Foundation
 
 /// 앱델리게이트에서의 작업 중 에러 정의.
-enum AppDelegateError: Error {
+enum LocationTaskError: Error {
   
   /// 주소 변환 작업 중 에러.
   case geoencodingError(Error)
