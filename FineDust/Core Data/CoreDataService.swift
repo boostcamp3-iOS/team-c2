@@ -15,16 +15,27 @@ final class CoreDataService: CoreDataServiceType {
   static let shared = CoreDataService()
   
   /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
-  let user: CoreDataManagerType
+  let user: CoreDataUserManagerType
   
   /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
-  let intake: CoreDataManagerType
+  let intake: CoreDataIntakeManagerType
   
   private init() {
     let context = CoreDataManager.shared.context
     user = User(context: context)
     intake = Intake(context: context)
   }
+  
+  func saveLastAccessedDate(completion: @escaping (Error?) -> Void) {
+    user.save([User.lastDate: Date()], completion: completion)
+  }
+  
+  func fetchLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
+    user.fetch { user, error in
+      completion(user?.lastDate, error)
+    }
+  }
+    
   
   func fetchIntakesInWeek(since date: Date, completion: @escaping ([Int]?, Error?) -> Void) {
     let array = [1, 2, 3, 4, 5, 6, 7]
