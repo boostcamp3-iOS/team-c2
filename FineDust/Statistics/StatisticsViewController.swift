@@ -50,7 +50,6 @@ final class StatisticsViewController: UIViewController {
   /// 값 그래프.
   private var valueGraphView: ValueGraphView! {
     didSet {
-      valueGraphView.dataSource = self
       valueGraphView.delegate = self
     }
   }
@@ -58,19 +57,19 @@ final class StatisticsViewController: UIViewController {
   /// 비율 그래프.
   private var ratioGraphView: RatioGraphView! {
     didSet {
-      ratioGraphView.dataSource = self
+      ratioGraphView.delegate = self
     }
   }
   
   // MARK: Property
   
   /// 7일간의 미세먼지 농도 값 모음.
-  var fineDustValues: [CGFloat] = [18, 67, 176, 135, 96, 79, 51]
+  var dustIntakes: [CGFloat] = [17, 27, 68, 74, 127, 67, 183]
   
   /// 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: CGFloat {
-    let sum = fineDustValues.reduce(0, +)
-    let last = fineDustValues.last ?? 0.0
+  private var dustLastValueRatio: CGFloat {
+    let sum = dustIntakes.reduce(0, +)
+    let last = dustIntakes.last ?? 0.0
     return last / sum
   }
   
@@ -83,60 +82,77 @@ final class StatisticsViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "미세먼지 분석".localized
     createSubviews()
+    setConstraintsToSubviews()
+    registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     // 값 새로 받아오고 서브뷰 초기화
-    var array = [CGFloat]()
-    for _ in 0..<7 {
-      array.append(CGFloat.random(in: 10...200))
-    }
-    fineDustValues = array
-    setConstraintsToSubviews()
     initializeValueGraphView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     initializeRatioGraphView()
   }
   
-  // MARK: Method
+  deinit {
+    unregisterLocationObserver()
+  }
   
-  /// 미세먼지 농도 조회 통신이 완료된 노티피케이션을 받았을 경우 동작 정의.
-  @objc private func didFetchFineDustConcentration(_ notification: Notification) {
-    if let response = notification.userInfo?["data"] as? DustResponse {
-      print(response)
+  private func requestDustTodayInfo() {
+    DustInfoService().fetchTodayInfo { fineDust, ultrafineDust, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
     }
   }
 }
 
-// MARK: - ValueGraphView Data Source 구현
+// MARK: - LocationObserver 구현
 
-extension StatisticsViewController: ValueGraphViewDataSource {
-  var referenceDate: Date {
-    return selectedDate
+extension StatisticsViewController: LocationObserver {
+  func handleIfSuccess(_ notification: Notification) {
+    requestDustTodayInfo()
   }
-  var intakeAmounts: [CGFloat] {
-    return fineDustValues
+  
+  func handleIfFail(_ notification: Notification) {
+    UIAlertController
+      .alert(title: "", message: notification.locationTaskError?.localizedDescription)
+      .action(title: "확인")
+      .present(to: self)
+  }
+  
+  func handleIfAuthorizationDenied(_ notification: Notification) {
+    print("authorization denied")
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
-  func valueGraphView(
-    _ valueGraphView: ValueGraphView,
-    didTapDoneButton button: UIBarButtonItem,
-    in datePicker: UIDatePicker
-  ) {
+  func valueGraphView(_ valueGraphView: ValueGraphView,
+                      didTapDoneButton button: UIBarButtonItem,
+                      in datePicker: UIDatePicker) {
     selectedDate = datePicker.date
+  }
+  
+  var referenceDate: Date {
+    return selectedDate
+  }
+  var intakeAmounts: [CGFloat] {
+    return dustIntakes
   }
 }
 
 // MARK: - RatioGraphView Data Source 구현
 
-extension StatisticsViewController: RatioGraphViewDataSource {
+extension StatisticsViewController: RatioGraphViewDelegate {
   /// 흡입량 비율
   var intakeRatio: CGFloat {
-    return fineDustLastValueRatio
+    return dustLastValueRatio
   }
 }
 
