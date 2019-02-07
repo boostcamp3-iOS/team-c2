@@ -17,7 +17,7 @@ protocol HealthKitManagerType: class {
                           hourInterval: Int,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double?, Error?) -> Void)
+                          completion: @escaping (Double?, Int?, Error?) -> Void)
   
   /// HealthKit 권한 요청 함수.
   func requestAuthorization()
