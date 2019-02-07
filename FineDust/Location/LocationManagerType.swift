@@ -37,6 +37,8 @@ extension LocationManagerType {
   
   var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)? {
     return { status in
+      // 권한이 허용이 되면 위치 정보 갱신을 시작함
+      // 권한이 거부되면 관련 상태를 포함하여 노티피케이션을 쏴줌
       switch status {
       case .authorizedAlways, .authorizedWhenInUse:
         self.startUpdatingLocation()
@@ -49,6 +51,14 @@ extension LocationManagerType {
   
   var locationUpdatingHandler: ((CLLocation) -> Void)? {
     return { location in
+      // 위치 정보 갱신이 완료되면
+      // 일단 위치 정보 갱신을 멈춘다
+      // 이후 GeoConverter 오픈소스 활용하여 좌표를 변환하고
+      // SharedInfo 싱글톤 객체에 x y 좌표를 저장한다
+      // GeocoderManager 활용하여 좌표로부터 주소를 얻고 주소를 SharedInfo 싱글톤 객체에 저장한다
+      // DustObservatoryManager 활용하여 관측소 정보를 얻고 SharedInfo 싱글톤 객체에 젖아한다
+      // 모든 작업이 완료되었으면 완료되었다는 노티피케이션을 쏴준다
+      // 작업 도중에 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
       self.stopUpdatingLocation()
       let coordinate = location.coordinate
       let convertedCoordinate
@@ -87,6 +97,7 @@ extension LocationManagerType {
   
   var errorHandler: ((Error) -> Void)? {
     return { error in
+      // Core Location 작업 중 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
       NotificationCenter.default
         .post(name: .didFailUpdatingAllLocationTasks,
               object: nil,
