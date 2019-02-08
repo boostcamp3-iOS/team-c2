@@ -13,20 +13,6 @@ final class DustInfoService: DustInfoServiceType {
   
   // MARK: Property
   
-  /// `yyyy-MM-dd HH:mm` 형식으로 포매팅하는 데이트 포매터.
-  private lazy var fullDateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    return formatter
-  }()
-  
-  /// `HH` 형식으로 포매팅하는 데이트 포매터.
-  private lazy var monthDateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH"
-    return formatter
-  }()
-  
   /// 미세먼지 매니저 프로토콜을 준수하는 프로퍼티.
   let dustInfoManager: DustInfoManagerType
   
@@ -52,7 +38,7 @@ final class DustInfoService: DustInfoServiceType {
               ultrafineDustValue: recentResponse.ultrafineDustValue,
               fineDustGrade: DustGrade(rawValue: recentResponse.fineDustGrade) ?? .default,
               ultrafineDustGrade: DustGrade(rawValue: recentResponse.ultrafineDustGrade) ?? .default,
-              updatingTime: self.fullDateFormatter.date(from: recentResponse.dataTime) ?? Date()
+              updatingTime: DateFormatter.dateAndTime.date(from: recentResponse.dataTime) ?? Date()
             )
             completion(dustInfo, nil)
           }
@@ -74,8 +60,8 @@ final class DustInfoService: DustInfoServiceType {
           guard let items = response?.items else { return }
           for item in items {
             let hour: Hour
-            if let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) {
-              let hourToString = self.monthDateFormatter.string(from: dataTimeToDate)
+            if let dataTimeToDate = DateFormatter.dateAndTime.date(from: item.dataTime) {
+              let hourToString = DateFormatter.hour.string(from: dataTimeToDate)
               let hourToInt = Int(hourToString) ?? 0
               hour = Hour(rawValue: hourToInt) ?? .default
             } else {
