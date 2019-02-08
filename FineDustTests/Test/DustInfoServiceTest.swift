@@ -10,7 +10,7 @@
 import XCTest
 import Foundation
 
-class DustServiceTest: XCTestCase {
+class DustInfoServiceTest: XCTestCase {
   
   var dustService: DustInfoService!
   
