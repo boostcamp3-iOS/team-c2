@@ -34,32 +34,56 @@ struct DustResponse: XMLParsingType {
     /// 관측 시간. `2019-01-29 16:00`. Format: `yyyy-MM-dd HH:mm`
     let dataTime: String
     
+    private let fineDustValueString: String
+    
+    private let fineDustValue24String: String
+    
+    private let fineDustGradeString: String
+    
+    private let ultrafineDustValueString: String
+    
+    private let ultrafineDustValue24String: String
+    
+    private let ultrafineDustGradeString: String
+    
     /// 미세먼지 현재 농도.
-    let fineDustValue: Int
+    var fineDustValue: Int {
+      return Int(fineDustValueString) ?? 0
+    }
     
     /// 미세먼지 24시간 농도.
-    let fineDustValue24: Int
+    var fineDustValue24: Int {
+      return Int(fineDustValue24String) ?? 0
+    }
     
     /// 미세먼지 현재 등급.
-    let fineDustGrade: Int
+    var fineDustGrade: Int {
+      return Int(fineDustGradeString) ?? 0
+    }
     
     /// 초미세먼지 현재 농도.
-    let ultrafineDustValue: Int
+    var ultrafineDustValue: Int {
+      return Int(ultrafineDustValueString) ?? 0
+    }
     
     /// 초미세먼지 24시간 농도.
-    let ultrafineDustValue24: Int
+    var ultrafineDustValue24: Int {
+      return Int(ultrafineDustValue24String) ?? 0
+    }
     
     /// 초미세먼지 현재 등급.
-    let ultrafineDustGrade: Int
+    var ultrafineDustGrade: Int {
+      return Int(ultrafineDustGradeString) ?? 0
+    }
     
     static func deserialize(_ node: XMLIndexer) throws -> Item {
       return try Item(dataTime: node["dataTime"].value(),
-                      fineDustValue: node["pm10Value"].value(),
-                      fineDustValue24: node["pm10Value24"].value(),
-                      fineDustGrade: node["pm10Grade"].value(),
-                      ultrafineDustValue: node["pm25Value"].value(),
-                      ultrafineDustValue24: node["pm25Value24"].value(),
-                      ultrafineDustGrade: node["pm25Grade"].value())
+                      fineDustValueString: node["pm10Value"].value(),
+                      fineDustValue24String: node["pm10Value24"].value(),
+                      fineDustGradeString: node["pm10Grade"].value(),
+                      ultrafineDustValueString: node["pm25Value"].value(),
+                      ultrafineDustValue24String: node["pm25Value24"].value(),
+                      ultrafineDustGradeString: node["pm25Grade"].value())
     }
   }
   
