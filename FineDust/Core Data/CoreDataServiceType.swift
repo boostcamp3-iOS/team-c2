@@ -18,7 +18,7 @@ protocol CoreDataServiceType: class {
   func fetchLastAccessedDate(completion: @escaping (Date?, Error?) -> Void)
   
   /// 일주일 미세먼지 흡입량 가져오기.
-  func fetchIntakes(since date: Date,
-                    for days: Int,
+  func fetchIntakes(from startDate: Date,
+                    to endDate: Date,
                     completion: @escaping ([Int]?, Error?) -> Void)
 }

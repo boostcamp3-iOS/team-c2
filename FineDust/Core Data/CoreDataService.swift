@@ -32,8 +32,8 @@ final class CoreDataService: CoreDataServiceType {
   
   func fetchLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
     user.fetch { user, error in
-      if let lastDate = user?.lastDate {
-        completion(lastDate, error)
+      if let lastAccessedDate = user?.lastAccessedDate {
+        completion(lastAccessedDate, error)
       } else {
         saveLastAccessedDate { error in
           completion(Date.start(), error)
@@ -41,7 +41,6 @@ final class CoreDataService: CoreDataServiceType {
       }
     }
   }
-  
   
   func fetchIntakes(from startDate: Date,
                     to endDate: Date,
@@ -67,8 +66,6 @@ final class CoreDataService: CoreDataServiceType {
           
         }
       }
-      
-      
     }
     
     let array = [1, 2, 3, 4, 5, 6, 7]
