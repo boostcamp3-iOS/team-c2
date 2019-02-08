@@ -30,6 +30,7 @@
 		945F8AE930CB66E8CF13E3ADC970C3D4 /* DustInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E7157DC9FD660275C049CF786F487E /* DustInfoManager.swift */; };
 		8311DEFE3A71615C51B3BE1D582E79E0 /* DustInfoManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED585E71752C3FCEFC3DB7DEAEAF68A2 /* DustInfoManagerType.swift */; };
 		E2806FDD8F1D3C4EA072CC99C7D145D4 /* DustInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B0B34F19342E62357963B77FBABF8C /* DustInfoService.swift */; };
+		CDF737C57FE818AA4D45EBBDCC11C3B3 /* DustInfoServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0EAA5F7CD6801E41A23B249BB98F4 /* DustInfoServiceTest.swift */; };
 		143EA2EB38E9FEC47ADE3105ACBFCFD4 /* DustInfoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1B9F9201ADFBC9619BED293B7E3E5 /* DustInfoServiceType.swift */; };
 		81536FD4F73F47271F106C2EEB814960 /* DustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4CAFFF2F8B581994F8CFE876638E4E /* DustManager.swift */; };
 		91780083CD30872CF3EA07321EAEF492 /* DustManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03176C99958DD1E499EECC89D6CE76D /* DustManagerTest.swift */; };
@@ -37,7 +38,6 @@
 		0C6FE5F2FBFA0CC849F3B0EB0B3A6C3D /* DustObservatoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A186092B1BADAC944224E6C56830FE /* DustObservatoryManager.swift */; };
 		5754F10E842FB7206E831C013BC62DAE /* DustObservatoryManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC209D25C37C66A4575AE2D9DF76130 /* DustObservatoryManagerType.swift */; };
 		2857D1F7306B342456D836BA06F582AE /* DustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C98043155CF43D3E5E4605CB1A88BE /* DustResponse.swift */; };
-		2FB067BA61B116DED749D2AD3DF92C24 /* DustServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */; };
 		F726386EC2915DC663C9CF635154C286 /* DustStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */; };
 		AF73755646D309F02637E4EE66CD23C5 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */; };
 		C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */; };
@@ -148,6 +148,7 @@
 		F9E7157DC9FD660275C049CF786F487E /* DustInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustInfoManager.swift; sourceTree = "<group>"; };
 		ED585E71752C3FCEFC3DB7DEAEAF68A2 /* DustInfoManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustInfoManagerType.swift; sourceTree = "<group>"; };
 		79B0B34F19342E62357963B77FBABF8C /* DustInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustInfoService.swift; sourceTree = "<group>"; };
+		13C0EAA5F7CD6801E41A23B249BB98F4 /* DustInfoServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustInfoServiceTest.swift; sourceTree = "<group>"; };
 		E2F1B9F9201ADFBC9619BED293B7E3E5 /* DustInfoServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustInfoServiceType.swift; sourceTree = "<group>"; };
 		BF4CAFFF2F8B581994F8CFE876638E4E /* DustManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustManager.swift; path = FineDust/Dust/DustManager.swift; sourceTree = SOURCE_ROOT; };
 		A03176C99958DD1E499EECC89D6CE76D /* DustManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustManagerTest.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		75A186092B1BADAC944224E6C56830FE /* DustObservatoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustObservatoryManager.swift; sourceTree = "<group>"; };
 		3DC209D25C37C66A4575AE2D9DF76130 /* DustObservatoryManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustObservatoryManagerType.swift; sourceTree = "<group>"; };
 		83C98043155CF43D3E5E4605CB1A88BE /* DustResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustResponse.swift; sourceTree = "<group>"; };
-		2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustServiceTest.swift; sourceTree = "<group>"; };
 		F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustStatusCode.swift; path = FineDust/Dust/DustStatusCode.swift; sourceTree = SOURCE_ROOT; };
 		907A79A2E70A8E037ABE9DC8A9E81490 /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -378,8 +378,8 @@
 		449312F5D8CCA3F63B8DD1DA344FE2BC /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				13C0EAA5F7CD6801E41A23B249BB98F4 /* DustInfoServiceTest.swift */,
 				A03176C99958DD1E499EECC89D6CE76D /* DustManagerTest.swift */,
-				2BC5EFB782083FC1856F325F9995F2A4 /* DustServiceTest.swift */,
 				CE2BB7B81F7AD4AADCCFF96A6AA10E15 /* HealthKitManagerTests.swift */,
 				0CD0BFFF937C6E0E33E1A6A6B616B269 /* HealthKitServiceTest.swift */,
 				08D5838C2071047116E1961DCA2B0576 /* IntakeServiceTest.swift */,
@@ -906,8 +906,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF737C57FE818AA4D45EBBDCC11C3B3 /* DustInfoServiceTest.swift in Sources */,
 				91780083CD30872CF3EA07321EAEF492 /* DustManagerTest.swift in Sources */,
-				2FB067BA61B116DED749D2AD3DF92C24 /* DustServiceTest.swift in Sources */,
 				FE6BA77554559F85CF4E6FF79286BEEE /* HealthKitManagerTests.swift in Sources */,
 				C3EB264857C89CE148FC8F56EF9E4265 /* HealthKitServiceTest.swift in Sources */,
 				A71BE8724D4D28DDDEF58F5C3E94716F /* IntakeServiceTest.swift in Sources */,
