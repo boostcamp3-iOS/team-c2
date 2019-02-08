@@ -41,13 +41,13 @@ extension DateFormatter {
     return formatter
   }()
   
-  /// 시간 데이트 포매터. `MM`
+  /// 시간 데이트 포매터. `HH`
   ///
   /// `12`
   static let hour: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale.korea
-    formatter.dateFormat = "MM"
+    formatter.dateFormat = "HH"
     return formatter
   }()
 }
