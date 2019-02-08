@@ -15,10 +15,13 @@ protocol CoreDataServiceType: class {
   func saveLastAccessedDate(completion: @escaping (Error?) -> Void)
   
   /// 최근 접속 날짜 가져오기.
-  func fetchLastAccessedDate(completion: @escaping (Date?, Error?) -> Void)
+  func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void)
   
   /// 일주일 미세먼지 흡입량 가져오기.
-  func fetchIntakes(from startDate: Date,
+  func requestIntakes(from startDate: Date,
                     to endDate: Date,
-                    completion: @escaping ([Int]?, Error?) -> Void)
+                    completion: @escaping ([Date: Int?]?, Error?) -> Void)
+  
+  /// 특정 날짜에 대한 미세먼지 흡입량 저장.
+  func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void)
 }
