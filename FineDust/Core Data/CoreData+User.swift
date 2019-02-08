@@ -13,7 +13,7 @@ import Foundation
 extension User {
   
   /// 최근 접속 날짜 Attribute
-  static let lastDate = "lastDate"
+  static let lastAccessedDate = "lastAccessedDate"
 }
 
 // MARK: - CoreDataUserManagerType 준수
