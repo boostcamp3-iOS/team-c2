@@ -112,10 +112,10 @@ final class DustInfoService: DustInfoServiceType {
             let hour: Hour
             // 현재 요소의 `dataTime`의 0시 날짜
             let currentStartDate: Date
-            if let dataTimeToDate = self.fullDateFormatter.date(from: item.dataTime) {
+            if let dataTimeToDate = DateFormatter.dateAndTime.date(from: item.dataTime) {
               // 24:00 형식이 아니어서 데이트 파싱이 잘 되는 경우
               // 하던 대로 한다
-              let hourToString = self.hourDateFormatter.string(from: dataTimeToDate)
+              let hourToString = DateFormatter.hour.string(from: dataTimeToDate)
               let hourToInt = Int(hourToString) ?? 0
               hour = Hour(rawValue: hourToInt) ?? .default
               currentStartDate = dataTimeToDate.start
@@ -123,7 +123,7 @@ final class DustInfoService: DustInfoServiceType {
               // 24:00 이라서 데이트 파싱이 안되고 nil이 나오는 경우
               // 다음 날짜의 0시로 바꿔준다
               let halfDataTime = item.dataTime.components(separatedBy: " ").first ?? ""
-              let halfDataTimeToDate = self.halfDateFormatter.date(from: halfDataTime)
+              let halfDataTimeToDate = DateFormatter.date.date(from: halfDataTime)
               let nextHalfDataTime = halfDataTimeToDate?.after(days: 1)
               let nextMidnight = nextHalfDataTime?.start ?? Date()
               hour = Hour(rawValue: 0) ?? .default
