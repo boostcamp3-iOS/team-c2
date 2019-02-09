@@ -17,15 +17,35 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: Properties
   
+  let feedbackService = FeedbackService()
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var count = 10
+  private var dustFeedbacks: [DustFeedback] = []
   
   // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
     feedbackListTableView.reloadData()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    NotificationCenter.default
+      .addObserver(self,
+                   selector: #selector(didReceiveFeedback(_:)),
+                   name: .didReceiveFeedback,
+                   object: nil)
+    feedbackService.requestDustFeedbacks()
+    print(dustFeedbacks)
+  }
+
+  @objc func didReceiveFeedback(_ noti: Notification) {
+    guard let dustFeedbacks = noti.userInfo?["feedbacks"] as? [DustFeedback]
+      else { return }
+    
+    self.dustFeedbacks = dustFeedbacks
   }
 }
 
@@ -50,7 +70,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath)
-
+    
     return cell
   }
 }
