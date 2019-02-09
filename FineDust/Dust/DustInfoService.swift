@@ -117,6 +117,9 @@ final class DustInfoService: DustInfoServiceType {
             if let dataTimeToDate = DateFormatter.dateAndTimeForDust.date(from: item.dataTime) {
               // 24:00 형식이 아니어서 데이트 파싱이 잘 되는 경우
               // 하던 대로 한다
+              //
+              // dataTime에서 시간을 추출하고, 그것으로 `Hour` 열거형 인스턴스를 생성한다
+              // 최종 결과 딕셔너리의 키값으로 쓰일 `Date`는 dataTime의 시작 날짜로 한다
               let hourToString = DateFormatter.hour.string(from: dataTimeToDate)
               let hourToInt = Int(hourToString) ?? 0
               hour = Hour(rawValue: hourToInt) ?? .default
@@ -124,6 +127,11 @@ final class DustInfoService: DustInfoServiceType {
             } else {
               // 24:00 이라서 데이트 파싱이 안되고 nil이 나오는 경우
               // 다음 날짜의 0시로 바꿔준다
+              //
+              // 예를 들어 2019-01-01 24:00을 2019-01-02 00:00으로 바꿔주는 작업을 하는 것이다
+              // 이를 위해 dataTime을 공백을 기준으로 잘라 yyyy-MM-dd 형식만을 취하고
+              // 이 형식의 다음 날짜의 시작 날짜를 구하여 최종 결과 딕셔너리의 키값으로 활용한다
+              // 이 경우 어차피 0시가 될 것이므로 `Hour` 열거형의 인스턴스는 원시값 0으로 생성한다
               let halfDataTime = item.dataTime.components(separatedBy: " ").first ?? ""
               let halfDataTimeToDate = DateFormatter.dateForDust.date(from: halfDataTime)
               let nextHalfDataTime = halfDataTimeToDate?.after(days: 1)

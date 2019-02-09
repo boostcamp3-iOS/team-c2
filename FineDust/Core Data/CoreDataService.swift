@@ -27,8 +27,7 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func saveLastAccessedDate(completion: @escaping (Error?) -> Void) {
-    let currentDate = Date.start()
-    user.save([User.lastAccessedDate: currentDate], completion: completion)
+    user.save([User.lastAccessedDate: Date()], completion: completion)
   }
   
   func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
