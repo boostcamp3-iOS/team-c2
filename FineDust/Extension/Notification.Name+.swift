@@ -19,8 +19,5 @@ extension Notification.Name {
   
   /// 위치정보 권한 성공 이외 노티피케이션
   static let locationPermissionDenied = Notification.Name("locationPermissionDenied")
-  
-  /// 피드백 정보 json 파싱 성공 노피피케이션
-  static let didReceiveFeedback =
-    Notification.Name("didReceiveFeedback")
+
 }

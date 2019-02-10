@@ -17,10 +17,10 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: Properties
   
-  let feedbackService = FeedbackService()
+  let jsonManager = JSONManager()
+  private var dustFeedbacks: [DustFeedbacks] = []
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var count = 10
-  private var dustFeedbacks: [DustFeedback] = []
   
   // MARK: - LifeCycle
   
@@ -28,25 +28,11 @@ final class FeedbackListViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
+    dustFeedbacks = jsonManager.requestDustFeedbacks()
+   
     feedbackListTableView.reloadData()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    NotificationCenter.default
-      .addObserver(self,
-                   selector: #selector(didReceiveFeedback(_:)),
-                   name: .didReceiveFeedback,
-                   object: nil)
-    feedbackService.requestDustFeedbacks()
-    print(dustFeedbacks)
-  }
-
-  @objc func didReceiveFeedback(_ noti: Notification) {
-    guard let dustFeedbacks = noti.userInfo?["feedbacks"] as? [DustFeedback]
-      else { return }
-    
-    self.dustFeedbacks = dustFeedbacks
-  }
 }
 
 // MARK: - UITabelViewDataSource
