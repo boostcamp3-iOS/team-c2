@@ -11,14 +11,12 @@ import UIKit
 /// 3번째 탭 피드백 화면
 final class FeedbackListViewController: UIViewController {
   
-  // MARK: IBOutlet
+  // MARK: - IBOutlet
   
   @IBOutlet private weak var feedbackListTableView: UITableView!
   
-  // MARK: Properties
+  // MARK: - Properties
   
-  let jsonManager = JSONManager()
-  private var dustFeedbacks: [DustFeedbacks] = []
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var count = 10
   
@@ -28,16 +26,23 @@ final class FeedbackListViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
-    dustFeedbacks = jsonManager.requestDustFeedbacks()
-   
     feedbackListTableView.reloadData()
   }
   
+  // MARK: - Function
+  
+  /// 화면 이동
+  func changeView() {
+    if let view = self.storyboard?.instantiateViewController(withIdentifier: "DetailView") {
+      self.navigationController?.pushViewController(view, animated: true)
+    }
+  }
 }
 
 // MARK: - UITabelViewDataSource
 
 extension FeedbackListViewController: UITableViewDataSource {
+  
   func numberOfSections(in tableView: UITableView) -> Int {
     return 2
   }
@@ -47,15 +52,18 @@ extension FeedbackListViewController: UITableViewDataSource {
     if section == 0 {
       return 1
     } else {
-      return count
+      return 3
     }
   }
   
   func tableView(_ tableView: UITableView,
                  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView
+    guard let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
-                           for: indexPath)
+                           for: indexPath) as? FeedbackListTableViewCell
+      else { return UITableViewCell() }
+    
+    cell.setTabelViewCellProperties(at: indexPath.row)
     
     return cell
   }
@@ -64,20 +72,33 @@ extension FeedbackListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension FeedbackListViewController: UITableViewDelegate {
+  
   func tableView(_ tableView: UITableView,
                  heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 300
-  }
-  
-  /// 테이블뷰 헤더 이름 설정.
-  func tableView(_ tableView: UITableView,
-                 titleForHeaderInSection section: Int) -> String? {
-    if section == 0 {
-      return "추천"
+    if indexPath.section == 0 {
+      return 330
     } else {
-      return "목록"
+      return 130
     }
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    changeView()
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+}
+
+/// 테이블뷰 헤더 이름 설정.
+func tableView(_ tableView: UITableView,
+               titleForHeaderInSection section: Int) -> String? {
+  
+  if section == 0 {
+    return "추천"
+  } else {
+    return "목록"
+  }
+  
 }
 
 // MARK: - UICollectionViewDataSource
@@ -101,6 +122,15 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       ) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
+    cell.setCollectionViewCellProperties(at: indexPath.item)
     return cell
+  }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension FeedbackListViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    changeView()
   }
 }

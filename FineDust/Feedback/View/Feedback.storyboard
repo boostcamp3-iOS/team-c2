@@ -18,60 +18,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zy8-Zz-Dej">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zy8-Zz-Dej">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="separatorInset" minX="10" minY="0.0" maxX="20" maxY="0.0"/>
+                                <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recommendTableCell" rowHeight="288" id="Fvy-Ba-Bof" customClass="RecommendTableViewCell" customModule="FineDust" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="288"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recommendTableCell" rowHeight="330" id="Fvy-Ba-Bof" customClass="RecommendTableViewCell" customModule="FineDust" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fvy-Ba-Bof" id="A4O-Xg-eb3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="287.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="267.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="309.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="15" id="0Eb-K8-Eau">
-                                                        <size key="itemSize" width="270" height="267"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="30" id="0Eb-K8-Eau">
+                                                        <size key="itemSize" width="300" height="250"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recommendCell" id="Tva-RU-VTV" customClass="RecommendCollectionViewCell" customModule="FineDust" customModuleProvider="target">
-                                                            <rect key="frame" x="50" y="0.5" width="270" height="267"/>
+                                                            <rect key="frame" x="50" y="30" width="300" height="250"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="267"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
-                                                                        <rect key="frame" x="1.5" y="0.0" width="267" height="267"/>
+                                                                        <rect key="frame" x="0.0" y="-25" width="300" height="300"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="267" id="EyX-Zc-wHy"/>
                                                                             <constraint firstAttribute="width" secondItem="rCT-91-ej0" secondAttribute="height" multiplier="1:1" id="ooT-00-Ivh"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물 - 틸란드시아" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-Mz-REd">
-                                                                        <rect key="frame" x="40" y="235" width="190.5" height="18"/>
-                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물 - 틸란드시아" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-Mz-REd">
+                                                                        <rect key="frame" x="15" y="212" width="270" height="24"/>
+                                                                        <color key="backgroundColor" red="0.3921568627" green="0.60392156860000001" blue="0.97254901959999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </view>
                                                             <constraints>
+                                                                <constraint firstItem="0hZ-Mz-REd" firstAttribute="width" secondItem="rCT-91-ej0" secondAttribute="width" multiplier="0.9" id="2i5-hL-a0n"/>
                                                                 <constraint firstItem="0hZ-Mz-REd" firstAttribute="centerX" secondItem="Tva-RU-VTV" secondAttribute="centerX" id="5u2-Ly-WyU"/>
                                                                 <constraint firstItem="rCT-91-ej0" firstAttribute="centerY" secondItem="Tva-RU-VTV" secondAttribute="centerY" id="Ajn-OY-fUL"/>
+                                                                <constraint firstItem="rCT-91-ej0" firstAttribute="width" secondItem="Tva-RU-VTV" secondAttribute="width" id="JeP-pC-iy6"/>
                                                                 <constraint firstItem="rCT-91-ej0" firstAttribute="centerX" secondItem="Tva-RU-VTV" secondAttribute="centerX" id="iKw-hx-sXR"/>
                                                                 <constraint firstAttribute="bottom" secondItem="0hZ-Mz-REd" secondAttribute="bottom" priority="999" constant="14" id="ncg-ZZ-aEU"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="recommendImageView" destination="rCT-91-ej0" id="toY-UE-UbZ"/>
                                                                 <outlet property="recommendTitleLabel" destination="0hZ-Mz-REd" id="G6j-EI-F9f"/>
-                                                                <segue destination="pse-81-DNc" kind="show" id="Adu-Nj-gN6"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -89,8 +90,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedbackListCell" rowHeight="134" id="A1f-td-iGf" customClass="FeedbackListTableViewCell" customModule="FineDust" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="316" width="375" height="134"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedbackListCell" rowHeight="134" id="A1f-td-iGf" customClass="FeedbackListTableViewCell" customModule="FineDust" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="358" width="375" height="134"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A1f-td-iGf" id="sZd-PZ-2PD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
@@ -130,7 +131,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Hd8-bJ-yT0" secondAttribute="height" multiplier="1:1" id="HRq-8x-WzI"/>
                                                     </constraints>
-                                                    <state key="normal" image="heart"/>
+                                                    <state key="normal" image="redheart"/>
                                                     <state key="selected" image="redheart"/>
                                                 </button>
                                             </subviews>
@@ -171,7 +172,7 @@
                         <viewLayoutGuide key="safeArea" id="GBK-iT-3lb"/>
                     </view>
                     <navigationItem key="navigationItem" id="bLQ-ID-bQi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="5JZ-gj-Ofj"/>
+                        <barButtonItem key="rightBarButtonItem" image="sort" id="5JZ-gj-Ofj"/>
                     </navigationItem>
                     <connections>
                         <outlet property="feedbackListTableView" destination="zy8-Zz-Dej" id="fUb-Ge-yn1"/>
@@ -184,7 +185,7 @@
         <!--View Controller-->
         <scene sceneID="RgD-T9-blT">
             <objects>
-                <viewController id="pse-81-DNc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pse-81-DNc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6F9-JH-VeS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -192,10 +193,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVj-lm-o6t">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="AXq-ts-j2Z">
-                                        <rect key="frame" x="-1" y="47" width="169" height="169"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gnI-an-Cas">
                                         <rect key="frame" x="23" y="233" width="329" height="526"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -213,6 +210,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="AXq-ts-j2Z">
+                                        <rect key="frame" x="101" y="48" width="169" height="169"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -252,9 +253,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" width="48" height="48"/>
         <image name="info1" width="320" height="320"/>
         <image name="infoTabIcon" width="48" height="48"/>
         <image name="redheart" width="48" height="48"/>
+        <image name="sort" width="24" height="24"/>
     </resources>
 </document>

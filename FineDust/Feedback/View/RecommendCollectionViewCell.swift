@@ -22,7 +22,13 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
     setImageView()
   }
   
-  /// 셀 데이터 및 UI 설정
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    recommendImageView.image = nil
+    recommendTitleLabel.text = nil
+  }
+  
+  /// 컬렉션뷰셀 데이터 설정
   func setCollectionViewCellProperties(at index: Int) {
     dustFeedbacks = jsonManager.fetchDustFeedbacks()
     
@@ -30,14 +36,9 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
     recommendTitleLabel.text = dustFeedbacks[index].title
   }
   
+  /// 컬렉션뷰셀 이미지 UI 설정
   func setImageView() {
     recommendImageView.layer.cornerRadius = 5
     recommendImageView.layer.masksToBounds = true
-  }
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    recommendImageView.image = nil
-    recommendTitleLabel.text = nil
   }
 }
