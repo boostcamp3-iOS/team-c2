@@ -84,6 +84,12 @@ final class HealthKitService: HealthKitServiceType {
     }
   }
   
+  func requestDistancePerHour(from startDate: Date,
+                              to endDate: Date,
+                              completion: @escaping (DateHourIntakePair?) -> Void) {
+    
+  }
+  
   /// 날짜 범위가 주어질 때 그 사이에 시간당 걸음거리를 fetch.
   func fetchDistancePerHour(from startDate: Date,
                             to endDate: Date,
