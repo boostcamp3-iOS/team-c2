@@ -24,7 +24,7 @@ final class GeocoderManager {
 
 extension GeocoderManager: GeocoderManagerType {
   func requestAddress(_ location: CLLocation,
-                    completion: @escaping (String?, Error?) -> Void) {
+                      completion: @escaping (String?, Error?) -> Void) {
     CLGeocoder()
       .reverseGeocodeLocation(location,
                               preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in

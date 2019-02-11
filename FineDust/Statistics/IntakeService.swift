@@ -34,7 +34,7 @@ final class IntakeService: IntakeServiceType {
   }
   
   func requestIntakesInWeek(since date: Date,
-                          completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
+                            completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
     // 특정 날짜에 대한 값은 `fetchTodayIntake`로 가져오고
     // 나머지는 코어데이터에서 가져옴
   }

@@ -19,6 +19,6 @@ protocol DustInfoServiceType: class {
   
   /// 특정 날짜부터 특정 날짜까지의 미세먼지 관련 정보를 fetch하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
   func requestDayInfo(from startDate: Date,
-                 to endDate: Date,
-                 completion: @escaping (DateHourIntakePair?, DateHourIntakePair?, Error?) -> Void)
+                      to endDate: Date,
+                      completion: @escaping (DateHourIntakePair?, DateHourIntakePair?, Error?) -> Void)
 }
