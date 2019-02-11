@@ -29,11 +29,11 @@ final class IntakeService: IntakeServiceType {
     self.coreDataService = coreDataService
   }
   
-  func fetchTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
+  func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
     
   }
   
-  func fetchIntakesInWeek(since date: Date,
+  func requestIntakesInWeek(since date: Date,
                           completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
     // 특정 날짜에 대한 값은 `fetchTodayIntake`로 가져오고
     // 나머지는 코어데이터에서 가져옴

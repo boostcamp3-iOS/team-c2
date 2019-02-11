@@ -37,13 +37,13 @@ class IntakeServiceTest: XCTestCase {
   }
   
   func testFetchIntakesInWeek() {
-    intakeService.fetchIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
+    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
       XCTAssertNil(error)
     }
   }
   
   func testFetchIntakesInWeekError() {
-    intakeService.fetchIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
+    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(error)
     }
   }

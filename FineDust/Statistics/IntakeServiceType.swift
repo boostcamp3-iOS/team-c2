@@ -12,9 +12,9 @@ import Foundation
 protocol IntakeServiceType {
   
   /// 오늘의 미세먼지 및 초미세먼지 섭취량 fetch.
-  func fetchTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void)
+  func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void)
   
   /// 지정 `Date`로부터 일주일 간의 미세먼지 섭취량 fetch.
-  func fetchIntakesInWeek(since date: Date,
+  func requestIntakesInWeek(since date: Date,
                           completion: @escaping ([Int]?, [Int]?, Error?) -> Void)
 }
