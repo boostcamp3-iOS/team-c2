@@ -16,16 +16,15 @@ final class FeedbackListViewController: UIViewController {
   @IBOutlet private weak var feedbackListTableView: UITableView!
   
   // MARK: - Properties
-  
+  var feedbackListService = FeedbackListService()
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
-  private var count = 10
   
   // MARK: - LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
-    
+ 
     feedbackListTableView.reloadData()
   }
   
@@ -52,7 +51,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     if section == 0 {
       return 1
     } else {
-      return 3
+      return feedbackListService.requestFeedbackCount()
     }
   }
   
@@ -63,8 +62,9 @@ extension FeedbackListViewController: UITableViewDataSource {
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
     
-    cell.setTabelViewCellProperties(at: indexPath.row)
-    
+    let feedback = feedbackListService.requestFeedbackData(index: Int(indexPath.row))
+    cell.setTabelViewCellProperties(dustFeedback: feedback)
+ 
     return cell
   }
 }
@@ -87,18 +87,16 @@ extension FeedbackListViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
-}
-
-/// 테이블뷰 헤더 이름 설정.
-func tableView(_ tableView: UITableView,
-               titleForHeaderInSection section: Int) -> String? {
-  
-  if section == 0 {
-    return "추천"
-  } else {
-    return "목록"
+  /// 테이블뷰 헤더 이름 설정.
+  func tableView(_ tableView: UITableView,
+                 titleForHeaderInSection section: Int) -> String? {
+    
+    if section == 0 {
+      return "추천"
+    } else {
+      return "목록"
+    }
   }
-  
 }
 
 // MARK: - UICollectionViewDataSource
@@ -122,7 +120,8 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       ) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    cell.setCollectionViewCellProperties(at: indexPath.item)
+    let feedback = feedbackListService.requestFeedbackData(index: Int(indexPath.item))
+    cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }
 }

@@ -32,12 +32,11 @@ final class FeedbackListTableViewCell: UITableViewCell {
   }
   
   /// 테이블뷰셀 데이터 설정
-  func setTabelViewCellProperties(at index: Int) {
-    dustFeedbacks = jsonManager.fetchDustFeedbacks()
+  func setTabelViewCellProperties(dustFeedback: DustFeedbacks) {
     
-    feedbackImageView.image = UIImage(named: dustFeedbacks[index].imageName)
-    feedbackTitleLabel.text = dustFeedbacks[index].title
-    feedbackSourceLabel.text = dustFeedbacks[index].source
+    feedbackImageView.image = UIImage(named: dustFeedback.imageName)
+    feedbackTitleLabel.text = dustFeedback.title
+    feedbackSourceLabel.text = dustFeedback.source
     
   }
   
