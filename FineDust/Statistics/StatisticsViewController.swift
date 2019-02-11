@@ -63,8 +63,11 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: Property
   
+  /// 화면이 표시가 되었는가.
+  private var isPresented: Bool = false
+  
   /// 7일간의 미세먼지 농도 값 모음.
-  var dustIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var dustIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -87,7 +90,6 @@ final class StatisticsViewController: UIViewController {
     createSubviews()
     setConstraintsToSubviews()
     registerLocationObserver()
-    requestWeekDustInfo()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +100,10 @@ final class StatisticsViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     initializeRatioGraphView()
+    if !isPresented {
+      isPresented.toggle()
+      requestWeekDustInfo()
+    }
   }
   
   deinit {
@@ -106,32 +112,34 @@ final class StatisticsViewController: UIViewController {
   
   /// 오늘 제외한 일주일간 정보 요청.
   private func requestWeekDustInfo() {
-    intakeService.requestIntakesInWeek(since: .before(days: 7)) { [weak self] fineDusts, ultrafineDusts, error in
-      guard let self = self else { return }
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      guard let fineDusts = fineDusts else { return }
-      self.dustIntakes = fineDusts.compactMap { CGFloat($0 / 100) }
-      DispatchQueue.main.async {
-        self.initializeValueGraphView()
-        self.initializeRatioGraphView()
-      }
-      print(fineDusts, ultrafineDusts, error)
+    intakeService
+      .requestIntakesInWeek(since: .before(days: 7)) { [weak self] fineDusts, ultrafineDusts, error in
+        guard let self = self else { return }
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+        guard let fineDusts = fineDusts else { return }
+        self.dustIntakes = fineDusts.compactMap { CGFloat($0 / 100) }
+        DispatchQueue.main.async {
+          self.initializeValueGraphView()
+          self.initializeRatioGraphView()
+        }
+        print(fineDusts, ultrafineDusts, error)
     }
   }
   
   /// 오늘의 정보 요청.
   private func requestTodayDustInfo() {
-    intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
-      guard let self = self else { return }
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      guard let fineDust = fineDust else { return }
-      // 구현 필요
+    intakeService
+      .requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
+        guard let self = self else { return }
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+        guard let fineDust = fineDust else { return }
+        // 구현 필요
     }
   }
 }
