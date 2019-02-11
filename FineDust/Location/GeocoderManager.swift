@@ -36,7 +36,7 @@ extension GeocoderManager: GeocoderManagerType {
                                 let administrativeArea = placemark.administrativeArea ?? ""
                                 let locality = placemark.locality ?? ""
                                 let name = placemark.name ?? ""
-                                let address = "\(administrativeArea) \(locality) \(name)"
+                                let address = "\(locality) \(name)"
                                 completion(address, nil)
     }
   }
