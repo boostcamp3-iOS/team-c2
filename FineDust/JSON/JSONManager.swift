@@ -17,12 +17,14 @@ final class JSONManager: JSONManagerType {
   // MARK: - Fucntion
   
   /// DustFeedbacks json 파싱하여 데이터를 가져옴.
-  func requestDustFeedbacks() -> [DustFeedbacks] {
+  func fetchDustFeedbacks() -> [DustFeedbacks] {
     
     guard let path = Bundle.main.path(forResource: "DustFeedbacks",
                                       ofType: "json")
     else { return [] }
+    
     let jsonDecoder = JSONDecoder()
+
     do {
       guard let data = try String(contentsOfFile: path).data(using: .utf8)
         else { return [] }
