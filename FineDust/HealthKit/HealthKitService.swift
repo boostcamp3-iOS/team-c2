@@ -54,6 +54,36 @@ final class HealthKitService: HealthKitServiceType {
     }
   }
   
+  func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void) {
+    var hourIntakePair = HourIntakePair()
+    
+    //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
+    let group = DispatchGroup()
+    
+    healthKitManager?.findHealthKitValue(startDate: Date.start(),
+                                         endDate: Date.end(),
+                                         hourInterval: 1,
+                                         quantityFor: .meter(),
+                                         quantityTypeIdentifier: .distanceWalkingRunning
+    ) { value, hour, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      
+      group.enter()
+      if let hour = hour {
+        hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)
+      }
+      group.leave()
+    }
+    
+    // 비동기 함수들이 끝날때까지 기다림.
+    group.notify(queue: .main) {
+      completion(hourIntakePair)
+    }
+  }
+  
   /// 날짜 범위가 주어질 때 그 사이에 시간당 걸음거리를 fetch.
   func fetchDistancePerHour(from startDate: Date,
                             to endDate: Date,
@@ -68,7 +98,11 @@ final class HealthKitService: HealthKitServiceType {
                                          hourInterval: 1,
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
-    ) { value, hour, _ in
+    ) { value, hour, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
       group.enter()
       if let hour = hour {
         hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)

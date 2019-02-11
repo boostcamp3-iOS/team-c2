@@ -21,4 +21,6 @@ protocol HealthKitServiceType: class {
   func fetchDistancePerHour(from startDate: Date,
                             to endDate: Date,
                             completion: @escaping (HourIntakePair?) -> Void)
+  
+  func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void)
 }

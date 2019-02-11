@@ -73,12 +73,5 @@ extension MainViewController {
         }
       }
     }
-    
-    // 값이 잘 들어오는지 테스트하는 임시코드.
-    healthKitService.fetchDistancePerHour(from: Date.start(), to: Date()) {
-      if let temp = $0 {
-        print(temp)
-      }
-    }
   }
 }
