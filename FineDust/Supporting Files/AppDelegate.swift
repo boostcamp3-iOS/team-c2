@@ -29,6 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITextField.appearance().tintColor = .clear
     healthKitManager.requestAuthorization()
     LocationManager.shared.requestAuthorization()
+    CoreDataService.shared.requestLastAccessedDate { date, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      print("최신 접속 날짜 갱신: \(date)")
+    }
     return true
   }
   

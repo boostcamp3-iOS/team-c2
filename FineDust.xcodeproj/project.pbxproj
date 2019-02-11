@@ -15,11 +15,13 @@
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
 		E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */; };
 		254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */; };
+		5F5DC6B6EFC8FB4B7C9F42E962925929 /* CoreDataIntakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56E46F34B3E2D3817AA29F91015C5C /* CoreDataIntakeManager.swift */; };
 		2D1B78BB008EFE83A558370B3BB1C0FB /* CoreDataIntakeManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */; };
 		58FABA83FEFC33CBA9C0A3DA3DE2BEEE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */; };
 		39E12E1416980561A0B4853AFA96897D /* CoreDataManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */; };
 		D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */; };
 		534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */; };
+		BCC0B3548859395D1A8AC4E8FEB98FC1 /* CoreDataUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4634B7B2002DF4C7627AD504DEF69FF /* CoreDataUserManager.swift */; };
 		F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */; };
 		959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */; };
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
@@ -132,11 +134,13 @@
 		837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Intake.swift"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
+		2F56E46F34B3E2D3817AA29F91015C5C /* CoreDataIntakeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntakeManager.swift; sourceTree = "<group>"; };
 		AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataIntakeManagerType.swift; sourceTree = "<group>"; };
 		ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerType.swift; sourceTree = "<group>"; };
 		AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataServiceType.swift; sourceTree = "<group>"; };
+		C4634B7B2002DF4C7627AD504DEF69FF /* CoreDataUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserManager.swift; sourceTree = "<group>"; };
 		6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataUserManagerType.swift; sourceTree = "<group>"; };
 		DCB3A0C58F91C851019700A53DC3C53D /* DataTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTerm.swift; sourceTree = "<group>"; };
 		804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -361,11 +365,13 @@
 			children = (
 				35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */,
 				608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */,
+				2F56E46F34B3E2D3817AA29F91015C5C /* CoreDataIntakeManager.swift */,
 				AD4EE57ED160AC6C9A7CD540C9BE6F42 /* CoreDataIntakeManagerType.swift */,
 				ED5E4B656EA720CF29B382D3FE7AE8ED /* CoreDataManager.swift */,
 				E9140914E0E6FA48B11C35EA021DF402 /* CoreDataManagerType.swift */,
 				AB9CACF98D7D17A42ED06FC4ABAEAF81 /* CoreDataService.swift */,
 				D74B80120009C12DE2F13DEF9A00AEF0 /* CoreDataServiceType.swift */,
+				C4634B7B2002DF4C7627AD504DEF69FF /* CoreDataUserManager.swift */,
 				6B4605DD86A9EC2056FDC543AF1DE88F /* CoreDataUserManagerType.swift */,
 				17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */,
 			);
@@ -813,11 +819,13 @@
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
 				E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */,
 				254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */,
+				5F5DC6B6EFC8FB4B7C9F42E962925929 /* CoreDataIntakeManager.swift in Sources */,
 				2D1B78BB008EFE83A558370B3BB1C0FB /* CoreDataIntakeManagerType.swift in Sources */,
 				58FABA83FEFC33CBA9C0A3DA3DE2BEEE /* CoreDataManager.swift in Sources */,
 				39E12E1416980561A0B4853AFA96897D /* CoreDataManagerType.swift in Sources */,
 				D59B0C772EA94F7C83031FAC2782D678 /* CoreDataService.swift in Sources */,
 				534D8B19FB980B4DD9E0CFEDE428E147 /* CoreDataServiceType.swift in Sources */,
+				BCC0B3548859395D1A8AC4E8FEB98FC1 /* CoreDataUserManager.swift in Sources */,
 				F3820F2C235DD02A6E10AC9B4A2EAE00 /* CoreDataUserManagerType.swift in Sources */,
 				959228DE936B1B4EB610C4992BB3F45C /* DataTerm.swift in Sources */,
 				485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */,
