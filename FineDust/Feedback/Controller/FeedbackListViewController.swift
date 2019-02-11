@@ -17,16 +17,22 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: Properties
   
+  let jsonManager = JSONManager()
+  private var dustFeedbacks: [DustFeedbacks] = []
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var count = 10
   
   // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
+    dustFeedbacks = jsonManager.requestDustFeedbacks()
+   
     feedbackListTableView.reloadData()
   }
+  
 }
 
 // MARK: - UITabelViewDataSource
@@ -50,7 +56,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath)
-
+    
     return cell
   }
 }
