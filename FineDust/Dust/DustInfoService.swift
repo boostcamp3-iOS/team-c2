@@ -22,10 +22,10 @@ final class DustInfoService: DustInfoServiceType {
     self.dustInfoManager = dustManager
   }
   
-  func fetchRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
+  func requestRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
     dustInfoManager
-      .fetchDustInfo(
-        term: .daily,
+      .request(
+        dataTerm: .daily,
         numberOfRows: 1,
         pageNumber: 1) { response, error in
           if let error = error {
@@ -47,10 +47,10 @@ final class DustInfoService: DustInfoServiceType {
     }
   }
   
-  func fetchInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
+  func requestDayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
     dustInfoManager
-      .fetchDustInfo(
-        term: .month,
+      .request(
+        dataTerm: .month,
         numberOfRows: 24,
         pageNumber: 1) { response, error in
           var fineDust: HourIntakePair = [:]
@@ -89,7 +89,7 @@ final class DustInfoService: DustInfoServiceType {
     }
   }
   
-  func fetchInfo(
+  func requestDayInfo(
     from startDate: Date,
     to endDate: Date,
     completion: @escaping (DateHourIntakePair?, DateHourIntakePair?, Error?) -> Void
@@ -99,8 +99,8 @@ final class DustInfoService: DustInfoServiceType {
     let daysBetweenDates
       = calendar.dateComponents([.day], from: startDate.start, to: endDate.start).day ?? 0
     dustInfoManager
-      .fetchDustInfo(
-        term: .month,
+      .request(
+        dataTerm: .month,
         numberOfRows: (daysBetweenDates + 2) * 24,
         pageNumber: 1) { response, error in
           var fineDustPerDate: DateHourIntakePair = [:]

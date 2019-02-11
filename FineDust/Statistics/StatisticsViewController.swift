@@ -103,13 +103,13 @@ final class StatisticsViewController: UIViewController {
   
   private func requestDustTodayInfo() {
     DustInfoService()
-      .fetchInfo(from: Date.before(days: 2),
-                 to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
-                  if let error = error {
-                    print(error.localizedDescription)
-                    return
-                  }
-                  print(fineDustPerDate)
+      .requestDayInfo(from: Date.before(days: 2),
+                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
+                        if let error = error {
+                          print(error.localizedDescription)
+                          return
+                        }
+                        print(fineDustPerDate)
     }
   }
 }
@@ -136,7 +136,7 @@ extension StatisticsViewController: LocationObserver {
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
-
+  
   var intakeAmounts: [CGFloat] {
     return dustIntakes
   }
