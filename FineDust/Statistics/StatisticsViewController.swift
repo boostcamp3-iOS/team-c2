@@ -102,12 +102,14 @@ final class StatisticsViewController: UIViewController {
   }
   
   private func requestDustTodayInfo() {
-    DustInfoService().fetchTodayInfo { fineDust, ultrafineDust, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      print(fineDust, ultrafineDust)
+    DustInfoService()
+      .requestDayInfo(from: Date.before(days: 2),
+                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
+                        if let error = error {
+                          print(error.localizedDescription)
+                          return
+                        }
+                        print(fineDustPerDate)
     }
   }
 }
@@ -134,24 +136,16 @@ extension StatisticsViewController: LocationObserver {
 // MARK: - ValueGraphView Delegate 구현
 
 extension StatisticsViewController: ValueGraphViewDelegate {
-  func valueGraphView(_ valueGraphView: ValueGraphView,
-                      didTapDoneButton button: UIBarButtonItem,
-                      in datePicker: UIDatePicker) {
-    selectedDate = datePicker.date
-  }
   
-  var referenceDate: Date {
-    return selectedDate
-  }
   var intakeAmounts: [CGFloat] {
     return dustIntakes
   }
 }
 
-// MARK: - RatioGraphView Data Source 구현
+// MARK: - RatioGraphView Delegate 구현
 
 extension StatisticsViewController: RatioGraphViewDelegate {
-  /// 흡입량 비율
+  
   var intakeRatio: CGFloat {
     return dustLastValueRatio
   }

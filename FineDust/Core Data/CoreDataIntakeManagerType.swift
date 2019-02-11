@@ -13,18 +13,18 @@ import Foundation
 protocol CoreDataIntakeManagerType: CoreDataManagerType {
   
   /// READ
-  func fetch(completion: (Intake?, Error?) -> Void)
+  func request(completion: ([Intake]?, Error?) -> Void)
 }
 
 // MARK: - CoreDataIntakeManagerType 프로토콜 초기 구현
 
 extension CoreDataIntakeManagerType {
   
-  func fetch(completion: (Intake?, Error?) -> Void) {
+  func request(completion: ([Intake]?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: Intake.classNameToString)
     do {
       let results = try context.fetch(request) as? [Intake]
-      completion(results?.first, nil)
+      completion(results, nil)
     } catch {
       completion(nil, error)
     }

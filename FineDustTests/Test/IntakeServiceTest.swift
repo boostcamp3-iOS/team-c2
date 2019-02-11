@@ -14,14 +14,14 @@ class IntakeServiceTest: XCTestCase {
   
   var intakeService: IntakeService!
   
-  let mockHealthKitService: HealthKitServiceType!
-  let mockDustInfoService: DustInfoServiceType!
-  let mockCoreDataService: CoreDataServiceType!
+  let mockHealthKitService: HealthKitServiceType! = nil
+  let mockDustInfoService: DustInfoServiceType! = nil
+  let mockCoreDataService: CoreDataServiceType! = nil
   
   override func setUp() {
-    IntakeService = IntakeService(healthKitService: mockHealthKitService,
-                                  dustInfoService: mockDustInfoService,
-                                  coreDataService: mockCoreDataService)
+//    IntakeService = IntakeService(healthKitService: mockHealthKitService,
+//                                  dustInfoService: mockDustInfoService,
+//                                  coreDataService: mockCoreDataService)
   }
   
   func testFetchTodayIntake() {
@@ -37,13 +37,13 @@ class IntakeServiceTest: XCTestCase {
   }
   
   func testFetchIntakesInWeek() {
-    intakeService.fetchIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
+    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
       XCTAssertNil(error)
     }
   }
   
   func testFetchIntakesInWeekError() {
-    intakeService.fetchIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
+    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(error)
     }
   }
