@@ -21,7 +21,7 @@ class MockDustManager: DustInfoManagerType {
     completion(nil, nil)
   }
   
-  func fetchDustInfo(term dataTerm: DataTerm,
+  func requestDustInfo(term dataTerm: DataTerm,
                      numberOfRows numOfRows: Int,
                      pageNumber pageNo: Int,
                      completion: @escaping (DustResponse?, Error?) -> Void) {

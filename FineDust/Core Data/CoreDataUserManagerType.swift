@@ -13,31 +13,28 @@ import Foundation
 protocol CoreDataUserManagerType: CoreDataManagerType {
 
   /// READ
-  func fetch(completion: (User?, Error?) -> Void)
+  func request(completion: (User?, Error?) -> Void)
 }
 
 // MARK: - CoreDataUserManagerType 프로토콜 초기 구현
 
 extension CoreDataUserManagerType {
   
-  func fetch(completion: (User?, Error?) -> Void) {
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: User.classNameToString)
+  func request(completion: (User?, Error?) -> Void) {
     do {
-      let results = try context.fetch(request) as? [User]
-      completion(results?.first, nil)
+      let results = try context.fetch(User.fetchRequest()) as? [User]
+      completion(results?.last, nil)
     } catch {
       completion(nil, error)
     }
   }
   
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
-    guard let entity = NSEntityDescription.entity(forEntityName: User.classNameToString,
-                                                  in: context)
-    else { return }
-    let newInstance = NSManagedObject(entity: entity, insertInto: context)
-    dictionary.forEach { newInstance.setValue($0.value, forKey: $0.key) }
     do {
+      let user = User(context: context)
+      dictionary.forEach { user.setValue($0.value, forKey: $0.key) }
       try context.save()
+      completion(nil)
     } catch {
       completion(error)
     }

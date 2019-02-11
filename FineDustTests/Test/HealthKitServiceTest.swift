@@ -25,6 +25,7 @@ class HealthKitServiceTest: XCTestCase {
     let expect = expectation(description: "fetch today step count")
     healthKitService?.fetchTodayStepCount { result, error in
       XCTAssertEqual(result, self.mockHealthKitManager.stepCount)
+      XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -35,6 +36,7 @@ class HealthKitServiceTest: XCTestCase {
     let expect = expectation(description: "fetch today distance")
     healthKitService?.fetchTodayDistance { result, error in
       XCTAssertEqual(result, self.mockHealthKitManager.distance)
+      XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -45,7 +47,7 @@ class HealthKitServiceTest: XCTestCase {
     let expect = expectation(description: "fetch error")
     mockHealthKitManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
     healthKitService?.fetchTodayStepCount { result, error in
-      XCTAssertNil(result)
+      XCTAssertEqual(result, 0.0)
       XCTAssertNotNil(error)
       expect.fulfill()
     }
@@ -57,7 +59,7 @@ class HealthKitServiceTest: XCTestCase {
     let expect = expectation(description: "fetch error")
     mockHealthKitManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
     healthKitService?.fetchTodayDistance { result, error in
-      XCTAssertNil(result)
+      XCTAssertEqual(result, 0.0)
       XCTAssertNotNil(error)
       expect.fulfill()
     }

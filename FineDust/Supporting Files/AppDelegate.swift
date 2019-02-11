@@ -28,8 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().barTintColor = Asset.graph1.color
     UITextField.appearance().tintColor = .clear
     healthKitManager.requestAuthorization()
-    LocationManager.shared.configure(configureLocationManager(_:))
     LocationManager.shared.requestAuthorization()
+    CoreDataService.shared.requestLastAccessedDate { date, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      print("최신 접속 날짜 갱신: \(date)")
+    }
     return true
   }
   
@@ -83,74 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nserror = error as NSError
         fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
       }
-    }
-  }
-}
-
-// MARK: - Location Manager Configuration
-
-private extension AppDelegate {
-  
-  /// Location Manager 환경설정
-  func configureLocationManager(_ manager: LocationManagerType) {
-    manager.authorizationChangingHandler = { status in
-      // 권한이 주어지면 위치 정보 갱신 작업을 시작하고
-      // 그렇지 않으면 관련 상태를 포함하여 노티피케이션을 쏴준다
-      switch status {
-      case .authorizedAlways, .authorizedWhenInUse:
-        manager.startUpdatingLocation()
-      default:
-        NotificationCenter.default
-          .post(name: .locationPermissionDenied, object: nil, userInfo: ["status": status])
-      }
-    }
-    manager.locationUpdatingHandler = { location in
-      // 위치 정보가 갱신되면
-      // 위경도를 변환하여 SharedInfo 싱글톤 객체에 저장하고
-      // GeocoderManager를 통해 주소를 얻어 SharedInfo 싱글톤 객체에 저장하고
-      // DustManager를 통해 관측소를 얻어 SharedInfo 싱글톤 객체에 저장한다
-      // 이후 위치 정보 갱신 작업이 완료되었다는 노티피케이션을 쏴준다
-      // 에러 발생시 해당하는 에러 정보를 포함하여(AppDelegateError) 노티피케이션을 쏴준다
-      let coordinate = location.coordinate
-      let convertedCoordinate
-        = GeoConverter().convert(sourceType: .WGS_84,
-                                 destinationType: .TM,
-                                 geoPoint: GeographicPoint(x: coordinate.longitude,
-                                                           y: coordinate.latitude))
-      SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-      GeocoderManager.shared.fetchAddress(location) { address, error in
-        defer {
-          manager.stopUpdatingLocation()
-        }
-        if let error = error {
-          NotificationCenter.default
-            .post(name: .didFailUpdatingAllLocationTasks,
-                  object: nil,
-                  userInfo: ["error": AppDelegateError.geoencodingError(error)])
-          return
-        }
-        SharedInfo.shared.set(address: address ?? "")
-        let dustObservatoryManager = DustObservatoryManager()
-        dustObservatoryManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-          if let error = error {
-            NotificationCenter.default
-              .post(name: .didSuccessUpdatingAllLocationTasks,
-                    object: nil,
-                    userInfo: ["error": AppDelegateError.networkingError(error)])
-            return
-          }
-          guard let observatory = response?.observatory else { return }
-          SharedInfo.shared.set(observatory: observatory)
-          NotificationCenter.default.post(name: .didSuccessUpdatingAllLocationTasks, object: nil)
-        }
-      }
-    }
-    manager.errorHandler = { error in
-      // 작업중 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
-      NotificationCenter.default
-        .post(name: .didFailUpdatingAllLocationTasks,
-              object: nil,
-              userInfo: ["error": AppDelegateError.coreLocationError(error)])
     }
   }
 }

@@ -29,15 +29,20 @@ extension UIViewController {
   /// 빌더 패턴을 통해 만들어진 `UIViewController`를 모달 present.
   func present(to viewController: UIViewController,
                transitionStyle style: UIModalTransitionStyle = .coverVertical,
-               animated: Bool = true,completion: (() -> Void)? = nil) {
+               animated: Bool = true,
+               completion: (() -> Void)? = nil) {
     modalTransitionStyle = style
-    viewController.present(self, animated: animated, completion: completion)
+    DispatchQueue.main.async {
+      viewController.present(self, animated: animated, completion: completion)
+    }
   }
   
   /// 빌더 패턴을 통해 만들어진 `UIViewController`를 내비게이션 스택에 추가.
   func push(at viewController: UIViewController?, animated: Bool = true) {
     if let navigationController = viewController?.navigationController {
-      navigationController.pushViewController(self, animated: animated)
+      DispatchQueue.main.async {
+        navigationController.pushViewController(self, animated: animated)
+      }
     } else {
       fatalError("해당 ViewController는 Navigation 스택에 있지 않습니다.")
     }

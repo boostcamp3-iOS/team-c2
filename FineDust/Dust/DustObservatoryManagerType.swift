@@ -10,17 +10,17 @@ import Foundation
 
 /// 관측소 관련 Dust Manager 프로토콜.
 protocol DustObservatoryManagerType: DustManagerType {
-  func fetchObservatory(numberOfRows numOfRows: Int,
-                        pageNumber pageNo: Int,
-                        completion: @escaping (ObservatoryResponse?, Error?) -> Void)
+  func requestObservatory(numberOfRows numOfRows: Int,
+                          pageNumber pageNo: Int,
+                          completion: @escaping (ObservatoryResponse?, Error?) -> Void)
 }
 
 // MARK: - DustObservatoryManagerType 프로토콜 초기 구현
 
 extension DustObservatoryManagerType {
-  func fetchObservatory(numberOfRows numOfRows: Int,
-                        pageNumber pageNo: Int,
-                        completion: @escaping (ObservatoryResponse?, Error?) -> Void) {
+  func requestObservatory(numberOfRows numOfRows: Int,
+                          pageNumber pageNo: Int,
+                          completion: @escaping (ObservatoryResponse?, Error?) -> Void) {
     let urlString = baseURL
       .appending("/MsrstnInfoInqireSvc/getNearbyMsrstnList")
       .appending("?tmX=\(SharedInfo.shared.x)")

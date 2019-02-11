@@ -10,19 +10,19 @@ import Foundation
 
 /// 미세먼지 정보 관련 Dust Manager 프로토콜.
 protocol DustInfoManagerType: DustManagerType {
-  func fetchDustInfo(term dataTerm: DataTerm,
-                     numberOfRows numOfRows: Int,
-                     pageNumber pageNo: Int,
-                     completion: @escaping (DustResponse?, Error?) -> Void)
+  func request(dataTerm: DataTerm,
+               numberOfRows numOfRows: Int,
+               pageNumber pageNo: Int,
+               completion: @escaping (DustResponse?, Error?) -> Void)
 }
 
 // MARK: - DustInfoManagerType 프로토콜 초기 구현
 
 extension DustInfoManagerType {
-  func fetchDustInfo(term dataTerm: DataTerm,
-                     numberOfRows numOfRows: Int,
-                     pageNumber pageNo: Int,
-                     completion: @escaping (DustResponse?, Error?) -> Void) {
+  func request(dataTerm: DataTerm,
+               numberOfRows numOfRows: Int,
+               pageNumber pageNo: Int,
+               completion: @escaping (DustResponse?, Error?) -> Void) {
     let observatory = SharedInfo.shared.observatory.percentEncoded
     let urlString = baseURL
       .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")

@@ -23,8 +23,8 @@ final class GeocoderManager {
 // MARK: - GeocoderManagerType 구현
 
 extension GeocoderManager: GeocoderManagerType {
-  func fetchAddress(_ location: CLLocation,
-                    completion: @escaping (String?, Error?) -> Void) {
+  func requestAddress(_ location: CLLocation,
+                      completion: @escaping (String?, Error?) -> Void) {
     CLGeocoder()
       .reverseGeocodeLocation(location,
                               preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in
@@ -33,10 +33,9 @@ extension GeocoderManager: GeocoderManagerType {
                                   return
                                 }
                                 guard let placemark = placemarks?.first else { return }
-                                let administrativeArea = placemark.administrativeArea ?? ""
                                 let locality = placemark.locality ?? ""
                                 let name = placemark.name ?? ""
-                                let address = "\(administrativeArea) \(locality) \(name)"
+                                let address = "\(locality) \(name)"
                                 completion(address, nil)
     }
   }

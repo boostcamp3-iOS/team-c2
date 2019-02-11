@@ -8,30 +8,41 @@
 
 import UIKit
 
+/// 3번째 탭 하단 정보 목록 테이블뷰셀.
 final class FeedbackListTableViewCell: UITableViewCell {
-
+  
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
-  @IBOutlet private weak var feedbackListShadowView: UIView!
-  @IBOutlet private weak var feedbackListTitleLabel: UILabel!
   @IBOutlet private weak var bookmarkButton: UIButton!
   
-  func setProperties(at index: Int) {
-    feedbackListTitleLabel.isHidden = index != 0 ? true : false
-    feedbackImageView.image = UIImage(named: "info1")
-    feedbackTitleLabel.text = "미세먼지 정화 식물"
-    feedbackSourceLabel.text = "KTV 국민 방송"
+  let jsonManager = JSONManager()
+  fileprivate var dustFeedbacks: [DustFeedbacks] = []
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setImageView()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    feedbackImageView.image = nil
+    feedbackTitleLabel.text = nil
+    feedbackSourceLabel.text = nil
+  }
+  
+  /// 테이블뷰셀 데이터 설정
+  func setTabelViewCellProperties(at index: Int) {
+    dustFeedbacks = jsonManager.fetchDustFeedbacks()
     
+    feedbackImageView.image = UIImage(named: dustFeedbacks[index].imageName)
+    feedbackTitleLabel.text = dustFeedbacks[index].title
+    feedbackSourceLabel.text = dustFeedbacks[index].source
+    
+  }
+  
+  /// 테이블뷰셀 이미지 UI 설정
+  func setImageView() {
     feedbackImageView.setRounded()
-    feedbackListShadowView.layer.applySketchShadow(
-      color: UIColor.gray,
-      alpha: 0.2,
-      x: 2,
-      y: 2,
-      blur: 5,
-      spread: 3
-    )
-    feedbackListShadowView.layer.cornerRadius = 5
   }
 }

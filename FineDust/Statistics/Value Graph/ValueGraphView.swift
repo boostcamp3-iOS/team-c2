@@ -8,25 +8,6 @@
 
 import UIKit
 
-/// Value Graph View Data Source.
-protocol ValueGraphViewDataSource: class {
-  
-  /// 기준 날짜.
-  var referenceDate: Date { get }
-  
-  /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
-  var intakeAmounts: [CGFloat] { get }
-}
-
-/// Value Graph View Delegate.
-protocol ValueGraphViewDelegate: class {
-  
-  /// DatePicker의 Done 버튼을 눌렀을 때의 동작 정의.
-  func valueGraphView(_ valueGraphView: ValueGraphView,
-                      didTapDoneButton button: UIBarButtonItem,
-                      in datePicker: UIDatePicker)
-}
-
 /// 지정 날짜 기준 일주일 그래프 관련 뷰.
 final class ValueGraphView: UIView {
 
@@ -43,7 +24,7 @@ final class ValueGraphView: UIView {
   enum Animation {
     
     /// 애니메이션 기간.
-    static let duration: TimeInterval = 0.3
+    static let duration: TimeInterval = 1.0
     
     /// 애니메이션 지연.
     static let delay: TimeInterval = 0.0
@@ -55,30 +36,15 @@ final class ValueGraphView: UIView {
     static let springVelocity: CGFloat = 0.5
     
     /// 애니메이션 옵션.
-    static let option: UIView.AnimationOptions = [.curveEaseInOut]
+    static let options: UIView.AnimationOptions = [.curveEaseInOut]
   }
   
   // MARK: Delegate
-  
-  /// Value Graph View Data Source.
-  weak var dataSource: ValueGraphViewDataSource?
   
   /// Value Graph View Delegate.
   weak var delegate: ValueGraphViewDelegate?
   
   // MARK: Property
-  
-  /// DatePicker 프로퍼티.
-  private lazy var datePicker: UIDatePicker = {
-    let picker = UIDatePicker()
-    picker.calendar = Calendar.current
-    picker.date = Date()
-    picker.datePickerMode = .date
-    picker.maximumDate = Date()
-    picker.minimumDate = Calendar.current.date(from: DateComponents(year: 2019, month: 1, day: 1))
-    picker.locale = Locale(identifier: "ko_KR")
-    return picker
-  }()
   
   /// DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
@@ -90,16 +56,9 @@ final class ValueGraphView: UIView {
   
   // MARK: Private Properties
   
-  /// 선택된 날짜.
-  private var selectedDate: Date = Date() {
-    didSet {
-      dateTextField.text = dateFormatter.string(from: selectedDate)
-    }
-  }
-  
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
-    return dataSource?.intakeAmounts ?? []
+    return delegate?.intakeAmounts ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.
@@ -123,7 +82,7 @@ final class ValueGraphView: UIView {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.dateFormat = "d"
-    var array = [Date].init(repeating: selectedDate, count: 7)
+    var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
@@ -132,49 +91,20 @@ final class ValueGraphView: UIView {
   
   // MARK: IBOutlets
   
-  /// 날짜 표시 텍스트 필드.
-  @IBOutlet private weak var dateTextField: UITextField! {
-    didSet {
-      let toolBar = UIToolbar(
-        frame: CGRect(
-          x: 0,
-          y: 0,
-          width: UIScreen.main.bounds.width,
-          height: 44
-        )
-      )
-      toolBar.items = [
-        UIBarButtonItem(
-          barButtonSystemItem: .flexibleSpace,
-          target: nil,
-          action: nil
-        ),
-        UIBarButtonItem(
-          barButtonSystemItem: .done,
-          target: self,
-          action: #selector(doneButtonDidTap(_:))
-        )
-      ]
-      // 선택된 날짜 초기화
-      selectedDate = Date()
-      dateTextField.inputView = datePicker
-      dateTextField.inputAccessoryView = toolBar
-    }
-  }
-  
+  /// 날짜 레이블.
+  @IBOutlet private weak var dateLabel: UILabel!
+
   /// 제목 레이블.
   @IBOutlet private weak var titleLabel: UILabel!
   
   /// 요일 레이블 모음.
-  @IBOutlet private var dateLabels: [UILabel]!
+  @IBOutlet private var dayLabels: [UILabel]!
   
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(
-          radius: 2.0
-        )
+        view.layer.setBorder(radius: 2.0)
         view.backgroundColor = graphBackgroundColor(at: index)
       }
     }
@@ -197,17 +127,8 @@ final class ValueGraphView: UIView {
     initializeHeights()
     animateHeights()
     setUnitLabels()
-    setDateLabelsTitle()
-    print(intakeAmounts, maxValue, intakeRatios)
-  }
-  
-  /// 키보드에 달린 완료 버튼을 눌렀을 때의 동작 정의.
-  @objc private func doneButtonDidTap(_ sender: UIBarButtonItem) {
-    dateTextField.resignFirstResponder()
-    dateTextField.text = dateFormatter.string(from: datePicker.date)
-    selectedDate = datePicker.date
-    setup()
-    delegate?.valueGraphView(self, didTapDoneButton: sender, in: datePicker)
+    setDayLabelsTitle()
+    setDateLabel()
   }
 }
 
@@ -227,17 +148,17 @@ private extension ValueGraphView {
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
       var heightConstraint = graphViewHeightConstraints[index]
-      DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+      DispatchQueue.main.async {
         UIView.animate(
           withDuration: Animation.duration,
           delay: Animation.delay,
           usingSpringWithDamping: Animation.damping,
           initialSpringVelocity: Animation.springVelocity,
-          options: .curveEaseInOut,
-          animations: {
+          options: Animation.options,
+          animations: { [weak self] in
             heightConstraint = heightConstraint.changedMultiplier(to: ratio)
             self?.layoutIfNeeded()
-        },
+          },
           completion: nil
         )
       }
@@ -246,16 +167,20 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정.
   func setUnitLabels() {
-    zip(unitLabels, axisTexts).forEach { (label, text) in
+    zip(unitLabels, axisTexts).forEach { label, text in
       label.text = text
     }
   }
   
   /// 요일 레이블 텍스트 설정.
-  func setDateLabelsTitle() {
-    zip(dateLabels, dateTexts).forEach { (label, text) in
+  func setDayLabelsTitle() {
+    zip(dayLabels, dateTexts).forEach { label, text in
       label.text = text
     }
+  }
+  
+  func setDateLabel() {
+    dateLabel.text = dateFormatter.string(from: Date())
   }
   
   /// 그래프 색상 구하기.
