@@ -29,7 +29,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNotNil(error)
       expect.fulfill()
@@ -47,7 +47,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNotNil(error)
       expect.fulfill()
@@ -62,7 +62,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNil(error)
       expect.fulfill()
@@ -77,7 +77,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       XCTAssertNil(error)
       expect.fulfill()
@@ -92,7 +92,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? HTTPError {
         XCTAssertEqual(error, HTTPError.default)
@@ -109,7 +109,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.default
     mockNetworkManager.error = HTTPError.default
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? HTTPError {
         XCTAssertEqual(error, HTTPError.default)
@@ -129,7 +129,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
@@ -149,7 +149,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
-    dustManager.fetchDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestDustInfo(term: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
@@ -168,7 +168,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.implementationIsMissing("asdf")
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.implementationIsMissing("asdf"))
@@ -188,7 +188,7 @@ class DustManagerTest: XCTestCase {
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.nodeHasNoValue
     let expect = expectation(description: "test")
-    dustManager.fetchObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+    dustManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.nodeHasNoValue)
