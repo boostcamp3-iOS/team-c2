@@ -102,7 +102,7 @@ final class StatisticsViewController: UIViewController {
     initializeRatioGraphView()
     if !isPresented {
       isPresented.toggle()
-      requestWeekDustInfo()
+      requestIntake()
     }
   }
   
@@ -110,36 +110,57 @@ final class StatisticsViewController: UIViewController {
     unregisterLocationObserver()
   }
   
-  /// 오늘 제외한 일주일간 정보 요청.
-  private func requestWeekDustInfo() {
-    intakeService
-      .requestIntakesInWeek(since: .before(days: 7)) { [weak self] fineDusts, ultrafineDusts, error in
-        guard let self = self else { return }
+  /// 미세먼지 흡입량 요청.
+  private func requestIntake() {
+    requestWeekDustInfo { [weak self] fineDusts, ultrafineDusts, error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      guard let self = self else { return }
+      self.requestTodayDustInfo { [weak self] fineDust, ultrafineDust, error in
         if let error = error {
           print(error.localizedDescription)
           return
         }
+        guard let self = self else { return }
         guard let fineDusts = fineDusts else { return }
-        self.dustIntakes = fineDusts.compactMap { CGFloat($0 / 100) }
+        guard let fineDust = fineDust else { return }
+        // 조작
+        let weekIntakes = [fineDusts, [fineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        print(weekIntakes)
+        self.dustIntakes = weekIntakes
         DispatchQueue.main.async {
           self.initializeValueGraphView()
           self.initializeRatioGraphView()
         }
-        print(fineDusts, ultrafineDusts, error)
+      }
+    }
+  }
+  
+  /// 오늘 제외한 일주일간 정보 요청.
+  private func requestWeekDustInfo(completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
+    intakeService
+      .requestIntakesInWeek(since: .before(days: 6)) { fineDusts, ultrafineDusts, error in
+        if let error = error {
+          completion(nil, nil, error)
+          return
+        }
+        completion(fineDusts, ultrafineDusts, nil)
     }
   }
   
   /// 오늘의 정보 요청.
-  private func requestTodayDustInfo() {
+  private func requestTodayDustInfo(completion: @escaping (Int?, Int?, Error?) -> Void) {
     intakeService
-      .requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
-        guard let self = self else { return }
+      .requestTodayIntake { fineDust, ultrafineDust, error in
         if let error = error {
-          print(error.localizedDescription)
+          completion(nil, nil, error)
           return
         }
-        guard let fineDust = fineDust else { return }
-        // 구현 필요
+        completion(fineDust, ultrafineDust, nil)
     }
   }
 }
@@ -148,7 +169,7 @@ final class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
-    requestWeekDustInfo()
+    requestIntake()
   }
   
   func handleIfFail(_ notification: Notification) {
