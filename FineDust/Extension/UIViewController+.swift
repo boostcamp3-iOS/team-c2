@@ -32,8 +32,10 @@ extension UIViewController {
                animated: Bool = true,
                completion: (() -> Void)? = nil) {
     modalTransitionStyle = style
-    DispatchQueue.main.async {
-      viewController.present(self, animated: animated, completion: completion)
+    if !(viewController.presentedViewController is UIAlertController) {
+      DispatchQueue.main.async {
+        viewController.present(self, animated: animated, completion: completion)
+      }
     }
   }
   
