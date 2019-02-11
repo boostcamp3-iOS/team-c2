@@ -10,31 +10,30 @@ import Foundation
 
 extension DateFormatter {
   
-  /// 날짜 및 시간 데이트 포매터. `yyyy-MM-dd HH:mm`
+  /// 미세먼지 API의 날짜 파싱을 위한 날짜 및 시간 데이트 포매터. `yyyy-MM-dd HH:mm`
   ///
   /// `2019-01-01 12:00`
-  static let dateAndTime: DateFormatter = {
+  static let dateAndTimeForDust: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale.korea
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     return formatter
   }()
   
-  /// 요일을 포함하여 로케일에 맞게 로컬라이징된 데이트 포매터. `yyyy년 M월 d일 EEEE`
+  /// 요일을 포함하여 로컬라이징된 데이트 포매터. `yyyy년 M월 d일 EEEE`
   ///
   /// `2019년 1월 1일 일요일`
-  static func localizedDateWithDay(locale: Locale) -> DateFormatter {
+  static let localizedDateWithDay: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = locale
-    formatter.dateStyle = .full
-    formatter.timeStyle = .none
+    formatter.locale = Locale.korea
+    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
-  }
+  }()
   
-  /// 날짜 데이트 포매터. `yyyy-MM-dd`
+  /// 미세먼지 API의 날짜 파싱을 위한 날짜 데이트 포매터. `yyyy-MM-dd`
   ///
   /// `2019-01-01`
-  static let date: DateFormatter = {
+  static let dateForDust: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale.korea
     formatter.dateFormat = "yyyy-MM-dd"
