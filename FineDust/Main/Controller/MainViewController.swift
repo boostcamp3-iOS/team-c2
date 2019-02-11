@@ -73,5 +73,11 @@ extension MainViewController {
         }
       }
     }
+    
+    healthKitService.requestDistancePerHour(from: Date.before(days: 2, since: Date()), to: Date()) {
+      if let temp = $0 {
+        print(temp)
+      }
+    }
   }
 }

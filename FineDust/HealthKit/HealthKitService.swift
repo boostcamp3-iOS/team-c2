@@ -54,6 +54,7 @@ final class HealthKitService: HealthKitServiceType {
     }
   }
   
+  /// 오늘 시간당 걸음거리를 HourIntakePair로 리턴하는 함수.
   func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void) {
     var hourIntakePair = HourIntakePair()
     
@@ -84,23 +85,19 @@ final class HealthKitService: HealthKitServiceType {
     }
   }
   
+  /// 날짜 범위가 주어질 때 해당 날짜에 1시간당 걸음거리를 DateHourIntakePair로 리턴하는 함수.
   func requestDistancePerHour(from startDate: Date,
                               to endDate: Date,
                               completion: @escaping (DateHourIntakePair?) -> Void) {
-    
-  }
-  
-  /// 날짜 범위가 주어질 때 그 사이에 시간당 걸음거리를 fetch.
-  func fetchDistancePerHour(from startDate: Date,
-                            to endDate: Date,
-                            completion: @escaping (HourIntakePair?) -> Void) {
     var hourIntakePair = HourIntakePair()
+    var dateHourIntakePair = DateHourIntakePair()
+    var indexDate = Date.start(of: startDate)
     
     //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
     let group = DispatchGroup()
     
-    healthKitManager?.findHealthKitValue(startDate: startDate,
-                                         endDate: endDate,
+    healthKitManager?.findHealthKitValue(startDate: Date.start(of: startDate),
+                                         endDate: Date.end(of: endDate),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
@@ -109,16 +106,21 @@ final class HealthKitService: HealthKitServiceType {
         print(error.localizedDescription)
         return
       }
+      
       group.enter()
       if let hour = hour {
         hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)
+        if hour == 23 {
+          dateHourIntakePair[indexDate] = hourIntakePair
+          indexDate = Date.after(days: 1, since: indexDate)
+        }
       }
       group.leave()
     }
     
     // 비동기 함수들이 끝날때까지 기다림.
     group.notify(queue: .main) {
-      completion(hourIntakePair)
+      completion(dateHourIntakePair)
     }
   }
 }
