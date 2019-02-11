@@ -34,7 +34,7 @@ class DustInfoServiceTest: XCTestCase {
   func test_fetchCurrentDustInfo() {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
-    dustService?.fetchRecentTimeInfo { dustInfo, error in
+    dustService?.requestRecentTimeInfo { dustInfo, error in
       XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.fineDustValue ?? 0, 1)
@@ -50,7 +50,7 @@ class DustInfoServiceTest: XCTestCase {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = nil
     mockDustManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
-    dustService.fetchRecentTimeInfo { dustInfo, error in
+    dustService.requestRecentTimeInfo { dustInfo, error in
       XCTAssertNil(dustInfo)
       XCTAssertNotNil(error)
       expect.fulfill()

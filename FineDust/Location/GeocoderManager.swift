@@ -23,7 +23,7 @@ final class GeocoderManager {
 // MARK: - GeocoderManagerType 구현
 
 extension GeocoderManager: GeocoderManagerType {
-  func fetchAddress(_ location: CLLocation,
+  func requestAddress(_ location: CLLocation,
                     completion: @escaping (String?, Error?) -> Void) {
     CLGeocoder()
       .reverseGeocodeLocation(location,

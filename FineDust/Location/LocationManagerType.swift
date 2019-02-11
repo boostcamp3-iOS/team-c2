@@ -68,7 +68,7 @@ extension LocationManagerType {
                    geoPoint: GeographicPoint(x: coordinate.longitude,
                                              y: coordinate.latitude))
       SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
-      GeocoderManager.shared.fetchAddress(location) { address, error in
+      GeocoderManager.shared.requestAddress(location) { address, error in
         if let error = error {
           NotificationCenter.default
             .post(name: .didFailUpdatingAllLocationTasks,
@@ -78,7 +78,7 @@ extension LocationManagerType {
         }
         SharedInfo.shared.set(address: address ?? "")
         let dustObservatoryManager = DustObservatoryManager()
-        dustObservatoryManager.fetchObservatory(numberOfRows: 1,
+        dustObservatoryManager.requestObservatory(numberOfRows: 1,
                                                 pageNumber: 1) { response, error in
           if let error = error {
             NotificationCenter.default

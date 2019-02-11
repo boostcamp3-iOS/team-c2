@@ -31,7 +31,7 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
-    user.fetch { user, error in
+    user.request { user, error in
       // 최신 접속 날짜가 코어데이터에 저장되어 있으면 그 값을 내려줌
       // 그렇지 않으면 최신 접속 날짜를 갱신한 후 그 값을 내려줌
       if let lastAccessedDate = user?.lastAccessedDate {
@@ -47,7 +47,7 @@ final class CoreDataService: CoreDataServiceType {
   func requestIntakes(from startDate: Date,
                       to endDate: Date,
                       completion: @escaping ([Date: Int?]?, Error?) -> Void) {
-    intake.fetch { intakes, error in
+    intake.request { intakes, error in
       if let error = error {
         completion(nil, error)
         return

@@ -103,7 +103,7 @@ final class StatisticsViewController: UIViewController {
   
   private func requestDustTodayInfo() {
     DustInfoService()
-      .fetchInfo(from: Date.before(days: 2),
+      .requestDayInfo(from: Date.before(days: 2),
                  to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
                   if let error = error {
                     print(error.localizedDescription)

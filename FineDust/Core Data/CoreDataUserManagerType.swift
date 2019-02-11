@@ -13,14 +13,14 @@ import Foundation
 protocol CoreDataUserManagerType: CoreDataManagerType {
 
   /// READ
-  func fetch(completion: (User?, Error?) -> Void)
+  func request(completion: (User?, Error?) -> Void)
 }
 
 // MARK: - CoreDataUserManagerType 프로토콜 초기 구현
 
 extension CoreDataUserManagerType {
   
-  func fetch(completion: (User?, Error?) -> Void) {
+  func request(completion: (User?, Error?) -> Void) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: User.classNameToString)
     do {
       let results = try context.fetch(request) as? [User]
