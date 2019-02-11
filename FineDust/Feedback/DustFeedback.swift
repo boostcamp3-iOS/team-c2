@@ -12,7 +12,8 @@ import Foundation
 struct DustFeedbacks: Codable {
   
   let title: String
-  let author: String
+  let imageName: String
+  let source: String
   let date: String
   let contents: String
   

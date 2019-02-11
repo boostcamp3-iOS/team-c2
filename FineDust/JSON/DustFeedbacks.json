@@ -1,7 +1,9 @@
 [{
   "title": "미세먼지 정화 식물 '틸란드시아'",
   
-  "author": "KTV 국민방송",
+  "imageName": "Tillandsia",
+  
+  "source": "KTV 국민방송",
   
   "date": "2018-12-15",
   
@@ -11,7 +13,9 @@
 {
   "title": "서울 미세먼지 정책/비상저감조치",
   
-  "author": "서울시 공식 블로그",
+  "imageName": "seoul",
+  
+  "source": "서울시 공식 블로그",
   
   "date": "2018-11-22",
   
@@ -22,7 +26,9 @@
 {
   "title": "실내 환기 요령",
   
-  "author": "네이버 지식백과",
+  "imageName": "Ventilation",
+  
+  "source": "네이버 지식백과",
   
   "date": "2018-11-27",
   
