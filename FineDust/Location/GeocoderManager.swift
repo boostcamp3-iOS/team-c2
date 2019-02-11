@@ -33,7 +33,6 @@ extension GeocoderManager: GeocoderManagerType {
                                   return
                                 }
                                 guard let placemark = placemarks?.first else { return }
-                                let administrativeArea = placemark.administrativeArea ?? ""
                                 let locality = placemark.locality ?? ""
                                 let name = placemark.name ?? ""
                                 let address = "\(locality) \(name)"

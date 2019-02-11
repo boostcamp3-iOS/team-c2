@@ -55,7 +55,7 @@ extension MainViewController: LocationObserver {
       return formatter
     }()
     
-    DustInfoService().fetchRecentTimeInfo() { info, _ in
+    DustInfoService().requestRecentTimeInfo() { info, _ in
       if let info = info {
         DispatchQueue.main.async {
           self.fineDustLabel.text = "\(info.fineDustValue)µg"
