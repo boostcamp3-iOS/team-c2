@@ -30,15 +30,14 @@ final class IntakeService: IntakeServiceType {
   }
   
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
-    dustInfoService
-      .requestDayInfo { fineDust, ultrafineDust, error in
-        if let error = error {
-          completion(nil, nil, error)
-          return
-        }
-        let fineDustValue = fineDust?.reduce(0, { $0 + $1.value })
-        let ultrafineDustValue = ultrafineDust?.reduce(0, { $0 + $1.value })
-        completion(fineDustValue, ultrafineDustValue, nil)
+    dustInfoService.requestDayInfo { fineDust, ultrafineDust, error in
+      if let error = error {
+        completion(nil, nil, error)
+        return
+      }
+      let totalFineDustValue = fineDust?.reduce(0, { $0 + $1.value })
+      let totalUltrafineDustValue = ultrafineDust?.reduce(0, { $0 + $1.value })
+      completion(totalFineDustValue, totalUltrafineDustValue, nil)
     }
   }
   

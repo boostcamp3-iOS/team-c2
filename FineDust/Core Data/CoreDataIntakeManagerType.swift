@@ -21,9 +21,8 @@ protocol CoreDataIntakeManagerType: CoreDataManagerType {
 extension CoreDataIntakeManagerType {
   
   func request(completion: ([Intake]?, Error?) -> Void) {
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: Intake.classNameToString)
     do {
-      let results = try context.fetch(request) as? [Intake]
+      let results = try context.fetch(Intake.fetchRequest()) as? [Intake]
       completion(results, nil)
     } catch {
       completion(nil, error)
@@ -32,13 +31,13 @@ extension CoreDataIntakeManagerType {
   
   /// CREATE
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
-    guard let entity = NSEntityDescription.entity(forEntityName: Intake.classNameToString,
-                                                  in: context)
-    else { return }
-    let newInstance = NSManagedObject(entity: entity, insertInto: context)
-    dictionary.forEach { newInstance.setValue($0.value, forKey: $0.key) }
     do {
-      try context.save()
+      let users = try context.fetch(User.fetchRequest()) as? [User]
+      let lastUser = users?.last
+      let intake = Intake(context: context)
+      dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
+      lastUser?.addToIntake(intake)
+      completion(nil)
     } catch {
       completion(error)
     }

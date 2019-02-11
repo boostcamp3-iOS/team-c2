@@ -17,7 +17,3 @@ extension Intake {
   /// 흡입량 Attribute
   static let value = "value"
 }
-
-// MARK: - CoreDataIntakeManagerType 준수
-
-extension Intake: CoreDataIntakeManagerType { }

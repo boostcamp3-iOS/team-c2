@@ -19,4 +19,5 @@ extension Notification.Name {
   
   /// 위치정보 권한 성공 이외 노티피케이션
   static let locationPermissionDenied = Notification.Name("locationPermissionDenied")
+
 }

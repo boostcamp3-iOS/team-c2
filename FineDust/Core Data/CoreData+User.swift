@@ -15,7 +15,3 @@ extension User {
   /// 최근 접속 날짜 Attribute
   static let lastAccessedDate = "lastAccessedDate"
 }
-
-// MARK: - CoreDataUserManagerType 준수
-
-extension User: CoreDataUserManagerType { }
