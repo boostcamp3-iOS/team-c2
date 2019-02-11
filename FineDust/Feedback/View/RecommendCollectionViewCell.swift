@@ -14,16 +14,25 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var recommendImageView: UIImageView!
   @IBOutlet weak var recommendTitleLabel: UILabel!
   
+  fileprivate let jsonManager = JSONManager()
+  fileprivate var dustFeedbacks: [DustFeedbacks] = []
+  
   override func awakeFromNib() {
     super.awakeFromNib()
-    setProperties()
+    setImageView()
   }
   
   /// 셀 데이터 및 UI 설정
-  func setProperties() {
+  func setCollectionViewCellProperties(at index: Int) {
+    dustFeedbacks = jsonManager.fetchDustFeedbacks()
+    
+    recommendImageView.image = UIImage(named: dustFeedbacks[index].imageName )
+    recommendTitleLabel.text = dustFeedbacks[index].title
+  }
+  
+  func setImageView() {
     recommendImageView.layer.cornerRadius = 5
     recommendImageView.layer.masksToBounds = true
-    recommendImageView.image = UIImage(named: "info1")
   }
   
   override func prepareForReuse() {
