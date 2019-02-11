@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// 관측소 응답 객체.
 struct ObservatoryResponse: XMLParsingType {
   
