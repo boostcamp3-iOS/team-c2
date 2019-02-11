@@ -144,23 +144,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AM 11 : 26" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKE-l6-uTF">
-                                <rect key="frame" x="65" y="614" width="67" height="17"/>
+                                <rect key="frame" x="65" y="614" width="102" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" name="black45"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0µg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNp-Nz-GeF">
-                                <rect key="frame" x="237" y="639" width="58" height="36"/>
+                                <rect key="frame" x="244" y="639" width="87" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" name="graph2"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="강남구 강남대로는 현재" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xzq-YG-k4e">
-                                <rect key="frame" x="65" y="639" width="138" height="18"/>
+                                <rect key="frame" x="65" y="639" width="155" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="black45"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -172,12 +172,15 @@
                     <connections>
                         <outlet property="distanceLabel" destination="Os6-Ee-Kik" id="zLO-ZP-CBl"/>
                         <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="QEc-bW-0WH"/>
+                        <outlet property="gradeLabel" destination="ehv-Kz-X1j" id="bD4-hN-klk"/>
+                        <outlet property="locationLabel" destination="Xzq-YG-k4e" id="leg-3a-Yp6"/>
                         <outlet property="stepCountLabel" destination="0D7-oi-jfT" id="eMR-qZ-dcc"/>
+                        <outlet property="timeLabel" destination="GKE-l6-uTF" id="14D-ub-p9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-oc-hRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542" y="-30"/>
+            <point key="canvasLocation" x="541.60000000000002" y="-30.295566502463057"/>
         </scene>
     </scenes>
     <resources>
