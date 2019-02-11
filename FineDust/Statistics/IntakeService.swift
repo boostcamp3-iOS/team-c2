@@ -21,9 +21,9 @@ final class IntakeService: IntakeServiceType {
   
   // MARK: Dependency Injection
   
-  init(healthKitService: HealthKitServiceType,
-       dustInfoService: DustInfoServiceType,
-       coreDataService: CoreDataServiceType) {
+  init(healthKitService: HealthKitServiceType = HealthKitService(healthKit: HealthKitManager()),
+       dustInfoService: DustInfoServiceType = DustInfoService(),
+       coreDataService: CoreDataServiceType = CoreDataService.shared) {
     self.healthKitService = healthKitService
     self.dustInfoService = dustInfoService
     self.coreDataService = coreDataService
@@ -37,5 +37,26 @@ final class IntakeService: IntakeServiceType {
                             completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
     // 특정 날짜에 대한 값은 `fetchTodayIntake`로 가져오고
     // 나머지는 코어데이터에서 가져옴
+    dustInfoService
+      .requestDayInfo(from: date,
+                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
+                        if let error = error {
+                          completion(nil, nil, error)
+                          return
+                        }
+                        var fineDusts: [Int] = []
+                        var ultrafineDusts: [Int] = []
+                        fineDustPerDate?
+                          .sorted { $0.key < $1.key }
+                          .forEach { dictionary in
+                            fineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+                        }
+                        ultrafineDustPerDate?
+                          .sorted { $0.key < $1.key }
+                          .forEach { dictionary in
+                            ultrafineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+                        }
+                        completion(fineDusts, ultrafineDusts, nil)
+    }
   }
 }
