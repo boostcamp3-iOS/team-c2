@@ -90,9 +90,13 @@ final class StatisticsViewController: UIViewController {
     requestWeekDustInfo()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    initializeValueGraphView()
+  }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    initializeValueGraphView()
     initializeRatioGraphView()
   }
   

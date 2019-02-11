@@ -24,7 +24,7 @@ final class ValueGraphView: UIView {
   enum Animation {
     
     /// 애니메이션 기간.
-    static let duration: TimeInterval = 0.3
+    static let duration: TimeInterval = 1.0
     
     /// 애니메이션 지연.
     static let delay: TimeInterval = 0.0
