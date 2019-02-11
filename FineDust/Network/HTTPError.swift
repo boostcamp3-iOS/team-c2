@@ -9,7 +9,7 @@
 import Foundation
 
 /// HTTP 통신 에러.
-enum HTTPError: Error {
+enum HTTPError: ServiceErrorType {
   
   case `default`
 }
