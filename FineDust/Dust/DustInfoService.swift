@@ -77,7 +77,7 @@ final class DustInfoService: DustInfoServiceType {
             if hour == .zero { break }
           }
           // 딕셔너리의 길이를 맞추기 위한 코드
-          Hour.allCases.filter { $0 == .default }.forEach { hour in
+          Hour.allCases.filter { $0 != .default }.forEach { hour in
             if fineDust[hour] == nil {
               fineDust[hour] = 0
             }

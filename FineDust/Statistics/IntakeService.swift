@@ -30,12 +30,35 @@ final class IntakeService: IntakeServiceType {
   }
   
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
-    
+    dustInfoService.requestDayInfo { fineDust, ultrafineDust, error in
+      if let error = error {
+        completion(nil, nil, error)
+        return
+      }
+      let totalFineDustValue = fineDust?.reduce(0, { $0 + $1.value })
+      let totalUltrafineDustValue = ultrafineDust?.reduce(0, { $0 + $1.value })
+      completion(totalFineDustValue, totalUltrafineDustValue, nil)
+    }
   }
   
   func requestIntakesInWeek(since date: Date,
                             completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
-    // 특정 날짜에 대한 값은 `fetchTodayIntake`로 가져오고
-    // 나머지는 코어데이터에서 가져옴
+    dustInfoService
+      .requestDayInfo(from: date,
+                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
+                        if let error = error {
+                          completion(nil, nil, error)
+                          return
+                        }
+                        var fineDusts: [Int] = []
+                        var ultrafineDusts: [Int] = []
+                        fineDustPerDate?.forEach { dictionary in
+                          fineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+                        }
+                        ultrafineDustPerDate?.forEach { dictionary in
+                          ultrafineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+                        }
+                        completion(fineDusts, ultrafineDusts, nil)
+    }
   }
 }

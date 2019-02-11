@@ -15,39 +15,39 @@ final class CoreDataService: CoreDataServiceType {
   static let shared = CoreDataService()
   
   /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
-  let user: CoreDataUserManagerType
+  let userManager: CoreDataUserManagerType
   
   /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
-  let intake: CoreDataIntakeManagerType
+  let intakeManager: CoreDataIntakeManagerType
   
-  private init() {
-    let context = CoreDataManager.shared.context
-    user = User(context: context)
-    intake = Intake(context: context)
-  }
-  
-  func saveLastAccessedDate(completion: @escaping (Error?) -> Void) {
-    user.save([User.lastAccessedDate: Date()], completion: completion)
+  private init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
+               intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
+    self.userManager = userManager
+    self.intakeManager = intakeManager
   }
   
   func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
-    user.request { user, error in
+    userManager.request { user, error in
       // 최신 접속 날짜가 코어데이터에 저장되어 있으면 그 값을 내려줌
       // 그렇지 않으면 최신 접속 날짜를 갱신한 후 그 값을 내려줌
       if let lastAccessedDate = user?.lastAccessedDate {
         completion(lastAccessedDate, error)
       } else {
         saveLastAccessedDate { error in
-          completion(Date.start(), error)
+          completion(Date(), error)
         }
       }
     }
   }
   
+  func saveLastAccessedDate(completion: @escaping (Error?) -> Void) {
+    userManager.save([User.lastAccessedDate: Date()], completion: completion)
+  }
+  
   func requestIntakes(from startDate: Date,
                       to endDate: Date,
                       completion: @escaping ([Date: Int?]?, Error?) -> Void) {
-    intake.request { intakes, error in
+    intakeManager.request { intakes, error in
       if let error = error {
         completion(nil, error)
         return
@@ -65,8 +65,6 @@ final class CoreDataService: CoreDataServiceType {
         let intakeInCurrentDate = intakesInDates.filter { $0.date?.start == currentDate }.first
         if let currentIntake = intakeInCurrentDate {
           result[currentDate] = Int(currentIntake.value)
-        } else {
-          result[currentDate] = nil
         }
         currentDate = currentDate.after(days: 1).start
       }
@@ -75,6 +73,6 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void) {
-    intake.save([Intake.date: Int16(value)], completion: completion)
+    intakeManager.save([Intake.date: date, Intake.value: Int16(value)], completion: completion)
   }
 }

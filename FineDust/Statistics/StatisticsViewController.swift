@@ -102,14 +102,15 @@ final class StatisticsViewController: UIViewController {
   }
   
   private func requestDustTodayInfo() {
-    DustInfoService()
-      .requestDayInfo(from: Date.before(days: 2),
-                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
-                        if let error = error {
-                          print(error.localizedDescription)
-                          return
-                        }
-                        print(fineDustPerDate)
+    let intakeService
+      = IntakeService(healthKitService: HealthKitService(healthKit: HealthKitManager()),
+                      dustInfoService: DustInfoService(dustManager: DustInfoManager()),
+                      coreDataService: CoreDataService.shared)
+    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+      print(fineDust, ultrafineDust, error)
+    }
+    intakeService.requestIntakesInWeek(since: .before(days: 3)) { fineDusts, ultrafineDusts, error in
+      print(fineDusts, ultrafineDusts, error)
     }
   }
 }
