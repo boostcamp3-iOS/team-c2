@@ -14,6 +14,7 @@ final class MainViewController: UIViewController {
   
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
+  @IBOutlet private weak var fineDustLabel: UILabel!
   
   // MARK: - Properties
   
@@ -24,6 +25,7 @@ final class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "내먼지".localized
+    registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +35,32 @@ final class MainViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+  }
+  
+  deinit {
+    unregisterLocationObserver()
+  }
+}
+
+// MARK: - LocationObserver
+
+extension MainViewController: LocationObserver {
+  func handleIfSuccess(_ notification: Notification) {
+    DustInfoService().fetchRecentTimeInfo() { info, _ in
+      if let info = info {
+        DispatchQueue.main.async {
+          self.fineDustLabel.text = "\(info.fineDustValue)µg"
+        }
+      }
+    }
+  }
+  
+  func handleIfFail(_ notification: Notification) {
+    
+  }
+  
+  func handleIfAuthorizationDenied(_ notification: Notification) {
+    
   }
 }
 
@@ -71,12 +99,6 @@ extension MainViewController {
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
-      }
-    }
-    
-    healthKitService.requestDistancePerHour(from: Date.before(days: 2, since: Date()), to: Date()) {
-      if let temp = $0 {
-        print(temp)
       }
     }
   }
