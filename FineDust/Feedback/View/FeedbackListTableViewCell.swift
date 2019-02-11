@@ -18,7 +18,20 @@ final class FeedbackListTableViewCell: UITableViewCell {
   
   let jsonManager = JSONManager()
   fileprivate var dustFeedbacks: [DustFeedbacks] = []
-  /// 테이블뷰셀 데이터 및 UI 설정
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setImageView()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    feedbackImageView.image = nil
+    feedbackTitleLabel.text = nil
+    feedbackSourceLabel.text = nil
+  }
+  
+  /// 테이블뷰셀 데이터 설정
   func setTabelViewCellProperties(at index: Int) {
     dustFeedbacks = jsonManager.fetchDustFeedbacks()
     
@@ -26,7 +39,10 @@ final class FeedbackListTableViewCell: UITableViewCell {
     feedbackTitleLabel.text = dustFeedbacks[index].title
     feedbackSourceLabel.text = dustFeedbacks[index].source
     
+  }
+  
+  /// 테이블뷰셀 이미지 UI 설정
+  func setImageView() {
     feedbackImageView.setRounded()
-    
   }
 }
