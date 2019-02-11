@@ -38,7 +38,7 @@ final class HealthKitService: HealthKitServiceType {
   
   /// 오늘 걸은 거리 가져오는 함수
   func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
-    healthKitManager?.findHealthKitValue(startDate: Date.start(),
+    healthKitManager?.findHealthKitValue(startDate: .start(),
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .meter(),
@@ -61,8 +61,8 @@ final class HealthKitService: HealthKitServiceType {
     //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
     let group = DispatchGroup()
     
-    healthKitManager?.findHealthKitValue(startDate: Date.start(),
-                                         endDate: Date.end(),
+    healthKitManager?.findHealthKitValue(startDate: .start(),
+                                         endDate: .end(),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
@@ -91,13 +91,13 @@ final class HealthKitService: HealthKitServiceType {
                               completion: @escaping (DateHourIntakePair?) -> Void) {
     var hourIntakePair = HourIntakePair()
     var dateHourIntakePair = DateHourIntakePair()
-    var indexDate = Date.start(of: startDate)
+    var indexDate = startDate.start
     
     //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
     let group = DispatchGroup()
     
-    healthKitManager?.findHealthKitValue(startDate: Date.start(of: startDate),
-                                         endDate: Date.end(of: endDate),
+    healthKitManager?.findHealthKitValue(startDate: startDate.start,
+                                         endDate: endDate.end,
                                          hourInterval: 1,
                                          quantityFor: .meter(),
                                          quantityTypeIdentifier: .distanceWalkingRunning
@@ -112,7 +112,7 @@ final class HealthKitService: HealthKitServiceType {
         hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)
         if hour == 23 {
           dateHourIntakePair[indexDate] = hourIntakePair
-          indexDate = Date.after(days: 1, since: indexDate)
+          indexDate = indexDate.after(days: 1)
         }
       }
       group.leave()
