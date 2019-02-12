@@ -64,7 +64,7 @@ final class IntakeService: IntakeServiceType {
     let endDate = Date.before(days: 1)
     // 먼저 코어데이터 데이터를 가져옴
     coreDataService
-      .requestIntakes(from: startDate, to: endDate) { [weak self] coreDataIntakeByDate, error in
+      .requestIntakes(from: startDate, to: endDate) { [weak self] coreDataIntakePerDate, error in
         if let error = error {
           completion(nil, nil, error)
           return
@@ -72,46 +72,46 @@ final class IntakeService: IntakeServiceType {
         guard let self = self else { return }
         var fineDustResult: [Date: Int] = [:]
         var ultrafineDustResult: [Date: Int] = [:]
-        guard let coreDataIntakeByDate = coreDataIntakeByDate else { return }
+        guard let coreDataIntakePerDate = coreDataIntakePerDate else { return }
         for date in Date.between(startDate, endDate) {
           // 주어진 날짜에 대하여 코어데이터에 데이터가 있는지 확인
-          guard let intake = coreDataIntakeByDate[date] else {
+          guard let intake = coreDataIntakePerDate[date] else {
             // 데이터가 없으면 DustInfoService 호출
             // 하루하루 값 산출하여 컴플리션 핸들러 호출
             self.dustInfoService
               .requestDayInfo(
                 from: date,
                 to: endDate
-              ) { [weak self] fineDustIntakePerHourPerDate, ultrafineDustIntakePerHourPerDate, error in
+              ) { [weak self] hourlyFineDustIntakePerDate, hourlyUltrafineDustIntakePerDate, error in
                 if let error = error {
                   completion(nil, nil, error)
                   return
                 }
                 guard let self = self else { return }
-                guard let fineDustIntakePerHourPerDate = fineDustIntakePerHourPerDate
+                guard let hourlyFineDustIntakePerDate = hourlyFineDustIntakePerDate
                 else { return }
-                guard let ultrafineDustIntakePerHourPerDate = ultrafineDustIntakePerHourPerDate
+                guard let hourlyUltrafineDustIntakePerDate = hourlyUltrafineDustIntakePerDate
                 else { return }
                 self.healthKitService
                   .requestDistancePerHour(
                     from: date,
                     to: endDate
-                  ) { [weak self] distancePerHourPerDate in
+                  ) { [weak self] hourlyDistancePerDate in
                     guard let self = self else { return }
-                    guard let distancePerHourPerDate = distancePerHourPerDate else { return }
-                    let sortedDistancePerHourPerDate = distancePerHourPerDate.sortedByDate()
-                    let sortedFineDustIntakePerHourPerDate
-                      = fineDustIntakePerHourPerDate.sortedByDate()
-                    let sortedUltrafineDustPerHourPerDate
-                      = ultrafineDustIntakePerHourPerDate.sortedByDate()
-                    var results = coreDataIntakeByDate.sortedByDate().compactMap { $0.value }
-                    zip(sortedFineDustIntakePerHourPerDate, sortedDistancePerHourPerDate)
+                    guard let hourlyDistancePerDate = hourlyDistancePerDate else { return }
+                    let sortedHourlyDistancePerDate = hourlyDistancePerDate.sortedByDate()
+                    let sortedHourlyFineDustIntakePerDate
+                      = hourlyFineDustIntakePerDate.sortedByDate()
+                    let sortedHourlyUltrafineDustPerDate
+                      = hourlyUltrafineDustIntakePerDate.sortedByDate()
+                    var results = coreDataIntakePerDate.sortedByDate().compactMap { $0.value }
+                    zip(sortedHourlyFineDustIntakePerDate, sortedHourlyDistancePerDate)
                       .forEach { argument in
-                        let (fineDustIntakePerHourPerDate, distancePerHourPerDate) = argument
-                        let sortedFineDustIntakePerHour = fineDustIntakePerHourPerDate.value.sortedByHour()
-                        let sortedDistancePerHour = distancePerHourPerDate.value.sortedByHour()
+                        let (hourlyFineDustIntakePerDate, hourlyDistancePerDate) = argument
+                        let sortedHourlyFineDustIntake = hourlyFineDustIntakePerDate.value.sortedByHour()
+                        let sortedHourlyDistance = hourlyDistancePerDate.value.sortedByHour()
                         let intake
-                          = zip(sortedFineDustIntakePerHour, sortedDistancePerHour)
+                          = zip(sortedHourlyFineDustIntake, sortedHourlyDistance)
                             .reduce(0, {
                               $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value)
                             })
