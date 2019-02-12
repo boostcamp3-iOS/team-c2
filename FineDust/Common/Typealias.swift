@@ -11,4 +11,5 @@ import Foundation
 /// 시간대별 흡입량 타입 별칭.
 typealias HourIntakePair = [Hour: Int]
 
+/// 날짜별 | 시간대별 흡입량 타입 별칭.
 typealias DateHourIntakePair = [Date: HourIntakePair]

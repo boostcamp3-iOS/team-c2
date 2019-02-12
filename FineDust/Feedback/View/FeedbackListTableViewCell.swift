@@ -17,7 +17,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
   @IBOutlet private weak var bookmarkButton: UIButton!
   
   let jsonManager = JSONManager()
-  fileprivate var dustFeedbacks: [DustFeedbacks] = []
+  private var dustFeedbacks: [DustFeedback] = []
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -32,17 +32,16 @@ final class FeedbackListTableViewCell: UITableViewCell {
   }
   
   /// 테이블뷰셀 데이터 설정
-  func setTabelViewCellProperties(at index: Int) {
-    dustFeedbacks = jsonManager.fetchDustFeedbacks()
+  func setTabelViewCellProperties(dustFeedback: DustFeedback) {
     
-    feedbackImageView.image = UIImage(named: dustFeedbacks[index].imageName)
-    feedbackTitleLabel.text = dustFeedbacks[index].title
-    feedbackSourceLabel.text = dustFeedbacks[index].source
+    feedbackImageView.image = UIImage(named: dustFeedback.imageName)
+    feedbackTitleLabel.text = dustFeedback.title
+    feedbackSourceLabel.text = dustFeedback.source
     
   }
   
   /// 테이블뷰셀 이미지 UI 설정
-  func setImageView() {
+  private func setImageView() {
     feedbackImageView.setRounded()
   }
 }

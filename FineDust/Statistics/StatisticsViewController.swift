@@ -113,14 +113,14 @@ final class StatisticsViewController: UIViewController {
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
     requestWeekDustInfo { [weak self] fineDusts, ultrafineDusts, error in
-      if let error = error {
-        print(error.localizedDescription)
+      if let error = error as? ServiceErrorType {
+        error.alert.present(to: self)
         return
       }
       guard let self = self else { return }
       self.requestTodayDustInfo { [weak self] fineDust, ultrafineDust, error in
-        if let error = error {
-          print(error.localizedDescription)
+        if let error = error as? ServiceErrorType {
+          error.alert.present(to: self)
           return
         }
         guard let self = self else { return }
@@ -170,17 +170,6 @@ final class StatisticsViewController: UIViewController {
 extension StatisticsViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
     requestIntake()
-  }
-  
-  func handleIfFail(_ notification: Notification) {
-    UIAlertController
-      .alert(title: "", message: notification.locationTaskError?.localizedDescription)
-      .action(title: "확인")
-      .present(to: self)
-  }
-  
-  func handleIfAuthorizationDenied(_ notification: Notification) {
-    print("authorization denied")
   }
 }
 

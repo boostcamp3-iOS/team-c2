@@ -69,20 +69,20 @@ extension LocationManagerType {
                                              y: coordinate.latitude))
       SharedInfo.shared.set(x: convertedCoordinate?.x ?? 0, y: convertedCoordinate?.y ?? 0)
       GeocoderManager.shared.requestAddress(location) { address, error in
-        if let error = error {
+        if let error = error as? CLError {
           NotificationCenter.default
             .post(name: .didFailUpdatingAllLocationTasks,
                   object: nil,
-                  userInfo: ["error": LocationTaskError.geoencodingError(error)])
+                  userInfo: ["error": LocationTaskError.geocodingError(error)])
           return
         }
         SharedInfo.shared.set(address: address ?? "")
         let dustObservatoryManager = DustObservatoryManager()
         dustObservatoryManager.requestObservatory(numberOfRows: 1,
                                                 pageNumber: 1) { response, error in
-          if let error = error {
+          if let error = error as? DustError {
             NotificationCenter.default
-              .post(name: .didSuccessUpdatingAllLocationTasks,
+              .post(name: .didFailUpdatingAllLocationTasks,
                     object: nil,
                     userInfo: ["error": LocationTaskError.networkingError(error)])
             return
@@ -98,10 +98,12 @@ extension LocationManagerType {
   var errorHandler: ((Error) -> Void)? {
     return { error in
       // Core Location 작업 중 에러가 발생하면 관련 에러를 포함하여 노티피케이션을 쏴준다
-      NotificationCenter.default
-        .post(name: .didFailUpdatingAllLocationTasks,
-              object: nil,
-              userInfo: ["error": LocationTaskError.coreLocationError(error)])
+      if let error = error as? CLError {
+        NotificationCenter.default
+          .post(name: .didFailUpdatingAllLocationTasks,
+                object: nil,
+                userInfo: ["error": LocationTaskError.coreLocationError(error)])
+      }
     }
   }
 }
