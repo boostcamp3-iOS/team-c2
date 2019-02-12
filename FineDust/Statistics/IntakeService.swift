@@ -100,24 +100,32 @@ final class IntakeService: IntakeServiceType {
                     }
                     guard let self = self else { return }
                     guard let fineDustIntakePerHourPerDate = fineDustIntakePerHourPerDate else { return }
-                    guard let ultrafineDustHourIntakePair = ultrafineDustIntakePerHourPerDate else { return }
+                    guard let ultrafineDustIntakePerHourPerDate = ultrafineDustIntakePerHourPerDate else { return }
                     // 헬스킷서비스 사용하여 걸음수 가져옴
                     self.healthKitService
                       .requestDistancePerHour(from: date, to: .before(days: 1)) { [weak self] distancePerHourPerDate in
                         guard let self = self else { return }
                         guard let distancePerHourPerDate = distancePerHourPerDate else { return }
-                        let sortedDistancePerDate = distancePerHourPerDate.sortedByDate()
-                        let sortedFineDustValuePerDate = fineDustIntakePerHourPerDate.sortedByDate()
+                        let sortedDistancePerHourPerDate = distancePerHourPerDate.sortedByDate()
+                        let sortedFineDustIntakePerHourPerDate = fineDustIntakePerHourPerDate.sortedByDate()
+                        let sortedUltrafineDustIntakePerHourPerDate = ultrafineDustIntakePerHourPerDate.sortedByDate()
                         var results = coreDateIntakeByDate.sortedByDate().compactMap { $0.value }
-                        zip(sortedFineDustValuePerDate, sortedDistancePerDate).forEach { argument in
+                        zip(sortedFineDustIntakePerHourPerDate, sortedDistancePerHourPerDate).forEach { argument in
                           let (fineDustHourIntakePerDate, distanceHourPerDate) = argument
                           let intake = zip(fineDustHourIntakePerDate.value, distanceHourPerDate.value)
                             .reduce(0, { $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value) })
                           results.append(intake)
                         }
-                        // 코어데이터 갱신 로직 필요
+                        // 코어데이터 갱신
+                        for (index, date) in Date.between(startDate, endDate).enumerated() {
+                          self.coreDataService.saveIntake(results[index], at: date) { error in
+                            if let error = error {
+                              print(error.localizedDescription)
+                              
+                            }
+                          }
+                        }
                         completion(results, nil, nil)
-                        return
                     }
                 }
                 return
