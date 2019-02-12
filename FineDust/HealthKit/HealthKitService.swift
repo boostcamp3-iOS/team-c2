@@ -18,7 +18,7 @@ final class HealthKitService: HealthKitServiceType {
   }
   
   /// 오늘 걸음 수 가져오는 함수
-  func fetchTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
+  func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     
     healthKitManager?.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
@@ -37,7 +37,7 @@ final class HealthKitService: HealthKitServiceType {
   }
   
   /// 오늘 걸은 거리 가져오는 함수
-  func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
+  func requestTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
     healthKitManager?.findHealthKitValue(startDate: .start(),
                                          endDate: Date(),
                                          hourInterval: 24,
@@ -110,6 +110,7 @@ final class HealthKitService: HealthKitServiceType {
       group.enter()
       if let hour = hour {
         var value = Int(value ?? 0)
+        // 걸음거리가 500 이하일때는 실내로 취급한다.
         value = value < 500 ? 0 : value
         hourIntakePair[Hour(rawValue: hour) ?? .default] = value
         if hour == 23 {

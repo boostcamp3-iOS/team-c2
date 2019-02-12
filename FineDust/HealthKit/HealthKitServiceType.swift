@@ -12,10 +12,10 @@ import HealthKit
 /// HealthKit Service Type.
 protocol HealthKitServiceType: class {
   /// 오늘 걸음 수 값 fetch.
-  func fetchTodayStepCount(completion: @escaping (Double?, Error?) -> Void)
+  func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void)
   
   /// 오늘 걸은 거리 값 fetch.
-  func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void)
+  func requestTodayDistance(completion: @escaping (Double?, Error?) -> Void)
   
   /// 오늘 시간당 걸음거리를 HourIntakePair로 리턴하는 함수.
   func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void)

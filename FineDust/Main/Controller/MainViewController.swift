@@ -22,13 +22,18 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
   
   let healthKitService = HealthKitService(healthKit: HealthKitManager())
+  let dustInfoService = DustInfoService(dustManager: DustInfoManager())
+  let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "a hh : mm"
+    return formatter
+  }()
   
   // MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "내먼지".localized
-    registerLocationObserver()
+    setUp()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +54,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
-    let dateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "a hh : mm"
-      return formatter
-    }()
-    DustInfoService().requestRecentTimeInfo() { info, error in
+    dustInfoService.requestRecentTimeInfo { info, error in
       if let error = error as? ServiceErrorType {
         error.alert.present(to: self)
         return 
@@ -62,7 +62,6 @@ extension MainViewController: LocationObserver {
       if let info = info {
         DispatchQueue.main.async {
           self.fineDustLabel.text = "\(info.fineDustValue)µg"
-          self.timeLabel.text = dateFormatter.string(from: info.updatingTime)
           self.locationLabel.text = SharedInfo.shared.address
           self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
         }
@@ -75,10 +74,16 @@ extension MainViewController: LocationObserver {
 
 extension MainViewController {
   
+  private func setUp() {
+    navigationItem.title = "내먼지".localized
+    registerLocationObserver()
+    timeLabel.text = dateFormatter.string(from: Date())
+  }
+  
   /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateViewController() {
     // 걸음 수 label에 표시
-    healthKitService.fetchTodayStepCount { value, error in
+    healthKitService.requestTodayStepCount { value, error in
       if let error = error {
         DispatchQueue.main.async {
           self.stepCountLabel.text = "0 걸음"
@@ -94,7 +99,7 @@ extension MainViewController {
     }
     
     // 걸은 거리 label에 표시
-    healthKitService.fetchTodayDistance { value, error in
+    healthKitService.requestTodayDistance { value, error in
       if let value = value {
         if let error = error {
           DispatchQueue.main.async {
@@ -114,10 +119,10 @@ extension MainViewController {
     switch grade {
     case .good:
       return "좋은 공기"
-    case .bad:
-      return "나쁜 공기"
     case .normal:
       return "보통 공기"
+    case .bad:
+      return "나쁜 공기"
     case .veryBad:
       return "매우 나쁨"
     case .default:

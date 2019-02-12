@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// 미세먼지 API의 Response 관련 부분을 먼저 파싱하기 위한 응답 객체.
 struct ResponseHeader: XMLParsingType {
   
