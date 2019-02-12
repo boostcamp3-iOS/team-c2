@@ -60,35 +60,73 @@ final class IntakeService: IntakeServiceType {
   
   func requestIntakesInWeek(since date: Date,
                             completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
+    // 초미세먼지 말고 미세먼지에 대해서만 일단 산출. 초미세먼지 부분은 nil을 넘겨줌
     dustInfoService
-      .requestDayInfo(from: date,
-                      to: Date.before(days: 1))
-      { [weak self] fineDustPerDate, ultrafineDustPerDate, error in
+      .requestDayInfo(
+        from: date,
+        to: Date.before(days: 1)
+      ) { [weak self] fineDustPerDate, ultrafineDustPerDate, error in
+        var fineDustResult: [Date: Int] = [:]
+        var ultrafineDustResult: [Date: Int] = [:]
         if let error = error {
           completion(nil, nil, error)
           return
         }
         guard let self = self else { return }
-        
-        
-        
-        
-        
-        
-        
-        var fineDusts: [Int] = []
-        var ultrafineDusts: [Int] = []
-        fineDustPerDate?
-          .sorted { $0.key < $1.key }
-          .forEach { dictionary in
-            fineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+        let startDate = Date.before(days: 6)
+        let endDate = Date.before(days: 1)
+        // 6일 전부터 1일 전까지의 코어데이터 가져오기
+        // 값이 없는 날이 나오면 반복문을 빠져나가고 DustInfoService 사용
+        self.coreDataService
+          .requestIntakes(from: startDate, to: endDate) { [weak self] coreDataIntakeByDate, error in
+            if let error = error {
+              completion(nil, nil, error)
+              return
+            }
+            guard let self = self else { return }
+            guard let coreDateIntakeByDate = coreDataIntakeByDate else { return }
+            for date in Date.between(startDate, endDate) {
+              guard let intake = coreDateIntakeByDate[date] else {
+                // 값이 없는 날이므로 DustInfoService 사용
+                // 코어데이터에 값이 없는 날짜부터 1일 전까지로 호출
+                self.dustInfoService
+                  .requestDayInfo(
+                    from: date,
+                    to: .before(days: 1)
+                  ) { [weak self] fineDustIntakePerHourPerDate, ultrafineDustIntakePerHourPerDate, error in
+                    if let error = error {
+                      completion(nil, nil, error)
+                      return
+                    }
+                    guard let self = self else { return }
+                    guard let fineDustIntakePerHourPerDate = fineDustIntakePerHourPerDate else { return }
+                    guard let ultrafineDustHourIntakePair = ultrafineDustIntakePerHourPerDate else { return }
+                    // 헬스킷서비스 사용하여 걸음수 가져옴
+                    self.healthKitService
+                      .requestDistancePerHour(from: date, to: .before(days: 1)) { [weak self] distancePerHourPerDate in
+                        guard let self = self else { return }
+                        guard let distancePerHourPerDate = distancePerHourPerDate else { return }
+                        let sortedDistancePerDate = distancePerHourPerDate.sortedByDate()
+                        let sortedFineDustValuePerDate = fineDustIntakePerHourPerDate.sortedByDate()
+                        var results = coreDateIntakeByDate.sortedByDate().compactMap { $0.value }
+                        zip(sortedFineDustValuePerDate, sortedDistancePerDate).forEach { argument in
+                          let (fineDustHourIntakePerDate, distanceHourPerDate) = argument
+                          let intake = zip(fineDustHourIntakePerDate.value, distanceHourPerDate.value)
+                            .reduce(0, { $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value) })
+                          results.append(intake)
+                        }
+                        // 코어데이터 갱신 로직 필요
+                        completion(results, nil, nil)
+                        return
+                    }
+                }
+                return
+              }
+              fineDustResult[date] = intake ?? 0
+            }
+            let results = fineDustResult.sortedByDate().map { $0.value }
+            completion(results, nil, nil)
         }
-        ultrafineDustPerDate?
-          .sorted { $0.key < $1.key }
-          .forEach { dictionary in
-            ultrafineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
-        }
-        completion(fineDusts, ultrafineDusts, nil)
     }
   }
 }
