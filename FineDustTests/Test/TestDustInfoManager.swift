@@ -21,16 +21,13 @@ class TestDustInfoManager: XCTestCase {
   }
   
   func test_request() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(response)
+      XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -39,11 +36,13 @@ class TestDustInfoManager: XCTestCase {
   func test_request_noDataError() {
     mockNetworkManager.data = nil
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-    mockNetworkManager.error = nil
+    mockNetworkManager.error = DustError.noData
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      XCTAssertNil(error)
+      if let error = error as? DustError {
+        XCTAssertEqual(error, DustError.noData)
+      }
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -65,15 +64,12 @@ class TestDustInfoManager: XCTestCase {
   }
   
   func test_request_dustError() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
+      XCTAssertNotNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
       }

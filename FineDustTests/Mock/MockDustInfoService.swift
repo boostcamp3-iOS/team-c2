@@ -13,13 +13,13 @@ class MockDustInfoService: DustInfoServiceType {
   
   var recentDustInfo: RecentDustInfo?
   
-  var fineDustHourlyIntake: HourIntakePair?
+  var fineDustHourlyValue: HourIntakePair?
   
-  var ultrafineDustHourlyIntake: HourIntakePair?
+  var ultrafineDustHourlyValue: HourIntakePair?
   
-  var fineDustHourlyIntakePerDate: DateHourIntakePair?
+  var fineDustHourlyValuePerDate: DateHourIntakePair?
   
-  var ultrafineDustHourlyIntakePerDate: DateHourIntakePair?
+  var ultrafineDustHourlyValuePerDate: DateHourIntakePair?
   
   var error: Error?
   
@@ -28,10 +28,10 @@ class MockDustInfoService: DustInfoServiceType {
   }
   
   func requestDayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
-    completion(fineDustHourlyIntake, ultrafineDustHourlyIntake, error)
+    completion(fineDustHourlyValue, ultrafineDustHourlyValue, error)
   }
   
   func requestDayInfo(from startDate: Date, to endDate: Date, completion: @escaping (DateHourIntakePair?, DateHourIntakePair?, Error?) -> Void) {
-    completion(fineDustHourlyIntakePerDate, ultrafineDustHourlyIntakePerDate, error)
+    completion(fineDustHourlyValuePerDate, ultrafineDustHourlyValuePerDate, error)
   }
 }

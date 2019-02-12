@@ -21,16 +21,13 @@ class TestDustObservatoryManager: XCTestCase {
   }
   
   func test_requestObservatory() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(response)
+      XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -65,15 +62,12 @@ class TestDustObservatoryManager: XCTestCase {
   }
   
   func test_requestObservatory_dustError() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = DustError.accessDenied
     let expect = expectation(description: "test")
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
+      XCTAssertNotNil(response)
       if let error = error as? DustError {
         XCTAssertEqual(error, DustError.accessDenied)
       }
@@ -83,15 +77,12 @@ class TestDustObservatoryManager: XCTestCase {
   }
   
   func test_requestObservatory_xmlError1() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.implementationIsMissing("asdf")
     let expect = expectation(description: "test")
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
+      XCTAssertNotNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.implementationIsMissing("asdf"))
       }
@@ -101,15 +92,12 @@ class TestDustObservatoryManager: XCTestCase {
   }
   
   func test_requesetObservatory_xmlError2() {
-    let json = """
-    { "key": "keykey", "value": "valuevalue" }
-    """
-    mockNetworkManager.data = json.data(using: .utf8)
+    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success
     mockNetworkManager.error = XMLError.nodeHasNoValue
     let expect = expectation(description: "test")
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-      XCTAssertNil(response)
+      XCTAssertNotNil(response)
       if let error = error as? XMLError {
         XCTAssertEqual(error, XMLError.nodeHasNoValue)
       }
