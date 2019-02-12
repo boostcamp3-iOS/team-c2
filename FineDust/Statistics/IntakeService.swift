@@ -110,6 +110,7 @@ final class IntakeService: IntakeServiceType {
                         let sortedFineDustIntakePerHourPerDate = fineDustIntakePerHourPerDate.sortedByDate()
                         let sortedUltrafineDustIntakePerHourPerDate = ultrafineDustIntakePerHourPerDate.sortedByDate()
                         var results = coreDateIntakeByDate.sortedByDate().compactMap { $0.value }
+                        // 하루하루 알고리즘 취하여 값 산출
                         zip(sortedFineDustIntakePerHourPerDate, sortedDistancePerHourPerDate).forEach { argument in
                           let (fineDustHourIntakePerDate, distanceHourPerDate) = argument
                           let intake = zip(fineDustHourIntakePerDate.value, distanceHourPerDate.value)
