@@ -73,7 +73,7 @@ extension LocationManagerType {
           NotificationCenter.default
             .post(name: .didFailUpdatingAllLocationTasks,
                   object: nil,
-                  userInfo: ["error": LocationTaskError.geoencodingError(error)])
+                  userInfo: ["error": LocationTaskError.geocodingError(error)])
           return
         }
         SharedInfo.shared.set(address: address ?? "")

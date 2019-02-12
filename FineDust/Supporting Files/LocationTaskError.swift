@@ -13,7 +13,7 @@ import Foundation
 enum LocationTaskError: Error {
   
   /// 주소 변환 작업 중 에러.
-  case geoencodingError(CLError)
+  case geocodingError(CLError)
   
   /// 관측소 정보 받아오는 중 에러.
   case networkingError(DustError)
@@ -23,7 +23,7 @@ enum LocationTaskError: Error {
   
   var localizedDescription: String {
     switch self {
-    case let .geoencodingError(error):
+    case let .geocodingError(error):
       return error.localizedDescription
     case let .networkingError(error):
       return error.localizedDescription
