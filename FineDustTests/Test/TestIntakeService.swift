@@ -40,18 +40,37 @@ class TestIntakeService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_requestIntakesInWeek() {
+  func test_requestIntakesInWeek_full() {
     mockDustInfoService.fineDustHourlyValuePerDate = DummyDustInfoService.fineDustHourlyValuePerDate
     mockDustInfoService.ultrafineDustHourlyValuePerDate = DummyDustInfoService.ultrafineDustHourlyValuePerDate
     mockDustInfoService.error = nil
     mockHealthKitService.hourlyDistancePerDate = DummyHealthKitService.hourlyDistancePerDate
     mockHealthKitService.error = nil
-    //mockCoreDataService.
+    mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateFull
+    mockCoreDataService.error = nil
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
-      XCTAssertNil(fineDusts)
+      XCTAssertNotNil(fineDusts)
       XCTAssertNil(ultrafineDusts)
-      XCTAssertNotNil(error)
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestIntakesInWeek_half() {
+    mockDustInfoService.fineDustHourlyValuePerDate = DummyDustInfoService.fineDustHourlyValuePerDate
+    mockDustInfoService.ultrafineDustHourlyValuePerDate = DummyDustInfoService.ultrafineDustHourlyValuePerDate
+    mockDustInfoService.error = nil
+    mockHealthKitService.hourlyDistancePerDate = DummyHealthKitService.hourlyDistancePerDate
+    mockHealthKitService.error = nil
+    mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
+    mockCoreDataService.error = nil
+    let expect = expectation(description: "test")
+    intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
+      XCTAssertNotNil(fineDusts)
+      XCTAssertNil(ultrafineDusts)
+      XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
@@ -73,11 +92,12 @@ class TestIntakeService: XCTestCase {
   func test_requestIntakesInWeek_error() {
     mockDustInfoService.error = DustError.accessDenied
     mockHealthKitService.error = NSError(domain: "healthKitError", code: 0, userInfo: nil)
+    mockCoreDataService.error = NSError(domain: "coreDataError", code: 0, userInfo: nil)
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNil(fineDusts)
       XCTAssertNil(ultrafineDusts)
-      XCTAssertNil(error)
+      XCTAssertNotNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)

@@ -27,6 +27,7 @@
 		485C2BFFB3B3A55ECAA2EA3E5E665B3F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */; };
 		DB84FFAEC8A44B1AF2B17E9E65186CC0 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B04B6C2CD4B334A519586D0E91DBCF /* DateFormatter+.swift */; };
 		E59BB0B0FBA7D57D24E6E247BE01272A /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */; };
+		F9FD41DC6CD16EC111527E3FBC9BDBC6 /* DummyCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11172A4ADA09E036783C0030CF04375C /* DummyCoreDataService.swift */; };
 		A524CDA9285DDC778CC0CF4EB2F4F6C3 /* DummyDustInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F5FF25E64FE0BB4F30FB013BE3C831 /* DummyDustInfoManager.swift */; };
 		101A02C9E2507574C9C3C458F04F73B0 /* DummyDustInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */; };
 		42C4D6D4F16243CDBAC5299CA6B6F409 /* DummyDustObservatoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */; };
@@ -166,6 +167,7 @@
 		804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		B9B04B6C2CD4B334A519586D0E91DBCF /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		11172A4ADA09E036783C0030CF04375C /* DummyCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCoreDataService.swift; sourceTree = "<group>"; };
 		50F5FF25E64FE0BB4F30FB013BE3C831 /* DummyDustInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDustInfoManager.swift; sourceTree = "<group>"; };
 		AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDustInfoService.swift; sourceTree = "<group>"; };
 		10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDustObservatoryManager.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		17C3D6266C5BE7EE77B5CFB27D0E0ABB /* Dummy */ = {
 			isa = PBXGroup;
 			children = (
+				11172A4ADA09E036783C0030CF04375C /* DummyCoreDataService.swift */,
 				50F5FF25E64FE0BB4F30FB013BE3C831 /* DummyDustInfoManager.swift */,
 				AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */,
 				10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */,
@@ -898,6 +901,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9FD41DC6CD16EC111527E3FBC9BDBC6 /* DummyCoreDataService.swift in Sources */,
 				A524CDA9285DDC778CC0CF4EB2F4F6C3 /* DummyDustInfoManager.swift in Sources */,
 				101A02C9E2507574C9C3C458F04F73B0 /* DummyDustInfoService.swift in Sources */,
 				42C4D6D4F16243CDBAC5299CA6B6F409 /* DummyDustObservatoryManager.swift in Sources */,

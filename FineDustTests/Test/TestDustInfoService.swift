@@ -84,9 +84,10 @@ class TestDustInfoService: XCTestCase {
     let expect = expectation(description: "test")
     mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24
     mockDustInfoManager.error = nil
-    dustService.requestDayInfo(from: .before(days: 1), to: Date()) { fineDustHourlyIntakePerDate, ultrafineDustHourlyIntakePerDate, error in
-      XCTAssertEqual(fineDustHourlyIntakePerDate, [Date(): [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1]])
-      XCTAssertEqual(ultrafineDustHourlyIntakePerDate, [Date(): [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1]])
+    let startDate = DateFormatter.dateAndTimeForDust.date(from: "2018-01-23 01:00") ?? Date()
+    dustService.requestDayInfo(from: startDate, to: startDate.after(days: 1)) { fineDustHourlyIntakePerDate, ultrafineDustHourlyIntakePerDate, error in
+      XCTAssertEqual(fineDustHourlyIntakePerDate, [startDate.start: [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1]])
+      XCTAssertEqual(ultrafineDustHourlyIntakePerDate, [startDate.start: [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1]])
       XCTAssertNil(error)
       expect.fulfill()
     }
