@@ -59,4 +59,15 @@ extension Date {
   var isToday: Bool {
     return Calendar.current.isDateInToday(self)
   }
+  
+  static func between(_ startDate: Date, _ endDate: Date) -> [Date] {
+    var result = [Date]()
+    var start = startDate.start
+    let end = endDate.end
+    while start <= end {
+      result.append(start)
+      start = start.after(days: 1)
+    }
+    return result
+  }
 }
