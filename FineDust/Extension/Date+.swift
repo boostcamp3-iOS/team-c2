@@ -9,10 +9,7 @@
 import Foundation
 
 extension Date {
-  static var today: Date {
-    return Date()
-  }
-  
+
   /// 기준 날짜 이전의 `Date` 구하기.
   static func before(days: Int, since date: Date = Date()) -> Date {
     return Calendar.current.date(byAdding: .day, value: -days, to: date) ?? Date()
@@ -58,5 +55,17 @@ extension Date {
   /// 주어진 날짜가 오늘인지 구하기.
   var isToday: Bool {
     return Calendar.current.isDateInToday(self)
+  }
+  
+  /// 주어진 날짜 사이에 있는 `Date` 배열 반환.
+  static func between(_ startDate: Date, _ endDate: Date) -> [Date] {
+    var result = [Date]()
+    var start = startDate.start
+    let end = endDate.end
+    while start <= end {
+      result.append(start)
+      start = start.after(days: 1)
+    }
+    return result
   }
 }
