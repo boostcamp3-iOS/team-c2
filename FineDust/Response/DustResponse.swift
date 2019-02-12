@@ -32,17 +32,17 @@ struct DustResponse: XMLParsingType {
     /// 관측 시간. `2019-01-29 16:00`. Format: `yyyy-MM-dd HH:mm`
     let dataTime: String
     
-    private let fineDustValueString: String
+    let fineDustValueString: String
     
-    private let fineDustValue24String: String
+    let fineDustValue24String: String
     
-    private let fineDustGradeString: String
+    let fineDustGradeString: String
     
-    private let ultrafineDustValueString: String
+    let ultrafineDustValueString: String
     
-    private let ultrafineDustValue24String: String
+    let ultrafineDustValue24String: String
     
-    private let ultrafineDustGradeString: String
+    let ultrafineDustGradeString: String
     
     /// 미세먼지 현재 농도.
     var fineDustValue: Int {
