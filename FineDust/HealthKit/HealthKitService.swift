@@ -91,39 +91,48 @@ final class HealthKitService: HealthKitServiceType {
                               completion: @escaping (DateHourIntakePair?) -> Void) {
     var hourIntakePair = HourIntakePair()
     var dateHourIntakePair = DateHourIntakePair()
-    var indexDate = startDate.start
+    // startDate와 endDate 사이에 며칠인지 파악.
+    let interval = Calendar.current.dateComponents([.day], from: startDate, to: endDate)
     
-    //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
-    let group = DispatchGroup()
+    guard let day = interval.day, day >= 0 else {
+      print("Input date error")
+      return
+    }
     
-    healthKitManager?.findHealthKitValue(startDate: startDate.start,
-                                         endDate: endDate.end,
-                                         hourInterval: 1,
-                                         quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning
-    ) { value, hour, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      
-      group.enter()
-      if let hour = hour {
-        var value = Int(value ?? 0)
-        // 걸음거리가 500 이하일때는 실내로 취급한다.
-        value = value < 500 ? 0 : value
-        hourIntakePair[Hour(rawValue: hour) ?? .default] = value
-        if hour == 23 {
-          dateHourIntakePair[indexDate] = hourIntakePair
-          indexDate = indexDate.after(days: 1)
+    // 비동기 함수를 동기 함수로 구현하기 위한 세마포어.
+    let semaphore = DispatchSemaphore(value: 0)
+    
+    var temp = 0
+    
+    for index in 0...day {
+      let indexDate = startDate.after(days: index)
+      healthKitManager?.findHealthKitValue(startDate: indexDate.start,
+                                           endDate: indexDate.end,
+                                           hourInterval: 1,
+                                           quantityFor: .meter(),
+                                           quantityTypeIdentifier: .distanceWalkingRunning
+      ) { value, hour, error in
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+        
+        if let hour = hour {
+          var value = Int(value ?? 0)
+          // 걸음거리가 500 이하일때는 실내로 취급한다.
+          value = value < 500 ? 0 : value
+          hourIntakePair[Hour(rawValue: hour) ?? .default] = value
+          dateHourIntakePair[indexDate.start] = hourIntakePair
+          
+          temp += 1
+          if temp == (day + 1) * 24 {
+            semaphore.signal()
+          }
         }
       }
-      group.leave()
     }
     
-    // 비동기 함수들이 끝날때까지 기다림.
-    group.notify(queue: .main) {
-      completion(dateHourIntakePair)
-    }
+    semaphore.wait()
+    completion(dateHourIntakePair)
   }
 }
