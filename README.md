@@ -52,6 +52,7 @@
 - **[SwiftLint](https://github.com/realm/SwiftLint)** 적용
 
 ```yaml
+# .swiftlint.yml
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
@@ -76,6 +77,7 @@ identifier_name:
 - 스토리보드 및 에셋 사용을 용이하게 하기 위해 **[SwiftGen](https://github.com/SwiftGen/SwiftGen)** 사용
 
 ```yaml
+# swiftgen.yml
 xcassets:
   inputs: FineDust/Supporting Files/Assets.xcassets
   outputs:
