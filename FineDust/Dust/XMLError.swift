@@ -11,7 +11,7 @@ import Foundation
 import SWXMLHash
 
 /// XML 파싱 에러 정의.
-enum XMLError: Error {
+enum XMLError: ServiceErrorType {
   
   case implementationIsMissing(String)
   

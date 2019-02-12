@@ -9,7 +9,7 @@
 import Foundation
 
 /// 미세먼지 API 오류 정의.
-enum DustError: Error {
+enum DustError: ServiceErrorType {
   
   /// 제공기관 서비스 상태가 원활하지 않음.
   case applicationError
@@ -56,7 +56,7 @@ enum DustError: Error {
 
 // MARK: - 에러 디스크립션
 
-extension DustError: LocalizedError {
+extension DustError {
   var localizedDescription: String {
     switch self {
     case .applicationError, .dbError, .httpError, .serviceTimeOut:

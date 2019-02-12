@@ -96,6 +96,8 @@
 		69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */; };
 		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */; };
+		D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */; };
+		585EA738C1263AEEE97962712EA4788B /* ServiceErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFACB8B8A628164CA222887EEA285687 /* ServiceErrorType.swift */; };
 		C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */; };
 		B500997103DB43D02E812611C3454782 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */; };
 		28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */; };
@@ -227,6 +229,8 @@
 		ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
 		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendCollectionViewCell.swift; path = FineDust/Feedback/View/RecommendCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
+		DFACB8B8A628164CA222887EEA285687 /* ServiceErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrorType.swift; sourceTree = "<group>"; };
 		72325220894EE5896332E4971553A6F7 /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
 		DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				768ED33DE8C563664122534CC0337E8E /* Hour.swift */,
 				648F2847BF0C37F32A03D356A9C8A1AE /* LocationObserver.swift */,
 				F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */,
+				DFACB8B8A628164CA222887EEA285687 /* ServiceErrorType.swift */,
 				BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */,
 			);
 			path = Common;
@@ -516,6 +521,7 @@
 				D8EC047C4F060467C8A0D71A5763D757 /* DustGrade.swift */,
 				83C98043155CF43D3E5E4605CB1A88BE /* DustResponse.swift */,
 				AF4AD95023734A3CADFEB5F089113191 /* ObservatoryResponse.swift */,
+				EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */,
 				771ADF487575031701FD3CE29CBA228C /* XMLParsingType.swift */,
 			);
 			path = Response;
@@ -897,6 +903,8 @@
 				69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */,
 				A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */,
 				5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */,
+				D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */,
+				585EA738C1263AEEE97962712EA4788B /* ServiceErrorType.swift in Sources */,
 				C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */,
 				28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
