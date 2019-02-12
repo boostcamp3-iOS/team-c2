@@ -31,30 +31,30 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="msG-Ue-EPf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="309.5"/>
+                                                    <rect key="frame" x="0.0" y="10" width="375" height="299.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="30" id="0Eb-K8-Eau">
-                                                        <size key="itemSize" width="300" height="250"/>
+                                                        <size key="itemSize" width="289" height="279.5"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recommendCell" id="Tva-RU-VTV" customClass="RecommendCollectionViewCell" customModule="FineDust" customModuleProvider="target">
-                                                            <rect key="frame" x="50" y="30" width="300" height="250"/>
+                                                            <rect key="frame" x="50" y="10" width="289" height="279.5"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="289" height="279.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="info1" translatesAutoresizingMaskIntoConstraints="NO" id="rCT-91-ej0">
-                                                                        <rect key="frame" x="0.0" y="-25" width="300" height="300"/>
+                                                                        <rect key="frame" x="0.0" y="-5" width="289" height="289.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="rCT-91-ej0" secondAttribute="height" multiplier="1:1" id="ooT-00-Ivh"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물 - 틸란드시아" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-Mz-REd">
-                                                                        <rect key="frame" x="15" y="212" width="270" height="24"/>
+                                                                        <rect key="frame" x="14.5" y="241.5" width="260" height="24"/>
                                                                         <color key="backgroundColor" red="0.3921568627" green="0.60392156860000001" blue="0.97254901959999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,7 +84,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="msG-Ue-EPf" secondAttribute="trailing" id="2WP-Cz-aSo"/>
-                                                <constraint firstItem="msG-Ue-EPf" firstAttribute="top" secondItem="A4O-Xg-eb3" secondAttribute="top" id="fWe-D9-pMy"/>
+                                                <constraint firstItem="msG-Ue-EPf" firstAttribute="top" secondItem="A4O-Xg-eb3" secondAttribute="top" constant="10" id="fWe-D9-pMy"/>
                                                 <constraint firstAttribute="bottom" secondItem="msG-Ue-EPf" secondAttribute="bottom" constant="20" symbolic="YES" id="qfb-GU-07d"/>
                                                 <constraint firstItem="msG-Ue-EPf" firstAttribute="leading" secondItem="A4O-Xg-eb3" secondAttribute="leading" id="yhI-P7-JPE"/>
                                             </constraints>

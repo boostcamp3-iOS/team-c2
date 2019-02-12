@@ -1,10 +1,10 @@
-# Project FineDust
+# 내안의먼지
 
 ![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 [![Build Status](https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop)](https://travis-ci.org/boostcamp3-iOS/team-c2)
 
-부스트캠프 3기 iOS과정 C-2팀
+부스트캠프 3기 iOS 과정 C-2팀
 
 ## 팀원 정보
 
@@ -52,14 +52,15 @@
 - **[SwiftLint](https://github.com/realm/SwiftLint)** 적용
 
 ```yaml
+# .swiftlint.yml
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
-- nesting
 
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
+- FineDust/SWXMLHash
 
 line_length:
   warning: 99
@@ -69,12 +70,14 @@ identifier_name:
   excluded:
     - x
     - y
+    - dx
 ```
 
 - StyleShare의 **[Swift Style Guide](https://github.com/StyleShare/swift-style-guide)** 준수
 - 스토리보드 및 에셋 사용을 용이하게 하기 위해 **[SwiftGen](https://github.com/SwiftGen/SwiftGen)** 사용
 
 ```yaml
+# swiftgen.yml
 xcassets:
   inputs: FineDust/Supporting Files/Assets.xcassets
   outputs:

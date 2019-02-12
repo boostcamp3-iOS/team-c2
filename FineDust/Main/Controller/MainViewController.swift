@@ -54,8 +54,11 @@ extension MainViewController: LocationObserver {
       formatter.dateFormat = "a hh : mm"
       return formatter
     }()
-    
-    DustInfoService().requestRecentTimeInfo() { info, _ in
+    DustInfoService().requestRecentTimeInfo() { info, error in
+      if let error = error as? ServiceErrorType {
+        error.alert.present(to: self)
+        return 
+      }
       if let info = info {
         DispatchQueue.main.async {
           self.fineDustLabel.text = "\(info.fineDustValue)µg"
@@ -65,14 +68,6 @@ extension MainViewController: LocationObserver {
         }
       }
     }
-  }
-  
-  func handleIfFail(_ notification: Notification) {
-    
-  }
-  
-  func handleIfAuthorizationDenied(_ notification: Notification) {
-    
   }
 }
 
