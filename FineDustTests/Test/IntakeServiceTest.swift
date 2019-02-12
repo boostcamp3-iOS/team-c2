@@ -10,41 +10,41 @@
 import XCTest
 import Foundation
 
-class IntakeServiceTest: XCTestCase {
-  
-  var intakeService: IntakeService!
-  
-  let mockHealthKitService: HealthKitServiceType! = nil
-  let mockDustInfoService: DustInfoServiceType! = nil
-  let mockCoreDataService: CoreDataServiceType! = nil
-  
-  override func setUp() {
-//    IntakeService = IntakeService(healthKitService: mockHealthKitService,
+//class IntakeServiceTest: XCTestCase {
+//
+//  var intakeService: IntakeService!
+//
+//  var mockHealthKitService: HealthKitServiceType!
+//  var mockDustInfoService: DustInfoServiceType!
+//  var mockCoreDataService: CoreDataServiceType!
+//
+//  override func setUp() {
+//    intakeService = IntakeService(healthKitService: mockHealthKitService,
 //                                  dustInfoService: mockDustInfoService,
 //                                  coreDataService: mockCoreDataService)
-  }
-  
-  func testFetchTodayIntake() {
-    intakeService.fetchTodayIntake { fineDust, ultrafineDust, error in
-      XCTAssertNil(error)
-    }
-  }
-  
-  func testFetchTodayIntakeError() {
-    intakeService.fetchTodayIntake { fineDust, ultrafineDust, error in
-      XCTAssertNotNil(error)
-    }
-  }
-  
-  func testFetchIntakesInWeek() {
-    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
-      XCTAssertNil(error)
-    }
-  }
-  
-  func testFetchIntakesInWeekError() {
-    intakeService.requestIntakesInWeek(since: Date()) { fineDusts, ultrafineDusts, error in
-      XCTAssertNotNil(error)
-    }
-  }
-}
+//  }
+//
+//  func testFetchTodayIntake() {
+//    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+//      XCTAssertNil(error)
+//    }
+//  }
+//
+//  func testFetchTodayIntakeError() {
+//    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+//      XCTAssertNotNil(error)
+//    }
+//  }
+//
+//  func testFetchIntakesInWeek() {
+//    intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
+//      XCTAssertNil(error)
+//    }
+//  }
+//
+//  func testFetchIntakesInWeekError() {
+//    intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
+//      XCTAssertNotNil(error)
+//    }
+//  }
+//}

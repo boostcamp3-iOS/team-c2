@@ -35,10 +35,10 @@ struct DustManagerInfo {
     result: DustResponse.Result(code: 0, message: "wow"),
     totalCount: 1,
     items: [DustResponse.Item(dataTime: "2018-01-23 17:00",
-                              fineDustValue: 1,
-                              fineDustValue24: 1,
-                              fineDustGrade: 1,
-                              ultrafineDustValue: 1,
-                              ultrafineDustValue24: 1,
-                              ultrafineDustGrade: 1)])
+                              fineDustValueString: "1",
+                              fineDustValue24String: "1",
+                              fineDustGradeString: "1",
+                              ultrafineDustValueString: "1",
+                              ultrafineDustValue24String: "1",
+                              ultrafineDustGradeString: "1")])
 }

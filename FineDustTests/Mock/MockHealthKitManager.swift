@@ -11,25 +11,28 @@ import Foundation
 import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
-
+  
   var error: Error?
   var stepCount = 2314.0
   var distance = 1409.53
+  var hourInterval = 1
   
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
+                          hourInterval: Int,
                           quantityFor: HKUnit,
                           quantityTypeIdentifier: HKQuantityTypeIdentifier,
-                          completion: @escaping (Double?, Error?) -> Void) {
+                          completion: @escaping (Double?, Int?, Error?) -> Void) {
     switch quantityTypeIdentifier {
     case .distanceWalkingRunning:
-      completion(distance, error)
+      completion(distance, 1, error)
     case .stepCount:
-      completion(stepCount, error)
-    default: 0
+      completion(stepCount, 1, error)
+    default:
+      break
     }
   }
-  
+
   func requestAuthorization() {}
 
 }
