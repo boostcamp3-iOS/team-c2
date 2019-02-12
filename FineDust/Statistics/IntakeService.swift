@@ -108,8 +108,10 @@ final class IntakeService: IntakeServiceType {
                     zip(sortedFineDustIntakePerHourPerDate, sortedDistancePerHourPerDate)
                       .forEach { argument in
                         let (fineDustIntakePerHourPerDate, distancePerHourPerDate) = argument
+                        let sortedFineDustIntakePerHour = fineDustIntakePerHourPerDate.value.sortedByHour()
+                        let sortedDistancePerHour = distancePerHourPerDate.value.sortedByHour()
                         let intake
-                          = zip(fineDustIntakePerHourPerDate.value, distancePerHourPerDate.value)
+                          = zip(sortedFineDustIntakePerHour, sortedDistancePerHour)
                             .reduce(0, {
                               $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value)
                             })
