@@ -130,7 +130,6 @@ final class StatisticsViewController: UIViewController {
         let weekIntakes = [fineDusts, [fineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
-        print(weekIntakes)
         self.dustIntakes = weekIntakes
         DispatchQueue.main.async {
           self.initializeValueGraphView()

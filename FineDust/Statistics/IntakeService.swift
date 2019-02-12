@@ -30,41 +30,65 @@ final class IntakeService: IntakeServiceType {
   }
   
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
-    dustInfoService.requestDayInfo { fineDust, ultrafineDust, error in
+    // 오늘의 시간대에 따른 걸음거리와
+    // 오늘의 시간대에 따른 미세먼지 수치를 받아
+    // 어떠한 수식을 수행하여 값을 산출한다
+    dustInfoService.requestDayInfo { [weak self] fineDust, ultrafineDust, error in
       if let error = error {
         completion(nil, nil, error)
         return
       }
-      let totalFineDustValue = fineDust?.reduce(0, { $0 + $1.value })
-      let totalUltrafineDustValue = ultrafineDust?.reduce(0, { $0 + $1.value })
-      completion(totalFineDustValue, totalUltrafineDustValue, nil)
+      guard let self = self else { return }
+      self.healthKitService.requestTodayDistancePerHour { [weak self] distancePerHour in
+        // 각 인자를 `Hour` 오름차순 정렬하고 value 매핑하여 최종적으로 `[Int]` 반환
+        guard let self = self else { return }
+        guard let sortedFineDust = fineDust?.sortedByHour()
+          .map({ $0.value }) else { return }
+        guard let sortedUltrafineDust = ultrafineDust?.sortedByHour()
+          .map({ $0.value }) else { return }
+        guard let sortedDistance = distancePerHour?.sortedByHour()
+          .map({ $0.value }) else { return }
+        // 시퀀스를 묶어 특정 수식을 통하여 값을 산출
+        let totalFineDustValue = zip(sortedFineDust, sortedDistance)
+          .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
+        let totalUltrafineDustValue = zip(sortedUltrafineDust, sortedDistance)
+          .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
+        completion(totalFineDustValue, totalUltrafineDustValue, nil)
+      }
     }
   }
   
   func requestIntakesInWeek(since date: Date,
                             completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
-    // 특정 날짜에 대한 값은 `fetchTodayIntake`로 가져오고
-    // 나머지는 코어데이터에서 가져올 예정
     dustInfoService
       .requestDayInfo(from: date,
-                      to: Date.before(days: 1)) { fineDustPerDate, ultrafineDustPerDate, error in
-                        if let error = error {
-                          completion(nil, nil, error)
-                          return
-                        }
-                        var fineDusts: [Int] = []
-                        var ultrafineDusts: [Int] = []
-                        fineDustPerDate?
-                          .sorted { $0.key < $1.key }
-                          .forEach { dictionary in
-                            fineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
-                        }
-                        ultrafineDustPerDate?
-                          .sorted { $0.key < $1.key }
-                          .forEach { dictionary in
-                            ultrafineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
-                        }
-                        completion(fineDusts, ultrafineDusts, nil)
+                      to: Date.before(days: 1))
+      { [weak self] fineDustPerDate, ultrafineDustPerDate, error in
+        if let error = error {
+          completion(nil, nil, error)
+          return
+        }
+        guard let self = self else { return }
+        
+        
+        
+        
+        
+        
+        
+        var fineDusts: [Int] = []
+        var ultrafineDusts: [Int] = []
+        fineDustPerDate?
+          .sorted { $0.key < $1.key }
+          .forEach { dictionary in
+            fineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+        }
+        ultrafineDustPerDate?
+          .sorted { $0.key < $1.key }
+          .forEach { dictionary in
+            ultrafineDusts.append(dictionary.value.reduce(0, { $0 + $1.value }))
+        }
+        completion(fineDusts, ultrafineDusts, nil)
     }
   }
 }
