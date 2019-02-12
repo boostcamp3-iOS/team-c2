@@ -10,18 +10,15 @@ import Foundation
 
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
-  
-  /// CoreDataService 싱글톤 객체.
-  static let shared = CoreDataService()
-  
+
   /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
   let userManager: CoreDataUserManagerType
   
   /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
   
-  private init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
-               intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
+  init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
+       intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
     self.userManager = userManager
     self.intakeManager = intakeManager
   }

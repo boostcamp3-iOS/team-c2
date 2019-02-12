@@ -15,7 +15,7 @@ final class MockHealthKitManager: HealthKitManagerType {
   var error: Error?
   var stepCount = 2314.0
   var distance = 1409.53
-  var hourInterval = 1
+  var hourInteger = 1
   
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
@@ -25,14 +25,13 @@ final class MockHealthKitManager: HealthKitManagerType {
                           completion: @escaping (Double?, Int?, Error?) -> Void) {
     switch quantityTypeIdentifier {
     case .distanceWalkingRunning:
-      completion(distance, 1, error)
+      completion(distance, hourInteger, error)
     case .stepCount:
-      completion(stepCount, 1, error)
+      completion(stepCount, hourInteger, error)
     default:
       break
     }
   }
 
-  func requestAuthorization() {}
-
+  func requestAuthorization() { }
 }

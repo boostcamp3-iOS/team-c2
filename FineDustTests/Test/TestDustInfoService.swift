@@ -10,11 +10,11 @@
 import XCTest
 import Foundation
 
-class DustInfoServiceTest: XCTestCase {
+class TestDustInfoService: XCTestCase {
   
   var dustService: DustInfoService!
   
-  let mockDustManager = MockDustManager()
+  let mockDustManager = MockDustInfoManager()
   
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -23,17 +23,14 @@ class DustInfoServiceTest: XCTestCase {
   }()
   
   override func setUp() {
+    mockDustManager.networkManager = MockNetworkManager()
     dustService = DustInfoService(dustManager: mockDustManager)
     
   }
   
-  override func tearDown() {
-    
-  }
-  
-  func test_fetchCurrentDustInfo() {
+  func test_requestRecentTimeInfo() {
     let expect = expectation(description: "test")
-    mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
+    mockDustManager.dustResponse = DummyDustManager.dummyDustResponse
     dustService?.requestRecentTimeInfo { dustInfo, error in
       XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.good)
@@ -46,7 +43,7 @@ class DustInfoServiceTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_fetchCurrentDustInfo_error() {
+  func test_requestRecentTimeInfo_error() {
     let expect = expectation(description: "test")
     mockDustManager.dustResponse = nil
     mockDustManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
@@ -58,9 +55,9 @@ class DustInfoServiceTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_fetchTodayDust() {
+  func test_requestDayInfo() {
     let expect = expectation(description: "test")
-    mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
+    mockDustManager.dustResponse = DummyDustManager.dummyDustResponse
     dustService.requestDayInfo { fineDustDictionary, ultrafineDustDictionary, error in
       XCTAssertEqual(fineDustDictionary, [.seventeen: 1])
       XCTAssertEqual(ultrafineDustDictionary, [.seventeen: 1])
@@ -70,9 +67,9 @@ class DustInfoServiceTest: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_fetchTodayDust_error() {
+  func test_requestDayInfo_error() {
     let expect = expectation(description: "test")
-    mockDustManager.dustResponse = DustManagerInfo.dummyDustResponse
+    mockDustManager.dustResponse = DummyDustManager.dummyDustResponse
     mockDustManager.error = NSError(domain: "", code: 0, userInfo: nil)
     dustService.requestDayInfo { fineDustDictionary, ultrafineDustDictionary, error in
       XCTAssertNil(fineDustDictionary)

@@ -23,7 +23,7 @@ final class IntakeService: IntakeServiceType {
   
   init(healthKitService: HealthKitServiceType = HealthKitService(healthKit: HealthKitManager()),
        dustInfoService: DustInfoServiceType = DustInfoService(),
-       coreDataService: CoreDataServiceType = CoreDataService.shared) {
+       coreDataService: CoreDataServiceType = CoreDataService()) {
     self.healthKitService = healthKitService
     self.dustInfoService = dustInfoService
     self.coreDataService = coreDataService
