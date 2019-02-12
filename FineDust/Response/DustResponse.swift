@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// 미세먼지 정보 응답 객체.
 struct DustResponse: XMLParsingType {
  
