@@ -34,7 +34,7 @@
             </objects>
             <point key="canvasLocation" x="-327.19999999999999" y="-29.23538230884558"/>
         </scene>
-        <!--내먼지-->
+        <!--Main View Controller-->
         <scene sceneID="rRQ-HU-Cxx">
             <objects>
                 <viewController id="PQ5-wO-1n3" customClass="MainViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
@@ -168,7 +168,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5IH-7S-HWE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="내먼지" id="oZo-0S-gGs"/>
+                    <navigationItem key="navigationItem" id="oZo-0S-gGs"/>
                     <connections>
                         <outlet property="distanceLabel" destination="Os6-Ee-Kik" id="zLO-ZP-CBl"/>
                         <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="QEc-bW-0WH"/>
