@@ -77,7 +77,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     if indexPath.section == 0 {
       return 330
     }
-      return 130
+    return 130
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,7 +92,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     if section == 0 {
       return "추천"
     }
-      return "목록"
+    return "목록"
   }
 }
 

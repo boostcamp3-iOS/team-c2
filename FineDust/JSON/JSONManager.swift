@@ -19,7 +19,7 @@ final class JSONManager: JSONManagerType {
   /// DustFeedbacks json 파싱하여 데이터를 가져옴.
   func fetchDustFeedbacks() -> [DustFeedback] {
     
-    guard let path = Bundle.main.path(forResource: "DustFeedbacks",
+    guard let path = Bundle.main.path(forResource: "DustFeedback",
                                       ofType: "json")
     else { return [] }
     
