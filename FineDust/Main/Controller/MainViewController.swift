@@ -73,7 +73,6 @@ extension MainViewController: LocationObserver {
 // MARK: - Functions
 
 extension MainViewController {
-  
   private func setUp() {
     navigationItem.title = "내먼지".localized
     registerLocationObserver()
