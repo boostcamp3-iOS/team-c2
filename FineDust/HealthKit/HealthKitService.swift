@@ -109,7 +109,9 @@ final class HealthKitService: HealthKitServiceType {
       
       group.enter()
       if let hour = hour {
-        hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)
+        var value = Int(value ?? 0)
+        value = value < 500 ? 0 : value
+        hourIntakePair[Hour(rawValue: hour) ?? .default] = value
         if hour == 23 {
           dateHourIntakePair[indexDate] = hourIntakePair
           indexDate = indexDate.after(days: 1)
