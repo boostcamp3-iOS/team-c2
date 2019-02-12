@@ -24,7 +24,7 @@ final class FeedbackListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
- 
+    
     feedbackListTableView.reloadData()
   }
   
@@ -50,9 +50,8 @@ extension FeedbackListViewController: UITableViewDataSource {
                  numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
       return 1
-    } else {
-      return feedbackListService.requestFeedbackCount()
     }
+    return feedbackListService.fetchFeedbackCount()
   }
   
   func tableView(_ tableView: UITableView,
@@ -62,9 +61,9 @@ extension FeedbackListViewController: UITableViewDataSource {
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
     
-    let feedback = feedbackListService.requestFeedbackData(index: Int(indexPath.row))
+    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
     cell.setTabelViewCellProperties(dustFeedback: feedback)
- 
+    
     return cell
   }
 }
@@ -77,9 +76,8 @@ extension FeedbackListViewController: UITableViewDelegate {
                  heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 0 {
       return 330
-    } else {
-      return 130
     }
+      return 130
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -93,9 +91,8 @@ extension FeedbackListViewController: UITableViewDelegate {
     
     if section == 0 {
       return "추천"
-    } else {
-      return "목록"
     }
+      return "목록"
   }
 }
 
@@ -120,7 +117,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       ) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    let feedback = feedbackListService.requestFeedbackData(index: Int(indexPath.item))
+    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }

@@ -11,22 +11,21 @@ import Foundation
 /// FeedbackListService를 구현하는 클래스
 final class FeedbackListService {
 
-fileprivate let jsonManager = JSONManager()
-fileprivate var dustFeedbacks: [DustFeedbacks] = []
+private let jsonManager = JSONManager()
+private var dustFeedbacks: [DustFeedback] = []
+  
+  init() {
+      dustFeedbacks =  jsonManager.fetchDustFeedbacks()
+  }
 
   /// 피드백 정보의 개수를 반환함.
-  func requestFeedbackCount() -> Int {
-    
-    dustFeedbacks =  jsonManager.fetchDustFeedbacks()
+  func fetchFeedbackCount() -> Int {
     
     return dustFeedbacks.count
   }
   
   /// 해당 인덱스의 피드백 정보를 반환함
-  func requestFeedbackData(index: Int) -> DustFeedbacks {
-    
-    dustFeedbacks =  jsonManager.fetchDustFeedbacks()
-  
+  func fetchFeedbackData(at index: Int) -> DustFeedback {
     return dustFeedbacks[index]
   }
   

@@ -12,5 +12,5 @@ import Foundation
 protocol JSONManagerType {
   
   /// DustFeedbacks.json을 파싱하여 데이터를 가져옴.
-  func fetchDustFeedbacks() -> [DustFeedbacks]
+  func fetchDustFeedbacks() -> [DustFeedback]
 }
