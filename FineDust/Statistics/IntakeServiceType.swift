@@ -15,8 +15,7 @@ protocol IntakeServiceType {
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void)
   
   /// 지정 `Date`로부터 일주일 간의 미세먼지 섭취량 fetch.
-  func requestIntakesInWeek(since date: Date,
-                            completion: @escaping ([Int]?, [Int]?, Error?) -> Void)
+  func requestIntakesInWeek(completion: @escaping ([Int]?, [Int]?, Error?) -> Void)
   
   /// 시간당 미세먼지 흡입량 계산.
   ///
