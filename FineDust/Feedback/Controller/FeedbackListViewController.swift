@@ -16,9 +16,8 @@ final class FeedbackListViewController: UIViewController {
   @IBOutlet private weak var feedbackListTableView: UITableView!
   
   // MARK: - Properties
-  
+  var feedbackListService = FeedbackListService()
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
-  private var count = 10
   
   // MARK: - LifeCycle
   
@@ -51,9 +50,8 @@ extension FeedbackListViewController: UITableViewDataSource {
                  numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
       return 1
-    } else {
-      return 3
     }
+    return feedbackListService.fetchFeedbackCount()
   }
   
   func tableView(_ tableView: UITableView,
@@ -63,7 +61,8 @@ extension FeedbackListViewController: UITableViewDataSource {
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
     
-    cell.setTabelViewCellProperties(at: indexPath.row)
+    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
+    cell.setTabelViewCellProperties(dustFeedback: feedback)
     
     return cell
   }
@@ -77,9 +76,8 @@ extension FeedbackListViewController: UITableViewDelegate {
                  heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 0 {
       return 330
-    } else {
-      return 130
     }
+    return 130
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -87,18 +85,15 @@ extension FeedbackListViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
-}
-
-/// 테이블뷰 헤더 이름 설정.
-func tableView(_ tableView: UITableView,
-               titleForHeaderInSection section: Int) -> String? {
-  
-  if section == 0 {
-    return "추천"
-  } else {
+  /// 테이블뷰 헤더 이름 설정.
+  func tableView(_ tableView: UITableView,
+                 titleForHeaderInSection section: Int) -> String? {
+    
+    if section == 0 {
+      return "추천"
+    }
     return "목록"
   }
-  
 }
 
 // MARK: - UICollectionViewDataSource
@@ -122,7 +117,8 @@ extension FeedbackListViewController: UICollectionViewDataSource {
       ) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    cell.setCollectionViewCellProperties(at: indexPath.item)
+    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
+    cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// 'DustFeedbacks' json 
-struct DustFeedbacks: Codable {
+struct DustFeedback: Codable {
   
   let title: String
   let imageName: String
