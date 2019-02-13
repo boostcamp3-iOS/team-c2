@@ -12,6 +12,8 @@ final class MainViewController: UIViewController {
   
   // MARK: - IBOutlets
   
+  @IBOutlet weak var intakeFineDustLable: UILabel!
+  @IBOutlet weak var intakeUltrafineDustLabel: UILabel!
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
   @IBOutlet private weak var timeLabel: UILabel!
@@ -23,6 +25,8 @@ final class MainViewController: UIViewController {
   
   let healthKitService = HealthKitService(healthKit: HealthKitManager())
   let dustInfoService = DustInfoService(dustManager: DustInfoManager())
+  let intakeService = IntakeService()
+  
   let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "a hh : mm"
@@ -77,6 +81,24 @@ extension MainViewController {
     navigationItem.title = "내안의먼지".localized
     registerLocationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
+    
+    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+      if let error = error {
+        DispatchQueue.main.async {
+          self.intakeFineDustLable.text = "0µg"
+          self.intakeUltrafineDustLabel.text = "0µg"
+        }
+        print(error.localizedDescription)
+        return
+      }
+      
+      if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
+        DispatchQueue.main.async {
+          self.intakeFineDustLable.text = "\(fineDust)µg"
+          self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+        }
+      }
+    }
   }
   
   /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.

@@ -284,8 +284,10 @@
                     <navigationItem key="navigationItem" id="oZo-0S-gGs"/>
                     <connections>
                         <outlet property="distanceLabel" destination="Os6-Ee-Kik" id="zLO-ZP-CBl"/>
-                        <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="QEc-bW-0WH"/>
+                        <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="JDA-1G-POT"/>
                         <outlet property="gradeLabel" destination="ehv-Kz-X1j" id="bD4-hN-klk"/>
+                        <outlet property="intakeFineDustLable" destination="6aD-dS-mao" id="yWs-jm-Des"/>
+                        <outlet property="intakeUltrafineDustLabel" destination="LfR-NG-QYj" id="788-w0-5Dp"/>
                         <outlet property="locationLabel" destination="Xzq-YG-k4e" id="leg-3a-Yp6"/>
                         <outlet property="stepCountLabel" destination="0D7-oi-jfT" id="eMR-qZ-dcc"/>
                         <outlet property="timeLabel" destination="GKE-l6-uTF" id="14D-ub-p9M"/>
