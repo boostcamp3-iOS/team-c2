@@ -27,6 +27,6 @@ protocol IntakeServiceType {
 
 extension IntakeServiceType {
   func intakePerHour(dust: Int, distance: Int) -> Int {
-    return Int(Double(dust * distance) * 0.036)
+    return Int(Double(dust * distance) * 0.036 * 0.01)
   }
 }

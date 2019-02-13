@@ -34,7 +34,7 @@ extension GeocoderManager: GeocoderManagerType {
                                 }
                                 guard let placemark = placemarks?.first else { return }
                                 let locality = placemark.locality ?? ""
-                                let name = placemark.name ?? ""
+                                let name = placemark.name?.components(separatedBy: " ").first ?? ""
                                 let address = "\(locality) \(name)"
                                 completion(address, nil)
     }
