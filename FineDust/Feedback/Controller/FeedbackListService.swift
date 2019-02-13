@@ -10,23 +10,39 @@ import Foundation
 
 /// FeedbackListService를 구현하는 클래스
 final class FeedbackListService {
-
-private let jsonManager = JSONManager()
-private var dustFeedbacks: [DustFeedback] = []
   
-  init() {
-      dustFeedbacks =  jsonManager.fetchDustFeedbacks()
+  private var dustFeedbacks: [DustFeedback] = []
+  let jsonManager: JSONManagerType
+  
+  init(jsonManager: JSONManagerType) {
+    self.jsonManager = jsonManager
+    dustFeedbacks =  jsonManager.fetchDustFeedbacks()
   }
-
+  
   /// 피드백 정보의 개수를 반환함.
   func fetchFeedbackCount() -> Int {
     
-    return dustFeedbacks.count
+    let count = dustFeedbacks.count
+    return count
   }
   
   /// 해당 인덱스의 피드백 정보를 반환함
   func fetchFeedbackData(at index: Int) -> DustFeedback {
     return dustFeedbacks[index]
+  }
+  
+  /// 피드백 정보를 최신순으로 반환함
+  func fetchFeedbackResentDate() -> [DustFeedback] {
+    let sortedArray = dustFeedbacks.sorted(by: { $0.date > $1.date })
+    print(sortedArray)
+    return sortedArray
+  }
+  
+  /// 피드백 정보를 제목순으로 반환함
+  func fetchFeedbackTitle() -> [DustFeedback] {
+    let sortedArray = dustFeedbacks.sorted(by: { $0.title < $1.title })
+    
+    return sortedArray
   }
   
 }
