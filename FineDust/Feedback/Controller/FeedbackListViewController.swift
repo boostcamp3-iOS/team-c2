@@ -15,10 +15,6 @@ final class FeedbackListViewController: UIViewController {
   
   @IBOutlet private weak var feedbackListTableView: UITableView!
   
-  @IBAction private func touchUpSortingButton(_ sender: UIBarButtonItem) {
-    setSortActionSheet(to: self)
-  }
-  
   // MARK: - Properties
   
   var feedbackListService = FeedbackListService(jsonManager: JSONManager())
@@ -46,7 +42,7 @@ final class FeedbackListViewController: UIViewController {
   }
   
   /// 미세먼지 정보 정렬 액션시트
-  @objc func setSortActionSheet(to viewController: UIViewController) {
+  @objc func settingButtonDidTap(_ sender: UIButton) {
     
     let sectionToReload = 1
     let indexSet: IndexSet = [sectionToReload]
@@ -126,7 +122,7 @@ extension FeedbackListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView,
                  viewForHeaderInSection section: Int) -> UIView? {
-
+    
     // headerView 설정
     let frame = tableView.frame
     let headerView = UIView(frame: CGRect(x: 0,
@@ -136,20 +132,18 @@ extension FeedbackListViewController: UITableViewDelegate {
     headerView.backgroundColor = UIColor(white: 1, alpha: 0.7)
     
     // header title 설정
-    let label = UILabel(frame: CGRect.init(x: 20,
-                                           y: -10,
-                                           width: tableView.frame.size.width,
-                                           height: 50))
-    
+    let label = UILabel(frame: CGRect(x: 20,
+                                      y: -10,
+                                      width: tableView.frame.size.width,
+                                      height: 50))
     label.textColor = .darkGray
-    
-    label.font = UIFont(name: "System-Bold", size: label.font.pointSize)
+    label.font = UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)
     
     // 정렬 액션시트 버튼 설정
     let button = UIButton(frame: CGRect(x: 330, y: 0, width: 25, height: 25))
-    button.setBackgroundImage(UIImage(named: "sort"), for: UIControl.State.normal)
+    button.setBackgroundImage(UIImage(named: "sort"), for: .normal)
     button.addTarget(self,
-                     action: #selector(setSortActionSheet),
+                     action: #selector(settingButtonDidTap),
                      for: .touchUpInside)
     if section == 1 {
       headerView.addSubview(button)
