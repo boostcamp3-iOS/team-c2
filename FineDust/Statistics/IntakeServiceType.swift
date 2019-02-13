@@ -19,7 +19,7 @@ protocol IntakeServiceType {
   
   /// 시간당 미세먼지 흡입량 계산.
   ///
-  /// `거리 * 농도 * 0.036`
+  /// `거리 * 농도 * 0.036 * 0.01`
   func intakePerHour(dust: Int, distance: Int) -> Int
 }
 
