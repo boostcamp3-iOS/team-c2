@@ -46,7 +46,7 @@ final class FeedbackListViewController: UIViewController {
   }
   
   /// 미세먼지 정보 정렬 액션시트
-  func setSortActionSheet(to viewController: UIViewController) {
+  @objc func setSortActionSheet(to viewController: UIViewController) {
     
     let sectionToReload = 1
     let indexSet: IndexSet = [sectionToReload]
@@ -63,7 +63,7 @@ final class FeedbackListViewController: UIViewController {
       }
       .action(title: "즐겨찾기순")
       .action(title: "취소", style: .cancel)
-      .present(to: viewController)
+      .present(to: self)
   }
 }
 
@@ -124,43 +124,42 @@ extension FeedbackListViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
-  /// 테이블뷰 헤더 이름 설정.
   func tableView(_ tableView: UITableView,
-                 titleForHeaderInSection section: Int) -> String? {
-    
-    if section == 0 {
-      return "정보 추천"
-    }
-    return "전체 목록"
-  }
-  
-//  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
-//    let headerView = UIView(frame: CGRect(x: 0,
-//                                          y: 0,
-//                                          width: feedbackListTableView.bounds.size.width,
-//                                          height: 30))
-//    if (section == integerRepresentingYourSectionOfInterest) {
-//      headerView.backgroundColor = Asset.graph2.color
-//    } else {
-//      headerView.backgroundColor = UIColor.clear
-//    }
-  
-//    view.tintColor = UIColor.black
-//        let header = view as? UITableViewHeaderFooterView
-//    headerView.textLabel?.textColor = Asset.graph1.color
-//    return headerView
-//
-//    let label = UILabel(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 30)
-//
-//      label.font = UIFont(name: "Arial", size: label.font.pointSize)
-//      return label
-//  }
-  
-  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-    view.tintColor = UIColor.white
-    guard let header = view as? UITableViewHeaderFooterView else { return }
-    header.textLabel?.textColor = UIColor.darkGray //Asset.graph1.color
+                 viewForHeaderInSection section: Int) -> UIView? {
 
+    // headerView 설정
+    let frame = tableView.frame
+    let headerView = UIView(frame: CGRect(x: 0,
+                                          y: 0,
+                                          width: frame.size.width,
+                                          height: frame.size.height+10))
+    headerView.backgroundColor = UIColor(white: 1, alpha: 0.7)
+    
+    // header title 설정
+    let label = UILabel(frame: CGRect.init(x: 20,
+                                           y: -10,
+                                           width: tableView.frame.size.width,
+                                           height: 50))
+    
+    label.textColor = .darkGray
+    
+    label.font = UIFont(name: "System-Bold", size: label.font.pointSize)
+    
+    // 정렬 액션시트 버튼 설정
+    let button = UIButton(frame: CGRect(x: 330, y: 0, width: 25, height: 25))
+    button.setBackgroundImage(UIImage(named: "sort"), for: UIControl.State.normal)
+    button.addTarget(self,
+                     action: #selector(setSortActionSheet),
+                     for: .touchUpInside)
+    if section == 1 {
+      headerView.addSubview(button)
+      label.text = "전체 목록"
+    } else {
+      label.text = "정보 추천"
+    }
+    headerView.addSubview(label)
+    
+    return headerView
   }
 }
 
