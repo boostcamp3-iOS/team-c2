@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph2.color
     UINavigationBar.appearance().tintColor = UIColor.white
-    UINavigationBar.appearance().barTintColor = Asset.graph2.color
-    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    UINavigationBar.appearance().barTintColor = .white
+    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
     UITabBar.appearance().tintColor = Asset.graph1.color
     UITabBar.appearance().unselectedItemTintColor = .lightGray
     UITabBar.appearance().barTintColor = .white

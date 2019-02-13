@@ -39,7 +39,7 @@ final class RatioGraphView: UIView {
   
   /// 배경 뷰 높이.
   private var backgroundViewHeight: CGFloat {
-    return backgroundView.bounds.height * 0.8
+    return backgroundView.bounds.height * 0.7
   }
   
   // MARK: IBOutlet
