@@ -51,7 +51,7 @@ class TestIntakeService: XCTestCase {
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(ultrafineDusts)
       XCTAssertNil(error)
       expect.fulfill()
     }
@@ -69,7 +69,7 @@ class TestIntakeService: XCTestCase {
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(ultrafineDusts)
       XCTAssertNil(error)
       expect.fulfill()
     }

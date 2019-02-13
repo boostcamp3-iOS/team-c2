@@ -146,7 +146,7 @@ final class IntakeService: IntakeServiceType {
                                       }
                       }
                     }
-                    completion(fineDustResults, nil, nil)
+                    completion(fineDustResults, ultrafineDustResults, nil)
                 }
             }
             return
