@@ -25,10 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().tintColor = UIColor.white
     UINavigationBar.appearance().barTintColor = Asset.graph2.color
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    UITabBar.appearance().tintColor = .white
-    UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
-    UITabBar.appearance().barTintColor = Asset.graph2.color
-    UITextField.appearance().tintColor = .clear
+    UITabBar.appearance().tintColor = Asset.graph1.color
+    UITabBar.appearance().unselectedItemTintColor = .lightGray
+    UITabBar.appearance().barTintColor = .white
     healthKitManager.requestAuthorization()
     LocationManager.shared.requestAuthorization()
     coreDataService.requestLastAccessedDate { date, error in
