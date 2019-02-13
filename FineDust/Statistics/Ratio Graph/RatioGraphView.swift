@@ -101,7 +101,7 @@ private extension RatioGraphView {
     entireLayer.path = path.cgPath
     entireLayer.lineWidth = Constant.lineWidth
     entireLayer.fillColor = UIColor.clear.cgColor
-    entireLayer.strokeColor = Asset.graph1.color.cgColor
+    entireLayer.strokeColor = Asset.graph2.color.cgColor
     backgroundView.layer.addSublayer(entireLayer)
     // 부분 레이어
     let portionLayer = CAShapeLayer()

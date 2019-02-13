@@ -58,7 +58,7 @@ final class ValueGraphView: UIView {
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
-    return delegate?.intakeAmounts ?? []
+    return delegate?.intakes ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.

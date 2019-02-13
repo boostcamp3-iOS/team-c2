@@ -15,7 +15,7 @@ typealias HourIntakePair = [Hour: Int]
 typealias DateHourIntakePair = [Date: HourIntakePair]
 
 /// 날짜별 흡입량 타입 별칭.
-typealias DateIntakePair = [Date: Int?]
+typealias DateIntakePair = [Date: (Int?, Int?)]
 
 // MARK: - 딕셔너리의 Key가 Hour일 때의 확장
 
