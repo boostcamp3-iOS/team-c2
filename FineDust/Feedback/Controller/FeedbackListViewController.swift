@@ -15,9 +15,16 @@ final class FeedbackListViewController: UIViewController {
   
   @IBOutlet private weak var feedbackListTableView: UITableView!
   
+  @IBAction private func touchUpSortingButton(_ sender: UIBarButtonItem) {
+    setSortActionSheet(to: self)
+  }
+  
   // MARK: - Properties
-  var feedbackListService = FeedbackListService()
+  
+  var feedbackListService = FeedbackListService(jsonManager: JSONManager())
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
+  private var feedbackCount = 0
+  private var newDustFeedback: [DustFeedback]?
   
   // MARK: - LifeCycle
   
@@ -25,6 +32,7 @@ final class FeedbackListViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
+    feedbackCount = feedbackListService.fetchFeedbackCount()
     feedbackListTableView.reloadData()
   }
   
@@ -35,6 +43,27 @@ final class FeedbackListViewController: UIViewController {
     if let view = self.storyboard?.instantiateViewController(withIdentifier: "DetailView") {
       self.navigationController?.pushViewController(view, animated: true)
     }
+  }
+  
+  /// 미세먼지 정보 정렬 액션시트
+  func setSortActionSheet(to viewController: UIViewController) {
+    
+    let sectionToReload = 1
+    let indexSet: IndexSet = [sectionToReload]
+    
+    UIAlertController
+      .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
+      .action(title: "최신순", style: .default) { _, _ in
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackResentDate()
+        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+      }
+      .action(title: "제목순", style: .default) { _, _ in
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackTitle()
+        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+      }
+      .action(title: "즐겨찾기순")
+      .action(title: "취소", style: .cancel)
+      .present(to: viewController)
   }
 }
 
@@ -50,8 +79,9 @@ extension FeedbackListViewController: UITableViewDataSource {
                  numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
       return 1
+    } else {
+      return feedbackListService.fetchFeedbackCount()
     }
-    return feedbackListService.fetchFeedbackCount()
   }
   
   func tableView(_ tableView: UITableView,
@@ -62,7 +92,16 @@ extension FeedbackListViewController: UITableViewDataSource {
       else { return UITableViewCell() }
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
-    cell.setTabelViewCellProperties(dustFeedback: feedback)
+    
+    if newDustFeedback != nil {
+      if let newDustFeedback = newDustFeedback {
+        cell.setTabelViewCellProperties(dustFeedback: newDustFeedback[indexPath.row])
+      }
+      
+    } else {
+      
+      cell.setTabelViewCellProperties(dustFeedback: feedback)
+    }
     
     return cell
   }
@@ -105,7 +144,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return (feedbackCount > 2) ? 3 : feedbackCount
   }
   
   func collectionView(_ collectionView: UICollectionView,
