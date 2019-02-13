@@ -130,7 +130,6 @@ final class StatisticsViewController: UIViewController {
         let weekIntakes = [fineDusts, [fineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
-        print(weekIntakes)
         self.dustIntakes = weekIntakes
         DispatchQueue.main.async {
           self.initializeValueGraphView()
@@ -143,7 +142,7 @@ final class StatisticsViewController: UIViewController {
   /// 오늘 제외한 일주일간 정보 요청.
   private func requestWeekDustInfo(completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
     intakeService
-      .requestIntakesInWeek(since: .before(days: 6)) { fineDusts, ultrafineDusts, error in
+      .requestIntakesInWeek { fineDusts, ultrafineDusts, error in
         if let error = error {
           completion(nil, nil, error)
           return

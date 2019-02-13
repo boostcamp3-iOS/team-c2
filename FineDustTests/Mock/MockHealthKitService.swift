@@ -11,17 +11,29 @@ import Foundation
 
 class MockHealthKitService: HealthKitServiceType {
   
-  var error: Error?
+  var stepCount: Double?
   
   var distance: Double?
   
-  var stepCount: Double?
+  var hourlyDistance: HourIntakePair?
   
-  func fetchTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
+  var hourlyDistancePerDate: DateHourIntakePair?
+  
+  var error: Error?
+  
+  func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
+    completion(stepCount, error)
+  }
+  
+  func requestTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
     completion(distance, error)
   }
   
-  func fetchTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
-    completion(stepCount, error)
+  func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void) {
+    completion(hourlyDistance)
+  }
+  
+  func requestDistancePerHour(from startDate: Date, to endDate: Date, completion: @escaping (DateHourIntakePair?) -> Void) {
+    completion(hourlyDistancePerDate)
   }
 }
