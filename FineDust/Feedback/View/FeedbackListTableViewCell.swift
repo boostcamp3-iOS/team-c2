@@ -14,6 +14,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
+  @IBOutlet private weak var feedbackDateLabel: UILabel!
   @IBOutlet private weak var bookmarkButton: UIButton!
   
   let jsonManager = JSONManager()
@@ -37,6 +38,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
     feedbackImageView.image = UIImage(named: dustFeedback.imageName)
     feedbackTitleLabel.text = dustFeedback.title
     feedbackSourceLabel.text = dustFeedback.source
+    feedbackDateLabel.text = dustFeedback.date
     
   }
   
