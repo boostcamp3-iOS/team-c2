@@ -54,7 +54,7 @@ final class FeedbackListViewController: UIViewController {
     UIAlertController
       .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
       .action(title: "최신순", style: .default) { _, _ in
-        self.newDustFeedback = self.feedbackListService.fetchFeedbackResentDate()
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackRecentDate()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
       .action(title: "제목순", style: .default) { _, _ in
@@ -129,9 +129,38 @@ extension FeedbackListViewController: UITableViewDelegate {
                  titleForHeaderInSection section: Int) -> String? {
     
     if section == 0 {
-      return "추천"
+      return "정보 추천"
     }
-    return "목록"
+    return "전체 목록"
+  }
+  
+//  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
+//    let headerView = UIView(frame: CGRect(x: 0,
+//                                          y: 0,
+//                                          width: feedbackListTableView.bounds.size.width,
+//                                          height: 30))
+//    if (section == integerRepresentingYourSectionOfInterest) {
+//      headerView.backgroundColor = Asset.graph2.color
+//    } else {
+//      headerView.backgroundColor = UIColor.clear
+//    }
+  
+//    view.tintColor = UIColor.black
+//        let header = view as? UITableViewHeaderFooterView
+//    headerView.textLabel?.textColor = Asset.graph1.color
+//    return headerView
+//
+//    let label = UILabel(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 30)
+//
+//      label.font = UIFont(name: "Arial", size: label.font.pointSize)
+//      return label
+//  }
+  
+  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    view.tintColor = UIColor.white
+    guard let header = view as? UITableViewHeaderFooterView else { return }
+    header.textLabel?.textColor = UIColor.darkGray //Asset.graph1.color
+
   }
 }
 
