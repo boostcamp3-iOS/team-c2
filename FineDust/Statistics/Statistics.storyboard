@@ -37,70 +37,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-ws-1tf">
-                                <rect key="frame" x="0.0" y="94" width="320" height="425"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="379"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
-                                        <rect key="frame" x="16" y="220.5" width="288" height="188.5"/>
+                                        <rect key="frame" x="16" y="197.5" width="288" height="181.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
-                                        <rect key="frame" x="16" y="16" width="288" height="188.5"/>
+                                        <rect key="frame" x="16" y="0.0" width="288" height="181.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ggd-ws-1tf" secondAttribute="top" constant="16" id="0Wb-fd-vbY"/>
-                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="height" secondItem="ggd-ws-1tf" secondAttribute="height" multiplier="0.45" priority="750" id="6Oq-5w-lZm"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="ggd-ws-1tf" secondAttribute="top" id="0Wb-fd-vbY"/>
                                     <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="ggd-ws-1tf" secondAttribute="centerY" constant="8" id="QND-8F-YDm"/>
                                     <constraint firstItem="b6f-az-Uoz" firstAttribute="centerX" secondItem="ggd-ws-1tf" secondAttribute="centerX" id="fQc-8Z-gLR"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="16" id="ktw-Ly-gfj"/>
+                                    <constraint firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" id="ktw-Ly-gfj"/>
                                     <constraint firstItem="Sca-OT-FiC" firstAttribute="bottom" secondItem="ggd-ws-1tf" secondAttribute="centerY" constant="-8" id="lgC-9D-l9G"/>
                                     <constraint firstItem="Sca-OT-FiC" firstAttribute="width" secondItem="ggd-ws-1tf" secondAttribute="width" multiplier="0.9" id="mD8-V0-rsS"/>
-                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="height" secondItem="ggd-ws-1tf" secondAttribute="height" multiplier="0.45" priority="750" id="s5E-FM-Lcj"/>
                                     <constraint firstItem="Sca-OT-FiC" firstAttribute="centerX" secondItem="ggd-ws-1tf" secondAttribute="centerX" id="vsS-sR-THQ"/>
                                     <constraint firstItem="b6f-az-Uoz" firstAttribute="width" secondItem="ggd-ws-1tf" secondAttribute="width" multiplier="0.9" id="yQb-5E-lHU"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-ep-R67">
-                                <rect key="frame" x="0.0" y="64" width="160" height="30"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kP2-MY-egO">
+                                <rect key="frame" x="16" y="80" width="288" height="29"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="1j4-Ac-rYs"/>
+                                    <constraint firstAttribute="height" constant="28" id="cPh-D0-4aF"/>
                                 </constraints>
-                                <state key="normal" title="미세먼지"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnC-iy-Juf">
-                                <rect key="frame" x="160" y="64" width="160" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="eee-GM-Ibc"/>
-                                </constraints>
-                                <state key="normal" title="초미세먼지"/>
-                            </button>
+                                <segments>
+                                    <segment title="미세먼지"/>
+                                    <segment title="초미세먼지"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="ggd-ws-1tf" secondAttribute="bottom" id="9b1-lr-WCD"/>
-                            <constraint firstItem="tnC-iy-Juf" firstAttribute="leading" secondItem="nE3-ep-R67" secondAttribute="trailing" id="BRi-oN-Pmi"/>
-                            <constraint firstItem="tnC-iy-Juf" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" id="BoX-sp-VCm"/>
-                            <constraint firstItem="tnC-iy-Juf" firstAttribute="trailing" secondItem="66h-Qh-c5I" secondAttribute="trailing" id="IDj-ne-1tN"/>
+                            <constraint firstItem="kP2-MY-egO" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="L6Y-gJ-lSU"/>
                             <constraint firstItem="ggd-ws-1tf" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" id="OsK-UX-KoL"/>
-                            <constraint firstItem="nE3-ep-R67" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" id="fGa-E5-btz"/>
-                            <constraint firstItem="nE3-ep-R67" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" id="g7o-Jn-S7j"/>
+                            <constraint firstItem="ggd-ws-1tf" firstAttribute="top" secondItem="kP2-MY-egO" secondAttribute="bottom" constant="16" id="c4y-qK-C87"/>
                             <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="ggd-ws-1tf" secondAttribute="trailing" id="hAd-JT-CeB"/>
-                            <constraint firstItem="tnC-iy-Juf" firstAttribute="width" secondItem="nE3-ep-R67" secondAttribute="width" id="oML-zD-Zgc"/>
-                            <constraint firstItem="ggd-ws-1tf" firstAttribute="top" secondItem="nE3-ep-R67" secondAttribute="bottom" id="vGv-9M-nIs"/>
+                            <constraint firstItem="kP2-MY-egO" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="16" id="p42-sg-cdo"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="kP2-MY-egO" secondAttribute="trailing" constant="16" id="p6O-bs-pC9"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="ggd-ws-1tf" secondAttribute="bottom" constant="16" id="u2p-F6-n34"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="66h-Qh-c5I"/>
                     </view>
                     <navigationItem key="navigationItem" id="q9l-Ys-TA3"/>
                     <connections>
                         <outlet property="ratioGraphBackgroundView" destination="b6f-az-Uoz" id="8jY-xt-nWU"/>
+                        <outlet property="segmentedControl" destination="kP2-MY-egO" id="Q31-f6-dau"/>
                         <outlet property="valueGraphBackgroundView" destination="Sca-OT-FiC" id="aA3-rP-Vwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktn-rj-baA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207.19999999999999" y="-6.746626686656672"/>
+            <point key="canvasLocation" x="-208.125" y="-7.394366197183099"/>
         </scene>
     </scenes>
     <resources>
