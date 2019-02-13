@@ -58,8 +58,9 @@ final class HealthKitService: HealthKitServiceType {
   func requestTodayDistancePerHour(completion: @escaping (HourIntakePair?) -> Void) {
     var hourIntakePair = HourIntakePair()
     
-    //비동기 함수를 동기 함수로 구현하기 위한 프로퍼티.
-    let group = DispatchGroup()
+    //비동기 함수를 동기 함수로 구현하기 위한 세마포어.
+    let semaphore = DispatchSemaphore(value: 0)
+    var temp = 0
     
     healthKitManager?.findHealthKitValue(startDate: .start(),
                                          endDate: .end(),
@@ -72,17 +73,21 @@ final class HealthKitService: HealthKitServiceType {
         return
       }
       
-      group.enter()
       if let hour = hour {
-        hourIntakePair[Hour(rawValue: hour) ?? .default] = Int(value ?? 0)
+        var value = Int(value ?? 0)
+        // 걸음거리가 500 이하일때는 실내로 취급한다.
+        value = value < 500 ? 0 : value
+        hourIntakePair[Hour(rawValue: hour) ?? .default] = value
+        
+        temp += 1
+        if temp == 24 {
+          semaphore.signal()
+        }
       }
-      group.leave()
     }
     
-    // 비동기 함수들이 끝날때까지 기다림.
-    group.notify(queue: .main) {
-      completion(hourIntakePair)
-    }
+    semaphore.wait()
+    completion(hourIntakePair)
   }
   
   /// 날짜 범위가 주어질 때 해당 날짜에 1시간당 걸음거리를 DateHourIntakePair로 리턴하는 함수.
