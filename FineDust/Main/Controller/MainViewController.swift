@@ -74,7 +74,7 @@ extension MainViewController: LocationObserver {
 
 extension MainViewController {
   private func setUp() {
-    navigationItem.title = "내먼지".localized
+    navigationItem.title = "내안의먼지".localized
     registerLocationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
   }
