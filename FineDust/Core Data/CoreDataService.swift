@@ -10,18 +10,15 @@ import Foundation
 
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
-  
-  /// CoreDataService 싱글톤 객체.
-  static let shared = CoreDataService()
-  
+
   /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
   let userManager: CoreDataUserManagerType
   
   /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
   
-  private init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
-               intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
+  init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
+       intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
     self.userManager = userManager
     self.intakeManager = intakeManager
   }
@@ -46,27 +43,25 @@ final class CoreDataService: CoreDataServiceType {
   
   func requestIntakes(from startDate: Date,
                       to endDate: Date,
-                      completion: @escaping ([Date: Int?]?, Error?) -> Void) {
+                      completion: @escaping (DateIntakePair?, Error?) -> Void) {
     intakeManager.request { intakes, error in
       if let error = error {
         completion(nil, error)
         return
       }
       guard let intakes = intakes else { return }
-      var result: [Date: Int?] = [:]
+      var result: DateIntakePair = [:]
       let startDate = startDate.start
       let endDate = endDate.end
       let intakesInDates = intakes.filter { (startDate...endDate).contains($0.date ?? Date()) }
-      var currentDate = startDate
       // 인자에 들어온 날짜를 순회하면서
       // 코어데이터에 해당 날짜에 대한 정보가 저장되어 있으면 그 정보를 내려주고
       // 그렇지 않으면 nil을 내려주어 해당 부분은 통신으로 처리하게 함
-      while currentDate <= endDate.end {
+      Date.between(startDate, endDate).forEach { currentDate in
         let intakeInCurrentDate = intakesInDates.filter { $0.date?.start == currentDate }.first
         if let currentIntake = intakeInCurrentDate {
           result[currentDate] = Int(currentIntake.value)
         }
-        currentDate = currentDate.after(days: 1).start
       }
       completion(result, nil)
     }

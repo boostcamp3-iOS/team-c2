@@ -11,19 +11,27 @@ import Foundation
 
 class MockDustInfoService: DustInfoServiceType {
   
+  var recentDustInfo: RecentDustInfo?
+  
+  var fineDustHourlyValue: HourIntakePair?
+  
+  var ultrafineDustHourlyValue: HourIntakePair?
+  
+  var fineDustHourlyValuePerDate: DateHourIntakePair?
+  
+  var ultrafineDustHourlyValuePerDate: DateHourIntakePair?
+  
   var error: Error?
   
-  var currentDustInfo: RecentDustInfo?
-  
-  var fineDustIntakeByHour: HourIntakePair?
-  
-  var ultrafineDustIntakeByHour: HourIntakePair?
-  
-  func fetchRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
-    completion(currentDustInfo, error)
+  func requestRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void) {
+    completion(recentDustInfo, error)
   }
   
-  func fetchTodayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
-    completion(fineDustIntakeByHour, ultrafineDustIntakeByHour, error)
+  func requestDayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void) {
+    completion(fineDustHourlyValue, ultrafineDustHourlyValue, error)
+  }
+  
+  func requestDayInfo(from startDate: Date, to endDate: Date, completion: @escaping (DateHourIntakePair?, DateHourIntakePair?, Error?) -> Void) {
+    completion(fineDustHourlyValuePerDate, ultrafineDustHourlyValuePerDate, error)
   }
 }

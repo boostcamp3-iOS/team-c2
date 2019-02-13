@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var healthKitManager = HealthKitManager()
   
+  let coreDataService = CoreDataService()
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window?.tintColor = Asset.graph1.color
     UINavigationBar.appearance().tintColor = UIColor.white
@@ -29,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITextField.appearance().tintColor = .clear
     healthKitManager.requestAuthorization()
     LocationManager.shared.requestAuthorization()
-    CoreDataService.shared.requestLastAccessedDate { date, error in
+    coreDataService.requestLastAccessedDate { date, error in
       if let error = error {
         print(error.localizedDescription)
         return
