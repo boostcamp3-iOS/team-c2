@@ -29,7 +29,7 @@ class MockCoreDataService: CoreDataServiceType {
     completion(coreDataIntakePerDate, error)
   }
   
-  func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void) {
+  func saveIntake(fineDust: Int, ultrafineDust: Int, at date: Date, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
 }
