@@ -23,5 +23,8 @@ protocol CoreDataServiceType: class {
                       completion: @escaping (DateIntakePair?, Error?) -> Void)
   
   /// 특정 날짜에 대한 미세먼지 흡입량 저장.
-  func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void)
+  func saveIntake(fineDust: Int,
+                  ultrafineDust: Int,
+                  at date: Date,
+                  completion: @escaping (Error?) -> Void)
 }

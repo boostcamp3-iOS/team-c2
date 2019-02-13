@@ -51,10 +51,10 @@ class TestCoreDataService: XCTestCase {
     let expect = expectation(description: "test")
     let intake1 = Intake(context: mockCoreDataIntakeManager.context)
     intake1.date = Date.before(days: 2).start
-    intake1.value = 10
+    intake1.fineDust = 10
     let intake2 = Intake(context: mockCoreDataIntakeManager.context)
     intake2.date = Date.before(days: 1).start
-    intake2.value = 20
+    intake2.fineDust = 20
     mockCoreDataIntakeManager.intakes = [intake1, intake2]
     mockCoreDataIntakeManager.error = nil
     coreDataService.requestIntakes(from: .before(days: 2), to: .before(days: 1)) { intakePerDate, error in

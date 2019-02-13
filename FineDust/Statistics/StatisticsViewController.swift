@@ -23,6 +23,22 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: IBOutlets
   
+  /// 서브뷰 포함하는 스크롤 뷰.
+  @IBOutlet private weak var scrollView: UIScrollView! {
+    didSet {
+      scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
+    }
+  }
+  
+  /// 미세먼지 / 초미세먼지 토글하는 세그먼티드 컨트롤.
+  @IBOutlet private weak var segmentedControl: UISegmentedControl! {
+    didSet {
+      segmentedControl.addTarget(self,
+                                 action: #selector(segmentedControlValueDidChange(_:)),
+                                 for: .valueChanged)
+    }
+  }
+  
   /// 값 그래프 배경 뷰.
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
     didSet {
@@ -67,15 +83,25 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var dustIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var fineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  
+  /// 7일간의 초미세먼지 농도 값 모음.
+  private var ultrafineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
   
-  /// 전체에 대한 마지막 값의 비율
-  private var dustLastValueRatio: CGFloat {
-    let sum = dustIntakes.reduce(0, +)
-    let last = dustIntakes.last ?? 0.0
+  /// 미세먼지의 전체에 대한 마지막 값의 비율
+  private var fineDustLastValueRatio: CGFloat {
+    let sum = fineDustTotalIntakes.reduce(0, +)
+    let last = fineDustTotalIntakes.last ?? 0.1
+    return last / sum
+  }
+  
+  /// 초미세먼지의 전체에 대한 마지막 값의 비율
+  private var ultrafineDustLastValueRatio: CGFloat {
+    let sum = ultrafineDustTotalIntakes.reduce(0, +)
+    let last = ultrafineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
   
@@ -110,6 +136,10 @@ final class StatisticsViewController: UIViewController {
     unregisterLocationObserver()
   }
   
+  @objc private func segmentedControlValueDidChange(_ sender: UISegmentedControl) {
+    initializeSubviews()
+  }
+  
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
     intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
@@ -123,16 +153,22 @@ final class StatisticsViewController: UIViewController {
           error.alert.present(to: self)
           return
         }
-        guard let self = self else { return }
-        guard let fineDusts = fineDusts else { return }
-        guard let fineDust = fineDust else { return }
-        let weekIntakes = [fineDusts, [fineDust]]
+        guard let self = self,
+          let fineDusts = fineDusts,
+          let ultrafineDusts = ultrafineDusts,
+          let fineDust = fineDust,
+          let ultrafineDust = ultrafineDust else { return }
+        let fineDustWeekIntakes = [fineDusts, [fineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
-        self.dustIntakes = weekIntakes
+        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        self.fineDustTotalIntakes = fineDustWeekIntakes
+        self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
+        print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
         DispatchQueue.main.async {
-          self.initializeValueGraphView()
-          self.initializeRatioGraphView()
+          self.initializeSubviews()
         }
       }
     }
@@ -151,8 +187,11 @@ extension StatisticsViewController: LocationObserver {
 
 extension StatisticsViewController: ValueGraphViewDelegate {
   
-  var intakeAmounts: [CGFloat] {
-    return dustIntakes
+  var intakes: [CGFloat] {
+    if segmentedControl.selectedSegmentIndex == 0 {
+      return fineDustTotalIntakes
+    }
+    return ultrafineDustTotalIntakes
   }
 }
 
@@ -161,7 +200,10 @@ extension StatisticsViewController: ValueGraphViewDelegate {
 extension StatisticsViewController: RatioGraphViewDelegate {
   
   var intakeRatio: CGFloat {
-    return dustLastValueRatio
+    if segmentedControl.selectedSegmentIndex == 0 {
+      return fineDustLastValueRatio
+    }
+    return ultrafineDustLastValueRatio
   }
 }
 
@@ -199,6 +241,12 @@ private extension StatisticsViewController {
 // MARK: - Value Graph Private Extension
 
 private extension StatisticsViewController {
+  
+  /// 모든 서브뷰 초기화.
+  func initializeSubviews() {
+    initializeValueGraphView()
+    initializeRatioGraphView()
+  }
   
   /// 값 그래프 뷰 초기화.
   func initializeValueGraphView() {

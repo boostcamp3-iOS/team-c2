@@ -18,9 +18,6 @@ final class RatioGraphView: UIView {
     
     /// 레이어 선 두께.
     static let lineWidth: CGFloat = 10.0
-    
-    /// 배경 뷰 높이와 전체 비율 섹션 뷰 높이의 차이.
-    static let entireSectionViewHeightDifference: CGFloat = 64.0
   }
   
   // MARK: Delegate
@@ -42,7 +39,7 @@ final class RatioGraphView: UIView {
   
   /// 배경 뷰 높이.
   private var backgroundViewHeight: CGFloat {
-    return backgroundView.bounds.height - Constant.entireSectionViewHeightDifference
+    return backgroundView.bounds.height * 0.7
   }
   
   // MARK: IBOutlet
@@ -101,7 +98,7 @@ private extension RatioGraphView {
     entireLayer.path = path.cgPath
     entireLayer.lineWidth = Constant.lineWidth
     entireLayer.fillColor = UIColor.clear.cgColor
-    entireLayer.strokeColor = Asset.graph1.color.cgColor
+    entireLayer.strokeColor = Asset.graph2.color.cgColor
     backgroundView.layer.addSublayer(entireLayer)
     // 부분 레이어
     let portionLayer = CAShapeLayer()

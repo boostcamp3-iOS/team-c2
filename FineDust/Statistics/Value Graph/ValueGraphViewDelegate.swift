@@ -12,6 +12,6 @@ import UIKit
 /// Value Graph View Delegate.
 protocol ValueGraphViewDelegate: class {
 
-  /// 오늘로부터 7일간의 미세먼지 흡입량.
-  var intakeAmounts: [CGFloat] { get }
+  /// 오늘 전날부터 일주일간의 흡입량.
+  var intakes: [CGFloat] { get }
 }
