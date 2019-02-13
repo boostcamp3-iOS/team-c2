@@ -158,6 +158,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
+    print(feedback)
     return cell
   }
 }
