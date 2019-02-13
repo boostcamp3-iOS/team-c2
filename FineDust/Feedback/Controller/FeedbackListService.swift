@@ -32,7 +32,7 @@ final class FeedbackListService {
   }
   
   /// 피드백 정보를 최신순으로 반환함
-  func fetchFeedbackResentDate() -> [DustFeedback] {
+  func fetchFeedbackRecentDate() -> [DustFeedback] {
     let sortedArray = dustFeedbacks.sorted(by: { $0.date > $1.date })
     print(sortedArray)
     return sortedArray

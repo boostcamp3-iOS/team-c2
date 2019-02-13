@@ -54,7 +54,7 @@ final class FeedbackListViewController: UIViewController {
     UIAlertController
       .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
       .action(title: "최신순", style: .default) { _, _ in
-        self.newDustFeedback = self.feedbackListService.fetchFeedbackResentDate()
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackRecentDate()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
       .action(title: "제목순", style: .default) { _, _ in
@@ -144,16 +144,15 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return (feedbackCount > 2) ? 3 : feedbackCount
+    return feedbackCount > 2 ? 3 : feedbackCount
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "recommendCell",
-      for: indexPath
-      ) as? RecommendCollectionViewCell
+    guard let cell = collectionView
+      .dequeueReusableCell(withReuseIdentifier: "recommendCell",
+                           for: indexPath) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
