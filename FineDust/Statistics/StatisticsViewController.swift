@@ -112,13 +112,13 @@ final class StatisticsViewController: UIViewController {
   
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
-    requestWeekDustInfo { [weak self] fineDusts, ultrafineDusts, error in
+    intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
         error.alert.present(to: self)
         return
       }
       guard let self = self else { return }
-      self.requestTodayDustInfo { [weak self] fineDust, ultrafineDust, error in
+      self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
           error.alert.present(to: self)
           return
@@ -126,7 +126,6 @@ final class StatisticsViewController: UIViewController {
         guard let self = self else { return }
         guard let fineDusts = fineDusts else { return }
         guard let fineDust = fineDust else { return }
-        // 조작
         let weekIntakes = [fineDusts, [fineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
@@ -136,30 +135,6 @@ final class StatisticsViewController: UIViewController {
           self.initializeRatioGraphView()
         }
       }
-    }
-  }
-  
-  /// 오늘 제외한 일주일간 정보 요청.
-  private func requestWeekDustInfo(completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
-    intakeService
-      .requestIntakesInWeek { fineDusts, ultrafineDusts, error in
-        if let error = error {
-          completion(nil, nil, error)
-          return
-        }
-        completion(fineDusts, ultrafineDusts, nil)
-    }
-  }
-  
-  /// 오늘의 정보 요청.
-  private func requestTodayDustInfo(completion: @escaping (Int?, Int?, Error?) -> Void) {
-    intakeService
-      .requestTodayIntake { fineDust, ultrafineDust, error in
-        if let error = error {
-          completion(nil, nil, error)
-          return
-        }
-        completion(fineDust, ultrafineDust, nil)
     }
   }
 }

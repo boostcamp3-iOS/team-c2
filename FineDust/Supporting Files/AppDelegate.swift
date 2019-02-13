@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(error.localizedDescription)
         return
       }
-      print("최신 접속 날짜 갱신: \(date)")
+      print("최신 접속 날짜 갱신: ", date ?? "?")
     }
     return true
   }
