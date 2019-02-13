@@ -23,7 +23,7 @@ final class IntakeService: IntakeServiceType {
   
   init(healthKitService: HealthKitServiceType = HealthKitService(healthKit: HealthKitManager()),
        dustInfoService: DustInfoServiceType = DustInfoService(),
-       coreDataService: CoreDataServiceType = CoreDataService.shared) {
+       coreDataService: CoreDataServiceType = CoreDataService()) {
     self.healthKitService = healthKitService
     self.dustInfoService = dustInfoService
     self.coreDataService = coreDataService
@@ -117,6 +117,7 @@ final class IntakeService: IntakeServiceType {
                             })
                         results.append(intake)
                     }
+                    print(1312412, results.count)
                     // 코어데이터 갱신
                     for (index, date) in Date.between(startDate, endDate).enumerated() {
                       self.coreDataService.saveIntake(results[index], at: date) { error in

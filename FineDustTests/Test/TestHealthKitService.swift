@@ -10,7 +10,7 @@
 import XCTest
 import Foundation
 
-class HealthKitServiceTest: XCTestCase {
+class TestHealthKitService: XCTestCase {
   
   var healthKitService: HealthKitServiceType?
   let mockHealthKitManager = MockHealthKitManager()
