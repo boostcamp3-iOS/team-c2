@@ -127,16 +127,16 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hd8-bJ-yT0">
-                                                    <rect key="frame" x="331.5" y="57.5" width="18.5" height="18.5"/>
+                                                    <rect key="frame" x="322" y="52.5" width="28" height="28.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Hd8-bJ-yT0" secondAttribute="height" multiplier="1:1" id="HRq-8x-WzI"/>
                                                     </constraints>
-                                                    <state key="normal" image="redheart"/>
-                                                    <state key="selected" image="redheart"/>
+                                                    <state key="normal" image="star-outline"/>
+                                                    <state key="selected" image="yellow-star"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hd8-bJ-yT0" firstAttribute="height" secondItem="QDy-BU-376" secondAttribute="height" multiplier="0.2" id="0K2-eb-7eJ"/>
+                                                <constraint firstItem="Hd8-bJ-yT0" firstAttribute="height" secondItem="QDy-BU-376" secondAttribute="height" multiplier="0.3" id="0K2-eb-7eJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Hd8-bJ-yT0" secondAttribute="trailing" constant="25" id="1OO-Ai-F63"/>
                                                 <constraint firstItem="QDy-BU-376" firstAttribute="height" secondItem="sZd-PZ-2PD" secondAttribute="height" multiplier="0.7" id="7ay-A3-GpS"/>
                                                 <constraint firstItem="QDy-BU-376" firstAttribute="leading" secondItem="sZd-PZ-2PD" secondAttribute="leading" priority="999" constant="20" id="9hJ-X7-jAr"/>
@@ -150,6 +150,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bookmarkButton" destination="Hd8-bJ-yT0" id="0F2-BC-XGf"/>
+                                            <outlet property="feedbackDateLabel" destination="155-ak-Bux" id="7wf-BH-mfE"/>
                                             <outlet property="feedbackImageView" destination="QDy-BU-376" id="bZC-ep-Y0m"/>
                                             <outlet property="feedbackSourceLabel" destination="pKI-R2-2Mu" id="Iu2-2q-AZ0"/>
                                             <outlet property="feedbackTitleLabel" destination="toI-26-T8z" id="8q3-0w-Ciy"/>
@@ -172,7 +173,11 @@
                         <viewLayoutGuide key="safeArea" id="GBK-iT-3lb"/>
                     </view>
                     <navigationItem key="navigationItem" id="bLQ-ID-bQi">
-                        <barButtonItem key="rightBarButtonItem" image="sort" id="5JZ-gj-Ofj"/>
+                        <barButtonItem key="rightBarButtonItem" image="sort" id="5JZ-gj-Ofj">
+                            <connections>
+                                <action selector="touchUpSortingButton:" destination="SJf-BD-jk7" id="9U6-vk-u2A"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="feedbackListTableView" destination="zy8-Zz-Dej" id="fUb-Ge-yn1"/>
@@ -255,7 +260,8 @@
     <resources>
         <image name="info1" width="320" height="320"/>
         <image name="infoTabIcon" width="48" height="48"/>
-        <image name="redheart" width="48" height="48"/>
         <image name="sort" width="24" height="24"/>
+        <image name="star-outline" width="48" height="48"/>
+        <image name="yellow-star" width="48" height="48"/>
     </resources>
 </document>
