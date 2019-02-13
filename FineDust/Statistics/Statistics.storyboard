@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rIq-fy-EBz">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,7 +17,7 @@
                     <tabBarItem key="tabBarItem" title="통계" image="barChartTabIcon" id="BxE-pT-soT"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -33,28 +33,62 @@
             <objects>
                 <viewController id="yLH-07-419" customClass="StatisticsViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cAa-p0-7jU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
-                                <rect key="frame" x="32" y="96" width="311" height="237"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-ws-1tf">
+                                <rect key="frame" x="0.0" y="94" width="320" height="425"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
+                                        <rect key="frame" x="16" y="220.5" width="288" height="188.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
+                                        <rect key="frame" x="16" y="16" width="288" height="188.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ggd-ws-1tf" secondAttribute="top" constant="16" id="0Wb-fd-vbY"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="height" secondItem="ggd-ws-1tf" secondAttribute="height" multiplier="0.45" priority="750" id="6Oq-5w-lZm"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="ggd-ws-1tf" secondAttribute="centerY" constant="8" id="QND-8F-YDm"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="centerX" secondItem="ggd-ws-1tf" secondAttribute="centerX" id="fQc-8Z-gLR"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="16" id="ktw-Ly-gfj"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="bottom" secondItem="ggd-ws-1tf" secondAttribute="centerY" constant="-8" id="lgC-9D-l9G"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="width" secondItem="ggd-ws-1tf" secondAttribute="width" multiplier="0.9" id="mD8-V0-rsS"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="height" secondItem="ggd-ws-1tf" secondAttribute="height" multiplier="0.45" priority="750" id="s5E-FM-Lcj"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="centerX" secondItem="ggd-ws-1tf" secondAttribute="centerX" id="vsS-sR-THQ"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="width" secondItem="ggd-ws-1tf" secondAttribute="width" multiplier="0.9" id="yQb-5E-lHU"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
-                                <rect key="frame" x="32" y="349" width="311" height="237"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-ep-R67">
+                                <rect key="frame" x="0.0" y="64" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1j4-Ac-rYs"/>
+                                </constraints>
+                                <state key="normal" title="미세먼지"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnC-iy-Juf">
+                                <rect key="frame" x="160" y="64" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eee-GM-Ibc"/>
+                                </constraints>
+                                <state key="normal" title="초미세먼지"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="b6f-az-Uoz" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="32" id="5Me-tg-mTj"/>
-                            <constraint firstItem="Sca-OT-FiC" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="32" id="5pt-9S-gdd"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="Sca-OT-FiC" secondAttribute="trailing" constant="32" id="Btq-Sh-eTx"/>
-                            <constraint firstItem="b6f-az-Uoz" firstAttribute="height" secondItem="Sca-OT-FiC" secondAttribute="height" id="ZU7-Rt-NH8"/>
-                            <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="Sca-OT-FiC" secondAttribute="bottom" constant="16" id="Zh2-Y8-YlE"/>
-                            <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="32" id="gcX-Nf-gdB"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" constant="32" id="q0m-bH-Z4m"/>
-                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="b6f-az-Uoz" secondAttribute="trailing" constant="32" id="vhB-m3-S59"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="bottom" secondItem="ggd-ws-1tf" secondAttribute="bottom" id="9b1-lr-WCD"/>
+                            <constraint firstItem="tnC-iy-Juf" firstAttribute="leading" secondItem="nE3-ep-R67" secondAttribute="trailing" id="BRi-oN-Pmi"/>
+                            <constraint firstItem="tnC-iy-Juf" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" id="BoX-sp-VCm"/>
+                            <constraint firstItem="tnC-iy-Juf" firstAttribute="trailing" secondItem="66h-Qh-c5I" secondAttribute="trailing" id="IDj-ne-1tN"/>
+                            <constraint firstItem="ggd-ws-1tf" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" id="OsK-UX-KoL"/>
+                            <constraint firstItem="nE3-ep-R67" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" id="fGa-E5-btz"/>
+                            <constraint firstItem="nE3-ep-R67" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" id="g7o-Jn-S7j"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="ggd-ws-1tf" secondAttribute="trailing" id="hAd-JT-CeB"/>
+                            <constraint firstItem="tnC-iy-Juf" firstAttribute="width" secondItem="nE3-ep-R67" secondAttribute="width" id="oML-zD-Zgc"/>
+                            <constraint firstItem="ggd-ws-1tf" firstAttribute="top" secondItem="nE3-ep-R67" secondAttribute="bottom" id="vGv-9M-nIs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="66h-Qh-c5I"/>
                     </view>
@@ -66,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktn-rj-baA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207" y="-6"/>
+            <point key="canvasLocation" x="-207.19999999999999" y="-6.746626686656672"/>
         </scene>
     </scenes>
     <resources>
