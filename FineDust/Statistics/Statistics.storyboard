@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rIq-fy-EBz">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -32,18 +32,18 @@
             <objects>
                 <viewController id="yLH-07-419" customClass="StatisticsViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cAa-p0-7jU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-ws-1tf">
-                                <rect key="frame" x="0.0" y="80" width="320" height="423"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="522"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
-                                        <rect key="frame" x="16" y="219.5" width="288" height="203.5"/>
+                                        <rect key="frame" x="19" y="269" width="337.5" height="253"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
-                                        <rect key="frame" x="16" y="0.0" width="288" height="203.5"/>
+                                        <rect key="frame" x="19" y="0.0" width="337.5" height="253"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -60,7 +60,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kP2-MY-egO">
-                                <rect key="frame" x="16" y="36" width="288" height="29"/>
+                                <rect key="frame" x="16" y="36" width="343" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="cPh-D0-4aF"/>
                                 </constraints>
