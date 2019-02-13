@@ -60,14 +60,19 @@ final class CoreDataService: CoreDataServiceType {
       Date.between(startDate, endDate).forEach { currentDate in
         let intakeInCurrentDate = intakesInDates.filter { $0.date?.start == currentDate }.first
         if let currentIntake = intakeInCurrentDate {
-          result[currentDate] = Int(currentIntake.value)
+          result[currentDate] = (Int(currentIntake.fineDust), Int(currentIntake.ultrafineDust))
         }
       }
       completion(result, nil)
     }
   }
   
-  func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void) {
-    intakeManager.save([Intake.date: date, Intake.value: Int16(value)], completion: completion)
+  func saveIntake(fineDust: Int,
+                  ultrafineDust: Int,
+                  at date: Date,
+                  completion: @escaping (Error?) -> Void) {
+    intakeManager.save([Intake.date: date,
+                        Intake.fineDust: Int16(fineDust),
+                        Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
   }
 }

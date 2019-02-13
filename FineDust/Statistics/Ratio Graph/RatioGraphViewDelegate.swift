@@ -12,6 +12,6 @@ import UIKit
 /// Ratio Graph View Data Source Protocol.
 protocol RatioGraphViewDelegate: class {
   
-  /// 전체에 대한 부분의 비율.
+  /// 전체 흡입량에 대한 부분의 비율.
   var intakeRatio: CGFloat { get }
 }
