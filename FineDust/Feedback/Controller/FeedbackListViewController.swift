@@ -172,16 +172,15 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return (feedbackCount > 2) ? 3 : feedbackCount
+    return feedbackCount > 2 ? 3 : feedbackCount
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "recommendCell",
-      for: indexPath
-      ) as? RecommendCollectionViewCell
+    guard let cell = collectionView
+      .dequeueReusableCell(withReuseIdentifier: "recommendCell",
+                           for: indexPath) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)

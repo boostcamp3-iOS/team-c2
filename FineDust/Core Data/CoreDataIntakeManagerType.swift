@@ -32,11 +32,9 @@ extension CoreDataIntakeManagerType {
   /// CREATE
   func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
     do {
-      let users = try context.fetch(User.fetchRequest()) as? [User]
-      let lastUser = users?.last
       let intake = Intake(context: context)
       dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
-      lastUser?.addToIntake(intake)
+      try context.save()
       completion(nil)
     } catch {
       completion(error)

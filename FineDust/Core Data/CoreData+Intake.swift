@@ -14,6 +14,10 @@ extension Intake {
   
   /// 날짜 Attribute
   static let date = "date"
-  /// 흡입량 Attribute
-  static let value = "value"
+  
+  /// 미세먼지 흡입량 Attribute
+  static let fineDust = "fineDust"
+  
+  /// 초미세먼지 흡입량 Attribute
+  static let ultrafineDust = "ultrafineDust"
 }
