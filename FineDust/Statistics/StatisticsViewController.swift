@@ -23,6 +23,13 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: IBOutlets
   
+  /// 서브뷰 포함하는 스크롤 뷰.
+  @IBOutlet private weak var scrollView: UIScrollView! {
+    didSet {
+      scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
+    }
+  }
+  
   /// 미세먼지 / 초미세먼지 토글하는 세그먼티드 컨트롤.
   @IBOutlet private weak var segmentedControl: UISegmentedControl! {
     didSet {
