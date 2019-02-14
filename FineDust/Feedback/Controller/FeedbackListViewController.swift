@@ -30,6 +30,7 @@ final class FeedbackListViewController: UIViewController {
     
     feedbackCount = feedbackListService.fetchFeedbackCount()
     feedbackListTableView.reloadData()
+    
   }
   
   // MARK: - Function
@@ -57,7 +58,10 @@ final class FeedbackListViewController: UIViewController {
         self.newDustFeedback = self.feedbackListService.fetchFeedbackTitle()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
-      .action(title: "즐겨찾기순")
+      .action(title: "즐겨찾기순", style: .default) { _, _ in
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackBookmark()
+        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+      }
       .action(title: "취소", style: .cancel)
       .present(to: self)
   }
@@ -86,7 +90,7 @@ extension FeedbackListViewController: UITableViewDataSource {
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
-    
+    cell.delegate = self
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
     
     if newDustFeedback != nil {
@@ -179,7 +183,6 @@ extension FeedbackListViewController: UICollectionViewDataSource {
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
-    print(feedback)
     return cell
   }
 }
@@ -189,5 +192,15 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     changeView()
+  }
+}
+
+// MARK: - FeedbackListCellDelegate
+
+extension FeedbackListViewController: FeedbackListCellDelegate {
+  func feedbackListCell(_ feedbackListCell: FeedbackListTableViewCell,
+                        didTapBookmarkButton button: UIButton) {
+    button.isSelected = !button.isSelected
+    feedbackListService.setBookmarkInfoTitleArray(title: feedbackListCell.title)
   }
 }

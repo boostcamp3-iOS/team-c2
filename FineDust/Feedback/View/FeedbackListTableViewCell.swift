@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol FeedbackListCellDelegate: class {
+  func feedbackListCell(_ feedbackListCell: FeedbackListTableViewCell,
+                        didTapBookmarkButton button: UIButton)
+}
+
 /// 3번째 탭 하단 정보 목록 테이블뷰셀.
 final class FeedbackListTableViewCell: UITableViewCell {
   
@@ -15,7 +20,19 @@ final class FeedbackListTableViewCell: UITableViewCell {
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
   @IBOutlet private weak var feedbackDateLabel: UILabel!
-  @IBOutlet private weak var bookmarkButton: UIButton!
+  @IBOutlet private weak var bookmarkButton: UIButton! {
+    didSet {
+      bookmarkButton.addTarget(self,
+                               action: #selector(bookmarkButtonDidTap(_:)),
+                               for: .touchUpInside)
+    }
+  }
+  
+  var title: String {
+    return feedbackTitleLabel.text ?? ""
+  }
+  
+  weak var delegate: FeedbackListCellDelegate?
   
   let jsonManager = JSONManager()
   private var dustFeedbacks: [DustFeedback] = []
@@ -30,6 +47,10 @@ final class FeedbackListTableViewCell: UITableViewCell {
     feedbackImageView.image = nil
     feedbackTitleLabel.text = nil
     feedbackSourceLabel.text = nil
+  }
+  
+  @objc private func bookmarkButtonDidTap(_ sender: UIButton) {
+    delegate?.feedbackListCell(self, didTapBookmarkButton: sender)
   }
   
   /// 테이블뷰셀 데이터 설정
