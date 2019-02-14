@@ -20,6 +20,7 @@ final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
   func parse(_ data: Data,
              completion: @escaping (XMLParsingType?, Error?) -> Void) {
     let parsed = xmlConfig.parse(data)
+    print(parsed)
     do {
       let response: T = try parsed.value()
       // 상태 코드가 00이 아니면 그에 대응하는 에러를 넘겨줌

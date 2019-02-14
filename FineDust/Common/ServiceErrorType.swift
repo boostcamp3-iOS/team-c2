@@ -12,8 +12,8 @@ import UIKit
 /// 서비스 메소드에서 나올 수 있는 사용자 정의 에러 타입.
 protocol ServiceErrorType: Error {
   
-  /// 에러를 얼러트에 표시하기 위한 프로퍼티.
-  var alert: UIAlertController { get }
+  /// 토스트에 에러 표시.
+  func presentToast()
 }
 
 // MARK: - ServiceErrorType 프로토콜 초기 구현
@@ -33,7 +33,7 @@ extension ServiceErrorType {
     }
   }
   
-  var alert: UIAlertController {
-    return UIAlertController.alert(title: "", message: localizedDescription).action(title: "확인")
+  func presentToast() {
+    Toast.shared.show(localizedDescription)
   }
 }

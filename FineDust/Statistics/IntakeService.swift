@@ -151,6 +151,7 @@ final class IntakeService: IntakeServiceType {
                                     ultrafineDust: ultrafineDustIntakes[index],
                                     at: date) { error in
                                       if let error = error {
+                                        Toast.shared.show(error.localizedDescription)
                                         print(error.localizedDescription)
                                       }
                       }

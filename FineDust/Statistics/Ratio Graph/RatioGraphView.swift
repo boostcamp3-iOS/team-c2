@@ -29,7 +29,7 @@ final class RatioGraphView: UIView {
   
   /// 전체에 대한 부분의 비율.
   private var ratio: CGFloat {
-    return dataSource?.intakeRatio ?? 0.0
+    return dataSource?.intakeRatio ?? .leastNonzeroMagnitude
   }
   
   /// 비율을 각도로 변환.

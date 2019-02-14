@@ -52,6 +52,7 @@ final class HealthKitManager: HealthKitManagerType {
     healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, error in
       if let error = error {
         print("request authorization error : \(error.localizedDescription)")
+        Toast.shared.show(error.localizedDescription)
       } else {
         print("complete request authorization")
         
@@ -98,13 +99,16 @@ final class HealthKitManager: HealthKitManagerType {
       //query 첫 결과에 대한 hanlder
       query.initialResultsHandler = { query, results, error in
         if let error = error {
+          print("HealthKit query is not valid.")
+          Toast.shared.show(error.localizedDescription)
           completion(nil, nil, error)
           return
         }
         if let results = results {
           // 결과가 0일 때
           if results.statistics().count == 0 {
-            completion(0, nil, nil)
+            print("Healthkit Query: 검색 결과가 없음")
+            completion(0, nil, NSError(domain: "asdf", code: 0, userInfo: nil))
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
             results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in

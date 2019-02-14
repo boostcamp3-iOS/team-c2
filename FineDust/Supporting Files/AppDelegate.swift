@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     LocationManager.shared.requestAuthorization()
     coreDataService.requestLastAccessedDate { date, error in
       if let error = error {
+        Toast.shared.show(error.localizedDescription)
         print(error.localizedDescription)
         return
       }

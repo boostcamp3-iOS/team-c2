@@ -97,14 +97,16 @@ final class StatisticsViewController: UIViewController {
   
   /// 미세먼지의 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: CGFloat {
-    let sum = fineDustTotalIntakes.reduce(0, +)
+    let reduced = fineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
     let last = fineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
   
   /// 초미세먼지의 전체에 대한 마지막 값의 비율
   private var ultrafineDustLastValueRatio: CGFloat {
-    let sum = ultrafineDustTotalIntakes.reduce(0, +)
+    let reduced = ultrafineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
     let last = ultrafineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
@@ -145,13 +147,13 @@ final class StatisticsViewController: UIViewController {
   private func requestIntake() {
     intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
-        Toast.shared.show(error.localizedDescription)
+        error.presentToast()
         return
       }
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
-          Toast.shared.show(error.localizedDescription)
+          error.presentToast()
           return
         }
         guard let self = self,
