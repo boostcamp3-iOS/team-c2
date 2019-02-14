@@ -15,29 +15,3 @@ protocol CoreDataIntakeManagerType: CoreDataManagerType {
   /// READ
   func request(completion: ([Intake]?, Error?) -> Void)
 }
-
-// MARK: - CoreDataIntakeManagerType 프로토콜 초기 구현
-
-extension CoreDataIntakeManagerType {
-  
-  func request(completion: ([Intake]?, Error?) -> Void) {
-    do {
-      let results = try context.fetch(Intake.fetchRequest()) as? [Intake]
-      completion(results, nil)
-    } catch {
-      completion(nil, error)
-    }
-  }
-  
-  /// CREATE
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
-    do {
-      let intake = Intake(context: context)
-      dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
-      try context.save()
-      completion(nil)
-    } catch {
-      completion(error)
-    }
-  }
-}

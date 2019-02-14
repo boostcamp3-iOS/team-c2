@@ -420,16 +420,6 @@
 			path = Dummy;
 			sourceTree = "<group>";
 		};
-		5B568E34B6E17034C0860A10710BB4BB /* XML */ = {
-			isa = PBXGroup;
-			children = (
-				BE89D1AC7B4ABC77F127973D69AA3290 /* XMLError.swift */,
-				E100FE6E1F64C9EE564CCB877D5E6DF5 /* XMLManager.swift */,
-				9B8DA6A2FE02219E549C233656F8918A /* XMLManagerType.swift */,
-			);
-			path = XML;
-			sourceTree = "<group>";
-		};
 		1A732CBC6A82F5401C8E972D3296C7C0 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +537,16 @@
 				46148D231458F1D73D6644E885ACAF67 /* ValueGraphViewDataSource.swift */,
 			);
 			path = "Value Graph";
+			sourceTree = "<group>";
+		};
+		5B568E34B6E17034C0860A10710BB4BB /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				BE89D1AC7B4ABC77F127973D69AA3290 /* XMLError.swift */,
+				E100FE6E1F64C9EE564CCB877D5E6DF5 /* XMLManager.swift */,
+				9B8DA6A2FE02219E549C233656F8918A /* XMLManagerType.swift */,
+			);
+			path = XML;
 			sourceTree = "<group>";
 		};
 		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
