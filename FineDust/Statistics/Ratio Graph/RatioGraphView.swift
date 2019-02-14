@@ -22,14 +22,14 @@ final class RatioGraphView: UIView {
   
   // MARK: Delegate
   
-  /// Ratio Graph View Delegate.
-  weak var delegate: RatioGraphViewDelegate?
+  /// Ratio Graph View Data Source.
+  weak var dataSource: RatioGraphViewDataSource?
   
   // MARK: Private Properties
   
   /// 전체에 대한 부분의 비율.
   private var ratio: CGFloat {
-    return delegate?.intakeRatio ?? 0.0
+    return dataSource?.intakeRatio ?? 0.0
   }
   
   /// 비율을 각도로 변환.
@@ -50,7 +50,7 @@ final class RatioGraphView: UIView {
   // MARK: View
   
   /// 퍼센트 레이블.
-  private lazy var percentLabel: UILabel! = {
+  private lazy var percentLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,7 @@ private extension RatioGraphView {
     entireLayer.path = path.cgPath
     entireLayer.lineWidth = Constant.lineWidth
     entireLayer.fillColor = UIColor.clear.cgColor
-    entireLayer.strokeColor = Asset.graph2.color.cgColor
+    entireLayer.strokeColor = Asset.graph1.color.cgColor
     backgroundView.layer.addSublayer(entireLayer)
     // 부분 레이어
     let portionLayer = CAShapeLayer()

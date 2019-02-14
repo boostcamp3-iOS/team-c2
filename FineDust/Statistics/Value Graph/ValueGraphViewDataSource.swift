@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-/// Value Graph View Delegate.
-protocol ValueGraphViewDelegate: class {
+/// Value Graph View Data Source.
+protocol ValueGraphViewDataSource: class {
 
   /// 오늘 전날부터 일주일간의 흡입량.
   var intakes: [CGFloat] { get }

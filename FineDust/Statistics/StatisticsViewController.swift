@@ -66,14 +66,14 @@ final class StatisticsViewController: UIViewController {
   /// 값 그래프.
   private var valueGraphView: ValueGraphView! {
     didSet {
-      valueGraphView.delegate = self
+      valueGraphView.dataSource = self
     }
   }
   
   /// 비율 그래프.
   private var ratioGraphView: RatioGraphView! {
     didSet {
-      ratioGraphView.delegate = self
+      ratioGraphView.dataSource = self
     }
   }
   
@@ -104,9 +104,6 @@ final class StatisticsViewController: UIViewController {
     let last = ultrafineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
-  
-  /// 선택된 날짜.
-  private var selectedDate: Date = Date()
   
   // MARK: Life Cycle
   
@@ -157,7 +154,8 @@ final class StatisticsViewController: UIViewController {
           let fineDusts = fineDusts,
           let ultrafineDusts = ultrafineDusts,
           let fineDust = fineDust,
-          let ultrafineDust = ultrafineDust else { return }
+          let ultrafineDust = ultrafineDust
+        else { return }
         let fineDustWeekIntakes = [fineDusts, [fineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
@@ -185,7 +183,7 @@ extension StatisticsViewController: LocationObserver {
 
 // MARK: - ValueGraphView Delegate 구현
 
-extension StatisticsViewController: ValueGraphViewDelegate {
+extension StatisticsViewController: ValueGraphViewDataSource {
   
   var intakes: [CGFloat] {
     if segmentedControl.selectedSegmentIndex == 0 {
@@ -197,7 +195,7 @@ extension StatisticsViewController: ValueGraphViewDelegate {
 
 // MARK: - RatioGraphView Delegate 구현
 
-extension StatisticsViewController: RatioGraphViewDelegate {
+extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: CGFloat {
     if segmentedControl.selectedSegmentIndex == 0 {

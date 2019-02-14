@@ -41,8 +41,8 @@ final class ValueGraphView: UIView {
   
   // MARK: Delegate
   
-  /// Value Graph View Delegate.
-  weak var delegate: ValueGraphViewDelegate?
+  /// Value Graph View Data Source.
+  weak var dataSource: ValueGraphViewDataSource?
   
   // MARK: Property
   
@@ -58,7 +58,7 @@ final class ValueGraphView: UIView {
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
-    return delegate?.intakes ?? []
+    return dataSource?.intakes ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.

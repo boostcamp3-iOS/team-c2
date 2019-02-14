@@ -100,7 +100,7 @@
 		61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */; };
 		9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */; };
 		2B8D866B39C9DD1EBE276B9E25957797 /* RatioGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */; };
-		69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */; };
+		61983521903384EDCC1ED4BA5F87BF04 /* RatioGraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */; };
 		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */; };
 		D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */; };
@@ -117,6 +117,7 @@
 		71A3418C5387A0F14C9743BCCCB43BBC /* TestFeedbackListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F983596EF0FD18034F3E35108C70ECC /* TestFeedbackListService.swift */; };
 		977ECFA384F7EE88E01C5B276680F78A /* TestHealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BB182EE3791206435A2EB85840E17 /* TestHealthKitService.swift */; };
 		5D7AEAF00ACF84511AC381D39D0EC67E /* TestIntakeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */; };
+		13DABA8D64DA1F3908824430DEBCB5ED /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757928E2CDD9423CB0AA2F81822DC8FF /* Toast.swift */; };
 		AF5A997903507F5F9B1FF620F977876E /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */; };
 		902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */; };
 		A0221EFCD87D0BA93CDD31C167E4DF2E /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */; };
@@ -127,7 +128,7 @@
 		3A77C8B9693322DF25FF0762A1ECF2AE /* UnitTestREADME.md in Resources */ = {isa = PBXBuildFile; fileRef = 1BA0A52F0ED2A919EC586D53EA6365F7 /* UnitTestREADME.md */; };
 		E58FADEFDCD685742F03D94196FDB227 /* ValueGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */; };
 		563A95DB8198B51C3DC0B7B6BE64DDA3 /* ValueGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */; };
-		1CB26EE568A3DDD41D49D6A341F76DC1 /* ValueGraphViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */; };
+		42B7E20210A334E844791CA1246D9530 /* ValueGraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46148D231458F1D73D6644E885ACAF67 /* ValueGraphViewDataSource.swift */; };
 		0D7D9170D64C59CBFDF5B3B699E135B9 /* XMLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50271B13372C2F87ABAADF29353AEDEC /* XMLError.swift */; };
 		A1C71E8BD3599B3BBE95696C2FEBA10D /* XMLIndexer+XMLIndexerDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6A6BF012251BC2597AC59B17DA1EC /* XMLIndexer+XMLIndexerDeserializable.swift */; };
 		98FA95AD469CE9B02B82BCE3C4F16F3E /* XMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEEE5C27474765434A333169934EB80 /* XMLManager.swift */; };
@@ -231,9 +232,7 @@
 		B642BB98DC614672674ADA7E7FEAA0DD /* MockDustObservatoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDustObservatoryManager.swift; sourceTree = "<group>"; };
 		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
 		00D9C06AFD48343B0C3E7B05C42671BC /* MockHealthKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitService.swift; sourceTree = "<group>"; };
-		C50389C80E73BBD8FFA4331D7EC43144 /* MockJSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSONManager.swift; sourceTree = "<group>"; };
 		C50389C80E73BBD8FFA4331D7EC43144 /* MockJSONManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONManager.swift; sourceTree = "<group>"; };
-		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+.swift"; sourceTree = "<group>"; };
 		475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
@@ -247,7 +246,7 @@
 		F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
-		ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDelegate.swift; sourceTree = "<group>"; };
+		06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDataSource.swift; sourceTree = "<group>"; };
 		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendCollectionViewCell.swift; path = FineDust/Feedback/View/RecommendCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
@@ -265,6 +264,7 @@
 		2F983596EF0FD18034F3E35108C70ECC /* TestFeedbackListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFeedbackListService.swift; sourceTree = "<group>"; };
 		985BB182EE3791206435A2EB85840E17 /* TestHealthKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHealthKitService.swift; sourceTree = "<group>"; };
 		8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIntakeService.swift; sourceTree = "<group>"; };
+		757928E2CDD9423CB0AA2F81822DC8FF /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 		1BA0A52F0ED2A919EC586D53EA6365F7 /* UnitTestREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = UnitTestREADME.md; sourceTree = "<group>"; };
 		BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueGraphView.swift; sourceTree = "<group>"; };
 		6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValueGraphView.xib; sourceTree = "<group>"; };
-		D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDelegate.swift; sourceTree = "<group>"; };
+		46148D231458F1D73D6644E885ACAF67 /* ValueGraphViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueGraphViewDataSource.swift; sourceTree = "<group>"; };
 		50271B13372C2F87ABAADF29353AEDEC /* XMLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLError.swift; sourceTree = "<group>"; };
 		6EF6A6BF012251BC2597AC59B17DA1EC /* XMLIndexer+XMLIndexerDeserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMLIndexer+XMLIndexerDeserializable.swift"; sourceTree = "<group>"; };
 		6DEEE5C27474765434A333169934EB80 /* XMLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLManager.swift; sourceTree = "<group>"; };
@@ -356,6 +356,7 @@
 				648F2847BF0C37F32A03D356A9C8A1AE /* LocationObserver.swift */,
 				F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */,
 				DFACB8B8A628164CA222887EEA285687 /* ServiceErrorType.swift */,
+				757928E2CDD9423CB0AA2F81822DC8FF /* Toast.swift */,
 				BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */,
 			);
 			path = Common;
@@ -391,7 +392,7 @@
 			children = (
 				41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */,
 				4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */,
-				ABB74F32A71DEF09C1E0BA1E3C00BBE2 /* RatioGraphViewDelegate.swift */,
+				06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -476,7 +477,7 @@
 			children = (
 				BDEA7F789E3D627A4E5FD6C9C99FB6E4 /* ValueGraphView.swift */,
 				6BBF617E080BA66253C23B9EDB38263E /* ValueGraphView.xib */,
-				D3CFB319F8995ACCC2D533280B2E0ADD /* ValueGraphViewDelegate.swift */,
+				46148D231458F1D73D6644E885ACAF67 /* ValueGraphViewDataSource.swift */,
 			);
 			path = "Value Graph";
 			sourceTree = "<group>";
@@ -880,7 +881,7 @@
 				67B90B88B78FC798FA44EB480AB2167A /* ObservatoryResponse.swift in Sources */,
 				61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */,
 				9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */,
-				69C1002E564CE2FB91179C033D174EEB /* RatioGraphViewDelegate.swift in Sources */,
+				61983521903384EDCC1ED4BA5F87BF04 /* RatioGraphViewDataSource.swift in Sources */,
 				A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */,
 				5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */,
 				D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */,
@@ -889,6 +890,7 @@
 				C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */,
 				28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */,
 				BFA9B24EA42B5531A4E033E71F4F8EDD /* String+.swift in Sources */,
+				13DABA8D64DA1F3908824430DEBCB5ED /* Toast.swift in Sources */,
 				AF5A997903507F5F9B1FF620F977876E /* Typealias.swift in Sources */,
 				902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */,
 				A0221EFCD87D0BA93CDD31C167E4DF2E /* UIColor+.swift in Sources */,
@@ -897,7 +899,7 @@
 				78460935F8D933BB0B289AF0A2352619 /* UIView+NSLayoutAnchor.swift in Sources */,
 				5FDA8F214C6E9BDDA2C64DBB2ED640BD /* UIViewController+.swift in Sources */,
 				E58FADEFDCD685742F03D94196FDB227 /* ValueGraphView.swift in Sources */,
-				1CB26EE568A3DDD41D49D6A341F76DC1 /* ValueGraphViewDelegate.swift in Sources */,
+				42B7E20210A334E844791CA1246D9530 /* ValueGraphViewDataSource.swift in Sources */,
 				0D7D9170D64C59CBFDF5B3B699E135B9 /* XMLError.swift in Sources */,
 				A1C71E8BD3599B3BBE95696C2FEBA10D /* XMLIndexer+XMLIndexerDeserializable.swift in Sources */,
 				98FA95AD469CE9B02B82BCE3C4F16F3E /* XMLManager.swift in Sources */,
