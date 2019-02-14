@@ -51,29 +51,6 @@ extension DustInfoManagerType {
                   let response = parsingType as? DustResponse
                   completion(response, error)
                 }
-                
-    
-   
-                
-                
-                
-                
-//
-//                // HTTP 상태 코드가 200인지 확인. 그렇지 않으면 이에 대응하는 에러를 만들어 넘겨줌.
-//                guard status == .success else {
-//                  completion(nil, status?.error)
-//                  return
-//                }
-//                // 데이터가 있는지 확인. 그렇지 않으면 넘어온 에러를 넘겨줌.
-//                guard let data = data else {
-//                  completion(nil, error)
-//                  return
-//                }
-//                // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
-//                XMLManager<DustResponse>().parse(data) { parsingType, error in
-//                  let response = parsingType as? DustResponse
-//                  completion(response, error)
-//                }
     }
   }
 }

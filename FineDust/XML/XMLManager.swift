@@ -20,22 +20,21 @@ final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
   func parse(_ data: Data,
              completion: @escaping (XMLParsingType?, Error?) -> Void) {
     let parsed = xmlConfig.parse(data)
-    // 미세먼지 상태 코드 먼저 확인해서
-    // 00이 아니면 그에 맞는 에러를 던져줌
-    // 00이면 정상 로직 수행
-    let header: ResponseHeader? = try? parsed.value()
-    guard header?.statusCode ?? .success == .success else {
-      completion(nil, (header?.statusCode ?? .success).error)
-      return
-    }
     do {
+      // 미세먼지 상태 코드 먼저 확인해서
+      // 00이 아니면 그에 맞는 에러를 던져줌
+      // 00이면 정상 로직 수행
+      let headerResponse: ResponseHeader = try parsed.value()
+      guard headerResponse.statusCode == .success else {
+        completion(nil, headerResponse.statusCode.error)
+        return
+      }
+      // 넘어온 타입으로 XML 파싱
       let response: T = try parsed.value()
-      // 상태 코드가 00이 아니면 그에 대응하는 에러를 넘겨줌
       guard response.statusCode == .success else {
         completion(nil, response.statusCode.error)
         return
       }
-      // 상태 코드가 00이면 파싱된 결과를 넘겨줌
       completion(response, nil)
     } catch let error as XMLDeserializationError {
       // 라이브러리에 정의된 에러에 대응하는 XMLError 넘겨줌
