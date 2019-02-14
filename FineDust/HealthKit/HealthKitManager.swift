@@ -38,7 +38,10 @@ final class HealthKitManager: HealthKitManagerType {
     // 권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정.
     if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
       || healthStore.authorizationStatus(for: distance) == .sharingDenied {
-      isAuthorized = false
+      NotificationCenter.default.post(
+        name: .healthKitAuthorizationSharingDenied,
+        object: nil)
+      print("denied")
       return
     }
     
@@ -46,13 +49,18 @@ final class HealthKitManager: HealthKitManagerType {
     let healthKitTypes: Set = [stepCount, distance]
     
     // 권한요청.
-    healthStore.requestAuthorization(toShare: healthKitTypes,
-                                     read: healthKitTypes
-    ) { _, error in
+    healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, error in
       if let error = error {
         print("request authorization error : \(error.localizedDescription)")
       } else {
         print("complete request authorization")
+        
+        if self.healthStore.authorizationStatus(for: stepCount) == .sharingAuthorized,
+          self.healthStore.authorizationStatus(for: distance) == .sharingAuthorized {
+          NotificationCenter.default.post(
+            name: .healthKitAuthorizationSharingAuthorized,
+            object: nil)
+        }
       }
     }
   }

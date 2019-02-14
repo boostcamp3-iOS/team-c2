@@ -27,10 +27,42 @@ extension HealthKitAuthorizationObserver where Self: UIViewController {
   }
   
   func authorizationSharingDenied(_ notification: Notification) {
-    print("sharing denied")
+    print("denied")
   }
   
-  func authorizationSharingAuthorized(_ notification: Notification) {
-    print("sharing authorized")
+  func registerHealthKitAuthorizationObserver() {
+    NotificationCenter.default.addObserver(
+      forName: .healthKitAuthorizationNotDetermined,
+      object: nil,
+      queue: nil) { [weak self] notification in
+        self?.authorizationNotDetermined(notification)
+    }
+    NotificationCenter.default.addObserver(
+      forName: .healthKitAuthorizationSharingDenied,
+      object: nil,
+      queue: nil) { [weak self] notification in
+        self?.authorizationSharingDenied(notification)
+    }
+    NotificationCenter.default.addObserver(
+      forName: .healthKitAuthorizationSharingAuthorized,
+      object: nil,
+      queue: nil) { [weak self] notification in
+        self?.authorizationSharingAuthorized(notification)
+    }
+  }
+  
+  func unregisterHealthKitAuthorizationObserver() {
+    NotificationCenter.default.removeObserver(
+      self,
+      name: .healthKitAuthorizationNotDetermined,
+      object: nil)
+    NotificationCenter.default.removeObserver(
+      self,
+      name: .healthKitAuthorizationSharingDenied,
+      object: nil)
+    NotificationCenter.default.removeObserver(
+      self,
+      name: .healthKitAuthorizationSharingAuthorized,
+      object: nil)
   }
 }
