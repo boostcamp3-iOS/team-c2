@@ -9,7 +9,7 @@
         <attribute name="lastAccessedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-27" width="128" height="58"/>
         <element name="Intake" positionX="237.65625" positionY="11.390625" width="128" height="88"/>
+        <element name="User" positionX="-63" positionY="-27" width="128" height="60"/>
     </elements>
 </model>

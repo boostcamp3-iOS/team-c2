@@ -83,10 +83,14 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var fineDustTotalIntakes: [CGFloat]
+    = (UserDefaults.standard.array(forKey: "fineDustIntakes") as? [Int])?.map { CGFloat($0) }
+      ?? [100, 100, 100, 100, 100, 100, 100]
   
   /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var ultrafineDustTotalIntakes: [CGFloat]
+    = (UserDefaults.standard.array(forKey: "ultrafineDustIntakes") as? [Int])?.map { CGFloat($0) }
+      ?? [100, 100, 100, 100, 100, 100, 100]
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -162,6 +166,10 @@ final class StatisticsViewController: UIViewController {
         let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
+        UserDefaults.standard
+          .set([fineDusts, [fineDust]].flatMap { $0 }, forKey: "fineDustIntakes")
+        UserDefaults.standard
+          .set([ultrafineDusts, [ultrafineDust]].flatMap { $0 }, forKey: "ultrafineDustIntakes")
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
