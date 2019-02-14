@@ -57,10 +57,22 @@ class TestDustInfoService: XCTestCase {
   
   func test_requestDayInfo() {
     let expect = expectation(description: "test")
-    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24
+    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24Full
     dustService.requestDayInfo { fineDustDictionary, ultrafineDustDictionary, error in
       XCTAssertEqual(fineDustDictionary, [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1])
       XCTAssertEqual(ultrafineDustDictionary, [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 1, .fifteen: 1, .sixteen: 1, .seventeen: 1, .eighteen: 1, .nineteen: 1, .twenty: 1, .twentyOne: 1, .twentyTwo: 1, .twentyThree: 1])
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestDayInfo_padding() {
+    let expect = expectation(description: "test")
+    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24Half
+    dustService.requestDayInfo { fineDustDictionary, ultrafineDustDictionary, error in
+      XCTAssertEqual(fineDustDictionary, [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 0, .fifteen: 0, .sixteen: 0, .seventeen: 0, .eighteen: 0, .nineteen: 0, .twenty: 0, .twentyOne: 0, .twentyTwo: 0, .twentyThree: 0])
+      XCTAssertEqual(ultrafineDustDictionary, [.zero: 1, .one: 1, .two: 1, .three: 1, .four: 1, .five: 1, .six: 1, .seven: 1, .eight: 1, .nine: 1, .ten: 1, .eleven: 1, .twelve: 1, .thirteen: 1, .fourteen: 0, .fifteen: 0, .sixteen: 0, .seventeen: 0, .eighteen: 0, .nineteen: 0, .twenty: 0, .twentyOne: 0, .twentyTwo: 0, .twentyThree: 0])
       XCTAssertNil(error)
       expect.fulfill()
     }
@@ -82,7 +94,7 @@ class TestDustInfoService: XCTestCase {
   
   func test_requestDayInfo2() {
     let expect = expectation(description: "test")
-    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24
+    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse24Full
     mockDustInfoManager.error = nil
     let startDate = DateFormatter.dateAndTimeForDust.date(from: "2018-01-23 01:00") ?? Date()
     dustService.requestDayInfo(from: startDate, to: startDate.after(days: 1)) { fineDustHourlyIntakePerDate, ultrafineDustHourlyIntakePerDate, error in

@@ -45,7 +45,7 @@ extension DustObservatoryManagerType {
                   return
                 }
                 // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
-                XMLManager<ResponseHeader>().parse(data) { parsingType, error in
+                XMLManager<ResponseHeader>().parse(data) { _, error in
                   if let error = error {
                     completion(nil, error)
                     return

@@ -51,7 +51,7 @@ class TestIntakeService: XCTestCase {
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(ultrafineDusts)
       XCTAssertNil(error)
       expect.fulfill()
     }
@@ -69,16 +69,15 @@ class TestIntakeService: XCTestCase {
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNotNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(ultrafineDusts)
       XCTAssertNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_requestTodayIntake_error() {
+  func test_requestTodayIntake_error_dust() {
     mockDustInfoService.error = DustError.accessDenied
-    mockHealthKitService.error = NSError(domain: "healthKitError", code: 0, userInfo: nil)
     let expect = expectation(description: "test")
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
       XCTAssertNil(fineDust)
@@ -89,10 +88,23 @@ class TestIntakeService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_requestIntakesInWeek_error() {
-    mockDustInfoService.error = DustError.accessDenied
-    mockHealthKitService.error = NSError(domain: "healthKitError", code: 0, userInfo: nil)
+  func test_requestIntakesInWeek_error_coreData() {
+    mockDustInfoService.error = nil
     mockCoreDataService.error = NSError(domain: "coreDataError", code: 0, userInfo: nil)
+    let expect = expectation(description: "test")
+    intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
+      XCTAssertNil(fineDusts)
+      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestIntakesInWeek_error_dust() {
+    mockDustInfoService.error = DustError.accessDenied
+    mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
+    mockCoreDataService.error = nil
     let expect = expectation(description: "test")
     intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
       XCTAssertNil(fineDusts)
