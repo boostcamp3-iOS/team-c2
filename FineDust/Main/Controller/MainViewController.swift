@@ -12,8 +12,8 @@ final class MainViewController: UIViewController {
   
   // MARK: - IBOutlets
   
-  @IBOutlet weak var intakeFineDustLable: UILabel!
-  @IBOutlet weak var intakeUltrafineDustLabel: UILabel!
+  @IBOutlet private weak var intakeFineDustLable: UILabel!
+  @IBOutlet private weak var intakeUltrafineDustLabel: UILabel!
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
   @IBOutlet private weak var timeLabel: UILabel!
