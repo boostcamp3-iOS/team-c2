@@ -45,10 +45,11 @@ final class DustInfoManager: DustInfoManagerType {
                 guard let data = data else { return }
                 // 해당 타입으로 XML 파싱 시도
                 // 파싱 로직 내부에서 미세먼지 에러를 찾아 내려줌
-                XMLManager<DustResponse>().parse(data) { parsingType, error in
-                  let response = parsingType as? DustResponse
-                  completion(response, error)
-                }
+                XMLManager().decode(data, completion: completion)
+//                XMLManager<DustResponse>().parse(data) { parsingType, error in
+//                  let response = parsingType as? DustResponse
+//                  completion(response, error)
+//                }
     }
   }
 }

@@ -44,10 +44,11 @@ final class DustObservatoryManager: DustObservatoryManagerType {
                   return
                 }
                 // XML 파싱하여 타입에 맞는 데이터로 캐스팅하여 넘겨줌.
-                XMLManager<ObservatoryResponse>().parse(data) { parsingType, error in
-                  let response = parsingType as? ObservatoryResponse
-                  completion(response, error)
-                }
+                XMLManager().decode(data, completion: completion)
+//                XMLManager<ObservatoryResponse>().parse(data) { parsingType, error in
+//                  let response = parsingType as? ObservatoryResponse
+//                  completion(response, error)
+//                }
     }
   }
 }

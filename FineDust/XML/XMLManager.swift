@@ -9,28 +9,23 @@
 import Foundation
 
 /// XML 매니저.
-final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
+final class XMLManager: XMLManagerType {
   
-  let xmlConfig: SWXMLHash
-
-  init(xmlConfig: SWXMLHash = SWXMLHash.config { $0.detectParsingErrors = true }) {
-    self.xmlConfig = xmlConfig
+  let xmlDecoder: XMLDecoderType
+  
+  init(xmlDecoder: XMLDecoderType = XMLDecoder.shared) {
+    self.xmlDecoder = xmlDecoder
   }
   
-  func parse(_ data: Data,
-             completion: @escaping (XMLParsingType?, Error?) -> Void) {
-    let parsed = xmlConfig.parse(data)
+  func decode<T>(_ data: Data,
+                 completion: @escaping (T?, Error?) -> Void) where T: XMLParsingType {
     do {
-      // 미세먼지 상태 코드 먼저 확인해서
-      // 00이 아니면 그에 맞는 에러를 던져줌
-      // 00이면 정상 로직 수행
-      let headerResponse: ResponseHeader = try parsed.value()
+      let headerResponse: ResponseHeader = try xmlDecoder.parse(data)
       guard headerResponse.statusCode == .success else {
         completion(nil, headerResponse.statusCode.error)
         return
       }
-      // 넘어온 타입으로 XML 파싱
-      let response: T = try parsed.value()
+      let response: T = try xmlDecoder.parse(data)
       guard response.statusCode == .success else {
         completion(nil, response.statusCode.error)
         return
@@ -56,5 +51,38 @@ final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
       // 기타 XMLError 넘겨줌
       completion(nil, XMLError.default)
     }
+//    let parsed = xmlDecoder.parse(data)
+//    do {
+//      let headerResponse: ResponseHeader = try parsed.value()
+//      guard headerResponse.statusCode == .success else {
+//        completion(nil, headerResponse.statusCode.error)
+//        return
+//      }
+//      let response: T = try parsed.value()
+//      guard response.statusCode == .success else {
+//        completion(nil, response.statusCode.error)
+//        return
+//      }
+//      completion(response, nil)
+//    } catch let error as XMLDeserializationError {
+//      // 라이브러리에 정의된 에러에 대응하는 XMLError 넘겨줌
+//      switch error {
+//      case let .implementationIsMissing(method):
+//        completion(nil, XMLError.implementationIsMissing(method))
+//      case let .nodeIsInvalid(node):
+//        completion(nil, XMLError.nodeIsInvalid(node))
+//      case .nodeHasNoValue:
+//        completion(nil, XMLError.nodeHasNoValue)
+//      case let .typeConversionFailed(type, node):
+//        completion(nil, XMLError.typeConversionFailed(type, node))
+//      case let .attributeDoesNotExist(node, attribute):
+//        completion(nil, XMLError.attributeDoesNotExist(node, attribute))
+//      case let .attributeDeserializationFailed(type, attribute):
+//        completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
+//      }
+//    } catch {
+//      // 기타 XMLError 넘겨줌
+//      completion(nil, XMLError.default)
+//    }
   }
 }
