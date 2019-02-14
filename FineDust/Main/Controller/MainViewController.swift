@@ -132,8 +132,10 @@ extension MainViewController {
           self.intakeFineDustLable.text = "0µg"
           self.intakeUltrafineDustLabel.text = "0µg"
         }
-        print(error.localizedDescription)
-        Toast.shared.show(error.localizedDescription)
+        if let error = error as? ServiceErrorType {
+          print(error.localizedDescription)
+          Toast.shared.show(error.localizedDescription)
+        }
         return
       }
       
