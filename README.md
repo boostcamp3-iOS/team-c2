@@ -46,9 +46,6 @@
 - **국가대기오염정보 Open API** 사용하여 미세먼지 및 초미세먼지 정보 가져오기
 - **Core Location** 사용하여 현재 위치의 위도 및 경도, 주소 가져오기
 - **Core Data** 사용하여 미세먼지 축적량을 앱 내부에 보존하기
-
----
-
 - **[SwiftLint](https://github.com/realm/SwiftLint)** 적용
 
 ```yaml
@@ -92,3 +89,11 @@ ib:
 ```
 
 - `project.pbxproj` 파일의 충돌을 최소화하고 해결을 쉽게 하기 위해 **[xUnique](https://github.com/truebit/xUnique)** 사용
+
+### Unit Test / Dependency Injection
+
+[Wiki](https://github.com/boostcamp3-iOS/team-c2/wiki/Unit-Test)를 참고해 주세요.
+
+### Profile
+
+[Wiki](https://github.com/boostcamp3-iOS/team-c2/wiki/Profile)를 참고해 주세요.
