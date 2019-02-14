@@ -40,16 +40,6 @@ final class MainViewController: UIViewController {
     setUp()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    updateHealthKitInfo()
-    updateAPIInfo()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
   deinit {
     unregisterLocationObserver()
     unregisterHealthKitAuthorizationObserver()
@@ -123,7 +113,7 @@ extension MainViewController {
     // 위치에 관련된 Label들을 업데이트함.
     dustInfoService.requestRecentTimeInfo { info, error in
       if let error = error as? ServiceErrorType {
-        error.alert.present(to: self)
+        error.presentToast()
         return
       }
       if let info = info {
@@ -142,7 +132,10 @@ extension MainViewController {
           self.intakeFineDustLable.text = "0µg"
           self.intakeUltrafineDustLabel.text = "0µg"
         }
-        print(error.localizedDescription)
+        if let error = error as? ServiceErrorType {
+          print(error.localizedDescription)
+          Toast.shared.show(error.localizedDescription)
+        }
         return
       }
       

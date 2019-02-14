@@ -69,7 +69,12 @@ final class HealthKitService: HealthKitServiceType {
                                          quantityTypeIdentifier: .distanceWalkingRunning
     ) { value, hour, error in
       if let error = error {
-        print(error.localizedDescription)
+        print("Healthkit Query Error: ", error.localizedDescription)
+        Toast.shared.show(error.localizedDescription)
+        for hour in 0...23 {
+          hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
+        }
+        completion(hourIntakePair)
         return
       }
       
@@ -118,8 +123,18 @@ final class HealthKitService: HealthKitServiceType {
                                            quantityTypeIdentifier: .distanceWalkingRunning
       ) { value, hour, error in
         if let error = error {
-          print(error.localizedDescription)
-          return
+          print("HealthKit Query error: ", error.localizedDescription)
+          Toast.shared.show(error.localizedDescription)
+          for hour in 0...23 {
+            hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
+            temp += 1
+            print("temp", temp)
+          }
+          dateHourIntakePair[indexDate.start] = hourIntakePair
+          
+          if temp == (day + 1) * 24 {
+            semaphore.signal()
+          }
         }
         
         if let hour = hour {

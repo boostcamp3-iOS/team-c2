@@ -20,6 +20,14 @@ final class XMLManager<T>: XMLManagerType where T: XMLParsingType {
   func parse(_ data: Data,
              completion: @escaping (XMLParsingType?, Error?) -> Void) {
     let parsed = xmlConfig.parse(data)
+    // 미세먼지 상태 코드 먼저 확인해서
+    // 00이 아니면 그에 맞는 에러를 던져줌
+    // 00이면 정상 로직 수행
+    let header: ResponseHeader? = try? parsed.value()
+    guard header?.statusCode ?? .success == .success else {
+      completion(nil, (header?.statusCode ?? .success).error)
+      return
+    }
     do {
       let response: T = try parsed.value()
       // 상태 코드가 00이 아니면 그에 대응하는 에러를 넘겨줌
