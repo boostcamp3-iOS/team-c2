@@ -21,6 +21,7 @@ final class FeedbackListViewController: UIViewController {
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var feedbackCount = 0
   private var newDustFeedback: [DustFeedback]?
+  private var bookmarkDictionary: [String: Bool] = [:]
   
   // MARK: - LifeCycle
   
@@ -28,9 +29,13 @@ final class FeedbackListViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
-    feedbackCount = feedbackListService.fetchFeedbackCount()
-    feedbackListTableView.reloadData()
+    do {
+      feedbackCount = try feedbackListService.fetchFeedbackCount()
+    } catch {
+      print(error.localizedDescription)
+    }
     
+    feedbackListTableView.reloadData()
   }
   
   // MARK: - Function
@@ -80,7 +85,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     if section == 0 {
       return 1
     } else {
-      return feedbackListService.fetchFeedbackCount()
+      return feedbackCount
     }
   }
   
@@ -99,9 +104,9 @@ extension FeedbackListViewController: UITableViewDataSource {
       }
       
     } else {
-      
       cell.setTabelViewCellProperties(dustFeedback: feedback)
     }
+        cell.setBookmarkButtonImage(bookmarkDictionary: bookmarkDictionary)
     
     return cell
   }
@@ -200,7 +205,20 @@ extension FeedbackListViewController: UICollectionViewDelegate {
 extension FeedbackListViewController: FeedbackListCellDelegate {
   func feedbackListCell(_ feedbackListCell: FeedbackListTableViewCell,
                         didTapBookmarkButton button: UIButton) {
+    
     button.isSelected = !button.isSelected
-    feedbackListService.setBookmarkInfoTitleArray(title: feedbackListCell.title)
+    
+    if button.isSelected == false {
+      bookmarkDictionary[feedbackListCell.title] = nil
+      print(bookmarkDictionary)
+      UserDefaults.standard.removeObject(forKey: "bookmarkInfoTitle")
+      feedbackListService.deleteFeedbackTitle(title: feedbackListCell.title)
+      
+    } else {
+      bookmarkDictionary[feedbackListCell.title] = true
+      print(bookmarkDictionary)
+      feedbackListService.setBookmarkInfoTitleArray(title: feedbackListCell.title)
+    }
+    
   }
 }

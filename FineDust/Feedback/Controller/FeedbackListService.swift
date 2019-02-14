@@ -9,7 +9,7 @@
 import Foundation
 
 /// FeedbackListService를 구현하는 클래스
-final class FeedbackListService: FeedbackServiceType {
+final class FeedbackListService: FeedbackListServiceType {
   
   // MARK: - Properties
   
@@ -17,7 +17,7 @@ final class FeedbackListService: FeedbackServiceType {
   private var dustFeedbacks: [DustFeedback] = []
   private var sortedArray: [DustFeedback] = []
   private var bookmarkInfoTitleArray: [String] = []
-  
+  private var bookmarkIndex: [Int] = []
   init(jsonManager: JSONManagerType) {
     self.jsonManager = jsonManager
     dustFeedbacks =  jsonManager.fetchDustFeedbacks()
@@ -26,24 +26,26 @@ final class FeedbackListService: FeedbackServiceType {
   // MARK: - Functions
   
   /// 피드백 정보의 개수를 반환함.
-  func fetchFeedbackCount() -> Int {
-    
+  func fetchFeedbackCount() throws -> Int {
     let count = dustFeedbacks.count
+    if count == 0 {
+      throw NSError(domain: "nanana", code: 0, userInfo: nil)
+    }
     return count
   }
   
-  /// 해당 인덱스의 피드백 정보를 반환함
+  /// 해당 인덱스의 피드백 정보를 반환함.
   func fetchFeedbackData(at index: Int) -> DustFeedback {
     return dustFeedbacks[index]
   }
   
-  /// 피드백 정보를 최신순으로 반환함
+  /// 피드백 정보를 최신순으로 반환함.
   func fetchFeedbackRecentDate() -> [DustFeedback] {
     sortedArray = dustFeedbacks.sorted(by: { $0.date > $1.date })
     return sortedArray
   }
   
-  /// 피드백 정보를 제목순으로 반환함
+  /// 피드백 정보를 제목순으로 반환함.
   func fetchFeedbackTitle() -> [DustFeedback] {
     sortedArray = dustFeedbacks.sorted(by: { $0.title < $1.title })
     return sortedArray
@@ -57,17 +59,17 @@ final class FeedbackListService: FeedbackServiceType {
     }
   }
   
-  /// 즐겨찾기한 글의 제목으로 인덱스를 반환함
+  /// 즐겨찾기한 글의 제목으로 인덱스를 반환함.
   func getBookmarkInfoIndex() -> [Int] {
-    var bookmarkIndex: [Int] = []
+    bookmarkIndex = []
     print(bookmarkIndex)
     for index in 0..<bookmarkInfoTitleArray.count {
-      print("f\(bookmarkInfoTitleArray.count)")
-      for index2 in 0..<dustFeedbacks.count {
+      print("f\(bookmarkInfoTitleArray)")
+      for totalIndex in 0..<dustFeedbacks.count {
         print("df\(dustFeedbacks.count)")
-        if dustFeedbacks[index2].title == bookmarkInfoTitleArray[index] {
-          print(dustFeedbacks.index(after: index2-1))
-          bookmarkIndex.append(dustFeedbacks.index(after: index2-1))
+        if bookmarkInfoTitleArray[index] == dustFeedbacks[totalIndex].title {
+          print(dustFeedbacks.index(after: totalIndex-1))
+          bookmarkIndex.append(dustFeedbacks.index(after: totalIndex-1))
           break
         }
       }
@@ -75,24 +77,35 @@ final class FeedbackListService: FeedbackServiceType {
     return bookmarkIndex
   }
   
-  /// 피드백 정보를 즐겨찾기순으로 반환함
+  /// 피드백 정보를 즐겨찾기순으로 반환함.
   func fetchFeedbackBookmark() -> [DustFeedback] {
+    sortedArray = []
     var feedbackIndex = Array<Int>(0..<dustFeedbacks.count)
-    let bookmarkIndexArray = getBookmarkInfoIndex()
+    var bookmarkIndexArray = getBookmarkInfoIndex()
+    for index in 0..<bookmarkIndexArray.count {
+      sortedArray.append(dustFeedbacks[bookmarkIndexArray[index]])
+    }
     
-    for index2 in (0..<bookmarkIndexArray.count).reversed() {
-      sortedArray.append(dustFeedbacks[bookmarkIndexArray[index2]])
-      for index in 0..<dustFeedbacks.count {
-        if bookmarkIndexArray[index2] == feedbackIndex[index] {
-          feedbackIndex.remove(at: index)
+    for index in (0..<bookmarkIndexArray.count).reversed() {
+      for totalIndex in 0..<dustFeedbacks.count {
+        if bookmarkIndexArray[index] == feedbackIndex[totalIndex] {
+          feedbackIndex.remove(at: totalIndex)
           break
         }
       }
     }
-    for index2 in 0..<feedbackIndex.count {
-      sortedArray.append(dustFeedbacks[feedbackIndex[index2]])
+    for restIndex in 0..<feedbackIndex.count {
+      sortedArray.append(dustFeedbacks[feedbackIndex[restIndex]])
     }
     return sortedArray
   }
   
+  /// 저장했던 즐겨찾기 정보 제목을 삭제함.
+  func deleteFeedbackTitle(title: String) {
+    for index in 0..<bookmarkInfoTitleArray.count {
+      if title == bookmarkInfoTitleArray[index] {
+        bookmarkInfoTitleArray.remove(at: index)
+      }
+    }
+  }
 }

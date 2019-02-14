@@ -47,6 +47,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
     feedbackImageView.image = nil
     feedbackTitleLabel.text = nil
     feedbackSourceLabel.text = nil
+    bookmarkButton.isSelected = false
   }
   
   @objc private func bookmarkButtonDidTap(_ sender: UIButton) {
@@ -60,7 +61,12 @@ final class FeedbackListTableViewCell: UITableViewCell {
     feedbackTitleLabel.text = dustFeedback.title
     feedbackSourceLabel.text = dustFeedback.source
     feedbackDateLabel.text = dustFeedback.date
-    
+  }
+  
+  /// 북마크 버튼 이미지 설정
+  func setBookmarkButtonImage(bookmarkDictionary: [String: Bool]) {
+    bookmarkButton.imageView?.image = bookmarkDictionary[title] ?? false ?
+      UIImage(named: Asset.yellowStar.name) : UIImage(named: Asset.starOutline.name)
   }
   
   /// 테이블뷰셀 이미지 UI 설정
