@@ -32,6 +32,7 @@
 		101A02C9E2507574C9C3C458F04F73B0 /* DummyDustInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */; };
 		42C4D6D4F16243CDBAC5299CA6B6F409 /* DummyDustObservatoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */; };
 		FCEA06ED189D9011AF454EBFFF6B0303 /* DummyHealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C26B3B0593407113C2ED88D1A6DDA6 /* DummyHealthKitService.swift */; };
+		81D20E9CADF01244ADFC634BACFD4A02 /* DummyJSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18EF4EFB5BFEBF0FF294BACC38A595 /* DummyJSONManager.swift */; };
 		31BB13768CFE9F024ABAC13EDC375039 /* DummyNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9B66402A9E9E9FCAA8D8E34A15E32 /* DummyNetworkManager.swift */; };
 		F2B9A6C9CEBF51011FE2C037DFACC5D8 /* DustError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DFB176E6D3CE407FBD2EA7289881AF /* DustError.swift */; };
 		D0765E052D0AF866A0C2843180CF4547 /* DustFeedback.json in Resources */ = {isa = PBXBuildFile; fileRef = 35A803F31E8FA311980BA194EBD8B678 /* DustFeedback.json */; };
@@ -51,6 +52,7 @@
 		A7D775E7BD2742C9F215C05EC30481BE /* FeedbackListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */; };
 		C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */; };
 		20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */; };
+		2C7C0969F7006BB15F448796C3BAA4CB /* FeedbackServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */; };
 		F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */; };
@@ -172,6 +174,7 @@
 		AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDustInfoService.swift; sourceTree = "<group>"; };
 		10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDustObservatoryManager.swift; sourceTree = "<group>"; };
 		E0C26B3B0593407113C2ED88D1A6DDA6 /* DummyHealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHealthKitService.swift; sourceTree = "<group>"; };
+		3E18EF4EFB5BFEBF0FF294BACC38A595 /* DummyJSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyJSONManager.swift; sourceTree = "<group>"; };
 		A5B9B66402A9E9E9FCAA8D8E34A15E32 /* DummyNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetworkManager.swift; sourceTree = "<group>"; };
 		91DFB176E6D3CE407FBD2EA7289881AF /* DustError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustError.swift; path = FineDust/Dust/DustError.swift; sourceTree = SOURCE_ROOT; };
 		35A803F31E8FA311980BA194EBD8B678 /* DustFeedback.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DustFeedback.json; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListService.swift; sourceTree = "<group>"; };
 		B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
+		893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackServiceType.swift; sourceTree = "<group>"; };
 		6CB7A59C01A6BEA73951091DC6C6C60F /* FineDust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineDust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC90C952E7EA68296C391AC855C57729 /* FineDust.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FineDust.entitlements; sourceTree = "<group>"; };
 		D247F6F3851E8A9D8F03470A313986A4 /* FineDust.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FineDust.xcdatamodel; sourceTree = "<group>"; };
@@ -226,8 +230,6 @@
 		2ED69B22F05A54CB9BA9B74800B0315B /* MockDustInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDustInfoService.swift; sourceTree = "<group>"; };
 		B642BB98DC614672674ADA7E7FEAA0DD /* MockDustObservatoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDustObservatoryManager.swift; sourceTree = "<group>"; };
 		EE6287CE8EC60C4A3AD1C4B219CEF3F5 /* MockHealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitManager.swift; sourceTree = "<group>"; };
-		C50389C80E73BBD8FFA4331D7EC43144 /* MockJSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSONManager.swift; sourceTree = "<group>"; };
-		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		00D9C06AFD48343B0C3E7B05C42671BC /* MockHealthKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHealthKitService.swift; sourceTree = "<group>"; };
 		C50389C80E73BBD8FFA4331D7EC43144 /* MockJSONManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONManager.swift; sourceTree = "<group>"; };
 		D976382D79F423DA692A7725F5CF5432 /* MockNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
@@ -258,7 +260,7 @@
 		426C701A827BC6DA8F3D6120768DD485 /* TestDustInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDustInfoManager.swift; sourceTree = "<group>"; };
 		A1F56B7CE2ABD245DD340EE0A2C9DEFC /* TestDustInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDustInfoService.swift; sourceTree = "<group>"; };
 		0FEC29A250034221A5E0A804B42D47DE /* TestDustObservatoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDustObservatoryManager.swift; sourceTree = "<group>"; };
-		2F983596EF0FD18034F3E35108C70ECC /* TestFeedbackListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFeedbackListService.swift; sourceTree = "<group>"; };
+		2F983596EF0FD18034F3E35108C70ECC /* TestFeedbackListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFeedbackListService.swift; sourceTree = "<group>"; };
 		985BB182EE3791206435A2EB85840E17 /* TestHealthKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHealthKitService.swift; sourceTree = "<group>"; };
 		8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIntakeService.swift; sourceTree = "<group>"; };
 		BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				AE0671DD8371627430E075564C0E7979 /* DummyDustInfoService.swift */,
 				10A450A97E79B482C6E46E50515F9888 /* DummyDustObservatoryManager.swift */,
 				E0C26B3B0593407113C2ED88D1A6DDA6 /* DummyHealthKitService.swift */,
+				3E18EF4EFB5BFEBF0FF294BACC38A595 /* DummyJSONManager.swift */,
 				A5B9B66402A9E9E9FCAA8D8E34A15E32 /* DummyNetworkManager.swift */,
 			);
 			path = Dummy;
@@ -492,6 +495,7 @@
 			children = (
 				15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */,
 				E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */,
+				893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -840,6 +844,7 @@
 				A7D775E7BD2742C9F215C05EC30481BE /* FeedbackListService.swift in Sources */,
 				C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */,
 				20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */,
+				2C7C0969F7006BB15F448796C3BAA4CB /* FeedbackServiceType.swift in Sources */,
 				F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */,
 				204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */,
 				A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */,
@@ -908,6 +913,7 @@
 				101A02C9E2507574C9C3C458F04F73B0 /* DummyDustInfoService.swift in Sources */,
 				42C4D6D4F16243CDBAC5299CA6B6F409 /* DummyDustObservatoryManager.swift in Sources */,
 				FCEA06ED189D9011AF454EBFFF6B0303 /* DummyHealthKitService.swift in Sources */,
+				81D20E9CADF01244ADFC634BACFD4A02 /* DummyJSONManager.swift in Sources */,
 				31BB13768CFE9F024ABAC13EDC375039 /* DummyNetworkManager.swift in Sources */,
 				F3FEC903328E87702903080011099030 /* MockCoreDataIntakeManager.swift in Sources */,
 				3A3311B6956D8744945D53D24522A353 /* MockCoreDataService.swift in Sources */,
