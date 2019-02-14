@@ -24,8 +24,10 @@ final class Toast {
       label.text = message
       label.sizeToFit()
       label.bounds.size = CGSize(width: label.bounds.width + 40, height: label.bounds.height + 20)
-      label.center = CGPoint(x: UIScreen.main.bounds.width / 2,
-                             y: UIScreen.main.bounds.height - 180)
+      label.center = CGPoint(
+        x: UIScreen.main.bounds.width / 2,
+        y: UIScreen.main.bounds.height - 49 - 32
+      )
       label.layer.cornerRadius = label.bounds.height / 2
       label.layer.masksToBounds = true
       label.layer.applySketchShadow(color: .black, alpha: 0.2, x: 0, y: 4, blur: 16, spread: 0)
