@@ -143,19 +143,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5F4B7A658AA47105B08357808E9047A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54C4C346C97282321391D3CDFE95CBC6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 99328B86A6ACDFB72238B7D3F791AA68;
-			remoteInfo = FineDustWidget;
-		};
 		1A6B3E344D43ED51722536A51D8E0970 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 54C4C346C97282321391D3CDFE95CBC6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C359351F31356424279C6FAA7866E534;
 			remoteInfo = FineDust;
+		};
+		5F4B7A658AA47105B08357808E9047A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54C4C346C97282321391D3CDFE95CBC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99328B86A6ACDFB72238B7D3F791AA68;
+			remoteInfo = FineDustWidget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -241,8 +241,8 @@
 		2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceType.swift; sourceTree = "<group>"; };
 		768ED33DE8C563664122534CC0337E8E /* Hour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
-		81F933DBA59974851C46D4F040C139D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81F933DBA59974851C46D4F040C139D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF69953AFBEC417F615AA54D037E154C /* IntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeService.swift; sourceTree = "<group>"; };
 		2C28E309F3241211358B41BF2B80DD50 /* IntakeServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeServiceType.swift; sourceTree = "<group>"; };
@@ -317,20 +317,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6D2B679EF123BDF10961394D11352F24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCC8284D97687139713F8F72B435D201 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				11673568F31D509D3388BE56842F8EBC /* HealthKit.framework in Frameworks */,
 				0CF051236FE12858B9DC25F02BDDAF4C /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D2B679EF123BDF10961394D11352F24 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,17 +418,6 @@
 			path = Dummy;
 			sourceTree = "<group>";
 		};
-		23E5FBBF335B27EE42BCD11806B78F83 /* FineDustWidget */ = {
-			isa = PBXGroup;
-			children = (
-				498774B758117C703D63D9CDDDB71664 /* FineDustWidget.entitlements */,
-				81F933DBA59974851C46D4F040C139D2 /* Info.plist */,
-				69CF8325AA98F8607E384A6E4F82D4C3 /* MainInterface.storyboard */,
-				285B151712E13FB2EAC8EB5AF40A3B2F /* TodayViewController.swift */,
-			);
-			path = FineDustWidget;
-			sourceTree = "<group>";
-		};
 		1A732CBC6A82F5401C8E972D3296C7C0 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +437,17 @@
 				06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */,
 			);
 			path = "Ratio Graph";
+			sourceTree = "<group>";
+		};
+		23E5FBBF335B27EE42BCD11806B78F83 /* FineDustWidget */ = {
+			isa = PBXGroup;
+			children = (
+				498774B758117C703D63D9CDDDB71664 /* FineDustWidget.entitlements */,
+				81F933DBA59974851C46D4F040C139D2 /* Info.plist */,
+				69CF8325AA98F8607E384A6E4F82D4C3 /* MainInterface.storyboard */,
+				285B151712E13FB2EAC8EB5AF40A3B2F /* TodayViewController.swift */,
+			);
+			path = FineDustWidget;
 			sourceTree = "<group>";
 		};
 		249684EBDBAFA57925A702F7F2706E9E /* Products */ = {
@@ -1148,6 +1148,27 @@
 			};
 			name = Debug;
 		};
+		31A568A58C1334B2A5028262683C9B8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H79MF628K3;
+				INFOPLIST_FILE = FineDustTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.boostcamp3rd.FineDustTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FineDust.app/FineDust";
+			};
+			name = Debug;
+		};
 		55C4D8D0EE3926FF247316486A1437F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1167,49 +1188,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		B514524A939C0A2B15C39C722EBA52B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = FineDustWidget/FineDustWidget.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H79MF628K3;
-				INFOPLIST_FILE = FineDustWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.boostcamp3rd.FineDust.FineDustWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		31A568A58C1334B2A5028262683C9B8D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H79MF628K3;
-				INFOPLIST_FILE = FineDustTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.boostcamp3rd.FineDustTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FineDust.app/FineDust";
 			};
 			name = Debug;
 		};
@@ -1265,6 +1243,28 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B514524A939C0A2B15C39C722EBA52B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FineDustWidget/FineDustWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H79MF628K3;
+				INFOPLIST_FILE = FineDustWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.boostcamp3rd.FineDust.FineDustWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
