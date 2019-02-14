@@ -21,6 +21,8 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Feedback"
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Feedback.self)
+
+    internal static let detailView = SceneType<UIKit.UIViewController>(storyboard: Feedback.self, identifier: "DetailView")
   }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
