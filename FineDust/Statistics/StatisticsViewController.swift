@@ -141,13 +141,13 @@ final class StatisticsViewController: UIViewController {
   private func requestIntake() {
     intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
-        error.alert.present(to: self)
+        Toast.shared.show(error.localizedDescription)
         return
       }
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
-          error.alert.present(to: self)
+          Toast.shared.show(error.localizedDescription)
           return
         }
         guard let self = self,
