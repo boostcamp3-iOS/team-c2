@@ -11,10 +11,10 @@ import Foundation
 /// 미세먼지 섭취량 관련 매니저 프로토콜.
 protocol IntakeServiceType {
   
-  /// 오늘의 미세먼지 및 초미세먼지 섭취량 fetch.
+  /// 오늘의 미세먼지 및 초미세먼지 섭취량 request.
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void)
   
-  /// 지정 `Date`로부터 일주일 간의 미세먼지 섭취량 fetch.
+  /// 지정 `Date`로부터 일주일 간의 미세먼지 섭취량 request.
   func requestIntakesInWeek(completion: @escaping ([Int]?, [Int]?, Error?) -> Void)
   
   /// 시간당 미세먼지 흡입량 계산.
