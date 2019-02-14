@@ -56,6 +56,11 @@ final class IntakeService: IntakeServiceType {
         print(sortedDistance)
         print(totalFineDustValue)
         print(totalUltrafineDustValue)
+        if let userDefaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust") {
+          userDefaults.set(totalFineDustValue, forKey: "fineDustIntake")
+          userDefaults.set(totalUltrafineDustValue, forKey: "ultrafineDustIntake")
+          userDefaults.synchronize()
+        }
         completion(totalFineDustValue, totalUltrafineDustValue, nil)
       }
     }
