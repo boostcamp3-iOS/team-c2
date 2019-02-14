@@ -58,6 +58,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
+    // 위치에 관련된 label들을 업데이트함.
     dustInfoService.requestRecentTimeInfo { info, error in
       if let error = error as? ServiceErrorType {
         error.alert.present(to: self)
@@ -71,17 +72,8 @@ extension MainViewController: LocationObserver {
         }
       }
     }
-  }
-}
-
-// MARK: - Functions
-
-extension MainViewController {
-  private func setUp() {
-    navigationItem.title = "내안의먼지".localized
-    registerLocationObserver()
-    timeLabel.text = dateFormatter.string(from: Date())
     
+    // 마신 미세먼지양을 업데이트함.
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
       if let error = error {
         DispatchQueue.main.async {
@@ -99,6 +91,16 @@ extension MainViewController {
         }
       }
     }
+  }
+}
+
+// MARK: - Functions
+
+extension MainViewController {
+  private func setUp() {
+    navigationItem.title = "내안의먼지".localized
+    registerLocationObserver()
+    timeLabel.text = dateFormatter.string(from: Date())
   }
   
   /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
