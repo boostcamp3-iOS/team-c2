@@ -51,6 +51,11 @@ final class IntakeService: IntakeServiceType {
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
         let totalUltrafineDustValue = zip(sortedUltrafineDust, sortedDistance)
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
+        print(sortedFineDust)
+        print(sortedUltrafineDust)
+        print(sortedDistance)
+        print(totalFineDustValue)
+        print(totalUltrafineDustValue)
         completion(totalFineDustValue, totalUltrafineDustValue, nil)
       }
     }
@@ -144,7 +149,10 @@ final class IntakeService: IntakeServiceType {
                                         print(error.localizedDescription)
                                       }
                       }
+                      print("코어데이터 갱신됨")
                     }
+                    print(fineDustIntakes)
+                    print(ultrafineDustIntakes)
                     completion(fineDustIntakes, ultrafineDustIntakes, nil)
                 }
             }
@@ -155,6 +163,8 @@ final class IntakeService: IntakeServiceType {
           ultrafineDustIntakePerDate[date] = intake.1 ?? 0
         }
         // 코어데이터에 주어진 날짜에 대한 데이터가 모두 있을 때 호출됨
+        print(fineDustIntakePerDate)
+        print(ultrafineDustIntakePerDate)
         completion(fineDustIntakePerDate.sortedByDate().map { $0.value },
                    ultrafineDustIntakePerDate.sortedByDate().map { $0.value },
                    nil)
