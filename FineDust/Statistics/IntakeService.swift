@@ -41,18 +41,26 @@ final class IntakeService: IntakeServiceType {
       guard let self = self else { return }
       self.healthKitService.requestTodayDistancePerHour { [weak self] distancePerHour in
         // 각 인자를 `Hour` 오름차순 정렬하고 value 매핑하여 최종적으로 `[Int]` 반환
-        guard let self = self else { return }
-        guard let sortedFineDust = fineDust?.sortedByHour()
-          .map({ $0.value }) else { return }
-        guard let sortedUltrafineDust = ultrafineDust?.sortedByHour()
-          .map({ $0.value }) else { return }
-        guard let sortedDistance = distancePerHour?.sortedByHour()
-          .map({ $0.value }) else { return }
+        guard let self = self,
+          let sortedFineDust = fineDust?.sortedByHour().map({ $0.value }),
+          let sortedUltrafineDust = ultrafineDust?.sortedByHour().map({ $0.value }),
+          let sortedDistance = distancePerHour?.sortedByHour().map({ $0.value })
+        else { return }
         // 시퀀스를 묶어 특정 수식을 통하여 값을 산출
         let totalFineDustValue = zip(sortedFineDust, sortedDistance)
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
         let totalUltrafineDustValue = zip(sortedUltrafineDust, sortedDistance)
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
+        print(sortedFineDust)
+        print(sortedUltrafineDust)
+        print(sortedDistance)
+        print(totalFineDustValue)
+        print(totalUltrafineDustValue)
+        if let userDefaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust") {
+          userDefaults.set(totalFineDustValue, forKey: "fineDustIntake")
+          userDefaults.set(totalUltrafineDustValue, forKey: "ultrafineDustIntake")
+          userDefaults.synchronize()
+        }
         completion(totalFineDustValue, totalUltrafineDustValue, nil)
       }
     }
@@ -70,8 +78,8 @@ final class IntakeService: IntakeServiceType {
           return
         }
         guard let self = self else { return }
-        var fineDustResult: [Date: Int] = [:]
-        var ultrafineDustResult: [Date: Int] = [:]
+        var fineDustIntakePerDate: [Date: Int] = [:]
+        var ultrafineDustIntakePerDate: [Date: Int] = [:]
         guard let coreDataIntakePerDate = coreDataIntakePerDate else { return }
         for date in Date.between(startDate, endDate) {
           // 주어진 날짜에 대하여 코어데이터에 데이터가 있는지 확인
@@ -90,23 +98,24 @@ final class IntakeService: IntakeServiceType {
                 guard let self = self,
                   let hourlyFineDustIntakePerDate = hourlyFineDustIntakePerDate,
                   let hourlyUltrafineDustIntakePerDate = hourlyUltrafineDustIntakePerDate
-                  else { return }
+                else { return }
                 self.healthKitService
                   .requestDistancePerHour(
                     from: date,
                     to: endDate
                   ) { [weak self] hourlyDistancePerDate in
-                    guard let self = self else { return }
-                    guard let hourlyDistancePerDate = hourlyDistancePerDate else { return }
+                    guard let self = self,
+                      let hourlyDistancePerDate = hourlyDistancePerDate
+                    else { return }
                     let sortedHourlyDistancePerDate = hourlyDistancePerDate.sortedByDate()
                     let sortedHourlyFineDustIntakePerDate
                       = hourlyFineDustIntakePerDate.sortedByDate()
                     let sortedHourlyUltrafineDustIntakePerDate
                       = hourlyUltrafineDustIntakePerDate.sortedByDate()
-                    var fineDustResults
-                      = coreDataIntakePerDate.sortedByDate().compactMap { $0.value.0 }
-                    var ultrafineDustResults
-                      = coreDataIntakePerDate.sortedByDate().compactMap { $0.value.1 }
+                    let sortedCoreDataIntakes
+                      = coreDataIntakePerDate.sortedByDate().map { $0.value }
+                    var fineDustIntakes = sortedCoreDataIntakes.compactMap { $0.0 }
+                    var ultrafineDustIntakes = sortedCoreDataIntakes.compactMap { $0.1 }                    
                     zip(sortedHourlyFineDustIntakePerDate, sortedHourlyDistancePerDate)
                       .forEach { argument in
                         let (hourlyFineDustIntakePerDate, hourlyDistancePerDate) = argument
@@ -119,7 +128,7 @@ final class IntakeService: IntakeServiceType {
                             .reduce(0, {
                               $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value)
                             })
-                        fineDustResults.append(intake)
+                        fineDustIntakes.append(intake)
                     }
                     zip(sortedHourlyUltrafineDustIntakePerDate, sortedHourlyDistancePerDate)
                       .forEach { argument in
@@ -133,31 +142,36 @@ final class IntakeService: IntakeServiceType {
                             .reduce(0, {
                               $0 + self.intakePerHour(dust: $1.0.value, distance: $1.1.value)
                             })
-                        ultrafineDustResults.append(intake)
+                        ultrafineDustIntakes.append(intake)
                     }
                     // 코어데이터 갱신
                     for (index, date) in Date.between(startDate, endDate).enumerated() {
                       self.coreDataService
-                        .saveIntake(fineDust: fineDustResults[index],
-                                    ultrafineDust: ultrafineDustResults[index],
+                        .saveIntake(fineDust: fineDustIntakes[index],
+                                    ultrafineDust: ultrafineDustIntakes[index],
                                     at: date) { error in
                                       if let error = error {
                                         print(error.localizedDescription)
                                       }
                       }
+                      print("코어데이터 갱신됨")
                     }
-                    completion(fineDustResults, nil, nil)
+                    print(fineDustIntakes)
+                    print(ultrafineDustIntakes)
+                    completion(fineDustIntakes, ultrafineDustIntakes, nil)
                 }
             }
             return
           }
           // 데이터가 있으면 빈 딕셔너리에 값 담는 로직 수행
-          fineDustResult[date] = intake.0 ?? 0
-          ultrafineDustResult[date] = intake.1 ?? 0
+          fineDustIntakePerDate[date] = intake.0 ?? 0
+          ultrafineDustIntakePerDate[date] = intake.1 ?? 0
         }
         // 코어데이터에 주어진 날짜에 대한 데이터가 모두 있을 때 호출됨
-        completion(fineDustResult.sortedByDate().map { $0.value },
-                   ultrafineDustResult.sortedByDate().map { $0.value },
+        print(fineDustIntakePerDate)
+        print(ultrafineDustIntakePerDate)
+        completion(fineDustIntakePerDate.sortedByDate().map { $0.value },
+                   ultrafineDustIntakePerDate.sortedByDate().map { $0.value },
                    nil)
     }
   }

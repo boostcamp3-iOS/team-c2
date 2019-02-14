@@ -9,7 +9,7 @@
 import Foundation
 
 /// FeedbackListService를 구현하는 클래스
-final class FeedbackListService {
+final class FeedbackListService: FeedbackServiceType {
   
   private var dustFeedbacks: [DustFeedback] = []
   let jsonManager: JSONManagerType

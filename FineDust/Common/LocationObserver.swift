@@ -37,19 +37,15 @@ extension LocationObserver where Self: UIViewController {
   
   func handleIfFail(_ notification: Notification) {
     if let error = notification.locationTaskError {
-      UIAlertController
-        .alert(title: "", message: error.localizedDescription)
-        .action(title: "확인")
-        .present(to: self)
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
     }
   }
   
   func handleIfAuthorizationDenied(_ notification: Notification) {
     if let error = notification.locationTaskError {
-      UIAlertController
-        .alert(title: "", message: error.localizedDescription)
-        .action(title: "확인")
-        .present(to: self)
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
     }
   }
   

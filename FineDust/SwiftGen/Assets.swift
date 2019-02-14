@@ -18,8 +18,11 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
+  internal static let tillandsia = ImageAsset(name: "Tillandsia")
+  internal static let ventilation = ImageAsset(name: "Ventilation")
   internal static let barChartTabIcon = ImageAsset(name: "barChartTabIcon")
   internal static let black45 = ColorAsset(name: "black45")
+  internal static let childrenSteps = ImageAsset(name: "childrenSteps")
   internal static let graph1 = ColorAsset(name: "graph1")
   internal static let graph2 = ColorAsset(name: "graph2")
   internal static let graphBorder = ColorAsset(name: "graphBorder")
@@ -29,7 +32,19 @@ internal enum Asset {
   internal static let info1 = ImageAsset(name: "info1")
   internal static let infoTabIcon = ImageAsset(name: "infoTabIcon")
   internal static let mainTabIcon = ImageAsset(name: "mainTabIcon")
+  internal static let nose = ImageAsset(name: "nose")
+  internal static let oldSteps = ImageAsset(name: "oldSteps")
   internal static let redheart = ImageAsset(name: "redheart")
+  internal static let seoul = ImageAsset(name: "seoul")
+  internal static let sevenSteps = ImageAsset(name: "sevenSteps")
+  internal static let sort = ImageAsset(name: "sort")
+  internal static let speechBubble1 = ImageAsset(name: "speechBubble1")
+  internal static let speechBubble2 = ImageAsset(name: "speechBubble2")
+  internal static let starOutline = ImageAsset(name: "star-outline")
+  internal static let steps = ImageAsset(name: "steps")
+  internal static let studentSteps = ImageAsset(name: "studentSteps")
+  internal static let vitaminB = ImageAsset(name: "vitaminB")
+  internal static let yellowStar = ImageAsset(name: "yellow-star")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
