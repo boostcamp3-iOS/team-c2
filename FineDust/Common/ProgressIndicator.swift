@@ -9,6 +9,10 @@
 import UIKit
 
 /// 네트워크 인디케이터 뷰
+///
+/// `ProgressIndicator.shared.show()`로 인디케이터 보이기
+///
+/// `ProgressIndicator.shared.hide()`로 인디케이터 숨기기
 final class ProgressIndicator: UIView {
   
   // MARK: Singleton Object
@@ -58,25 +62,35 @@ final class ProgressIndicator: UIView {
     indicator = UIActivityIndicatorView()
   }
   
-  /// `ProgressIndicator.shared.show()`로 인디케이터 표시
   func show() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
       self.indicator.startAnimating()
+      self.alpha = 0
       if let window = UIApplication.shared.keyWindow {
         window.addSubview(self)
+        UIView.animate(withDuration: 0.3) {
+          self.alpha = 1
+        }
       }
     }
   }
   
-  /// `ProgressIndicator.shared.hide()`로 인디케이터 표시
   func hide() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = false
       self.indicator.stopAnimating()
-      self.removeFromSuperview()
+      self.alpha = 1
+      UIView.animate(
+        withDuration: 0.3,
+        animations: {
+          self.alpha = 0
+        }, completion: { _ in
+          self.removeFromSuperview()
+        }
+      )
     }
   }
 }

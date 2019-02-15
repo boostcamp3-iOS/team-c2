@@ -11,7 +11,10 @@ import Foundation
 /// 미세먼지 정보 관련 Dust Manager 클래스.
 final class DustInfoManager: DustInfoManagerType {
 
-  var networkManager: NetworkManagerType
+  /// 네트워크 매니저.
+  let networkManager: NetworkManagerType
+  
+  // MARK: Dependency Injection
   
   init(networkManager: NetworkManagerType = NetworkManager.shared) {
     self.networkManager = networkManager
@@ -46,10 +49,6 @@ final class DustInfoManager: DustInfoManagerType {
                 // 해당 타입으로 XML 파싱 시도
                 // 파싱 로직 내부에서 미세먼지 에러를 찾아 내려줌
                 XMLManager().decode(data, completion: completion)
-//                XMLManager<DustResponse>().parse(data) { parsingType, error in
-//                  let response = parsingType as? DustResponse
-//                  completion(response, error)
-//                }
     }
   }
 }

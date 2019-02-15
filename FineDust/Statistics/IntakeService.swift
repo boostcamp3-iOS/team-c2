@@ -55,6 +55,7 @@ final class IntakeService: IntakeServiceType {
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
         let totalUltrafineDustValue = zip(sortedUltrafineDust, sortedDistance)
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
+        print("오늘의 흡입량 가져오기 성공")
         print(sortedFineDust)
         print(sortedUltrafineDust)
         print(sortedDistance)
@@ -87,6 +88,7 @@ final class IntakeService: IntakeServiceType {
         guard let coreDataIntakePerDate = coreDataIntakePerDate else { return }
         for date in Date.between(startDate, endDate) {
           // 주어진 날짜에 대하여 코어데이터에 데이터가 있는지 확인
+          // 없으면 네트워크 호출을 통해 빈 데이터를 채워넣음
           guard let intake = coreDataIntakePerDate[date] else {
             // 데이터가 없으면 DustInfoService 호출
             // 하루하루 값 산출하여 컴플리션 핸들러 호출
@@ -165,6 +167,8 @@ final class IntakeService: IntakeServiceType {
                       }
                       print("코어데이터 갱신됨")
                     }
+                    print("일주일치 흡입량 가져오기 성공.")
+                    print("네트워크 호출 후 코어데이터 갱신하고 작업 종료")
                     print(fineDustIntakes)
                     print(ultrafineDustIntakes)
                     completion(fineDustIntakes, ultrafineDustIntakes, nil)
@@ -172,11 +176,12 @@ final class IntakeService: IntakeServiceType {
             }
             return
           }
-          // 데이터가 있으면 빈 딕셔너리에 값 담는 로직 수행
+          // 데이터가 있으면 기존 딕셔너리에 값 담는 로직을 지속 수행
           fineDustIntakePerDate[date] = intake.0 ?? 0
           ultrafineDustIntakePerDate[date] = intake.1 ?? 0
         }
-        // 코어데이터에 주어진 날짜에 대한 데이터가 모두 있을 때 호출됨
+        print("일주일치 흡입량 가져오기 성공.")
+        print("코어데이터에 주어진 날짜에 대한 데이터가 모두 있음")
         print(fineDustIntakePerDate)
         print(ultrafineDustIntakePerDate)
         completion(fineDustIntakePerDate.sortedByDate().map { $0.value },

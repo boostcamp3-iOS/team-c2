@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// XML 매니저 프로토콜.
+/// XML 디코더 매니저 프로토콜.
 protocol XMLDecoderType: class {
   
   var config: SWXMLHash { get }

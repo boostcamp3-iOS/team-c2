@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIView {
+  
   /// `UIView` instantiate.
   static func instantiate(fromXib name: String) -> UIView? {
     return UINib(nibName: name, bundle: nil)

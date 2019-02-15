@@ -9,6 +9,7 @@
 import CoreLocation
 import Foundation
 
+/// Core Location Error가 ServiceErrorType을 준수하게 함.
 extension CLError: ServiceErrorType {
   
   var localizedDescription: String {

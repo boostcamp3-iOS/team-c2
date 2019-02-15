@@ -8,8 +8,10 @@
 
 import Foundation
 
+/// XML 디코더 클래스.
 final class XMLDecoder: XMLDecoderType {
   
+  /// Singleton Object.
   static let shared = XMLDecoder()
   
   private init() { }

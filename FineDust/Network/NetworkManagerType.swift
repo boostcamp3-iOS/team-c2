@@ -12,6 +12,13 @@ import Foundation
 protocol NetworkManagerType: class {
   
   /// 네트워크 요청.
+  ///
+  /// - Parameters:
+  ///   - url: URL.
+  ///   - method: HTTP Method.
+  ///   - parameters: HTTP Body에 들어갈 키/값 쌍. 기본값은 `[:]`.
+  ///   - headers: HTTP Header에 들어갈 키/값 쌍. 기본값은 `[:]`.
+  ///   - completion: 컴플리션 핸들러.
   func request(_ url: URL,
                method: HTTPMethod,
                parameters: [String: Any]?,

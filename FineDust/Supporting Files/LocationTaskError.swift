@@ -20,6 +20,11 @@ enum LocationTaskError: Error {
   
   /// 코어 로케이션 작업 중 에러.
   case coreLocationError(CLError)
+}
+
+// MARK: - 에러 디스크립션
+
+extension LocationTaskError {
   
   var localizedDescription: String {
     switch self {

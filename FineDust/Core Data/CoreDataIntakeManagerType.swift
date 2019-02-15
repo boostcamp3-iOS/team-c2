@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-/// `Intake` Entity에 대한 Manager 프로토콜.
+/// 코어데이터의 `Intake` 모델 관련 매니저 프로토콜.
 protocol CoreDataIntakeManagerType: CoreDataManagerType {
   
   /// READ

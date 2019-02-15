@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-/// `User` Entity에 대한 프로토콜.
+/// 코어데이터의 `User` 모델 관련 매니저 프로토콜.
 protocol CoreDataUserManagerType: CoreDataManagerType {
 
   /// READ

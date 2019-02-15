@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 
+/// 간단한 메세지를 띄우는 토스트 정의.
 final class Toast {
   
+  /// Singleton Object
   static let shared = Toast()
   
   private init() { }
   
+  /// 토스트 보이기.
   func show(_ message: String?, duration: TimeInterval = 4.0) {
     DispatchQueue.main.async {
       let label = UILabel()
@@ -26,7 +29,7 @@ final class Toast {
       label.bounds.size = CGSize(width: label.bounds.width + 40, height: label.bounds.height + 20)
       label.center = CGPoint(
         x: UIScreen.main.bounds.width / 2,
-        y: UIScreen.main.bounds.height - 49 - 32
+        y: UIScreen.main.bounds.height - 49 - 64
       )
       label.layer.cornerRadius = label.bounds.height / 2
       label.layer.masksToBounds = true

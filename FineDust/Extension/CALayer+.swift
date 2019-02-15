@@ -9,6 +9,7 @@
 import UIKit
 
 extension CALayer {
+  
   /// 경계선 관련 설정.
   func setBorder(color borderColor: UIColor = .black,
                  width borderWidth: CGFloat = 0,
@@ -18,6 +19,7 @@ extension CALayer {
     self.borderWidth = borderWidth
     self.cornerRadius = cornerRadius
   }
+  
   /// Sketch에서 제공하는 그림자 관련 정보 적용.
   func applySketchShadow(color: UIColor = .black,
                          alpha: Float = 0.5,
@@ -37,6 +39,7 @@ extension CALayer {
       shadowPath = UIBezierPath(rect: rect).cgPath
     }
   }
+  
   /// 그라데이션 효과 적용.
   func applyGradient(colors: [Any],
                      locations: [NSNumber],
