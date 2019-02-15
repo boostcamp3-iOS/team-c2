@@ -33,6 +33,12 @@ final class HealthKitManager: HealthKitManagerType {
   
   /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
   func requestAuthorization() {
+    if authorizationStatus != (.sharingAuthorized, .sharingAuthorized) {
+      print(33)
+      NotificationCenter.default.post(
+        name: Notification.Name.healthKitAuthorizationSharingDenied,
+        object: nil)
+    }
     
     // 걸음 데이터를 얻기 위해 Set을 만든 다음 권한 요청.
     let healthKitTypes: Set = [stepCount, distance]
@@ -136,5 +142,4 @@ final class HealthKitManager: HealthKitManagerType {
     }
     healthStore.execute(query)
   }
-  
 }

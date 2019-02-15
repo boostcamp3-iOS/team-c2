@@ -27,7 +27,6 @@ extension HealthKitAuthorizationObserver where Self: UIViewController {
   }
   
   func authorizationSharingDenied(_ notification: Notification) {
-    print("denied")
   }
   
   func registerHealthKitAuthorizationObserver() {

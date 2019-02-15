@@ -23,13 +23,15 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
+  ///한번만 표시해주기 위한 프로퍼티
   private var isPresented: Bool = false
   
-  let healthKitService = HealthKitService(healthKit: HealthKitManager())
-  let dustInfoService = DustInfoService(dustManager: DustInfoManager())
-  let intakeService = IntakeService()
+  private let healthKitService = HealthKitService(healthKit: HealthKitManager())
+  private let dustInfoService = DustInfoService(dustManager: DustInfoManager())
+  private let intakeService = IntakeService()
   
-  let dateFormatter: DateFormatter = {
+  /// 오전(후) 시 : 분 으로 나타내주는 프로퍼티.
+  private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "a hh : mm"
     return formatter
@@ -77,14 +79,15 @@ extension MainViewController: HealthKitAuthorizationObserver {
 // MARK: - Methods
 
 extension MainViewController {
+  /// MainViewController 초기 설정 메소드.
   private func setUp() {
-    navigationItem.title = "내안의먼지".localized
     registerLocationObserver()
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
+    presentAlert()
   }
   
-  /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
+  /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
@@ -113,7 +116,7 @@ extension MainViewController {
     }
   }
   
-  ///미세먼지량과 위치정보 같은 API정보들을 업데이트 함.
+  /// 미세먼지량과 위치정보 같은 API정보들을 업데이트 하는 메소드.
   private func updateAPIInfo() {
     // 위치에 관련된 Label들을 업데이트함.
     dustInfoService.requestRecentTimeInfo { info, error in
@@ -147,7 +150,26 @@ extension MainViewController {
     }
   }
   
-  func setUpGradeLabel(grade: DustGrade) -> String {
+  /// 권한이 없을시 권한설정을 도와주는 AlertController.
+  private func presentAlert() {
+    if !healthKitService.isAuthorized {
+      UIAlertController
+        .alert(title: "건강 App 권한이 없습니다.",
+               message: """
+          내안의먼지는 건강 App에 대한 권한이 필요합니다. 건강 App-> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 \
+          허용해주세요.
+          """
+        )
+        .action(title: "건강 App", style: .default) { _, _ in
+          UIApplication.shared.open(URL(string: "x-apple-health://")!)
+        }
+        .action(title: "취소", style: .cancel)
+        .present(to: self)
+    }
+  }
+  
+  /// 미세먼지 등급을 알려주는 메소드.
+  private func setUpGradeLabel(grade: DustGrade) -> String {
     switch grade {
     case .good:
       return "좋은 공기"
