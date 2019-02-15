@@ -8,8 +8,10 @@
 
 import Foundation
 
+/// 코어데이터의 `User` 모델 관련 매니저 프로토콜.
 final class CoreDataUserManager: CoreDataUserManagerType {
   
+  /// Singleton Object
   static let shared = CoreDataUserManager()
   
   private init() { }

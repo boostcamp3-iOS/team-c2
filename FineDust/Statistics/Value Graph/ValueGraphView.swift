@@ -46,10 +46,10 @@ final class ValueGraphView: UIView {
   
   // MARK: Property
   
-  /// DateFormatter 프로퍼티.
+  /// `yyyy년 M월 d일 EEEE` 포맷을 갖는 DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.locale = .korea
     formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
   }()
@@ -80,13 +80,14 @@ final class ValueGraphView: UIView {
   /// 일 텍스트.
   private var dateTexts: [String] {
     let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.locale = .korea
     dateFormatter.dateFormat = "d"
     var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
     var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
+    // 마지막 값을 오늘로 바꿈
     reversed.removeLast()
     reversed.append("오늘")
     return reversed
@@ -182,6 +183,7 @@ private extension ValueGraphView {
     }
   }
   
+  /// 날짜 레이블 설정.
   func setDateLabel() {
     dateLabel.text = dateFormatter.string(from: Date())
   }

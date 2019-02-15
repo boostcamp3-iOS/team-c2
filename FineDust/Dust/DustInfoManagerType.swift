@@ -10,6 +10,10 @@ import Foundation
 
 /// 미세먼지 정보 관련 Dust Manager 프로토콜.
 protocol DustInfoManagerType: DustManagerType {
+  
+  /// 미세먼지 정보 요청.
+  ///
+  /// numberOfRows는 1, pageNumber는 유동적으로.
   func request(dataTerm: DataTerm,
                numberOfRows numOfRows: Int,
                pageNumber pageNo: Int,

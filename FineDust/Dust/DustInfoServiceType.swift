@@ -11,13 +11,13 @@ import Foundation
 /// 미세먼지 정보 서비스 프로토콜.
 protocol DustInfoServiceType: class {
   
-  /// 최근 시간의 미세먼지 관련 정보 fetch.
+  /// 최근 시간의 미세먼지 관련 정보 요청.
   func requestRecentTimeInfo(_ completion: @escaping (RecentDustInfo?, Error?) -> Void)
   
-  /// 하루의 미세먼지 관련 정보를 fetch하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
+  /// 하루의 미세먼지 관련 정보를 요청하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
   func requestDayInfo(_ completion: @escaping (HourIntakePair?, HourIntakePair?, Error?) -> Void)
   
-  /// 특정 날짜부터 특정 날짜까지의 미세먼지 관련 정보를 fetch하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
+  /// 특정 날짜 내의 관련 정보를 요청하고 시간대별 미세먼지 값과 초미세먼지 값을 산출.
   func requestDayInfo(
     from startDate: Date,
     to endDate: Date,

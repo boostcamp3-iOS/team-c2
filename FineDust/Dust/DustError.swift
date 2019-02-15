@@ -80,7 +80,7 @@ extension DustError {
     case .unregisteredDomainOfIPAddress:
       return "활용신청한 서버의 IP와 실제 Open API를 호출한 서버가 다릅니다."
     case .default:
-      return "알 수 없는 오류가 발생하였습니다."
+      return "미세먼지 정보를 가져오지 못했습니다."
     }
   }
 }

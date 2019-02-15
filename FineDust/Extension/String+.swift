@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+  
   /// 문자열 로컬라이징.
   var localized: String {
     return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")

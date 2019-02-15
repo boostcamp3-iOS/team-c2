@@ -11,8 +11,10 @@ import Foundation
 /// 미세먼지 API의 Response 관련 부분을 먼저 파싱하기 위한 응답 객체.
 struct ResponseHeader: XMLParsingType {
   
+  /// 상태 코드.
   let code: Int
   
+  /// 상태 메세지.
   let message: String
   
   static func deserialize(_ node: XMLIndexer) throws -> ResponseHeader {
@@ -20,6 +22,7 @@ struct ResponseHeader: XMLParsingType {
                               message: node["response"]["header"]["resultMsg"].value())
   }
   
+  /// 미세먼지 API 상태 코드.
   var statusCode: DustStatusCode {
     return DustStatusCode(rawValue: code) ?? .default
   }

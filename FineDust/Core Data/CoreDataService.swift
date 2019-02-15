@@ -11,11 +11,13 @@ import Foundation
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
 
-  /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 유저 매니저 프로퍼티.
   let userManager: CoreDataUserManagerType
   
-  /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 흡입량 매니저 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
+  
+  // MARK: Dependency Injection
   
   init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
        intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
@@ -76,14 +78,28 @@ final class CoreDataService: CoreDataServiceType {
                         Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
   }
   
-  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
+  func saveIntakes(fineDusts: [Int],
+                   ultrafineDusts: [Int],
+                   at dates: [Date],
+                   completion: @escaping (Error?) -> Void) {
+    for index in dates.indices {
+      let fineDust = fineDusts[index]
+      let ultrafineDust = ultrafineDusts[index]
+      let date = dates[index]
+      intakeManager.save([Intake.date: date,
+                          Intake.fineDust: Int16(fineDust),
+                          Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
+    }
+  }
+  
+  func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
         completion(nil, error)
         return
       }
       guard let user = user else { return }
-      let lastSavedData = LastSavedData(
+      let lastSavedData = LastRequestedData(
         todayFineDust: Int(user.todayFineDust),
         todayUltrafineDust: Int(user.todayUltrafineDust),
         distance: Int(user.distance),
@@ -96,15 +112,16 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastSavedData(_ lastSavedData: LastSavedData, completion: @escaping (Error?) -> Void) {
+  func saveLastRequestedData(_ lastRequestedData: LastRequestedData,
+                             completion: @escaping (Error?) -> Void) {
     userManager.save([
-      User.todayFineDust: Int16(lastSavedData.todayFineDust),
-      User.todayUltrafineDust: Int16(lastSavedData.todayUltrafineDust),
-      User.distance: Int16(lastSavedData.distance),
-      User.steps: Int16(lastSavedData.steps),
-      User.address: lastSavedData.address,
-      User.grade: Int16(lastSavedData.grade),
-      User.recentFineDust: Int16(lastSavedData.recentFineDust)
+      User.todayFineDust: Int16(lastRequestedData.todayFineDust),
+      User.todayUltrafineDust: Int16(lastRequestedData.todayUltrafineDust),
+      User.distance: Int16(lastRequestedData.distance),
+      User.steps: Int16(lastRequestedData.steps),
+      User.address: lastRequestedData.address,
+      User.grade: Int16(lastRequestedData.grade),
+      User.recentFineDust: Int16(lastRequestedData.recentFineDust)
       ], completion: completion)
   }
 }

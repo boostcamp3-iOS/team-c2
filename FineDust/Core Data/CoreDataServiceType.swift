@@ -28,9 +28,18 @@ protocol CoreDataServiceType: class {
                   at date: Date,
                   completion: @escaping (Error?) -> Void)
   
-  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void)
+  /// 여러 날짜에 대한 미세먼지 흡입량 저장.
+  ///
+  /// 모든 인자의 길이가 같아야 한다.
+  func saveIntakes(fineDusts: [Int],
+                   ultrafineDusts: [Int],
+                   at dates: [Date],
+                   completion: @escaping (Error?) -> Void)
   
-  func saveLastSavedData(_ lastSavedData: LastSavedData, completion: @escaping (Error?) -> Void)
+  /// 마지막으로 요청한 데이터 가져오기.
+  func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void)
+  
+  /// 마지막으로 요청한 데이터 저장하기.
+  func saveLastRequestedData(_ lastRequestedData: LastRequestedData,
+                             completion: @escaping (Error?) -> Void)
 }
-
-

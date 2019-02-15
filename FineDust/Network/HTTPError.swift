@@ -11,12 +11,14 @@ import Foundation
 /// HTTP 통신 에러.
 enum HTTPError: ServiceErrorType {
   
+  /// 200이 아닌 나머지.
   case `default`
 }
 
 // MARK: - 에러 디스크립션
 
 extension HTTPError {
+  
   var localizedDescription: String {
     switch self {
     case .default:

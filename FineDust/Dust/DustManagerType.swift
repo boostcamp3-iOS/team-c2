@@ -11,10 +11,13 @@ import Foundation
 /// Dust Manager 기반 프로토콜.
 protocol DustManagerType {
   
+  /// Base URL.
   var baseURL: String { get }
   
+  /// 미세먼지 API 서비스 키.
   var serviceKey: String { get }
   
+  /// 네트워크 매니저.
   var networkManager: NetworkManagerType { get }
 }
 
