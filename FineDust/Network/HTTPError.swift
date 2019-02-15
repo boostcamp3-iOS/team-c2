@@ -20,7 +20,7 @@ extension HTTPError {
   var localizedDescription: String {
     switch self {
     case .default:
-      return "네트워크 오류가 발생하였습니다."
+      return "네트워크 연결을 확인해 주세요."
     }
   }
 }

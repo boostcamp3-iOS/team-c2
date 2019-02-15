@@ -23,6 +23,8 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
+  private var isPresented: Bool = false
+  
   let healthKitService = HealthKitService(healthKit: HealthKitManager())
   let dustInfoService = DustInfoService(dustManager: DustInfoManager())
   let intakeService = IntakeService()
@@ -38,6 +40,15 @@ final class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if !isPresented {
+      isPresented.toggle()
+      updateHealthKitInfo()
+      updateAPIInfo()
+    }
   }
   
   deinit {
@@ -78,9 +89,6 @@ extension MainViewController {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
       if let error = error {
-        DispatchQueue.main.async {
-          self.stepCountLabel.text = "0 걸음"
-        }
         print(error)
         return
       }
@@ -95,9 +103,6 @@ extension MainViewController {
     healthKitService.requestTodayDistance { value, error in
       if let value = value {
         if let error = error {
-          DispatchQueue.main.async {
-            self.distanceLabel.text = "0 km"
-          }
           print(error)
           return
         }
@@ -127,22 +132,17 @@ extension MainViewController {
     
     // 마신 미세먼지양 Label들을 업데이트함.
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
-      if let error = error {
-        DispatchQueue.main.async {
-          self.intakeFineDustLable.text = "0µg"
-          self.intakeUltrafineDustLabel.text = "0µg"
-        }
-        if let error = error as? ServiceErrorType {
-          print(error.localizedDescription)
-          Toast.shared.show(error.localizedDescription)
-        }
+      if let error = error as? ServiceErrorType {
+        print(error.localizedDescription)
+        Toast.shared.show(error.localizedDescription)
         return
       }
-      
       if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
-        DispatchQueue.main.async {
-          self.intakeFineDustLable.text = "\(fineDust)µg"
-          self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.intakeFineDustLable.text = "\(fineDust)µg"
+            self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+          }
         }
       }
     }
