@@ -14,4 +14,18 @@ extension User {
   
   /// 최근 접속 날짜 Attribute
   static let lastAccessedDate = "lastAccessedDate"
+  
+  static let todayFineDust = "todayFineDust"
+  
+  static let todayUltrafineDust = "todayUltrafineDust"
+  
+  static let distance = "distance"
+  
+  static let steps = "steps"
+  
+  static let address = "address"
+  
+  static let grade = "grade"
+  
+  static let recentFineDust = "recentFineDust"
 }

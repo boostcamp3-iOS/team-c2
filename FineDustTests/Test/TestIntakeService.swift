@@ -29,6 +29,7 @@ class TestIntakeService: XCTestCase {
     mockDustInfoService.ultrafineDustHourlyValue = DummyDustInfoService.ultrafineDustHourlyValue
     mockHealthKitService.hourlyDistance = DummyHealthKitService.hourlyDistance
     mockDustInfoService.error = nil
+    mockHealthKitService.isAuthorized = true
     mockHealthKitService.error = nil
     let expect = expectation(description: "test")
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
@@ -63,6 +64,7 @@ class TestIntakeService: XCTestCase {
     mockDustInfoService.ultrafineDustHourlyValuePerDate = DummyDustInfoService.ultrafineDustHourlyValuePerDate
     mockDustInfoService.error = nil
     mockHealthKitService.hourlyDistancePerDate = DummyHealthKitService.hourlyDistancePerDate
+    mockHealthKitService.isAuthorized = true
     mockHealthKitService.error = nil
     mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
     mockCoreDataService.error = nil

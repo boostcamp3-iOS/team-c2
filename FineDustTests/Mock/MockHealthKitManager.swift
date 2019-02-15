@@ -17,6 +17,10 @@ final class MockHealthKitManager: HealthKitManagerType {
   var distance = 1409.53
   var hourInteger = 1
   
+  var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) {
+    return (.notDetermined, .notDetermined)
+  }
+  
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
                           hourInterval: Int,
