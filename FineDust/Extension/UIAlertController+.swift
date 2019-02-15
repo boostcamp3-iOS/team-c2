@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIAlertController {
+  
   /// `UIAlertController` Helper.
   static func alert(title: String?,
                     message: String?,

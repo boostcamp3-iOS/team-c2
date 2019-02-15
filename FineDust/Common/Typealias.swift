@@ -21,7 +21,7 @@ typealias DateIntakePair = [Date: (Int?, Int?)]
 
 extension Dictionary where Key == Hour {
   
-  /// HourIntakePair 타입에서 `Hour` 순서로 정렬.
+  /// `Key`가 `Hour`인 타입에서 `Hour` 순서로 정렬.
   ///
   /// 기본 정렬은 오름차순. 내림차순으로 하려면 인자로 `false`를 주기.
   func sortedByHour(isAscending ascending: Bool = true) -> [(key: Key, value: Value)] {
@@ -35,6 +35,10 @@ extension Dictionary where Key == Hour {
 // MARK: - 딕셔너리의 Key가 Date일 때의 확장
 
 extension Dictionary where Key == Date {
+  
+  /// Key가 `Date`인 타입에서 `Date` 순서로 정렬.
+  ///
+  /// 기본 정렬은 오름차순. 내림차순으로 하려면 인자로 `false`를 주기.
   func sortedByDate(isAscending ascending: Bool = true) -> [(key: Key, value: Value)] {
     if ascending {
       return sorted { $0.key < $1.key }

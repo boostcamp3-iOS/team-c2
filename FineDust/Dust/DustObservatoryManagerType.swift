@@ -10,6 +10,10 @@ import Foundation
 
 /// 관측소 관련 Dust Manager 프로토콜.
 protocol DustObservatoryManagerType: DustManagerType {
+  
+  /// 관측소 정보 요청.
+  ///
+  /// numberOfRows는 1, pageNumber는 1.
   func requestObservatory(numberOfRows numOfRows: Int,
                           pageNumber pageNo: Int,
                           completion: @escaping (ObservatoryResponse?, Error?) -> Void)

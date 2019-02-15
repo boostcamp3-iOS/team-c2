@@ -15,7 +15,7 @@ extension DateFormatter {
   /// `2019-01-01 12:00`
   static let dateAndTimeForDust: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale.korea
+    formatter.locale = .korea
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     return formatter
   }()
@@ -25,7 +25,7 @@ extension DateFormatter {
   /// `2019년 1월 1일 일요일`
   static let localizedDateWithDay: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale.korea
+    formatter.locale = .korea
     formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
   }()
@@ -35,7 +35,7 @@ extension DateFormatter {
   /// `2019-01-01`
   static let dateForDust: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale.korea
+    formatter.locale = .korea
     formatter.dateFormat = "yyyy-MM-dd"
     return formatter
   }()
@@ -45,7 +45,7 @@ extension DateFormatter {
   /// `12`
   static let hour: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale.korea
+    formatter.locale = .korea
     formatter.dateFormat = "HH"
     return formatter
   }()

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Core Data Service
+/// 코어데이터 매니저 베이스 클래스.
 final class CoreDataManager: CoreDataManagerType {
   
   /// CoreDataManager의 싱글톤 객체.

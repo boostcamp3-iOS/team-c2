@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIViewController {
+  
   /// `UIViewController` instantiate.
   static func instantiate(fromStoryboard storyboard: String,
                           identifier: String) -> UIViewController {

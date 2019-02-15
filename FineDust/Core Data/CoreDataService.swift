@@ -11,11 +11,13 @@ import Foundation
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
 
-  /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 유저 매니저 프로퍼티.
   let userManager: CoreDataUserManagerType
   
-  /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 흡입량 매니저 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
+  
+  // MARK: Dependency Injection
   
   init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
        intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {

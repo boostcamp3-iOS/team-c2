@@ -8,8 +8,10 @@
 
 import Foundation
 
+/// 코어데이터의 `Intake` 모델 관련 매니저.
 final class CoreDataIntakeManager: CoreDataIntakeManagerType {
   
+  /// Singleton Object
   static let shared = CoreDataIntakeManager()
   
   private init() { }

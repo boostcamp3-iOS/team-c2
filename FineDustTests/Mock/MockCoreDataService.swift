@@ -40,7 +40,7 @@ class MockCoreDataService: CoreDataServiceType {
   }
   
   func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void) {
-    completion(lastRequestedData, error)
+    completion(lastSavedData, error)
   }
   
   func saveLastRequestedData(_ lastSavedData: LastRequestedData, completion: @escaping (Error?) -> Void) {

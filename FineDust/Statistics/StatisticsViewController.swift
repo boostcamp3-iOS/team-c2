@@ -83,14 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes: [CGFloat]
-    = (UserDefaults.standard.array(forKey: "fineDustIntakes") as? [Int])?.map { CGFloat($0) }
-      ?? [100, 100, 100, 100, 100, 100, 100]
+  private var fineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
   
   /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes: [CGFloat]
-    = (UserDefaults.standard.array(forKey: "ultrafineDustIntakes") as? [Int])?.map { CGFloat($0) }
-      ?? [100, 100, 100, 100, 100, 100, 100]
+  private var ultrafineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -115,7 +111,6 @@ final class StatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "미세먼지 분석".localized
     createSubviews()
     setConstraintsToSubviews()
     registerLocationObserver()
@@ -129,6 +124,7 @@ final class StatisticsViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     initializeRatioGraphView()
+    // 한번 보여진 이후로는 비즈니스 로직을 수행하지 않음
     if !isPresented {
       isPresented.toggle()
       requestIntake()
@@ -139,6 +135,7 @@ final class StatisticsViewController: UIViewController {
     unregisterLocationObserver()
   }
   
+  /// 세그먼티드 컨트롤 값이 바뀌었을 때 호출됨.
   @objc private func segmentedControlValueDidChange(_ sender: UISegmentedControl) {
     initializeSubviews()
   }
@@ -168,10 +165,6 @@ final class StatisticsViewController: UIViewController {
         let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
-        UserDefaults.standard
-          .set([fineDusts, [fineDust]].flatMap { $0 }, forKey: "fineDustIntakes")
-        UserDefaults.standard
-          .set([ultrafineDusts, [ultrafineDust]].flatMap { $0 }, forKey: "ultrafineDustIntakes")
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
@@ -186,7 +179,9 @@ final class StatisticsViewController: UIViewController {
 // MARK: - LocationObserver 구현
 
 extension StatisticsViewController: LocationObserver {
+  
   func handleIfSuccess(_ notification: Notification) {
+    // 탭바 컨트롤러의 현재 뷰컨트롤러가 해당 뷰컨트롤러일 때만 노티피케이션 성공 핸들러 로직을 수행함
     let tabBarControllerCurrentViewController
       = (tabBarController?.selectedViewController as? UINavigationController)?
         .visibleViewController

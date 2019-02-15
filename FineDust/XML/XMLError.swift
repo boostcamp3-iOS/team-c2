@@ -26,11 +26,10 @@ enum XMLError: Error {
   case `default`
 }
 
-// MARK: - XMLError Extension
+// MARK: - 에러 디스크립션
 
 extension XMLError {
   
-  /// 에러 디스크립션.
   var localizedDescription: String {
     switch self {
     case let .implementationIsMissing(method):

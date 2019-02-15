@@ -11,7 +11,9 @@ import Foundation
 /// 관측소 관련 Dust Manager 클래스.
 final class DustObservatoryManager: DustObservatoryManagerType {
   
-  var networkManager: NetworkManagerType
+  let networkManager: NetworkManagerType
+  
+  // MARK: Dependency Injection
   
   init(networkManager: NetworkManagerType = NetworkManager.shared) {
     self.networkManager = networkManager

@@ -11,6 +11,7 @@ import Foundation
 /// Dust Manager 기반 프로토콜.
 final class DustManager: DustManagerType {
   
+  /// Singleton Object.
   static let shared = DustManager()
   
   private init() { }
