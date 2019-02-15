@@ -9,5 +9,13 @@
 import Foundation
 
 enum HealthKitError: Error {
+  case notMatchingArguments
   
+  case unexpectedIdentifier
+  
+  case queryNotValid
+  
+  case queryExecutedFailed
+  
+  case queryNotSearched
 }

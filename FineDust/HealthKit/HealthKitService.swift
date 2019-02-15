@@ -29,7 +29,7 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .count(),
-                                         quantityTypeIdentifier: .stepCount
+                                         identifier: .stepCount
     ) { value, _, error in
       if let error = error {
         completion(0, error)
@@ -47,7 +47,7 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning
+                                         identifier: .distanceWalkingRunning
     ) { value, _, error in
       if let error = error {
         completion(0, error)
@@ -71,7 +71,7 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: .end(),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning
+                                         identifier: .distanceWalkingRunning
     ) { value, hour, error in
       if let error = error {
         print("Healthkit Query Error: ", error.localizedDescription)
@@ -125,7 +125,7 @@ final class HealthKitService: HealthKitServiceType {
                                            endDate: indexDate.end,
                                            hourInterval: 1,
                                            quantityFor: .meter(),
-                                           quantityTypeIdentifier: .distanceWalkingRunning
+                                           identifier: .distanceWalkingRunning
       ) { value, hour, error in
         if let error = error {
           print("HealthKit Query error: ", error.localizedDescription)

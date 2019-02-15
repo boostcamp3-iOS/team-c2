@@ -16,7 +16,7 @@ protocol HealthKitManagerType: class {
                           endDate: Date,
                           hourInterval: Int,
                           quantityFor: HKUnit,
-                          quantityTypeIdentifier: HKQuantityTypeIdentifier,
+                          identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void)
   
   /// HealthKit 권한 요청 함수.
