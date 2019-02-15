@@ -279,4 +279,144 @@ struct DummyNetworkManager {
       </body>
   </response>
   """
+  
+  static let dustInfoResponseSuccess = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>00</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseApplicationError = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>01</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseDBError = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>02</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseNoData = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>03</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseHTTPError = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>04</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseServiceTimeOut = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>05</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseInvalidRequestParameter = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>10</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseNoRequiredRequestParameter = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>11</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseNoServiceOrDeprecated = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>12</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseAccessDenied = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>20</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseExceededRequestLimit = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>22</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseUnregisteredServiceKey = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>30</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseExpiredServiceKey = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>31</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
+  
+  static let dustInfoResponseUnregisteredDomainOfIPAddress = """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response>
+      <header>
+          <resultCode>32</resultCode>
+          <resultMsg>NORMAL SERVICE.</resultMsg>
+      </header>
+  </response>
+  """
 }

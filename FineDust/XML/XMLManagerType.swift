@@ -10,8 +10,7 @@ import Foundation
 
 /// XML 매니저 프로토콜.
 protocol XMLManagerType: class {
-  
+
   // 주어진 데이터 파싱.
-  func parse(_ data: Data,
-             completion: @escaping (XMLParsingType?, Error?) -> Void)
+  func decode<T>(_ data: Data, completion: @escaping (T?, Error?) -> Void) where T: XMLParsingType
 }

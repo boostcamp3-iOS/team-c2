@@ -14,8 +14,4 @@ final class DustManager: DustManagerType {
   static let shared = DustManager()
   
   private init() { }
-  
-  var networkManager: NetworkManagerType {
-    return NetworkManager.shared
-  }
 }

@@ -83,24 +83,30 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var fineDustTotalIntakes: [CGFloat]
+    = (UserDefaults.standard.array(forKey: "fineDustIntakes") as? [Int])?.map { CGFloat($0) }
+      ?? [100, 100, 100, 100, 100, 100, 100]
   
   /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var ultrafineDustTotalIntakes: [CGFloat]
+    = (UserDefaults.standard.array(forKey: "ultrafineDustIntakes") as? [Int])?.map { CGFloat($0) }
+      ?? [100, 100, 100, 100, 100, 100, 100]
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
   
   /// 미세먼지의 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: CGFloat {
-    let sum = fineDustTotalIntakes.reduce(0, +)
+    let reduced = fineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
     let last = fineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
   
   /// 초미세먼지의 전체에 대한 마지막 값의 비율
   private var ultrafineDustLastValueRatio: CGFloat {
-    let sum = ultrafineDustTotalIntakes.reduce(0, +)
+    let reduced = ultrafineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
     let last = ultrafineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
@@ -141,13 +147,13 @@ final class StatisticsViewController: UIViewController {
   private func requestIntake() {
     intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
-        error.alert.present(to: self)
+        error.presentToast()
         return
       }
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
-          error.alert.present(to: self)
+          error.presentToast()
           return
         }
         guard let self = self,
@@ -162,6 +168,10 @@ final class StatisticsViewController: UIViewController {
         let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
+        UserDefaults.standard
+          .set([fineDusts, [fineDust]].flatMap { $0 }, forKey: "fineDustIntakes")
+        UserDefaults.standard
+          .set([ultrafineDusts, [ultrafineDust]].flatMap { $0 }, forKey: "ultrafineDustIntakes")
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)

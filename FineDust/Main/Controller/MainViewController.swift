@@ -40,17 +40,9 @@ final class MainViewController: UIViewController {
     setUp()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    updateViewController()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
   deinit {
     unregisterLocationObserver()
+    unregisterHealthKitAuthorizationObserver()
   }
 }
 
@@ -58,51 +50,31 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
-    dustInfoService.requestRecentTimeInfo { info, error in
-      if let error = error as? ServiceErrorType {
-        error.alert.present(to: self)
-        return 
-      }
-      if let info = info {
-        DispatchQueue.main.async {
-          self.fineDustLabel.text = "\(info.fineDustValue)µg"
-          self.locationLabel.text = SharedInfo.shared.address
-          self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
-        }
-      }
-    }
+    updateAPIInfo()
   }
 }
 
-// MARK: - Functions
+// MARK: - HealthKitAuthorizationObserver
+
+extension MainViewController: HealthKitAuthorizationObserver {
+  func authorizationSharingAuthorized(_ notification: Notification) {
+    updateHealthKitInfo()
+    updateAPIInfo()
+  }
+}
+
+// MARK: - Methods
 
 extension MainViewController {
   private func setUp() {
     navigationItem.title = "내안의먼지".localized
     registerLocationObserver()
+    registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
-    
-    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
-      if let error = error {
-        DispatchQueue.main.async {
-          self.intakeFineDustLable.text = "0µg"
-          self.intakeUltrafineDustLabel.text = "0µg"
-        }
-        print(error.localizedDescription)
-        return
-      }
-      
-      if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
-        DispatchQueue.main.async {
-          self.intakeFineDustLable.text = "\(fineDust)µg"
-          self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
-        }
-      }
-    }
   }
   
   /// 걸음 수, 걸은 거리 값 업데이트하는 메소드.
-  private func updateViewController() {
+  private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
       if let error = error {
@@ -131,6 +103,46 @@ extension MainViewController {
         }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+        }
+      }
+    }
+  }
+  
+  ///미세먼지량과 위치정보 같은 API정보들을 업데이트 함.
+  private func updateAPIInfo() {
+    // 위치에 관련된 Label들을 업데이트함.
+    dustInfoService.requestRecentTimeInfo { info, error in
+      if let error = error as? ServiceErrorType {
+        error.presentToast()
+        return
+      }
+      if let info = info {
+        DispatchQueue.main.async {
+          self.fineDustLabel.text = "\(info.fineDustValue)µg"
+          self.locationLabel.text = SharedInfo.shared.address
+          self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
+        }
+      }
+    }
+    
+    // 마신 미세먼지양 Label들을 업데이트함.
+    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+      if let error = error {
+        DispatchQueue.main.async {
+          self.intakeFineDustLable.text = "0µg"
+          self.intakeUltrafineDustLabel.text = "0µg"
+        }
+        if let error = error as? ServiceErrorType {
+          print(error.localizedDescription)
+          Toast.shared.show(error.localizedDescription)
+        }
+        return
+      }
+      
+      if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
+        DispatchQueue.main.async {
+          self.intakeFineDustLable.text = "\(fineDust)µg"
+          self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
         }
       }
     }

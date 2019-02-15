@@ -38,7 +38,10 @@ final class HealthKitManager: HealthKitManagerType {
     // 권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정.
     if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
       || healthStore.authorizationStatus(for: distance) == .sharingDenied {
-      isAuthorized = false
+      NotificationCenter.default.post(
+        name: .healthKitAuthorizationSharingDenied,
+        object: nil)
+      print("denied")
       return
     }
     
@@ -46,13 +49,19 @@ final class HealthKitManager: HealthKitManagerType {
     let healthKitTypes: Set = [stepCount, distance]
     
     // 권한요청.
-    healthStore.requestAuthorization(toShare: healthKitTypes,
-                                     read: healthKitTypes
-    ) { _, error in
+    healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, error in
       if let error = error {
         print("request authorization error : \(error.localizedDescription)")
+        Toast.shared.show(error.localizedDescription)
       } else {
         print("complete request authorization")
+        
+        if self.healthStore.authorizationStatus(for: stepCount) == .sharingAuthorized,
+          self.healthStore.authorizationStatus(for: distance) == .sharingAuthorized {
+          NotificationCenter.default.post(
+            name: .healthKitAuthorizationSharingAuthorized,
+            object: nil)
+        }
       }
     }
   }
@@ -90,13 +99,16 @@ final class HealthKitManager: HealthKitManagerType {
       //query 첫 결과에 대한 hanlder
       query.initialResultsHandler = { query, results, error in
         if let error = error {
+          print("HealthKit query is not valid.")
+          Toast.shared.show(error.localizedDescription)
           completion(nil, nil, error)
           return
         }
         if let results = results {
           // 결과가 0일 때
           if results.statistics().count == 0 {
-            completion(0, nil, nil)
+            print("Healthkit Query: 검색 결과가 없음")
+            completion(0, nil, NSError(domain: "asdf", code: 0, userInfo: nil))
           } else {
             // 시작 날짜부터 종료 날짜까지의 모든 시간 간격에 대한 통계 개체를 나열함.
             results.enumerateStatistics(from: startDate, to: endDate) { statistics, _ in
