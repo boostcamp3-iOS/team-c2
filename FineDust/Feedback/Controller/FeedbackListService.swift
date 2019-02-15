@@ -14,6 +14,7 @@ final class FeedbackListService: FeedbackListServiceType {
   // MARK: - Properties
   
   let jsonManager: JSONManagerType
+  private let userDefaultsKey: String = "isBookmarkedByTitle"
   private var dustFeedbacks: [DustFeedback] = []
   private var isBookmarkedByTitle: [String: Bool] = [:]
   
@@ -21,7 +22,7 @@ final class FeedbackListService: FeedbackListServiceType {
     self.jsonManager = jsonManager
     dustFeedbacks =  jsonManager.fetchDustFeedbacks()
     isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
+      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] ?? [:]
   }
   
   // MARK: - Functions
@@ -68,12 +69,12 @@ final class FeedbackListService: FeedbackListServiceType {
   /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
   func saveBookmark(by title: String) {
     if let isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] {
+      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] {
       var newDictionary = isBookmarkedByTitle
       newDictionary[title] = true
-      UserDefaults.standard.set(newDictionary, forKey: "isBookmarkedByTitle")
+      UserDefaults.standard.set(newDictionary, forKey: userDefaultsKey)
     } else {
-      UserDefaults.standard.set([title: true], forKey: "isBookmarkedByTitle")
+      UserDefaults.standard.set([title: true], forKey: userDefaultsKey)
     }
     isBookmarkedByTitle[title] = true
   }
@@ -82,10 +83,10 @@ final class FeedbackListService: FeedbackListServiceType {
   func deleteBookmark(by title: String) {
     isBookmarkedByTitle[title] = false
     if let isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] {
+      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] {
       var newDictionary = isBookmarkedByTitle
       newDictionary[title] = false
-      UserDefaults.standard.set(newDictionary, forKey: "isBookmarkedByTitle")
+      UserDefaults.standard.set(newDictionary, forKey: userDefaultsKey)
     }
   }
 }
