@@ -58,8 +58,7 @@ final class XMLManager: XMLManagerType {
         completion(nil, XMLError.attributeDeserializationFailed(type, attribute))
       }
     } catch {
-      // 기타 XMLError 넘겨줌
-      completion(nil, XMLError.default)
+      completion(nil, error)
     }
   }
 }

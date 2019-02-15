@@ -82,6 +82,10 @@ final class CoreDataService: CoreDataServiceType {
                    ultrafineDusts: [Int],
                    at dates: [Date],
                    completion: @escaping (Error?) -> Void) {
+    if !(fineDusts.count == ultrafineDusts.count && ultrafineDusts.count == dates.count) {
+      completion(NSError(domain: "count not matched", code: 0, userInfo: nil))
+      return
+    }
     for index in dates.indices {
       let fineDust = fineDusts[index]
       let ultrafineDust = ultrafineDusts[index]

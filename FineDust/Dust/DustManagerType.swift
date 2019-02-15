@@ -16,9 +16,6 @@ protocol DustManagerType {
   
   /// 미세먼지 API 서비스 키.
   var serviceKey: String { get }
-  
-  /// 네트워크 매니저.
-  var networkManager: NetworkManagerType { get }
 }
 
 // MARK: - DustManagerType 프로토콜 초기 구현
@@ -33,9 +30,5 @@ extension DustManagerType {
     return """
     BfJjA4%2BuaBHhfAzyF2Ni6xoVDaf%2FhsZylifmFKdW3kyaZECH6c2Lua05fV%2F%2BYgbzPBaSl0YLZwI%2BW%2FK2xzO7sw%3D%3D
     """
-  }
-  
-  var networkManager: NetworkManagerType {
-    return NetworkManager.shared
   }
 }
