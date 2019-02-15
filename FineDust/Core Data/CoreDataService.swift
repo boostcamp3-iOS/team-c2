@@ -76,14 +76,28 @@ final class CoreDataService: CoreDataServiceType {
                         Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
   }
   
-  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
+  func saveIntakes(fineDusts: [Int],
+                   ultrafineDusts: [Int],
+                   at dates: [Date],
+                   completion: @escaping (Error?) -> Void) {
+    for index in dates.indices {
+      let fineDust = fineDusts[index]
+      let ultrafineDust = ultrafineDusts[index]
+      let date = dates[index]
+      intakeManager.save([Intake.date: date,
+                          Intake.fineDust: Int16(fineDust),
+                          Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
+    }
+  }
+  
+  func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
         completion(nil, error)
         return
       }
       guard let user = user else { return }
-      let lastSavedData = LastSavedData(
+      let lastSavedData = LastRequestedData(
         todayFineDust: Int(user.todayFineDust),
         todayUltrafineDust: Int(user.todayUltrafineDust),
         distance: Int(user.distance),
