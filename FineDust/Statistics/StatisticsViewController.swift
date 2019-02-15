@@ -187,7 +187,12 @@ final class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
-    requestIntake()
+    let tabBarControllerCurrentViewController
+      = (tabBarController?.selectedViewController as? UINavigationController)?
+        .visibleViewController
+    if tabBarControllerCurrentViewController == self {
+      requestIntake()
+    }
   }
 }
 
