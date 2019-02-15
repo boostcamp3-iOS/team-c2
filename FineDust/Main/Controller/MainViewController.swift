@@ -88,8 +88,8 @@ extension MainViewController {
   private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
-      if let error = error {
-        print(error)
+      if let error = error as? ServiceErrorType {
+        error.presentToast()
         return
       }
       if let value = value {
@@ -101,11 +101,11 @@ extension MainViewController {
     
     // 걸은 거리 label에 표시
     healthKitService.requestTodayDistance { value, error in
+      if let error = error as? ServiceErrorType {
+        error.presentToast()
+        return
+      }
       if let value = value {
-        if let error = error {
-          print(error)
-          return
-        }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
@@ -133,8 +133,7 @@ extension MainViewController {
     // 마신 미세먼지양 Label들을 업데이트함.
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
       if let error = error as? ServiceErrorType {
-        print(error.localizedDescription)
-        Toast.shared.show(error.localizedDescription)
+        error.presentToast()
         return
       }
       if let fineDust = fineDust, let ultrafineDust = ultrafineDust {

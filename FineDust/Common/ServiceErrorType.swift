@@ -28,6 +28,8 @@ extension ServiceErrorType {
       return error.localizedDescription
     case let error as DustError:
       return error.localizedDescription
+    case let error as HealthKitError:
+      return error.localizedDescription
     default:
       return "에러"
     }
