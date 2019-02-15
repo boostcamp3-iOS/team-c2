@@ -29,7 +29,7 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .count(),
-                                         quantityTypeIdentifier: .stepCount
+                                         identifier: .stepCount
     ) { value, _, error in
       if let error = error {
         completion(0, error)
@@ -47,7 +47,7 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning
+                                         identifier: .distanceWalkingRunning
     ) { value, _, error in
       if let error = error {
         completion(0, error)
@@ -71,9 +71,9 @@ final class HealthKitService: HealthKitServiceType {
                                          endDate: .end(),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
-                                         quantityTypeIdentifier: .distanceWalkingRunning
+                                         identifier: .distanceWalkingRunning
     ) { value, hour, error in
-      if let error = error {
+      if let error = error as? ServiceErrorType {
         print("Healthkit Query Error: ", error.localizedDescription)
         Toast.shared.show(error.localizedDescription)
         for hour in 0...23 {
@@ -125,15 +125,14 @@ final class HealthKitService: HealthKitServiceType {
                                            endDate: indexDate.end,
                                            hourInterval: 1,
                                            quantityFor: .meter(),
-                                           quantityTypeIdentifier: .distanceWalkingRunning
+                                           identifier: .distanceWalkingRunning
       ) { value, hour, error in
-        if let error = error {
+        if let error = error as? ServiceErrorType {
           print("HealthKit Query error: ", error.localizedDescription)
           Toast.shared.show(error.localizedDescription)
           for hour in 0...23 {
             hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
             temp += 1
-            print("temp", temp)
           }
           dateHourIntakePair[indexDate.start] = hourIntakePair
           

@@ -65,6 +65,7 @@
 		11673568F31D509D3388BE56842F8EBC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */; };
 		519B7F0016C2C381A823F4E7629D0A85 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */; };
 		10D87C87A888A5B4D15497F707FFCCB5 /* HealthKitAuthorizationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074065756F2F4F3D14EAB5587538EF /* HealthKitAuthorizationObserver.swift */; };
+		2B2B6D92FFEB20810E34154A808B8C77 /* HealthKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CC45BE624B6E37953DF24A3C61CA17 /* HealthKitError.swift */; };
 		618DA42D0AAE01B72083D5BB17E8919C /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */; };
 		7B28D176B8026581EE3B56141483C34D /* HealthKitManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */; };
 		CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */; };
@@ -245,6 +246,7 @@
 		809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		DC074065756F2F4F3D14EAB5587538EF /* HealthKitAuthorizationObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitAuthorizationObserver.swift; sourceTree = "<group>"; };
+		B3CC45BE624B6E37953DF24A3C61CA17 /* HealthKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitError.swift; sourceTree = "<group>"; };
 		347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManagerType.swift; sourceTree = "<group>"; };
 		2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				DC074065756F2F4F3D14EAB5587538EF /* HealthKitAuthorizationObserver.swift */,
+				B3CC45BE624B6E37953DF24A3C61CA17 /* HealthKitError.swift */,
 				347A6FE85C32130023FDA3A74361CAB3 /* HealthKitManager.swift */,
 				80E2736AB0D4478F84705BDDA97BD8CA /* HealthKitManagerType.swift */,
 				2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */,
@@ -991,6 +994,7 @@
 				BF8FDD73C3CB256E7A640BE952DAB4ED /* HTTPMethod.swift in Sources */,
 				0F99D43AFB7714E3367A58D454482FC1 /* HTTPStatusCode.swift in Sources */,
 				10D87C87A888A5B4D15497F707FFCCB5 /* HealthKitAuthorizationObserver.swift in Sources */,
+				2B2B6D92FFEB20810E34154A808B8C77 /* HealthKitError.swift in Sources */,
 				618DA42D0AAE01B72083D5BB17E8919C /* HealthKitManager.swift in Sources */,
 				7B28D176B8026581EE3B56141483C34D /* HealthKitManagerType.swift in Sources */,
 				CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */,

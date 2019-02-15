@@ -21,9 +21,9 @@ final class MockHealthKitManager: HealthKitManagerType {
                           endDate: Date,
                           hourInterval: Int,
                           quantityFor: HKUnit,
-                          quantityTypeIdentifier: HKQuantityTypeIdentifier,
+                          identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void) {
-    switch quantityTypeIdentifier {
+    switch identifier {
     case .distanceWalkingRunning:
       completion(distance, hourInteger, error)
     case .stepCount:
