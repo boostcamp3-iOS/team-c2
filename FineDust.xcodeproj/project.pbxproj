@@ -35,7 +35,6 @@
 		81D20E9CADF01244ADFC634BACFD4A02 /* DummyJSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18EF4EFB5BFEBF0FF294BACC38A595 /* DummyJSONManager.swift */; };
 		31BB13768CFE9F024ABAC13EDC375039 /* DummyNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9B66402A9E9E9FCAA8D8E34A15E32 /* DummyNetworkManager.swift */; };
 		F2B9A6C9CEBF51011FE2C037DFACC5D8 /* DustError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DFB176E6D3CE407FBD2EA7289881AF /* DustError.swift */; };
-		D0765E052D0AF866A0C2843180CF4547 /* DustFeedback.json in Resources */ = {isa = PBXBuildFile; fileRef = 35A803F31E8FA311980BA194EBD8B678 /* DustFeedback.json */; };
 		9DBFC7AB6704D4E8983F2F1DAF56E373 /* DustFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602A432174330BBC17B1E697D350626 /* DustFeedback.swift */; };
 		8A850213B84E4BADA60BA0AFF9518D5D /* DustGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EC047C4F060467C8A0D71A5763D757 /* DustGrade.swift */; };
 		945F8AE930CB66E8CF13E3ADC970C3D4 /* DustInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E7157DC9FD660275C049CF786F487E /* DustInfoManager.swift */; };
@@ -206,7 +205,6 @@
 		3E18EF4EFB5BFEBF0FF294BACC38A595 /* DummyJSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyJSONManager.swift; sourceTree = "<group>"; };
 		A5B9B66402A9E9E9FCAA8D8E34A15E32 /* DummyNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetworkManager.swift; sourceTree = "<group>"; };
 		91DFB176E6D3CE407FBD2EA7289881AF /* DustError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustError.swift; path = FineDust/Dust/DustError.swift; sourceTree = SOURCE_ROOT; };
-		35A803F31E8FA311980BA194EBD8B678 /* DustFeedback.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DustFeedback.json; sourceTree = "<group>"; };
 		7602A432174330BBC17B1E697D350626 /* DustFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DustFeedback.swift; path = FineDust/Feedback/DustFeedback.swift; sourceTree = SOURCE_ROOT; };
 		D8EC047C4F060467C8A0D71A5763D757 /* DustGrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustGrade.swift; sourceTree = "<group>"; };
 		F9E7157DC9FD660275C049CF786F487E /* DustInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustInfoManager.swift; sourceTree = "<group>"; };
@@ -420,16 +418,6 @@
 			path = Dummy;
 			sourceTree = "<group>";
 		};
-		5B568E34B6E17034C0860A10710BB4BB /* XML */ = {
-			isa = PBXGroup;
-			children = (
-				BE89D1AC7B4ABC77F127973D69AA3290 /* XMLError.swift */,
-				E100FE6E1F64C9EE564CCB877D5E6DF5 /* XMLManager.swift */,
-				9B8DA6A2FE02219E549C233656F8918A /* XMLManagerType.swift */,
-			);
-			path = XML;
-			sourceTree = "<group>";
-		};
 		1A732CBC6A82F5401C8E972D3296C7C0 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +535,16 @@
 				46148D231458F1D73D6644E885ACAF67 /* ValueGraphViewDataSource.swift */,
 			);
 			path = "Value Graph";
+			sourceTree = "<group>";
+		};
+		5B568E34B6E17034C0860A10710BB4BB /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				BE89D1AC7B4ABC77F127973D69AA3290 /* XMLError.swift */,
+				E100FE6E1F64C9EE564CCB877D5E6DF5 /* XMLManager.swift */,
+				9B8DA6A2FE02219E549C233656F8918A /* XMLManagerType.swift */,
+			);
+			path = XML;
 			sourceTree = "<group>";
 		};
 		5D59E8FBA59418EFF9F76EB07E738D2F /* HealthKit */ = {
@@ -716,7 +714,6 @@
 		C88330A0EFA0B675152D24D29FE45F1D /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				35A803F31E8FA311980BA194EBD8B678 /* DustFeedback.json */,
 				5E5C390A35DCD90C43B0702BDC3C825C /* JSONManager.swift */,
 				5C7A1E57AF58FC89CACB2E06F9BFA22B /* JSONManagerType.swift */,
 			);
@@ -876,7 +873,6 @@
 				204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */,
 				740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */,
 				BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */,
-				D0765E052D0AF866A0C2843180CF4547 /* DustFeedback.json in Resources */,
 				F7D73707461038D505CBB62AF328D9E2 /* Feedback.storyboard in Resources */,
 				A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */,
 				5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */,
