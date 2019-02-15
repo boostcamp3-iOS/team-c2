@@ -89,4 +89,16 @@ final class FeedbackListService: FeedbackListServiceType {
       UserDefaults.standard.set(newDictionary, forKey: userDefaultsKey)
     }
   }
+  
+  /// 제목으로 피드백 전체 정보를 가져옴.
+  func fetchFeedbackbyTitle(title: String) -> DustFeedback {
+    var result: DustFeedback?
+    
+    for feedback in 0..<dustFeedbacks.count {
+      if title == dustFeedbacks[feedback].title {
+        result = dustFeedbacks[feedback]
+      }
+    }
+    return result ?? dustFeedbacks[0]
+  }
 }
