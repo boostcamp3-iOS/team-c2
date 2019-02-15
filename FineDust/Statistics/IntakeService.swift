@@ -46,6 +46,10 @@ final class IntakeService: IntakeServiceType {
           let sortedUltrafineDust = ultrafineDust?.sortedByHour().map({ $0.value }),
           let sortedDistance = distancePerHour?.sortedByHour().map({ $0.value })
         else { return }
+        if !self.healthKitService.isAuthorized {
+          completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
+          return
+        }
         // 시퀀스를 묶어 특정 수식을 통하여 값을 산출
         let totalFineDustValue = zip(sortedFineDust, sortedDistance)
           .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
@@ -107,6 +111,10 @@ final class IntakeService: IntakeServiceType {
                     guard let self = self,
                       let hourlyDistancePerDate = hourlyDistancePerDate
                     else { return }
+                    if !self.healthKitService.isAuthorized {
+                      completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
+                      return
+                    }
                     let sortedHourlyDistancePerDate = hourlyDistancePerDate.sortedByDate()
                     let sortedHourlyFineDustIntakePerDate
                       = hourlyFineDustIntakePerDate.sortedByDate()

@@ -21,4 +21,6 @@ protocol HealthKitManagerType: class {
   
   /// HealthKit 권한 요청 함수.
   func requestAuthorization()
+  
+  var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) { get }
 }

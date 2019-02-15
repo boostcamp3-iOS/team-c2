@@ -17,6 +17,11 @@ final class HealthKitService: HealthKitServiceType {
     self.healthKitManager = healthKit
   }
   
+  var isAuthorized: Bool {
+    let status = healthKitManager?.authorizationStatus ?? (.notDetermined, .notDetermined)
+    return status.0 == .sharingAuthorized && status.1 == .sharingAuthorized
+  }
+  
   /// 오늘 걸음 수 가져오는 함수
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     

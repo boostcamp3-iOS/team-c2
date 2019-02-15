@@ -23,9 +23,6 @@ final class HealthKitManager: HealthKitManagerType {
   /// Health 앱 데이터 중 걸은 거리를 가져오기 위한 프로퍼티.
   private let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
   
-  /// Health App 권한을 나타내는 변수.
-  private var isAuthorized = true
-  
   // MARK: - Method
   
   /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
@@ -133,5 +130,12 @@ final class HealthKitManager: HealthKitManagerType {
       }
       healthStore.execute(query)
     }
+  }
+  
+  var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) {
+    guard let stepCount = stepCount, let distance = distance
+    else { return (.notDetermined, .notDetermined) }
+    return (healthStore.authorizationStatus(for: stepCount),
+            healthStore.authorizationStatus(for: distance))
   }
 }
