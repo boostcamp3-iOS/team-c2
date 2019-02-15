@@ -17,7 +17,7 @@ protocol CoreDataManagerType {
   var context: NSManagedObjectContext { get }
   
   /// CREATE
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void)
+  func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void)
 }
 
 // MARK: - CoreDataManagerType 프로토콜 초기 구현
@@ -29,5 +29,5 @@ extension CoreDataManagerType {
     return delegate.persistentContainer.viewContext
   }
   
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) { }
+  func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) { }
 }
