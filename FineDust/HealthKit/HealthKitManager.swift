@@ -18,20 +18,21 @@ final class HealthKitManager: HealthKitManagerType {
   private let healthStore = HKHealthStore()
   
   /// Health 앱 데이터 중 걸음 수를 가져오기 위한 프로퍼티.
-  private let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount)
+  private let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount)!
   
   /// Health 앱 데이터 중 걸은 거리를 가져오기 위한 프로퍼티.
-  private let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
+  private let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!
   
-  // MARK: - Method
+  /// stepCount에 대한 권한과 distance에 관한 권한.
+  var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) {
+    return (healthStore.authorizationStatus(for: stepCount),
+            healthStore.authorizationStatus(for: distance))
+  }
+  
+  // MARK: - Methods
   
   /// App 시작시 Health App 정보 접근권한을 얻기 위한 메소드.
   func requestAuthorization() {
-    guard let stepCount = stepCount, let distance = distance else {
-      print("stepCount, distance properties error")
-      return
-    }
-    
     // 권한이 없을 경우 사용자가 직접 허용을 해야하게끔 해주기 위해 변수를 false로 설정.
     if healthStore.authorizationStatus(for: stepCount) == .sharingDenied
       || healthStore.authorizationStatus(for: distance) == .sharingDenied {
@@ -53,11 +54,13 @@ final class HealthKitManager: HealthKitManagerType {
       } else {
         print("complete request authorization")
         
-        if self.healthStore.authorizationStatus(for: stepCount) == .sharingAuthorized,
-          self.healthStore.authorizationStatus(for: distance) == .sharingAuthorized {
+        if self.healthStore.authorizationStatus(for: self.stepCount) == .sharingAuthorized,
+          self.healthStore.authorizationStatus(for: self.distance) == .sharingAuthorized {
           NotificationCenter.default.post(
             name: .healthKitAuthorizationSharingAuthorized,
             object: nil)
+        } else {
+          
         }
       }
     }
@@ -132,10 +135,5 @@ final class HealthKitManager: HealthKitManagerType {
     }
   }
   
-  var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) {
-    guard let stepCount = stepCount, let distance = distance
-    else { return (.notDetermined, .notDetermined) }
-    return (healthStore.authorizationStatus(for: stepCount),
-            healthStore.authorizationStatus(for: distance))
-  }
+  
 }
