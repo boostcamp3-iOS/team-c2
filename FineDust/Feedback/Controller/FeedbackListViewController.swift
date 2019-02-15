@@ -22,6 +22,7 @@ final class FeedbackListViewController: UIViewController {
   private var feedbackCount = 0
   private var newDustFeedbacks: [DustFeedback]?
   private var isBookmarkedByTitle: [String: Bool] = [:]
+  private var valueToPass: String?
   
   // MARK: - LifeCycle
   
@@ -37,16 +38,21 @@ final class FeedbackListViewController: UIViewController {
       print(error.localizedDescription)
     }
     
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    
     feedbackListTableView.reloadData()
   }
   
   // MARK: - Function
   
-  private func pushDetailViewController() {
+  private func pushDetailViewController(valueToPass: String) {
     if let viewController = storyboard?
-      .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString) {
+      .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString)
+      as? FeedbackDetailViewController {
       navigationController?.pushViewController(viewController, animated: true)
+      viewController.passedValue = valueToPass
     }
+    
   }
   
   /// 미세먼지 정보 정렬 액션시트
@@ -96,7 +102,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     guard let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath) as? FeedbackListTableViewCell
-    else { return UITableViewCell() }
+      else { return UITableViewCell() }
     cell.delegate = self
     let feedback = feedbackListService.fetchFeedback(at: indexPath.row)
     
@@ -125,7 +131,13 @@ extension FeedbackListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    pushDetailViewController()
+    
+    guard let currentCell = feedbackListTableView.cellForRow(at: indexPath)
+      as? FeedbackListTableViewCell else { return }
+    
+    let valueToPass = currentCell.title
+
+    pushDetailViewController(valueToPass: valueToPass)
   }
   
   func tableView(_ tableView: UITableView,
@@ -211,7 +223,13 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-    pushDetailViewController()
+      
+      guard let currentCell = collectionView.cellForItem(at: indexPath)
+        as? RecommendCollectionViewCell else { return }
+    
+      let valueToPass = currentCell.title
+    
+      pushDetailViewController(valueToPass: valueToPass)
   }
 }
 
