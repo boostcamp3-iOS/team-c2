@@ -1,7 +1,9 @@
 language: swift
 osx_image: xcode10.1
 xcode_project: FineDust.xcodeproj
-xcode_scheme: FineDustTests
+xcode_scheme: 
+- FineDust
+- FineDustTests
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
 notifications:
   slack:
