@@ -9,7 +9,7 @@
 import Foundation
 
 /// XML 파싱 에러 정의.
-enum XMLError: ServiceErrorType {
+enum XMLError: Error {
   
   case implementationIsMissing(String)
   

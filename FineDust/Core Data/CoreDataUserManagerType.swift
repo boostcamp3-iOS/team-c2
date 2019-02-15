@@ -13,5 +13,5 @@ import Foundation
 protocol CoreDataUserManagerType: CoreDataManagerType {
 
   /// READ
-  func request(completion: (User?, Error?) -> Void)
+  func request(completion: @escaping (User?, Error?) -> Void)
 }

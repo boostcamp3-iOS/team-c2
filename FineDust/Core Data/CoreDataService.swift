@@ -30,7 +30,7 @@ final class CoreDataService: CoreDataServiceType {
       if let lastAccessedDate = user?.lastAccessedDate {
         completion(lastAccessedDate, error)
       } else {
-        saveLastAccessedDate { error in
+        self.saveLastAccessedDate { error in
           completion(Date(), error)
         }
       }

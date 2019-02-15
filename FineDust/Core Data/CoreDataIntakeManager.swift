@@ -14,24 +14,28 @@ final class CoreDataIntakeManager: CoreDataIntakeManagerType {
   
   private init() { }
   
-  func request(completion: ([Intake]?, Error?) -> Void) {
-    do {
-      let results = try context.fetch(Intake.fetchRequest()) as? [Intake]
-      completion(results, nil)
-    } catch {
-      completion(nil, error)
+  func request(completion: @escaping ([Intake]?, Error?) -> Void) {
+    DispatchQueue.main.async {
+      do {
+        let results = try self.context.fetch(Intake.fetchRequest()) as? [Intake]
+        completion(results, nil)
+      } catch {
+        completion(nil, error)
+      }
     }
   }
   
   /// CREATE
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
-    do {
-      let intake = Intake(context: context)
-      dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
-      try context.save()
-      completion(nil)
-    } catch {
-      completion(error)
+  func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) {
+    DispatchQueue.main.async {
+      do {
+        let intake = Intake(context: self.context)
+        dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
+        try self.context.save()
+        completion(nil)
+      } catch {
+        completion(error)
+      }
     }
   }
 }
