@@ -16,5 +16,4 @@ struct DustFeedback: Codable {
   let source: String
   let date: String
   let contents: String
-  
 }

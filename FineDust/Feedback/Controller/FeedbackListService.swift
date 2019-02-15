@@ -15,12 +15,13 @@ final class FeedbackListService: FeedbackListServiceType {
   
   let jsonManager: JSONManagerType
   private var dustFeedbacks: [DustFeedback] = []
-  private var sortedArray: [DustFeedback] = []
-  private var bookmarkInfoTitleArray: [String] = []
-  private var bookmarkIndex: [Int] = []
+  private var isBookmarkedByTitle: [String: Bool] = [:]
+  
   init(jsonManager: JSONManagerType) {
     self.jsonManager = jsonManager
     dustFeedbacks =  jsonManager.fetchDustFeedbacks()
+    isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
   }
   
   // MARK: - Functions
@@ -35,77 +36,56 @@ final class FeedbackListService: FeedbackListServiceType {
   }
   
   /// 해당 인덱스의 피드백 정보를 반환함.
-  func fetchFeedbackData(at index: Int) -> DustFeedback {
+  func fetchFeedback(at index: Int) -> DustFeedback {
     return dustFeedbacks[index]
   }
   
   /// 피드백 정보를 최신순으로 반환함.
-  func fetchFeedbackRecentDate() -> [DustFeedback] {
-    sortedArray = dustFeedbacks.sorted(by: { $0.date > $1.date })
-    return sortedArray
+  func fetchFeedbacksByRecentDate() -> [DustFeedback] {
+    return dustFeedbacks.sorted { $0.date > $1.date }
   }
   
   /// 피드백 정보를 제목순으로 반환함.
-  func fetchFeedbackTitle() -> [DustFeedback] {
-    sortedArray = dustFeedbacks.sorted(by: { $0.title < $1.title })
-    return sortedArray
-  }
-  
-  /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
-  func setBookmarkInfoTitleArray(title: String) {
-    UserDefaults.standard.set(title, forKey: "bookmarkInfoTitle")
-    if let bookmarkInfoTitle = UserDefaults.standard.string(forKey: "bookmarkInfoTitle") {
-      bookmarkInfoTitleArray.append(bookmarkInfoTitle)
-    }
-  }
-  
-  /// 즐겨찾기한 글의 제목으로 인덱스를 반환함.
-  func getBookmarkInfoIndex() -> [Int] {
-    bookmarkIndex = []
-    print(bookmarkIndex)
-    for index in 0..<bookmarkInfoTitleArray.count {
-      print("f\(bookmarkInfoTitleArray)")
-      for totalIndex in 0..<dustFeedbacks.count {
-        print("df\(dustFeedbacks.count)")
-        if bookmarkInfoTitleArray[index] == dustFeedbacks[totalIndex].title {
-          print(dustFeedbacks.index(after: totalIndex-1))
-          bookmarkIndex.append(dustFeedbacks.index(after: totalIndex-1))
-          break
-        }
-      }
-    }
-    return bookmarkIndex
+  func fetchFeedbacksByTitle() -> [DustFeedback] {
+    return dustFeedbacks.sorted { $0.title < $1.title }
   }
   
   /// 피드백 정보를 즐겨찾기순으로 반환함.
-  func fetchFeedbackBookmark() -> [DustFeedback] {
-    sortedArray = []
-    var feedbackIndex = Array<Int>(0..<dustFeedbacks.count)
-    var bookmarkIndexArray = getBookmarkInfoIndex()
-    for index in 0..<bookmarkIndexArray.count {
-      sortedArray.append(dustFeedbacks[bookmarkIndexArray[index]])
-    }
-    
-    for index in (0..<bookmarkIndexArray.count).reversed() {
-      for totalIndex in 0..<dustFeedbacks.count {
-        if bookmarkIndexArray[index] == feedbackIndex[totalIndex] {
-          feedbackIndex.remove(at: totalIndex)
-          break
-        }
+  func fetchFeedbacksByBookmark() -> [DustFeedback] {
+    var tempFeedbacks: [DustFeedback] = []
+    var resultFeedbacks: [DustFeedback] = []
+    for feedback in dustFeedbacks {
+      if isBookmarkedByTitle[feedback.title] ?? false {
+        tempFeedbacks.append(feedback)
+      } else {
+        resultFeedbacks.append(feedback)
       }
     }
-    for restIndex in 0..<feedbackIndex.count {
-      sortedArray.append(dustFeedbacks[feedbackIndex[restIndex]])
+    resultFeedbacks.insert(contentsOf: tempFeedbacks, at: 0)
+    return resultFeedbacks
+  }
+  
+  /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
+  func saveBookmark(by title: String) {
+    if let isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] {
+      var newDictionary = isBookmarkedByTitle
+      newDictionary[title] = true
+      UserDefaults.standard.set(newDictionary, forKey: "isBookmarkedByTitle")
+    } else {
+      UserDefaults.standard.set([title: true], forKey: "isBookmarkedByTitle")
     }
-    return sortedArray
+    isBookmarkedByTitle[title] = true
   }
   
   /// 저장했던 즐겨찾기 정보 제목을 삭제함.
-  func deleteFeedbackTitle(title: String) {
-    for index in 0..<bookmarkInfoTitleArray.count {
-      if title == bookmarkInfoTitleArray[index] {
-        bookmarkInfoTitleArray.remove(at: index)
-      }
+  func deleteBookmark(by title: String) {
+    isBookmarkedByTitle[title] = false
+    if let isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] {
+      var newDictionary = isBookmarkedByTitle
+      newDictionary[title] = false
+      UserDefaults.standard.set(newDictionary, forKey: "isBookmarkedByTitle")
     }
   }
 }

@@ -10,10 +10,6 @@ import Foundation
 
 final class JSONManager: JSONManagerType {
   
-  // MARK: - Properties
-  
-  var dustFeedbacks = [DustFeedback]()
-  
   // MARK: - Fucntion
   
   /// DustFeedbacks json 파싱하여 데이터를 가져옴.
@@ -27,12 +23,11 @@ final class JSONManager: JSONManagerType {
 
     do {
       guard let data = try String(contentsOfFile: path).data(using: .utf8)
-        else { return [] }
-      dustFeedbacks = try jsonDecoder.decode([DustFeedback].self, from: data)
+      else { return [] }
+      return try jsonDecoder.decode([DustFeedback].self, from: data)
     } catch {
       print("error: \(error)")
+      return []
     }
-    return dustFeedbacks
   }
-  
 }
