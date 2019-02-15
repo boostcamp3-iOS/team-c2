@@ -13,5 +13,5 @@ import Foundation
 protocol CoreDataIntakeManagerType: CoreDataManagerType {
   
   /// READ
-  func request(completion: ([Intake]?, Error?) -> Void)
+  func request(completion: @escaping ([Intake]?, Error?) -> Void)
 }
