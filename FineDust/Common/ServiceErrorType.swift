@@ -6,6 +6,7 @@
 //  Copyright © 2019 boostcamp3rd. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 import UIKit
 
@@ -27,6 +28,8 @@ extension ServiceErrorType {
     case let error as XMLError:
       return error.localizedDescription
     case let error as DustError:
+      return error.localizedDescription
+    case let error as CLError:
       return error.localizedDescription
     default:
       return "에러"

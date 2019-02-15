@@ -14,23 +14,27 @@ final class CoreDataUserManager: CoreDataUserManagerType {
   
   private init() { }
   
-  func request(completion: (User?, Error?) -> Void) {
-    do {
-      let results = try context.fetch(User.fetchRequest()) as? [User]
-      completion(results?.last, nil)
-    } catch {
-      completion(nil, error)
+  func request(completion: @escaping (User?, Error?) -> Void) {
+    DispatchQueue.main.async {
+      do {
+        let results = try self.context.fetch(User.fetchRequest()) as? [User]
+        completion(results?.last, nil)
+      } catch {
+        completion(nil, error)
+      }
     }
   }
   
-  func save(_ dictionary: [String: Any], completion: (Error?) -> Void) {
-    do {
-      let user = User(context: context)
-      dictionary.forEach { user.setValue($0.value, forKey: $0.key) }
-      try context.save()
-      completion(nil)
-    } catch {
-      completion(error)
+  func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) {
+    DispatchQueue.main.async {
+      do {
+        let user = User(context: self.context)
+        dictionary.forEach { user.setValue($0.value, forKey: $0.key) }
+        try self.context.save()
+        completion(nil)
+      } catch {
+        completion(error)
+      }
     }
   }
 }
