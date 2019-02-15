@@ -19,8 +19,10 @@ class MockHealthKitService: HealthKitServiceType {
   
   var hourlyDistancePerDate: DateHourIntakePair?
   
-  var error: Error?
+  var isAuthorized: Bool = false
   
+  var error: Error?
+
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     completion(stepCount, error)
   }
