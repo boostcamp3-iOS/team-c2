@@ -15,7 +15,7 @@ class MockCoreDataService: CoreDataServiceType {
   
   var coreDataIntakePerDate: DateIntakePair?
   
-  var lastSavedData: LastRequestedData?
+  var lastRequestedData: LastRequestedData?
   
   var error: Error?
   
@@ -35,11 +35,15 @@ class MockCoreDataService: CoreDataServiceType {
     completion(error)
   }
   
+  func saveIntakes(fineDusts: [Int], ultrafineDusts: [Int], at dates: [Date], completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
   func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void) {
     completion(lastSavedData, error)
   }
   
-  func saveLastSavedData(_ lastSavedData: LastRequestedData, completion: @escaping (Error?) -> Void) {
+  func saveLastRequestedData(_ lastSavedData: LastRequestedData, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
 }
