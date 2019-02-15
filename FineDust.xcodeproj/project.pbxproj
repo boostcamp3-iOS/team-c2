@@ -49,9 +49,9 @@
 		F726386EC2915DC663C9CF635154C286 /* DustStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */; };
 		F7D73707461038D505CBB62AF328D9E2 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */; };
 		A7D775E7BD2742C9F215C05EC30481BE /* FeedbackListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */; };
+		548B48B18573E8F39B87EF0B206A2D50 /* FeedbackListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1907A7ABC45E06D253CFDDB27B219B01 /* FeedbackListServiceType.swift */; };
 		C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */; };
 		20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */; };
-		2C7C0969F7006BB15F448796C3BAA4CB /* FeedbackServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */; };
 		F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */; };
 		F9C6F83E8E347307EEF528C08F36BA8B /* FineDustWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D3C478E3F0755E23B991CA642B7C90E /* FineDustWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
@@ -223,9 +223,9 @@
 		F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustStatusCode.swift; path = FineDust/Dust/DustStatusCode.swift; sourceTree = SOURCE_ROOT; };
 		E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListService.swift; sourceTree = "<group>"; };
+		1907A7ABC45E06D253CFDDB27B219B01 /* FeedbackListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListServiceType.swift; sourceTree = "<group>"; };
 		B059EEA2F5DED858EF5951E9018C8A75 /* FeedbackListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackListTableViewCell.swift; path = FineDust/Feedback/View/FeedbackListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
-		893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackServiceType.swift; sourceTree = "<group>"; };
 		6CB7A59C01A6BEA73951091DC6C6C60F /* FineDust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineDust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC90C952E7EA68296C391AC855C57729 /* FineDust.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FineDust.entitlements; sourceTree = "<group>"; };
 		D247F6F3851E8A9D8F03470A313986A4 /* FineDust.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FineDust.xcdatamodel; sourceTree = "<group>"; };
@@ -574,8 +574,8 @@
 			isa = PBXGroup;
 			children = (
 				15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */,
+				1907A7ABC45E06D253CFDDB27B219B01 /* FeedbackListServiceType.swift */,
 				E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */,
-				893E408D113DF5AABDE273DB50A59452 /* FeedbackServiceType.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -969,9 +969,9 @@
 				2857D1F7306B342456D836BA06F582AE /* DustResponse.swift in Sources */,
 				F726386EC2915DC663C9CF635154C286 /* DustStatusCode.swift in Sources */,
 				A7D775E7BD2742C9F215C05EC30481BE /* FeedbackListService.swift in Sources */,
+				548B48B18573E8F39B87EF0B206A2D50 /* FeedbackListServiceType.swift in Sources */,
 				C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */,
 				20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */,
-				2C7C0969F7006BB15F448796C3BAA4CB /* FeedbackServiceType.swift in Sources */,
 				F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */,
 				204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */,
 				A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */,

@@ -21,6 +21,7 @@ final class FeedbackListViewController: UIViewController {
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var feedbackCount = 0
   private var newDustFeedback: [DustFeedback]?
+  private var bookmarkDictionary: [String: Bool] = [:]
   
   // MARK: - LifeCycle
   
@@ -28,7 +29,12 @@ final class FeedbackListViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
     
-    feedbackCount = feedbackListService.fetchFeedbackCount()
+    do {
+      feedbackCount = try feedbackListService.fetchFeedbackCount()
+    } catch {
+      print(error.localizedDescription)
+    }
+    
     feedbackListTableView.reloadData()
   }
   
@@ -57,7 +63,10 @@ final class FeedbackListViewController: UIViewController {
         self.newDustFeedback = self.feedbackListService.fetchFeedbackTitle()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
-      .action(title: "즐겨찾기순")
+      .action(title: "즐겨찾기순", style: .default) { _, _ in
+        self.newDustFeedback = self.feedbackListService.fetchFeedbackBookmark()
+        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+      }
       .action(title: "취소", style: .cancel)
       .present(to: self)
   }
@@ -76,7 +85,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     if section == 0 {
       return 1
     } else {
-      return feedbackListService.fetchFeedbackCount()
+      return feedbackCount
     }
   }
   
@@ -86,7 +95,7 @@ extension FeedbackListViewController: UITableViewDataSource {
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
-    
+    cell.delegate = self
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
     
     if newDustFeedback != nil {
@@ -95,9 +104,9 @@ extension FeedbackListViewController: UITableViewDataSource {
       }
       
     } else {
-      
       cell.setTabelViewCellProperties(dustFeedback: feedback)
     }
+        cell.setBookmarkButtonImage(bookmarkDictionary: bookmarkDictionary)
     
     return cell
   }
@@ -179,7 +188,6 @@ extension FeedbackListViewController: UICollectionViewDataSource {
     
     let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
-    print(feedback)
     return cell
   }
 }
@@ -189,5 +197,28 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     changeView()
+  }
+}
+
+// MARK: - FeedbackListCellDelegate
+
+extension FeedbackListViewController: FeedbackListCellDelegate {
+  func feedbackListCell(_ feedbackListCell: FeedbackListTableViewCell,
+                        didTapBookmarkButton button: UIButton) {
+    
+    button.isSelected = !button.isSelected
+    
+    if button.isSelected == false {
+      bookmarkDictionary[feedbackListCell.title] = nil
+      print(bookmarkDictionary)
+      UserDefaults.standard.removeObject(forKey: "bookmarkInfoTitle")
+      feedbackListService.deleteFeedbackTitle(title: feedbackListCell.title)
+      
+    } else {
+      bookmarkDictionary[feedbackListCell.title] = true
+      print(bookmarkDictionary)
+      feedbackListService.setBookmarkInfoTitleArray(title: feedbackListCell.title)
+    }
+    
   }
 }
