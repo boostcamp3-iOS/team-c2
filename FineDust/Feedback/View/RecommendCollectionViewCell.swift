@@ -16,7 +16,6 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-
     setImageView()
   }
   
@@ -28,14 +27,12 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   
   /// 컬렉션뷰셀 데이터 설정
   func setCollectionViewCellProperties(dustFeedback: DustFeedback) {
-    
-    recommendImageView.image = UIImage(named: dustFeedback.imageName )
+    recommendImageView.image = UIImage(named: dustFeedback.imageName)
     recommendTitleLabel.text = dustFeedback.title
   }
   
   /// 컬렉션뷰셀 이미지 UI 설정
   private func setImageView() {
-    contentView.layer.cornerRadius = 5
-    contentView.layer.masksToBounds = true
+    contentView.layer.setBorder(color: .clear, width: 0.0, radius: 5.0)
   }
 }

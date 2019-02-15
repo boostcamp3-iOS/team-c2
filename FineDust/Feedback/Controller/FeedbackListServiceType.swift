@@ -15,20 +15,22 @@ protocol FeedbackListServiceType: class {
   func fetchFeedbackCount() throws -> Int
   
   /// 해당 인덱스의 피드백 정보를 반환함
-  func fetchFeedbackData(at index: Int) -> DustFeedback
+  func fetchFeedback(at index: Int) -> DustFeedback
   
   /// 피드백 정보를 최신순으로 반환함
-  func fetchFeedbackRecentDate() -> [DustFeedback]
+  func fetchFeedbacksByRecentDate() -> [DustFeedback]
   
   /// 피드백 정보를 제목순으로 반환함
-  func fetchFeedbackTitle() -> [DustFeedback]
+  func fetchFeedbacksByTitle() -> [DustFeedback]
+  
+  /// 피드백 정보를 즐겨찾기순으로 반환함
+  func fetchFeedbacksByBookmark() -> [DustFeedback]
   
   /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
-  func setBookmarkInfoTitleArray(title: String)
+  func saveBookmark(by title: String)
+  
+  func deleteBookmark(by title: String)
   
   /// 즐겨찾기한 글의 제목으로 인덱스를 반환함
-  func getBookmarkInfoIndex() -> [Int]
-
-  /// 피드백 정보를 즐겨찾기순으로 반환함
-  func fetchFeedbackBookmark() -> [DustFeedback]
+  //func getBookmarkInfoIndex() -> [Int]
 }

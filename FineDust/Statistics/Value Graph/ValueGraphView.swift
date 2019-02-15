@@ -86,7 +86,10 @@ final class ValueGraphView: UIView {
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
-    return array.map { dateFormatter.string(from: $0) }.reversed()
+    var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
+    reversed.removeLast()
+    reversed.append("오늘")
+    return reversed
   }
   
   // MARK: IBOutlets

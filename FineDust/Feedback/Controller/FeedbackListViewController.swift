@@ -20,14 +20,16 @@ final class FeedbackListViewController: UIViewController {
   var feedbackListService = FeedbackListService(jsonManager: JSONManager())
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var feedbackCount = 0
-  private var newDustFeedback: [DustFeedback]?
-  private var bookmarkDictionary: [String: Bool] = [:]
+  private var newDustFeedbacks: [DustFeedback]?
+  private var isBookmarkedByTitle: [String: Bool] = [:]
   
   // MARK: - LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
+    isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
     
     do {
       feedbackCount = try feedbackListService.fetchFeedbackCount()
@@ -40,10 +42,10 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: - Function
   
-  /// 화면 이동
-  func changeView() {
-    if let view = self.storyboard?.instantiateViewController(withIdentifier: "DetailView") {
-      self.navigationController?.pushViewController(view, animated: true)
+  private func pushDetailViewController() {
+    if let viewController = storyboard?
+      .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString) {
+      navigationController?.pushViewController(viewController, animated: true)
     }
   }
   
@@ -55,16 +57,16 @@ final class FeedbackListViewController: UIViewController {
     
     UIAlertController
       .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
-      .action(title: "최신순", style: .default) { _, _ in
-        self.newDustFeedback = self.feedbackListService.fetchFeedbackRecentDate()
+      .action(title: "최신순") { _, _ in
+        self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
-      .action(title: "제목순", style: .default) { _, _ in
-        self.newDustFeedback = self.feedbackListService.fetchFeedbackTitle()
+      .action(title: "제목순") { _, _ in
+        self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
-      .action(title: "즐겨찾기순", style: .default) { _, _ in
-        self.newDustFeedback = self.feedbackListService.fetchFeedbackBookmark()
+      .action(title: "즐겨찾기순") { _, _ in
+        self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
         self.feedbackListTableView.reloadSections(indexSet, with: .none)
       }
       .action(title: "취소", style: .cancel)
@@ -94,19 +96,16 @@ extension FeedbackListViewController: UITableViewDataSource {
     guard let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath) as? FeedbackListTableViewCell
-      else { return UITableViewCell() }
+    else { return UITableViewCell() }
     cell.delegate = self
-    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.row)
+    let feedback = feedbackListService.fetchFeedback(at: indexPath.row)
     
-    if newDustFeedback != nil {
-      if let newDustFeedback = newDustFeedback {
-        cell.setTabelViewCellProperties(dustFeedback: newDustFeedback[indexPath.row])
-      }
-      
+    if let newDustFeedbacks = newDustFeedbacks {
+      cell.setTableViewCellProperties(dustFeedback: newDustFeedbacks[indexPath.row])
     } else {
-      cell.setTabelViewCellProperties(dustFeedback: feedback)
+      cell.setTableViewCellProperties(dustFeedback: feedback)
     }
-        cell.setBookmarkButtonImage(bookmarkDictionary: bookmarkDictionary)
+    cell.setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
     
     return cell
   }
@@ -121,48 +120,63 @@ extension FeedbackListViewController: UITableViewDelegate {
     if indexPath.section == 0 {
       return 330
     }
-    return 130
+    return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    changeView()
     tableView.deselectRow(at: indexPath, animated: true)
+    pushDetailViewController()
   }
   
   func tableView(_ tableView: UITableView,
                  viewForHeaderInSection section: Int) -> UIView? {
     
     // headerView 설정
-    let frame = tableView.frame
     let headerView = UIView(frame: CGRect(x: 0,
                                           y: 0,
-                                          width: frame.size.width,
-                                          height: frame.size.height+10))
+                                          width: view.bounds.width,
+                                          height: 60))
     headerView.backgroundColor = UIColor(white: 1, alpha: 0.7)
     
     // header title 설정
-    let label = UILabel(frame: CGRect(x: 20,
-                                      y: -10,
-                                      width: tableView.frame.size.width,
-                                      height: 50))
+    let label = UILabel()
     label.textColor = .darkGray
     label.font = UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    headerView.addSubview(label)
+    NSLayoutConstraint.activate([
+      label.anchor.leading.equal(to: headerView.anchor.leading, offset: 20),
+      label.anchor.centerY.equal(to: headerView.anchor.centerY)
+      ])
     
     // 정렬 액션시트 버튼 설정
-    let button = UIButton(frame: CGRect(x: 330, y: 0, width: 25, height: 25))
-    button.setBackgroundImage(UIImage(named: "sort"), for: .normal)
+    let button = UIButton(type: .system)
+    headerView.addSubview(button)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    NSLayoutConstraint.activate([
+      button.anchor.centerY.equal(to: headerView.anchor.centerY),
+      button.anchor.trailing.equal(to: headerView.anchor.trailing, offset: -20),
+      button.anchor.width.equal(toConstant: 44),
+      button.anchor.height.equal(toConstant: 44)
+      ])
+    button.setImage(Asset.sort.image, for: [])
     button.addTarget(self,
                      action: #selector(settingButtonDidTap),
                      for: .touchUpInside)
     if section == 1 {
-      headerView.addSubview(button)
+      button.isHidden = false
       label.text = "전체 목록"
     } else {
+      button.isHidden = true
       label.text = "정보 추천"
     }
-    headerView.addSubview(label)
     
     return headerView
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 40
   }
 }
 
@@ -186,7 +200,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
                            for: indexPath) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    let feedback = feedbackListService.fetchFeedbackData(at: indexPath.item)
+    let feedback = feedbackListService.fetchFeedback(at: indexPath.item)
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }
@@ -196,7 +210,8 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    changeView()
+    collectionView.deselectItem(at: indexPath, animated: true)
+    pushDetailViewController()
   }
 }
 
@@ -205,20 +220,14 @@ extension FeedbackListViewController: UICollectionViewDelegate {
 extension FeedbackListViewController: FeedbackListCellDelegate {
   func feedbackListCell(_ feedbackListCell: FeedbackListTableViewCell,
                         didTapBookmarkButton button: UIButton) {
-    
-    button.isSelected = !button.isSelected
-    
-    if button.isSelected == false {
-      bookmarkDictionary[feedbackListCell.title] = nil
-      print(bookmarkDictionary)
-      UserDefaults.standard.removeObject(forKey: "bookmarkInfoTitle")
-      feedbackListService.deleteFeedbackTitle(title: feedbackListCell.title)
-      
+    button.isSelected.toggle()
+    let title = feedbackListCell.title
+    if button.isSelected {
+      isBookmarkedByTitle[title] = true
+      feedbackListService.saveBookmark(by: title)
     } else {
-      bookmarkDictionary[feedbackListCell.title] = true
-      print(bookmarkDictionary)
-      feedbackListService.setBookmarkInfoTitleArray(title: feedbackListCell.title)
+      isBookmarkedByTitle[feedbackListCell.title] = false
+      feedbackListService.deleteBookmark(by: title)
     }
-    
   }
 }

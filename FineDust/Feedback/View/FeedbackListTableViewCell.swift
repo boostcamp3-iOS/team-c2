@@ -55,7 +55,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
   }
   
   /// 테이블뷰셀 데이터 설정
-  func setTabelViewCellProperties(dustFeedback: DustFeedback) {
+  func setTableViewCellProperties(dustFeedback: DustFeedback) {
     
     feedbackImageView.image = UIImage(named: dustFeedback.imageName)
     feedbackTitleLabel.text = dustFeedback.title
@@ -64,13 +64,17 @@ final class FeedbackListTableViewCell: UITableViewCell {
   }
   
   /// 북마크 버튼 이미지 설정
-  func setBookmarkButtonImage(bookmarkDictionary: [String: Bool]) {
-    bookmarkButton.imageView?.image = bookmarkDictionary[title] ?? false ?
-      UIImage(named: Asset.yellowStar.name) : UIImage(named: Asset.starOutline.name)
+  func setBookmarkButtonState(isBookmarkedByTitle: [String: Bool]) {
+    let isBookmarked = isBookmarkedByTitle[title] ?? false
+    bookmarkButton.imageView?.image
+      = isBookmarked ? Asset.yellowStar.image : Asset.starOutline.image
+    bookmarkButton.isSelected = isBookmarked
   }
   
   /// 테이블뷰셀 이미지 UI 설정
   private func setImageView() {
-    feedbackImageView.setRounded()
+    feedbackImageView.layer.setBorder(color: .clear,
+                                      width: 0.0,
+                                      radius: feedbackImageView.bounds.height / 2)
   }
 }
