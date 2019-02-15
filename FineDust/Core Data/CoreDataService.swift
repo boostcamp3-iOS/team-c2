@@ -110,15 +110,16 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastSavedData(_ lastSavedData: LastSavedData, completion: @escaping (Error?) -> Void) {
+  func saveLastRequestedData(_ lastRequestedData: LastRequestedData,
+                             completion: @escaping (Error?) -> Void) {
     userManager.save([
-      User.todayFineDust: Int16(lastSavedData.todayFineDust),
-      User.todayUltrafineDust: Int16(lastSavedData.todayUltrafineDust),
-      User.distance: Int16(lastSavedData.distance),
-      User.steps: Int16(lastSavedData.steps),
-      User.address: lastSavedData.address,
-      User.grade: Int16(lastSavedData.grade),
-      User.recentFineDust: Int16(lastSavedData.recentFineDust)
+      User.todayFineDust: Int16(lastRequestedData.todayFineDust),
+      User.todayUltrafineDust: Int16(lastRequestedData.todayUltrafineDust),
+      User.distance: Int16(lastRequestedData.distance),
+      User.steps: Int16(lastRequestedData.steps),
+      User.address: lastRequestedData.address,
+      User.grade: Int16(lastRequestedData.grade),
+      User.recentFineDust: Int16(lastRequestedData.recentFineDust)
       ], completion: completion)
   }
 }
