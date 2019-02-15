@@ -27,4 +27,10 @@ protocol CoreDataServiceType: class {
                   ultrafineDust: Int,
                   at date: Date,
                   completion: @escaping (Error?) -> Void)
+  
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void)
+  
+  func saveLastSavedData(_ lastSavedData: LastSavedData, completion: @escaping (Error?) -> Void)
 }
+
+

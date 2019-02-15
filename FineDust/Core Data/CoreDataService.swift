@@ -75,4 +75,36 @@ final class CoreDataService: CoreDataServiceType {
                         Intake.fineDust: Int16(fineDust),
                         Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
   }
+  
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(nil, error)
+        return
+      }
+      guard let user = user else { return }
+      let lastSavedData = LastSavedData(
+        todayFineDust: Int(user.todayFineDust),
+        todayUltrafineDust: Int(user.todayUltrafineDust),
+        distance: Int(user.distance),
+        steps: Int(user.steps),
+        address: user.address ?? "",
+        grade: Int(user.grade),
+        recentFineDust: Int(user.recentFineDust)
+      )
+      completion(lastSavedData, nil)
+    }
+  }
+  
+  func saveLastSavedData(_ lastSavedData: LastSavedData, completion: @escaping (Error?) -> Void) {
+    userManager.save([
+      User.todayFineDust: Int16(lastSavedData.todayFineDust),
+      User.todayUltrafineDust: Int16(lastSavedData.todayUltrafineDust),
+      User.distance: Int16(lastSavedData.distance),
+      User.steps: Int16(lastSavedData.steps),
+      User.address: lastSavedData.address,
+      User.grade: Int16(lastSavedData.grade),
+      User.recentFineDust: Int16(lastSavedData.recentFineDust)
+      ], completion: completion)
+  }
 }
