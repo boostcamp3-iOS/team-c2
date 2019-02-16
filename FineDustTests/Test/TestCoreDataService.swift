@@ -67,7 +67,7 @@ class TestCoreDataService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test_saveIntakes() {
+  func test_saveIntake() {
     coreDataService.saveIntake(fineDust: 100, ultrafineDust: 100, at: Date()) { error in
       
     }
@@ -112,6 +112,77 @@ class TestCoreDataService: XCTestCase {
     let expect = expectation(description: "test")
     mockCoreDataIntakeManager.error = NSError(domain: "coreDataError", code: 0, userInfo: nil)
     coreDataService.saveIntake(fineDust: 100, ultrafineDust: 100, at: Date()) { error in
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+ 
+  func test_saveIntakes_error() {
+    let expect = expectation(description: "test")
+    mockCoreDataIntakeManager.error = NSError(domain: "count not matched", code: 0, userInfo: nil)
+    coreDataService.saveIntakes(fineDusts: [1], ultrafineDusts: [1, 1], at: [.before(days: 2), .before(days: 1)]) { error in
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestLastRequestedData() {
+    let expect = expectation(description: "test")
+    let user = User(context: mockCoreDataUserManager.context)
+    user.todayFineDust = 0
+    user.todayFineDust = 0
+    user.distance = 0
+    user.steps = 0
+    user.address = ""
+    user.grade = 0
+    user.recentFineDust = 0
+    mockCoreDataUserManager.user = user
+    mockCoreDataUserManager.error = nil
+    coreDataService.requestLastRequestedData { lastRequestedData, error in
+      XCTAssertNotNil(lastRequestedData)
+      XCTAssertEqual(lastRequestedData?.todayFineDust, 0)
+      XCTAssertEqual(lastRequestedData?.todayUltrafineDust, 0)
+      XCTAssertEqual(lastRequestedData?.distance, 0)
+      XCTAssertEqual(lastRequestedData?.steps, 0)
+      XCTAssertEqual(lastRequestedData?.address, "")
+      XCTAssertEqual(lastRequestedData?.grade, 0)
+      XCTAssertEqual(lastRequestedData?.recentFineDust, 0)
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestLastRequestedData_error() {
+    let expect = expectation(description: "teset")
+    mockCoreDataUserManager.user = nil
+    mockCoreDataUserManager.error = NSError(domain: "", code: 0, userInfo: nil)
+    coreDataService.requestLastRequestedData { lastRequestedData, error in
+      XCTAssertNil(lastRequestedData)
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_saveLastRequestedData() {
+    let expect = expectation(description: "test")
+    mockCoreDataUserManager.error = nil
+    let lastRequestedData = LastRequestedData(todayFineDust: 0, todayUltrafineDust: 0, distance: 0, steps: 0, address: "", grade: 0, recentFineDust: 0)
+    coreDataService.saveLastRequestedData(lastRequestedData) { error in
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_saveLastRequestedData_error() {
+    let expect = expectation(description: "test")
+    mockCoreDataUserManager.error = NSError(domain: "", code: 0, userInfo: nil)
+    let lastRequestedData = LastRequestedData(todayFineDust: 0, todayUltrafineDust: 0, distance: 0, steps: 0, address: "", grade: 0, recentFineDust: 0)
+    coreDataService.saveLastRequestedData(lastRequestedData) { error in
       XCTAssertNotNil(error)
       expect.fulfill()
     }

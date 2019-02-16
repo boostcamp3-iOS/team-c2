@@ -22,8 +22,6 @@ enum XMLError: Error {
   case attributeDoesNotExist(XMLElement, String)
   
   case attributeDeserializationFailed(String, XMLAttribute)
-  
-  case `default`
 }
 
 // MARK: - 에러 디스크립션
@@ -44,8 +42,6 @@ extension XMLError {
       print("애트리뷰트가 존재하지 않음", node, attribute)
     case let .attributeDeserializationFailed(type, attribute):
       print("애트리뷰트 역직렬화 실패", type, attribute)
-    case .default:
-      print("XML 알 수 없는 오류")
     }
     return "알 수 없는 오류가 발생하였습니다."
   }

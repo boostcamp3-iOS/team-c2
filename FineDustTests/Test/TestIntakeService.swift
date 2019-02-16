@@ -90,6 +90,23 @@ class TestIntakeService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  func test_requestTodayIntake_error_noHealthKitPermission() {
+    let expect = expectation(description: "test")
+    mockDustInfoService.fineDustHourlyValue = DummyDustInfoService.fineDustHourlyValue
+    mockDustInfoService.ultrafineDustHourlyValue = DummyDustInfoService.ultrafineDustHourlyValue
+    mockHealthKitService.hourlyDistance = DummyHealthKitService.hourlyDistance
+    mockDustInfoService.error = nil
+    mockHealthKitService.isAuthorized = false
+    mockHealthKitService.error = nil
+    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+      XCTAssertNil(fineDust)
+      XCTAssertNil(ultrafineDust)
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
   func test_requestIntakesInWeek_error_coreData() {
     mockDustInfoService.error = nil
     mockCoreDataService.error = NSError(domain: "coreDataError", code: 0, userInfo: nil)
@@ -105,6 +122,25 @@ class TestIntakeService: XCTestCase {
   
   func test_requestIntakesInWeek_error_dust() {
     mockDustInfoService.error = DustError.accessDenied
+    mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
+    mockCoreDataService.error = nil
+    let expect = expectation(description: "test")
+    intakeService.requestIntakesInWeek { fineDusts, ultrafineDusts, error in
+      XCTAssertNil(fineDusts)
+      XCTAssertNil(ultrafineDusts)
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_requestIntakesInWeek_error_noHealthKitPermission() {
+    mockDustInfoService.fineDustHourlyValuePerDate = DummyDustInfoService.fineDustHourlyValuePerDate
+    mockDustInfoService.ultrafineDustHourlyValuePerDate = DummyDustInfoService.ultrafineDustHourlyValuePerDate
+    mockDustInfoService.error = nil
+    mockHealthKitService.hourlyDistancePerDate = DummyHealthKitService.hourlyDistancePerDate
+    mockHealthKitService.isAuthorized = false
+    mockHealthKitService.error = nil
     mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
     mockCoreDataService.error = nil
     let expect = expectation(description: "test")

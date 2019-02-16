@@ -155,18 +155,16 @@ final class IntakeService: IntakeServiceType {
                         ultrafineDustIntakes.append(intake)
                     }
                     // 코어데이터 갱신
-                    for (index, date) in Date.between(startDate, endDate).enumerated() {
-                      self.coreDataService
-                        .saveIntake(fineDust: fineDustIntakes[index],
-                                    ultrafineDust: ultrafineDustIntakes[index],
-                                    at: date) { error in
-                                      if let error = error {
-                                        Toast.shared.show(error.localizedDescription)
-                                        print(error.localizedDescription)
-                                      }
-                      }
-                      print("코어데이터 갱신됨")
+                    self.coreDataService
+                      .saveIntakes(fineDusts: fineDustIntakes,
+                                   ultrafineDusts: ultrafineDustIntakes,
+                                   at: Date.between(startDate, endDate)) { error in
+                                    if let error = error {
+                                      Toast.shared.show(error.localizedDescription)
+                                      print(error.localizedDescription)
+                                    }
                     }
+                    print("코어데이터 갱신 성공.")
                     print("일주일치 흡입량 가져오기 성공.")
                     print("네트워크 호출 후 코어데이터 갱신하고 작업 종료")
                     print(fineDustIntakes)
