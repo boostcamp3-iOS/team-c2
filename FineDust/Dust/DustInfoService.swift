@@ -42,6 +42,8 @@ final class DustInfoService: DustInfoServiceType {
               updatingTime: DateFormatter.dateAndTimeForDust
                 .date(from: recentResponse.dataTime) ?? Date()
             )
+            print("최신 대기 오염 데이터 가져오기 성공.")
+            print(dustInfo)
             completion(dustInfo, nil)
           }
     }
@@ -85,6 +87,9 @@ final class DustInfoService: DustInfoServiceType {
               ultrafineDust[hour] = 0
             }
           }
+          print("오늘 자정부터 현시각까지의 대기 오염 데이터 가져오기 성공.")
+          print(fineDust)
+          print(ultrafineDust)
           completion(fineDust, ultrafineDust, nil)
     }
   }
@@ -152,6 +157,9 @@ final class DustInfoService: DustInfoServiceType {
             }
             ultrafineDustPerDate[currentStartDate]?[hour] = item.ultrafineDustValue
           }
+          print("특정 기간 내의 대기 오염 데이터 가져오기 성공.")
+          print(fineDustPerDate)
+          print(ultrafineDustPerDate)
           completion(fineDustPerDate, ultrafineDustPerDate, nil)
     }
   }
