@@ -22,7 +22,6 @@ final class FeedbackListViewController: UIViewController {
   private var feedbackCount = 0
   private var newDustFeedbacks: [DustFeedback]?
   private var isBookmarkedByTitle: [String: Bool] = [:]
-  private var valueToPass: String?
   
   // MARK: - LifeCycle
   
@@ -45,12 +44,12 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: - Function
   
-  private func pushDetailViewController(valueToPass: String) {
+  private func pushDetailViewController(feedbackTitle: String) {
     if let viewController = storyboard?
       .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString)
       as? FeedbackDetailViewController {
+      viewController.feedbackTitle = feedbackTitle
       navigationController?.pushViewController(viewController, animated: true)
-      viewController.passedValue = valueToPass
     }
     
   }
@@ -134,10 +133,8 @@ extension FeedbackListViewController: UITableViewDelegate {
     
     guard let currentCell = feedbackListTableView.cellForRow(at: indexPath)
       as? FeedbackListTableViewCell else { return }
-    
-    let valueToPass = currentCell.title
-
-    pushDetailViewController(valueToPass: valueToPass)
+ 
+    pushDetailViewController(feedbackTitle: currentCell.title)
   }
   
   func tableView(_ tableView: UITableView,
@@ -181,7 +178,7 @@ extension FeedbackListViewController: UITableViewDelegate {
       label.text = "전체 목록"
     } else {
       button.isHidden = true
-      label.text = "정보 추천"
+      label.text = "맞춤 정보 추천"
     }
     
     return headerView
@@ -223,13 +220,11 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-      
-      guard let currentCell = collectionView.cellForItem(at: indexPath)
-        as? RecommendCollectionViewCell else { return }
     
-      let valueToPass = currentCell.title
+    guard let currentCell = collectionView.cellForItem(at: indexPath)
+      as? RecommendCollectionViewCell else { return }
     
-      pushDetailViewController(valueToPass: valueToPass)
+    pushDetailViewController(feedbackTitle: currentCell.title)
   }
 }
 
@@ -244,7 +239,7 @@ extension FeedbackListViewController: FeedbackListCellDelegate {
       isBookmarkedByTitle[title] = true
       feedbackListService.saveBookmark(by: title)
     } else {
-      isBookmarkedByTitle[feedbackListCell.title] = false
+      isBookmarkedByTitle[title] = false
       feedbackListService.deleteBookmark(by: title)
     }
   }

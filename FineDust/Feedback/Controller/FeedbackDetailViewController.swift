@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 피드백 정보 상세 화면
 final class FeedbackDetailViewController: UIViewController {
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
@@ -16,17 +17,19 @@ final class FeedbackDetailViewController: UIViewController {
   @IBOutlet private weak var contentLabel: UILabel!
   @IBOutlet private weak var bookmarkButton: UIButton!
   
-  var feedbackListService = FeedbackListService(jsonManager: JSONManager())
-  var passedValue: String = ""
-  var dustFeedback: DustFeedback?
+  private let feedbackListService = FeedbackListService(jsonManager: JSONManager())
+  var feedbackTitle: String = ""
+  private var dustFeedback: DustFeedback?
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    dustFeedback = feedbackListService.fetchFeedbackbyTitle(title: passedValue)
-    setFeedback(dustFeedback: dustFeedback!)
+    if let dustFeedback = feedbackListService.fetchFeedback(by: feedbackTitle) {
+      setFeedback(dustFeedback)
+    }
   }
   
-  func setFeedback(dustFeedback: DustFeedback) {
+  /// 뷰컨 데이터 설정
+  func setFeedback(_ dustFeedback: DustFeedback) {
     feedbackTitleLabel.text = dustFeedback.title
     feedbackSourceLabel.text = dustFeedback.source
     dateLabel.text = dustFeedback.date
