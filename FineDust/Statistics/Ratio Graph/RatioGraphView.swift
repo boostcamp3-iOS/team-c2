@@ -50,8 +50,8 @@ final class RatioGraphView: UIView {
   // MARK: View
   
   /// 퍼센트 레이블.
-  private lazy var percentLabel: UILabel = {
-    let label = UILabel()
+  private lazy var percentLabel: FDCountingLabel = {
+    let label = FDCountingLabel()
     label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.addSubview(label)
@@ -119,19 +119,9 @@ private extension RatioGraphView {
   
   /// 비어 있는 원 안에 퍼센트 레이블 설정하기.
   func setPercentLabel() {
-    var startValue: Int = 0
     let endValue = Int(ratio * 100)
     let interval = 1.0 / Double(endValue)
     backgroundView.addSubview(percentLabel)
-    timer = Timer
-      .scheduledTimer(withTimeInterval: interval,
-                      repeats: true) { [weak self] timer in
-                        startValue += 1
-                        self?.percentLabel.text = "\(startValue)%"
-                        if startValue == endValue {
-                          timer.invalidate()
-                        }
-    }
-    timer?.fire()
+    percentLabel.countFromZero(to: endValue, unit: .percent, interval: interval)
   }
 }
