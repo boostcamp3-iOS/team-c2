@@ -67,6 +67,6 @@ struct ObservatoryResponse: XMLParsingType {
   
   /// 미세먼지 API 상태 코드.
   var statusCode: DustStatusCode {
-    return DustStatusCode(rawValue: result.code) ?? .default
+    return DustStatusCode(rawValue: result.code) ?? .success
   }
 }

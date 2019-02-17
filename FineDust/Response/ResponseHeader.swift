@@ -24,6 +24,6 @@ struct ResponseHeader: XMLParsingType {
   
   /// 미세먼지 API 상태 코드.
   var statusCode: DustStatusCode {
-    return DustStatusCode(rawValue: code) ?? .default
+    return DustStatusCode(rawValue: code) ?? .success
   }
 }

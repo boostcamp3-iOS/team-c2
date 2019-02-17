@@ -51,9 +51,6 @@ enum DustStatusCode: Int {
   /// 활용신청한 서버의 IP와 실제 Open API 호출한 서버가 다름.
   case unregisteredDomainOfIPAddress = 32
   
-  /// 나머지.
-  case `default`
-  
   var error: DustError? {
     switch self {
     case .success:
@@ -84,8 +81,6 @@ enum DustStatusCode: Int {
       return .expiredServiceKey
     case .unregisteredDomainOfIPAddress:
       return .unregisteredDomainOfIPAddress
-    case .default:
-      return .default
     }
   }
 }

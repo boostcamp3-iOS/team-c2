@@ -71,6 +71,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.applicationError.localizedDescription)
         XCTAssertEqual(error, DustError.applicationError)
       } else {
         XCTFail()
@@ -88,6 +89,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.dbError.localizedDescription)
         XCTAssertEqual(error, DustError.dbError)
       } else {
         XCTFail()
@@ -105,6 +107,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.noData.localizedDescription)
         XCTAssertEqual(error, DustError.noData)
       } else {
         XCTFail()
@@ -122,6 +125,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.httpError.localizedDescription)
         XCTAssertEqual(error, DustError.httpError)
       } else {
         XCTFail()
@@ -139,6 +143,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.serviceTimeOut.localizedDescription)
         XCTAssertEqual(error, DustError.serviceTimeOut)
       } else {
         XCTFail()
@@ -156,6 +161,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.invalidRequestParameter.localizedDescription)
         XCTAssertEqual(error, DustError.invalidRequestParameter)
       } else {
         XCTFail()
@@ -173,6 +179,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.noRequiredRequestParameter.localizedDescription)
         XCTAssertEqual(error, DustError.noRequiredRequestParameter)
       } else {
         XCTFail()
@@ -190,6 +197,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.noServiceOrDeprecated.localizedDescription)
         XCTAssertEqual(error, DustError.noServiceOrDeprecated)
       } else {
         XCTFail()
@@ -207,6 +215,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.accessDenied.localizedDescription)
         XCTAssertEqual(error, DustError.accessDenied)
       } else {
         XCTFail()
@@ -224,6 +233,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.exceededRequestLimit.localizedDescription)
         XCTAssertEqual(error, DustError.exceededRequestLimit)
       } else {
         XCTFail()
@@ -241,6 +251,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.unregisteredServiceKey.localizedDescription)
         XCTAssertEqual(error, DustError.unregisteredServiceKey)
       } else {
         XCTFail()
@@ -258,6 +269,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.expiredServiceKey.localizedDescription)
         XCTAssertEqual(error, DustError.expiredServiceKey)
       } else {
         XCTFail()
@@ -275,6 +287,7 @@ class TestDustObservatoryManager: XCTestCase {
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
       if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.unregisteredDomainOfIPAddress.localizedDescription)
         XCTAssertEqual(error, DustError.unregisteredDomainOfIPAddress)
       } else {
         XCTFail()
@@ -283,110 +296,4 @@ class TestDustObservatoryManager: XCTestCase {
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
-
-  
-//  func test_requestObservatory_xmlError1() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.attributeDeserializationFailed("", .init(name: "", text: ""))
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.attributeDeserializationFailed("", .init(name: "", text: "")))
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requesetObservatory_xmlError2() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.attributeDoesNotExist(.init(name: "", options: .init()), "")
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.attributeDoesNotExist(.init(name: "", options: .init()), ""))
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requestObservatory_xmlError3() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.default
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.default)
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requestObservatory_xmlError4() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.implementationIsMissing("")
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.implementationIsMissing(""))
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requestObservatory_xmlError5() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.nodeHasNoValue
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.nodeHasNoValue)
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requestObservatory_xmlError6() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.nodeIsInvalid(.element(.init(name: "", options: .init())))
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.nodeIsInvalid(.element(.init(name: "", options: .init()))))
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//
-//  func test_requestObservatory_xmlError7() {
-//    mockNetworkManager.data = DummyNetworkManager.observatoryResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.typeConversionFailed("", .init(name: "", options: .init()))
-//    let expect = expectation(description: "test")
-//    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.typeConversionFailed("", .init(name: "", options: .init())))
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
 }
