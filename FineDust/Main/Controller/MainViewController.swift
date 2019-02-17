@@ -115,36 +115,41 @@ extension MainViewController {
   
   ///미세먼지량과 위치정보 같은 API정보들을 업데이트 함.
   private func updateAPIInfo() {
-    // 위치에 관련된 Label들을 업데이트함.
-    dustInfoService.requestRecentTimeInfo { info, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
-        return
-      }
-      if let info = info {
-        DispatchQueue.main.async {
-          self.fineDustLabel.text = "\(info.fineDustValue)µg"
-          self.locationLabel.text = SharedInfo.shared.address
-          self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
+    DispatchQueue.global(qos: .utility).async { [weak self] in
+      guard let self = self else { return }
+      // 위치에 관련된 Label들을 업데이트함.
+      self.dustInfoService.requestRecentTimeInfo { info, error in
+        if let error = error as? ServiceErrorType {
+          error.presentToast()
+          return
         }
-      }
-    }
-    
-    // 마신 미세먼지양 Label들을 업데이트함.
-    intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
-        return
-      }
-      if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
-        if self.healthKitService.isAuthorized {
+        if let info = info {
           DispatchQueue.main.async {
-            self.intakeFineDustLable.text = "\(fineDust)µg"
-            self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+            self.fineDustLabel.text = "\(info.fineDustValue)µg"
+            self.locationLabel.text = SharedInfo.shared.address
+            self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
           }
         }
       }
     }
+    DispatchQueue.global(qos: .utility).async { [weak self] in
+      guard let self = self else { return }
+      self.intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
+        if let error = error as? ServiceErrorType {
+          error.presentToast()
+          return
+        }
+        if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
+          if self.healthKitService.isAuthorized {
+            DispatchQueue.main.async {
+              self.intakeFineDustLable.text = "\(fineDust)µg"
+              self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+            }
+          }
+        }
+      }
+    }
+    // 마신 미세먼지양 Label들을 업데이트함.
   }
   
   func setUpGradeLabel(grade: DustGrade) -> String {
