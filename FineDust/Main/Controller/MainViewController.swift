@@ -84,7 +84,7 @@ extension MainViewController {
     registerLocationObserver()
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
-    presentAlert()
+    presentOpenHealthAppAlert()
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -128,7 +128,7 @@ extension MainViewController {
         DispatchQueue.main.async {
           self.fineDustLabel.text = "\(info.fineDustValue)µg"
           self.locationLabel.text = SharedInfo.shared.address
-          self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
+          self.gradeLabel.text = info.fineDustGrade.description
         }
       }
     }
@@ -151,7 +151,7 @@ extension MainViewController {
   }
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
-  private func presentAlert() {
+  private func presentOpenHealthAppAlert() {
     if !healthKitService.isAuthorized {
       UIAlertController
         .alert(title: "건강 App 권한이 없습니다.",
@@ -165,22 +165,6 @@ extension MainViewController {
         }
         .action(title: "취소", style: .cancel)
         .present(to: self)
-    }
-  }
-  
-  /// 미세먼지 등급을 알려주는 메소드.
-  private func setUpGradeLabel(grade: DustGrade) -> String {
-    switch grade {
-    case .good:
-      return "좋은 공기"
-    case .normal:
-      return "보통 공기"
-    case .bad:
-      return "나쁜 공기"
-    case .veryBad:
-      return "매우 나쁨"
-    case .default:
-      return "기타"
     }
   }
 }

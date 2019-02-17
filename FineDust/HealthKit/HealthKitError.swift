@@ -31,7 +31,6 @@ enum HealthKitError: ServiceErrorType {
   /// HealthKitManager의 indentifier 인자 값이 예상치 못한 값이 들어올때의 에러.
   case unexpectedIdentifier
   
-  
   case queryNotValid
   
   case queryExecutedFailed
