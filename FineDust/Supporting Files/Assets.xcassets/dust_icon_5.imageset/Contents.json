@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "DD1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "grayDust.png",
       "scale" : "2x"
     },
     {

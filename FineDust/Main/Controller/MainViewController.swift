@@ -26,6 +26,7 @@ final class MainViewController: UIViewController {
   ///한번만 표시해주기 위한 프로퍼티
   private var isPresented: Bool = false
   
+  private let coreDataService = CoreDataService()
   private let healthKitService = HealthKitService(healthKit: HealthKitManager())
   private let dustInfoService = DustInfoService(dustManager: DustInfoManager())
   private let intakeService = IntakeService()
@@ -43,7 +44,7 @@ final class MainViewController: UIViewController {
     super.viewDidLoad()
     setUp()
   }
-
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if !isPresented {
@@ -96,6 +97,14 @@ extension MainViewController {
         return
       }
       if let value = value {
+        self.coreDataService
+          .saveLastSteps(Int(value)) { error in
+            if error != nil {
+              print("마지막으로 요청한 걸음수가 저장되지 않음")
+            } else {
+              print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
+            }
+          }
         DispatchQueue.main.async {
           self.stepCountLabel.text = "\(Int(value)) 걸음"
         }
@@ -109,6 +118,14 @@ extension MainViewController {
         return
       }
       if let value = value {
+        self.coreDataService
+          .saveLastDistance(value) { error in
+            if error != nil {
+              print("마지막으로 요청한 걸음거리가 저장되지 않음")
+            } else {
+              print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
+            }
+          }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
@@ -127,6 +144,17 @@ extension MainViewController {
           return
         }
         if let info = info {
+          self.coreDataService
+            .saveLastDustData(
+              (address: SharedInfo.shared.address,
+               grade: info.fineDustGrade.rawValue,
+               recentFineDust: info.fineDustValue)) { error in
+                if error != nil {
+                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
+                } else {
+                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
+                }
+          }
           DispatchQueue.main.async {
             self.fineDustLabel.countFromZero(to: info.fineDustValue,
                                              unit: .microgram,
@@ -146,6 +174,16 @@ extension MainViewController {
         }
         if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
           if self.healthKitService.isAuthorized {
+            self.coreDataService
+              .saveLastTodayIntake(
+                (todayFineDust: fineDust,
+                 todayUltrafineDust: ultrafineDust)) { error in
+                  if error != nil {
+                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
+                  } else {
+                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
+                  }
+            }
             DispatchQueue.main.async {
               self.intakeFineDustLable.text = "\(fineDust)µg"
               self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"

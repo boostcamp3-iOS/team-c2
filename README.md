@@ -1,9 +1,17 @@
-# 내안의먼지
+<img alt="FineDust" src="https://raw.github.com/boostcamp3-iOS/team-c2/master/images/main.png" style="max-width: 100%">
 
-![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
-![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
-[![Build Status](https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop)](https://travis-ci.org/boostcamp3-iOS/team-c2)
-[![codecov](https://codecov.io/gh/boostcamp3-iOS/team-c2/branch/develop/graph/badge.svg)](https://codecov.io/gh/boostcamp3-iOS/team-c2)
+<p align="center">
+  <img alt="Swift" src="https://img.shields.io/badge/swift-4.2-orange.svg">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-ios-lightgrey.svg">
+  <a href="https://travis-ci.org/boostcamp3-iOS/team-c2" target="_blank">
+    <img alt="Build Status" src="https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop">
+  </a>
+  <a href="https://codecov.io/gh/boostcamp3-iOS/team-c2" target="_blank">
+    <img alt="Codecov" src="https://codecov.io/gh/boostcamp3-iOS/team-c2/branch/develop/graph/badge.svg">
+  </a>
+</p>
+
+# 내안의먼지
 
 부스트캠프 3기 iOS 과정 C-2팀
 
@@ -29,9 +37,9 @@
 
 ### 현재까지 구현된 뷰
 
-![1](./images/1.PNG)
-![2](./images/2.PNG)
-![3](./images/3.PNG)
+![1](./images/1.png)
+![2](./images/2.png)
+![3](./images/3.png)
 
 ### 컬러칩
 

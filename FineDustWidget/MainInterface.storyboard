@@ -33,7 +33,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayDust" translatesAutoresizingMaskIntoConstraints="NO" id="qf3-43-4Ax">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dust_icon_5" translatesAutoresizingMaskIntoConstraints="NO" id="qf3-43-4Ax">
                                 <rect key="frame" x="48" y="16" width="68" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qf3-43-4Ax" secondAttribute="height" id="SZ2-fS-lRY"/>
@@ -133,7 +133,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="grayDust" width="208.55999755859375" height="207.1199951171875"/>
+        <image name="dust_icon_5" width="158.8800048828125" height="161.27999877929688"/>
         <image name="widget_background" width="437.760009765625" height="127.68000030517578"/>
     </resources>
 </document>
