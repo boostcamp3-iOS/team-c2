@@ -123,6 +123,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="360" height="100"/>
                     <connections>
+                        <outlet property="dustImageView" destination="qf3-43-4Ax" id="Wsb-BD-ocJ"/>
                         <outlet property="fineDustIntakeLabel" destination="lu6-qw-PJc" id="Je7-RX-d4Y"/>
                         <outlet property="ultrafineDustIntakeLabel" destination="dHU-U5-3kp" id="QFH-k5-YeG"/>
                     </connections>
