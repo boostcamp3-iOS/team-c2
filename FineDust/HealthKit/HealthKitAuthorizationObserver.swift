@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 
 protocol HealthKitAuthorizationObserver: class {
-  func authorizationNotDetermined(_ notification: Notification)
-  
-  func authorizationSharingDenied(_ notification: Notification)
-  
   func authorizationSharingAuthorized(_ notification: Notification)
   
   func registerHealthKitAuthorizationObserver()
@@ -22,26 +18,7 @@ protocol HealthKitAuthorizationObserver: class {
 }
 
 extension HealthKitAuthorizationObserver where Self: UIViewController {
-  func authorizationNotDetermined(_ notification: Notification) {
-    print("not determined")
-  }
-  
-  func authorizationSharingDenied(_ notification: Notification) {
-  }
-  
   func registerHealthKitAuthorizationObserver() {
-    NotificationCenter.default.addObserver(
-      forName: .healthKitAuthorizationNotDetermined,
-      object: nil,
-      queue: nil) { [weak self] notification in
-        self?.authorizationNotDetermined(notification)
-    }
-    NotificationCenter.default.addObserver(
-      forName: .healthKitAuthorizationSharingDenied,
-      object: nil,
-      queue: nil) { [weak self] notification in
-        self?.authorizationSharingDenied(notification)
-    }
     NotificationCenter.default.addObserver(
       forName: .healthKitAuthorizationSharingAuthorized,
       object: nil,
@@ -51,14 +28,6 @@ extension HealthKitAuthorizationObserver where Self: UIViewController {
   }
   
   func unregisterHealthKitAuthorizationObserver() {
-    NotificationCenter.default.removeObserver(
-      self,
-      name: .healthKitAuthorizationNotDetermined,
-      object: nil)
-    NotificationCenter.default.removeObserver(
-      self,
-      name: .healthKitAuthorizationSharingDenied,
-      object: nil)
     NotificationCenter.default.removeObserver(
       self,
       name: .healthKitAuthorizationSharingAuthorized,
