@@ -130,7 +130,7 @@ extension MainViewController {
           DispatchQueue.main.async {
             self.fineDustLabel.text = "\(info.fineDustValue)µg"
             self.locationLabel.text = SharedInfo.shared.address
-            self.gradeLabel.text = self.setUpGradeLabel(grade: info.fineDustGrade)
+            self.gradeLabel.text = info.fineDustGrade.description
           }
         }
       }
