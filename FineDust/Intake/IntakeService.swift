@@ -200,9 +200,9 @@ final class IntakeService: IntakeServiceType {
       currentState = TodayGrade.soso.rawValue
     case 100..<150:
       currentState = TodayGrade.bad.rawValue
-    case 150..<180:
+    case 150..<200:
       currentState = TodayGrade.worse.rawValue
-    case 180...1000:
+    case 200...1000:
       currentState = TodayGrade.evil.rawValue
     default:
       currentState = TodayGrade.good.rawValue
