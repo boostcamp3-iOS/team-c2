@@ -168,7 +168,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     NSLayoutConstraint.activate([
       button.anchor.centerY.equal(to: headerView.anchor.centerY),
-      button.anchor.trailing.equal(to: headerView.anchor.trailing, offset: -20),
+      button.anchor.leading.equal(to: label.anchor.trailing, offset: 5),
       button.anchor.width.equal(toConstant: 44),
       button.anchor.height.equal(toConstant: 44)
       ])
