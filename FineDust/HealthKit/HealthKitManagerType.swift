@@ -14,6 +14,9 @@ protocol HealthKitManagerType: class {
   /// stepCount에 대한 권한과 distance에 관한 권한.
   var authorizationStatus: (HKAuthorizationStatus, HKAuthorizationStatus) { get }
   
+  /// HealthKit 권한 요청 함수.
+  func requestAuthorization()
+  
   /// HealthKit App의 저장된 자료를 찾아주는 메소드.
   func findHealthKitValue(startDate: Date,
                           endDate: Date,
@@ -21,8 +24,4 @@ protocol HealthKitManagerType: class {
                           quantityFor: HKUnit,
                           identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void)
-  
-  /// HealthKit 권한 요청 함수.
-  func requestAuthorization()
-
 }
