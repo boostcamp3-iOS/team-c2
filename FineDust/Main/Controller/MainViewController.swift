@@ -27,6 +27,8 @@ final class MainViewController: UIViewController {
   ///한번만 표시해주기 위한 프로퍼티
   private var isPresented: Bool = false
   
+  private var timer: Timer?
+  
   private let coreDataService = CoreDataService()
   private let healthKitService = HealthKitService(healthKit: HealthKitManager())
   private let dustInfoService = DustInfoService(dustManager: DustInfoManager())
@@ -87,6 +89,7 @@ extension MainViewController {
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
     presentOpenHealthAppAlert()
+    updateFineDustImageView()
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -204,7 +207,21 @@ extension MainViewController {
   }
   
   private func updateFineDustImageView() {
-    
+    timer?.invalidate()
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5,
+                                 repeats: true
+    ) { [weak self] _ in
+      guard let identity = self?.fineDustImageView.transform.isIdentity else {
+        return
+      }
+      
+      if identity {
+        self?.fineDustImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+      } else {
+        self?.fineDustImageView.transform = .identity
+      }
+    }
+    timer?.fire()
   }
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
