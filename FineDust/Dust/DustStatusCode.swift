@@ -52,7 +52,7 @@ enum DustStatusCode: Int {
   case unregisteredDomainOfIPAddress = 32
   
   /// 나머지.
-  case `default` = 9999
+  case `default`
   
   var error: DustError? {
     switch self {
