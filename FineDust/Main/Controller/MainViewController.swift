@@ -12,19 +12,22 @@ final class MainViewController: UIViewController {
   
   // MARK: - IBOutlets
   
-  @IBOutlet private weak var intakeFineDustLable: UILabel!
-  @IBOutlet private weak var intakeUltrafineDustLabel: UILabel!
+  @IBOutlet private weak var intakeFineDustLable: FDCountingLabel!
+  @IBOutlet private weak var intakeUltrafineDustLabel: FDCountingLabel!
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
   @IBOutlet private weak var timeLabel: UILabel!
   @IBOutlet private weak var locationLabel: UILabel!
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
+  @IBOutlet private weak var fineDustImageView: UIImageView!
   
   // MARK: - Properties
   
   ///한번만 표시해주기 위한 프로퍼티
   private var isPresented: Bool = false
+  
+  private var timer: Timer?
   
   private let coreDataService = CoreDataService()
   private let healthKitService = HealthKitService(healthKit: HealthKitManager())
@@ -86,6 +89,7 @@ extension MainViewController {
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
     presentOpenHealthAppAlert()
+    updateFineDustImageView()
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -165,6 +169,7 @@ extension MainViewController {
         }
       }
     }
+    
     DispatchQueue.global(qos: .utility).async { [weak self] in
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
@@ -184,15 +189,39 @@ extension MainViewController {
                     print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
                   }
             }
+            // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {
-              self.intakeFineDustLable.text = "\(fineDust)µg"
-              self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+              self.intakeFineDustLable.countFromZero(to: fineDust,
+                                                     unit: .microgram,
+                                                     interval: 1.0 /
+                                                      Double(fineDust))
+              self.intakeUltrafineDustLabel.countFromZero(to: ultrafineDust,
+                                                          unit: .microgram,
+                                                          interval: 1.0 /
+                                                            Double(ultrafineDust))
             }
           }
         }
       }
     }
-    // 마신 미세먼지양 Label들을 업데이트함.
+  }
+  
+  private func updateFineDustImageView() {
+    timer?.invalidate()
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5,
+                                 repeats: true
+    ) { [weak self] _ in
+      guard let identity = self?.fineDustImageView.transform.isIdentity else {
+        return
+      }
+      
+      if identity {
+        self?.fineDustImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+      } else {
+        self?.fineDustImageView.transform = .identity
+      }
+    }
+    timer?.fire()
   }
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.

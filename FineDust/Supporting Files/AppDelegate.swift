@@ -51,6 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillEnterForeground(_ application: UIApplication) {
     // 포어그라운드 진입시 위치 정보 갱신
     LocationManager.shared.startUpdatingLocation()
+    
+    if healthKitManager.authorizationStatus ==
+      (.sharingAuthorized, .sharingAuthorized) {
+      NotificationCenter.default.post(
+        name: .healthKitAuthorizationSharingAuthorized,
+        object: nil,
+        userInfo: nil
+      )
+    }
   }
   
   func applicationDidBecomeActive(_ application: UIApplication) { }
