@@ -67,7 +67,7 @@ final class FeedbackDetailViewController: UIViewController {
     dateLabel.text = dustFeedback.date
     contentLabel.text = dustFeedback.contents
     feedbackImageView.image = UIImage(named: dustFeedback.imageName)?
-      .resizeImage(newWidth: UIScreen.main.bounds.width)
+      .resized(newWidth: UIScreen.main.bounds.width)
   }
   
   /// 북마크 버튼 이미지 설정

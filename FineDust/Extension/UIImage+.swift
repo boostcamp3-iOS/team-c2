@@ -12,7 +12,7 @@ import UIKit
 
 extension UIImage {
   // 이미지 크기 변경.
-  func resizeImage(newWidth: CGFloat) -> UIImage? {
+  func resized(newWidth: CGFloat) -> UIImage? {
     let scale = newWidth / size.width
     let newHeight = size.height * scale
     UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
