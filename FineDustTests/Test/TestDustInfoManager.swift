@@ -284,122 +284,20 @@ class TestDustInfoManager: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-//  func test_request_xmlError1() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.attributeDeserializationFailed("", .init(name: "", text: ""))
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.attributeDeserializationFailed("", .init(name: "", text: "")))
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError2() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.attributeDoesNotExist(.init(name: "", options: .init()), "")
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.attributeDoesNotExist(.init(name: "", options: .init()), ""))
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError3() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.default
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.default)
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError4() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.implementationIsMissing("")
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.implementationIsMissing(""))
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError5() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.nodeHasNoValue
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.nodeHasNoValue)
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError6() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.nodeIsInvalid(.element(.init(name: "", options: .init())))
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.nodeIsInvalid(.element(.init(name: "", options: .init()))))
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
-//  
-//  func test_request_xmlError7() {
-//    mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-//    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
-//    mockNetworkManager.error = XMLError.typeConversionFailed("", .init(name: "", options: .init()))
-//    let expect = expectation(description: "test")
-//    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
-//      XCTAssertNotNil(response)
-//      if let error = error as? XMLError {
-//        XCTAssertEqual(error, XMLError.typeConversionFailed("", .init(name: "", options: .init())))
-//      } else {
-//        XCTFail()
-//      }
-//      expect.fulfill()
-//    }
-//    waitForExpectations(timeout: 5, handler: nil)
-//  }
+  func test_request_dustError14() {
+    mockNetworkManager.data = DummyNetworkManager.dustInfoResponseDefault.data(using: .utf8)
+    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.error = nil
+    let expect = expectation(description: "test")
+    dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
+      XCTAssertNil(response)
+      if let error = error as? DustError {
+        XCTAssertEqual(error, DustError.default)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
 }

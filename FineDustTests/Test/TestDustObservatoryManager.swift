@@ -296,4 +296,22 @@ class TestDustObservatoryManager: XCTestCase {
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
+  
+  func test_requestObservatory_dustError14() {
+    mockNetworkManager.data = DummyNetworkManager.dustInfoResponseDefault.data(using: .utf8)
+    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.error = nil
+    let expect = expectation(description: "test")
+    dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in
+      XCTAssertNil(response)
+      if let error = error as? DustError {
+        XCTAssertEqual(error.localizedDescription, DustError.default.localizedDescription)
+        XCTAssertEqual(error, DustError.default)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
 }

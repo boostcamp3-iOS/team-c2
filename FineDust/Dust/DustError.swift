@@ -49,6 +49,9 @@ enum DustError: ServiceErrorType {
   
   /// 활용신청한 서버의 IP와 실제 Open API 호출한 서버가 다름.
   case unregisteredDomainOfIPAddress
+  
+  /// 나머지.
+  case `default`
 }
 
 // MARK: - 에러 디스크립션
@@ -76,6 +79,8 @@ extension DustError {
       return "API 사용기간이 만료되었습니다."
     case .unregisteredDomainOfIPAddress:
       return "활용신청한 서버의 IP와 실제 Open API를 호출한 서버가 다릅니다."
+    case .default:
+      return "미세먼지 정보를 가져오지 못했습니다."
     }
   }
 }
