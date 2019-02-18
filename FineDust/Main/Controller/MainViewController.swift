@@ -12,8 +12,8 @@ final class MainViewController: UIViewController {
   
   // MARK: - IBOutlets
   
-  @IBOutlet private weak var intakeFineDustLable: UILabel!
-  @IBOutlet private weak var intakeUltrafineDustLabel: UILabel!
+  @IBOutlet private weak var intakeFineDustLable: FDCountingLabel!
+  @IBOutlet private weak var intakeUltrafineDustLabel: FDCountingLabel!
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
   @IBOutlet private weak var timeLabel: UILabel!
@@ -165,6 +165,7 @@ extension MainViewController {
         }
       }
     }
+    
     DispatchQueue.global(qos: .utility).async { [weak self] in
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
@@ -184,15 +185,21 @@ extension MainViewController {
                     print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
                   }
             }
+            // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {
-              self.intakeFineDustLable.text = "\(fineDust)µg"
-              self.intakeUltrafineDustLabel.text = "\(ultrafineDust)µg"
+              self.intakeFineDustLable.countFromZero(to: fineDust,
+                                                     unit: .microgram,
+                                                     interval: 1.0 /
+                                                      Double(fineDust))
+              self.intakeUltrafineDustLabel.countFromZero(to: ultrafineDust,
+                                                          unit: .microgram,
+                                                          interval: 1.0 /
+                                                            Double(ultrafineDust))
             }
           }
         }
       }
     }
-    // 마신 미세먼지양 Label들을 업데이트함.
   }
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
