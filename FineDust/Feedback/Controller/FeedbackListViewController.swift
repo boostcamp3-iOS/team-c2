@@ -28,9 +28,7 @@ final class FeedbackListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
-    
+
     do {
       feedbackCount = try feedbackListService.fetchFeedbackCount()
     } catch {
@@ -38,6 +36,11 @@ final class FeedbackListViewController: UIViewController {
     }
     
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
     
     feedbackListTableView.reloadData()
   }
