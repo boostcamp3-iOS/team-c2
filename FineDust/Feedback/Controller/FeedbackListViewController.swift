@@ -28,9 +28,7 @@ final class FeedbackListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
-    
+
     do {
       feedbackCount = try feedbackListService.fetchFeedbackCount()
     } catch {
@@ -38,6 +36,11 @@ final class FeedbackListViewController: UIViewController {
     }
     
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
     
     feedbackListTableView.reloadData()
   }
@@ -165,7 +168,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     NSLayoutConstraint.activate([
       button.anchor.centerY.equal(to: headerView.anchor.centerY),
-      button.anchor.trailing.equal(to: headerView.anchor.trailing, offset: -20),
+      button.anchor.leading.equal(to: label.anchor.trailing, offset: 5),
       button.anchor.width.equal(toConstant: 44),
       button.anchor.height.equal(toConstant: 44)
       ])

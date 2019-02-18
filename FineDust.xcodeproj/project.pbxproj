@@ -138,6 +138,7 @@
 		902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */; };
 		0A3D712EDD73CD9FCE62626D51842BCE /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */; };
 		A0221EFCD87D0BA93CDD31C167E4DF2E /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */; };
+		5CAA825A5AA04EAF13F6D487C105C7E5 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B47A899B37E37A4A63E65C9C895385A /* UIImage+.swift */; };
 		EF1E146C27E18234A79270C70FA9D14F /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */; };
 		F408ED0799CF004B53F4180BE8F1CACD /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FC303D1FA77029C0B18B8C19A66650 /* UIView+.swift */; };
 		78460935F8D933BB0B289AF0A2352619 /* UIView+NSLayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */; };
@@ -324,6 +325,7 @@
 		BD765F536A1105FE2055510D17AF4578 /* Typealias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		6B47A899B37E37A4A63E65C9C895385A /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		05FC303D1FA77029C0B18B8C19A66650 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutAnchor.swift"; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				43A9E8FB49A9FF5D6049F1AA935B3EAD /* String+.swift */,
 				499FC240839E34C3B6FE55023AAF42C2 /* UIAlertController+.swift */,
 				DB9A6ED48D7730E8191DF882910D907E /* UIColor+.swift */,
+				6B47A899B37E37A4A63E65C9C895385A /* UIImage+.swift */,
 				BE68CF5C8CCE8F34FBB3ABED81BA164C /* UIImageView+.swift */,
 				05FC303D1FA77029C0B18B8C19A66650 /* UIView+.swift */,
 				98B4BE46BFB958F5BEA81116B5B5279F /* UIView+NSLayoutAnchor.swift */,
@@ -1065,6 +1068,7 @@
 				AF5A997903507F5F9B1FF620F977876E /* Typealias.swift in Sources */,
 				902AEE393C167BFDE0698F2C1236F783 /* UIAlertController+.swift in Sources */,
 				A0221EFCD87D0BA93CDD31C167E4DF2E /* UIColor+.swift in Sources */,
+				5CAA825A5AA04EAF13F6D487C105C7E5 /* UIImage+.swift in Sources */,
 				EF1E146C27E18234A79270C70FA9D14F /* UIImageView+.swift in Sources */,
 				F408ED0799CF004B53F4180BE8F1CACD /* UIView+.swift in Sources */,
 				78460935F8D933BB0B289AF0A2352619 /* UIView+NSLayoutAnchor.swift in Sources */,

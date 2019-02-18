@@ -31,7 +31,7 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   
   /// 컬렉션뷰셀 데이터 설정
   func setCollectionViewCellProperties(dustFeedback: DustFeedback) {
-    recommendImageView.image = UIImage(named: dustFeedback.imageName)
+    recommendImageView.image = UIImage(named: dustFeedback.imageName)?.resize(newWidth: 300)
     recommendTitleLabel.text = dustFeedback.title
   }
   
