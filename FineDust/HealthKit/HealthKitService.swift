@@ -80,11 +80,8 @@ final class HealthKitService: HealthKitServiceType {
         for hour in 0...23 {
           hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
         }
-        completion(hourIntakePair)
-        return
-      }
-      
-      if let hour = hour {
+        semaphore.signal()
+      } else if let hour = hour {
         var value = Int(value ?? 0)
         // 걸음거리가 500 이하일때는 실내로 취급한다.
         value = value < 500 ? 0 : value
