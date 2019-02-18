@@ -94,3 +94,4 @@ final class FeedbackListService: FeedbackListServiceType {
   func fetchFeedback(by title: String) -> DustFeedback? {
     return dustFeedbacks.filter { $0.title == title }.first
   }
+}
