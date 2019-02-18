@@ -43,11 +43,11 @@ final class FeedbackDetailViewController: UIViewController {
   
   // MARK: - IBAction
   
-  @IBAction func touchBackButton(_ sender: Any) {
+  @IBAction func backButtonDidTap(_ sender: Any) {
     navigationController?.popViewController(animated: true)
   }
   
-  @IBAction func didTapBookmarkButton(button: UIButton) {
+  @IBAction func bookmarkButtonDidTap(button: UIButton) {
     button.isSelected.toggle()
     if button.isSelected {
       isBookmarkedByTitle[feedbackTitle] = true

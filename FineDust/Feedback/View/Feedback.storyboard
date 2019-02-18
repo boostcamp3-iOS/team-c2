@@ -5476,7 +5476,7 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="backButton"/>
                                         <connections>
-                                            <action selector="touchBackButton:" destination="pse-81-DNc" eventType="touchUpInside" id="uIN-QK-biF"/>
+                                            <action selector="backButtonDidTap:" destination="pse-81-DNc" eventType="touchUpInside" id="2zf-aR-aBg"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -5506,7 +5506,7 @@
                                 <state key="normal" image="star-outline"/>
                                 <state key="selected" image="yellow-star"/>
                                 <connections>
-                                    <action selector="didTapBookmarkButtonWithButton:" destination="pse-81-DNc" eventType="touchUpInside" id="2wy-r8-or7"/>
+                                    <action selector="bookmarkButtonDidTapWithButton:" destination="pse-81-DNc" eventType="touchUpInside" id="tkj-wN-S1M"/>
                                 </connections>
                             </button>
                         </subviews>

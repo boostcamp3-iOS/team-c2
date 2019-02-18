@@ -45,7 +45,7 @@ final class IntakeService: IntakeServiceType {
           let sortedFineDust = fineDust?.sortedByHour().map({ $0.value }),
           let sortedUltrafineDust = ultrafineDust?.sortedByHour().map({ $0.value }),
           let sortedDistance = distancePerHour?.sortedByHour().map({ $0.value })
-        else { return }
+          else { return }
         if !self.healthKitService.isAuthorized {
           completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
           return
@@ -104,7 +104,7 @@ final class IntakeService: IntakeServiceType {
                 guard let self = self,
                   let hourlyFineDustIntakePerDate = hourlyFineDustIntakePerDate,
                   let hourlyUltrafineDustIntakePerDate = hourlyUltrafineDustIntakePerDate
-                else { return }
+                  else { return }
                 self.healthKitService
                   .requestDistancePerHour(
                     from: date,
@@ -112,7 +112,7 @@ final class IntakeService: IntakeServiceType {
                   ) { [weak self] hourlyDistancePerDate in
                     guard let self = self,
                       let hourlyDistancePerDate = hourlyDistancePerDate
-                    else { return }
+                      else { return }
                     if !self.healthKitService.isAuthorized {
                       completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
                       return
