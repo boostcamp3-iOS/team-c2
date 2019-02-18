@@ -12,6 +12,7 @@ import Foundation
 final class MockJSONManager: JSONManagerType {
 
   var dustFeedbacks: [DustFeedback] = []
+  var dustFeedbackZero: [DustFeedback] = []
 
   func fetchDustFeedbacks() -> [DustFeedback] {
     return dustFeedbacks

@@ -29,8 +29,10 @@ protocol FeedbackListServiceType: class {
   /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
   func saveBookmark(by title: String)
   
+  /// 저장했던 즐겨찾기 정보 제목을 삭제함.
   func deleteBookmark(by title: String)
   
-  /// 즐겨찾기한 글의 제목으로 인덱스를 반환함
-  //func getBookmarkInfoIndex() -> [Int]
+  /// 제목으로 피드백 전체 정보를 가져옴.
+  func fetchFeedback(by title: String) -> DustFeedback?
+  
 }
