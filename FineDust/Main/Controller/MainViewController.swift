@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var timeLabel: UILabel!
   @IBOutlet private weak var locationLabel: UILabel!
   @IBOutlet private weak var gradeLabel: UILabel!
-  @IBOutlet private weak var fineDustLabel: UILabel!
+  @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   
   // MARK: - Properties
   
@@ -128,7 +128,9 @@ extension MainViewController {
         }
         if let info = info {
           DispatchQueue.main.async {
-            self.fineDustLabel.text = "\(info.fineDustValue)µg"
+            self.fineDustLabel.countFromZero(to: info.fineDustValue,
+                                             unit: .microgram,
+                                             interval: 1.0 / Double(info.fineDustValue))
             self.locationLabel.text = SharedInfo.shared.address
             self.gradeLabel.text = info.fineDustGrade.description
           }
