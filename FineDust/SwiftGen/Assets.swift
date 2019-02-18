@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(OSX)
   import AppKit.NSImage
@@ -44,6 +44,7 @@ internal enum Asset {
   internal static let steps = ImageAsset(name: "steps")
   internal static let studentSteps = ImageAsset(name: "studentSteps")
   internal static let vitaminB = ImageAsset(name: "vitaminB")
+  internal static let widgetBackground = ImageAsset(name: "widget_background")
   internal static let yellowStar = ImageAsset(name: "yellow-star")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

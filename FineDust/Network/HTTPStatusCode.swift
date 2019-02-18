@@ -18,10 +18,10 @@ enum HTTPStatusCode: Int {
   /// 각 상태 코드에 대응하는 에러.
   var error: HTTPError? {
     switch self {
+    case .success:
+      return nil
     case .default:
       return .default
-    default:
-      return nil
     }
   }
 }

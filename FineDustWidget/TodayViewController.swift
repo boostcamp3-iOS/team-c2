@@ -11,8 +11,6 @@ import NotificationCenter
 
 final class TodayViewController: UIViewController, NCWidgetProviding {
   
-  @IBOutlet private weak var stackView: UIStackView!
-  
   @IBOutlet private weak var fineDustIntakeLabel: UILabel!
   
   @IBOutlet private weak var ultrafineDustIntakeLabel: UILabel!
@@ -27,12 +25,10 @@ final class TodayViewController: UIViewController, NCWidgetProviding {
     let fineDustIntake = defaults?.integer(forKey: "fineDustIntake")
     let ultrafineDustIntake = defaults?.integer(forKey: "ultrafineDustIntake")
     if let fineDustIntake = fineDustIntake, let ultrafineDustIntake = ultrafineDustIntake {
-      stackView.isHidden = false
       label.isHidden = true
-      fineDustIntakeLabel.text = "\(fineDustIntake)μg"
-      ultrafineDustIntakeLabel.text = "\(ultrafineDustIntake)μg"
+      fineDustIntakeLabel.text = "\(fineDustIntake)"
+      ultrafineDustIntakeLabel.text = "\(ultrafineDustIntake)"
     } else {
-      stackView.isHidden = true
       label.isHidden = false
       label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
       label.textColor = .black

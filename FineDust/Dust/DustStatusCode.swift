@@ -56,6 +56,8 @@ enum DustStatusCode: Int {
   
   var error: DustError? {
     switch self {
+    case .success:
+      return nil
     case .applicationError:
       return .applicationError
     case .dbError:
@@ -84,8 +86,6 @@ enum DustStatusCode: Int {
       return .unregisteredDomainOfIPAddress
     case .default:
       return .default
-    default:
-      return nil
     }
   }
 }
