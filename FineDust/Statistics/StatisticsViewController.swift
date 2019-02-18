@@ -83,10 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  private var fineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
   
   /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
