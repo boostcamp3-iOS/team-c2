@@ -24,8 +24,11 @@ enum HealthKitError: ServiceErrorType {
     }
   }
   
+  /// HealthKitManager의 파라미터 값들이 .stepCount - .count() 와
+  /// .distanceWalkingRunning - .meter() 짝으로 오지 않을때 에러.
   case notMatchingArguments
   
+  /// HealthKitManager의 indentifier 인자 값이 예상치 못한 값이 들어올때의 에러.
   case unexpectedIdentifier
   
   case queryNotValid
@@ -34,5 +37,3 @@ enum HealthKitError: ServiceErrorType {
   
   case queryNotSearched
 }
-
-
