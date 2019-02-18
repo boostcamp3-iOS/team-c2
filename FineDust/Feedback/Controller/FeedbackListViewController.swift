@@ -37,16 +37,21 @@ final class FeedbackListViewController: UIViewController {
       print(error.localizedDescription)
     }
     
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    
     feedbackListTableView.reloadData()
   }
   
   // MARK: - Function
   
-  private func pushDetailViewController() {
+  private func pushDetailViewController(feedbackTitle: String) {
     if let viewController = storyboard?
-      .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString) {
+      .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString)
+      as? FeedbackDetailViewController {
+      viewController.feedbackTitle = feedbackTitle
       navigationController?.pushViewController(viewController, animated: true)
     }
+    
   }
   
   /// 미세먼지 정보 정렬 액션시트
@@ -96,7 +101,7 @@ extension FeedbackListViewController: UITableViewDataSource {
     guard let cell = tableView
       .dequeueReusableCell(withIdentifier: reuseIdentifiers[indexPath.section],
                            for: indexPath) as? FeedbackListTableViewCell
-    else { return UITableViewCell() }
+      else { return UITableViewCell() }
     cell.delegate = self
     let feedback = feedbackListService.fetchFeedback(at: indexPath.row)
     
@@ -125,7 +130,11 @@ extension FeedbackListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    pushDetailViewController()
+    
+    guard let currentCell = feedbackListTableView.cellForRow(at: indexPath)
+      as? FeedbackListTableViewCell else { return }
+ 
+    pushDetailViewController(feedbackTitle: currentCell.title)
   }
   
   func tableView(_ tableView: UITableView,
@@ -169,7 +178,7 @@ extension FeedbackListViewController: UITableViewDelegate {
       label.text = "전체 목록"
     } else {
       button.isHidden = true
-      label.text = "정보 추천"
+      label.text = "맞춤 정보 추천"
     }
     
     return headerView
@@ -211,7 +220,11 @@ extension FeedbackListViewController: UICollectionViewDataSource {
 extension FeedbackListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-    pushDetailViewController()
+    
+    guard let currentCell = collectionView.cellForItem(at: indexPath)
+      as? RecommendCollectionViewCell else { return }
+    
+    pushDetailViewController(feedbackTitle: currentCell.title)
   }
 }
 
@@ -226,7 +239,7 @@ extension FeedbackListViewController: FeedbackListCellDelegate {
       isBookmarkedByTitle[title] = true
       feedbackListService.saveBookmark(by: title)
     } else {
-      isBookmarkedByTitle[feedbackListCell.title] = false
+      isBookmarkedByTitle[title] = false
       feedbackListService.deleteBookmark(by: title)
     }
   }

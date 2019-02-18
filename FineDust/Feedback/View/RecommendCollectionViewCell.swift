@@ -14,6 +14,10 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   @IBOutlet private weak var recommendImageView: UIImageView!
   @IBOutlet private weak var recommendTitleLabel: UILabel!
   
+  var title: String {
+    return recommendTitleLabel.text ?? ""
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     setImageView()
