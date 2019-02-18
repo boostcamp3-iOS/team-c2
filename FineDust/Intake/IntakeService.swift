@@ -45,7 +45,7 @@ final class IntakeService: IntakeServiceType {
           let sortedFineDust = fineDust?.sortedByHour().map({ $0.value }),
           let sortedUltrafineDust = ultrafineDust?.sortedByHour().map({ $0.value }),
           let sortedDistance = distancePerHour?.sortedByHour().map({ $0.value })
-        else { return }
+          else { return }
         if !self.healthKitService.isAuthorized {
           completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
           return
@@ -104,7 +104,7 @@ final class IntakeService: IntakeServiceType {
                 guard let self = self,
                   let hourlyFineDustIntakePerDate = hourlyFineDustIntakePerDate,
                   let hourlyUltrafineDustIntakePerDate = hourlyUltrafineDustIntakePerDate
-                else { return }
+                  else { return }
                 self.healthKitService
                   .requestDistancePerHour(
                     from: date,
@@ -112,7 +112,7 @@ final class IntakeService: IntakeServiceType {
                   ) { [weak self] hourlyDistancePerDate in
                     guard let self = self,
                       let hourlyDistancePerDate = hourlyDistancePerDate
-                    else { return }
+                      else { return }
                     if !self.healthKitService.isAuthorized {
                       completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
                       return
@@ -186,5 +186,31 @@ final class IntakeService: IntakeServiceType {
                    ultrafineDustIntakePerDate.sortedByDate().map { $0.value },
                    nil)
     }
+  }
+  
+  /// 미세먼지 섭취량으로 현재 상태 등급을 반환함.
+  func calculateCurrentState() -> Int {
+    var sumFineDust = 0
+    var currentState = 8
+    requestTodayIntake { (fineDust, ultraFineDust, _) in
+      if let fineDust = fineDust, let ultraFinedust = ultraFineDust {
+        sumFineDust = fineDust + ultraFinedust
+      }
+    }
+    switch sumFineDust {
+    case 0..<50:
+      currentState = TodayGrade.good.rawValue
+    case 50..<100:
+      currentState = TodayGrade.soso.rawValue
+    case 100..<150:
+      currentState = TodayGrade.bad.rawValue
+    case 150..<180:
+      currentState = TodayGrade.worse.rawValue
+    case 180...1000:
+      currentState = TodayGrade.evil.rawValue
+    default:
+      currentState = TodayGrade.good.rawValue
+    }
+    return currentState
   }
 }
