@@ -129,7 +129,7 @@ extension MainViewController {
             } else {
               print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
-          }
+        }
         DispatchQueue.main.async {
           self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }

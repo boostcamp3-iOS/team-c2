@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */; };
 		DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */; };
-		E81C1E68E26A12B21C557F6DDF683143 /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600A7EE29289B373EB674BCB03FE5146 /* AppIconManager.swift */; };
 		30A1DE8E981143431137AAE63C49D96C /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
 		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
 		339A73B07C29A939A19FA0A51422B3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
@@ -181,6 +180,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		368D160F5617575878855CA57DAE5BF6 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE6CA6F91CBF34E82AE4F6E1F47BF414 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,7 +206,6 @@
 /* Begin PBXFileReference section */
 		90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		600A7EE29289B373EB674BCB03FE5146 /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		067E449E7BAAA91C4EE4A2715980EAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -427,7 +435,6 @@
 		10F15CFF826B6B000B3C9C0973EA612B /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				600A7EE29289B373EB674BCB03FE5146 /* AppIconManager.swift */,
 				837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */,
 				4BDF70F8C8CCF939A458E8C06F17FCA1 /* FDCountingLabel.swift */,
 				768ED33DE8C563664122534CC0337E8E /* Hour.swift */,
@@ -826,6 +833,7 @@
 				51B3C28C7598053C0285EFFA1543C4F4 /* Resources */,
 				7228FB920B244F6FEED29E43DBB069BD /* ShellScript */,
 				AE6CA6F91CBF34E82AE4F6E1F47BF414 /* Embed App Extensions */,
+				368D160F5617575878855CA57DAE5BF6 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -996,7 +1004,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
-				E81C1E68E26A12B21C557F6DDF683143 /* AppIconManager.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
 				E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */,

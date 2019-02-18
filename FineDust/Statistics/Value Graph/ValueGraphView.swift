@@ -104,12 +104,16 @@ final class ValueGraphView: UIView {
   /// 요일 레이블 모음.
   @IBOutlet private var dayLabels: [UILabel]!
   
+  @IBOutlet private weak var graphContainerView: UIView!
+  
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
         view.layer.setBorder(radius: 2.0)
         view.backgroundColor = graphBackgroundColor(at: index)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                         action: #selector(graphViewDidTap(_:))))
       }
     }
   }
@@ -133,6 +137,22 @@ final class ValueGraphView: UIView {
     setUnitLabels()
     setDayLabelsTitle()
     setDateLabel()
+  }
+  
+  @objc private func graphViewDidTap(_ recognizer: UITapGestureRecognizer) {
+    guard let tappedGraphView = recognizer.view else { return }
+    if let tappedIndex = graphViews.firstIndex(of: tappedGraphView) {
+      print(tappedIndex, intakeAmounts[tappedIndex])
+      print(tappedGraphView.frame)
+      print(tappedGraphView.bounds)
+      let label = UILabel()
+      label.text = "\(intakeAmounts[tappedIndex])"
+      label.sizeToFit()
+      graphContainerView.addSubview(label)
+      label.center = tappedGraphView.frame.origin
+      print(label.frame)
+      
+    }
   }
 }
 

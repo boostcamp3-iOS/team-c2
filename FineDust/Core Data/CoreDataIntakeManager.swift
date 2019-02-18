@@ -24,7 +24,7 @@ final class CoreDataIntakeManager: CoreDataIntakeManagerType {
       } catch {
         completion(nil, error)
       }
-    }
+    } 
   }
   
   /// CREATE
