@@ -127,7 +127,7 @@
                                     <constraint firstAttribute="bottom" secondItem="PQh-1l-uC6" secondAttribute="bottom" id="gHv-0e-Ek4"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayDust" translatesAutoresizingMaskIntoConstraints="NO" id="sGr-3S-82N" userLabel="GrayDustImageView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dust_5" translatesAutoresizingMaskIntoConstraints="NO" id="sGr-3S-82N" userLabel="GrayDustImageView">
                                 <rect key="frame" x="80" y="156.5" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sGr-3S-82N" secondAttribute="height" multiplier="1:1" id="kb1-zP-xKN"/>
@@ -299,7 +299,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="grayDust" width="208.55999755859375" height="207.1199951171875"/>
+        <image name="dust_5" width="208.55999755859375" height="200.39999389648438"/>
         <image name="mainTabIcon" width="48" height="48"/>
         <image name="speechBubble1" width="109.91999816894531" height="81.599998474121094"/>
         <image name="speechBubble2" width="109.91999816894531" height="81.599998474121094"/>
