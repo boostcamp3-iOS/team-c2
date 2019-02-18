@@ -284,6 +284,7 @@
                     <navigationItem key="navigationItem" id="oZo-0S-gGs"/>
                     <connections>
                         <outlet property="distanceLabel" destination="Os6-Ee-Kik" id="zLO-ZP-CBl"/>
+                        <outlet property="fineDustImageView" destination="sGr-3S-82N" id="X8E-FU-Pjo"/>
                         <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="JDA-1G-POT"/>
                         <outlet property="gradeLabel" destination="ehv-Kz-X1j" id="bD4-hN-klk"/>
                         <outlet property="intakeFineDustLable" destination="6aD-dS-mao" id="Oia-TS-jvb"/>

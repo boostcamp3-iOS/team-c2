@@ -20,6 +20,7 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var locationLabel: UILabel!
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
+  @IBOutlet private weak var fineDustImageView: UIImageView!
   
   // MARK: - Properties
   
@@ -200,6 +201,10 @@ extension MainViewController {
         }
       }
     }
+  }
+  
+  private func updateFineDustImageView() {
+    
   }
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.

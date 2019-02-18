@@ -19,7 +19,8 @@ final class HealthKitService: HealthKitServiceType {
   
   var isAuthorized: Bool {
     let status = healthKitManager?.authorizationStatus ?? (.notDetermined, .notDetermined)
-    return status.0 == .sharingAuthorized && status.1 == .sharingAuthorized
+    return status == (.sharingAuthorized, .sharingAuthorized) ||
+      status == (.notDetermined, .notDetermined)
   }
   
   /// 오늘 걸음 수 가져오는 함수
