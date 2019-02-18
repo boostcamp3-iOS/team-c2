@@ -187,26 +187,4 @@ final class IntakeService: IntakeServiceType {
                    nil)
     }
   }
-  
-  /// 미세먼지 섭취량으로 현재 상태 등급을 반환함.
-  func calculateCurrentState(todayFineDust: Int, todayUltraFineDust: Int) -> Int {
-    let sumFineDust = todayFineDust + todayUltraFineDust
-    var currentState = 1
-    
-    switch sumFineDust {
-    case 0..<50:
-      currentState = TodayGrade.good.rawValue
-    case 50..<100:
-      currentState = TodayGrade.soso.rawValue
-    case 100..<150:
-      currentState = TodayGrade.bad.rawValue
-    case 150..<200:
-      currentState = TodayGrade.worse.rawValue
-    case 200...1000:
-      currentState = TodayGrade.evil.rawValue
-    default:
-      currentState = TodayGrade.good.rawValue
-    }
-    return currentState
-  }
 }
