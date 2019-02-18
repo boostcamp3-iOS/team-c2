@@ -26,10 +26,12 @@ final class TodayViewController: UIViewController, NCWidgetProviding {
     defaults?.synchronize()
     let fineDustIntake = defaults?.integer(forKey: "fineDustIntake")
     let ultrafineDustIntake = defaults?.integer(forKey: "ultrafineDustIntake")
-    if let fineDustIntake = fineDustIntake, let ultrafineDustIntake = ultrafineDustIntake {
+    if let fineDustIntake = fineDustIntake,
+      let ultrafineDustIntake = ultrafineDustIntake {
       label.isHidden = true
       fineDustIntakeLabel.text = "\(fineDustIntake)"
       ultrafineDustIntakeLabel.text = "\(ultrafineDustIntake)"
+      dustImageView.image = UIImage(named: IntakeGrade(intake: fineDustIntake).iconName)
     } else {
       label.isHidden = false
       label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
@@ -56,7 +58,7 @@ final class TodayViewController: UIViewController, NCWidgetProviding {
   
   func widgetMarginInsets(
     forProposedMarginInsets defaultMarginInsets: UIEdgeInsets
-  ) -> UIEdgeInsets {
+    ) -> UIEdgeInsets {
     return .zero
   }
 }

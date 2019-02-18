@@ -76,6 +76,8 @@
 		CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */; };
 		DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
+		4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
+		52DE9C2225FB68AED9B0D265BC103292 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
 		EAD6BEA4DC982B483C0A95A67C270235 /* IntakeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606C9E3BFF1AED7C81E5F20826CB9B6 /* IntakeService.swift */; };
 		7ED6D48115ABA15E603B9E99145AC290 /* IntakeServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB41FF074468002F2C2A80F4BCBB2E /* IntakeServiceType.swift */; };
 		73E17575954CD283AB780AF418B0B695 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5C390A35DCD90C43B0702BDC3C825C /* JSONManager.swift */; };
@@ -267,6 +269,7 @@
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81F933DBA59974851C46D4F040C139D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeGrade.swift; sourceTree = "<group>"; };
 		E606C9E3BFF1AED7C81E5F20826CB9B6 /* IntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeService.swift; sourceTree = "<group>"; };
 		2CFB41FF074468002F2C2A80F4BCBB2E /* IntakeServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeServiceType.swift; sourceTree = "<group>"; };
 		7CCC24FEE510E7D01D68706187551A87 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
@@ -603,6 +606,7 @@
 		5FEB46BCC1B8D788F6F47A0D089D755A /* Intake */ = {
 			isa = PBXGroup;
 			children = (
+				730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */,
 				E606C9E3BFF1AED7C81E5F20826CB9B6 /* IntakeService.swift */,
 				2CFB41FF074468002F2C2A80F4BCBB2E /* IntakeServiceType.swift */,
 			);
@@ -981,6 +985,7 @@
 			files = (
 				30A1DE8E981143431137AAE63C49D96C /* Assets.swift in Sources */,
 				CF3FAFCABD0FF5505CA5375FB2DC5915 /* CALayer+.swift in Sources */,
+				52DE9C2225FB68AED9B0D265BC103292 /* IntakeGrade.swift in Sources */,
 				37F1DC532E92CED7DFB991E7A1F4B3BB /* TodayViewController.swift in Sources */,
 				0A3D712EDD73CD9FCE62626D51842BCE /* UIColor+.swift in Sources */,
 			);
@@ -1041,6 +1046,7 @@
 				CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */,
 				DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */,
 				B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */,
+				4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */,
 				EAD6BEA4DC982B483C0A95A67C270235 /* IntakeService.swift in Sources */,
 				7ED6D48115ABA15E603B9E99145AC290 /* IntakeServiceType.swift in Sources */,
 				73E17575954CD283AB780AF418B0B695 /* JSONManager.swift in Sources */,
