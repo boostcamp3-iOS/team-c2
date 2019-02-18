@@ -23,6 +23,22 @@ final class StatisticsViewController: UIViewController {
   
   // MARK: IBOutlets
   
+  /// 서브뷰 포함하는 스크롤 뷰.
+  @IBOutlet private weak var scrollView: UIScrollView! {
+    didSet {
+      scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
+    }
+  }
+  
+  /// 미세먼지 / 초미세먼지 토글하는 세그먼티드 컨트롤.
+  @IBOutlet private weak var segmentedControl: UISegmentedControl! {
+    didSet {
+      segmentedControl.addTarget(self,
+                                 action: #selector(segmentedControlValueDidChange(_:)),
+                                 for: .valueChanged)
+    }
+  }
+  
   /// 값 그래프 배경 뷰.
   @IBOutlet private weak var valueGraphBackgroundView: UIView! {
     didSet {
@@ -50,14 +66,14 @@ final class StatisticsViewController: UIViewController {
   /// 값 그래프.
   private var valueGraphView: ValueGraphView! {
     didSet {
-      valueGraphView.delegate = self
+      valueGraphView.dataSource = self
     }
   }
   
   /// 비율 그래프.
   private var ratioGraphView: RatioGraphView! {
     didSet {
-      ratioGraphView.delegate = self
+      ratioGraphView.dataSource = self
     }
   }
   
@@ -67,26 +83,34 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var dustIntakes: [CGFloat] = [100, 100, 100, 100, 100, 100, 100]
+  private var fineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  
+  /// 7일간의 초미세먼지 농도 값 모음.
+  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
   
-  /// 전체에 대한 마지막 값의 비율
-  private var dustLastValueRatio: CGFloat {
-    let sum = dustIntakes.reduce(0, +)
-    let last = dustIntakes.last ?? 0.0
+  /// 미세먼지의 전체에 대한 마지막 값의 비율
+  private var fineDustLastValueRatio: CGFloat {
+    let reduced = fineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
+    let last = fineDustTotalIntakes.last ?? 0.1
     return last / sum
   }
   
-  /// 선택된 날짜.
-  private var selectedDate: Date = Date()
+  /// 초미세먼지의 전체에 대한 마지막 값의 비율
+  private var ultrafineDustLastValueRatio: CGFloat {
+    let reduced = ultrafineDustTotalIntakes.reduce(0, +)
+    let sum = reduced == 0 ? 0.1 : reduced
+    let last = ultrafineDustTotalIntakes.last ?? 0.1
+    return last / sum
+  }
   
   // MARK: Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "미세먼지 분석".localized
     createSubviews()
     setConstraintsToSubviews()
     registerLocationObserver()
@@ -100,6 +124,7 @@ final class StatisticsViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     initializeRatioGraphView()
+    // 한번 보여진 이후로는 비즈니스 로직을 수행하지 않음
     if !isPresented {
       isPresented.toggle()
       requestIntake()
@@ -110,57 +135,46 @@ final class StatisticsViewController: UIViewController {
     unregisterLocationObserver()
   }
   
+  /// 세그먼티드 컨트롤 값이 바뀌었을 때 호출됨.
+  @objc private func segmentedControlValueDidChange(_ sender: UISegmentedControl) {
+    initializeSubviews()
+  }
+  
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
-    requestWeekDustInfo { [weak self] fineDusts, ultrafineDusts, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
+    DispatchQueue.global(qos: .utility).async { [weak self] in
       guard let self = self else { return }
-      self.requestTodayDustInfo { [weak self] fineDust, ultrafineDust, error in
-        if let error = error {
-          print(error.localizedDescription)
+      self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
+        if let error = error as? ServiceErrorType {
+          error.presentToast()
           return
         }
         guard let self = self else { return }
-        guard let fineDusts = fineDusts else { return }
-        guard let fineDust = fineDust else { return }
-        // 조작
-        let weekIntakes = [fineDusts, [fineDust]]
-          .flatMap { $0 }
-          .map { CGFloat($0) }
-        print(weekIntakes)
-        self.dustIntakes = weekIntakes
-        DispatchQueue.main.async {
-          self.initializeValueGraphView()
-          self.initializeRatioGraphView()
+        self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
+          if let error = error as? ServiceErrorType {
+            error.presentToast()
+            return
+          }
+          guard let self = self,
+            let fineDusts = fineDusts,
+            let ultrafineDusts = ultrafineDusts,
+            let fineDust = fineDust,
+            let ultrafineDust = ultrafineDust
+            else { return }
+          let fineDustWeekIntakes = [fineDusts, [fineDust]]
+            .flatMap { $0 }
+            .map { CGFloat($0) }
+          let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
+            .flatMap { $0 }
+            .map { CGFloat($0) }
+          self.fineDustTotalIntakes = fineDustWeekIntakes
+          self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
+          print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
+          DispatchQueue.main.async {
+            self.initializeSubviews()
+          }
         }
       }
-    }
-  }
-  
-  /// 오늘 제외한 일주일간 정보 요청.
-  private func requestWeekDustInfo(completion: @escaping ([Int]?, [Int]?, Error?) -> Void) {
-    intakeService
-      .requestIntakesInWeek(since: .before(days: 6)) { fineDusts, ultrafineDusts, error in
-        if let error = error {
-          completion(nil, nil, error)
-          return
-        }
-        completion(fineDusts, ultrafineDusts, nil)
-    }
-  }
-  
-  /// 오늘의 정보 요청.
-  private func requestTodayDustInfo(completion: @escaping (Int?, Int?, Error?) -> Void) {
-    intakeService
-      .requestTodayIntake { fineDust, ultrafineDust, error in
-        if let error = error {
-          completion(nil, nil, error)
-          return
-        }
-        completion(fineDust, ultrafineDust, nil)
     }
   }
 }
@@ -168,37 +182,39 @@ final class StatisticsViewController: UIViewController {
 // MARK: - LocationObserver 구현
 
 extension StatisticsViewController: LocationObserver {
+  
   func handleIfSuccess(_ notification: Notification) {
-    requestIntake()
-  }
-  
-  func handleIfFail(_ notification: Notification) {
-    UIAlertController
-      .alert(title: "", message: notification.locationTaskError?.localizedDescription)
-      .action(title: "확인")
-      .present(to: self)
-  }
-  
-  func handleIfAuthorizationDenied(_ notification: Notification) {
-    print("authorization denied")
+    // 탭바 컨트롤러의 현재 뷰컨트롤러가 해당 뷰컨트롤러일 때만 노티피케이션 성공 핸들러 로직을 수행함
+    let tabBarControllerCurrentViewController
+      = (tabBarController?.selectedViewController as? UINavigationController)?
+        .visibleViewController
+    if tabBarControllerCurrentViewController == self {
+      requestIntake()
+    }
   }
 }
 
 // MARK: - ValueGraphView Delegate 구현
 
-extension StatisticsViewController: ValueGraphViewDelegate {
+extension StatisticsViewController: ValueGraphViewDataSource {
   
-  var intakeAmounts: [CGFloat] {
-    return dustIntakes
+  var intakes: [CGFloat] {
+    if segmentedControl.selectedSegmentIndex == 0 {
+      return fineDustTotalIntakes
+    }
+    return ultrafineDustTotalIntakes
   }
 }
 
 // MARK: - RatioGraphView Delegate 구현
 
-extension StatisticsViewController: RatioGraphViewDelegate {
+extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: CGFloat {
-    return dustLastValueRatio
+    if segmentedControl.selectedSegmentIndex == 0 {
+      return fineDustLastValueRatio
+    }
+    return ultrafineDustLastValueRatio
   }
 }
 
@@ -236,6 +252,12 @@ private extension StatisticsViewController {
 // MARK: - Value Graph Private Extension
 
 private extension StatisticsViewController {
+  
+  /// 모든 서브뷰 초기화.
+  func initializeSubviews() {
+    initializeValueGraphView()
+    initializeRatioGraphView()
+  }
   
   /// 값 그래프 뷰 초기화.
   func initializeValueGraphView() {

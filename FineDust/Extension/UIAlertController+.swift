@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIAlertController {
+  
   /// `UIAlertController` Helper.
   static func alert(title: String?,
                     message: String?,
@@ -44,7 +45,9 @@ extension UIAlertController {
                animated: Bool = true,
                completion: (() -> Void)? = nil) {
     DispatchQueue.main.async {
-      viewController?.present(self, animated: animated, completion: completion)
+      if !(viewController?.presentedViewController is UIAlertController) {
+        viewController?.present(self, animated: animated, completion: completion)
+      }
     }
   }
 }

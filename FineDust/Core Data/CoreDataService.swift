@@ -11,17 +11,16 @@ import Foundation
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
   
-  /// CoreDataService 싱글톤 객체.
-  static let shared = CoreDataService()
-  
-  /// `User` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 유저 매니저 프로퍼티.
   let userManager: CoreDataUserManagerType
   
-  /// `Intake` Entity가 들어올, CoreDataManagerType을 준수하는 프로퍼티.
+  /// 코어데이터 흡입량 매니저 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
   
-  private init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
-               intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
+  // MARK: Dependency Injection
+  
+  init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
+       intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
     self.userManager = userManager
     self.intakeManager = intakeManager
   }
@@ -33,7 +32,7 @@ final class CoreDataService: CoreDataServiceType {
       if let lastAccessedDate = user?.lastAccessedDate {
         completion(lastAccessedDate, error)
       } else {
-        saveLastAccessedDate { error in
+        self.saveLastAccessedDate { error in
           completion(Date(), error)
         }
       }
@@ -46,33 +45,127 @@ final class CoreDataService: CoreDataServiceType {
   
   func requestIntakes(from startDate: Date,
                       to endDate: Date,
-                      completion: @escaping ([Date: Int?]?, Error?) -> Void) {
+                      completion: @escaping (DateIntakePair?, Error?) -> Void) {
     intakeManager.request { intakes, error in
       if let error = error {
         completion(nil, error)
         return
       }
       guard let intakes = intakes else { return }
-      var result: [Date: Int?] = [:]
+      var result: DateIntakePair = [:]
       let startDate = startDate.start
       let endDate = endDate.end
       let intakesInDates = intakes.filter { (startDate...endDate).contains($0.date ?? Date()) }
-      var currentDate = startDate
       // 인자에 들어온 날짜를 순회하면서
       // 코어데이터에 해당 날짜에 대한 정보가 저장되어 있으면 그 정보를 내려주고
       // 그렇지 않으면 nil을 내려주어 해당 부분은 통신으로 처리하게 함
-      while currentDate <= endDate.end {
+      Date.between(startDate, endDate).forEach { currentDate in
         let intakeInCurrentDate = intakesInDates.filter { $0.date?.start == currentDate }.first
         if let currentIntake = intakeInCurrentDate {
-          result[currentDate] = Int(currentIntake.value)
+          result[currentDate] = (Int(currentIntake.fineDust), Int(currentIntake.ultrafineDust))
         }
-        currentDate = currentDate.after(days: 1).start
       }
       completion(result, nil)
     }
   }
   
-  func saveIntake(_ value: Int, at date: Date, completion: @escaping (Error?) -> Void) {
-    intakeManager.save([Intake.date: date, Intake.value: Int16(value)], completion: completion)
+  func saveIntake(fineDust: Int,
+                  ultrafineDust: Int,
+                  at date: Date,
+                  completion: @escaping (Error?) -> Void) {
+    intakeManager.save([Intake.date: date,
+                        Intake.fineDust: Int16(fineDust),
+                        Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
+  }
+  
+  func saveIntakes(fineDusts: [Int],
+                   ultrafineDusts: [Int],
+                   at dates: [Date],
+                   completion: @escaping (Error?) -> Void) {
+    if !(fineDusts.count == ultrafineDusts.count && ultrafineDusts.count == dates.count) {
+      completion(NSError(domain: "count not matched", code: 0, userInfo: nil))
+      return
+    }
+    for index in dates.indices {
+      let fineDust = fineDusts[index]
+      let ultrafineDust = ultrafineDusts[index]
+      let date = dates[index]
+      intakeManager.save([Intake.date: date,
+                          Intake.fineDust: Int16(fineDust),
+                          Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
+    }
+  }
+  
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(nil, error)
+        return
+      }
+      guard let user = user else { return }
+      let lastSavedData = LastSavedData(
+        todayFineDust: Int(user.todayFineDust),
+        todayUltrafineDust: Int(user.todayUltrafineDust),
+        distance: user.distance,
+        steps: Int(user.steps),
+        address: user.address ?? "",
+        grade: Int(user.grade),
+        recentFineDust: Int(user.recentFineDust)
+      )
+      completion(lastSavedData, nil)
+    }
+  }
+  
+  func saveLastSteps(_ steps: Int, completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([User.steps: Int16(steps)], completion: completion)
+    }
+  }
+  
+  func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([User.distance: distance], completion: completion)
+    }
+  }
+  
+  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int),
+                        completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([
+        User.address: dustData.address,
+        User.grade: Int16(dustData.grade),
+        User.recentFineDust: Int16(dustData.recentFineDust)
+        ], completion: completion)
+    }
+  }
+  
+  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int),
+                           completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([
+        User.todayFineDust: Int16(intakes.todayFineDust),
+        User.todayUltrafineDust: Int16(intakes.todayUltrafineDust)
+        ], completion: completion)
+    }
   }
 }

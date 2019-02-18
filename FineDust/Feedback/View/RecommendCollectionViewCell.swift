@@ -11,11 +11,12 @@ import UIKit
 /// 3번째 탭 상단 정보 추천 컬렉션뷰셀. 
 final class RecommendCollectionViewCell: UICollectionViewCell {
 
-  @IBOutlet weak var recommendImageView: UIImageView!
-  @IBOutlet weak var recommendTitleLabel: UILabel!
+  @IBOutlet private weak var recommendImageView: UIImageView!
+  @IBOutlet private weak var recommendTitleLabel: UILabel!
   
-  fileprivate let jsonManager = JSONManager()
-  fileprivate var dustFeedbacks: [DustFeedbacks] = []
+  var title: String {
+    return recommendTitleLabel.text ?? ""
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -29,16 +30,13 @@ final class RecommendCollectionViewCell: UICollectionViewCell {
   }
   
   /// 컬렉션뷰셀 데이터 설정
-  func setCollectionViewCellProperties(at index: Int) {
-    dustFeedbacks = jsonManager.fetchDustFeedbacks()
-    
-    recommendImageView.image = UIImage(named: dustFeedbacks[index].imageName )
-    recommendTitleLabel.text = dustFeedbacks[index].title
+  func setCollectionViewCellProperties(dustFeedback: DustFeedback) {
+    recommendImageView.image = UIImage(named: dustFeedback.imageName)?.resize(newWidth: 300)
+    recommendTitleLabel.text = dustFeedback.title
   }
   
   /// 컬렉션뷰셀 이미지 UI 설정
-  func setImageView() {
-    recommendImageView.layer.cornerRadius = 5
-    recommendImageView.layer.masksToBounds = true
+  private func setImageView() {
+    contentView.layer.setBorder(color: .clear, width: 0.0, radius: 5.0)
   }
 }

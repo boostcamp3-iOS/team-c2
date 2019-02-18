@@ -11,13 +11,51 @@ import Foundation
 
 class MockCoreDataService: CoreDataServiceType {
   
-  var referenceDate: Date = Date()
+  var lastAccessedDate: Date?
+  
+  var coreDataIntakePerDate: DateIntakePair?
+  
+  var lastSavedData: LastSavedData?
   
   var error: Error?
   
-  var intakesInWeek: [Int]?
+  func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
+    completion(lastAccessedDate, error)
+  }
   
-  func fetchIntakesInWeek(since date: Date, completion: @escaping ([Int]?, Error?) -> Void) {
-    completion(intakesInWeek, error)
+  func saveLastAccessedDate(completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
+  func requestIntakes(from startDate: Date, to endDate: Date, completion: @escaping (DateIntakePair?, Error?) -> Void) {
+    completion(coreDataIntakePerDate, error)
+  }
+  
+  func saveIntake(fineDust: Int, ultrafineDust: Int, at date: Date, completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
+  func saveIntakes(fineDusts: [Int], ultrafineDusts: [Int], at dates: [Date], completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
+    completion(lastSavedData, error)
+  }
+ 
+  func saveLastSteps(_ steps: Int, completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
+  func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
+  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int), completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
+  
+  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int), completion: @escaping (Error?) -> Void) {
+    completion(error)
   }
 }

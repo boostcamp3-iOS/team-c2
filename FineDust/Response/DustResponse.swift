@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// 미세먼지 정보 응답 객체.
 struct DustResponse: XMLParsingType {
  
@@ -34,26 +32,17 @@ struct DustResponse: XMLParsingType {
     /// 관측 시간. `2019-01-29 16:00`. Format: `yyyy-MM-dd HH:mm`
     let dataTime: String
     
-    private let fineDustValueString: String
+    let fineDustValueString: String
     
-    private let fineDustValue24String: String
+    let fineDustGradeString: String
     
-    private let fineDustGradeString: String
+    let ultrafineDustValueString: String
     
-    private let ultrafineDustValueString: String
-    
-    private let ultrafineDustValue24String: String
-    
-    private let ultrafineDustGradeString: String
+    let ultrafineDustGradeString: String
     
     /// 미세먼지 현재 농도.
     var fineDustValue: Int {
       return Int(fineDustValueString) ?? 0
-    }
-    
-    /// 미세먼지 24시간 농도.
-    var fineDustValue24: Int {
-      return Int(fineDustValue24String) ?? 0
     }
     
     /// 미세먼지 현재 등급.
@@ -65,12 +54,7 @@ struct DustResponse: XMLParsingType {
     var ultrafineDustValue: Int {
       return Int(ultrafineDustValueString) ?? 0
     }
-    
-    /// 초미세먼지 24시간 농도.
-    var ultrafineDustValue24: Int {
-      return Int(ultrafineDustValue24String) ?? 0
-    }
-    
+
     /// 초미세먼지 현재 등급.
     var ultrafineDustGrade: Int {
       return Int(ultrafineDustGradeString) ?? 0
@@ -79,10 +63,8 @@ struct DustResponse: XMLParsingType {
     static func deserialize(_ node: XMLIndexer) throws -> Item {
       return try Item(dataTime: node["dataTime"].value(),
                       fineDustValueString: node["pm10Value"].value(),
-                      fineDustValue24String: node["pm10Value24"].value(),
                       fineDustGradeString: node["pm10Grade"].value(),
                       ultrafineDustValueString: node["pm25Value"].value(),
-                      ultrafineDustValue24String: node["pm25Value24"].value(),
                       ultrafineDustGradeString: node["pm25Grade"].value())
     }
   }
@@ -100,11 +82,6 @@ struct DustResponse: XMLParsingType {
     return try DustResponse(result: node["response"]["header"].value(),
                             totalCount: node["response"]["body"]["totalCount"].value(),
                             items: node["response"]["body"]["items"]["item"].value())
-  }
-    
-  /// 서브스크립트로 리스트의 값에 접근. `response[1]`
-  subscript(index: Int) -> Item {
-    return items[index]
   }
   
   /// 미세먼지 API 상태 코드.

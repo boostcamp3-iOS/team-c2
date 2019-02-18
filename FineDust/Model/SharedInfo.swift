@@ -29,30 +29,35 @@ final class SharedInfo {
   
   private var _observatory: String = ""
   
+  /// 현재 위치의 x좌표.
   var x: Double {
     return _x
   }
   
+  /// 현재 위치의 y좌표.
   var y: Double {
     return _y
   }
   
+  /// 현재 위치의 주소.
   var address: String {
     return _address
   }
   
-  /// 관측소.
+  /// 현재 위치 근처의 관측소.
   var observatory: String {
     return _observatory
   }
 
   // MARK: Methods
   
+  /// 좌표 설정.
   func set(x: Double, y: Double) {
     _x = x
     _y = y
   }
   
+  /// 주소 설정.
   func set(address: String) {
     _address = address
   }

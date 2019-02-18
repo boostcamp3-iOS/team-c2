@@ -8,8 +8,6 @@
 
 import Foundation
 
-import SWXMLHash
-
 /// XML 파싱이 가능한 타입.
 protocol XMLParsingType: XMLIndexerDeserializable {
   

@@ -41,15 +41,15 @@ final class ValueGraphView: UIView {
   
   // MARK: Delegate
   
-  /// Value Graph View Delegate.
-  weak var delegate: ValueGraphViewDelegate?
+  /// Value Graph View Data Source.
+  weak var dataSource: ValueGraphViewDataSource?
   
   // MARK: Property
   
-  /// DateFormatter 프로퍼티.
+  /// `yyyy년 M월 d일 EEEE` 포맷을 갖는 DateFormatter 프로퍼티.
   private lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.locale = .korea
     formatter.dateFormat = "yyyy년 M월 d일 EEEE"
     return formatter
   }()
@@ -58,7 +58,7 @@ final class ValueGraphView: UIView {
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [CGFloat] {
-    return delegate?.intakeAmounts ?? []
+    return dataSource?.intakes ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.
@@ -80,13 +80,17 @@ final class ValueGraphView: UIView {
   /// 일 텍스트.
   private var dateTexts: [String] {
     let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.locale = .korea
     dateFormatter.dateFormat = "d"
     var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
-    return array.map { dateFormatter.string(from: $0) }.reversed()
+    var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
+    // 마지막 값을 오늘로 바꿈
+    reversed.removeLast()
+    reversed.append("오늘")
+    return reversed
   }
   
   // MARK: IBOutlets
@@ -179,6 +183,7 @@ private extension ValueGraphView {
     }
   }
   
+  /// 날짜 레이블 설정.
   func setDateLabel() {
     dateLabel.text = dateFormatter.string(from: Date())
   }

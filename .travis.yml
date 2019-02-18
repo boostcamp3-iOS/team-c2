@@ -1,0 +1,10 @@
+language: swift
+osx_image: xcode10.1
+xcode_project: FineDust.xcodeproj
+xcode_scheme: FineDust
+xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
+notifications:
+  slack:
+    secure: l6rvYbyyG0pIgu4EmvZPjDAXeJqfw685ImhRV4WNrJ8f32ogF6HCo5WLSFqzG7vwona8LWg0iFMH38RsBc8jQm3utmcEG90eYHHBciBnWclwxeX1E2DtXp6/7hfAQ5x1Pw4M4Cnj3pQesxXf0gGNwF2SIE3Y1qNm2nTP2jEUvALcfrOeFSzJ1zNxfC5NgTA5Fhjr5Sky98zTHo0a6m6ycA1GbJGDiyLefw2PQT9YsxriPQFOtFQsqaS7hi1yJlwi7cFKtfBWGGs4oXzHB0XYl/uPNN8/4/C95Hs3HQ0x7ZHaQAaDpvBpU5rfE0S+yIeUwNsMXf+C9xJciNGh9m65IkrluLqr1y/p7rfkLOiYe3WPI+djs2zSLtemEraE/6BHKhvug40K34kNbpCbDEg5licVfvwJZQaLVHdfiKNJS83GBOVbUPBa6tZ7frbilvBx+4/RfZO2lo8CarRFj+Zokx80OvNbd+FE0e/2EbTy9ejUx5LjjzV8kraRSZBBk/aJ5A1L0bYTgbOouf2j7ujuDrcro2RJAf73CKgIxU6la4/cQH8EApr8Iuaa413nrFGi0eFTi4utHrUe5qa9ETAuyYztsLlPK35N7XnXrb5JNaQkYyiaXD/eelYVaxwZmVp/SfYyiPPmLCP3MtNzIkgadb+IGS9Z+NiyB+3J3y2NApU=
+after_success:
+- bash <(curl -s https://codecov.io/bash)

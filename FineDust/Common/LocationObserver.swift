@@ -35,6 +35,20 @@ protocol LocationObserver: class {
 
 extension LocationObserver where Self: UIViewController {
   
+  func handleIfFail(_ notification: Notification) {
+    if let error = notification.locationTaskError {
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
+    }
+  }
+  
+  func handleIfAuthorizationDenied(_ notification: Notification) {
+    if let error = notification.locationTaskError {
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
+    }
+  }
+  
   /// 위의 세 경우에 대한 옵저버 등록.
   func registerLocationObserver() {
     NotificationCenter.default.addObserver(

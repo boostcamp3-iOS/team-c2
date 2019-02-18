@@ -9,18 +9,20 @@
 import Foundation
 
 /// HTTP 통신 에러.
-enum HTTPError: Error {
+enum HTTPError: ServiceErrorType {
   
+  /// 200이 아닌 나머지.
   case `default`
 }
 
 // MARK: - 에러 디스크립션
 
 extension HTTPError {
+  
   var localizedDescription: String {
     switch self {
     case .default:
-      return "네트워크 오류가 발생하였습니다."
+      return "네트워크 연결을 확인해 주세요."
     }
   }
 }

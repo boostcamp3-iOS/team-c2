@@ -10,7 +10,7 @@ import CoreLocation
 import Foundation
 
 /// 지오코딩 매니저.
-final class GeocoderManager {
+final class GeocoderManager: GeocoderManagerType {
   
   // MARK: Singleton Object
   
@@ -18,23 +18,20 @@ final class GeocoderManager {
   static let shared = GeocoderManager()
   
   private init() { }
-}
-
-// MARK: - GeocoderManagerType 구현
-
-extension GeocoderManager: GeocoderManagerType {
+  
   func requestAddress(_ location: CLLocation,
                       completion: @escaping (String?, Error?) -> Void) {
     CLGeocoder()
       .reverseGeocodeLocation(location,
-                              preferredLocale: Locale(identifier: "ko_KR")) { placemarks, error in
+                              preferredLocale: .korea) { placemarks, error in
                                 if let error = error {
                                   completion(nil, error)
                                   return
                                 }
                                 guard let placemark = placemarks?.first else { return }
                                 let locality = placemark.locality ?? ""
-                                let name = placemark.name ?? ""
+                                // 도로명과 번지를 잘라 도로명만 취함
+                                let name = placemark.name?.components(separatedBy: " ").first ?? ""
                                 let address = "\(locality) \(name)"
                                 completion(address, nil)
     }

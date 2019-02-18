@@ -18,21 +18,18 @@ final class RatioGraphView: UIView {
     
     /// 레이어 선 두께.
     static let lineWidth: CGFloat = 10.0
-    
-    /// 배경 뷰 높이와 전체 비율 섹션 뷰 높이의 차이.
-    static let entireSectionViewHeightDifference: CGFloat = 64.0
   }
   
   // MARK: Delegate
   
-  /// Ratio Graph View Delegate.
-  weak var delegate: RatioGraphViewDelegate?
+  /// Ratio Graph View Data Source.
+  weak var dataSource: RatioGraphViewDataSource?
   
   // MARK: Private Properties
   
   /// 전체에 대한 부분의 비율.
   private var ratio: CGFloat {
-    return delegate?.intakeRatio ?? 0.0
+    return dataSource?.intakeRatio ?? .leastNonzeroMagnitude
   }
   
   /// 비율을 각도로 변환.
@@ -42,7 +39,7 @@ final class RatioGraphView: UIView {
   
   /// 배경 뷰 높이.
   private var backgroundViewHeight: CGFloat {
-    return backgroundView.bounds.height - Constant.entireSectionViewHeightDifference
+    return backgroundView.bounds.height * 0.7
   }
   
   // MARK: IBOutlet
@@ -53,8 +50,8 @@ final class RatioGraphView: UIView {
   // MARK: View
   
   /// 퍼센트 레이블.
-  private lazy var percentLabel: UILabel! = {
-    let label = UILabel()
+  private lazy var percentLabel: FDCountingLabel = {
+    let label = FDCountingLabel()
     label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.addSubview(label)
@@ -122,19 +119,9 @@ private extension RatioGraphView {
   
   /// 비어 있는 원 안에 퍼센트 레이블 설정하기.
   func setPercentLabel() {
-    var startValue: Int = 0
     let endValue = Int(ratio * 100)
     let interval = 1.0 / Double(endValue)
     backgroundView.addSubview(percentLabel)
-    timer = Timer
-      .scheduledTimer(withTimeInterval: interval,
-                      repeats: true) { [weak self] timer in
-                        startValue += 1
-                        self?.percentLabel.text = "\(startValue)%"
-                        if startValue == endValue {
-                          timer.invalidate()
-                        }
-    }
-    timer?.fire()
+    percentLabel.countFromZero(to: endValue, unit: .percent, interval: interval)
   }
 }

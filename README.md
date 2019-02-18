@@ -1,10 +1,19 @@
-# Project FineDust
+<img alt="FineDust" src="https://raw.github.com/boostcamp3-iOS/team-c2/master/images/main.png" style="max-width: 100%">
 
-![Language](https://img.shields.io/badge/swift-4.2-orange.svg)
-![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
-[![Build Status](https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop)](https://travis-ci.org/boostcamp3-iOS/team-c2)
+<p align="center">
+  <img alt="Swift" src="https://img.shields.io/badge/swift-4.2-orange.svg">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-ios-lightgrey.svg">
+  <a href="https://travis-ci.org/boostcamp3-iOS/team-c2" target="_blank">
+    <img alt="Build Status" src="https://travis-ci.org/boostcamp3-iOS/team-c2.svg?branch=develop">
+  </a>
+  <a href="https://codecov.io/gh/boostcamp3-iOS/team-c2" target="_blank">
+    <img alt="Codecov" src="https://codecov.io/gh/boostcamp3-iOS/team-c2/branch/develop/graph/badge.svg">
+  </a>
+</p>
 
-부스트캠프 3기 iOS과정 C-2팀
+# 내안의먼지
+
+부스트캠프 3기 iOS 과정 C-2팀
 
 ## 팀원 정보
 
@@ -28,9 +37,9 @@
 
 ### 현재까지 구현된 뷰
 
-![1](./images/1.PNG)
-![2](./images/2.PNG)
-![3](./images/3.PNG)
+![1](./images/1.png)
+![2](./images/2.png)
+![3](./images/3.png)
 
 ### 컬러칩
 
@@ -46,20 +55,18 @@
 - **국가대기오염정보 Open API** 사용하여 미세먼지 및 초미세먼지 정보 가져오기
 - **Core Location** 사용하여 현재 위치의 위도 및 경도, 주소 가져오기
 - **Core Data** 사용하여 미세먼지 축적량을 앱 내부에 보존하기
-
----
-
 - **[SwiftLint](https://github.com/realm/SwiftLint)** 적용
 
 ```yaml
+# .swiftlint.yml
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
-- nesting
 
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
+- FineDust/SWXMLHash
 
 line_length:
   warning: 99
@@ -69,12 +76,14 @@ identifier_name:
   excluded:
     - x
     - y
+    - dx
 ```
 
 - StyleShare의 **[Swift Style Guide](https://github.com/StyleShare/swift-style-guide)** 준수
 - 스토리보드 및 에셋 사용을 용이하게 하기 위해 **[SwiftGen](https://github.com/SwiftGen/SwiftGen)** 사용
 
 ```yaml
+# swiftgen.yml
 xcassets:
   inputs: FineDust/Supporting Files/Assets.xcassets
   outputs:
@@ -89,3 +98,11 @@ ib:
 ```
 
 - `project.pbxproj` 파일의 충돌을 최소화하고 해결을 쉽게 하기 위해 **[xUnique](https://github.com/truebit/xUnique)** 사용
+
+### Unit Test / Dependency Injection
+
+[Wiki](https://github.com/boostcamp3-iOS/team-c2/wiki/Unit-Test)를 참고해 주세요.
+
+### Profile
+
+[Wiki](https://github.com/boostcamp3-iOS/team-c2/wiki/Profile)를 참고해 주세요.

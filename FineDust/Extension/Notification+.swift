@@ -9,6 +9,8 @@
 import Foundation
 
 extension Notification {
+  
+  /// 위치 관련 작업 중 에러.
   var locationTaskError: LocationTaskError? {
     return userInfo?["error"] as? LocationTaskError
   }

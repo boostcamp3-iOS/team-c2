@@ -9,24 +9,25 @@
 import UIKit
 
 /// 네트워크 인디케이터 뷰
+///
+/// `ProgressIndicator.shared.show()`로 인디케이터 보이기
+///
+/// `ProgressIndicator.shared.hide()`로 인디케이터 숨기기
 final class ProgressIndicator: UIView {
   
   // MARK: Singleton Object
   static let shared = ProgressIndicator(frame: UIScreen.main.bounds)
   
   /// 배경 뷰
-  private var backgroundView: UIView! {
+  private var backgroundView: UIVisualEffectView! {
     didSet {
-      backgroundView.backgroundColor = .lightGray
-      backgroundView.clipsToBounds = true
-      backgroundView.layer.cornerRadius = 10
       backgroundView.translatesAutoresizingMaskIntoConstraints = false
       addSubview(backgroundView)
       NSLayoutConstraint.activate([
-        backgroundView.anchor.centerX.equal(to: anchor.centerX),
-        backgroundView.anchor.centerY.equal(to: anchor.centerY),
-        backgroundView.anchor.width.equal(toConstant: 100),
-        backgroundView.anchor.height.equal(toConstant: 100)
+        backgroundView.anchor.top.equal(to: anchor.top),
+        backgroundView.anchor.leading.equal(to: anchor.leading),
+        backgroundView.anchor.bottom.equal(to: anchor.bottom),
+        backgroundView.anchor.trailing.equal(to: anchor.trailing)
         ])
     }
   }
@@ -34,11 +35,10 @@ final class ProgressIndicator: UIView {
   // 액티비티 인디케이터
   private var indicator: UIActivityIndicatorView! {
     didSet {
-      indicator.style = .whiteLarge
-      indicator.color = .black
+      indicator.style = .gray
       indicator.hidesWhenStopped = true
       indicator.translatesAutoresizingMaskIntoConstraints = false
-      backgroundView.addSubview(indicator)
+      backgroundView.contentView.addSubview(indicator)
       NSLayoutConstraint.activate([
         indicator.anchor.centerX.equal(to: backgroundView.anchor.centerX),
         indicator.anchor.centerY.equal(to: backgroundView.anchor.centerY)
@@ -57,30 +57,40 @@ final class ProgressIndicator: UIView {
   }
   
   private func setup() {
-    backgroundColor = UIColor.black.withAlphaComponent(0.3)
-    backgroundView = UIView()
+    backgroundColor = .clear
+    backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     indicator = UIActivityIndicatorView()
   }
   
-  /// `ProgressIndicator.shared.show()`로 인디케이터 표시
   func show() {
     DispatchQueue.main.async { [weak self] in
-      guard let `self` = self else { return }
+      guard let self = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
       self.indicator.startAnimating()
+      self.alpha = 0
       if let window = UIApplication.shared.keyWindow {
         window.addSubview(self)
+        UIView.animate(withDuration: 0.3) {
+          self.alpha = 1
+        }
       }
     }
   }
   
-  /// `ProgressIndicator.shared.hide()`로 인디케이터 표시
   func hide() {
     DispatchQueue.main.async { [weak self] in
-      guard let `self` = self else { return }
+      guard let self = self else { return }
       UIApplication.shared.isNetworkActivityIndicatorVisible = false
       self.indicator.stopAnimating()
-      self.removeFromSuperview()
+      self.alpha = 1
+      UIView.animate(
+        withDuration: 0.3,
+        animations: {
+          self.alpha = 0
+        }, completion: { _ in
+          self.removeFromSuperview()
+        }
+      )
     }
   }
 }

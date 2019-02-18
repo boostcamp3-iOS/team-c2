@@ -1,13 +1,12 @@
 disabled_rules:
 - leading_whitespace
 - trailing_whitespace
-- nesting
 
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
-- Pods/
 - FineDustTests/
+- FineDust/SWXMLHash
 
 line_length:
   warning: 99

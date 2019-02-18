@@ -18,23 +18,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var healthKitManager = HealthKitManager()
   
+  let coreDataService = CoreDataService()
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    window?.tintColor = Asset.graph1.color
+    window?.tintColor = Asset.graph2.color
     UINavigationBar.appearance().tintColor = UIColor.white
-    UINavigationBar.appearance().barTintColor = Asset.graph1.color
-    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    UITabBar.appearance().tintColor = .white
-    UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
-    UITabBar.appearance().barTintColor = Asset.graph1.color
-    UITextField.appearance().tintColor = .clear
+    UINavigationBar.appearance().barTintColor = .white
+    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
+    UITabBar.appearance().tintColor = Asset.graph1.color
+    UITabBar.appearance().unselectedItemTintColor = .lightGray
+    UITabBar.appearance().barTintColor = .white
+    // 헬스킷 권한 요청
+    // 위치 권한 요청
+    // 최신 접속 날짜 갱신
     healthKitManager.requestAuthorization()
     LocationManager.shared.requestAuthorization()
-    CoreDataService.shared.requestLastAccessedDate { date, error in
+    coreDataService.requestLastAccessedDate { date, error in
       if let error = error {
+        Toast.shared.show(error.localizedDescription)
         print(error.localizedDescription)
         return
       }
-      print("최신 접속 날짜 갱신: \(date)")
+      print("최신 접속 날짜 갱신: ", date ?? "?")
     }
     return true
   }
@@ -44,7 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) { }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
+    // 포어그라운드 진입시 위치 정보 갱신
     LocationManager.shared.startUpdatingLocation()
+    
+    if healthKitManager.authorizationStatus ==
+      (.sharingAuthorized, .sharingAuthorized) {
+      NotificationCenter.default.post(
+        name: .healthKitAuthorizationSharingAuthorized,
+        object: nil,
+        userInfo: nil
+      )
+    }
   }
   
   func applicationDidBecomeActive(_ application: UIApplication) { }
@@ -59,17 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let container = NSPersistentContainer(name: "FineDust")
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
-        // Replace this implementation with code to handle the error appropriately.
-        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        
-        /*
-         Typical reasons for an error here include:
-         * The parent directory does not exist, cannot be created, or disallows writing.
-         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-         * The device is out of space.
-         * The store could not be migrated to the current model version.
-         Check the error message to determine what the actual problem was.
-         */
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     })
@@ -84,8 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       do {
         try context.save()
       } catch {
-        // Replace this implementation with code to handle the error appropriately.
-        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         let nserror = error as NSError
         fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
       }
