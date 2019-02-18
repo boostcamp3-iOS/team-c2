@@ -9,7 +9,7 @@
 import Foundation
 
 /// 메인 뷰에 표시되는, 마지막으로 저장된 데이터
-struct LastRequestedData {
+struct LastSavedData {
   
   /// 오늘 마신 미세먼지 농도.
   let todayFineDust: Int
@@ -18,7 +18,7 @@ struct LastRequestedData {
   let todayUltrafineDust: Int
   
   /// 오늘 걸은 거리.
-  let distance: Int
+  let distance: Double
   
   /// 오늘 걸음수.
   let steps: Int

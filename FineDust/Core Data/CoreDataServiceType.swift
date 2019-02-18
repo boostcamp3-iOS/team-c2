@@ -37,9 +37,19 @@ protocol CoreDataServiceType: class {
                    completion: @escaping (Error?) -> Void)
   
   /// 마지막으로 요청한 데이터 가져오기.
-  func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void)
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void)
   
-  /// 마지막으로 요청한 데이터 저장하기.
-  func saveLastRequestedData(_ lastRequestedData: LastRequestedData,
-                             completion: @escaping (Error?) -> Void)
+  /// 마지막으로 요청한 걸음수 저장하기.
+  func saveLastSteps(_ steps: Int, completion: @escaping (Error?) -> Void)
+  
+  /// 마지막으로 요청한 걸음거리 저장하기.
+  func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void)
+  
+  /// 마지막으로 요청한 최근 미세먼지 데이터 저장하기.
+  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int),
+                        completion: @escaping (Error?) -> Void)
+  
+  /// 마지막으로 요청한 오늘의 흡입 먼지 농도 저장하기.
+  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int),
+                           completion: @escaping (Error?) -> Void)
 }

@@ -10,7 +10,7 @@ import Foundation
 
 /// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
-
+  
   /// 코어데이터 유저 매니저 프로퍼티.
   let userManager: CoreDataUserManagerType
   
@@ -96,17 +96,17 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func requestLastRequestedData(completion: @escaping (LastRequestedData?, Error?) -> Void) {
+  func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
         completion(nil, error)
         return
       }
       guard let user = user else { return }
-      let lastSavedData = LastRequestedData(
+      let lastSavedData = LastSavedData(
         todayFineDust: Int(user.todayFineDust),
         todayUltrafineDust: Int(user.todayUltrafineDust),
-        distance: Int(user.distance),
+        distance: user.distance,
         steps: Int(user.steps),
         address: user.address ?? "",
         grade: Int(user.grade),
@@ -116,16 +116,56 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastRequestedData(_ lastRequestedData: LastRequestedData,
-                             completion: @escaping (Error?) -> Void) {
-    userManager.save([
-      User.todayFineDust: Int16(lastRequestedData.todayFineDust),
-      User.todayUltrafineDust: Int16(lastRequestedData.todayUltrafineDust),
-      User.distance: Int16(lastRequestedData.distance),
-      User.steps: Int16(lastRequestedData.steps),
-      User.address: lastRequestedData.address,
-      User.grade: Int16(lastRequestedData.grade),
-      User.recentFineDust: Int16(lastRequestedData.recentFineDust)
-      ], completion: completion)
+  func saveLastSteps(_ steps: Int, completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([User.steps: Int16(steps)], completion: completion)
+    }
+  }
+  
+  func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([User.distance: distance], completion: completion)
+    }
+  }
+  
+  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int),
+                        completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([
+        User.address: dustData.address,
+        User.grade: Int16(dustData.grade),
+        User.recentFineDust: Int16(dustData.recentFineDust)
+        ], completion: completion)
+    }
+  }
+  
+  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int),
+                           completion: @escaping (Error?) -> Void) {
+    userManager.request { user, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard user != nil else { return }
+      self.userManager.save([
+        User.todayFineDust: Int16(intakes.todayFineDust),
+        User.todayUltrafineDust: Int16(intakes.todayUltrafineDust)
+        ], completion: completion)
+    }
   }
 }
