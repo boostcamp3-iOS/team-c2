@@ -11,6 +11,8 @@ import NotificationCenter
 
 final class TodayViewController: UIViewController, NCWidgetProviding {
   
+  @IBOutlet private weak var dustImageView: UIImageView!
+  
   @IBOutlet private weak var fineDustIntakeLabel: UILabel!
   
   @IBOutlet private weak var ultrafineDustIntakeLabel: UILabel!
@@ -41,7 +43,20 @@ final class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    guard let url = URL(string: "finedust://") else { return }
+    extensionContext?.open(url) { isSuccess in
+      print(isSuccess)
+    }
+  }
+  
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     completionHandler(NCUpdateResult.newData)
+  }
+  
+  func widgetMarginInsets(
+    forProposedMarginInsets defaultMarginInsets: UIEdgeInsets
+  ) -> UIEdgeInsets {
+    return .zero
   }
 }
