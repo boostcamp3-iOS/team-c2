@@ -57,7 +57,7 @@ final class FeedbackListTableViewCell: UITableViewCell {
   /// 테이블뷰셀 데이터 설정
   func setTableViewCellProperties(dustFeedback: DustFeedback) {
     
-    feedbackImageView.image = UIImage(named: dustFeedback.imageName)
+    feedbackImageView.image = UIImage(named: dustFeedback.imageName)?.resizeImage(newWidth: 150)
     feedbackTitleLabel.text = dustFeedback.title
     feedbackSourceLabel.text = dustFeedback.source
     feedbackDateLabel.text = dustFeedback.date

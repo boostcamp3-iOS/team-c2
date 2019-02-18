@@ -34,6 +34,6 @@ final class FeedbackDetailViewController: UIViewController {
     feedbackSourceLabel.text = dustFeedback.source
     dateLabel.text = dustFeedback.date
     contentLabel.text = dustFeedback.contents
-    feedbackImageView.image = UIImage(named: dustFeedback.imageName)
+    feedbackImageView.image = UIImage(named: dustFeedback.imageName)?.resizeImage(newWidth: 300)
   }
 }
