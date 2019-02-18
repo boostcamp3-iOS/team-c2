@@ -17,7 +17,6 @@ class TestHealthKitService: XCTestCase {
   
   override func setUp() {
     healthKitService = HealthKitService(healthKit: mockHealthKitManager)
-    
   }
   
   /// 오늘 걸음 수 데이터 받아오는 함수 테스트
@@ -45,7 +44,7 @@ class TestHealthKitService: XCTestCase {
   /// 오늘 걸음 수 데이터 받아오는 함수 에러 테스트
   func testFetchTodayStepCountError() {
     let expect = expectation(description: "fetch error")
-    mockHealthKitManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
+    mockHealthKitManager.error = HealthKitError.queryExecutedFailed
     healthKitService?.requestTodayStepCount { result, error in
       XCTAssertEqual(result, 0.0)
       XCTAssertNotNil(error)
@@ -57,10 +56,24 @@ class TestHealthKitService: XCTestCase {
   /// 오늘 걸은 거리 데이터 받아오는 함수 에러 테스트
   func testFetchTodayDistanceError() {
     let expect = expectation(description: "fetch error")
-    mockHealthKitManager.error = NSError(domain: "domain", code: 0, userInfo: nil)
+    mockHealthKitManager.error = HealthKitError.queryExecutedFailed
     healthKitService?.requestTodayDistance { result, error in
       XCTAssertEqual(result, 0.0)
       XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func testRequestTodayDistancePerHour() {
+    let expect = expectation(description: "request error")
+    mockHealthKitManager.error = HealthKitError.queryExecutedFailed
+    var mockHourIntakePair = HourIntakePair()
+    for hour in 0...23 {
+      mockHourIntakePair[Hour(rawValue: hour) ?? .default] = 0
+    }
+    healthKitService?.requestTodayDistancePerHour { hourIntakePair in
+      XCTAssertEqual(mockHourIntakePair, hourIntakePair)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)

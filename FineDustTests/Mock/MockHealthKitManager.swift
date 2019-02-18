@@ -12,7 +12,7 @@ import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
   
-  var error: Error?
+  var error: HealthKitError?
   var stepCount = 2314.0
   var distance = 1409.53
   var hourInteger = 1
