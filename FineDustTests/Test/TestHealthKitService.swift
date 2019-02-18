@@ -20,8 +20,8 @@ class TestHealthKitService: XCTestCase {
   }
   
   /// 오늘 걸음 수 데이터 받아오는 함수 테스트
-  func testFetchTodayStepCount() {
-    let expect = expectation(description: "fetch today step count")
+  func testRequestTodayStepCount() {
+    let expect = expectation(description: "Request today step count")
     healthKitService?.requestTodayStepCount { result, error in
       XCTAssertEqual(result, self.mockHealthKitManager.stepCount)
       XCTAssertNil(error)
@@ -31,8 +31,8 @@ class TestHealthKitService: XCTestCase {
   }
   
   /// 오늘 걸은 거리 데이터 받아오는 함수 테스트
-  func testFetchTodayDistance() {
-    let expect = expectation(description: "fetch today distance")
+  func testRequestTodayDistance() {
+    let expect = expectation(description: "Request today distance")
     healthKitService?.requestTodayDistance { result, error in
       XCTAssertEqual(result, self.mockHealthKitManager.distance)
       XCTAssertNil(error)
@@ -42,8 +42,8 @@ class TestHealthKitService: XCTestCase {
   }
   
   /// 오늘 걸음 수 데이터 받아오는 함수 에러 테스트
-  func testFetchTodayStepCountError() {
-    let expect = expectation(description: "fetch error")
+  func testRequestTodayStepCountError() {
+    let expect = expectation(description: "Request error")
     mockHealthKitManager.error = HealthKitError.queryExecutedFailed
     healthKitService?.requestTodayStepCount { result, error in
       XCTAssertEqual(result, 0.0)
@@ -54,8 +54,8 @@ class TestHealthKitService: XCTestCase {
   }
   
   /// 오늘 걸은 거리 데이터 받아오는 함수 에러 테스트
-  func testFetchTodayDistanceError() {
-    let expect = expectation(description: "fetch error")
+  func testRequestTodayDistanceError() {
+    let expect = expectation(description: "Request error")
     mockHealthKitManager.error = HealthKitError.queryExecutedFailed
     healthKitService?.requestTodayDistance { result, error in
       XCTAssertEqual(result, 0.0)
