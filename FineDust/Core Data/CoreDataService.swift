@@ -69,8 +69,8 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveIntake(fineDust: Int,
-                  ultrafineDust: Int,
+  func saveIntake(_ fineDust: Int,
+                  _ ultrafineDust: Int,
                   at date: Date,
                   completion: @escaping (Error?) -> Void) {
     intakeManager.save([Intake.date: date,
@@ -78,8 +78,8 @@ final class CoreDataService: CoreDataServiceType {
                         Intake.ultrafineDust: Int16(ultrafineDust)], completion: completion)
   }
   
-  func saveIntakes(fineDusts: [Int],
-                   ultrafineDusts: [Int],
+  func saveIntakes(_ fineDusts: [Int],
+                   _ ultrafineDusts: [Int],
                    at dates: [Date],
                    completion: @escaping (Error?) -> Void) {
     if !(fineDusts.count == ultrafineDusts.count && ultrafineDusts.count == dates.count) {
@@ -138,9 +138,9 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastDustData(address: String,
-                        grade: Int,
-                        recentFineDust: Int,
+  func saveLastDustData(_ address: String,
+                        _ grade: Int,
+                        _ recentFineDust: Int,
                         completion: @escaping (Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
@@ -156,8 +156,8 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastTodayIntake(todayFineDust: Int,
-                           todayUltrafineDust: Int,
+  func saveLastTodayIntake(_ todayFineDust: Int,
+                           _ todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {

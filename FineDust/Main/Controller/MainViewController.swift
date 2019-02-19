@@ -149,9 +149,9 @@ extension MainViewController {
         }
         if let info = info {
           self.coreDataService
-            .saveLastDustData(address: SharedInfo.shared.address,
-                              grade: info.fineDustGrade.rawValue,
-                              recentFineDust: info.fineDustValue) { error in
+            .saveLastDustData(SharedInfo.shared.address,
+                              info.fineDustGrade.rawValue,
+                              info.fineDustValue) { error in
                                 if error != nil {
                                   print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
                                 } else {
@@ -179,8 +179,8 @@ extension MainViewController {
         if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
           if self.healthKitService.isAuthorized {
             self.coreDataService
-              .saveLastTodayIntake(todayFineDust: fineDust,
-                                   todayUltrafineDust: ultrafineDust) { error in
+              .saveLastTodayIntake(fineDust,
+                                   ultrafineDust) { error in
                                     if error != nil {
                                       print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
                                     } else {

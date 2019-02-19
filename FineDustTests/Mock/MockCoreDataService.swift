@@ -31,11 +31,11 @@ class MockCoreDataService: CoreDataServiceType {
     completion(coreDataIntakePerDate, error)
   }
   
-  func saveIntake(fineDust: Int, ultrafineDust: Int, at date: Date, completion: @escaping (Error?) -> Void) {
+  func saveIntake(_ fineDust: Int, _ ultrafineDust: Int, at date: Date, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
   
-  func saveIntakes(fineDusts: [Int], ultrafineDusts: [Int], at dates: [Date], completion: @escaping (Error?) -> Void) {
+  func saveIntakes(_ fineDusts: [Int], _ ultrafineDusts: [Int], at dates: [Date], completion: @escaping (Error?) -> Void) {
     completion(error)
   }
 
@@ -51,11 +51,11 @@ class MockCoreDataService: CoreDataServiceType {
     completion(error)
   }
   
-  func saveLastDustData(address: String, grade: Int, recentFineDust: Int, completion: @escaping (Error?) -> Void) {
+  func saveLastDustData(_ address: String, _ grade: Int, _ recentFineDust: Int, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
   
-  func saveLastTodayIntake(todayFineDust: Int, todayUltrafineDust: Int, completion: @escaping (Error?) -> Void) {
+  func saveLastTodayIntake(_ todayFineDust: Int, _ todayUltrafineDust: Int, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
 }

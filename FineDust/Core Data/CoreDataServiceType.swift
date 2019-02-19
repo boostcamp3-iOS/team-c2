@@ -23,16 +23,16 @@ protocol CoreDataServiceType: class {
                       completion: @escaping (DateIntakePair?, Error?) -> Void)
   
   /// 특정 날짜에 대한 미세먼지 흡입량 저장.
-  func saveIntake(fineDust: Int,
-                  ultrafineDust: Int,
+  func saveIntake(_ fineDust: Int,
+                  _ ultrafineDust: Int,
                   at date: Date,
                   completion: @escaping (Error?) -> Void)
   
   /// 여러 날짜에 대한 미세먼지 흡입량 저장.
   ///
   /// 모든 인자의 길이가 같아야 한다.
-  func saveIntakes(fineDusts: [Int],
-                   ultrafineDusts: [Int],
+  func saveIntakes(_ fineDusts: [Int],
+                   _ ultrafineDusts: [Int],
                    at dates: [Date],
                    completion: @escaping (Error?) -> Void)
   
@@ -46,13 +46,13 @@ protocol CoreDataServiceType: class {
   func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void)
   
   /// 마지막으로 요청한 최근 미세먼지 데이터 저장하기.
-  func saveLastDustData(address: String,
-                        grade: Int,
-                        recentFineDust: Int,
+  func saveLastDustData(_ address: String,
+                        _ grade: Int,
+                        _ recentFineDust: Int,
                         completion: @escaping (Error?) -> Void)
   
   /// 마지막으로 요청한 오늘의 흡입 먼지 농도 저장하기.
-  func saveLastTodayIntake(todayFineDust: Int,
-                           todayUltrafineDust: Int,
+  func saveLastTodayIntake(_ todayFineDust: Int,
+                           _ todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void)
 }

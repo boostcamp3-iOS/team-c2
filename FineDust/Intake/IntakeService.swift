@@ -115,8 +115,8 @@ final class IntakeService: IntakeServiceType {
                         = [savedUltrafineDustIntakes, ultrafineDusts].flatMap { $0 }
                       // 코어데이터 갱신
                       self.coreDataService
-                        .saveIntakes(fineDusts: totalFineDustIntakes,
-                                     ultrafineDusts: totalUltrafineDustIntakes,
+                        .saveIntakes(totalFineDustIntakes,
+                                     totalUltrafineDustIntakes,
                                      at: dates) { error in
                                       if let error = error {
                                         print("코어데이터 갱신 실패: ", error.localizedDescription)
