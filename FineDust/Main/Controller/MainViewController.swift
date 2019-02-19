@@ -104,7 +104,9 @@ extension MainViewController {
     healthKitService.requestTodayStepCount { value, error in
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
-          self.stepCountLabel.text = "0 걸음"
+          DispatchQueue.main.async {
+            self.stepCountLabel.text = "0 걸음"
+          }
         } else {
           error.presentToast()
         }
@@ -132,7 +134,9 @@ extension MainViewController {
     healthKitService.requestTodayDistance { value, error in
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
-          self.distanceLabel.text = "0.0 km"
+          DispatchQueue.main.sync {
+            self.distanceLabel.text = "0.0 km"
+          }
         } 
         return
       }

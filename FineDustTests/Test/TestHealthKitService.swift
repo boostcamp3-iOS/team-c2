@@ -126,4 +126,8 @@ class TestHealthKitService: XCTestCase {
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
+  
+  func test() {
+    
+  }
 }

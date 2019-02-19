@@ -149,7 +149,7 @@ final class HealthKitService: HealthKitServiceType {
           
           temp += 1
           if temp == (day + 1) * 24 {
-//            semaphore.signal()
+            semaphore.signal()
           }
         }
       }
