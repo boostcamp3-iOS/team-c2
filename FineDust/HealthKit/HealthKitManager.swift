@@ -134,5 +134,6 @@ final class HealthKitManager: HealthKitManagerType {
       }
     }
     healthStore.execute(query)
+    print("query: ", query)
   }
 }

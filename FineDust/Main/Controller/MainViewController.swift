@@ -97,9 +97,14 @@ extension MainViewController {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
       if let error = error as? ServiceErrorType {
-        error.presentToast()
+        if self.healthKitService.isAuthorized {
+          self.stepCountLabel.text = "0 걸음"
+        } else {
+          error.presentToast()
+        }
         return
       }
+      
       if let value = value {
         self.coreDataService
           .saveLastSteps(Int(value)) { error in
@@ -117,8 +122,12 @@ extension MainViewController {
     
     // 걸은 거리 label에 표시
     healthKitService.requestTodayDistance { value, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
+      if let error = error as? HealthKitError, error == .queryNotSearched {
+        if self.healthKitService.isAuthorized {
+          self.distanceLabel.text = "0.0 km"
+        } else {
+          error.presentToast()
+        }
         return
       }
       if let value = value {
