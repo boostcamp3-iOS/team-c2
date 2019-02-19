@@ -21,6 +21,8 @@ enum HealthKitError: ServiceErrorType {
       return "query문의 검색결과가 없습니다.(권한이 없을 경우에도 발생)"
     case .queryExecutedFailed:
       return "query문 실행이 실패했습니다."
+    case .notAuthorized:
+      return "건강 앱 권한 없음"
     }
   }
   
@@ -39,4 +41,7 @@ enum HealthKitError: ServiceErrorType {
   
   /// query는 만들어지긴 하나 결과가 없을때. 권한이 없을때도 발생.
   case queryNotSearched
+  
+  /// 권한이 없음.
+  case notAuthorized
 }

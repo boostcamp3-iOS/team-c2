@@ -67,7 +67,7 @@ final class DustInfoService: DustInfoServiceType {
             hourlyUltrafineDustIntake[hour] = item.ultrafineDustValue
             if isMidnight { break }
           }
-          // 딕셔너리의 길이를 맞추기 위함
+          // 딕셔너리에 들어오지 않은 Hour를 0으로 채워넣음
           hourlyFineDustIntake.insertPaddingIfHourIsNotFulled()
           hourlyUltrafineDustIntake.insertPaddingIfHourIsNotFulled()
           print("오늘 자정부터 현시각까지의 대기 오염 데이터 가져오기 성공.")

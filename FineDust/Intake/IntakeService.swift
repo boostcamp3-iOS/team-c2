@@ -33,41 +33,33 @@ final class IntakeService: IntakeServiceType {
     // 오늘의 시간대에 따른 걸음거리와
     // 오늘의 시간대에 따른 미세먼지 수치를 받아
     // 어떠한 수식을 수행하여 값을 산출한다
-    dustInfoService.requestDayInfo { [weak self] fineDust, ultrafineDust, error in
-      if let error = error {
-        completion(nil, nil, error)
-        return
-      }
-      guard let self = self else { return }
-      self.healthKitService.requestTodayDistancePerHour { [weak self] distancePerHour in
-        // 각 인자를 `Hour` 오름차순 정렬하고 value 매핑하여 최종적으로 `[Int]` 반환
-        guard let self = self,
-          let sortedFineDust = fineDust?.sortedByHour().map({ $0.value }),
-          let sortedUltrafineDust = ultrafineDust?.sortedByHour().map({ $0.value }),
-          let sortedDistance = distancePerHour?.sortedByHour().map({ $0.value })
-          else { return }
-        if !self.healthKitService.isAuthorized {
-          completion(nil, nil, NSError(domain: "헬스킷 정보 없음", code: 0, userInfo: nil))
-          return
+    dustInfoService
+      .requestDayInfo { [weak self] hourlyFineDustIntake, hourlyUltrafineDustIntake, error in
+        guard let hourlyFineDustIntake = hourlyFineDustIntake,
+          let hourlyUltrafineDustIntake = hourlyUltrafineDustIntake
+          else {
+            completion(nil, nil, error)
+            return
         }
-        // 시퀀스를 묶어 특정 수식을 통하여 값을 산출
-        let totalFineDustValue = zip(sortedFineDust, sortedDistance)
-          .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
-        let totalUltrafineDustValue = zip(sortedUltrafineDust, sortedDistance)
-          .reduce(0, { $0 + self.intakePerHour(dust: $1.0, distance: $1.1) })
-        print("오늘의 흡입량 가져오기 성공")
-        print(sortedFineDust)
-        print(sortedUltrafineDust)
-        print(sortedDistance)
-        print(totalFineDustValue)
-        print(totalUltrafineDustValue)
-        if let userDefaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust") {
-          userDefaults.set(totalFineDustValue, forKey: "fineDustIntake")
-          userDefaults.set(totalUltrafineDustValue, forKey: "ultrafineDustIntake")
-          userDefaults.synchronize()
+        guard let self = self else { return }
+        self.healthKitService
+          .requestTodayDistancePerHour { [weak self] hourlyDistance in
+            guard let self = self, let hourlyDistance = hourlyDistance else { return }
+            if !self.healthKitService.isAuthorized {
+              completion(nil, nil, HealthKitError.notAuthorized)
+              return
+            }
+            let (fineDust, ultrafineDust)
+              = self.totalHourlyIntake(hourlyFineDustIntake,
+                                       hourlyUltrafineDustIntake,
+                                       hourlyDistance)
+            TodayExtensionManager.shared
+              .shareTodayIntakes(fineDust: fineDust, ultrafineDust: ultrafineDust)
+            print("오늘의 흡입량 가져오기 성공")
+            print(fineDust)
+            print(ultrafineDust)
+            completion(fineDust, ultrafineDust, nil)
         }
-        completion(totalFineDustValue, totalUltrafineDustValue, nil)
-      }
     }
   }
   
@@ -186,5 +178,29 @@ final class IntakeService: IntakeServiceType {
                    ultrafineDustIntakePerDate.sortedByDate().map { $0.value },
                    nil)
     }
+  }
+}
+
+private extension IntakeService {
+  
+  /// 시간당 미세먼지 흡입량 계산.
+  ///
+  /// `거리 * 농도 * 0.036 * 0.01`
+  func intakePerHour(dust: Int, distance: Int) -> Int {
+    return Int(Double(dust * distance) * 0.036 * 0.01)
+  }
+  
+  /// 시간별 흡입량 계산.
+  func totalHourlyIntake(_ hourlyFineDustIntake: HourIntakePair,
+                         _ hourlyUltrafineDustIntake: HourIntakePair,
+                         _ hourlyDistance: HourIntakePair) -> (Int, Int) {
+    let sortedFineDust = hourlyFineDustIntake.sortedByHour().map { $0.value }
+    let sortedUltrafineDust = hourlyUltrafineDustIntake.sortedByHour().map { $0.value }
+    let sortedDistance = hourlyDistance.sortedByHour().map { $0.value }
+    let fineDust = zip(sortedFineDust, sortedDistance)
+      .reduce(0, { $0 + intakePerHour(dust: $1.0, distance: $1.1) })
+    let ultrafineDust = zip(sortedUltrafineDust, sortedDistance)
+      .reduce(0, { $0 + intakePerHour(dust: $1.0, distance: $1.1) })
+    return (fineDust, ultrafineDust)
   }
 }
