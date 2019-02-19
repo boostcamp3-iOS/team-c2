@@ -21,12 +21,14 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
+  @IBOutlet private weak var healthKitInfoView: UIView!
   
   // MARK: - Properties
   
-  ///한번만 표시해주기 위한 프로퍼티
+  /// 한번만 표시해주기 위한 프로퍼티.
   private var isPresented: Bool = false
   
+  /// 미세먼지 애니메이션을 움직이게 할 타이머.
   private var timer: Timer?
   
   private let coreDataService = CoreDataService()
@@ -90,6 +92,10 @@ extension MainViewController {
     timeLabel.text = dateFormatter.string(from: Date())
     presentOpenHealthAppAlert()
     updateFineDustImageView()
+    
+    let tapRecognizer = UITapGestureRecognizer(target: self,
+                                               action: #selector(openHealth(gestureRecognizer:)))
+    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -219,6 +225,7 @@ extension MainViewController {
     }
   }
   
+  /// 미세먼지 애니메이션 
   private func updateFineDustImageView() {
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5,
@@ -253,5 +260,10 @@ extension MainViewController {
         .action(title: "취소", style: .cancel)
         .present(to: self)
     }
+  }
+  
+  /// 건강 App으로 이동시켜주는 메소드.
+  @objc func openHealth(gestureRecognizer: UIGestureRecognizer) {
+    UIApplication.shared.open(URL(string: "x-apple-health://")!)
   }
 }

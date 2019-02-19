@@ -49,8 +49,6 @@ final class HealthKitManager: HealthKitManagerType {
           NotificationCenter.default.post(
             name: .healthKitAuthorizationSharingAuthorized,
             object: nil)
-        } else {
-//          Toast.shared.show("건강 App 권한 요청이 거부되었습니다.")
         }
       }
     }
@@ -98,13 +96,13 @@ final class HealthKitManager: HealthKitManagerType {
                                             anchorDate: startDate,
                                             intervalComponents: interval)
     
-    //query 첫 결과에 대한 hanlder
+    // query 첫 결과에 대한 hanlder
     query.initialResultsHandler = { query, results, error in
       // query가 유효하지 않을 경우.
       if let error = error {
         print("query문이 유효하지 않습니다.")
-        completion(nil, nil, HealthKitError.queryNotValid)
         print(error.localizedDescription)
+        completion(nil, nil, HealthKitError.queryNotValid)
         return
       }
       
