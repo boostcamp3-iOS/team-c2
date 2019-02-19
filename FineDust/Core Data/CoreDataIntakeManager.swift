@@ -11,15 +11,19 @@ import Foundation
 /// 코어데이터의 `Intake` 모델 관련 매니저.
 final class CoreDataIntakeManager: CoreDataIntakeManagerType {
   
-  /// Singleton Object
-  static let shared = CoreDataIntakeManager()
+  /// 코어데이터 매니저.
+  let manager: CoreDataManagerType
   
-  private init() { }
+  // MARK: Dependency Injection
+  
+  init(coreDataManager: CoreDataManagerType = CoreDataManager.shared) {
+    manager = coreDataManager
+  }
   
   func request(completion: @escaping ([Intake]?, Error?) -> Void) {
     DispatchQueue.main.async {
       do {
-        let results = try self.context.fetch(Intake.fetchRequest()) as? [Intake]
+        let results = try self.manager.context.fetch(Intake.fetchRequest()) as? [Intake]
         completion(results, nil)
       } catch {
         completion(nil, error)
@@ -31,9 +35,9 @@ final class CoreDataIntakeManager: CoreDataIntakeManagerType {
   func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) {
     DispatchQueue.main.async {
       do {
-        let intake = Intake(context: self.context)
+        let intake = Intake(context: self.manager.context)
         dictionary.forEach { intake.setValue($0.value, forKey: $0.key) }
-        try self.context.save()
+        try self.manager.context.save()
         completion(nil)
       } catch {
         completion(error)
