@@ -21,11 +21,6 @@ final class NetworkManager: NetworkManagerType {
                parameters: [String: Any]? = nil,
                headers: [String: String] = [:],
                completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void) {
-    defer {
-      DispatchQueue.main.async {
-        ProgressIndicator.shared.hide()
-      }
-    }
     let session = URLSession(configuration: .default)
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = method.rawValue
@@ -37,10 +32,15 @@ final class NetworkManager: NetworkManagerType {
       ProgressIndicator.shared.show()
     }
     let task = session.dataTask(with: urlRequest) { data, response, error in
+      defer {
+        session.finishTasksAndInvalidate()
+        DispatchQueue.main.async {
+          ProgressIndicator.shared.hide()
+        }
+      }
       let statusCodeRawValue = (response as? HTTPURLResponse)?.statusCode ?? 0
       let statusCode = HTTPStatusCode(rawValue: statusCodeRawValue) ?? .default
       completion(data, statusCode, error)
-      session.finishTasksAndInvalidate()
     }
     task.resume()
   }

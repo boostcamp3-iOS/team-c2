@@ -61,8 +61,6 @@ class TestDustInfoManager: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  /// 에러 대신 더미를 따로 다 정의해야함..
-  
   func test_request_dustError1() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseApplicationError.data(using: .utf8)
     mockNetworkManager.httpStatusCode = HTTPStatusCode.success

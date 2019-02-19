@@ -32,7 +32,7 @@ enum IntakeGrade: Int {
   /// 흡입량으로 열거형 인스턴스 생성.
   init(intake: Int) {
     switch intake {
-    case ..<50:
+    case 0..<50:
       self = .veryGood
     case 50..<100:
       self = .good
