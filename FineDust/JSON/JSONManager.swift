@@ -8,25 +8,26 @@
 
 import Foundation
 
+/// JSON 매니저.
 final class JSONManager: JSONManagerType {
+  
+  // MARK: - Properties
+  
+  let resourceName = "DustFeedback"
+  let jsonDecoder = JSONDecoder()
   
   // MARK: - Fucntion
   
-  /// DustFeedbacks json 파싱하여 데이터를 가져옴.
-  func fetchDustFeedbacks() -> [DustFeedback] {
+  /// json 파싱하여 데이터를 가져옴.
+  func fetchJSONData<T: Decodable>(_ data: T.Type) -> [T] {
+    guard let path = Bundle.main.path(forResource: resourceName, ofType: "json") else { return [] }
     
-    guard let path = Bundle.main.path(forResource: "DustFeedback",
-                                      ofType: "json")
-    else { return [] }
-    
-    let jsonDecoder = JSONDecoder()
-
     do {
-      guard let data = try String(contentsOfFile: path).data(using: .utf8)
-      else { return [] }
-      return try jsonDecoder.decode([DustFeedback].self, from: data)
+      guard let data = try String(contentsOfFile: path).data(using: .utf8) else { return [] }
+      let response: [T] = try jsonDecoder.decode([T].self, from: data)
+      return response
     } catch {
-      print("error: \(error)")
+      print(error)
       return []
     }
   }
