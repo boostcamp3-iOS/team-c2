@@ -30,9 +30,9 @@ final class MockHealthKitManager: HealthKitManagerType {
     if let error = self.error {
       switch identifier {
       case .distanceWalkingRunning:
-        completion(distance, hourInteger, error)
+        completion(nil, nil, error)
       case .stepCount:
-        completion(stepCount, hourInteger, error)
+        completion(nil, nil, error)
       default:
         break
       }
