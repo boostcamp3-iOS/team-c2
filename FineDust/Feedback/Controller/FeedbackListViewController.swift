@@ -28,20 +28,14 @@ final class FeedbackListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "먼지 정보".localized
-
-    do {
-      feedbackCount = try feedbackListService.fetchFeedbackCount()
-    } catch {
-      print(error.localizedDescription)
-    }
     
+    feedbackCount = feedbackListService.fetchFeedbackCount()
+    // back swipe
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
-    
+    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
     feedbackListTableView.reloadData()
   }
   
@@ -136,7 +130,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     
     guard let currentCell = feedbackListTableView.cellForRow(at: indexPath)
       as? FeedbackListTableViewCell else { return }
- 
+    
     pushDetailViewController(feedbackTitle: currentCell.title)
   }
   

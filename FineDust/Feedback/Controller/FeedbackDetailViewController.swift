@@ -32,9 +32,10 @@ final class FeedbackDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
-    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
     if let dustFeedback = feedbackListService.fetchFeedback(by: feedbackTitle) {
       setFeedback(dustFeedback)
       setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
