@@ -96,7 +96,7 @@ extension MainViewController {
   private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
-      if let error = error as? ServiceErrorType {
+      if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
           self.stepCountLabel.text = "0 걸음"
         } else {
@@ -114,8 +114,10 @@ extension MainViewController {
               print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
           }
-        DispatchQueue.main.async {
-          self.stepCountLabel.text = "\(Int(value)) 걸음"
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.stepCountLabel.text = "\(Int(value)) 걸음"
+          }
         }
       }
     }
@@ -125,9 +127,7 @@ extension MainViewController {
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
           self.distanceLabel.text = "0.0 km"
-        } else {
-          error.presentToast()
-        }
+        } 
         return
       }
       if let value = value {
@@ -139,8 +139,10 @@ extension MainViewController {
               print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
           }
-        DispatchQueue.main.async {
-          self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+          }
         }
       }
     }
@@ -237,7 +239,7 @@ extension MainViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-    if !healthKitService.isAuthorized {
+    if !healthKitService.isAuthorized && healthKitService.isDeterminded {
       UIAlertController
         .alert(title: "건강 App 권한이 없습니다.",
                message: """

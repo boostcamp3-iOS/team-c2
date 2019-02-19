@@ -18,9 +18,13 @@ final class HealthKitService: HealthKitServiceType {
   }
   
   var isAuthorized: Bool {
-    let status = healthKitManager?.authorizationStatus ?? (.notDetermined, .notDetermined)
-    return status == (.sharingAuthorized, .sharingAuthorized) ||
-      status == (.notDetermined, .notDetermined)
+    let status = healthKitManager?.authorizationStatus ?? (.sharingDenied, .sharingDenied)
+    return status == (.sharingAuthorized, .sharingAuthorized)
+  }
+  
+  var isDeterminded: Bool {
+    let status = healthKitManager?.authorizationStatus ?? (.sharingDenied, .sharingDenied)
+    return !(status == (.notDetermined, .notDetermined))
   }
   
   /// 오늘 걸음 수 가져오는 함수
@@ -76,7 +80,6 @@ final class HealthKitService: HealthKitServiceType {
     ) { value, hour, error in
       if let error = error as? ServiceErrorType {
         print("Healthkit Query Error: ", error.localizedDescription)
-        Toast.shared.show(error.localizedDescription)
         for hour in 0...23 {
           hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
         }
@@ -108,7 +111,7 @@ final class HealthKitService: HealthKitServiceType {
     let interval = Calendar.current.dateComponents([.day], from: startDate, to: endDate)
     
     guard let day = interval.day, day >= 0 else {
-      print("Input date error")
+      print("Date 입력값을 잘못 입력하였습니다.")
       completion(nil)
       return
     }
@@ -128,11 +131,9 @@ final class HealthKitService: HealthKitServiceType {
       ) { value, hour, error in
         if let error = error as? ServiceErrorType {
           print("HealthKit Query error: ", error.localizedDescription)
-          Toast.shared.show(error.localizedDescription)
           for hour in 0...23 {
             hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
             temp += 1
-            print(temp)
           }
           dateHourIntakePair[indexDate.start] = hourIntakePair
           
@@ -148,7 +149,7 @@ final class HealthKitService: HealthKitServiceType {
           
           temp += 1
           if temp == (day + 1) * 24 {
-            semaphore.signal()
+//            semaphore.signal()
           }
         }
       }
