@@ -19,8 +19,8 @@ final class CoreDataService: CoreDataServiceType {
   
   // MARK: Dependency Injection
   
-  init(userManager: CoreDataUserManagerType = CoreDataUserManager.shared,
-       intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager.shared) {
+  init(userManager: CoreDataUserManagerType = CoreDataUserManager(),
+       intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager()) {
     self.userManager = userManager
     self.intakeManager = intakeManager
   }

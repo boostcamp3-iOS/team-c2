@@ -44,16 +44,6 @@ final class ValueGraphView: UIView {
   /// Value Graph View Data Source.
   weak var dataSource: ValueGraphViewDataSource?
   
-  // MARK: Property
-  
-  /// `yyyy년 M월 d일 EEEE` 포맷을 갖는 DateFormatter 프로퍼티.
-  private lazy var dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.locale = .korea
-    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
-    return formatter
-  }()
-  
   // MARK: Private Properties
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
@@ -79,9 +69,7 @@ final class ValueGraphView: UIView {
   
   /// 일 텍스트.
   private var dateTexts: [String] {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .korea
-    dateFormatter.dateFormat = "d"
+    let dateFormatter = DateFormatter.day
     var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
@@ -104,12 +92,16 @@ final class ValueGraphView: UIView {
   /// 요일 레이블 모음.
   @IBOutlet private var dayLabels: [UILabel]!
   
+  @IBOutlet private weak var graphContainerView: UIView!
+  
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
         view.layer.setBorder(radius: 2.0)
         view.backgroundColor = graphBackgroundColor(at: index)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                         action: #selector(graphViewDidTap(_:))))
       }
     }
   }
@@ -133,6 +125,22 @@ final class ValueGraphView: UIView {
     setUnitLabels()
     setDayLabelsTitle()
     setDateLabel()
+  }
+  
+  @objc private func graphViewDidTap(_ recognizer: UITapGestureRecognizer) {
+    guard let tappedGraphView = recognizer.view else { return }
+    if let tappedIndex = graphViews.firstIndex(of: tappedGraphView) {
+      print(tappedIndex, intakeAmounts[tappedIndex])
+      print(tappedGraphView.frame)
+      print(tappedGraphView.bounds)
+      let label = UILabel()
+      label.text = "\(intakeAmounts[tappedIndex])"
+      label.sizeToFit()
+      graphContainerView.addSubview(label)
+      label.center = tappedGraphView.frame.origin
+      print(label.frame)
+      
+    }
   }
 }
 
@@ -185,7 +193,7 @@ private extension ValueGraphView {
   
   /// 날짜 레이블 설정.
   func setDateLabel() {
-    dateLabel.text = dateFormatter.string(from: Date())
+    dateLabel.text = DateFormatter.localizedDateWithDay.string(from: Date())
   }
   
   /// 그래프 색상 구하기.

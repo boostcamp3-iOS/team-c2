@@ -25,14 +25,12 @@ extension ServiceErrorType {
     switch self {
     case let error as HTTPError:
       return error.localizedDescription
-    case let error as XMLError:
-      return error.localizedDescription
     case let error as DustError:
       return error.localizedDescription
     case let error as HealthKitError:
       return error.localizedDescription
     case let error as CLError:
-      return error.localizedDescription
+      return error.code.localizedDescription
     default:
       return "에러"
     }

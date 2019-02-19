@@ -83,10 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  private var fineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
   
   /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -142,37 +142,34 @@ final class StatisticsViewController: UIViewController {
   
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
-    DispatchQueue.global(qos: .utility).async { [weak self] in
+    self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
+      if let error = error as? ServiceErrorType {
+        error.presentToast()
+        return
+      }
       guard let self = self else { return }
-      self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
+      self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
           error.presentToast()
           return
         }
-        guard let self = self else { return }
-        self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
-          if let error = error as? ServiceErrorType {
-            error.presentToast()
-            return
-          }
-          guard let self = self,
-            let fineDusts = fineDusts,
-            let ultrafineDusts = ultrafineDusts,
-            let fineDust = fineDust,
-            let ultrafineDust = ultrafineDust
-            else { return }
-          let fineDustWeekIntakes = [fineDusts, [fineDust]]
-            .flatMap { $0 }
-            .map { CGFloat($0) }
-          let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
-            .flatMap { $0 }
-            .map { CGFloat($0) }
-          self.fineDustTotalIntakes = fineDustWeekIntakes
-          self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
-          print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
-          DispatchQueue.main.async {
-            self.initializeSubviews()
-          }
+        guard let self = self,
+          let fineDusts = fineDusts,
+          let ultrafineDusts = ultrafineDusts,
+          let fineDust = fineDust,
+          let ultrafineDust = ultrafineDust
+          else { return }
+        let fineDustWeekIntakes = [fineDusts, [fineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        self.fineDustTotalIntakes = fineDustWeekIntakes
+        self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
+        print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
+        DispatchQueue.main.async {
+          self.initializeSubviews()
         }
       }
     }
