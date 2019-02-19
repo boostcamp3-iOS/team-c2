@@ -32,6 +32,20 @@ extension Dictionary where Key == Hour {
   }
 }
 
+// MARK: - 딕셔너리의 Key가 Hour이고 Value가 정수일 때 정렬
+
+extension Dictionary where Key == Hour, Value: BinaryInteger {
+  
+  /// 딕셔너리가 채워지지 않은 경우 0을 첨가함.
+  mutating func insertPaddingIfHourIsNotFulled() {
+    Hour.allCases.filter { $0 != .default }.forEach { hour in
+      if self[hour] == nil {
+        self[hour] = 0
+      }
+    }
+  }
+}
+
 // MARK: - 딕셔너리의 Key가 Date일 때의 확장
 
 extension Dictionary where Key == Date {
@@ -44,5 +58,18 @@ extension Dictionary where Key == Date {
       return sorted { $0.key < $1.key }
     }
     return sorted { $0.key > $1.key }
+  }
+}
+
+// MARK: 딕셔너리의 Key가 Date이고 Value가 HourIntakePair일 때의 확장
+
+extension Dictionary where Key == Date, Value == HourIntakePair {
+  
+  /// 특정 키에 대해 빈 딕셔너리를 첨가함.
+  mutating func insertIntakeOrEmpty(date: Date, hour: Hour, intake: Int) {
+    if self[date] == nil {
+      self[date] = [:]
+    }
+    self[date]?[hour] = intake
   }
 }
