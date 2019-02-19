@@ -18,7 +18,7 @@ final class JSONManager: JSONManagerType {
   // MARK: - Fucntion
   
   /// json 파싱하여 데이터를 가져옴.
-  func fetchJSONObject<T: Decodable>(to type: T.Type, resourceName: String) -> [T] {
+  func fetchJSONObject<T>(to type: T.Type, resourceName: String) -> [T] where T : Decodable {
     guard let path = Bundle.main.path(forResource: resourceName, ofType: "json") else { return [] }
     
     do {
