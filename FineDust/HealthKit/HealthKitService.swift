@@ -109,6 +109,7 @@ final class HealthKitService: HealthKitServiceType {
     
     guard let day = interval.day, day >= 0 else {
       print("Input date error")
+      completion(nil)
       return
     }
     

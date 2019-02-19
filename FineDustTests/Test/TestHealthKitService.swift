@@ -93,13 +93,35 @@ class TestHealthKitService: XCTestCase {
   }
   
   func testRequestDistancePerHour() {
+    let expect = expectation(description: "Request Distance Per Hour")
+    healthKitService?.requestDistancePerHour(from: .before(days: 6),
+                                             to: .before(days: 1)
+    ) { dateIntakePair in
+      XCTAssertEqual(dateIntakePair, DummyHealthKitService.hourlyZeroDistancePerDate)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func testRequestDistancePerHourError() {
     let expect = expectation(description: "Request Distance Per Hour Error")
     mockHealthKitManager.error = HealthKitError.queryNotSearched
     
     healthKitService?.requestDistancePerHour(from: .before(days: 6),
                                              to: .before(days: 1)
     ) { dateIntakePair in
-      XCTAssertEqual(DummyHealthKitService.hourlyZeroDistancePerDate, dateIntakePair!)
+      XCTAssertEqual(DummyHealthKitService.hourlyZeroDistancePerDate, dateIntakePair)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func testRequestDistancePerHourDateError() {
+    let expect = expectation(description: "Request Distance Per Hour Date error")
+    healthKitService?.requestDistancePerHour(from: .before(days: 1),
+                                             to: .before(days: 6)
+    ) { dateHourIntakePair in
+      XCTAssertNil(dateHourIntakePair)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
