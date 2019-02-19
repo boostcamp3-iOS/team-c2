@@ -34,7 +34,7 @@ final class CoreDataService: CoreDataServiceType {
       if let lastAccessedDate = user?.lastAccessedDate {
         completion(lastAccessedDate, nil)
       } else {
-        completion(nil, NSError(domain: "CoreDataNoUser", code: 0, userInfo: nil))
+        completion(nil, CoreDataError.noUser)
       }
     }
   }
@@ -102,7 +102,10 @@ final class CoreDataService: CoreDataServiceType {
         completion(nil, error)
         return
       }
-      guard let user = user else { return }
+      guard let user = user else {
+        completion(nil, CoreDataError.noUser)
+        return
+      }
       let lastSavedData = LastSavedData(
         todayFineDust: Int(user.todayFineDust),
         todayUltrafineDust: Int(user.todayUltrafineDust),
@@ -122,7 +125,10 @@ final class CoreDataService: CoreDataServiceType {
         completion(error)
         return
       }
-      guard user != nil else { return }
+      guard user != nil else {
+        completion(CoreDataError.noUser)
+        return
+      }
       self.userManager.save([User.steps: Int16(steps)], completion: completion)
     }
   }
@@ -133,7 +139,10 @@ final class CoreDataService: CoreDataServiceType {
         completion(error)
         return
       }
-      guard user != nil else { return }
+      guard user != nil else {
+        completion(CoreDataError.noUser)
+        return
+      }
       self.userManager.save([User.distance: distance], completion: completion)
     }
   }
@@ -147,7 +156,10 @@ final class CoreDataService: CoreDataServiceType {
         completion(error)
         return
       }
-      guard user != nil else { return }
+      guard user != nil else {
+        completion(CoreDataError.noUser)
+        return
+      }
       self.userManager.save([
         User.address: address,
         User.grade: Int16(grade),
@@ -164,7 +176,10 @@ final class CoreDataService: CoreDataServiceType {
         completion(error)
         return
       }
-      guard user != nil else { return }
+      guard user != nil else {
+        completion(CoreDataError.noUser)
+        return
+      }
       self.userManager.save([
         User.todayFineDust: Int16(todayFineDust),
         User.todayUltrafineDust: Int16(todayUltrafineDust)

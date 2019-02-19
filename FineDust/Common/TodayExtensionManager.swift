@@ -8,13 +8,17 @@
 
 import Foundation
 
+/// 투데이 익스텐션 매니저 프로토콜.
 protocol TodayExtensionManagerType: class {
   
+  /// 투데이 익스텐션과 흡입량 정보 공유하기.
   func shareTodayIntakes(_ fineDust: Int, _ ultrafineDust: Int)
 }
 
+/// 투데이 익스텐션 매니저.
 final class TodayExtensionManager: TodayExtensionManagerType {
   
+  /// Singleton Object.
   static let shared = TodayExtensionManager()
   
   private init() { }
