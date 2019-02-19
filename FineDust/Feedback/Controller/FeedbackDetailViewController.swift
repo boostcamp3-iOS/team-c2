@@ -9,10 +9,12 @@
 import UIKit
 
 /// 피드백 정보 상세 화면
-final class FeedbackDetailViewController: UIViewController {
+final class FeedbackDetailViewController: UIViewController, UIScrollViewDelegate {
   
   // MARK: - IBOutlets
   
+  @IBOutlet private weak var imageScrollView: UIScrollView!
+  @IBOutlet private weak var totalScrollView: UIScrollView!
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
@@ -31,6 +33,8 @@ final class FeedbackDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    imageScrollView.delegate = self
     
     isBookmarkedByTitle
       = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
@@ -59,6 +63,11 @@ final class FeedbackDetailViewController: UIViewController {
   }
   
   // MARK: - Function
+  
+  /// 이미지 확대하기.
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return feedbackImageView
+  }
   
   /// 뷰컨 데이터 설정
   func setFeedback(_ dustFeedback: DustFeedback) {
