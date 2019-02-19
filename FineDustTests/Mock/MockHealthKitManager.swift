@@ -27,13 +27,33 @@ final class MockHealthKitManager: HealthKitManagerType {
                           quantityFor: HKUnit,
                           identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void) {
-    switch identifier {
-    case .distanceWalkingRunning:
-      completion(distance, hourInteger, error)
-    case .stepCount:
-      completion(stepCount, hourInteger, error)
-    default:
-      break
+    if let error = self.error {
+      switch identifier {
+      case .distanceWalkingRunning:
+        completion(distance, hourInteger, error)
+      case .stepCount:
+        completion(stepCount, hourInteger, error)
+      default:
+        break
+      }
+      return
+    }
+    
+    if hourInterval == 1 {
+      for value in DummyHealthKitService.hourlyDistance {
+        let hour = value.key
+        let quantityValue = value.value
+        completion(Double(quantityValue), hour.rawValue, nil)
+      }
+    } else {
+      switch identifier {
+      case .distanceWalkingRunning:
+        completion(distance, hourInteger, error)
+      case .stepCount:
+        completion(stepCount, hourInteger, error)
+      default:
+        break
+      }
     }
   }
 

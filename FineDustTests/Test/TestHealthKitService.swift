@@ -65,7 +65,20 @@ class TestHealthKitService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func testRequestTodayDistancePerHour() {
+  func testRequestTodayDitancePerHour() {
+    let expect = expectation(description: "request Today Distance Per Hour")
+    var mockHourIntakePair = HourIntakePair()
+    for hour in 0...23 {
+      mockHourIntakePair[Hour(rawValue: hour) ?? .default] = 0
+    }
+    healthKitService?.requestTodayDistancePerHour { hourIntakePair in
+      XCTAssertEqual(hourIntakePair!, mockHourIntakePair)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func testRequestTodayDistancePerHourError() {
     let expect = expectation(description: "request error")
     mockHealthKitManager.error = HealthKitError.queryExecutedFailed
     var mockHourIntakePair = HourIntakePair()
@@ -78,4 +91,6 @@ class TestHealthKitService: XCTestCase {
     }
     waitForExpectations(timeout: 5, handler: nil)
   }
+  
+  
 }
