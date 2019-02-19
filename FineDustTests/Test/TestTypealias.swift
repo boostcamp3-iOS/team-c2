@@ -14,7 +14,7 @@ class TestTypealias: XCTestCase {
   
   func test_sortedByHour_ascending() {
     let dict: HourIntakePair = [.zero: 0, .one: 1]
-    let sorted = dict.sortedByHour()
+    let sorted = dict.sortByHour()
     let compared: [(key: Hour, value: Int)] = [(key: .zero, value: 0), (key: .one, value: 1)]
     for index in sorted.indices {
       let sortedElement = sorted[index]
@@ -26,7 +26,7 @@ class TestTypealias: XCTestCase {
   
   func test_sortedByHour_descending() {
     let dict: HourIntakePair = [.zero: 0, .one: 1]
-    let sorted = dict.sortedByHour(isAscending: false)
+    let sorted = dict.sortByHour(isAscending: false)
     let compared: [(key: Hour, value: Int)] = [(key: .one, value: 1), (key: .zero, value: 0)]
     for index in sorted.indices {
       let sortedElement = sorted[index]
@@ -39,7 +39,7 @@ class TestTypealias: XCTestCase {
   func test_sortedByDate_ascending() {
     let referenceDate = Date()
     let dict: DateHourIntakePair = [referenceDate.before(days: 1): [.zero: 0, .one: 1], referenceDate.before(days: 2): [.zero: 0, .one: 1]]
-    let sorted = dict.sortedByDate()
+    let sorted = dict.sortByDate()
     let compared: [(key: Date, value: HourIntakePair)] = [(key: referenceDate.before(days: 2), value: [.zero: 0, .one: 1]), (key: referenceDate.before(days: 1), value: [.zero: 0, .one: 1])]
     for index in sorted.indices {
       let sortedElement = sorted[index]
@@ -52,7 +52,7 @@ class TestTypealias: XCTestCase {
   func test_sortedByDate_descending() {
     let referenceDate = Date()
     let dict: DateHourIntakePair = [referenceDate.before(days: 1): [.zero: 0, .one: 1], referenceDate.before(days: 2): [.zero: 0, .one: 1]]
-    let sorted = dict.sortedByDate(isAscending: false)
+    let sorted = dict.sortByDate(isAscending: false)
     let compared: [(key: Date, value: HourIntakePair)] = [(key: referenceDate.before(days: 1), value: [.zero: 0, .one: 1]), (key: referenceDate.before(days: 2), value: [.zero: 0, .one: 1])]
     for index in sorted.indices {
       let sortedElement = sorted[index]
