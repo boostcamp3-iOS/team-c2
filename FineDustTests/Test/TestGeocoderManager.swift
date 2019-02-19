@@ -15,15 +15,15 @@ class TestGeocoderManager: XCTestCase {
   
   let geocoderManager = GeocoderManager.shared
   
-  func test_requestAddress() {
-    let expect = expectation(description: "test")
-    geocoderManager.requestAddress(.init(latitude: 37.4969, longitude: 127.0284)) { address, error in
-      XCTAssertEqual(address, "강남구 강남대로")
-      XCTAssertNil(error)
-      expect.fulfill()
-    }
-    waitForExpectations(timeout: 5, handler: nil)
-  }
+//  func test_requestAddress() {
+//    let expect = expectation(description: "test")
+//    geocoderManager.requestAddress(.init(latitude: 37.4969, longitude: 127.0284)) { address, error in
+//      defer { expect.fulfill() }
+//      XCTAssertEqual(address, "강남구 강남대로")
+//      XCTAssertNil(error)
+//    }
+//    waitForExpectations(timeout: 5, handler: nil)
+//  }
   
   func test_requestAddress_error() {
     let expect = expectation(description: "test")
