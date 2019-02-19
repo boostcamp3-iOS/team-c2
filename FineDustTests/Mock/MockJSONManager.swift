@@ -11,10 +11,12 @@ import Foundation
 
 final class MockJSONManager: JSONManagerType {
 
+  var resourceName = "DustFeedback"
   var dustFeedbacks: [DustFeedback] = []
-  var dustFeedbackZero: [DustFeedback] = []
+  var emptyDustFeedback: [DustFeedback] = []
+  var error: Error?
 
-  func fetchDustFeedbacks() -> [DustFeedback] {
-    return dustFeedbacks
+  func fetchJSONObject<T>(to type: T.Type, resourceName: String) -> [T] where T : Decodable {
+    return dustFeedbacks as? [T] ?? []
   }
 }
