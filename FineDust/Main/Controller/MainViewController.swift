@@ -190,7 +190,7 @@ extension MainViewController {
             // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {
               self.fineDustImageView.image
-                = UIImage(named: IntakeGrade(intake: fineDust).imageName)
+                = UIImage(named: IntakeGrade(intake: fineDust + ultrafineDust).imageName)
               self.intakeFineDustLable.countFromZero(to: fineDust,
                                                      unit: .microgram,
                                                      interval: 1.0 /

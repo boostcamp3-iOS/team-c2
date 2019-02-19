@@ -19,14 +19,18 @@ final class IntakeService: IntakeServiceType {
   
   let coreDataService: CoreDataServiceType
   
+  let todayExtensionManager: TodayExtensionManagerType
+  
   // MARK: Dependency Injection
   
   init(healthKitService: HealthKitServiceType = HealthKitService(healthKit: HealthKitManager()),
        dustInfoService: DustInfoServiceType = DustInfoService(),
-       coreDataService: CoreDataServiceType = CoreDataService()) {
+       coreDataService: CoreDataServiceType = CoreDataService(),
+       todayExtensionManager: TodayExtensionManagerType = TodayExtensionManager.shared) {
     self.healthKitService = healthKitService
     self.dustInfoService = dustInfoService
     self.coreDataService = coreDataService
+    self.todayExtensionManager = todayExtensionManager
   }
   
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {
@@ -53,8 +57,8 @@ final class IntakeService: IntakeServiceType {
               = self.totalHourlyIntake(hourlyFineDustIntake,
                                        hourlyUltrafineDustIntake,
                                        hourlyDistance)
-            TodayExtensionManager.shared
-              .shareTodayIntakes(fineDust: fineDust, ultrafineDust: ultrafineDust)
+            self.todayExtensionManager
+              .shareTodayIntakes(fineDust, ultrafineDust)
             print("오늘의 흡입량 가져오기 성공")
             print(fineDust)
             print(ultrafineDust)

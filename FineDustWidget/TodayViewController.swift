@@ -31,7 +31,8 @@ final class TodayViewController: UIViewController, NCWidgetProviding {
       label.isHidden = true
       fineDustIntakeLabel.text = "\(fineDustIntake)"
       ultrafineDustIntakeLabel.text = "\(ultrafineDustIntake)"
-      dustImageView.image = UIImage(named: IntakeGrade(intake: fineDustIntake).iconName)
+      dustImageView.image
+        = UIImage(named: IntakeGrade(intake: fineDustIntake + ultrafineDustIntake).iconName)
     } else {
       label.isHidden = false
       label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
