@@ -16,6 +16,7 @@ final class FeedbackListService: FeedbackListServiceType {
   private let jsonManager: JSONManagerType?
   private var dustFeedbacks: [DustFeedback] = []
   private let userDefaultsKey = "isBookmarkedByTitle"
+  private let resourceName = "DustFeedback"
   var isBookmarkedByTitle: [String: Bool] {
     get {
       return UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] ?? [:]
@@ -27,7 +28,7 @@ final class FeedbackListService: FeedbackListServiceType {
   
   init(jsonManager: JSONManagerType) {
     self.jsonManager = jsonManager
-    dustFeedbacks = jsonManager.fetchJSONData(DustFeedback.self)
+    dustFeedbacks = jsonManager.fetchJSONObject(to: DustFeedback.self, resourceName: resourceName)
   }
   
   // MARK: - Functions

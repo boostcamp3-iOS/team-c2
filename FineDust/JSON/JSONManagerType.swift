@@ -12,5 +12,5 @@ import Foundation
 protocol JSONManagerType {
 
   /// 주어진 데이터를 특정 타입으로 디코딩함.
-  func fetchJSONData<T: Decodable>(_ data: T.Type) -> [T]
+  func fetchJSONObject<T: Decodable>(to type: T.Type, resourceName: String) -> [T]
 }

@@ -12,14 +12,13 @@ import Foundation
 final class JSONManager: JSONManagerType {
   
   // MARK: - Properties
-  
-  let resourceName = "DustFeedback"
+
   let jsonDecoder = JSONDecoder()
   
   // MARK: - Fucntion
   
   /// json 파싱하여 데이터를 가져옴.
-  func fetchJSONData<T: Decodable>(_ data: T.Type) -> [T] {
+  func fetchJSONObject<T: Decodable>(to type: T.Type, resourceName: String) -> [T] {
     guard let path = Bundle.main.path(forResource: resourceName, ofType: "json") else { return [] }
     
     do {
