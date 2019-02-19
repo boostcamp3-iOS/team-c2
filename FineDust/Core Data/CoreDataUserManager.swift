@@ -34,10 +34,15 @@ final class CoreDataUserManager: CoreDataUserManagerType {
   func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) {
     DispatchQueue.main.async {
       do {
-        let user = User(context: self.manager.context)
-        dictionary.forEach { user.setValue($0.value, forKey: $0.key) }
-        try self.manager.context.save()
-        completion(nil)
+        let fetchedUsers
+          = try self.manager.context.fetch(User.fetchRequest()) as? [User]
+        let isNoUser = fetchedUsers?.isEmpty
+        let user = isNoUser ?? false ? User(context: self.manager.context) : fetchedUsers?.last
+        if let user = user {
+          dictionary.forEach { user.setValue($0.value, forKey: $0.key) }
+          try self.manager.context.save()
+          completion(nil)
+        }
       } catch {
         completion(error)
       }

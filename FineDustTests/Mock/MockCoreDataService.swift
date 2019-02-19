@@ -51,11 +51,11 @@ class MockCoreDataService: CoreDataServiceType {
     completion(error)
   }
   
-  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int), completion: @escaping (Error?) -> Void) {
+  func saveLastDustData(address: String, grade: Int, recentFineDust: Int, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
   
-  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int), completion: @escaping (Error?) -> Void) {
+  func saveLastTodayIntake(todayFineDust: Int, todayUltrafineDust: Int, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
 }

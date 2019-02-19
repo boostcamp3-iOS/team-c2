@@ -27,14 +27,14 @@ final class CoreDataService: CoreDataServiceType {
   
   func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
     userManager.request { user, error in
-      // 최신 접속 날짜가 코어데이터에 저장되어 있으면 그 값을 내려줌
-      // 그렇지 않으면 최신 접속 날짜를 갱신한 후 그 값을 내려줌
+      if let error = error {
+        completion(nil, error)
+        return
+      }
       if let lastAccessedDate = user?.lastAccessedDate {
-        completion(lastAccessedDate, error)
+        completion(lastAccessedDate, nil)
       } else {
-        self.saveLastAccessedDate { error in
-          completion(Date(), error)
-        }
+        completion(nil, NSError(domain: "CoreDataNoUser", code: 0, userInfo: nil))
       }
     }
   }
@@ -138,7 +138,9 @@ final class CoreDataService: CoreDataServiceType {
     }
   }
   
-  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int),
+  func saveLastDustData(address: String,
+                        grade: Int,
+                        recentFineDust: Int,
                         completion: @escaping (Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
@@ -147,14 +149,15 @@ final class CoreDataService: CoreDataServiceType {
       }
       guard user != nil else { return }
       self.userManager.save([
-        User.address: dustData.address,
-        User.grade: Int16(dustData.grade),
-        User.recentFineDust: Int16(dustData.recentFineDust)
+        User.address: address,
+        User.grade: Int16(grade),
+        User.recentFineDust: Int16(recentFineDust)
         ], completion: completion)
     }
   }
   
-  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int),
+  func saveLastTodayIntake(todayFineDust: Int,
+                           todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void) {
     userManager.request { user, error in
       if let error = error {
@@ -163,8 +166,8 @@ final class CoreDataService: CoreDataServiceType {
       }
       guard user != nil else { return }
       self.userManager.save([
-        User.todayFineDust: Int16(intakes.todayFineDust),
-        User.todayUltrafineDust: Int16(intakes.todayUltrafineDust)
+        User.todayFineDust: Int16(todayFineDust),
+        User.todayUltrafineDust: Int16(todayUltrafineDust)
         ], completion: completion)
     }
   }

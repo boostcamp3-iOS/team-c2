@@ -108,7 +108,7 @@ extension MainViewController {
             } else {
               print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
-          }
+        }
         DispatchQueue.main.async {
           self.stepCountLabel.text = "\(Int(value)) 걸음"
         }
@@ -149,15 +149,14 @@ extension MainViewController {
         }
         if let info = info {
           self.coreDataService
-            .saveLastDustData(
-              (address: SharedInfo.shared.address,
-               grade: info.fineDustGrade.rawValue,
-               recentFineDust: info.fineDustValue)) { error in
-                if error != nil {
-                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
-                } else {
-                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
-                }
+            .saveLastDustData(address: SharedInfo.shared.address,
+                              grade: info.fineDustGrade.rawValue,
+                              recentFineDust: info.fineDustValue) { error in
+                                if error != nil {
+                                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
+                                } else {
+                                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
+                                }
           }
           DispatchQueue.main.async {
             self.fineDustLabel.countFromZero(to: info.fineDustValue,
@@ -180,14 +179,13 @@ extension MainViewController {
         if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
           if self.healthKitService.isAuthorized {
             self.coreDataService
-              .saveLastTodayIntake(
-                (todayFineDust: fineDust,
-                 todayUltrafineDust: ultrafineDust)) { error in
-                  if error != nil {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
-                  } else {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
-                  }
+              .saveLastTodayIntake(todayFineDust: fineDust,
+                                   todayUltrafineDust: ultrafineDust) { error in
+                                    if error != nil {
+                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
+                                    } else {
+                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
+                                    }
             }
             // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {

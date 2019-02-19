@@ -46,10 +46,13 @@ protocol CoreDataServiceType: class {
   func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void)
   
   /// 마지막으로 요청한 최근 미세먼지 데이터 저장하기.
-  func saveLastDustData(_ dustData: (address: String, grade: Int, recentFineDust: Int),
+  func saveLastDustData(address: String,
+                        grade: Int,
+                        recentFineDust: Int,
                         completion: @escaping (Error?) -> Void)
   
   /// 마지막으로 요청한 오늘의 흡입 먼지 농도 저장하기.
-  func saveLastTodayIntake(_ intakes: (todayFineDust: Int, todayUltrafineDust: Int),
+  func saveLastTodayIntake(todayFineDust: Int,
+                           todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void)
 }
