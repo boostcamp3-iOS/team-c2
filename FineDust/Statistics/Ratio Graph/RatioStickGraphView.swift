@@ -75,9 +75,7 @@ final class RatioStickGraphView: UIView {
   func setState(average: Int, today: Int) {
     averageIntake = average
     todayIntake = today
-    deinitializeSubviews()
-    drawGraph()
-    setLabels()
+    reloadGraphView()
   }
 }
 

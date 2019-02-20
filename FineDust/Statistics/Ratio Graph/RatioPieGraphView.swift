@@ -54,9 +54,7 @@ final class RatioPieGraphView: UIView {
   func setState(ratio: CGFloat, endAngle: CGFloat) {
     self.ratio = ratio
     self.endAngle = endAngle
-    deinitializeSubviews()
-    drawGraph()
-    setLabels()
+    reloadGraphView()
   }
 }
 
