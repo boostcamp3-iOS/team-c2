@@ -37,5 +37,10 @@ protocol FeedbackListServiceType: class {
   
   /// 제목으로 피드백 전체 정보를 가져옴.
   func fetchFeedback(by title: String) -> DustFeedback?
+ 
+  /// 현재 상태로 피드백 정보를 가져옴.
+  func fetchRecommedFeedback(by currentState: Int) -> [DustFeedback]
   
+  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
+  func fetchFeedbacks(by importance: Int) -> [DustFeedback]
 }
