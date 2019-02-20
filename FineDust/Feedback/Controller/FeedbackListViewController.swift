@@ -27,11 +27,8 @@ final class FeedbackListViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "먼지 정보".localized
     
-    feedbackCount = feedbackListService.fetchFeedbackCount()
-    // back swipe
-    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +37,12 @@ final class FeedbackListViewController: UIViewController {
   }
   
   // MARK: - Function
+  
+  private func setup() {
+    feedbackCount = feedbackListService.fetchFeedbackCount()
+    // back swipe
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
   
   private func pushDetailViewController(feedbackTitle: String) {
     if let viewController = storyboard?
