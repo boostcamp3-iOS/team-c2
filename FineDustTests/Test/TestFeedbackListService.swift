@@ -79,7 +79,8 @@ class FeedbackListServiceTest: XCTestCase {
   /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
   func testFetchFeedbacks() {
     let importance = 3
-    let result = feedbackListService.fetchFeedbacks(by: importance)
+    var result = feedbackListService.fetchFeedbacks(by: importance)
+    result = result.filter { $0.importance == importance }
     XCTAssertNil(result)
   }
 }
