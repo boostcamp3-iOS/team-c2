@@ -118,6 +118,8 @@
 		9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */; };
 		2B8D866B39C9DD1EBE276B9E25957797 /* RatioGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */; };
 		61983521903384EDCC1ED4BA5F87BF04 /* RatioGraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */; };
+		D06D4EFAD3BFE322DD572DCFCD1B8C14 /* RatioPieGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */; };
+		F39D215B613CEB186A163BBF47ACCE91 /* RatioStickGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */; };
 		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */; };
 		D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */; };
@@ -337,6 +339,8 @@
 		41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphView.swift; sourceTree = "<group>"; };
 		4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatioGraphView.xib; sourceTree = "<group>"; };
 		06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDataSource.swift; sourceTree = "<group>"; };
+		71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioPieGraphView.swift; sourceTree = "<group>"; };
+		6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioStickGraphView.swift; sourceTree = "<group>"; };
 		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendCollectionViewCell.swift; path = FineDust/Feedback/View/RecommendCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 				41ABD37F289096BED279C69EBF05CBBB /* RatioGraphView.swift */,
 				4D25EE7795836E28C1E93549BCCE5CF6 /* RatioGraphView.xib */,
 				06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */,
+				71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */,
+				6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -1135,6 +1141,8 @@
 				61456BB8371C8910DFEA1F2E03CB6C81 /* ProgressIndicator.swift in Sources */,
 				9E6F27BA884D082B48A8C33F8088422D /* RatioGraphView.swift in Sources */,
 				61983521903384EDCC1ED4BA5F87BF04 /* RatioGraphViewDataSource.swift in Sources */,
+				D06D4EFAD3BFE322DD572DCFCD1B8C14 /* RatioPieGraphView.swift in Sources */,
+				F39D215B613CEB186A163BBF47ACCE91 /* RatioStickGraphView.swift in Sources */,
 				A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */,
 				5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */,
 				D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */,
