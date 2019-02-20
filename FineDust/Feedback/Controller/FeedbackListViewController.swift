@@ -22,6 +22,11 @@ final class FeedbackListViewController: UIViewController {
   private var feedbackCount = 0
   private var newDustFeedbacks: [DustFeedback]?
   private var isBookmarkedByTitle: [String: Bool] = [:]
+  private var recommendFeedbacks: [DustFeedback] = []
+  private let defaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust")
+  private var fineDustIntake: Int = 0
+  private var ultraFineDustIntake: Int = 0
+  private var currentState: Int = 1
   
   // MARK: - LifeCycle
   
@@ -39,11 +44,28 @@ final class FeedbackListViewController: UIViewController {
   // MARK: - Function
   
   private func setup() {
+    
+    calculateState()
+    
     feedbackCount = feedbackListService.fetchFeedbackCount()
+    recommendFeedbacks = feedbackListService.fetchRecommedFeedback(by: currentState)
     // back swipe
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
   
+  /// 미세먼지 섭취량으로 현재 상태를 계산함.
+  private func calculateState() {
+    if let defaults = defaults {
+      defaults.synchronize()
+      fineDustIntake = defaults.integer(forKey: "fineDustIntake")
+      ultraFineDustIntake = defaults.integer(forKey: "ultrafineDustIntake")
+      
+      let intake = fineDustIntake + ultraFineDustIntake
+      currentState = IntakeGrade(intake: intake).rawValue
+    }
+  }
+  
+  /// 상세정보 화면으로 이동함.
   private func pushDetailViewController(feedbackTitle: String) {
     if let viewController = storyboard?
       .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString)
@@ -198,7 +220,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return feedbackCount > 2 ? 3 : feedbackCount
+    return recommendFeedbacks.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -209,7 +231,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
                            for: indexPath) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    let feedback = feedbackListService.fetchFeedback(at: indexPath.item)
+    let feedback = recommendFeedbacks[indexPath.item]
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }
