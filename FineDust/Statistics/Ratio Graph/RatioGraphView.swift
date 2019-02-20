@@ -11,117 +11,42 @@ import UIKit
 /// 비율 그래프 뷰.
 final class RatioGraphView: UIView {
   
-  // MARK: Constant
-  
-  /// 상수 정리.
-  enum Layer {
-    
-    /// 레이어 선 두께.
-    static let lineWidth: CGFloat = 10.0
-  }
-  
   // MARK: Delegate
   
   /// Ratio Graph View Data Source.
   weak var dataSource: RatioGraphViewDataSource?
   
-  // MARK: Private Properties
-  
-  /// 전체에 대한 부분의 비율.
-  private var ratio: CGFloat {
-    return dataSource?.intakeRatio ?? .leastNonzeroMagnitude
-  }
-  
-  /// 비율을 각도로 변환.
-  private var endAngle: CGFloat {
-    return ratio * 2 * .pi - .pi / 2
-  }
-  
-  /// 배경 뷰 높이.
-  private var backgroundViewHeight: CGFloat {
-    return backgroundView.bounds.height * 0.7
-  }
-  
-  // MARK: IBOutlet
-  
-  /// 배경 뷰.
-  @IBOutlet private weak var backgroundView: UIView!
-  
   // MARK: View
   
-  /// 퍼센트 레이블.
-  private lazy var percentLabel: FDCountingLabel = {
-    let label = FDCountingLabel()
-    label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    backgroundView.addSubview(label)
-    NSLayoutConstraint.activate([
-      label.anchor.centerX.equal(to: backgroundView.anchor.centerX),
-      label.anchor.centerY.equal(to: backgroundView.anchor.centerY)
-      ])
-    return label
-  }()
+  /// 파이 그래프가 위치하는 좌측 뷰.
+  @IBOutlet private weak var pieGraphView: RatioPieGraphView!
   
-  /// 타이머.
-  private var timer: Timer?
+  /// 막대 그래프가 위치하는 우측 뷰.
+  private lazy var stickGraphView: RatioStickGraphView! = {
+    guard let contentView =
+      UIView
+        .instantiate(fromXib: RatioStickGraphView.classNameToString) as? RatioStickGraphView
+      else { return nil }
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(contentView)
+    NSLayoutConstraint.activate([
+      contentView.anchor.top.equal(to: pieGraphView.anchor.top),
+      contentView.anchor.leading.equal(to: pieGraphView.anchor.trailing, offset: 16),
+      contentView.anchor.bottom.equal(to: anchor.bottom),
+      contentView.anchor.trailing.equal(to: anchor.trailing, offset: -16)
+      ])
+    return contentView
+  }()
   
   // MARK: Method
   
   /// 뷰 전체 설정.
   func setup() {
-    deinitializeElements()
-    drawRatioGraph()
-    setPercentLabel()
-  }
-}
-
-// MARK: - View Drawing
-
-private extension RatioGraphView {
-  
-  /// 서브뷰 초기화.
-  func deinitializeElements() {
-    timer?.invalidate()
-    backgroundView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-  }
-  
-  /// 비율 원 그래프 그리기.
-  func drawRatioGraph() {
-    let path = UIBezierPath(arcCenter: CGPoint(x: backgroundView.bounds.width / 2,
-                                               y: backgroundView.bounds.height / 2),
-                            radius: backgroundViewHeight / 2,
-                            startAngle: -.pi / 2,
-                            endAngle: .pi * 3 / 2,
-                            clockwise: true)
-    // 전체 레이어
-    let entireLayer = CAShapeLayer()
-    entireLayer.path = path.cgPath
-    entireLayer.lineWidth = Layer.lineWidth
-    entireLayer.fillColor = UIColor.clear.cgColor
-    entireLayer.strokeColor = Asset.graph1.color.cgColor
-    backgroundView.layer.addSublayer(entireLayer)
-    // 부분 레이어
-    let portionLayer = CAShapeLayer()
-    portionLayer.path = path.cgPath
-    portionLayer.lineWidth = Layer.lineWidth
-    portionLayer.fillColor = UIColor.clear.cgColor
-    portionLayer.strokeColor = Asset.graphToday.color.cgColor
-    portionLayer.strokeEnd = 0
-    backgroundView.layer.addSublayer(portionLayer)
-    // 부분 레이어에 애니메이션
-    let animation = CABasicAnimation(keyPath: "strokeEnd")
-    animation.fromValue = 0
-    animation.toValue = ratio
-    animation.duration = 1
-    portionLayer.strokeEnd = ratio
-    portionLayer.add(animation, forKey: animation.keyPath)
-  }
-  
-  /// 비어 있는 원 안에 퍼센트 레이블 설정하기.
-  func setPercentLabel() {
-    let endValue = Int(ratio * 100)
-    let interval = 1.0 / Double(endValue)
-    backgroundView.addSubview(percentLabel)
-    percentLabel.countFromZero(to: endValue, unit: .percent, interval: interval)
+    let ratio = dataSource?.intakeRatio ?? .leastNonzeroMagnitude
+    let endAngle = ratio * 2 * .pi - .pi / 2
+    let averageIntake = Int(Double((dataSource?.totalIntake ?? 1)) / 7.0)
+    let todayIntake = dataSource?.todayIntake ?? 1
+    pieGraphView.setState(ratio: ratio, endAngle: endAngle)
+    stickGraphView.setState(average: averageIntake, today: todayIntake)
   }
 }

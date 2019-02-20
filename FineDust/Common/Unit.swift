@@ -16,4 +16,7 @@ enum Unit: String {
   
   /// 비율 단위인 퍼센트.
   case percent = "%"
+  
+  /// 없음.
+  case none = ""
 }

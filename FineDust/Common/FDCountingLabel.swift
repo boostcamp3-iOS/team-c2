@@ -42,4 +42,9 @@ final class FDCountingLabel: UILabel {
     }
     timer?.fire()
   }
+  
+  /// 시간 내 카운팅을 위한 인터벌 구하기.
+  static func interval(forCounting count: Double, inSecond second: Double = 1.0) -> TimeInterval {
+    return second / count
+  }
 }
