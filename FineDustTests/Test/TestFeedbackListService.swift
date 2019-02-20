@@ -69,18 +69,54 @@ class FeedbackListServiceTest: XCTestCase {
     XCTAssertNotNil(result)
   }
   
-  /// 현재 상태로 피드백 정보를 가져옴.
-  func testFetchRecommedFeedback() {
-    let state = 3
-    let result = feedbackListService.fetchRecommedFeedback(by: state)
-    XCTAssertNil(result)
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 default
+  func testFetchRecommedFeedbackDefault() {
+    let state = IntakeGrade.default
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
   }
   
-  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
-  func testFetchFeedbacks() {
-    let importance = 3
-    var result = feedbackListService.fetchFeedbacks(by: importance)
-    result = result.filter { $0.importance == importance }
-    XCTAssertNil(result)
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 1
+  func testFetchRecommedFeedbackState1() {
+    let state = IntakeGrade.veryBad
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
   }
+  
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 2
+  func testFetchRecommedFeedbackState2() {
+    let state = IntakeGrade.bad
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
+  }
+  
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 3
+  func testFetchRecommedFeedbackState3() {
+    let state = IntakeGrade.normal
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
+  }
+  
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 4
+  func testFetchRecommedFeedbackState4() {
+    let state = IntakeGrade.good
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
+  }
+  
+  /// 현재 상태로 피드백 정보를 가져오는 함수 테스트 5
+  func testFetchRecommedFeedbackState5() {
+    let state = IntakeGrade.veryGood
+    let result = feedbackListService.fetchRecommededFeedbacks(by: state)
+    XCTAssertNotNil(result)
+  }
+  
+  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞는 함수 테스트
+  func testFetchImportantFeedbacks() {
+    let importance = ImportanceGrade.normal
+    var result = feedbackListService.fetchFeedbacks(by: importance)
+    result = result.filter { $0.importance == importance.rawValue }
+    XCTAssertNotNil(result)
+  }
+  
 }
