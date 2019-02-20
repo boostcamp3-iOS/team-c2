@@ -68,4 +68,18 @@ class FeedbackListServiceTest: XCTestCase {
     let result = feedbackListService.fetchFeedback(by: title)
     XCTAssertNotNil(result)
   }
+  
+  /// 현재 상태로 피드백 정보를 가져옴.
+  func testFetchRecommedFeedback() {
+    let state = 3
+    let result = feedbackListService.fetchRecommedFeedback(by: state)
+    XCTAssertNil(result)
+  }
+  
+  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
+  func testFetchFeedbacks() {
+    let importance = 3
+    let result = feedbackListService.fetchFeedbacks(by: importance)
+    XCTAssertNil(result)
+  }
 }
