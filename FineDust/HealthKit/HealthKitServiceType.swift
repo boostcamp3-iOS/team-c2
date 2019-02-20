@@ -14,6 +14,8 @@ protocol HealthKitServiceType: class {
   
   var isAuthorized: Bool { get }
   
+  var isDeterminded: Bool { get }
+  
   /// 오늘 걸음 수 값 fetch.
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void)
   
