@@ -25,8 +25,8 @@ final class FeedbackListViewController: UIViewController {
   private var recommendFeedbacks: [DustFeedback] = []
   private let defaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust")
   private var fineDustIntake: Int = 0
-  private var ultraFineDustIntake: Int = 0
-  private var currentState: Int = 1
+  private var ultrafineDustIntake: Int = 0
+  private var currentState: IntakeGrade = .good
   
   // MARK: - LifeCycle
   
@@ -48,7 +48,7 @@ final class FeedbackListViewController: UIViewController {
     calculateState()
     
     feedbackCount = feedbackListService.fetchFeedbackCount()
-    recommendFeedbacks = feedbackListService.fetchRecommedFeedback(by: currentState)
+    recommendFeedbacks = feedbackListService.fetchRecommededFeedbacks(by: currentState)
     // back swipe
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
@@ -56,12 +56,11 @@ final class FeedbackListViewController: UIViewController {
   /// 미세먼지 섭취량으로 현재 상태를 계산함.
   private func calculateState() {
     if let defaults = defaults {
-      defaults.synchronize()
       fineDustIntake = defaults.integer(forKey: "fineDustIntake")
-      ultraFineDustIntake = defaults.integer(forKey: "ultrafineDustIntake")
+      ultrafineDustIntake = defaults.integer(forKey: "ultrafineDustIntake")
       
-      let intake = fineDustIntake + ultraFineDustIntake
-      currentState = IntakeGrade(intake: intake).rawValue
+      let intake = fineDustIntake + ultrafineDustIntake
+      currentState = IntakeGrade(intake: intake)
     }
   }
   

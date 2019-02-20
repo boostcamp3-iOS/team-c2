@@ -85,30 +85,34 @@ final class FeedbackListService: FeedbackListServiceType {
   }
   
   /// 현재 상태로 피드백 정보를 가져옴.
-  func fetchRecommedFeedback(by currentState: Int) -> [DustFeedback] {
-    var recommendCount: [Int: Int] = [:] // 중요도별 개수
+  func fetchRecommededFeedbacks(by currentState: IntakeGrade) -> [DustFeedback] {
+    var recommendCount: [ImportanceGrade: Int] = [:] // 중요도별 개수
     switch currentState {
-    case 1:
-      recommendCount = [2: 2, 1: 1]
-    case 2:
-      recommendCount = [2: 3]
-    case 3:
-      recommendCount = [3: 1]
-    case 4:
-      recommendCount = [3: 2, 2: 1]
-    case 5:
-      recommendCount = [3: 3]
+    case .veryGood:
+      recommendCount = [.important: 2, .normal: 1]
+    case .good:
+      recommendCount = [.important: 3]
+    case .normal:
+      recommendCount = [.veryImportant: 1, .important: 2]
+    case .bad:
+      recommendCount = [.veryImportant: 2, .important: 1]
+    case .veryBad:
+      recommendCount = [.veryImportant: 3]
     default:
-      recommendCount = [2: 2, 1: 1]
+      recommendCount = [.important: 2, .normal: 1]
     }
     var importantDustFeedbacks: [DustFeedback] = [] // 중요도별 전체 정보
-    let recommendImportance = recommendCount.keys.map { Int($0) } // 가져올 중요도
-
+    let recommendImportance = recommendCount.keys.map { $0 } // 가져올 중요도
+ 
     var recommendFeedbacks: [DustFeedback] = []
     for index in 0..<recommendImportance.count {
-    importantDustFeedbacks = fetchFeedbacks(by: recommendImportance[index])
-      for count in 0..<recommendImportance[index] { // 중요도별 개수로 추천 정보 결정
-        recommendFeedbacks.append(importantDustFeedbacks[count])
+      importantDustFeedbacks = fetchFeedbacks(by: recommendImportance[index].rawValue)
+      // 중요도별 개수로 추천 정보 결정
+      let importanceKey = recommendImportance[index]
+      if let importanceCount = recommendCount[importanceKey] {
+        for count in 0..<importanceCount {
+          recommendFeedbacks.append(importantDustFeedbacks[count])
+        }
       }
     }
     return recommendFeedbacks
