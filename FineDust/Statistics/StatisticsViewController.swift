@@ -83,10 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 흡입량 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
+  private var fineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
   
   /// 7일간의 초미세먼지 흡입량 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
+  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
   
   /// 오늘의 미세먼지 흡입량.
   private var todayFineDustIntake: Int = 1
@@ -225,7 +225,8 @@ extension StatisticsViewController: RatioGraphViewDataSource {
   }
   
   var todayIntake: Int {
-    return segmentedControl.selectedSegmentIndex == 0 ? todayFineDustIntake : todayUltrafineDustIntake
+    return segmentedControl.selectedSegmentIndex == 0
+      ? todayFineDustIntake : todayUltrafineDustIntake
   }
 }
 

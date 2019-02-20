@@ -8,62 +8,74 @@
 
 import UIKit
 
+/// 비율 그래프의 원 그래프 뷰.
 final class RatioPieGraphView: UIView {
+  
+  // MARK: Layer 관련 상수
   
   enum Layer {
     
+    /// 그래프 두께.
     static let lineWidth: CGFloat = 10.0
   }
   
+  /// 타이머.
+  private var timer: Timer?
+  
+  // MARK: State
+  
+  /// 전체에 대한 부분의 비율.
   private var ratio: CGFloat = 0
   
+  /// 원 그래프의 끝 각도. 라디안.
   private var endAngle: CGFloat = 0
   
+  /// 그래프 뷰 높이.
   private var graphHeight: CGFloat = 0
   
-  private var backgroundViewHeight: CGFloat {
-    return bounds.width * 0.8
-  }
+  // MARK: View
   
+  /// 퍼센트 레이블.
   private lazy var percentLabel: FDCountingLabel = {
     let label = FDCountingLabel()
-    label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+    label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
-    leftBackgroundView.addSubview(label)
+    addSubview(label)
     NSLayoutConstraint.activate([
-      label.anchor.centerX.equal(to: leftBackgroundView.anchor.centerX),
-      label.anchor.centerY.equal(to: leftBackgroundView.anchor.centerY)
+      label.anchor.centerX.equal(to: anchor.centerX),
+      label.anchor.centerY.equal(to: anchor.centerY)
       ])
     return label
   }()
   
-  private var timer: Timer?
+  // MARK: Method
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
+  /// 상태값 설정하고 뷰 갱신.
   func setState(ratio: CGFloat, endAngle: CGFloat) {
     self.ratio = ratio
     self.endAngle = endAngle
     deinitializeSubviews()
     drawGraph()
-    setPercentLabel()
+    setLabels()
   }
+}
+
+// MARK: - GraphDrawable 구현
+
+extension RatioPieGraphView: GraphDrawable {
   
-  private func deinitializeSubviews() {
+  /// 서브뷰 초기화.
+  func deinitializeSubviews() {
     timer?.invalidate()
     layer.sublayers?.forEach { $0.removeFromSuperlayer() }
   }
   
-  private func drawGraph() {
-    let path = UIBezierPath(arcCenter: .init(x: bounds.width / 2,
-                                             y: bounds.height / 2),
-                            radius: backgroundViewHeight / 2,
+  /// 그래프 그리기.
+  func drawGraph() {
+    let graphViewHeight = bounds.width * 0.8
+    let path = UIBezierPath(arcCenter: CGPoint(x: bounds.width / 2,
+                                               y: bounds.height / 2),
+                            radius: graphViewHeight / 2,
                             startAngle: -.pi / 2,
                             endAngle: .pi * 3 / 2,
                             clockwise: true)
@@ -91,7 +103,11 @@ final class RatioPieGraphView: UIView {
     portionLayer.add(animation, forKey: animation.keyPath)
   }
   
-  private func setPercentLabel() {
-    
+  func setLabels() {
+    let endValue = Int(ratio * 100)
+    addSubview(percentLabel)
+    percentLabel.countFromZero(to: endValue,
+                               unit: .percent,
+                               interval: FDCountingLabel.interval(forCounting: Double(endValue)))
   }
 }

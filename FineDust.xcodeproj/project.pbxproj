@@ -64,6 +64,7 @@
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */; };
 		04A572D5E9209E88FC7B31057CCE14ED /* GeocoderManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */; };
+		6408809C668F1530211188FEDFD6E661 /* GraphDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5864F1281D74766589BFC74E7AE13ADE /* GraphDrawable.swift */; };
 		5BF160CCADAB359002B99C3FC6EEB91A /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */; };
 		BF8FDD73C3CB256E7A640BE952DAB4ED /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D1CBCB05A905AE4917A0CEA861699F /* HTTPMethod.swift */; };
 		0F99D43AFB7714E3367A58D454482FC1 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */; };
@@ -121,6 +122,7 @@
 		61983521903384EDCC1ED4BA5F87BF04 /* RatioGraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */; };
 		D06D4EFAD3BFE322DD572DCFCD1B8C14 /* RatioPieGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */; };
 		F39D215B613CEB186A163BBF47ACCE91 /* RatioStickGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */; };
+		05CA789D06E1CA1C790B5FE7EB7053E4 /* RatioStickGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8240674C26B7CF95F03C4968D5E63705 /* RatioStickGraphView.xib */; };
 		A51E6DAD7010A2182F400DB983564D54 /* RecentDustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */; };
 		5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */; };
 		D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */; };
@@ -287,6 +289,7 @@
 		9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManager.swift; sourceTree = "<group>"; };
 		0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManagerType.swift; sourceTree = "<group>"; };
+		5864F1281D74766589BFC74E7AE13ADE /* GraphDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDrawable.swift; sourceTree = "<group>"; };
 		B1D6864AEA6750FFD363FB96B9D8B3A0 /* HTTPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		A7D1CBCB05A905AE4917A0CEA861699F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		809DFB48CC77B219543B775E38C70D48 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
@@ -344,6 +347,7 @@
 		06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioGraphViewDataSource.swift; sourceTree = "<group>"; };
 		71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioPieGraphView.swift; sourceTree = "<group>"; };
 		6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioStickGraphView.swift; sourceTree = "<group>"; };
+		8240674C26B7CF95F03C4968D5E63705 /* RatioStickGraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatioStickGraphView.xib; sourceTree = "<group>"; };
 		FEBB8C71A7FB362DC9A9A7D132534A56 /* RecentDustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentDustInfo.swift; sourceTree = "<group>"; };
 		48BE6C39A1E9F23DBD0C1AF1B0E3DD9B /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendCollectionViewCell.swift; path = FineDust/Feedback/View/RecommendCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EC7247CE1DC76053F18FE04A31CE4860 /* ResponseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 			children = (
 				210EE93514800517A8F4C0AED0A4BE35 /* Ratio Graph */,
 				53A54E60DE3CB9FAEC67B9A153930A34 /* Value Graph */,
+				5864F1281D74766589BFC74E7AE13ADE /* GraphDrawable.swift */,
 				DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */,
 				58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */,
 			);
@@ -530,6 +535,7 @@
 				06C2D54C78218CF91694FD9E94E0D468 /* RatioGraphViewDataSource.swift */,
 				71A201E37AB26A50C89CA0A26E64C76C /* RatioPieGraphView.swift */,
 				6EED57764EB842B7760933270C0D1EF0 /* RatioStickGraphView.swift */,
+				8240674C26B7CF95F03C4968D5E63705 /* RatioStickGraphView.xib */,
 			);
 			path = "Ratio Graph";
 			sourceTree = "<group>";
@@ -1019,6 +1025,7 @@
 				A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */,
 				5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */,
 				2B8D866B39C9DD1EBE276B9E25957797 /* RatioGraphView.xib in Resources */,
+				05CA789D06E1CA1C790B5FE7EB7053E4 /* RatioStickGraphView.xib in Resources */,
 				B500997103DB43D02E812611C3454782 /* Statistics.storyboard in Resources */,
 				563A95DB8198B51C3DC0B7B6BE64DDA3 /* ValueGraphView.xib in Resources */,
 				0CD1740E330718AD9F6C5C529AD7B10F /* swiftgen.yml in Resources */,
@@ -1113,6 +1120,7 @@
 				204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */,
 				A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */,
 				04A572D5E9209E88FC7B31057CCE14ED /* GeocoderManagerType.swift in Sources */,
+				6408809C668F1530211188FEDFD6E661 /* GraphDrawable.swift in Sources */,
 				5BF160CCADAB359002B99C3FC6EEB91A /* HTTPError.swift in Sources */,
 				BF8FDD73C3CB256E7A640BE952DAB4ED /* HTTPMethod.swift in Sources */,
 				0F99D43AFB7714E3367A58D454482FC1 /* HTTPStatusCode.swift in Sources */,

@@ -16,6 +16,8 @@ final class ValueGraphView: UIView {
   /// 레이어 관련 상수 모음.
   enum Layer {
     
+    static let radius: CGFloat = 2.0
+    
     /// 경계선 두께.
     static let borderWidth: CGFloat = 1.0
   }
@@ -99,7 +101,7 @@ final class ValueGraphView: UIView {
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(radius: 2.0)
+        view.layer.setBorder(radius: Layer.radius)
         view.backgroundColor = graphBackgroundColor(at: index)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                          action: #selector(graphViewDidTap(_:))))
@@ -137,6 +139,7 @@ final class ValueGraphView: UIView {
       let label = UILabel()
       label.tag = tappedIndex
       label.text = "\(Int(intakeAmounts[tappedIndex]))"
+      label.textColor = .white
       label.font = UIFont.systemFont(ofSize: 8, weight: .bold)
       label.sizeToFit()
       graphContainerView.addSubview(label)
@@ -146,7 +149,25 @@ final class ValueGraphView: UIView {
   }
 }
 
-// MARK: - Private Extension
+// MARK: - GraphDrawable 구현
+
+extension ValueGraphView: GraphDrawable {
+  
+  func deinitializeSubviews() {
+    initializeHeights()
+  }
+  
+  func drawGraph() {
+    animateHeights()
+  }
+  
+  func setLabels() {
+    setUnitLabels()
+    setDateLabel()
+  }
+}
+
+// MARK: - Private Method
 
 private extension ValueGraphView {
   
