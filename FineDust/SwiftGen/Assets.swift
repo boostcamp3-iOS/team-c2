@@ -1,14 +1,14 @@
 // swiftlint:disable all
-// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 #if os(OSX)
-  import AppKit.NSImage
-  internal typealias AssetColorTypeAlias = NSColor
-  internal typealias AssetImageTypeAlias = NSImage
+import AppKit.NSImage
+internal typealias AssetColorTypeAlias = NSColor
+internal typealias AssetImageTypeAlias = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
-  internal typealias AssetColorTypeAlias = UIColor
-  internal typealias AssetImageTypeAlias = UIImage
+import UIKit.UIImage
+internal typealias AssetColorTypeAlias = UIColor
+internal typealias AssetImageTypeAlias = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
@@ -39,6 +39,7 @@ internal enum Asset {
   internal static let yellowStar = ImageAsset(name: "yellow-star")
   internal static let backButton = ImageAsset(name: "backButton")
   internal static let barChartTabIcon = ImageAsset(name: "barChartTabIcon")
+  internal static let distance = ImageAsset(name: "distance")
   internal static let dust1 = ImageAsset(name: "dust_1")
   internal static let dust2 = ImageAsset(name: "dust_2")
   internal static let dust3 = ImageAsset(name: "dust_3")
@@ -56,6 +57,7 @@ internal enum Asset {
   internal static let sort = ImageAsset(name: "sort")
   internal static let speechBubble1 = ImageAsset(name: "speechBubble1")
   internal static let speechBubble2 = ImageAsset(name: "speechBubble2")
+  internal static let walking = ImageAsset(name: "walking")
   internal static let widgetBackground = ImageAsset(name: "widget_background")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
@@ -64,7 +66,7 @@ internal enum Asset {
 
 internal struct ColorAsset {
   internal fileprivate(set) var name: String
-
+  
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   internal var color: AssetColorTypeAlias {
     return AssetColorTypeAlias(asset: self)
@@ -87,7 +89,7 @@ internal extension AssetColorTypeAlias {
 
 internal struct DataAsset {
   internal fileprivate(set) var name: String
-
+  
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
   internal var data: NSDataAsset {
@@ -112,7 +114,7 @@ internal extension NSDataAsset {
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
-
+  
   internal var image: AssetImageTypeAlias {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
@@ -130,7 +132,7 @@ internal struct ImageAsset {
 internal extension AssetImageTypeAlias {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
-    message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
+  message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {
     #if os(iOS) || os(tvOS)
     let bundle = Bundle(for: BundleToken.self)
