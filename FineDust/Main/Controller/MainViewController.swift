@@ -94,7 +94,7 @@ extension MainViewController {
     updateFineDustImageView()
     
     let tapRecognizer = UITapGestureRecognizer(target: self,
-                                               action: #selector(openHealth(gestureRecognizer:)))
+                                               action: #selector(healthKitInfoViewDidTap(_:)))
     self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
@@ -259,7 +259,7 @@ extension MainViewController {
           """
         )
         .action(title: "건강 App", style: .default) { _, _ in
-          UIApplication.shared.open(URL(string: "x-apple-health://")!)
+          self.openHealthApp()
         }
         .action(title: "취소", style: .cancel)
         .present(to: self)
@@ -267,7 +267,11 @@ extension MainViewController {
   }
   
   /// 건강 App으로 이동시켜주는 메소드.
-  @objc func openHealth(gestureRecognizer: UIGestureRecognizer) {
+  @objc private func healthKitInfoViewDidTap(_ gesture: UITapGestureRecognizer) {
+    openHealthApp()
+  }
+  
+  private func openHealthApp() {
     UIApplication.shared.open(URL(string: "x-apple-health://")!)
   }
 }
