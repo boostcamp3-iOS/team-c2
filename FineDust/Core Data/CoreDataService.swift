@@ -55,11 +55,12 @@ final class CoreDataService: CoreDataServiceType {
       var result: DateIntakePair = [:]
       let startDate = startDate.start
       let endDate = endDate.end
+      let dates = Date.between(startDate, endDate)
       let intakesInDates = intakes.filter { (startDate...endDate).contains($0.date ?? Date()) }
       // 인자에 들어온 날짜를 순회하면서
       // 코어데이터에 해당 날짜에 대한 정보가 저장되어 있으면 그 정보를 내려주고
       // 그렇지 않으면 nil을 내려주어 해당 부분은 통신으로 처리하게 함
-      Date.between(startDate, endDate).forEach { currentDate in
+      dates.forEach { currentDate in
         let intakeInCurrentDate = intakesInDates.filter { $0.date?.start == currentDate }.first
         if let currentIntake = intakeInCurrentDate {
           result[currentDate] = (Int(currentIntake.fineDust), Int(currentIntake.ultrafineDust))
