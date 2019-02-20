@@ -22,7 +22,7 @@ final class FeedbackDetailViewController: UIViewController {
   
   // MARK: - Properties
   
-  private let feedbackListService = FeedbackListService(jsonManager: JSONManager())
+  private let feedbackListService = FeedbackListService()
   var feedbackTitle: String = ""
   private var dustFeedback: DustFeedback?
   private var isBookmarkedByTitle: [String: Bool] = [:]

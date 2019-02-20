@@ -26,7 +26,7 @@ final class FeedbackListService: FeedbackListServiceType {
     }
   }
   
-  init(jsonManager: JSONManagerType) {
+  init(jsonManager: JSONManagerType = JSONManager()) {
     self.jsonManager = jsonManager
     dustFeedbacks = jsonManager.fetchJSONObject(to: DustFeedback.self, resourceName: resourceName)
   }

@@ -17,7 +17,7 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: - Properties
   
-  var feedbackListService = FeedbackListService(jsonManager: JSONManager())
+  var feedbackListService = FeedbackListService()
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var feedbackCount = 0
   private var newDustFeedbacks: [DustFeedback]?
