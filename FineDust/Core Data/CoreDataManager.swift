@@ -8,7 +8,6 @@
 
 import CoreData
 import Foundation
-import UIKit
 
 /// 코어데이터 매니저 베이스 클래스.
 final class CoreDataManager: CoreDataManagerType {

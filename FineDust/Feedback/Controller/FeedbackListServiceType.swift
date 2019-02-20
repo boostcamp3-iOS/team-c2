@@ -11,6 +11,9 @@ import Foundation
 /// FeedbackListService Type.
 protocol FeedbackListServiceType: class {
   
+  /// 정보의 제목으로 즐겨찾기 여부를 저장함.
+  var isBookmarkedByTitle: [String: Bool] { get set }
+  
   /// 피드백 정보의 개수를 반환함.
   func fetchFeedbackCount() throws -> Int
   

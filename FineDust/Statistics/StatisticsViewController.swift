@@ -204,10 +204,8 @@ extension StatisticsViewController: LocationObserver {
 extension StatisticsViewController: ValueGraphViewDataSource {
   
   var intakes: [CGFloat] {
-    if segmentedControl.selectedSegmentIndex == 0 {
-      return fineDustTotalIntakes
-    }
-    return ultrafineDustTotalIntakes
+    return segmentedControl.selectedSegmentIndex == 0
+      ? fineDustTotalIntakes : ultrafineDustTotalIntakes
   }
 }
 
@@ -216,10 +214,8 @@ extension StatisticsViewController: ValueGraphViewDataSource {
 extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: CGFloat {
-    if segmentedControl.selectedSegmentIndex == 0 {
-      return fineDustLastValueRatio
-    }
-    return ultrafineDustLastValueRatio
+    return segmentedControl.selectedSegmentIndex == 0
+      ? fineDustLastValueRatio : ultrafineDustLastValueRatio
   }
   
   var totalIntake: Int {
@@ -262,11 +258,6 @@ private extension StatisticsViewController {
       ratioGraphView.anchor.bottom.equal(to: ratioGraphBackgroundView.anchor.bottom)
       ])
   }
-}
-
-// MARK: - Value Graph Private Extension
-
-private extension StatisticsViewController {
   
   /// 모든 서브뷰 초기화.
   func initializeSubviews() {
