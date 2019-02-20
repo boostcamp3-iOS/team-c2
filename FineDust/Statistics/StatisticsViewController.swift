@@ -213,6 +213,14 @@ extension StatisticsViewController: RatioGraphViewDataSource {
     }
     return ultrafineDustLastValueRatio
   }
+  
+  var totalIntake: Int {
+    
+  }
+  
+  var todayIntake: Int {
+    
+  }
 }
 
 // MARK: - Private Extension
