@@ -77,6 +77,7 @@
 		CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */; };
 		DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
+		FD42AFA50F6EC381796B23C08ED0982F /* ImportanceGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6A1374CE928EBD9F693AB9B1A903B1 /* ImportanceGrade.swift */; };
 		4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
 		52DE9C2225FB68AED9B0D265BC103292 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
 		EAD6BEA4DC982B483C0A95A67C270235 /* IntakeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606C9E3BFF1AED7C81E5F20826CB9B6 /* IntakeService.swift */; };
@@ -301,6 +302,7 @@
 		2406BE24347CA0049E4B71E28E45D9E5 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitServiceType.swift; sourceTree = "<group>"; };
 		768ED33DE8C563664122534CC0337E8E /* Hour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
+		CF6A1374CE928EBD9F693AB9B1A903B1 /* ImportanceGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceGrade.swift; sourceTree = "<group>"; };
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81F933DBA59974851C46D4F040C139D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 				6AC19CD7DDEBD8345E7C6A3745E98017 /* Controller */,
 				C683749A4618A81E1E0F1CF2A8180BCB /* View */,
 				7602A432174330BBC17B1E697D350626 /* DustFeedback.swift */,
+				CF6A1374CE928EBD9F693AB9B1A903B1 /* ImportanceGrade.swift */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				CCBC032B52F1DABD1309EA3DA21FFD9C /* HealthKitService.swift in Sources */,
 				DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */,
 				B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */,
+				FD42AFA50F6EC381796B23C08ED0982F /* ImportanceGrade.swift in Sources */,
 				4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */,
 				EAD6BEA4DC982B483C0A95A67C270235 /* IntakeService.swift in Sources */,
 				7ED6D48115ABA15E603B9E99145AC290 /* IntakeServiceType.swift in Sources */,

@@ -84,4 +84,41 @@ final class FeedbackListService: FeedbackListServiceType {
     return dustFeedbacks.filter { $0.title == title }.first
   }
   
+  /// 현재 상태로 피드백 정보를 가져옴.
+  func fetchRecommededFeedbacks(by currentState: IntakeGrade) -> [DustFeedback] {
+    var recommendCount: [ImportanceGrade: Int] = [:] // 중요도별 개수
+    switch currentState {
+    case .veryGood:
+      recommendCount = [.important: 2, .normal: 1]
+    case .good:
+      recommendCount = [.important: 3]
+    case .normal:
+      recommendCount = [.veryImportant: 1, .important: 2]
+    case .bad:
+      recommendCount = [.veryImportant: 2, .important: 1]
+    case .veryBad:
+      recommendCount = [.veryImportant: 3]
+    default:
+      recommendCount = [.important: 2, .normal: 1]
+    }
+    var importantDustFeedbacks: [DustFeedback] = [] // 중요도별 전체 정보
+ 
+    var recommendFeedbacks: [DustFeedback] = []
+    for (key, _) in recommendCount {
+      importantDustFeedbacks = fetchFeedbacks(by: key)
+      // 중요도별 개수로 추천 정보 결정
+      if let importanceCount = recommendCount[key] {
+        for count in 0..<importanceCount {
+          recommendFeedbacks.append(importantDustFeedbacks[count])
+        }
+      }
+    }
+    return recommendFeedbacks
+  }
+  
+  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
+  func fetchFeedbacks(by importance: ImportanceGrade) -> [DustFeedback] {
+    let feedbacks = dustFeedbacks.filter { $0.importance == importance.rawValue }
+    return feedbacks.shuffled()
+  }
 }
