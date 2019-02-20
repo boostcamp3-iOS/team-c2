@@ -156,6 +156,7 @@
 		5D7AEAF00ACF84511AC381D39D0EC67E /* TestIntakeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */; };
 		1B17056B0A8890610CA8F86D26F55DAD /* TestNSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C97DEAF96336B82C7C589DE239BFD7 /* TestNSObject+.swift */; };
 		6BA2974BDDA4BEBF0C6A52281A51EC7B /* TestNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54623E292883E938E0F37B68511E18E4 /* TestNetworkManager.swift */; };
+		1D3B268EAA047941610A7A9C51B78C26 /* TestRatioPieGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A6EB50A2D651B9AEE270F6542C576 /* TestRatioPieGraphView.swift */; };
 		A22B4576FA677E54071B4716DD30CCE3 /* TestServiceErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE94B0E86B723A1B2020873A2C47A58 /* TestServiceErrorType.swift */; };
 		92377948EFDBAE1845987BFBABC84776 /* TestTypealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3598B181540AEBB192D612C16AC5BFAD /* TestTypealias.swift */; };
 		310C7F0327C99EEC9461A3D2316A9BFC /* TestUIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA433274C8CD53F8F3538637236FC1 /* TestUIColor+.swift */; };
@@ -382,6 +383,7 @@
 		8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIntakeService.swift; sourceTree = "<group>"; };
 		46C97DEAF96336B82C7C589DE239BFD7 /* TestNSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestNSObject+.swift"; sourceTree = "<group>"; };
 		54623E292883E938E0F37B68511E18E4 /* TestNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkManager.swift; sourceTree = "<group>"; };
+		771A6EB50A2D651B9AEE270F6542C576 /* TestRatioPieGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRatioPieGraphView.swift; sourceTree = "<group>"; };
 		5FE94B0E86B723A1B2020873A2C47A58 /* TestServiceErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestServiceErrorType.swift; sourceTree = "<group>"; };
 		3598B181540AEBB192D612C16AC5BFAD /* TestTypealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTypealias.swift; sourceTree = "<group>"; };
 		A2BA433274C8CD53F8F3538637236FC1 /* TestUIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestUIColor+.swift"; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				8E94357793256E8258A0F3F7DDBE6DB8 /* TestIntakeService.swift */,
 				46C97DEAF96336B82C7C589DE239BFD7 /* TestNSObject+.swift */,
 				54623E292883E938E0F37B68511E18E4 /* TestNetworkManager.swift */,
+				771A6EB50A2D651B9AEE270F6542C576 /* TestRatioPieGraphView.swift */,
 				5FE94B0E86B723A1B2020873A2C47A58 /* TestServiceErrorType.swift */,
 				3598B181540AEBB192D612C16AC5BFAD /* TestTypealias.swift */,
 				A2BA433274C8CD53F8F3538637236FC1 /* TestUIColor+.swift */,
@@ -1240,6 +1243,7 @@
 				5D7AEAF00ACF84511AC381D39D0EC67E /* TestIntakeService.swift in Sources */,
 				1B17056B0A8890610CA8F86D26F55DAD /* TestNSObject+.swift in Sources */,
 				6BA2974BDDA4BEBF0C6A52281A51EC7B /* TestNetworkManager.swift in Sources */,
+				1D3B268EAA047941610A7A9C51B78C26 /* TestRatioPieGraphView.swift in Sources */,
 				A22B4576FA677E54071B4716DD30CCE3 /* TestServiceErrorType.swift in Sources */,
 				92377948EFDBAE1845987BFBABC84776 /* TestTypealias.swift in Sources */,
 				310C7F0327C99EEC9461A3D2316A9BFC /* TestUIColor+.swift in Sources */,
