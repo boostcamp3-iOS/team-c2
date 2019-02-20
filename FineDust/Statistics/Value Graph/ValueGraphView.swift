@@ -16,6 +16,8 @@ final class ValueGraphView: UIView {
   /// 레이어 관련 상수 모음.
   enum Layer {
     
+    static let radius: CGFloat = 2.0
+    
     /// 경계선 두께.
     static let borderWidth: CGFloat = 1.0
   }
@@ -44,16 +46,6 @@ final class ValueGraphView: UIView {
   /// Value Graph View Data Source.
   weak var dataSource: ValueGraphViewDataSource?
   
-  // MARK: Property
-  
-  /// `yyyy년 M월 d일 EEEE` 포맷을 갖는 DateFormatter 프로퍼티.
-  private lazy var dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.locale = .korea
-    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
-    return formatter
-  }()
-  
   // MARK: Private Properties
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
@@ -79,9 +71,7 @@ final class ValueGraphView: UIView {
   
   /// 일 텍스트.
   private var dateTexts: [String] {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .korea
-    dateFormatter.dateFormat = "d"
+    let dateFormatter = DateFormatter.day
     var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
@@ -104,11 +94,14 @@ final class ValueGraphView: UIView {
   /// 요일 레이블 모음.
   @IBOutlet private var dayLabels: [UILabel]!
   
+  /// 그래프 컨테이너 뷰.
+  @IBOutlet private weak var graphContainerView: UIView!
+  
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(radius: 2.0)
+        view.layer.setBorder(radius: Layer.radius)
         view.backgroundColor = graphBackgroundColor(at: index)
       }
     }
@@ -128,15 +121,29 @@ final class ValueGraphView: UIView {
   
   /// 뷰 전체 설정.
   func setup() {
+    reloadGraphView()
+  }
+}
+
+// MARK: - GraphDrawable 구현
+
+extension ValueGraphView: GraphDrawable {
+  
+  func deinitializeSubviews() {
     initializeHeights()
+  }
+  
+  func drawGraph() {
     animateHeights()
+  }
+  
+  func setLabels() {
     setUnitLabels()
-    setDayLabelsTitle()
     setDateLabel()
   }
 }
 
-// MARK: - Private Extension
+// MARK: - Private Method
 
 private extension ValueGraphView {
   
@@ -171,21 +178,17 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정.
   func setUnitLabels() {
-    zip(unitLabels, axisTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(unitLabels, axisTexts).forEach { $0.text = $1 }
   }
   
   /// 요일 레이블 텍스트 설정.
   func setDayLabelsTitle() {
-    zip(dayLabels, dateTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(dayLabels, dateTexts).forEach { $0.text = $1 }
   }
   
   /// 날짜 레이블 설정.
   func setDateLabel() {
-    dateLabel.text = dateFormatter.string(from: Date())
+    dateLabel.text = DateFormatter.localizedDateWithDay.string(from: Date())
   }
   
   /// 그래프 색상 구하기.

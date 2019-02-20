@@ -10,10 +10,10 @@ import CoreLocation
 import Foundation
 
 /// Core Location Error가 ServiceErrorType을 준수하게 함.
-extension CLError: ServiceErrorType {
+extension CLError.Code: ServiceErrorType {
   
   var localizedDescription: String {
-    switch code {
+    switch self {
     case .deferredAccuracyTooLow:
       print("Core Location Error: ", "deferred mode is not supported for the requested accuracy.")
     case .deferredCanceled:

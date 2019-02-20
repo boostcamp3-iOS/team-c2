@@ -35,7 +35,7 @@ class TestDustObservatoryManager: XCTestCase {
   
   func test_requestObservatory_noData() {
     mockNetworkManager.data = nil
-    mockNetworkManager.httpStatusCode = .success
+    mockNetworkManager.httpStatusCode = .default
     mockNetworkManager.error = NSError(domain: "nodata", code: 0, userInfo: nil)
     let expect = expectation(description: "test")
     dustObservatoryManager.requestObservatory(numberOfRows: 1, pageNumber: 1) { response, error in

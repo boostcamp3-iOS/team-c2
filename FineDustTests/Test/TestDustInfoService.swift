@@ -43,6 +43,21 @@ class TestDustInfoService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  func test_requestRecentTimeInfo_weird() {
+    let expect = expectation(description: "test")
+    mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponseWeird
+    dustService?.requestRecentTimeInfo { dustInfo, error in
+      XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.default)
+      XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.default)
+      XCTAssertEqual(dustInfo?.fineDustValue ?? 0, 0)
+      XCTAssertEqual(dustInfo?.ultrafineDustValue ?? 0, 0)
+      XCTAssertEqual(dustInfo?.updatingTime ?? Date(),
+                     self.dateFormatter.date(from: "2018-01-23 17:00"))
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
   func test_requestRecentTimeInfo_error() {
     let expect = expectation(description: "test")
     mockDustInfoManager.dustResponse = nil

@@ -99,22 +99,22 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sdA-f8-q7b">
-                                                    <rect key="frame" x="135" y="33" width="165" height="67"/>
+                                                    <rect key="frame" x="135" y="26" width="168" height="81"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="미세먼지 정화 식물식물식물" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toI-26-T8z">
-                                                            <rect key="frame" x="0.0" y="0.0" width="165" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="미세먼지 정화 식물식물식물" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toI-26-T8z">
+                                                            <rect key="frame" x="0.0" y="0.0" width="168" height="41"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" red="0.37254901960784315" green="0.43529411764705883" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KTV 국민방송방송방송" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-R2-2Mu">
-                                                            <rect key="frame" x="0.0" y="28.5" width="165" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KTV 국민방송방송방송" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-R2-2Mu">
+                                                            <rect key="frame" x="0.0" y="49" width="168" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019. 01. 23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="155-ak-Bux">
-                                                            <rect key="frame" x="0.0" y="52.5" width="165" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2019. 01. 23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="155-ak-Bux">
+                                                            <rect key="frame" x="0.0" y="73" width="168" height="8"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -134,15 +134,15 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-BU-376">
                                                     <rect key="frame" x="15" y="16.5" width="100" height="100"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="100" id="aHe-XQ-0F7"/>
-                                                        <constraint firstAttribute="width" constant="100" id="t38-p3-e2W"/>
+                                                        <constraint firstAttribute="width" constant="100" id="IfK-7J-Ild"/>
+                                                        <constraint firstAttribute="width" secondItem="QDy-BU-376" secondAttribute="height" multiplier="1:1" id="eGw-si-Eug"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hd8-bJ-yT0" firstAttribute="leading" secondItem="sdA-f8-q7b" secondAttribute="trailing" constant="8" id="6Qd-14-IBB"/>
-                                                <constraint firstItem="sdA-f8-q7b" firstAttribute="top" secondItem="sZd-PZ-2PD" secondAttribute="topMargin" constant="22" id="E8O-Gj-BRO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="sdA-f8-q7b" secondAttribute="bottom" constant="22" id="Ld3-wG-27e"/>
+                                                <constraint firstItem="Hd8-bJ-yT0" firstAttribute="leading" secondItem="sdA-f8-q7b" secondAttribute="trailing" constant="5" id="6Qd-14-IBB"/>
+                                                <constraint firstItem="sdA-f8-q7b" firstAttribute="top" secondItem="sZd-PZ-2PD" secondAttribute="topMargin" constant="15" id="E8O-Gj-BRO"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="sdA-f8-q7b" secondAttribute="bottom" constant="15" id="Ld3-wG-27e"/>
                                                 <constraint firstItem="QDy-BU-376" firstAttribute="centerY" secondItem="sZd-PZ-2PD" secondAttribute="centerY" id="XEP-O3-5ym"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Hd8-bJ-yT0" secondAttribute="trailing" constant="8" id="aTq-95-ruz"/>
                                                 <constraint firstItem="Hd8-bJ-yT0" firstAttribute="centerY" secondItem="sZd-PZ-2PD" secondAttribute="centerY" id="hgD-a6-LrF"/>
@@ -258,7 +258,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" priority="250" constant="1108" id="FvV-BG-jLp"/>
                                         </constraints>
-                                        <mutableString key="text">미세먼지 비상저감조치란? 수도권에 고농도 미세먼지가 일정기간 지속될 경우, 미세먼지를 단기간에 줄이고자 자동차, 공장 등 대기오염 물질을 줄이는 조치\n\n &lt;발령 기준&gt;\n 1. 당일 0~16시 PM-2.5 평균 농도가 50 /m 초과, 다음날 24시간 평균 농도가 50 /m 초과 예측\n 2. 당일 0~16시 사이 경보권역중 한곳 이상 PM-2.5 주의보 또는 경보 발령, 다음날 24시간 평균 농도가 50 초과 예측\n 3. 다음날 PM-2.5 24시간 평균 농도 75 초과 예측 (서울, 경기, 인천 2개 시/도 이상 발령기준 충족시 조치 시행)\n\n미세먼지 비상저감조치 발령시 경유 차량 운행이 제한되고 시민 참여형 ‘차량 2부제’가 실시됩니다. 또한 공공기간 주차장이 폐쇄되며 공공사업장과 공사장의 조업이 단축됩니다.\n\n* 미세먼지 관련 서울시의 정책\n 규제책 1. 노후경유차 운행이 제한됩니다. 서울시내 2005년 12월 31일 이전 수도권에 등록된 총중량 2.5톤 이상 경유차량(저감장치 부착차량 제외) 운행이 제한됩니다. 위반시 과태료가 10만원 부과됩니다.\n 규제책2. 공공기관 주차장이 폐쇄됩니다. 발령 익일 06시~21시까지 폐쇄되며, 시민편의 문화, 체육, 의료시설 및 정부 행정 공공기관은 2부제를 시행합니다.\n 규제책3. 서울시내 대기온도별 공회전 제한시간에 따른 자동차 공회전 단속을 실시합니다. 자동차 공회전은 미세먼지와 초미세먼지의 원인 물질인 ‘질소산화물(NOx)’이 포함된 배출가스를 발생시켜 대기오염을 유발합니다. 특히, 고농도 미세먼지가 심해지는 겨울철에는 미세먼지를 더욱 악화시키는 요인이기도 합니다. 또한, 12월 1일부터는 자동차정비업소에 대한 공회전 단속을 시작해 정화장치 없이 약품 등을 사용해 정비하거나 과도한 공회전을 단속합니다. 위반시 과태료 5만원이 부과됩니다.\n\n </mutableString>
+                                        <string key="text">미세먼지 비상저감조치란? 수도권에 고농도 미세먼지가 일정기간 지속될 경우, 미세먼지를 단기간에 줄이고자 자동차, 공장 등 대기오염 물질을 줄이는 조치\n\n &lt;발령 기준&gt;\n 1. 당일 0~16시 PM-2.5 평균 농도가 50 /m 초과, 다음날 24시간 평균 농도가 50 /m 초과 예측\n 2. 당일 0~16시 사이 경보권역중 한곳 이상 PM-2.5 주의보 또는 경보 발령, 다음날 24시간 평균 농도가 50 초과 예측\n 3. 다음날 PM-2.5 24시간 평균 농도 75 초과 예측 (서울, 경기, 인천 2개 시/도 이상 발령기준 충족시 조치 시행)\n\n미세먼지 비상저감조치 발령시 경유 차량 운행이 제한되고 시민 참여형 ‘차량 2부제’가 실시됩니다. 또한 공공기간 주차장이 폐쇄되며 공공사업장과 공사장의 조업이 단축됩니다.\n\n* 미세먼지 관련 서울시의 정책\n 규제책 1. 노후경유차 운행이 제한됩니다. 서울시내 2005년 12월 31일 이전 수도권에 등록된 총중량 2.5톤 이상 경유차량(저감장치 부착차량 제외) 운행이 제한됩니다. 위반시 과태료가 10만원 부과됩니다.\n 규제책2. 공공기관 주차장이 폐쇄됩니다. 발령 익일 06시~21시까지 폐쇄되며, 시민편의 문화, 체육, 의료시설 및 정부 행정 공공기관은 2부제를 시행합니다.\n 규제책3. 서울시내 대기온도별 공회전 제한시간에 따른 자동차 공회전 단속을 실시합니다. 자동차 공회전은 미세먼지와 초미세먼지의 원인 물질인 ‘질소산화물(NOx)’이 포함된 배출가스를 발생시켜 대기오염을 유발합니다. 특히, 고농도 미세먼지가 심해지는 겨울철에는 미세먼지를 더욱 악화시키는 요인이기도 합니다. 또한, 12월 1일부터는 자동차정비업소에 대한 공회전 단속을 시작해 정화장치 없이 약품 등을 사용해 정비하거나 과도한 공회전을 단속합니다. 위반시 과태료 5만원이 부과됩니다.\n\n </string>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>

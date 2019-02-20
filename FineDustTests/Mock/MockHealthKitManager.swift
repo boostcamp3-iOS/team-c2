@@ -12,7 +12,7 @@ import HealthKit
 
 final class MockHealthKitManager: HealthKitManagerType {
   
-  var error: Error?
+  var error: HealthKitError?
   var stepCount = 2314.0
   var distance = 1409.53
   var hourInteger = 1
@@ -27,13 +27,33 @@ final class MockHealthKitManager: HealthKitManagerType {
                           quantityFor: HKUnit,
                           identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void) {
-    switch identifier {
-    case .distanceWalkingRunning:
-      completion(distance, hourInteger, error)
-    case .stepCount:
-      completion(stepCount, hourInteger, error)
-    default:
-      break
+    if let error = self.error {
+      switch identifier {
+      case .distanceWalkingRunning:
+        completion(nil, nil, error)
+      case .stepCount:
+        completion(nil, nil, error)
+      default:
+        break
+      }
+      return
+    }
+    
+    if hourInterval == 1 {
+      for value in DummyHealthKitService.hourlyDistance {
+        let hour = value.key
+        let quantityValue = value.value
+        completion(Double(quantityValue), hour.rawValue, nil)
+      }
+    } else {
+      switch identifier {
+      case .distanceWalkingRunning:
+        completion(distance, hourInteger, error)
+      case .stepCount:
+        completion(stepCount, hourInteger, error)
+      default:
+        break
+      }
     }
   }
 

@@ -29,11 +29,11 @@ extension LocationTaskError {
   var localizedDescription: String {
     switch self {
     case let .geocodingError(error):
-      return error.localizedDescription
+      return error.code.localizedDescription
     case let .networkingError(error):
       return error.localizedDescription
     case let .coreLocationError(error):
-      return error.localizedDescription
+      return error.code.localizedDescription
     }
   }
 }

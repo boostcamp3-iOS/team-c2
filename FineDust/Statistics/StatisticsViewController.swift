@@ -82,11 +82,17 @@ final class StatisticsViewController: UIViewController {
   /// 화면이 표시가 되었는가.
   private var isPresented: Bool = false
   
-  /// 7일간의 미세먼지 농도 값 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  /// 7일간의 미세먼지 흡입량 모음.
+  private var fineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
   
-  /// 7일간의 초미세먼지 농도 값 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.001, count: 7)
+  /// 7일간의 초미세먼지 흡입량 모음.
+  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
+  
+  /// 오늘의 미세먼지 흡입량.
+  private var todayFineDustIntake: Int = 1
+  
+  /// 오늘의 초미세먼지 흡입량.
+  private var todayUltrafineDustIntake: Int = 1
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -142,37 +148,36 @@ final class StatisticsViewController: UIViewController {
   
   /// 미세먼지 흡입량 요청.
   private func requestIntake() {
-    DispatchQueue.global(qos: .utility).async { [weak self] in
+    self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
+      if let error = error as? ServiceErrorType {
+        error.presentToast()
+        return
+      }
       guard let self = self else { return }
-      self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
+      self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
           error.presentToast()
           return
         }
-        guard let self = self else { return }
-        self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
-          if let error = error as? ServiceErrorType {
-            error.presentToast()
-            return
-          }
-          guard let self = self,
-            let fineDusts = fineDusts,
-            let ultrafineDusts = ultrafineDusts,
-            let fineDust = fineDust,
-            let ultrafineDust = ultrafineDust
-            else { return }
-          let fineDustWeekIntakes = [fineDusts, [fineDust]]
-            .flatMap { $0 }
-            .map { CGFloat($0) }
-          let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
-            .flatMap { $0 }
-            .map { CGFloat($0) }
-          self.fineDustTotalIntakes = fineDustWeekIntakes
-          self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
-          print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
-          DispatchQueue.main.async {
-            self.initializeSubviews()
-          }
+        guard let self = self,
+          let fineDusts = fineDusts,
+          let ultrafineDusts = ultrafineDusts,
+          let fineDust = fineDust,
+          let ultrafineDust = ultrafineDust
+          else { return }
+        let fineDustWeekIntakes = [fineDusts, [fineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
+          .flatMap { $0 }
+          .map { CGFloat($0) }
+        self.todayFineDustIntake = fineDust
+        self.todayUltrafineDustIntake = ultrafineDust
+        self.fineDustTotalIntakes = fineDustWeekIntakes
+        self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
+        print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
+        DispatchQueue.main.async {
+          self.initializeSubviews()
         }
       }
     }
@@ -199,10 +204,8 @@ extension StatisticsViewController: LocationObserver {
 extension StatisticsViewController: ValueGraphViewDataSource {
   
   var intakes: [CGFloat] {
-    if segmentedControl.selectedSegmentIndex == 0 {
-      return fineDustTotalIntakes
-    }
-    return ultrafineDustTotalIntakes
+    return segmentedControl.selectedSegmentIndex == 0
+      ? fineDustTotalIntakes : ultrafineDustTotalIntakes
   }
 }
 
@@ -211,10 +214,19 @@ extension StatisticsViewController: ValueGraphViewDataSource {
 extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: CGFloat {
-    if segmentedControl.selectedSegmentIndex == 0 {
-      return fineDustLastValueRatio
-    }
-    return ultrafineDustLastValueRatio
+    return segmentedControl.selectedSegmentIndex == 0
+      ? fineDustLastValueRatio : ultrafineDustLastValueRatio
+  }
+  
+  var totalIntake: Int {
+    let reducedFineDust = fineDustTotalIntakes.map { Int($0) }.reduce(0, +)
+    let reducedUltrafineDust = ultrafineDustTotalIntakes.map { Int($0) }.reduce(0, +)
+    return segmentedControl.selectedSegmentIndex == 0 ? reducedFineDust : reducedUltrafineDust
+  }
+  
+  var todayIntake: Int {
+    return segmentedControl.selectedSegmentIndex == 0
+      ? todayFineDustIntake : todayUltrafineDustIntake
   }
 }
 
@@ -247,11 +259,6 @@ private extension StatisticsViewController {
       ratioGraphView.anchor.bottom.equal(to: ratioGraphBackgroundView.anchor.bottom)
       ])
   }
-}
-
-// MARK: - Value Graph Private Extension
-
-private extension StatisticsViewController {
   
   /// 모든 서브뷰 초기화.
   func initializeSubviews() {

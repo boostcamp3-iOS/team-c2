@@ -13,6 +13,8 @@ final class FeedbackDetailViewController: UIViewController {
   
   // MARK: - IBOutlets
   
+  @IBOutlet private weak var imageScrollView: UIScrollView!
+  @IBOutlet private weak var totalScrollView: UIScrollView!
   @IBOutlet private weak var feedbackImageView: UIImageView!
   @IBOutlet private weak var feedbackTitleLabel: UILabel!
   @IBOutlet private weak var feedbackSourceLabel: UILabel!
@@ -31,6 +33,11 @@ final class FeedbackDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    imageScrollView.delegate = self
+    
+    isBookmarkedByTitle
+      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
     
     if let dustFeedback = feedbackListService.fetchFeedback(by: feedbackTitle) {
       setFeedback(dustFeedback)
@@ -78,4 +85,12 @@ final class FeedbackDetailViewController: UIViewController {
       = isBookmarked ? Asset.yellowStar.image : Asset.starOutline.image
     bookmarkButton.isSelected = isBookmarked
   }
+}
+
+extension FeedbackDetailViewController: UIScrollViewDelegate {
+  /// 이미지 확대하기.
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return feedbackImageView
+  }
+  
 }
