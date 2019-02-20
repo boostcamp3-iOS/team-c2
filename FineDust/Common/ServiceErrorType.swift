@@ -31,6 +31,8 @@ extension ServiceErrorType {
       return error.localizedDescription
     case let error as CLError:
       return error.code.localizedDescription
+    case let error as CoreDataError:
+      return error.localizedDescription
     default:
       return "에러"
     }
