@@ -49,4 +49,12 @@ extension DateFormatter {
     formatter.dateFormat = "HH"
     return formatter
   }()
+  
+  /// 요일 데이터 포매터. `d`
+  static let day: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.locale = .korea
+    formatter.dateFormat = "d"
+    return formatter
+  }()
 }

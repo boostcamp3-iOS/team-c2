@@ -29,14 +29,14 @@ final class XMLManager: XMLManagerType {
       // 성공이 아니면 그에 해당하는 에러를 내려줌
       let headerResponse: ResponseHeader = try xmlDecoder.parse(data)
       guard headerResponse.statusCode == .success else {
-        completion(nil, headerResponse.statusCode.error)
+        completion(headerResponse as? T, headerResponse.statusCode.error)
         return
       }
       // 특정 타입으로 파싱함
       // 성공이 아니면 그에 해당하는 에러를 내려줌
       let response: T = try xmlDecoder.parse(data)
       guard response.statusCode == .success else {
-        completion(nil, response.statusCode.error)
+        completion(response, response.statusCode.error)
         return
       }
       // 모두 성공하면 파싱된 데이터를 내려줌

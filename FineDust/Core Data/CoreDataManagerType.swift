@@ -28,6 +28,4 @@ extension CoreDataManagerType {
     guard let delegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
     return delegate.persistentContainer.viewContext
   }
-  
-  func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void) { }
 }

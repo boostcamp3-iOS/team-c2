@@ -7,22 +7,7 @@
 //
 
 /// 미세먼지 API 응답에 의한 대기 등급 정의
-enum DustGrade: Int {
-  /// 등급에 따라 표현될 Label String.
-  var description: String {
-    switch self {
-    case .good:
-      return "좋은 공기"
-    case .normal:
-      return "보통 공기"
-    case .bad:
-      return "나쁜 공기"
-    case .veryBad:
-      return "매우 나쁨"
-    case .default:
-      return "기타"
-    }
-  }
+enum DustGrade: Int, CustomStringConvertible {
   
   /// 좋음
   case good = 1
@@ -38,4 +23,19 @@ enum DustGrade: Int {
   
   /// 기타
   case `default`
+  
+  var description: String {
+    switch self {
+    case .good:
+      return "좋은 공기"
+    case .normal:
+      return "보통 공기"
+    case .bad:
+      return "나쁜 공기"
+    case .veryBad:
+      return "매우 나쁨"
+    case .default:
+      return "기타"
+    }
+  }
 }
