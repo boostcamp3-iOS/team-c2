@@ -95,7 +95,7 @@ extension MainViewController {
     
     let tapRecognizer = UITapGestureRecognizer(target: self,
                                                action: #selector(healthKitInfoViewDidTap(_:)))
-    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
+//    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
