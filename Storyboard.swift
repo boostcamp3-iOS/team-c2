@@ -14,31 +14,31 @@ import UIKit
 internal enum StoryboardScene {
   internal enum Common: StoryboardType {
     internal static let storyboardName = "Common"
-    
+
     internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Common.self)
   }
   internal enum Feedback: StoryboardType {
     internal static let storyboardName = "Feedback"
-    
+
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Feedback.self)
-    
+
     internal static let feedbackDetailViewController = SceneType<FeedbackDetailViewController>(storyboard: Feedback.self, identifier: "FeedbackDetailViewController")
   }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
-    
+
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: LaunchScreen.self)
   }
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
-    
+
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
   }
   internal enum Statistics: StoryboardType {
     internal static let storyboardName = "Statistics"
-    
+
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Statistics.self)
-    
+
     internal static let statisticsViewController = SceneType<StatisticsViewController>(storyboard: Statistics.self, identifier: "StatisticsViewController")
   }
 }
@@ -60,7 +60,7 @@ internal extension StoryboardType {
 internal struct SceneType<T: UIViewController> {
   internal let storyboard: StoryboardType.Type
   internal let identifier: String
-  
+
   internal func instantiate() -> T {
     let identifier = self.identifier
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
@@ -72,7 +72,7 @@ internal struct SceneType<T: UIViewController> {
 
 internal struct InitialSceneType<T: UIViewController> {
   internal let storyboard: StoryboardType.Type
-  
+
   internal func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
       fatalError("ViewController is not of the expected class \(T.self).")
