@@ -42,5 +42,5 @@ protocol FeedbackListServiceType: class {
   func fetchRecommededFeedbacks(by currentState: IntakeGrade) -> [DustFeedback]
   
   /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
-  func fetchFeedbacks(by importance: Int) -> [DustFeedback]
+  func fetchFeedbacks(by importance: ImportanceGrade) -> [DustFeedback]
 }

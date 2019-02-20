@@ -1,5 +1,5 @@
 //
-//  ImportanceGrace.swift
+//  ImportanceGrade.swift
 //  FineDust
 //
 //  Created by 이재은 on 20/02/2019.

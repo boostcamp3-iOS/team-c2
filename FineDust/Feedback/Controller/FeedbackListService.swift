@@ -102,14 +102,12 @@ final class FeedbackListService: FeedbackListServiceType {
       recommendCount = [.important: 2, .normal: 1]
     }
     var importantDustFeedbacks: [DustFeedback] = [] // 중요도별 전체 정보
-    let recommendImportance = recommendCount.keys.map { $0 } // 가져올 중요도
  
     var recommendFeedbacks: [DustFeedback] = []
-    for index in 0..<recommendImportance.count {
-      importantDustFeedbacks = fetchFeedbacks(by: recommendImportance[index].rawValue)
+    for (key, _) in recommendCount {
+      importantDustFeedbacks = fetchFeedbacks(by: key)
       // 중요도별 개수로 추천 정보 결정
-      let importanceKey = recommendImportance[index]
-      if let importanceCount = recommendCount[importanceKey] {
+      if let importanceCount = recommendCount[key] {
         for count in 0..<importanceCount {
           recommendFeedbacks.append(importantDustFeedbacks[count])
         }
@@ -119,8 +117,8 @@ final class FeedbackListService: FeedbackListServiceType {
   }
   
   /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
-  func fetchFeedbacks(by importance: Int) -> [DustFeedback] {
-    let feedbacks = dustFeedbacks.filter { $0.importance == importance }
+  func fetchFeedbacks(by importance: ImportanceGrade) -> [DustFeedback] {
+    let feedbacks = dustFeedbacks.filter { $0.importance == importance.rawValue }
     return feedbacks.shuffled()
   }
 }
