@@ -96,7 +96,10 @@ extension RatioStickGraphView: GraphDrawable {
   
   /// 그래프 그리기.
   func drawGraph() {
-    let todayIntakeGraphViewHeightMultiplier = CGFloat(todayIntake) / CGFloat(averageIntake) * 0.5
+    let averageIntakeMultiplier = averageIntake > todayIntake
+      ? 1 : CGFloat(averageIntake) / CGFloat(todayIntake)
+    let todayIntakeMultiplier = averageIntake > todayIntake
+      ? CGFloat(todayIntake) / CGFloat(averageIntake) : 1
     UIView.animate(
       withDuration: Animation.duration,
       delay: Animation.delay,
@@ -105,10 +108,11 @@ extension RatioStickGraphView: GraphDrawable {
       options: Animation.options,
       animations: { [weak self] in
         self?.averageIntakeGraphViewHeightConstraint
-          = self?.averageIntakeGraphViewHeightConstraint.changedMultiplier(to: 0.5)
+          = self?.averageIntakeGraphViewHeightConstraint
+            .changedMultiplier(to: averageIntakeMultiplier)
         self?.todayIntakeGraphViewHeightConstraint
           = self?.todayIntakeGraphViewHeightConstraint
-            .changedMultiplier(to: todayIntakeGraphViewHeightMultiplier)
+            .changedMultiplier(to: todayIntakeMultiplier)
         self?.layoutIfNeeded()
       },
       completion: nil

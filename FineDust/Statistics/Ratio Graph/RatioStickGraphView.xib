@@ -61,8 +61,8 @@
                         <constraint firstItem="aWD-00-ga0" firstAttribute="trailing" secondItem="ZQ1-sG-HYQ" secondAttribute="centerX" constant="-16" id="weW-Mk-AcJ"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일주일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
-                    <rect key="frame" x="58.5" y="210.5" width="26" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일주일 평균" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
+                    <rect key="frame" x="58.5" y="210.5" width="26" height="24"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -73,25 +73,37 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="103%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNY-30-FwY" customClass="FDCountingLabel" customModule="FineDust" customModuleProvider="target">
-                    <rect key="frame" x="66" y="35.5" width="53" height="24"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCK-qV-4eL">
+                    <rect key="frame" x="0.0" y="0.0" width="185" height="67.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="103%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNY-30-FwY" customClass="FDCountingLabel" customModule="FineDust" customModuleProvider="target">
+                            <rect key="frame" x="66" y="22" width="53" height="24"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="KNY-30-FwY" firstAttribute="centerX" secondItem="kCK-qV-4eL" secondAttribute="centerX" id="A9K-Iq-sh2"/>
+                        <constraint firstItem="KNY-30-FwY" firstAttribute="centerY" secondItem="kCK-qV-4eL" secondAttribute="centerY" id="Z0i-dm-gbe"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yMn-6g-svc" firstAttribute="centerX" secondItem="aWD-00-ga0" secondAttribute="centerX" id="6br-Oj-1wd"/>
-                <constraint firstItem="ZQ1-sG-HYQ" firstAttribute="top" secondItem="KNY-30-FwY" secondAttribute="bottom" constant="8" id="BBn-Ce-vpO"/>
                 <constraint firstItem="rDI-ZM-jPg" firstAttribute="top" secondItem="ZQ1-sG-HYQ" secondAttribute="bottom" constant="8" id="Bto-45-gsc"/>
+                <constraint firstItem="kCK-qV-4eL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="OKA-SO-603"/>
+                <constraint firstItem="ZQ1-sG-HYQ" firstAttribute="top" secondItem="kCK-qV-4eL" secondAttribute="bottom" id="Qpw-6n-FZW"/>
                 <constraint firstItem="yMn-6g-svc" firstAttribute="top" secondItem="ZQ1-sG-HYQ" secondAttribute="bottom" constant="8" id="cAs-cw-iAV"/>
                 <constraint firstItem="rDI-ZM-jPg" firstAttribute="centerX" secondItem="hzh-JZ-DYj" secondAttribute="centerX" id="geC-sE-I2F"/>
+                <constraint firstItem="kCK-qV-4eL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hYa-qY-LGd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kCK-qV-4eL" secondAttribute="trailing" id="hmB-IU-q5p"/>
                 <constraint firstItem="ZQ1-sG-HYQ" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="kRi-Hn-E3M"/>
                 <constraint firstAttribute="trailing" secondItem="ZQ1-sG-HYQ" secondAttribute="trailing" id="mdY-ck-bjk"/>
                 <constraint firstItem="ZQ1-sG-HYQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qbU-dM-63m"/>
                 <constraint firstItem="ZQ1-sG-HYQ" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="rFU-l3-s74"/>
-                <constraint firstItem="KNY-30-FwY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="teZ-TQ-w3H"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
