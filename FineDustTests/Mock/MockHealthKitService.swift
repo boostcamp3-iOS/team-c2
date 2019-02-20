@@ -21,7 +21,7 @@ class MockHealthKitService: HealthKitServiceType {
   
   var isAuthorized: Bool = false
   
-  var isDeterminded: Bool = false
+  var isDetermined: Bool = false
   
   var error: Error?
 

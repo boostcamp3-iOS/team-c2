@@ -127,7 +127,9 @@ class TestHealthKitService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func test() {
-    
+  func testIsDeterMined() {
+    let isDetermined = healthKitService?.isDetermined
+    XCTAssertFalse(isDetermined!)
   }
 }
+

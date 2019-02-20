@@ -248,7 +248,7 @@ extension MainViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-    if !healthKitService.isAuthorized && healthKitService.isDeterminded {
+    if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
         .alert(title: "건강 App 권한이 없습니다.",
                message: """
