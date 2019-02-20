@@ -82,11 +82,17 @@ final class StatisticsViewController: UIViewController {
   /// 화면이 표시가 되었는가.
   private var isPresented: Bool = false
   
-  /// 7일간의 미세먼지 농도 값 모음.
+  /// 7일간의 미세먼지 흡입량 모음.
   private var fineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
   
-  /// 7일간의 초미세먼지 농도 값 모음.
+  /// 7일간의 초미세먼지 흡입량 모음.
   private var ultrafineDustTotalIntakes = [CGFloat](repeating: 0.01, count: 7)
+  
+  /// 오늘의 미세먼지 흡입량.
+  private var todayFineDustIntake: Int = 1
+  
+  /// 오늘의 초미세먼지 흡입량.
+  private var todayUltrafineDustIntake: Int = 1
   
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
@@ -165,6 +171,8 @@ final class StatisticsViewController: UIViewController {
         let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
           .flatMap { $0 }
           .map { CGFloat($0) }
+        self.todayFineDustIntake = fineDust
+        self.todayUltrafineDustIntake = ultrafineDust
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
@@ -215,11 +223,13 @@ extension StatisticsViewController: RatioGraphViewDataSource {
   }
   
   var totalIntake: Int {
-    
+    let reducedFineDust = fineDustTotalIntakes.map { Int($0) }.reduce(0, +)
+    let reducedUltrafineDust = ultrafineDustTotalIntakes.map { Int($0) }.reduce(0, +)
+    return segmentedControl.selectedSegmentIndex == 0 ? reducedFineDust : reducedUltrafineDust
   }
   
   var todayIntake: Int {
-    
+    return segmentedControl.selectedSegmentIndex == 0 ? todayFineDustIntake : todayUltrafineDustIntake
   }
 }
 

@@ -23,11 +23,11 @@
                     <color key="textColor" name="black45"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TK-MT-dTa">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TK-MT-dTa" customClass="RatioPieGraphView" customModule="FineDust" customModuleProvider="target">
                     <rect key="frame" x="16" y="42" width="171.5" height="245"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myx-BH-DgS">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myx-BH-DgS" customClass="RatioStickGraphView" customModule="FineDust" customModuleProvider="target">
                     <rect key="frame" x="187.5" y="42" width="171.5" height="245"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
