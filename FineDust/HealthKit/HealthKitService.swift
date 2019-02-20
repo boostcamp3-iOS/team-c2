@@ -11,26 +11,24 @@ import Foundation
 /// HealthKit 서비스를 구현하는 클래스
 final class HealthKitService: HealthKitServiceType {
   
-  let healthKitManager: HealthKitManagerType? 
+  let healthKitManager: HealthKitManagerType
   
   init(healthKit: HealthKitManagerType) {
     self.healthKitManager = healthKit
   }
   
   var isAuthorized: Bool {
-    let status = healthKitManager?.authorizationStatus ?? (.sharingDenied, .sharingDenied)
-    return status == (.sharingAuthorized, .sharingAuthorized)
+    return healthKitManager.authorizationStatus == (.sharingAuthorized, .sharingAuthorized)
   }
   
-  var isDeterminded: Bool {
-    let status = healthKitManager?.authorizationStatus ?? (.sharingDenied, .sharingDenied)
-    return !(status == (.notDetermined, .notDetermined))
+  var isDetermined: Bool {
+    return !(healthKitManager.authorizationStatus == (.notDetermined, .notDetermined))
   }
   
   /// 오늘 걸음 수 가져오는 함수
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     
-    healthKitManager?.findHealthKitValue(startDate: Date.start(),
+    healthKitManager.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .count(),
@@ -48,7 +46,7 @@ final class HealthKitService: HealthKitServiceType {
   
   /// 오늘 걸은 거리 가져오는 함수
   func requestTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
-    healthKitManager?.findHealthKitValue(startDate: .start(),
+    healthKitManager.findHealthKitValue(startDate: .start(),
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .meter(),
@@ -72,7 +70,7 @@ final class HealthKitService: HealthKitServiceType {
     let semaphore = DispatchSemaphore(value: 0)
     var temp = 0
     
-    healthKitManager?.findHealthKitValue(startDate: .start(),
+    healthKitManager.findHealthKitValue(startDate: .start(),
                                          endDate: .end(),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
@@ -123,7 +121,7 @@ final class HealthKitService: HealthKitServiceType {
     
     for index in 0...day {
       let indexDate = startDate.after(days: index)
-      healthKitManager?.findHealthKitValue(startDate: indexDate.start,
+      healthKitManager.findHealthKitValue(startDate: indexDate.start,
                                            endDate: indexDate.end,
                                            hourInterval: 1,
                                            quantityFor: .meter(),

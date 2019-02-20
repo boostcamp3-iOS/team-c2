@@ -95,7 +95,7 @@ extension MainViewController {
     
     let tapRecognizer = UITapGestureRecognizer(target: self,
                                                action: #selector(healthKitInfoViewDidTap(_:)))
-    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
+//    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -248,7 +248,7 @@ extension MainViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-    if !healthKitService.isAuthorized && healthKitService.isDeterminded {
+    if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
         .alert(title: "건강 App 권한이 없습니다.",
                message: """
