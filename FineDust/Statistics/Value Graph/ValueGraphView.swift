@@ -103,8 +103,6 @@ final class ValueGraphView: UIView {
       for (index, view) in graphViews.enumerated() {
         view.layer.setBorder(radius: Layer.radius)
         view.backgroundColor = graphBackgroundColor(at: index)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                         action: #selector(graphViewDidTap(_:))))
       }
     }
   }
@@ -123,29 +121,7 @@ final class ValueGraphView: UIView {
   
   /// 뷰 전체 설정.
   func setup() {
-    initializeHeights()
-    animateHeights()
-    setUnitLabels()
-    setDayLabelsTitle()
-    setDateLabel()
-  }
-  
-  /// 그래프 뷰 탭했을 때의 동작.
-  ///
-  /// 데이터 레이블 표시.
-  @objc private func graphViewDidTap(_ recognizer: UITapGestureRecognizer) {
-    guard let tappedGraphView = recognizer.view else { return }
-    if let tappedIndex = graphViews.firstIndex(of: tappedGraphView) {
-      let label = UILabel()
-      label.tag = tappedIndex
-      label.text = "\(Int(intakeAmounts[tappedIndex]))"
-      label.textColor = .white
-      label.font = UIFont.systemFont(ofSize: 8, weight: .bold)
-      label.sizeToFit()
-      graphContainerView.addSubview(label)
-      label.center = tappedGraphView.center
-      label.frame.origin.y = tappedGraphView.frame.origin.y
-    }
+    reloadGraphView()
   }
 }
 

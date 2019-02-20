@@ -11,6 +11,9 @@ import Foundation
 /// 그래프를 그리는 프로토콜.
 protocol GraphDrawable: class {
   
+  /// 뷰 리로드.
+  func reloadGraphView()
+  
   /// 서브뷰 초기화.
   func deinitializeSubviews()
   
@@ -19,4 +22,15 @@ protocol GraphDrawable: class {
   
   /// 레이블 설정하기
   func setLabels()
+}
+
+// MARK: - GraphDrawable 프로토콜 초기 구현
+
+extension GraphDrawable {
+  
+  func reloadGraphView() {
+    deinitializeSubviews()
+    drawGraph()
+    setLabels()
+  }
 }
