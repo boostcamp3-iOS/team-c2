@@ -121,10 +121,11 @@ extension MainViewController {
             } else {
               print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
-        if self.healthKitService.isAuthorized {
-          DispatchQueue.main.async {
-            self.stepCountLabel.text = "\(Int(value)) 걸음"
-          }
+            if self.healthKitService.isAuthorized {
+              DispatchQueue.main.async {
+                self.stepCountLabel.text = "\(Int(value)) 걸음"
+              }
+            }
         }
       }
     }
@@ -136,7 +137,7 @@ extension MainViewController {
           DispatchQueue.main.sync {
             self.distanceLabel.text = "0.0 km"
           }
-        } 
+        }
         return
       }
       if let value = value {
@@ -147,7 +148,7 @@ extension MainViewController {
             } else {
               print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
-          }
+        }
         if self.healthKitService.isAuthorized {
           DispatchQueue.main.async {
             self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
@@ -226,7 +227,7 @@ extension MainViewController {
     }
   }
   
-  /// 미세먼지 애니메이션 
+  /// 미세먼지 애니메이션
   private func updateFineDustImageView() {
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5,
@@ -269,6 +270,8 @@ extension MainViewController {
   }
   
   private func openHealthApp() {
-    UIApplication.shared.open(URL(string: "x-apple-health://")!)
+    if let url = URL(string: "x-apple-health://") {
+      UIApplication.shared.open(url)
+    }
   }
 }
