@@ -26,12 +26,12 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func requestLastAccessedDate(completion: @escaping (Date?, Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(nil, error)
         return
       }
-      if let lastAccessedDate = user?.lastAccessedDate {
+      if let lastAccessedDate = userEntity?.lastAccessedDate {
         completion(lastAccessedDate, nil)
       } else {
         completion(nil, CoreDataError.noUser)
@@ -98,12 +98,12 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func requestLastSavedData(completion: @escaping (LastSavedData?, Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(nil, error)
         return
       }
-      guard let user = user else {
+      guard let user = userEntity else {
         completion(nil, CoreDataError.noUser)
         return
       }
@@ -121,12 +121,12 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func saveLastSteps(_ steps: Int, completion: @escaping (Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(error)
         return
       }
-      guard user != nil else {
+      guard userEntity != nil else {
         completion(CoreDataError.noUser)
         return
       }
@@ -135,12 +135,12 @@ final class CoreDataService: CoreDataServiceType {
   }
   
   func saveLastDistance(_ distance: Double, completion: @escaping (Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(error)
         return
       }
-      guard user != nil else {
+      guard userEntity != nil else {
         completion(CoreDataError.noUser)
         return
       }
@@ -152,12 +152,12 @@ final class CoreDataService: CoreDataServiceType {
                         _ grade: Int,
                         _ recentFineDust: Int,
                         completion: @escaping (Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(error)
         return
       }
-      guard user != nil else {
+      guard userEntity != nil else {
         completion(CoreDataError.noUser)
         return
       }
@@ -172,12 +172,12 @@ final class CoreDataService: CoreDataServiceType {
   func saveLastTodayIntake(_ todayFineDust: Int,
                            _ todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void) {
-    userManager.request { user, error in
+    userManager.request { userEntity, error in
       if let error = error {
         completion(error)
         return
       }
-      guard user != nil else {
+      guard userEntity != nil else {
         completion(CoreDataError.noUser)
         return
       }
