@@ -14,7 +14,7 @@ final class RatioGraphView: UIView {
   // MARK: Constant
   
   /// 상수 정리.
-  enum Constant {
+  enum Layer {
     
     /// 레이어 선 두께.
     static let lineWidth: CGFloat = 10.0
@@ -87,8 +87,8 @@ private extension RatioGraphView {
   
   /// 비율 원 그래프 그리기.
   func drawRatioGraph() {
-    let path = UIBezierPath(arcCenter: .init(x: backgroundView.bounds.width / 2,
-                                             y: backgroundView.bounds.height / 2),
+    let path = UIBezierPath(arcCenter: CGPoint(x: backgroundView.bounds.width / 2,
+                                               y: backgroundView.bounds.height / 2),
                             radius: backgroundViewHeight / 2,
                             startAngle: -.pi / 2,
                             endAngle: .pi * 3 / 2,
@@ -96,14 +96,14 @@ private extension RatioGraphView {
     // 전체 레이어
     let entireLayer = CAShapeLayer()
     entireLayer.path = path.cgPath
-    entireLayer.lineWidth = Constant.lineWidth
+    entireLayer.lineWidth = Layer.lineWidth
     entireLayer.fillColor = UIColor.clear.cgColor
     entireLayer.strokeColor = Asset.graph1.color.cgColor
     backgroundView.layer.addSublayer(entireLayer)
     // 부분 레이어
     let portionLayer = CAShapeLayer()
     portionLayer.path = path.cgPath
-    portionLayer.lineWidth = Constant.lineWidth
+    portionLayer.lineWidth = Layer.lineWidth
     portionLayer.fillColor = UIColor.clear.cgColor
     portionLayer.strokeColor = Asset.graphToday.color.cgColor
     portionLayer.strokeEnd = 0

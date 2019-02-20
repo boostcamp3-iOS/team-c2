@@ -24,7 +24,7 @@ final class FeedbackDetailViewController: UIViewController {
   
   // MARK: - Properties
   
-  private let feedbackListService = FeedbackListService(jsonManager: JSONManager())
+  private let feedbackListService = FeedbackListService()
   var feedbackTitle: String = ""
   private var dustFeedback: DustFeedback?
   private var isBookmarkedByTitle: [String: Bool] = [:]
@@ -41,8 +41,12 @@ final class FeedbackDetailViewController: UIViewController {
     
     if let dustFeedback = feedbackListService.fetchFeedback(by: feedbackTitle) {
       setFeedback(dustFeedback)
-      setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
     }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
+    setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
   }
   
   // MARK: - IBAction

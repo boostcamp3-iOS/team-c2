@@ -21,12 +21,14 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
+  @IBOutlet private weak var healthKitInfoView: UIView!
   
   // MARK: - Properties
   
-  ///한번만 표시해주기 위한 프로퍼티
+  /// 한번만 표시해주기 위한 프로퍼티.
   private var isPresented: Bool = false
   
+  /// 미세먼지 애니메이션을 움직이게 할 타이머.
   private var timer: Timer?
   
   private let coreDataService = CoreDataService()
@@ -90,16 +92,27 @@ extension MainViewController {
     timeLabel.text = dateFormatter.string(from: Date())
     presentOpenHealthAppAlert()
     updateFineDustImageView()
+    
+    let tapRecognizer = UITapGestureRecognizer(target: self,
+                                               action: #selector(healthKitInfoViewDidTap(_:)))
+    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
+      if let error = error as? HealthKitError, error == .queryNotSearched {
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.stepCountLabel.text = "0 걸음"
+          }
+        } else {
+          error.presentToast()
+        }
         return
       }
+      
       if let value = value {
         self.coreDataService
           .saveLastSteps(Int(value)) { error in
@@ -108,17 +121,23 @@ extension MainViewController {
             } else {
               print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
-          }
-        DispatchQueue.main.async {
-          self.stepCountLabel.text = "\(Int(value)) 걸음"
+            if self.healthKitService.isAuthorized {
+              DispatchQueue.main.async {
+                self.stepCountLabel.text = "\(Int(value)) 걸음"
+              }
+            }
         }
       }
     }
     
     // 걸은 거리 label에 표시
     healthKitService.requestTodayDistance { value, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
+      if let error = error as? HealthKitError, error == .queryNotSearched {
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.sync {
+            self.distanceLabel.text = "0.0 km"
+          }
+        }
         return
       }
       if let value = value {
@@ -130,8 +149,10 @@ extension MainViewController {
               print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
         }
-        DispatchQueue.main.async {
-          self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
+          }
         }
       }
     }
@@ -149,15 +170,14 @@ extension MainViewController {
         }
         if let info = info {
           self.coreDataService
-            .saveLastDustData(
-              (address: SharedInfo.shared.address,
-               grade: info.fineDustGrade.rawValue,
-               recentFineDust: info.fineDustValue)) { error in
-                if error != nil {
-                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
-                } else {
-                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
-                }
+            .saveLastDustData(SharedInfo.shared.address,
+                              info.fineDustGrade.rawValue,
+                              info.fineDustValue) { error in
+                                if error != nil {
+                                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
+                                } else {
+                                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
+                                }
           }
           DispatchQueue.main.async {
             self.fineDustLabel.countFromZero(to: info.fineDustValue,
@@ -180,19 +200,18 @@ extension MainViewController {
         if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
           if self.healthKitService.isAuthorized {
             self.coreDataService
-              .saveLastTodayIntake(
-                (todayFineDust: fineDust,
-                 todayUltrafineDust: ultrafineDust)) { error in
-                  if error != nil {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
-                  } else {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
-                  }
+              .saveLastTodayIntake(fineDust,
+                                   ultrafineDust) { error in
+                                    if error != nil {
+                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
+                                    } else {
+                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
+                                    }
             }
             // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {
               self.fineDustImageView.image
-                = UIImage(named: IntakeGrade(intake: fineDust).imageName)
+                = UIImage(named: IntakeGrade(intake: fineDust + ultrafineDust).imageName)
               self.intakeFineDustLable.countFromZero(to: fineDust,
                                                      unit: .microgram,
                                                      interval: 1.0 /
@@ -208,6 +227,7 @@ extension MainViewController {
     }
   }
   
+  /// 미세먼지 애니메이션
   private func updateFineDustImageView() {
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5,
@@ -228,7 +248,7 @@ extension MainViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-    if !healthKitService.isAuthorized {
+    if !healthKitService.isAuthorized && healthKitService.isDeterminded {
       UIAlertController
         .alert(title: "건강 App 권한이 없습니다.",
                message: """
@@ -237,10 +257,21 @@ extension MainViewController {
           """
         )
         .action(title: "건강 App", style: .default) { _, _ in
-          UIApplication.shared.open(URL(string: "x-apple-health://")!)
+          self.openHealthApp()
         }
         .action(title: "취소", style: .cancel)
         .present(to: self)
+    }
+  }
+  
+  /// 건강 App으로 이동시켜주는 메소드.
+  @objc private func healthKitInfoViewDidTap(_ gesture: UITapGestureRecognizer) {
+    openHealthApp()
+  }
+  
+  private func openHealthApp() {
+    if let url = URL(string: "x-apple-health://") {
+      UIApplication.shared.open(url)
     }
   }
 }

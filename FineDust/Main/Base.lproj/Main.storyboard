@@ -212,7 +212,7 @@
                                                 <rect key="frame" x="0.0" y="11" width="128" height="51.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AM 11 : 26" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKE-l6-uTF">
-                                                        <rect key="frame" x="18.5" y="0.0" width="91.5" height="17"/>
+                                                        <rect key="frame" x="18" y="0.0" width="91.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" name="black45"/>
                                                         <nil key="highlightedColor"/>
@@ -224,7 +224,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ehv-Kz-X1j">
-                                                        <rect key="frame" x="59.5" y="34.5" width="9.5" height="17"/>
+                                                        <rect key="frame" x="59" y="34.5" width="9.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" name="black45"/>
                                                         <nil key="highlightedColor"/>
@@ -287,6 +287,7 @@
                         <outlet property="fineDustImageView" destination="sGr-3S-82N" id="X8E-FU-Pjo"/>
                         <outlet property="fineDustLabel" destination="CNp-Nz-GeF" id="JDA-1G-POT"/>
                         <outlet property="gradeLabel" destination="ehv-Kz-X1j" id="bD4-hN-klk"/>
+                        <outlet property="healthKitInfoView" destination="bZ9-Kn-1sZ" id="9nv-FD-7Mc"/>
                         <outlet property="intakeFineDustLable" destination="6aD-dS-mao" id="Oia-TS-jvb"/>
                         <outlet property="intakeUltrafineDustLabel" destination="LfR-NG-QYj" id="iYZ-Kw-hPl"/>
                         <outlet property="locationLabel" destination="Xzq-YG-k4e" id="leg-3a-Yp6"/>

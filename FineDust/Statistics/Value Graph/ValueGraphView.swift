@@ -92,6 +92,7 @@ final class ValueGraphView: UIView {
   /// 요일 레이블 모음.
   @IBOutlet private var dayLabels: [UILabel]!
   
+  /// 그래프 컨테이너 뷰.
   @IBOutlet private weak var graphContainerView: UIView!
   
   /// 그래프 뷰 모음.
@@ -127,19 +128,20 @@ final class ValueGraphView: UIView {
     setDateLabel()
   }
   
+  /// 그래프 뷰 탭했을 때의 동작.
+  ///
+  /// 데이터 레이블 표시.
   @objc private func graphViewDidTap(_ recognizer: UITapGestureRecognizer) {
     guard let tappedGraphView = recognizer.view else { return }
     if let tappedIndex = graphViews.firstIndex(of: tappedGraphView) {
-      print(tappedIndex, intakeAmounts[tappedIndex])
-      print(tappedGraphView.frame)
-      print(tappedGraphView.bounds)
       let label = UILabel()
-      label.text = "\(intakeAmounts[tappedIndex])"
+      label.tag = tappedIndex
+      label.text = "\(Int(intakeAmounts[tappedIndex]))"
+      label.font = UIFont.systemFont(ofSize: 8, weight: .bold)
       label.sizeToFit()
       graphContainerView.addSubview(label)
-      label.center = tappedGraphView.frame.origin
-      print(label.frame)
-      
+      label.center = tappedGraphView.center
+      label.frame.origin.y = tappedGraphView.frame.origin.y
     }
   }
 }
@@ -179,16 +181,12 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정.
   func setUnitLabels() {
-    zip(unitLabels, axisTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(unitLabels, axisTexts).forEach { $0.text = $1 }
   }
   
   /// 요일 레이블 텍스트 설정.
   func setDayLabelsTitle() {
-    zip(dayLabels, dateTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(dayLabels, dateTexts).forEach { $0.text = $1 }
   }
   
   /// 날짜 레이블 설정.

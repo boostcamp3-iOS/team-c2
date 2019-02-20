@@ -8,7 +8,6 @@
 
 import Foundation
 
-/// 'DustFeedbacks' json 
 struct DustFeedback: Codable {
   
   let title: String
