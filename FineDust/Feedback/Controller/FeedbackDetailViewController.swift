@@ -9,7 +9,7 @@
 import UIKit
 
 /// 피드백 정보 상세 화면
-final class FeedbackDetailViewController: UIViewController, UIScrollViewDelegate {
+final class FeedbackDetailViewController: UIViewController {
   
   // MARK: - IBOutlets
   
@@ -64,11 +64,6 @@ final class FeedbackDetailViewController: UIViewController, UIScrollViewDelegate
   
   // MARK: - Function
   
-  /// 이미지 확대하기.
-  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-    return feedbackImageView
-  }
-  
   /// 뷰컨 데이터 설정
   func setFeedback(_ dustFeedback: DustFeedback) {
     feedbackTitleLabel.text = dustFeedback.title
@@ -86,4 +81,12 @@ final class FeedbackDetailViewController: UIViewController, UIScrollViewDelegate
       = isBookmarked ? Asset.yellowStar.image : Asset.starOutline.image
     bookmarkButton.isSelected = isBookmarked
   }
+}
+
+extension FeedbackDetailViewController: UIScrollViewDelegate {
+  /// 이미지 확대하기.
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return feedbackImageView
+  }
+  
 }
