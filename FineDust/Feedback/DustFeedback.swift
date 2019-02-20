@@ -12,6 +12,7 @@ struct DustFeedback: Codable {
   
   let title: String
   let imageName: String
+  let importance: Int
   let source: String
   let date: String
   let contents: String
