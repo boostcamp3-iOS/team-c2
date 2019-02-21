@@ -22,11 +22,11 @@
 "Main" = "Main";
 "Stats" = "Stats";
 "Info" = "Info";
-"good" = "good";
-"normal" = "normal";
-"bad" = "bad";
-"veryBad" = "very Bad";
-"unknown" = "unknown";
+"Good" = "Good";
+"Normal" = "Normal";
+"Bad" = "Bad";
+"Very bad" = "Very bad";
+"Unknown" = "Unknown";
 "Sorting method" = "Sorting method";
 "Please choose how to sort information." = "Please choose how to sort information.";
 "by Recent" = "by Recent";
@@ -37,3 +37,5 @@
 "Health App permissions not yet set." = "Health App permissions not yet set.";
 "Do not have Health App privileges." = "Do not have Health App privileges.";
 "Execution of query statement failed." = "Execution of query statement failed.";
+"Health App" = "Health App";
+"'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions.";

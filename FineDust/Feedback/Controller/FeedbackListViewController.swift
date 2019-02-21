@@ -82,22 +82,22 @@ final class FeedbackListViewController: UIViewController {
   @objc func settingButtonDidTap(_ sender: UIButton) {
     
     UIAlertController
-      .alert(title: "정렬 방식 선택".localized,
-             message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?".localized,
+      .alert(title: "Sorting method".localized,
+             message: "Please choose how to sort information.".localized,
              style: .actionSheet)
-      .action(title: "최신순".localized) { _, _ in
+      .action(title: "by Recent".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "제목순".localized) { _, _ in
+      .action(title: "by Title".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "즐겨찾기순".localized) { _, _ in
+      .action(title: "by Bookmark".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "취소".localized, style: .cancel)
+      .action(title: "Cancel".localized, style: .cancel)
       .present(to: self)
   }
 }
@@ -197,10 +197,10 @@ extension FeedbackListViewController: UITableViewDelegate {
                      for: .touchUpInside)
     if section == 1 {
       button.isHidden = false
-      label.text = "전체 목록".localized
+      label.text = "Full list".localized
     } else {
       button.isHidden = true
-      label.text = "맞춤 정보 추천".localized
+      label.text = "Optimized information".localized
     }
     
     return headerView

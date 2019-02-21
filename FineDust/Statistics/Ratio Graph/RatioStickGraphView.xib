@@ -61,14 +61,14 @@
                         <constraint firstItem="aWD-00-ga0" firstAttribute="trailing" secondItem="ZQ1-sG-HYQ" secondAttribute="centerX" constant="-16" id="weW-Mk-AcJ"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일주일 평균" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
-                    <rect key="frame" x="58.5" y="210.5" width="26" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly  average" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
+                    <rect key="frame" x="52" y="210.5" width="39" height="24"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDI-ZM-jPg">
-                    <rect key="frame" x="105" y="210.5" width="17.5" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDI-ZM-jPg">
+                    <rect key="frame" x="99" y="210.5" width="29" height="12"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

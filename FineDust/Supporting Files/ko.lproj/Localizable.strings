@@ -22,11 +22,11 @@
 "Main" = "메인";
 "Stats" = "통계";
 "Info" = "정보";
-"good" = "좋음";
-"normal" = "보통";
-"bad" = "나쁨";
-"veryBad" = "매우 나쁨";
-"unknown" = "알 수 없음";
+"Good" = "좋음";
+"Normal" = "보통";
+"Bad" = "나쁨";
+"Very bad" = "매우 나쁨";
+"Unknown" = "알 수 없음";
 "Sorting method" = "정렬 방식 선택";
 "Please choose how to sort information." = "미세먼지 관련 정보를 어떤 순서로 정렬할까요?";
 "by Recent" = "최신순";
@@ -37,3 +37,5 @@
 "Health App permissions not yet set." = "건강 App 권한이 아직 설정되지 않았습니다.";
 "Do not have Health App privileges." = "건강 App 권한이 없습니다.";
 "Execution of query statement failed." = "query문 실행이 실패했습니다.";
+"Health App" = "건강 App";
+"'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'내안의먼지'는 건강 App에 대한 권한이 필요합니다. 건강 App -> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 허용해주세요.";
