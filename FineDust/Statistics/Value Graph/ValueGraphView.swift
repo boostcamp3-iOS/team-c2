@@ -118,6 +118,7 @@ final class ValueGraphView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    titleLabel.text = "Weekly inhalation dose".localized
   }
   
   /// 뷰 전체 설정.
