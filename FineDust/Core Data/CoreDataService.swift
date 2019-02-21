@@ -114,7 +114,9 @@ final class CoreDataService: CoreDataServiceType {
         steps: Int(user.steps),
         address: user.address ?? "",
         grade: Int(user.grade),
-        recentFineDust: Int(user.recentFineDust)
+        recentFineDust: Int(user.recentFineDust),
+        weekFineDust: user.weekFineDust as? [Int] ?? [],
+        weekUltrafineDust: user.weekUltrafineDust as? [Int] ?? []
       )
       completion(lastSavedData, nil)
     }
@@ -184,6 +186,25 @@ final class CoreDataService: CoreDataServiceType {
       self.userManager.save([
         User.todayFineDust: Int16(todayFineDust),
         User.todayUltrafineDust: Int16(todayUltrafineDust)
+        ], completion: completion)
+    }
+  }
+  
+  func saveLastWeekIntake(_ fineDusts: [Int],
+                          _ ultrafineDusts: [Int],
+                          completion: @escaping (Error?) -> Void) {
+    userManager.request { userEntity, error in
+      if let error = error {
+        completion(error)
+        return
+      }
+      guard userEntity != nil else {
+        completion(CoreDataError.noUser)
+        return
+      }
+      self.userManager.save([
+        User.weekFineDust: fineDusts,
+        User.weekUltrafineDust: ultrafineDusts
         ], completion: completion)
     }
   }
