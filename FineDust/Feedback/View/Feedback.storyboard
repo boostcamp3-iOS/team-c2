@@ -292,7 +292,6 @@
                                     </view>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅇㅇ" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5Z-ba-YyD">
                                         <rect key="frame" x="37.5" y="408.5" width="300" height="16"/>
-                                        <color key="backgroundColor" white="0.9512788955" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" name="black45"/>
                                         <nil key="highlightedColor"/>

@@ -82,20 +82,22 @@ final class FeedbackListViewController: UIViewController {
   @objc func settingButtonDidTap(_ sender: UIButton) {
     
     UIAlertController
-      .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
-      .action(title: "최신순") { _, _ in
+      .alert(title: "정렬 방식 선택".localized,
+             message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?".localized,
+             style: .actionSheet)
+      .action(title: "최신순".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "제목순") { _, _ in
+      .action(title: "제목순".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "즐겨찾기순") { _, _ in
+      .action(title: "즐겨찾기순".localized) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "취소", style: .cancel)
+      .action(title: "취소".localized, style: .cancel)
       .present(to: self)
   }
 }
