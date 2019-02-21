@@ -93,9 +93,6 @@ extension MainViewController {
     presentOpenHealthAppAlert()
     updateFineDustImageView()
     
-    let tapRecognizer = UITapGestureRecognizer(target: self,
-                                               action: #selector(healthKitInfoViewDidTap(_:)))
-//    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -262,11 +259,6 @@ extension MainViewController {
         .action(title: "취소", style: .cancel)
         .present(to: self)
     }
-  }
-  
-  /// 건강 App으로 이동시켜주는 메소드.
-  @objc private func healthKitInfoViewDidTap(_ gesture: UITapGestureRecognizer) {
-    openHealthApp()
   }
   
   private func openHealthApp() {
