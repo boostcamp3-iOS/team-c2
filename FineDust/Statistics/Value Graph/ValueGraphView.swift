@@ -49,19 +49,20 @@ final class ValueGraphView: UIView {
   // MARK: Private Properties
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
-  private var intakeAmounts: [CGFloat] {
+  private var intakeAmounts: [Int] {
     return dataSource?.intakes ?? []
   }
   
   /// 미세먼지 흡입량의 최대값.
-  private var maxValue: CGFloat {
-    let max = intakeAmounts.max() ?? 0.0
-    return max + 1.0
+  private var maxValue: Int {
+    let max = intakeAmounts.max() ?? 1
+    return max
   }
   
   /// 흡입량 모음을 최대값에 대한 비율로 산출. `1.0 - (비율)`.
-  private var intakeRatios: [CGFloat] {
-    return intakeAmounts.map { 1.0 - $0 / maxValue }
+  private var intakeRatios: [Double] {
+    return intakeAmounts.map { 1.0 - Double($0) / Double(maxValue) }
+      .map { !$0.canBecomeMultiplier ? 0.01 : $0 }
   }
   
   /// 주축 레이블.
@@ -70,7 +71,7 @@ final class ValueGraphView: UIView {
   }
   
   /// 일 텍스트.
-  private var dateTexts: [String] {
+  private var dayTexts: [String] {
     let dateFormatter = DateFormatter.day
     var array = [Date](repeating: Date(), count: 7)
     for (index, element) in array.enumerated() {
@@ -139,6 +140,7 @@ extension ValueGraphView: GraphDrawable {
   
   func setLabels() {
     setUnitLabels()
+    setDayLabelsTitle()
     setDateLabel()
   }
 }
@@ -167,7 +169,7 @@ private extension ValueGraphView {
           initialSpringVelocity: Animation.springVelocity,
           options: Animation.options,
           animations: { [weak self] in
-            heightConstraint = heightConstraint.changedMultiplier(to: ratio)
+            heightConstraint = heightConstraint.changedMultiplier(to: CGFloat(ratio))
             self?.layoutIfNeeded()
           },
           completion: nil
@@ -183,7 +185,7 @@ private extension ValueGraphView {
   
   /// 요일 레이블 텍스트 설정.
   func setDayLabelsTitle() {
-    zip(dayLabels, dateTexts).forEach { $0.text = $1 }
+    zip(dayLabels, dayTexts).forEach { $0.text = $1 }
   }
   
   /// 날짜 레이블 설정.

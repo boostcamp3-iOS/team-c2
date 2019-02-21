@@ -27,6 +27,7 @@ final class FeedbackListViewController: UIViewController {
   private var fineDustIntake: Int = 0
   private var ultrafineDustIntake: Int = 0
   private var currentState: IntakeGrade = .good
+  private let sectionToReload: IndexSet = [1]
   
   // MARK: - LifeCycle
   
@@ -37,20 +38,22 @@ final class FeedbackListViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
-    feedbackListTableView.reloadData()
+    loadFeedback()
   }
   
   // MARK: - Function
   
   private func setup() {
-    
-    calculateState()
-    
     feedbackCount = feedbackListService.fetchFeedbackCount()
-    recommendFeedbacks = feedbackListService.fetchRecommededFeedbacks(by: currentState)
     // back swipe
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+  
+  private func loadFeedback() {
+    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
+    feedbackListTableView.reloadSections(sectionToReload, with: .none)
+    calculateState()
+    recommendFeedbacks = feedbackListService.fetchRecommededFeedbacks(by: currentState)
   }
   
   /// 미세먼지 섭취량으로 현재 상태를 계산함.
@@ -59,8 +62,8 @@ final class FeedbackListViewController: UIViewController {
       fineDustIntake = defaults.integer(forKey: "fineDustIntake")
       ultrafineDustIntake = defaults.integer(forKey: "ultrafineDustIntake")
       
-      let intake = fineDustIntake + ultrafineDustIntake
-      currentState = IntakeGrade(intake: intake)
+      let totalIntake = fineDustIntake + ultrafineDustIntake
+      currentState = IntakeGrade(intake: totalIntake)
     }
   }
   
@@ -78,22 +81,19 @@ final class FeedbackListViewController: UIViewController {
   /// 미세먼지 정보 정렬 액션시트
   @objc func settingButtonDidTap(_ sender: UIButton) {
     
-    let sectionToReload = 1
-    let indexSet: IndexSet = [sectionToReload]
-    
     UIAlertController
       .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
       .action(title: "최신순") { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
       .action(title: "제목순") { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
       .action(title: "즐겨찾기순") { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
       .action(title: "취소", style: .cancel)
       .present(to: self)
@@ -124,15 +124,14 @@ extension FeedbackListViewController: UITableViewDataSource {
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
     cell.delegate = self
-    let feedback = feedbackListService.fetchFeedback(at: indexPath.row)
     
     if let newDustFeedbacks = newDustFeedbacks {
       cell.setTableViewCellProperties(dustFeedback: newDustFeedbacks[indexPath.row])
     } else {
-      cell.setTableViewCellProperties(dustFeedback: feedback)
+      let feedback = feedbackListService.fetchFeedbacksByBookmark()
+      cell.setTableViewCellProperties(dustFeedback: feedback[indexPath.row])
     }
     cell.setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
-    
     return cell
   }
 }
@@ -196,10 +195,10 @@ extension FeedbackListViewController: UITableViewDelegate {
                      for: .touchUpInside)
     if section == 1 {
       button.isHidden = false
-      label.text = "전체 목록"
+      label.text = "전체 목록".localized
     } else {
       button.isHidden = true
-      label.text = "맞춤 정보 추천"
+      label.text = "맞춤 정보 추천".localized
     }
     
     return headerView
@@ -263,5 +262,7 @@ extension FeedbackListViewController: FeedbackListCellDelegate {
       isBookmarkedByTitle[title] = false
       feedbackListService.deleteBookmark(by: title)
     }
+    self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
+    self.feedbackListTableView.reloadSections(sectionToReload, with: .none)
   }
 }

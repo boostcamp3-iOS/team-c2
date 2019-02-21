@@ -83,10 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 흡입량 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
+  private var fineDustTotalIntakes = [Int](repeating: 1, count: 7)
   
   /// 7일간의 초미세먼지 흡입량 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
+  private var ultrafineDustTotalIntakes = [Int](repeating: 1, count: 7)
   
   /// 오늘의 미세먼지 흡입량.
   private var todayFineDustIntake: Int = 1
@@ -98,19 +98,19 @@ final class StatisticsViewController: UIViewController {
   private let intakeService = IntakeService()
   
   /// 미세먼지의 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: CGFloat {
+  private var fineDustLastValueRatio: Double {
     let reduced = fineDustTotalIntakes.reduce(0, +)
-    let sum = reduced == 0 ? 0.1 : reduced
-    let last = fineDustTotalIntakes.last ?? 0.1
-    return last / sum
+    let sum = reduced == 0 ? 1 : reduced
+    let last = fineDustTotalIntakes.last ?? 1
+    return Double(last) / Double(sum)
   }
   
   /// 초미세먼지의 전체에 대한 마지막 값의 비율
-  private var ultrafineDustLastValueRatio: CGFloat {
+  private var ultrafineDustLastValueRatio: Double {
     let reduced = ultrafineDustTotalIntakes.reduce(0, +)
-    let sum = reduced == 0 ? 0.1 : reduced
-    let last = ultrafineDustTotalIntakes.last ?? 0.1
-    return last / sum
+    let sum = reduced == 0 ? 1 : reduced
+    let last = ultrafineDustTotalIntakes.last ?? 1
+    return Double(last) / Double(sum)
   }
   
   // MARK: Life Cycle
@@ -165,12 +165,8 @@ final class StatisticsViewController: UIViewController {
           let fineDust = fineDust,
           let ultrafineDust = ultrafineDust
           else { return }
-        let fineDustWeekIntakes = [fineDusts, [fineDust]]
-          .flatMap { $0 }
-          .map { CGFloat($0) }
-        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
-          .flatMap { $0 }
-          .map { CGFloat($0) }
+        let fineDustWeekIntakes = [fineDusts, [fineDust]].flatMap { $0 }
+        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]].flatMap { $0 }
         self.todayFineDustIntake = fineDust
         self.todayUltrafineDustIntake = ultrafineDust
         self.fineDustTotalIntakes = fineDustWeekIntakes
@@ -203,7 +199,7 @@ extension StatisticsViewController: LocationObserver {
 
 extension StatisticsViewController: ValueGraphViewDataSource {
   
-  var intakes: [CGFloat] {
+  var intakes: [Int] {
     return segmentedControl.selectedSegmentIndex == 0
       ? fineDustTotalIntakes : ultrafineDustTotalIntakes
   }
@@ -213,7 +209,7 @@ extension StatisticsViewController: ValueGraphViewDataSource {
 
 extension StatisticsViewController: RatioGraphViewDataSource {
   
-  var intakeRatio: CGFloat {
+  var intakeRatio: Double {
     return segmentedControl.selectedSegmentIndex == 0
       ? fineDustLastValueRatio : ultrafineDustLastValueRatio
   }
