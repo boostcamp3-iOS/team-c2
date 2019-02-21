@@ -58,4 +58,8 @@ class MockCoreDataService: CoreDataServiceType {
   func saveLastTodayIntake(_ todayFineDust: Int, _ todayUltrafineDust: Int, completion: @escaping (Error?) -> Void) {
     completion(error)
   }
+  
+  func saveLastWeekIntake(_ fineDusts: [Int], _ ultrafineDusts: [Int], completion: @escaping (Error?) -> Void) {
+    completion(error)
+  }
 }

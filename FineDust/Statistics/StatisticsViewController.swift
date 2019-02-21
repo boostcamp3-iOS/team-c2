@@ -97,6 +97,9 @@ final class StatisticsViewController: UIViewController {
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
   
+  /// 코어데이터 서비스 프로퍼티.
+  private let coreDataService = CoreDataService()
+  
   /// 미세먼지의 전체에 대한 마지막 값의 비율
   private var fineDustLastValueRatio: Double {
     let reduced = fineDustTotalIntakes.reduce(0, +)
@@ -151,12 +154,14 @@ final class StatisticsViewController: UIViewController {
     self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
         error.presentToast()
+        self?.presentLastSavedData()
         return
       }
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
           error.presentToast()
+          self?.presentLastSavedData()
           return
         }
         guard let self = self,
@@ -167,12 +172,39 @@ final class StatisticsViewController: UIViewController {
           else { return }
         let fineDustWeekIntakes = [fineDusts, [fineDust]].flatMap { $0 }
         let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]].flatMap { $0 }
+        self.coreDataService
+          .saveLastWeekIntake(fineDustWeekIntakes, ultrafineDustWeekIntakes) { error in
+            if error != nil {
+              print("마지막으로 요청한 일주일 먼지 농도가 저장되지 않음")
+            } else {
+              print("마지막으로 요청한 일주일 먼지 농도가 성공적으로 저장됨")
+            }
+        }
         self.todayFineDustIntake = fineDust
         self.todayUltrafineDustIntake = ultrafineDust
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
         DispatchQueue.main.async {
+          self.initializeSubviews()
+        }
+      }
+    }
+  }
+  
+  /// 마지막으로 저장된 데이터 보여주기.
+  private func presentLastSavedData() {
+    coreDataService.requestLastSavedData { lastSavedData, error in
+      if error != nil {
+        print("마지막으로 저장된 데이터도 표시되지 않음")
+        return
+      }
+      if let lastSavedData  = lastSavedData {
+        DispatchQueue.main.async {
+          self.todayFineDustIntake = lastSavedData.todayFineDust
+          self.todayUltrafineDustIntake = lastSavedData.todayUltrafineDust
+          self.fineDustTotalIntakes = lastSavedData.weekFineDust
+          self.ultrafineDustTotalIntakes = lastSavedData.weekUltrafineDust
           self.initializeSubviews()
         }
       }

@@ -162,6 +162,18 @@ class TestCoreDataService: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
   }
   
+  func test_saveLastWeekIntake() {
+    let expect = expectation(description: "test")
+    let user = User(context: mockCoreDataUserManager.context)
+    mockCoreDataUserManager.user = user
+    mockCoreDataUserManager.error = nil
+    coreDataService.saveLastWeekIntake([1, 1], [1, 1]) { error in
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
   func test_requestLastAccessedDate_error() {
     let expect = expectation(description: "test")
     mockCoreDataUserManager.user = nil
@@ -363,6 +375,28 @@ class TestCoreDataService: XCTestCase {
       } else {
         XCTFail()
       }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_saveLastWeekIntake_error() {
+    let expect = expectation(description: "test")
+    mockCoreDataUserManager.error = NSError(domain: "", code: 0, userInfo: nil)
+    mockCoreDataUserManager.error = nil
+    coreDataService.saveLastWeekIntake([1, 1], [1, 1]) { error in
+      XCTAssertNotNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_saveLastWeekIntake_error2() {
+    let expect = expectation(description: "test")
+    mockCoreDataUserManager.user = nil
+    mockCoreDataUserManager.error = nil
+    coreDataService.saveLastWeekIntake([1, 1], [1, 1]) { error in
+      XCTAssertNotNil(error)
       expect.fulfill()
     }
     waitForExpectations(timeout: 5, handler: nil)
