@@ -22,8 +22,8 @@
 "Main" = "메인";
 "Stats" = "통계";
 "Info" = "정보";
-"good" = "좋음"
-"normal" = "보통"
+"good" = "좋음";
+"normal" = "보통";
 "bad" = "나쁨";
 "veryBad" = "매우 나쁨";
 "unknown" = "알 수 없음";
