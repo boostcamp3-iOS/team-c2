@@ -75,6 +75,7 @@ extension MainViewController: LocationObserver {
     updateAPIInfo()
   }
   
+  /// 데이터를 받아오는데 문제가 있으면 코어데이터에 마지막으로 저장된 값을 불러옴.
   func handleIfFail(_ notification: Notification) {
     if let error = notification.locationTaskError {
       coreDataService.requestLastSavedData { lastSaveData, error in
@@ -89,6 +90,9 @@ extension MainViewController: LocationObserver {
                                                         unit: .microgram,
                                                         interval: 1.0 /
                                                           Double(data.todayUltrafineDust))
+            self.fineDustImageView.image
+              = UIImage(named: IntakeGrade(intake: data.todayFineDust + data.todayUltrafineDust)
+                .imageName)
             
             self.locationLabel.text = data.address
             self.gradeLabel.text = DustGrade(rawValue: data.grade)?.description
