@@ -292,7 +292,6 @@
                                     </view>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅇㅇ" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5Z-ba-YyD">
                                         <rect key="frame" x="37.5" y="408.5" width="300" height="16"/>
-                                        <color key="backgroundColor" white="0.9512788955" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" name="black45"/>
                                         <nil key="highlightedColor"/>
@@ -345,11 +344,11 @@
             </objects>
             <point key="canvasLocation" x="1709.5999999999999" y="-201.49925037481262"/>
         </scene>
-        <!--정보-->
+        <!--Info-->
         <scene sceneID="wl7-tx-Ipj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fMM-kt-kZo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="정보" image="infoTabIcon" id="Yse-Ig-ExT"/>
+                    <tabBarItem key="tabBarItem" title="Info" image="infoTabIcon" id="Yse-Ig-ExT"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iPc-BG-6oF">

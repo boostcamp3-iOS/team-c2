@@ -10,11 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--통계-->
+        <!--Stats-->
         <scene sceneID="hxl-bi-pes">
             <objects>
                 <navigationController navigationBarHidden="YES" id="rIq-fy-EBz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="통계" image="barChartTabIcon" id="BxE-pT-soT"/>
+                    <tabBarItem key="tabBarItem" title="Stats" image="barChartTabIcon" id="BxE-pT-soT"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
                         <autoresizingMask key="autoresizingMask"/>
@@ -41,8 +41,8 @@
                                     <constraint firstAttribute="height" constant="28" id="cPh-D0-4aF"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="미세먼지"/>
-                                    <segment title="초미세먼지"/>
+                                    <segment title="Fine dust"/>
+                                    <segment title="Ultrafine dust"/>
                                 </segments>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vK-Nk-thK">

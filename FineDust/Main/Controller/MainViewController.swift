@@ -148,7 +148,7 @@ extension MainViewController {
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
           DispatchQueue.main.async {
-            self.stepCountLabel.text = "0 걸음"
+            self.stepCountLabel.text = "0 " + "steps".localized
           }
         } else {
           error.presentToast()
@@ -166,7 +166,7 @@ extension MainViewController {
             }
             if self.healthKitService.isAuthorized {
               DispatchQueue.main.async {
-                self.stepCountLabel.text = "\(Int(value)) 걸음"
+                self.stepCountLabel.text = "\(Int(value)) " + "steps".localized
               }
             }
         }
@@ -293,16 +293,16 @@ extension MainViewController {
   private func presentOpenHealthAppAlert() {
     if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
-        .alert(title: "건강 App 권한이 없습니다.",
+        .alert(title: "Do not have Health App privileges.".localized,
                message: """
-          내안의먼지는 건강 App에 대한 권한이 필요합니다. 건강 App-> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 \
-          허용해주세요.
-          """
+                'Dust inside me' need authority to the Health App. Health App -> \
+                Data Sources -> Dust inside me -> Allow all write and read permissions.
+          """.localized
         )
-        .action(title: "건강 App", style: .default) { _, _ in
+        .action(title: "Health App".localized, style: .default) { _, _ in
           self.openHealthApp()
         }
-        .action(title: "취소", style: .cancel)
+        .action(title: "Cancel".localized, style: .cancel)
         .present(to: self)
     }
   }

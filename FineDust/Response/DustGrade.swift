@@ -21,21 +21,21 @@ enum DustGrade: Int, CustomStringConvertible {
   /// 매우나쁨
   case veryBad
   
-  /// 기타
+  /// 알 수 없음
   case `default`
   
   var description: String {
     switch self {
     case .good:
-      return "좋은 공기"
+      return "Good".localized
     case .normal:
-      return "보통 공기"
+      return "Normal".localized
     case .bad:
-      return "나쁜 공기"
+      return "Bad".localized
     case .veryBad:
-      return "매우 나쁨"
+      return "Very bad".localized
     case .default:
-      return "기타"
+      return "Unknown".localized
     }
   }
 }

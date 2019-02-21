@@ -12,17 +12,17 @@ enum HealthKitError: ServiceErrorType {
   var localizedDescription: String {
     switch self {
     case .notMatchingArguments:
-      return "알 수 없는 에러가 발생했습니다."
+      return "An unknown error has occurred.".localized
     case .unexpectedIdentifier:
-      return "알 수 없는 에러가 발생했습니다."
+      return "An unknown error has occurred.".localized
     case .queryNotValid:
-      return "건강 App 권한이 아직 설정되지 않았습니다"
+      return "Health App permissions not yet set.".localized
     case .queryNotSearched:
-      return "건강 App 권한이 없습니다."
+      return "Do not have Health App privileges.".localized
     case .queryExecutedFailed:
-      return "query문 실행이 실패했습니다."
+      return "Execution of query statement failed.".localized
     case .notAuthorized:
-      return "건강 앱 권한 없음"
+      return "Do not have Health App privileges.".localized
     }
   }
   
