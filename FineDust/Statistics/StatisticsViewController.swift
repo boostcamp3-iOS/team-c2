@@ -83,10 +83,10 @@ final class StatisticsViewController: UIViewController {
   private var isPresented: Bool = false
   
   /// 7일간의 미세먼지 흡입량 모음.
-  private var fineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
+  private var fineDustTotalIntakes = [Int](repeating: 1, count: 7)
   
   /// 7일간의 초미세먼지 흡입량 모음.
-  private var ultrafineDustTotalIntakes = [CGFloat](repeating: 1, count: 7)
+  private var ultrafineDustTotalIntakes = [Int](repeating: 1, count: 7)
   
   /// 오늘의 미세먼지 흡입량.
   private var todayFineDustIntake: Int = 1
@@ -97,20 +97,23 @@ final class StatisticsViewController: UIViewController {
   /// 흡입량 서비스 프로퍼티.
   private let intakeService = IntakeService()
   
+  /// 코어데이터 서비스 프로퍼티.
+  private let coreDataService = CoreDataService()
+  
   /// 미세먼지의 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: CGFloat {
+  private var fineDustLastValueRatio: Double {
     let reduced = fineDustTotalIntakes.reduce(0, +)
-    let sum = reduced == 0 ? 0.1 : reduced
-    let last = fineDustTotalIntakes.last ?? 0.1
-    return last / sum
+    let sum = reduced == 0 ? 1 : reduced
+    let last = fineDustTotalIntakes.last ?? 1
+    return Double(last) / Double(sum)
   }
   
   /// 초미세먼지의 전체에 대한 마지막 값의 비율
-  private var ultrafineDustLastValueRatio: CGFloat {
+  private var ultrafineDustLastValueRatio: Double {
     let reduced = ultrafineDustTotalIntakes.reduce(0, +)
-    let sum = reduced == 0 ? 0.1 : reduced
-    let last = ultrafineDustTotalIntakes.last ?? 0.1
-    return last / sum
+    let sum = reduced == 0 ? 1 : reduced
+    let last = ultrafineDustTotalIntakes.last ?? 1
+    return Double(last) / Double(sum)
   }
   
   // MARK: Life Cycle
@@ -151,12 +154,14 @@ final class StatisticsViewController: UIViewController {
     self.intakeService.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error as? ServiceErrorType {
         error.presentToast()
+        self?.presentLastSavedData()
         return
       }
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
           error.presentToast()
+          self?.presentLastSavedData()
           return
         }
         guard let self = self,
@@ -165,18 +170,41 @@ final class StatisticsViewController: UIViewController {
           let fineDust = fineDust,
           let ultrafineDust = ultrafineDust
           else { return }
-        let fineDustWeekIntakes = [fineDusts, [fineDust]]
-          .flatMap { $0 }
-          .map { CGFloat($0) }
-        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]]
-          .flatMap { $0 }
-          .map { CGFloat($0) }
+        let fineDustWeekIntakes = [fineDusts, [fineDust]].flatMap { $0 }
+        let ultrafineDustWeekIntakes = [ultrafineDusts, [ultrafineDust]].flatMap { $0 }
+        self.coreDataService
+          .saveLastWeekIntake(fineDustWeekIntakes, ultrafineDustWeekIntakes) { error in
+            if error != nil {
+              print("마지막으로 요청한 일주일 먼지 농도가 저장되지 않음")
+            } else {
+              print("마지막으로 요청한 일주일 먼지 농도가 성공적으로 저장됨")
+            }
+        }
         self.todayFineDustIntake = fineDust
         self.todayUltrafineDustIntake = ultrafineDust
         self.fineDustTotalIntakes = fineDustWeekIntakes
         self.ultrafineDustTotalIntakes = ultrafineDustWeekIntakes
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
         DispatchQueue.main.async {
+          self.initializeSubviews()
+        }
+      }
+    }
+  }
+  
+  /// 마지막으로 저장된 데이터 보여주기.
+  private func presentLastSavedData() {
+    coreDataService.requestLastSavedData { lastSavedData, error in
+      if error != nil {
+        print("마지막으로 저장된 데이터도 표시되지 않음")
+        return
+      }
+      if let lastSavedData  = lastSavedData {
+        DispatchQueue.main.async {
+          self.todayFineDustIntake = lastSavedData.todayFineDust
+          self.todayUltrafineDustIntake = lastSavedData.todayUltrafineDust
+          self.fineDustTotalIntakes = lastSavedData.weekFineDust
+          self.ultrafineDustTotalIntakes = lastSavedData.weekUltrafineDust
           self.initializeSubviews()
         }
       }
@@ -203,7 +231,7 @@ extension StatisticsViewController: LocationObserver {
 
 extension StatisticsViewController: ValueGraphViewDataSource {
   
-  var intakes: [CGFloat] {
+  var intakes: [Int] {
     return segmentedControl.selectedSegmentIndex == 0
       ? fineDustTotalIntakes : ultrafineDustTotalIntakes
   }
@@ -213,7 +241,7 @@ extension StatisticsViewController: ValueGraphViewDataSource {
 
 extension StatisticsViewController: RatioGraphViewDataSource {
   
-  var intakeRatio: CGFloat {
+  var intakeRatio: Double {
     return segmentedControl.selectedSegmentIndex == 0
       ? fineDustLastValueRatio : ultrafineDustLastValueRatio
   }

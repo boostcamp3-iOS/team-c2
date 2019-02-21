@@ -55,4 +55,9 @@ protocol CoreDataServiceType: class {
   func saveLastTodayIntake(_ todayFineDust: Int,
                            _ todayUltrafineDust: Int,
                            completion: @escaping (Error?) -> Void)
+  
+  /// 마지막으로 요청한 일주일의 흡입 먼지 농도 저장하기.
+  func saveLastWeekIntake(_ fineDusts: [Int],
+                          _ ultrafineDusts: [Int],
+                          completion: @escaping (Error?) -> Void)
 }

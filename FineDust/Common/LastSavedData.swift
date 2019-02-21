@@ -31,4 +31,10 @@ struct LastSavedData {
   
   /// 최근 미세먼지 농도.
   let recentFineDust: Int
+  
+  /// 일주일 미세먼지 농도.
+  let weekFineDust: [Int]
+  
+  /// 일주일 초미세먼지 농도.
+  let weekUltrafineDust: [Int]
 }
