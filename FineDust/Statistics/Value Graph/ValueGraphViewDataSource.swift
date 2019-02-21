@@ -13,5 +13,5 @@ import UIKit
 protocol ValueGraphViewDataSource: class {
 
   /// 오늘의 전날부터 일주일간의 흡입량.
-  var intakes: [CGFloat] { get }
+  var intakes: [Int] { get }
 }

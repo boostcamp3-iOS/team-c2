@@ -13,7 +13,7 @@ import UIKit
 protocol RatioGraphViewDataSource: class {
   
   /// 전체 흡입량에 대한 부분의 비율.
-  var intakeRatio: CGFloat { get }
+  var intakeRatio: Double { get }
   
   /// 일주일간 총 흡입량.
   var totalIntake: Int { get }

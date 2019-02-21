@@ -61,6 +61,7 @@
 		20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8438C43EE32ED8F13670899C1B1F531 /* FeedbackListViewController.swift */; };
 		F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17AFECFD5FB32629FADDDD4FA8975772 /* FineDust.xcdatamodeld */; };
 		F9C6F83E8E347307EEF528C08F36BA8B /* FineDustWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D3C478E3F0755E23B991CA642B7C90E /* FineDustWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6DC4F01A82F5B7B154E8A86A8254FA5F /* FloatingPoint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83434827AF152E3F341D904C1020CBB6 /* FloatingPoint+.swift */; };
 		204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */; };
 		A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */; };
 		04A572D5E9209E88FC7B31057CCE14ED /* GeocoderManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */; };
@@ -288,6 +289,7 @@
 		986780C6CD66A004B310FDEEC0E52DE5 /* FineDustTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FineDustTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D3C478E3F0755E23B991CA642B7C90E /* FineDustWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FineDustWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		498774B758117C703D63D9CDDDB71664 /* FineDustWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FineDustWidget.entitlements; sourceTree = "<group>"; };
+		83434827AF152E3F341D904C1020CBB6 /* FloatingPoint+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+.swift"; sourceTree = "<group>"; };
 		9DD3AAD051DF7FFF74B2A70DEBC077F4 /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		8215D70BB6DCDAD324A3D700C35885F9 /* GeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManager.swift; sourceTree = "<group>"; };
 		0C4940A5123686A4719A1384D7DF89EA /* GeocoderManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManagerType.swift; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 				804690DF390A0D47D42527A7CB7C6101 /* Date+.swift */,
 				B9B04B6C2CD4B334A519586D0E91DBCF /* DateFormatter+.swift */,
 				E5C8240AE4FF5A0BE37AAAE3E2784963 /* Double+.swift */,
+				83434827AF152E3F341D904C1020CBB6 /* FloatingPoint+.swift */,
 				BB149EF126DB25219545819089E8062F /* Locale+.swift */,
 				978E9708A1C5C90982083446DDFDF57E /* NSLayoutAnchor+.swift */,
 				475FEB0148B502284938C322A1FCE657 /* NSLayoutConstraint+.swift */,
@@ -1123,6 +1126,7 @@
 				C227239079D47CDEC9F72FAEDA56B178 /* FeedbackListTableViewCell.swift in Sources */,
 				20CA4CC9EEF0809549D22652D5C0C4D4 /* FeedbackListViewController.swift in Sources */,
 				F6C1234488BC54FDB5C5D472D24EDC2D /* FineDust.xcdatamodeld in Sources */,
+				6DC4F01A82F5B7B154E8A86A8254FA5F /* FloatingPoint+.swift in Sources */,
 				204861CD1D98F7238EA6235CF28AB641 /* GeoConverter.swift in Sources */,
 				A951150290C32A8CBDD522094B8398A0 /* GeocoderManager.swift in Sources */,
 				04A572D5E9209E88FC7B31057CCE14ED /* GeocoderManagerType.swift in Sources */,
