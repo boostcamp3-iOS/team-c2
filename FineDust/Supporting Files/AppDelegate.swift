@@ -36,20 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     coreDataService.requestLastAccessedDate { date, error in
       if let error = error as NSError? {
         // 에러가 넘어온 경우
-        if error.domain == "CoreDataNoUser" {
-          // 그 에러가 첫 접속에 의해 유저 정보가 기록되지 않은 에러라면
-          // 첫 접속 날짜를 저장
+        if error is CoreDataError {
+          print("첫 실행!")
           self.coreDataService.saveLastAccessedDate { error in
             if let error = error {
-              // 저장 도중 에러가 발생한다면 로그 찍어줌
               print("첫 접속 날짜 저장 실패: ", error.localizedDescription)
             } else {
               print("현재 Date로 첫 접속 날짜 갱신")
             }
           }
         } else {
-          // 그렇지 않은 에러라면
-          // 에러 로그를 찍음
           print("첫 접속 날짜 관련 알 수 없는 에러", error.localizedDescription)
         }
       } else {

@@ -25,13 +25,13 @@ final class RatioPieGraphView: UIView {
   // MARK: State
   
   /// 전체에 대한 부분의 비율.
-  private var ratio: CGFloat = 0
+  private var ratio: Double = 0
   
   /// 원 그래프의 끝 각도. 라디안.
-  private var endAngle: CGFloat = 0
+  private var endAngle: Double = 0
   
   /// 그래프 뷰 높이.
-  private var graphHeight: CGFloat = 0
+  private var graphHeight: Double = 0
   
   // MARK: View
   
@@ -51,7 +51,7 @@ final class RatioPieGraphView: UIView {
   // MARK: Method
   
   /// 상태값 설정하고 뷰 갱신.
-  func setState(ratio: CGFloat, endAngle: CGFloat) {
+  func setState(ratio: Double, endAngle: Double) {
     self.ratio = ratio
     self.endAngle = endAngle
     reloadGraphView()
@@ -104,9 +104,9 @@ private extension RatioPieGraphView {
   func formPortionShapeLayer() {
     let shapeLayer = formCircleLayer(fillColor: .clear,
                                      strokeColor: Asset.graphToday.color,
-                                     strokeEnd: ratio,
-                                     ratio: ratio)
-    addAnimation(to: shapeLayer, ratio: ratio)
+                                     strokeEnd: CGFloat(ratio),
+                                     ratio: CGFloat(ratio))
+    addAnimation(to: shapeLayer, ratio: CGFloat(ratio))
     layer.addSublayer(shapeLayer)
   }
   
