@@ -35,4 +35,10 @@ extension User {
   
   /// 최근 호출한 미세먼지 농도 Attribute.
   static let recentFineDust = "recentFineDust"
+  
+  /// 일주일의 미세먼지 흡입량 Attribute.
+  static let weekFineDust = "weekFineDust"
+  
+  /// 일주일의 미세먼지 흡입량 Attribute.
+  static let weekUltrafineDust = "weekUltrafineDust"
 }

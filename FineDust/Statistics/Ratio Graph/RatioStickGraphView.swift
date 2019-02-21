@@ -94,10 +94,16 @@ extension RatioStickGraphView: GraphDrawable {
   
   /// 그래프 그리기.
   func drawGraph() {
-    let averageIntakeMultiplier = averageIntake > todayIntake
+    let averageIntakeTempMultiplier = averageIntake >= todayIntake
       ? 1 : CGFloat(averageIntake) / CGFloat(todayIntake)
-    let todayIntakeMultiplier = averageIntake > todayIntake
+    let todayIntakeTempMultiplier = averageIntake >= todayIntake
       ? CGFloat(todayIntake) / CGFloat(averageIntake) : 1
+    let averageIntakeMultiplier
+      = !averageIntakeTempMultiplier.canBecomeMultiplier
+        ? 0.01 : averageIntakeTempMultiplier
+    let todayIntakeMultiplier
+      = !todayIntakeTempMultiplier.canBecomeMultiplier
+        ? 0.01 : todayIntakeTempMultiplier
     UIView.animate(
       withDuration: Animation.duration,
       delay: Animation.delay,
@@ -119,7 +125,8 @@ extension RatioStickGraphView: GraphDrawable {
   
   /// 레이블 설정하기.
   func setLabels() {
-    let ratio = Double(todayIntake) / Double(averageIntake) * 100
+    let tempRatio = Double(todayIntake) / Double(averageIntake) * 100
+    let ratio = !tempRatio.canBecomeMultiplier ? 0 : tempRatio
     percentLabel.countFromZero(to: Int(ratio),
                                unit: .percent,
                                interval: FDCountingLabel.interval(forCounting: ratio))

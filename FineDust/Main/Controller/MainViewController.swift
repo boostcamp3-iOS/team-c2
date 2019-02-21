@@ -22,6 +22,9 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
   @IBOutlet private weak var healthKitInfoView: UIView!
+  @IBOutlet private weak var locationInfoView: UIView!
+  @IBOutlet private weak var currentDistance: UILabel!
+  @IBOutlet private weak var currentWalkingCount: UILabel!
   
   // MARK: - Properties
   
@@ -71,6 +74,39 @@ extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
     updateAPIInfo()
   }
+  
+  /// 데이터를 받아오는데 문제가 있으면 코어데이터에 마지막으로 저장된 값을 불러옴.
+  func handleIfFail(_ notification: Notification) {
+    if let error = notification.locationTaskError {
+      coreDataService.requestLastSavedData { lastSaveData, error in
+        if let data = lastSaveData {
+          DispatchQueue.main.async {
+            self.intakeFineDustLable.countFromZero(to: data.todayFineDust,
+                                                   unit: .microgram,
+                                                   interval: 1.0 /
+                                                    Double(data.todayFineDust))
+            
+            self.intakeUltrafineDustLabel.countFromZero(to: data.todayUltrafineDust,
+                                                        unit: .microgram,
+                                                        interval: 1.0 /
+                                                          Double(data.todayUltrafineDust))
+            self.fineDustImageView.image
+              = UIImage(named: IntakeGrade(intake: data.todayFineDust + data.todayUltrafineDust)
+                .imageName)
+            
+            self.locationLabel.text = data.address
+            self.gradeLabel.text = DustGrade(rawValue: data.grade)?.description
+            self.fineDustLabel.countFromZero(to: data.recentFineDust,
+                                             unit: .microgram,
+                                             interval: 1.0 / Double(data.recentFineDust))
+          }
+        }
+      }
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
+    }
+    updateHealthKitInfo()
+  }
 }
 
 // MARK: - HealthKitAuthorizationObserver
@@ -93,9 +129,16 @@ extension MainViewController {
     presentOpenHealthAppAlert()
     updateFineDustImageView()
     
-    let tapRecognizer = UITapGestureRecognizer(target: self,
-                                               action: #selector(healthKitInfoViewDidTap(_:)))
-    //    self.healthKitInfoView.addGestureRecognizer(tapRecognizer)
+    // InfoView들의 둥글 모서리와 shadow 추가
+    healthKitInfoView.layer.applySketchShadow()
+    healthKitInfoView.layer.cornerRadius = 10
+    locationInfoView.layer.applySketchShadow()
+    locationInfoView.layer.cornerRadius = 10
+    
+    // 해상도 별 폰트 크기 조정.
+    let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)
+    currentWalkingCount.font = currentWalkingCount.font.withSize(size)
+    currentDistance.font = currentDistance.font.withSize(size)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -264,14 +307,14 @@ extension MainViewController {
     }
   }
   
-  /// 건강 App으로 이동시켜주는 메소드.
-  @objc private func healthKitInfoViewDidTap(_ gesture: UITapGestureRecognizer) {
-    openHealthApp()
-  }
-  
   private func openHealthApp() {
     if let url = URL(string: "x-apple-health://") {
       UIApplication.shared.open(url)
     }
+  }
+  
+  private func fontSizeByScreen(size: CGFloat) -> CGFloat {
+    let value = size / 414
+    return UIScreen.main.bounds.width * value
   }
 }
