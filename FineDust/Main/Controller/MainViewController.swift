@@ -22,6 +22,9 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
   @IBOutlet private weak var healthKitInfoView: UIView!
+  @IBOutlet private weak var locationInfoView: UIView!
+  @IBOutlet private weak var currentDistance: UILabel!
+  @IBOutlet private weak var currentWalkingCount: UILabel!
   
   // MARK: - Properties
   
@@ -93,6 +96,16 @@ extension MainViewController {
     presentOpenHealthAppAlert()
     updateFineDustImageView()
     
+    // InfoView들의 둥글 모서리와 shadow 추가
+    healthKitInfoView.layer.applySketchShadow()
+    healthKitInfoView.layer.cornerRadius = 10
+    locationInfoView.layer.applySketchShadow()
+    locationInfoView.layer.cornerRadius = 10
+    
+    // 해상도 별 폰트 크기 조정.
+    let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)
+    currentWalkingCount.font = currentWalkingCount.font.withSize(size)
+    currentDistance.font = currentDistance.font.withSize(size)
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -265,5 +278,10 @@ extension MainViewController {
     if let url = URL(string: "x-apple-health://") {
       UIApplication.shared.open(url)
     }
+  }
+  
+  private func fontSizeByScreen(size: CGFloat) -> CGFloat {
+    let value = size / 414
+    return UIScreen.main.bounds.width * value
   }
 }
