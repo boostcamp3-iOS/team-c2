@@ -38,12 +38,7 @@ final class FeedbackListService: FeedbackListServiceType {
     let count = dustFeedbacks.count
     return count
   }
-  
-  /// 해당 인덱스의 피드백 정보를 반환함.
-  func fetchFeedback(at index: Int) -> DustFeedback {
-    return dustFeedbacks[index]
-  }
-  
+
   /// 피드백 정보를 최신순으로 반환함.
   func fetchFeedbacksByRecentDate() -> [DustFeedback] {
     return dustFeedbacks.sorted { $0.date > $1.date }
@@ -79,7 +74,7 @@ final class FeedbackListService: FeedbackListServiceType {
     isBookmarkedByTitle[title] = false
   }
   
-  /// 제목으로 피드백 전체 정보를 가져옴.
+  /// 제목으로 피드백 정보를 가져옴.
   func fetchFeedback(by title: String) -> DustFeedback? {
     return dustFeedbacks.filter { $0.title == title }.first
   }
