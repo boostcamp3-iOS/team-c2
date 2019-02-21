@@ -15,10 +15,7 @@ protocol FeedbackListServiceType: class {
   var isBookmarkedByTitle: [String: Bool] { get set }
   
   /// 피드백 정보의 개수를 반환함.
-  func fetchFeedbackCount() throws -> Int
-  
-  /// 해당 인덱스의 피드백 정보를 반환함
-  func fetchFeedback(at index: Int) -> DustFeedback
+  func fetchFeedbackCount() -> Int
   
   /// 피드백 정보를 최신순으로 반환함
   func fetchFeedbacksByRecentDate() -> [DustFeedback]
