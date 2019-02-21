@@ -74,6 +74,35 @@ extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
     updateAPIInfo()
   }
+  
+  func handleIfFail(_ notification: Notification) {
+    if let error = notification.locationTaskError {
+      coreDataService.requestLastSavedData { lastSaveData, error in
+        if let data = lastSaveData {
+          DispatchQueue.main.async {
+            self.intakeFineDustLable.countFromZero(to: data.todayFineDust,
+                                                   unit: .microgram,
+                                                   interval: 1.0 /
+                                                    Double(data.todayFineDust))
+            
+            self.intakeUltrafineDustLabel.countFromZero(to: data.todayUltrafineDust,
+                                                        unit: .microgram,
+                                                        interval: 1.0 /
+                                                          Double(data.todayUltrafineDust))
+            
+            self.locationLabel.text = data.address
+            self.gradeLabel.text = DustGrade(rawValue: data.grade)?.description
+            self.fineDustLabel.countFromZero(to: data.recentFineDust,
+                                             unit: .microgram,
+                                             interval: 1.0 / Double(data.recentFineDust))
+          }
+        }
+      }
+      print(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
+    }
+    updateHealthKitInfo()
+  }
 }
 
 // MARK: - HealthKitAuthorizationObserver
