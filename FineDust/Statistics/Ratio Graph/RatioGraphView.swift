@@ -58,3 +58,7 @@ final class RatioGraphView: UIView {
     stickGraphView.setState(average: averageIntake, today: todayIntake)
   }
 }
+
+// MARK: - GraphDrawable 프로토콜 준수
+
+extension RatioGraphView: GraphDrawable { }

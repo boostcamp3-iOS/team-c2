@@ -33,4 +33,10 @@ extension GraphDrawable {
     drawGraph()
     setLabels()
   }
+  
+  func deinitializeSubviews() { }
+  
+  func drawGraph() { }
+  
+  func setLabels() { }
 }
