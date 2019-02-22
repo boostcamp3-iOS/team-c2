@@ -21,6 +21,9 @@ final class RatioGraphView: UIView {
   /// 파이 그래프가 위치하는 좌측 뷰.
   @IBOutlet private weak var pieGraphView: RatioPieGraphView!
   
+  /// 타이틀 레이블.
+  @IBOutlet private weak var titleLabel: UILabel!
+  
   /// 막대 그래프가 위치하는 우측 뷰.
   private lazy var stickGraphView: RatioStickGraphView! = {
     guard let contentView =
@@ -39,6 +42,11 @@ final class RatioGraphView: UIView {
   }()
   
   // MARK: Method
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    titleLabel.text = "Weekly rate of inhalation".localized
+  }
   
   /// 뷰 전체 설정.
   func setup() {

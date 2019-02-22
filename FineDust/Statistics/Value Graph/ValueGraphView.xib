@@ -237,7 +237,7 @@
             <connections>
                 <outlet property="dateLabel" destination="jWV-sT-069" id="4Zd-DL-ibJ"/>
                 <outlet property="graphContainerView" destination="czD-Mk-e1B" id="7pR-PN-Bdi"/>
-                <outlet property="titleLabel" destination="zGk-lF-LjL" id="r9I-gg-ejq"/>
+                <outlet property="titleLabel" destination="zGk-lF-LjL" id="uGg-to-hLd"/>
                 <outletCollection property="dayLabels" destination="SlF-r1-i3D" collectionClass="NSMutableArray" id="JIF-Ya-FgF"/>
                 <outletCollection property="dayLabels" destination="AyM-rU-hZW" collectionClass="NSMutableArray" id="y3n-xh-UXh"/>
                 <outletCollection property="dayLabels" destination="1UC-f1-uZa" collectionClass="NSMutableArray" id="hVB-ib-REv"/>

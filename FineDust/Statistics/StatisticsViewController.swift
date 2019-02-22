@@ -33,6 +33,8 @@ final class StatisticsViewController: UIViewController {
   /// 미세먼지 / 초미세먼지 토글하는 세그먼티드 컨트롤.
   @IBOutlet private weak var segmentedControl: UISegmentedControl! {
     didSet {
+      segmentedControl.setTitle("Fine dust".localized, forSegmentAt: 0)
+      segmentedControl.setTitle("Ultrafine dust".localized, forSegmentAt: 1)
       segmentedControl.addTarget(self,
                                  action: #selector(segmentedControlValueDidChange(_:)),
                                  for: .valueChanged)

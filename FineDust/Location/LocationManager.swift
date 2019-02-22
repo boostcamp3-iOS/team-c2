@@ -39,6 +39,10 @@ final class LocationManager: NSObject {
 
 extension LocationManager: LocationManagerType {
   
+  var authorizationStatus: CLAuthorizationStatus {
+    return CLLocationManager.authorizationStatus()
+  }
+  
   var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)? {
     return { status in
       // 권한이 허용이 되면 위치 정보 갱신을 시작함

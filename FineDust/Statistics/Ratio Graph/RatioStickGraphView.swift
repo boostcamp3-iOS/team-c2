@@ -71,6 +71,18 @@ final class RatioStickGraphView: UIView {
   /// 퍼센트 레이블.
   @IBOutlet private weak var percentLabel: FDCountingLabel!
   
+  /// 일주일 평균 레이블.
+  @IBOutlet private weak var weeklyAverageLabel: UILabel!
+  
+  /// 오늘 레이블.
+  @IBOutlet private weak var todayLabel: UILabel!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    weeklyAverageLabel.text = "Weekly\naverage".localized
+    todayLabel.text = "Today".localized
+  }
+  
   /// 상태 설정하고 뷰 갱신.
   func setState(average: Int, today: Int) {
     averageIntake = average

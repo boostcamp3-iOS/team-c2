@@ -52,6 +52,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="pieGraphView" destination="7TK-MT-dTa" id="ceI-yq-a3w"/>
+                <outlet property="titleLabel" destination="UOu-Vb-qjS" id="FPm-l9-ULk"/>
             </connections>
             <point key="canvasLocation" x="36" y="-120.98950524737631"/>
         </view>

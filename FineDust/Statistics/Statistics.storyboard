@@ -41,8 +41,8 @@
                                     <constraint firstAttribute="height" constant="28" id="cPh-D0-4aF"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Fine dust"/>
-                                    <segment title="Ultrafine dust"/>
+                                    <segment title="미세먼지"/>
+                                    <segment title="초미세먼지"/>
                                 </segments>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vK-Nk-thK">
