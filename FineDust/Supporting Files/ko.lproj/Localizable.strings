@@ -40,3 +40,5 @@
 "Health App" = "건강 App";
 "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'내안의먼지'는 건강 App에 대한 권한이 필요합니다. 건강 App -> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 허용해주세요.";
 "Location" = "위치 권한";
+"Please check your network connection." = "네트워크 연결을 확인해 주세요.";
+"Please verify your location permissions." = "위치 권한을 확인해 주세요.";

@@ -80,7 +80,7 @@ final class ValueGraphView: UIView {
     var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
     // 마지막 값을 오늘로 바꿈
     reversed.removeLast()
-    reversed.append("오늘")
+    reversed.append("Today".localized)
     return reversed
   }
   
