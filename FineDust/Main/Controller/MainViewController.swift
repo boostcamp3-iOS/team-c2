@@ -21,10 +21,11 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
-  @IBOutlet private weak var healthKitInfoView: UIView!
-  @IBOutlet private weak var locationInfoView: UIView!
   @IBOutlet private weak var currentDistance: UILabel!
   @IBOutlet private weak var currentWalkingCount: UILabel!
+  @IBOutlet private weak var dataContainerView: UIView!
+  @IBOutlet private weak var todayFineDustContainerView: UIView!
+  @IBOutlet private weak var todayUltrafineDustContainerView: UIView!
   
   // MARK: - Properties
   
@@ -162,8 +163,9 @@ extension MainViewController {
     updateFineDustImageView()
     
     // InfoView들의 둥글 모서리와 shadow 추가
-    healthKitInfoView.layer.setBorder(color: Asset.graphBorder.color, width: 1, radius: 10)
-    locationInfoView.layer.setBorder(color: Asset.graphBorder.color, width: 1, radius: 10)
+    dataContainerView.layer
+      .applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 4, blur: 16, spread: 0)
+    dataContainerView.layer.cornerRadius = 10
     
     // 해상도 별 폰트 크기 조정.
     let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)

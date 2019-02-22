@@ -30,8 +30,7 @@ final class GeocoderManager: GeocoderManagerType {
                                 }
                                 guard let placemark = placemarks?.first else { return }
                                 let locality = placemark.locality ?? ""
-                                // 도로명과 번지를 잘라 도로명만 취함
-                                let name = placemark.name?.components(separatedBy: " ").first ?? ""
+                                let name = placemark.name ?? ""
                                 let address = "\(locality) \(name)"
                                 completion(address, nil)
     }
