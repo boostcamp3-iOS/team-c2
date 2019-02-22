@@ -16,6 +16,7 @@
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		CF3FAFCABD0FF5505CA5375FB2DC5915 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
+		97A3EC3C137135A10DD6E66C58905353 /* CommonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */; };
 		E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */; };
 		254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */; };
 		29032DEF5F69B5985D8D151D90D17FB4 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EAFDFB88CD840EE562502E3EE74714 /* CoreDataError.swift */; };
@@ -246,6 +247,7 @@
 		9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
+		EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTabBarController.swift; sourceTree = "<group>"; };
 		35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Intake.swift"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
 		D5EAFDFB88CD840EE562502E3EE74714 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */,
+				EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */,
 				4BDF70F8C8CCF939A458E8C06F17FCA1 /* FDCountingLabel.swift */,
 				768ED33DE8C563664122534CC0337E8E /* Hour.swift */,
 				1033EA9C18FE338D4FD4245B2F65FFA1 /* LastSavedData.swift */,
@@ -1110,6 +1113,7 @@
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
+				97A3EC3C137135A10DD6E66C58905353 /* CommonTabBarController.swift in Sources */,
 				E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */,
 				254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */,
 				29032DEF5F69B5985D8D151D90D17FB4 /* CoreDataError.swift in Sources */,

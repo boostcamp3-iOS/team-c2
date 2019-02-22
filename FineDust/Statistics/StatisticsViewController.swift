@@ -124,12 +124,6 @@ final class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: IntakeRequestable {
   
-  func injectDependency(_ intakeService: IntakeServiceType,
-                        _ coreDataService: CoreDataServiceType) {
-    self.intakeService = intakeService
-    self.coreDataService = coreDataService
-  }
-  
   var requestIntakeHandler: ([Int]?, [Int]?, Int?, Int?, Error?) -> Void {
     return { [weak self] fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
       guard let self = self else { return }
@@ -253,14 +247,14 @@ private extension StatisticsViewController {
     ratioGraphBackgroundView.layer.setBorder(color: Asset.graphBorder.color,
                                              width: Layer.borderWidth,
                                              radius: Layer.cornerRadius)
-    valueGraphView.dataSource = self
-    ratioGraphView.dataSource = self
   }
   
   /// 서브뷰 생성하여 프로퍼티에 할당.
   func createGraphViews() {
     valueGraphView = instantiateGraphView(ValueGraphView.self)
     ratioGraphView = instantiateGraphView(RatioGraphView.self)
+    valueGraphView.dataSource = self
+    ratioGraphView.dataSource = self
     valueGraphBackgroundView.addSubview(valueGraphView)
     ratioGraphBackgroundView.addSubview(ratioGraphView)
   }

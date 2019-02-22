@@ -12,10 +12,10 @@ import Foundation
 protocol IntakeRequestable: class {
   
   /// IntakeServiceType 프로토콜을 준수하는 모듈.
-  var intakeService: IntakeServiceType? { get }
+  var intakeService: IntakeServiceType? { get set }
   
   /// CoreDataServiceType 프로토콜을 준수하는 모듈.
-  var coreDataService: CoreDataServiceType? { get }
+  var coreDataService: CoreDataServiceType? { get set }
   
   /// 의존성 주입.
   func injectDependency(_ intakeService: IntakeServiceType,
@@ -31,6 +31,12 @@ protocol IntakeRequestable: class {
 }
 
 extension IntakeRequestable {
+  
+  func injectDependency(_ intakeService: IntakeServiceType,
+                        _ coreDataService: CoreDataServiceType) {
+    self.intakeService = intakeService
+    self.coreDataService = coreDataService
+  }
   
   func requestIntake(completion: @escaping ([Int]?, [Int]?, Int?, Int?, Error?) -> Void) {
     intakeService?.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
