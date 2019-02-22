@@ -46,6 +46,38 @@ final class MainViewController: UIViewController {
     return formatter
   }()
   
+  // MARK: IBAction
+  
+  @IBAction func authorizationButtonDidTap(_ sender: Any) {
+    if !healthKitService.isAuthorized {
+      UIAlertController.alert(title: "권한이 필요합니다.", message: """
+      내안의 먼지를 사용하려면 위치권한과 건강 권한이 필요합니다.
+      원하는 버튼을 눌러주세요.
+      """, style: .actionSheet)
+        .action(title: "Settings", style: .default) { _, _ in
+          guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            return
+          }
+          if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+          }
+        }.action(title: "Health", style: .default) { _, _ in
+          guard let url = URL(string: "x-apple-health://") else {
+            return
+          }
+          if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+          }
+        }
+        .action(title: "Cancel", style: .cancel)
+        .present(to: self)
+    } else {
+      UIAlertController.alert(title: "", message: "필요한 권한이 없습니다.")
+        .action(title: "확인")
+        .present(to: self)
+    }
+  }
+  
   // MARK: - Life Cycle
   
   override func viewDidLoad() {
@@ -130,10 +162,8 @@ extension MainViewController {
     updateFineDustImageView()
     
     // InfoView들의 둥글 모서리와 shadow 추가
-    healthKitInfoView.layer.applySketchShadow()
-    healthKitInfoView.layer.cornerRadius = 10
-    locationInfoView.layer.applySketchShadow()
-    locationInfoView.layer.cornerRadius = 10
+    healthKitInfoView.layer.setBorder(color: Asset.graphBorder.color, width: 1, radius: 10)
+    locationInfoView.layer.setBorder(color: Asset.graphBorder.color, width: 1, radius: 10)
     
     // 해상도 별 폰트 크기 조정.
     let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)
