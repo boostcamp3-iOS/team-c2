@@ -15,31 +15,31 @@ class TestDustGrade: XCTestCase {
   func test_good() {
     let grade = DustGrade(rawValue: 1)
     XCTAssertEqual(grade, DustGrade.good)
-    XCTAssertEqual(grade?.description.localized, "좋음")
+    XCTAssertEqual(grade?.description.localized, "Good")
   }
   
   func test_normal() {
     let grade = DustGrade(rawValue: 2)
     XCTAssertEqual(grade, DustGrade.normal)
-    XCTAssertEqual(grade?.description.localized, "보통")
+    XCTAssertEqual(grade?.description.localized, "Normal")
   }
   
   func test_bad() {
     let grade = DustGrade(rawValue: 3)
     XCTAssertEqual(grade, DustGrade.bad)
-    XCTAssertEqual(grade?.description.localized, "나쁨")
+    XCTAssertEqual(grade?.description.localized, "Bad")
   }
   
   func test_veryBad() {
     let grade = DustGrade(rawValue: 4)
     XCTAssertEqual(grade, DustGrade.veryBad)
-    XCTAssertEqual(grade?.description.localized, "매우 나쁨")
+    XCTAssertEqual(grade?.description.localized, "Very bad")
   }
   
   func test_default() {
     let grade = DustGrade(rawValue: 5)
     XCTAssertEqual(grade, DustGrade.default)
-    XCTAssertEqual(grade?.description.localized, "알 수 없음")
+    XCTAssertEqual(grade?.description.localized, "Unknown")
   }
   
   func test_none() {
