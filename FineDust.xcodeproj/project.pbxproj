@@ -53,7 +53,7 @@
 		2857D1F7306B342456D836BA06F582AE /* DustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C98043155CF43D3E5E4605CB1A88BE /* DustResponse.swift */; };
 		F726386EC2915DC663C9CF635154C286 /* DustStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */; };
 		D55A974A6428DC386E2F133B460373A7 /* FDCountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDF70F8C8CCF939A458E8C06F17FCA1 /* FDCountingLabel.swift */; };
-		F7D73707461038D505CBB62AF328D9E2 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */; };
+		9E157BB149FC13DBA27E94C033950626 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */; };
 		D7736668B56EC6FFB65C3F86CC22963F /* FeedbackDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D82683EF4C369B76D81A52E561D125 /* FeedbackDetailViewController.swift */; };
 		A7D775E7BD2742C9F215C05EC30481BE /* FeedbackListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */; };
 		548B48B18573E8F39B87EF0B206A2D50 /* FeedbackListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1907A7ABC45E06D253CFDDB27B219B01 /* FeedbackListServiceType.swift */; };
@@ -237,6 +237,7 @@
 		D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F57EA71672D592C503198144E3648E /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68A4AA015E273BD556606E8DD84E8F7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Feedback.storyboard; sourceTree = "<group>"; };
 		067E449E7BAAA91C4EE4A2715980EAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
@@ -278,7 +279,6 @@
 		83C98043155CF43D3E5E4605CB1A88BE /* DustResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DustResponse.swift; sourceTree = "<group>"; };
 		F10780943A97F514FA160307D17C959E /* DustStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DustStatusCode.swift; path = FineDust/Dust/DustStatusCode.swift; sourceTree = SOURCE_ROOT; };
 		4BDF70F8C8CCF939A458E8C06F17FCA1 /* FDCountingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDCountingLabel.swift; sourceTree = "<group>"; };
-		E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		15D82683EF4C369B76D81A52E561D125 /* FeedbackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailViewController.swift; sourceTree = "<group>"; };
 		15C67504047F83769B8622AD0D05A620 /* FeedbackListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListService.swift; sourceTree = "<group>"; };
 		1907A7ABC45E06D253CFDDB27B219B01 /* FeedbackListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListServiceType.swift; sourceTree = "<group>"; };
@@ -415,9 +415,10 @@
 		9B8DA6A2FE02219E549C233656F8918A /* XMLManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLManagerType.swift; sourceTree = "<group>"; };
 		771ADF487575031701FD3CE29CBA228C /* XMLParsingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParsingType.swift; sourceTree = "<group>"; };
 		75D580805D03BA8E22002C81109A84F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F662A8A63093F1D01EF42971AD9BFA93 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		AB5C4B59BAD8CCE12D731102F3F05356 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Feedback.strings; sourceTree = "<group>"; };
 		18565C03190EC81ED411F90F18F99195 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		51C06C21029884B205362AD35FD98149 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F662A8A63093F1D01EF42971AD9BFA93 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		FE84CBEDDE8ED4F39D8B0BA3C4F7A506 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1037,7 +1038,7 @@
 				740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */,
 				BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */,
 				D0765E052D0AF866A0C2843180CF4547 /* DustFeedback.json in Resources */,
-				F7D73707461038D505CBB62AF328D9E2 /* Feedback.storyboard in Resources */,
+				9E157BB149FC13DBA27E94C033950626 /* Feedback.storyboard in Resources */,
 				A91D83975CED5DB65ED352B523335AB2 /* LaunchScreen.storyboard in Resources */,
 				1E95158D8B9F32E1925404317EF3FC1F /* Localizable.strings in Resources */,
 				5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */,
@@ -1279,6 +1280,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E208DBDEC015D48168F788BB33917E01 /* Feedback.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68A4AA015E273BD556606E8DD84E8F7C /* Base */,
+				AB5C4B59BAD8CCE12D731102F3F05356 /* ko */,
+			);
+			name = Feedback.storyboard;
+			sourceTree = "<group>";
+		};
 		BEFABB8E1F9CB2D4E34DD0B06D45172A /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
