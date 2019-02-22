@@ -59,6 +59,6 @@ extension CLError.Code: ServiceErrorType {
       print("Core Location Error: ",
             "Core Location could not initialize the region monitoring feature immediately.")
     }
-    return "위치 권한을 확인해 주세요."
+    return "Please verify your location permissions.".localized
   }
 }

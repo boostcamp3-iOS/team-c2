@@ -122,7 +122,6 @@ final class StatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tabBarItem.title = "Stats".localized
     createSubviews()
     setConstraintsToSubviews()
     registerLocationObserver()

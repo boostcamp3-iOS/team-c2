@@ -22,7 +22,7 @@ extension HTTPError {
   var localizedDescription: String {
     switch self {
     case .default:
-      return "네트워크 연결을 확인해 주세요.".localized
+      return "Please check your network connection.".localized
     }
   }
 }

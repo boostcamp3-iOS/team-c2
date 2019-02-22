@@ -40,3 +40,5 @@
 "Health App" = "Health App";
 "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions.";
 "Location" = "Location";
+"Please check your network connection." = "Please check your network connection.";
+"Please verify your location permissions." = "Please verify your location permissions.";
