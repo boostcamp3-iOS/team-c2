@@ -39,3 +39,4 @@
 "Execution of query statement failed." = "query문 실행이 실패했습니다.";
 "Health App" = "건강 App";
 "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'내안의먼지'는 건강 App에 대한 권한이 필요합니다. 건강 App -> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 허용해주세요.";
+"Location" = "위치 권한";
