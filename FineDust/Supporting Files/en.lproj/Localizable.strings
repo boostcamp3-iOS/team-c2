@@ -39,3 +39,4 @@
 "Execution of query statement failed." = "Execution of query statement failed.";
 "Health App" = "Health App";
 "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions." = "'Dust inside me' need authority to the Health App. Health App -> Data Sources -> Dust inside me -> Allow all write and read permissions.";
+"Location" = "Location";
