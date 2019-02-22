@@ -14,7 +14,7 @@
         <!--Feedback List View Controller-->
         <scene sceneID="rBX-S8-JcQ">
             <objects>
-                <viewController id="SJf-BD-jk7" customClass="FeedbackListViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SJf-BD-jk7" customClass="FeedbackListViewController" customModule="FineDust" customModuleProvider="target" propertyAccessControl="localizable" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="61v-n6-cUP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,6 +182,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <attributedString key="userComments">
+                        <fragment content="Info"/>
+                    </attributedString>
                     <connections>
                         <outlet property="feedbackListTableView" destination="zy8-Zz-Dej" id="fUb-Ge-yn1"/>
                     </connections>
