@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Dust inside me</string>
+	<string>내안의먼지</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -41,13 +41,13 @@
 		<true/>
 	</dict>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Use your health data to calculate the fine dust intake.</string>
+	<string>사용자의 건강 데이터를 사용하여 미세먼지 섭취량을 계산합니다.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Use your health data to calculate the fine dust intake.</string>
+	<string>사용자의 건강 데이터를 사용하여 미세먼지 섭취량을 계산합니다.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Use your location information to get the fine dust concentration at the current location.</string>
+	<string>위치 정보를 사용하여 현재 위치의 미세먼지 농도를 가져옵니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Use your location information to get the fine dust concentration at the current location.</string>
+	<string>위치 정보를 사용하여 현재 위치의 미세먼지 농도를 가져옵니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
