@@ -35,11 +35,15 @@
 
 ## 디자인
 
-### 현재까지 구현된 뷰
+### 스크린샷
 
-![1](./images/1.PNG)
-![2](./images/2.PNG)
-![3](./images/3.PNG)
+| 화면                 | 스크린샷             |
+| -------------------- | -------------------- |
+| 메인 탭              | ![1](./images/1.PNG) |
+| 통계 탭 - 미세먼지   | ![2](./images/2.PNG) |
+| 통계 탭 - 초미세먼지 | ![3](./images/3.PNG) |
+| 정보 탭              | ![4](./images/4.PNG) |
+| 통계 탭 세부         | ![5](./images/5.PNG) |
 
 ### 컬러칩
 
@@ -66,6 +70,7 @@ disabled_rules:
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
+- FineDustTests/
 - FineDust/SWXMLHash
 
 line_length:
@@ -76,11 +81,10 @@ identifier_name:
   excluded:
     - x
     - y
-    - dx
 ```
 
 - StyleShare의 **[Swift Style Guide](https://github.com/StyleShare/swift-style-guide)** 준수
-- 스토리보드 및 에셋 사용을 용이하게 하기 위해 **[SwiftGen](https://github.com/SwiftGen/SwiftGen)** 사용
+- 에셋과 스토리보드 사용, 로컬라이징을 용이하게 하기 위해 **[SwiftGen](https://github.com/SwiftGen/SwiftGen)** 사용
 
 ```yaml
 # swiftgen.yml
@@ -88,13 +92,20 @@ xcassets:
   inputs: FineDust/Supporting Files/Assets.xcassets
   outputs:
     templateName: swift4
-    output: Assets.swift
+    output: FineDust/SwiftGen/Assets.swift
 
 ib:
   inputs: FineDust
   outputs:
     templateName: scenes-swift4
-    output: Storyboard.swift
+    output: FineDust/SwiftGen/Storyboard.swift
+
+strings:
+  inputs:
+    - FineDust/Supporting Files/ko.lproj/Localizable.strings
+  outputs:
+    templateName: structured-swift4
+    output: FineDust/SwiftGen/Strings.swift
 ```
 
 - `project.pbxproj` 파일의 충돌을 최소화하고 해결을 쉽게 하기 위해 **[xUnique](https://github.com/truebit/xUnique)** 사용

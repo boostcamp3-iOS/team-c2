@@ -148,8 +148,12 @@
                                     <constraint firstItem="sGr-3S-82N" firstAttribute="centerY" secondItem="ymA-Jm-9sH" secondAttribute="centerY" id="WhU-PK-Es0"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GqH-yh-ZBI">
-                                <rect key="frame" x="337" y="54" width="22" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GqH-yh-ZBI">
+                                <rect key="frame" x="242" y="54" width="117" height="27"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <state key="normal" title="정보가 표시되지 않나요?">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="authorizationButtonDidTap:" destination="PQ5-wO-1n3" eventType="touchUpInside" id="qqc-kK-89w"/>
                                 </connections>
@@ -344,6 +348,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oZo-0S-gGs"/>
                     <connections>
+                        <outlet property="authorizationButton" destination="GqH-yh-ZBI" id="OLa-er-ZOz"/>
                         <outlet property="currentDistance" destination="Akz-ud-YeW" id="dgW-mW-Bhx"/>
                         <outlet property="currentWalkingCount" destination="Wcm-Sj-Egu" id="HlE-oj-RP0"/>
                         <outlet property="dataContainerView" destination="unL-2J-JcY" id="orZ-72-g1d"/>

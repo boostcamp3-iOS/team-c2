@@ -12,17 +12,17 @@ enum HealthKitError: ServiceErrorType {
   var localizedDescription: String {
     switch self {
     case .notMatchingArguments:
-      return "An unknown error has occurred.".localized
+      return L10n.anUnknownErrorHasOccurred
     case .unexpectedIdentifier:
-      return "An unknown error has occurred.".localized
+      return L10n.anUnknownErrorHasOccurred
     case .queryNotValid:
-      return "Health App permissions not yet set.".localized
+      return L10n.healthAppPermissionsNotYetSet
     case .queryNotSearched:
-      return "Do not have Health App privileges.".localized
+      return L10n.doNotHaveHealthAppPrivileges
     case .queryExecutedFailed:
-      return "Execution of query statement failed.".localized
+      return L10n.executionOfQueryStatementFailed
     case .notAuthorized:
-      return "Do not have Health App privileges.".localized
+      return L10n.doNotHaveHealthAppPrivileges
     }
   }
   

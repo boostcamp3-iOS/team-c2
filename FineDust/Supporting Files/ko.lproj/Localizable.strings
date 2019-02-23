@@ -42,3 +42,5 @@
 "Location" = "위치 권한";
 "Please check your network connection." = "네트워크 연결을 확인해 주세요.";
 "Please verify your location permissions." = "위치 권한을 확인해 주세요.";
+"Don't you have any information?" = "정보가 표시되지 않나요?";
+"You must allow permission for health app and location to view information." = "정보를 확인하려면 건강 앱 및 위치에 대한 권한을 허용해야 합니다.";

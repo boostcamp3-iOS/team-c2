@@ -26,6 +26,7 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var dataContainerView: UIView!
   @IBOutlet private weak var todayFineDustContainerView: UIView!
   @IBOutlet private weak var todayUltrafineDustContainerView: UIView!
+  @IBOutlet private weak var authorizationButton: UIButton!
   
   // MARK: - Properties
   
@@ -53,15 +54,17 @@ final class MainViewController: UIViewController {
     let isHealthKitAuthorized = healthKitService.isAuthorized && healthKitService.isDetermined
     let isLocationAuthorized = LocationManager.shared.authorizationStatus == .authorizedWhenInUse
       || LocationManager.shared.authorizationStatus == .authorizedAlways
-    let healthKitAction = UIAlertAction(title: "Health App".localized, style: .default) { _ in
+    let healthKitAction = UIAlertAction(title: L10n.healthApp, style: .default) { _ in
       self.openHealthApp()
     }
-    let locationAction = UIAlertAction(title: "Location".localized, style: .default) { _ in
+    let locationAction = UIAlertAction(title: L10n.location, style: .default) { _ in
       self.openSettingApp()
     }
-    let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
-    let alert = UIAlertController(title: "Permission Setting",
-                                  message: "",
+    let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
+    let title = L10n.donTYouHaveAnyInformation
+    let message = L10n.youMustAllowPermissionForHealthAppAndLocationToViewInformation
+    let alert = UIAlertController(title: title,
+                                  message: message,
                                   preferredStyle: .actionSheet)
     if !isHealthKitAuthorized { alert.addAction(healthKitAction) }
     if !isLocationAuthorized { alert.addAction(locationAction) }
@@ -161,6 +164,8 @@ extension MainViewController {
     let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)
     currentWalkingCount.font = currentWalkingCount.font.withSize(size)
     currentDistance.font = currentDistance.font.withSize(size)
+    
+    authorizationButton.setTitle(L10n.donTYouHaveAnyInformation, for: [])
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -170,7 +175,7 @@ extension MainViewController {
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
           DispatchQueue.main.async {
-            self.stepCountLabel.text = "0 " + "steps".localized
+            self.stepCountLabel.text = "0 \(L10n.steps)"
           }
         } else {
           error.presentToast()
@@ -188,7 +193,7 @@ extension MainViewController {
             }
             if self.healthKitService.isAuthorized {
               DispatchQueue.main.async {
-                self.stepCountLabel.text = "\(Int(value)) " + "steps".localized
+                self.stepCountLabel.text = "\(Int(value)) \(L10n.steps)"
               }
             }
         }
@@ -316,16 +321,14 @@ extension MainViewController {
 
     if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
-        .alert(title: "Do not have Health App privileges.".localized,
-               message: """
-                'Dust inside me' need authority to the Health App. Health App -> \
-                Data Sources -> Dust inside me -> Allow all write and read permissions.
-          """.localized
+        .alert(title: L10n.doNotHaveHealthAppPrivileges,
+               message: L10n.DustInsideMeNeedAuthorityToTheHealthApp
+                .healthAppDataSourcesDustInsideMeAllowAllWriteAndReadPermissions
         )
-        .action(title: "Health App".localized, style: .default) { _, _ in
+        .action(title: L10n.healthApp, style: .default) { _, _ in
           self.openHealthApp()
         }
-        .action(title: "Cancel".localized, style: .cancel)
+        .action(title: L10n.cancel, style: .cancel)
         .present(to: self)
     }
   }

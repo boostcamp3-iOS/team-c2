@@ -22,7 +22,7 @@ extension HTTPError {
   var localizedDescription: String {
     switch self {
     case .default:
-      return "Please check your network connection.".localized
+      return L10n.pleaseCheckYourNetworkConnection
     }
   }
 }

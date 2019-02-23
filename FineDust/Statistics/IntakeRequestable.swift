@@ -24,10 +24,10 @@ protocol IntakeRequestable: class {
   /// 흡입량 요청.
   ///
   /// - Parameter completion: 일주일 미세먼지 / 일주일 초미세먼지 / 오늘 미세먼지 / 오늘 초미세먼지 / 에러
-  func requestIntake(completion: @escaping ([Int]?, [Int]?, Int?, Int?, Error?) -> Void)
+  func requestIntake(completion: @escaping (IntakeData?, Error?) -> Void)
   
   /// 흡입량 요청 핸들러.
-  var requestIntakeHandler: ([Int]?, [Int]?, Int?, Int?, Error?) -> Void { get }
+  var requestIntakeHandler: (IntakeData?, Error?) -> Void { get }
 }
 
 extension IntakeRequestable {
@@ -38,16 +38,16 @@ extension IntakeRequestable {
     self.coreDataService = coreDataService
   }
   
-  func requestIntake(completion: @escaping ([Int]?, [Int]?, Int?, Int?, Error?) -> Void) {
+  func requestIntake(completion: @escaping (IntakeData?, Error?) -> Void) {
     intakeService?.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error {
-        completion(nil, nil, nil, nil, error)
+        completion(nil, error)
         return
       }
       guard let self = self else { return }
       self.intakeService?.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error {
-          completion(nil, nil, nil, nil, error)
+          completion(nil, error)
           return
         }
         guard let self = self,
@@ -67,7 +67,11 @@ extension IntakeRequestable {
             }
         }
         print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
-        completion(fineDustWeekIntakes, ultrafineDustWeekIntakes, fineDust, ultrafineDust, nil)
+        let intakeData = IntakeData(weekFineDust: fineDustWeekIntakes,
+                                    weekUltrafineDust: ultrafineDustWeekIntakes,
+                                    todayFineDust: fineDust,
+                                    todayUltrafineDust: ultrafineDust)
+        completion(intakeData, nil)
       }
     }
   }

@@ -82,22 +82,22 @@ final class FeedbackListViewController: UIViewController {
   @objc func settingButtonDidTap(_ sender: UIButton) {
     
     UIAlertController
-      .alert(title: "Sorting method".localized,
-             message: "Please choose how to sort information.".localized,
+      .alert(title: L10n.sortingMethod,
+             message: L10n.pleaseChooseHowToSortInformation,
              style: .actionSheet)
-      .action(title: "by Recent".localized) { _, _ in
+      .action(title: L10n.byRecent) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "by Title".localized) { _, _ in
+      .action(title: L10n.byTitle) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "by Bookmark".localized) { _, _ in
+      .action(title: L10n.byBookmark) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
         self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "Cancel".localized, style: .cancel)
+      .action(title: L10n.cancel, style: .cancel)
       .present(to: self)
   }
 }
@@ -197,10 +197,10 @@ extension FeedbackListViewController: UITableViewDelegate {
                      for: .touchUpInside)
     if section == 1 {
       button.isHidden = false
-      label.text = "Full list".localized
+      label.text = L10n.fullList
     } else {
       button.isHidden = true
-      label.text = "Optimized information".localized
+      label.text = L10n.optimizedInformation
     }
     
     return headerView

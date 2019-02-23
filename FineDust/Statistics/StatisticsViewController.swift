@@ -49,38 +49,27 @@ final class StatisticsViewController: UIViewController {
   
   var coreDataService: CoreDataServiceType?
   
-  // MARK: Stored Property
+  // MARK: Property
   
   /// 화면이 표시가 되었는가.
   private var isPresented: Bool = false
   
-  /// 7일간의 미세먼지 흡입량 모음.
-  private var fineDustTotalIntakes = [Int](repeating: 1, count: 7)
+  /// 흡입량 데이터.
+  private var intakeData: IntakeData = IntakeData()
   
-  /// 7일간의 초미세먼지 흡입량 모음.
-  private var ultrafineDustTotalIntakes = [Int](repeating: 1, count: 7)
-  
-  /// 오늘의 미세먼지 흡입량.
-  private var todayFineDustIntake: Int = 1
-  
-  /// 오늘의 초미세먼지 흡입량.
-  private var todayUltrafineDustIntake: Int = 1
-  
-  // MARK: Computed Property
-  
-  /// 미세먼지의 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: Double {
-    let reduced = fineDustTotalIntakes.reduce(0, +)
+  /// 미세먼지의 전체에 대한 오늘의 비율.
+  private var todayFineDustRatio: Double {
+    let reduced = intakeData.weekFineDust.reduce(0, +)
     let sum = reduced == 0 ? 1 : reduced
-    let last = fineDustTotalIntakes.last ?? 1
+    let last = intakeData.weekFineDust.last ?? 1
     return Double(last) / Double(sum)
   }
   
-  /// 초미세먼지의 전체에 대한 마지막 값의 비율
-  private var ultrafineDustLastValueRatio: Double {
-    let reduced = ultrafineDustTotalIntakes.reduce(0, +)
+  /// 초미세먼지의 전체에 대한 오늘의 비율.
+  private var todayUltrafineDustRatio: Double {
+    let reduced = intakeData.weekUltrafineDust.reduce(0, +)
     let sum = reduced == 0 ? 1 : reduced
-    let last = ultrafineDustTotalIntakes.last ?? 1
+    let last = intakeData.weekUltrafineDust.last ?? 1
     return Double(last) / Double(sum)
   }
   
@@ -91,18 +80,17 @@ final class StatisticsViewController: UIViewController {
     injectDependency(IntakeService(), CoreDataService())
     setupSubviews()
     createGraphViews()
-    setGraphViewConstraintsToSubviews()
+    setGraphViewConstraints()
     registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    initializeValueGraphView()
+    initializeGraphViews()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    initializeRatioGraphView()
     // 한번 보여진 이후로는 비즈니스 로직을 수행하지 않음
     if !isPresented {
       isPresented.toggle()
@@ -124,20 +112,16 @@ final class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: IntakeRequestable {
   
-  var requestIntakeHandler: ([Int]?, [Int]?, Int?, Int?, Error?) -> Void {
-    return { [weak self] fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
+  var requestIntakeHandler: (IntakeData?, Error?) -> Void {
+    return { [weak self] intakeData, error in
       guard let self = self else { return }
       if let error = error as? ServiceErrorType {
         error.presentToast()
         self.presentLastSavedData()
         return
       }
-      guard let fineDusts = fineDusts,
-        let ultrafineDusts = ultrafineDusts,
-        let fineDust = fineDust,
-        let ultrafineDust = ultrafineDust
-        else { return }
-      self.setIntakes(fineDusts, ultrafineDusts, fineDust, ultrafineDust)
+      guard let intakeData = intakeData else { return }
+      self.intakeData.reset(intakeData)
       DispatchQueue.main.async {
         self.initializeGraphViews()
       }
@@ -166,8 +150,8 @@ extension StatisticsViewController: ValueGraphViewDataSource {
   
   var intakes: [Int] {
     return segmentedControl.selectedSegmentIndex == 0
-      ? fineDustTotalIntakes
-      : ultrafineDustTotalIntakes
+      ? intakeData.weekFineDust
+      : intakeData.weekUltrafineDust
   }
 }
 
@@ -177,20 +161,20 @@ extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: Double {
     return segmentedControl.selectedSegmentIndex == 0
-      ? fineDustLastValueRatio
-      : ultrafineDustLastValueRatio
+      ? todayFineDustRatio
+      : todayUltrafineDustRatio
   }
   
   var totalIntake: Int {
-    let reducedFineDust = fineDustTotalIntakes.reduce(0, +)
-    let reducedUltrafineDust = ultrafineDustTotalIntakes.reduce(0, +)
+    let reducedFineDust = intakeData.weekFineDust.reduce(0, +)
+    let reducedUltrafineDust = intakeData.weekUltrafineDust.reduce(0, +)
     return segmentedControl.selectedSegmentIndex == 0 ? reducedFineDust : reducedUltrafineDust
   }
   
   var todayIntake: Int {
     return segmentedControl.selectedSegmentIndex == 0
-      ? todayFineDustIntake
-      : todayUltrafineDustIntake
+      ? intakeData.todayFineDust
+      : intakeData.todayUltrafineDust
   }
 }
 
@@ -206,26 +190,16 @@ private extension StatisticsViewController {
         return
       }
       if let lastSavedData  = lastSavedData {
-        self.setIntakes(lastSavedData.weekFineDust,
-                        lastSavedData.weekUltrafineDust,
-                        lastSavedData.todayFineDust,
-                        lastSavedData.todayUltrafineDust)
+        let intakeData = IntakeData(weekFineDust: lastSavedData.weekFineDust,
+                                    weekUltrafineDust: lastSavedData.weekUltrafineDust,
+                                    todayFineDust: lastSavedData.todayFineDust,
+                                    todayUltrafineDust: lastSavedData.todayUltrafineDust)
+        self.intakeData.reset(intakeData)
         DispatchQueue.main.async {
           self.initializeGraphViews()
         }
       }
     }
-  }
-  
-  /// 흡입량 관련 프로퍼티 설정.
-  func setIntakes(_ fineDusts: [Int],
-                  _ ultrafineDusts: [Int],
-                  _ fineDust: Int,
-                  _ ultrafineDust: Int) {
-    fineDustTotalIntakes = fineDusts
-    ultrafineDustTotalIntakes = ultrafineDusts
-    todayFineDustIntake = fineDust
-    todayUltrafineDustIntake = ultrafineDust
   }
 }
 
@@ -236,8 +210,8 @@ private extension StatisticsViewController {
   /// 서브뷰 초기 설정.
   func setupSubviews() {
     scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
-    segmentedControl.setTitle("Fine dust".localized, forSegmentAt: 0)
-    segmentedControl.setTitle("Ultrafine dust".localized, forSegmentAt: 1)
+    segmentedControl.setTitle(L10n.fineDust, forSegmentAt: 0)
+    segmentedControl.setTitle(L10n.ultrafineDust, forSegmentAt: 1)
     segmentedControl.addTarget(self,
                                action: #selector(segmentedControlValueDidChange(_:)),
                                for: .valueChanged)
@@ -260,7 +234,7 @@ private extension StatisticsViewController {
   }
   
   /// 서브뷰에 오토레이아웃 설정.
-  func setGraphViewConstraintsToSubviews() {
+  func setGraphViewConstraints() {
     NSLayoutConstraint.activate([
       valueGraphView.anchor.top.equal(to: valueGraphBackgroundView.anchor.top),
       valueGraphView.anchor.leading.equal(to: valueGraphBackgroundView.anchor.leading),
@@ -273,19 +247,9 @@ private extension StatisticsViewController {
       ])
   }
   
-  /// 모든 서브뷰 초기화.
+  /// 모든 그래프 뷰 초기화.
   func initializeGraphViews() {
-    initializeValueGraphView()
-    initializeRatioGraphView()
-  }
-  
-  /// 값 그래프 뷰 초기화.
-  func initializeValueGraphView() {
     valueGraphView.setup()
-  }
-  
-  /// 비율 그래프 뷰 초기화.
-  func initializeRatioGraphView() {
     ratioGraphView.setup()
   }
   

@@ -16,13 +16,15 @@ final class RatioGraphView: UIView {
   /// Ratio Graph View Data Source.
   weak var dataSource: RatioGraphViewDataSource?
   
-  // MARK: View
+  // MARK: IBOutlet
   
   /// 파이 그래프가 위치하는 좌측 뷰.
   @IBOutlet private weak var pieGraphView: RatioPieGraphView!
   
   /// 타이틀 레이블.
   @IBOutlet private weak var titleLabel: UILabel!
+  
+  // MARK: View
   
   /// 막대 그래프가 위치하는 우측 뷰.
   private lazy var stickGraphView: RatioStickGraphView! = {
@@ -43,13 +45,9 @@ final class RatioGraphView: UIView {
   
   // MARK: Method
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    titleLabel.text = "Weekly rate of inhalation".localized
-  }
-  
   /// 뷰 전체 설정.
   func setup() {
+    titleLabel.text = L10n.weeklyRateOfInhalation
     let ratio = dataSource?.intakeRatio ?? .leastNonzeroMagnitude
     let endAngle = ratio * 2 * .pi - .pi / 2
     let averageIntake = Int(Double((dataSource?.totalIntake ?? 1)) / 7.0)
