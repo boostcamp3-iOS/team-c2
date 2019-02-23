@@ -35,11 +35,11 @@ class TestStatisticsViewController: XCTestCase {
     mockCoreDataService.error = nil
     viewController.injectDependency(mockIntakeService, mockCoreDataService)
     let expect = expectation(description: "test")
-    viewController.requestIntake { fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
-      XCTAssertNotNil(fineDusts)
-      XCTAssertNotNil(ultrafineDusts)
-      XCTAssertNotNil(fineDust)
-      XCTAssertNotNil(ultrafineDust)
+    viewController.requestIntake { intakeData, error in
+      XCTAssertNotNil(intakeData?.weekFineDust)
+      XCTAssertNotNil(intakeData?.weekUltrafineDust)
+      XCTAssertNotNil(intakeData?.todayFineDust)
+      XCTAssertNotNil(intakeData?.todayUltrafineDust)
       XCTAssertNil(error)
       expect.fulfill()
     }
@@ -56,11 +56,11 @@ class TestStatisticsViewController: XCTestCase {
     mockCoreDataService.error = nil
     viewController.injectDependency(mockIntakeService, mockCoreDataService)
     let expect = expectation(description: "test")
-    viewController.requestIntake { fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
-      XCTAssertNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
-      XCTAssertNil(fineDust)
-      XCTAssertNil(ultrafineDust)
+    viewController.requestIntake { intakeData, error in
+      XCTAssertNil(intakeData?.weekFineDust)
+      XCTAssertNil(intakeData?.weekUltrafineDust)
+      XCTAssertNil(intakeData?.todayFineDust)
+      XCTAssertNil(intakeData?.todayUltrafineDust)
       XCTAssertNotNil(error)
       expect.fulfill()
     }
@@ -77,11 +77,11 @@ class TestStatisticsViewController: XCTestCase {
     mockCoreDataService.error = nil
     viewController.injectDependency(mockIntakeService, mockCoreDataService)
     let expect = expectation(description: "test")
-    viewController.requestIntake { fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
-      XCTAssertNil(fineDusts)
-      XCTAssertNil(ultrafineDusts)
-      XCTAssertNil(fineDust)
-      XCTAssertNil(ultrafineDust)
+    viewController.requestIntake { intakeData, error in
+      XCTAssertNil(intakeData?.weekFineDust)
+      XCTAssertNil(intakeData?.weekUltrafineDust)
+      XCTAssertNil(intakeData?.todayFineDust)
+      XCTAssertNil(intakeData?.todayUltrafineDust)
       XCTAssertNotNil(error)
       expect.fulfill()
     }
@@ -98,11 +98,11 @@ class TestStatisticsViewController: XCTestCase {
     mockCoreDataService.error = NSError(domain: "", code: 0, userInfo: nil)
     viewController.injectDependency(mockIntakeService, mockCoreDataService)
     let expect = expectation(description: "test")
-    viewController.requestIntake { fineDusts, ultrafineDusts, fineDust, ultrafineDust, error in
-      XCTAssertNotNil(fineDusts)
-      XCTAssertNotNil(ultrafineDusts)
-      XCTAssertNotNil(fineDust)
-      XCTAssertNotNil(ultrafineDust)
+    viewController.requestIntake { intakeData, error in
+      XCTAssertNotNil(intakeData?.weekFineDust)
+      XCTAssertNotNil(intakeData?.weekUltrafineDust)
+      XCTAssertNotNil(intakeData?.todayFineDust)
+      XCTAssertNotNil(intakeData?.todayUltrafineDust)
       XCTAssertNil(error)
       expect.fulfill()
     }

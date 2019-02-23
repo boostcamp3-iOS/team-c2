@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		204D5CCDCF0215098F02993D13C3EBFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 90760EFD0D5A2BDBAF4D75058A09EC0A /* .swiftlint.yml */; };
 		DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208A0B65663B22067E6C7CE03E25453 /* AppDelegate.swift */; };
-		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
 		30A1DE8E981143431137AAE63C49D96C /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
+		761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F57EA71672D592C503198144E3648E /* Assets.swift */; };
 		339A73B07C29A939A19FA0A51422B3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
 		740464EE62794055771F2E4C9D0035C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4ABB05FB0A25453FC7A9EE002373931 /* Assets.xcassets */; };
 		0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		CF3FAFCABD0FF5505CA5375FB2DC5915 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */; };
 		BA45B98CB11CC8D859EBA76342CF6029 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */; };
-		97A3EC3C137135A10DD6E66C58905353 /* CommonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */; };
 		E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */; };
 		254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */; };
 		A3E2A2A10FDD30983370D05C045F76DA /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F1A80AD01AF0E2277ADBEC0A15623 /* CoreData.swift */; };
@@ -81,6 +80,7 @@
 		DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E800F476B5CA88E5119389C2D43254EF /* HealthKitServiceType.swift */; };
 		B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ED33DE8C563664122534CC0337E8E /* Hour.swift */; };
 		FD42AFA50F6EC381796B23C08ED0982F /* ImportanceGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6A1374CE928EBD9F693AB9B1A903B1 /* ImportanceGrade.swift */; };
+		CFAA9C7DF3E22A96490977EEE21BCE43 /* IntakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A919DBD2A9051AAE7ECF412D0B67DC48 /* IntakeData.swift */; };
 		4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
 		52DE9C2225FB68AED9B0D265BC103292 /* IntakeGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */; };
 		042381557EBA1C3AC09B2968C92F2BF6 /* IntakeRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD7F6B576CBD1457DB5439AEB1D577 /* IntakeRequestable.swift */; };
@@ -249,7 +249,6 @@
 		9FB0BC76B2D4F22A9A11E837F8E6FA5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD13F7185E86398B09AE891F1343AA5E /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
-		EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTabBarController.swift; sourceTree = "<group>"; };
 		35887A35006CD23F2F658B61865C94EE /* CoreData+Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Intake.swift"; sourceTree = "<group>"; };
 		608282B25B2C8A8C81584C48DAD15FA5 /* CoreData+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+User.swift"; sourceTree = "<group>"; };
 		458F1A80AD01AF0E2277ADBEC0A15623 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -319,6 +318,7 @@
 		254F9879FFF9396ECD229DAD5BAAA8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81F933DBA59974851C46D4F040C139D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82887C16FE58890774E3F9057F98EFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A919DBD2A9051AAE7ECF412D0B67DC48 /* IntakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeData.swift; sourceTree = "<group>"; };
 		730B7B11F7A0766F0ABF39A63D28D244 /* IntakeGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeGrade.swift; sourceTree = "<group>"; };
 		4DCD7F6B576CBD1457DB5439AEB1D577 /* IntakeRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeRequestable.swift; sourceTree = "<group>"; };
 		E606C9E3BFF1AED7C81E5F20826CB9B6 /* IntakeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeService.swift; sourceTree = "<group>"; };
@@ -469,6 +469,7 @@
 				210EE93514800517A8F4C0AED0A4BE35 /* Ratio Graph */,
 				53A54E60DE3CB9FAEC67B9A153930A34 /* Value Graph */,
 				5864F1281D74766589BFC74E7AE13ADE /* GraphDrawable.swift */,
+				A919DBD2A9051AAE7ECF412D0B67DC48 /* IntakeData.swift */,
 				4DCD7F6B576CBD1457DB5439AEB1D577 /* IntakeRequestable.swift */,
 				DC70CCB69DBB1D392CC698DA0DC29071 /* Statistics.storyboard */,
 				58AB4A60A90E8A065BBA6004FB187F89 /* StatisticsViewController.swift */,
@@ -513,7 +514,6 @@
 			isa = PBXGroup;
 			children = (
 				837F021C44F34498596E7FCE85A20B51 /* Common.storyboard */,
-				EBACC8E70C452C345BCAA556B1068261 /* CommonTabBarController.swift */,
 				4BDF70F8C8CCF939A458E8C06F17FCA1 /* FDCountingLabel.swift */,
 				768ED33DE8C563664122534CC0337E8E /* Hour.swift */,
 				1033EA9C18FE338D4FD4245B2F65FFA1 /* LastSavedData.swift */,
@@ -1119,7 +1119,6 @@
 				DCE1D84855AA9E770D56DBD295DE412E /* AppDelegate.swift in Sources */,
 				761345E0591820A820DBB44A79B1FB76 /* Assets.swift in Sources */,
 				0902E7B6288B1F6B38A1FA941EF9D737 /* CALayer+.swift in Sources */,
-				97A3EC3C137135A10DD6E66C58905353 /* CommonTabBarController.swift in Sources */,
 				E7863FA24D4CC1DD1C8809C51CE226CB /* CoreData+Intake.swift in Sources */,
 				254F4FA6169B39876343EB37D9DFD50F /* CoreData+User.swift in Sources */,
 				A3E2A2A10FDD30983370D05C045F76DA /* CoreData.swift in Sources */,
@@ -1172,6 +1171,7 @@
 				DC03132F456C5888B3D1EAE3CDFEBBD2 /* HealthKitServiceType.swift in Sources */,
 				B2BB14A56A22329527F75FC0D39915E0 /* Hour.swift in Sources */,
 				FD42AFA50F6EC381796B23C08ED0982F /* ImportanceGrade.swift in Sources */,
+				CFAA9C7DF3E22A96490977EEE21BCE43 /* IntakeData.swift in Sources */,
 				4075F2FAA75E8CB2246B13F41FC8A131 /* IntakeGrade.swift in Sources */,
 				042381557EBA1C3AC09B2968C92F2BF6 /* IntakeRequestable.swift in Sources */,
 				EAD6BEA4DC982B483C0A95A67C270235 /* IntakeService.swift in Sources */,

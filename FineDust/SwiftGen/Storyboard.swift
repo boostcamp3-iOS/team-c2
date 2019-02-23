@@ -15,9 +15,7 @@ internal enum StoryboardScene {
   internal enum Common: StoryboardType {
     internal static let storyboardName = "Common"
 
-    internal static let initialScene = InitialSceneType<CommonTabBarController>(storyboard: Common.self)
-
-    internal static let commonTabBarController = SceneType<CommonTabBarController>(storyboard: Common.self, identifier: "CommonTabBarController")
+    internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Common.self)
   }
   internal enum Feedback: StoryboardType {
     internal static let storyboardName = "Feedback"
