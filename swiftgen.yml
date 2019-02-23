@@ -16,9 +16,3 @@ strings:
   outputs:
     templateName: structured-swift4
     output: FineDust/SwiftGen/Strings.swift
-
-coredata:
-  inputs: FineDust/Core Data/FineDust.xcdatamodeld
-  outputs:
-    templateName: swift4
-    output: FineDust/SwiftGen/CoreData.swift
