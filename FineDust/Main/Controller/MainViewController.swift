@@ -67,33 +67,6 @@ final class MainViewController: UIViewController {
     if !isLocationAuthorized { alert.addAction(locationAction) }
     alert.addAction(cancelAction)
     present(alert, animated: true, completion: nil)
-//    if !healthKitService.isAuthorized {
-//      UIAlertController.alert(title: "권한이 필요합니다.", message: """
-//      내안의 먼지를 사용하려면 위치권한과 건강 권한이 필요합니다.
-//      원하는 버튼을 눌러주세요.
-//      """, style: .actionSheet)
-//        .action(title: "Settings", style: .default) { _, _ in
-//          guard let url = URL(string: UIApplication.openSettingsURLString) else {
-//            return
-//          }
-//          if UIApplication.shared.canOpenURL(url) {
-//            UIApplication.shared.open(url)
-//          }
-//        }.action(title: "Health", style: .default) { _, _ in
-//          guard let url = URL(string: "x-apple-health://") else {
-//            return
-//          }
-//          if UIApplication.shared.canOpenURL(url) {
-//            UIApplication.shared.open(url)
-//          }
-//        }
-//        .action(title: "Cancel", style: .cancel)
-//        .present(to: self)
-//    } else {
-//      UIAlertController.alert(title: "", message: "필요한 권한이 없습니다.")
-//        .action(title: "확인")
-//        .present(to: self)
-//    }
   }
   
   // MARK: - Life Cycle
@@ -358,13 +331,21 @@ extension MainViewController {
   }
   
   private func openHealthApp() {
-    if let url = URL(string: "x-apple-health://") {
+    guard let url = URL(string: "x-apple-health://") else {
+      return
+    }
+    
+    if UIApplication.shared.canOpenURL(url) {
       UIApplication.shared.open(url)
     }
   }
   
   private func openSettingApp() {
-    if let url = URL(string: UIApplication.openSettingsURLString) {
+    guard let url = URL(string: UIApplication.openSettingsURLString) else {
+      return
+    }
+    
+    if UIApplication.shared.canOpenURL(url) {
       UIApplication.shared.open(url)
     }
   }
