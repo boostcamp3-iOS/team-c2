@@ -124,7 +124,7 @@ extension StatisticsViewController: IntakeRequestable {
         return
       }
       guard let intakeData = intakeData else { return }
-      self.setIntakes(intakeData)
+      self.intakeData.reset(intakeData)
       DispatchQueue.main.async {
         self.initializeGraphViews()
       }
@@ -198,17 +198,11 @@ private extension StatisticsViewController {
                                     todayFineDust: lastSavedData.todayFineDust,
                                     todayUltrafineDust: lastSavedData.todayUltrafineDust)
         self.intakeData.reset(intakeData)
-        self.setIntakes(intakeData)
         DispatchQueue.main.async {
           self.initializeGraphViews()
         }
       }
     }
-  }
-  
-  /// 흡입량 관련 프로퍼티 설정.
-  func setIntakes(_ intakeData: IntakeData) {
-    self.intakeData.reset(intakeData)
   }
 }
 
