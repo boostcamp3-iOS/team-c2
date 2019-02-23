@@ -42,14 +42,12 @@ extension IntakeRequestable {
     intakeService?.requestIntakesInWeek { [weak self] fineDusts, ultrafineDusts, error in
       if let error = error {
         completion(nil, error)
-        //completion(nil, nil, nil, nil, error)
         return
       }
       guard let self = self else { return }
       self.intakeService?.requestTodayIntake { [weak self] fineDust, ultrafineDust, error in
         if let error = error {
           completion(nil, error)
-          //completion(nil, nil, nil, nil, error)
           return
         }
         guard let self = self,
@@ -74,7 +72,6 @@ extension IntakeRequestable {
                                     todayFineDust: fineDust,
                                     todayUltrafineDust: ultrafineDust)
         completion(intakeData, nil)
-        //completion(fineDustWeekIntakes, ultrafineDustWeekIntakes, fineDust, ultrafineDust, nil)
       }
     }
   }
