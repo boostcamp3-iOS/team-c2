@@ -186,7 +186,7 @@ private extension StatisticsViewController {
   private func presentLastSavedData() {
     coreDataService?.requestLastSavedData { lastSavedData, error in
       if error != nil {
-        print("마지막으로 저장된 데이터도 표시되지 않음")
+        errorLog("마지막으로 저장된 데이터도 표시되지 않음")
         return
       }
       if let lastSavedData  = lastSavedData {

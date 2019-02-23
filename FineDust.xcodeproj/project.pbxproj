@@ -96,6 +96,7 @@
 		9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */; };
 		FD5813C98B5F2778F973CCD0808BEF41 /* LocationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648F2847BF0C37F32A03D356A9C8A1AE /* LocationObserver.swift */; };
 		389ABD326700CC5C6C826AF9950D44E4 /* LocationTaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5967B73B9B07FE118F70037FCBDE2 /* LocationTaskError.swift */; };
+		BF6A2889DF297F24F4583AC89B5D8722 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F50413C8AFB58A1515AB5BC284AF70 /* Log.swift */; };
 		5C7A02F9CEE3F4A4A79E457AFEDCEBAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1273B4F655106F72F602D38FC779D2 /* Main.storyboard */; };
 		7969646A01120DE7958F76929EC4B2A0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CF8325AA98F8607E384A6E4F82D4C3 /* MainInterface.storyboard */; };
 		DDF20BF1181CF217DC8739371363142A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */; };
@@ -332,6 +333,7 @@
 		DB60A7D36168E1C32069A6F80E0EC0D4 /* LocationManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerType.swift; sourceTree = "<group>"; };
 		648F2847BF0C37F32A03D356A9C8A1AE /* LocationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationObserver.swift; sourceTree = "<group>"; };
 		74F5967B73B9B07FE118F70037FCBDE2 /* LocationTaskError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTaskError.swift; sourceTree = "<group>"; };
+		02F50413C8AFB58A1515AB5BC284AF70 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		69CF8325AA98F8607E384A6E4F82D4C3 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		384B12B899B6BF360FA830E35534B006 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1644E56E811886FA59628BFFAB345E0C /* MockCoreDataIntakeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoreDataIntakeManager.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				1033EA9C18FE338D4FD4245B2F65FFA1 /* LastSavedData.swift */,
 				648F2847BF0C37F32A03D356A9C8A1AE /* LocationObserver.swift */,
 				74F5967B73B9B07FE118F70037FCBDE2 /* LocationTaskError.swift */,
+				02F50413C8AFB58A1515AB5BC284AF70 /* Log.swift */,
 				F489B34F713CED4C59D8449DF165CA2C /* ProgressIndicator.swift */,
 				DFACB8B8A628164CA222887EEA285687 /* ServiceErrorType.swift */,
 				757928E2CDD9423CB0AA2F81822DC8FF /* Toast.swift */,
@@ -1183,6 +1186,7 @@
 				9960E4528C1A31B56BD1182E0A91AE8F /* LocationManagerType.swift in Sources */,
 				FD5813C98B5F2778F973CCD0808BEF41 /* LocationObserver.swift in Sources */,
 				389ABD326700CC5C6C826AF9950D44E4 /* LocationTaskError.swift in Sources */,
+				BF6A2889DF297F24F4583AC89B5D8722 /* Log.swift in Sources */,
 				DDF20BF1181CF217DC8739371363142A /* MainViewController.swift in Sources */,
 				1F8405E32EEF66BD14AAC45BD82369DD /* NSLayoutAnchor+.swift in Sources */,
 				41057EA496BADCA9B72504DFC9FFA23B /* NSLayoutConstraint+.swift in Sources */,

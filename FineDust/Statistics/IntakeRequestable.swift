@@ -61,12 +61,13 @@ extension IntakeRequestable {
         self.coreDataService?
           .saveLastWeekIntake(fineDustWeekIntakes, ultrafineDustWeekIntakes) { error in
             if error != nil {
-              print("마지막으로 요청한 일주일 먼지 농도가 저장되지 않음")
+              errorLog("마지막으로 요청한 일주일 먼지 농도가 저장되지 않음")
             } else {
-              print("마지막으로 요청한 일주일 먼지 농도가 성공적으로 저장됨")
+              debugLog("마지막으로 요청한 일주일 먼지 농도가 성공적으로 저장됨")
             }
         }
-        print(fineDustWeekIntakes, ultrafineDustWeekIntakes)
+        debugLog(fineDustWeekIntakes)
+        debugLog(ultrafineDustWeekIntakes)
         let intakeData = IntakeData(weekFineDust: fineDustWeekIntakes,
                                     weekUltrafineDust: ultrafineDustWeekIntakes,
                                     todayFineDust: fineDust,

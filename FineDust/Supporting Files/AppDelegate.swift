@@ -37,20 +37,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       if let error = error as NSError? {
         // 에러가 넘어온 경우
         if error is CoreDataError {
-          print("첫 실행!")
+          debugLog("첫 실행!")
           self.coreDataService.saveLastAccessedDate { error in
             if let error = error {
-              print("첫 접속 날짜 저장 실패: ", error.localizedDescription)
+              errorLog("첫 접속 날짜 저장 실패: \(error.localizedDescription)")
             } else {
-              print("현재 Date로 첫 접속 날짜 갱신")
+              debugLog("현재 Date로 첫 접속 날짜 갱신")
             }
           }
         } else {
-          print("첫 접속 날짜 관련 알 수 없는 에러", error.localizedDescription)
+          errorLog("첫 접속 날짜 관련 알 수 없는 에러: \(error.localizedDescription)")
         }
       } else {
         // 에러가 없는 경우 날짜 로그를 찍어줌
-        print("첫 접속 날짜가 이미 기록되어 있음: ", date ?? "?")
+        debugLog("첫 접속 날짜가 이미 기록되어 있음: \(String(describing: date))")
       }
     }
     return true

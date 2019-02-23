@@ -26,7 +26,7 @@ final class JSONManager: JSONManagerType {
       let response: [T] = try jsonDecoder.decode([T].self, from: data)
       return response
     } catch {
-      print(error)
+      errorLog(error)
       return []
     }
   }

@@ -62,6 +62,7 @@ final class ProgressIndicator: UIView {
     indicator = UIActivityIndicatorView()
   }
   
+  /// 프로그레스 인디케이터 보이기.
   func show() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
@@ -77,6 +78,7 @@ final class ProgressIndicator: UIView {
     }
   }
   
+  /// 프로그레스 인디케이터 숨기기.
   func hide() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }

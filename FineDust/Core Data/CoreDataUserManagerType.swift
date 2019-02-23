@@ -12,6 +12,6 @@ import Foundation
 /// 코어데이터의 `User` 모델 관련 매니저 프로토콜.
 protocol CoreDataUserManagerType: CoreDataManagerType {
 
-  /// READ
+  /// User 데이터 가져오기.
   func request(completion: @escaping (User?, Error?) -> Void)
 }

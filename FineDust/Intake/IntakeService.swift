@@ -59,9 +59,9 @@ final class IntakeService: IntakeServiceType {
                                        hourlyDistance)
             self.todayExtensionManager
               .shareTodayIntakes(fineDust, ultrafineDust)
-            print("오늘의 흡입량 가져오기 성공")
-            print(fineDust)
-            print(ultrafineDust)
+            debugLog("오늘의 흡입량 가져오기 성공")
+            debugLog(fineDust)
+            debugLog(ultrafineDust)
             completion(fineDust, ultrafineDust, nil)
         }
     }
@@ -123,15 +123,15 @@ final class IntakeService: IntakeServiceType {
                                      totalUltrafineDustIntakes,
                                      at: dates) { error in
                                       if let error = error {
-                                        print("코어데이터 갱신 실패: ", error.localizedDescription)
+                                        errorLog("코어데이터 갱신 실패: \(error.localizedDescription)")
                                         return
                                       } else {
-                                        print("코어데이터 갱신 성공")
+                                        debugLog("코어데이터 갱신 성공")
                                       }
                       }
-                      print("일주일치 흡입량 가져오기 성공")
-                      print(totalFineDustIntakes)
-                      print(totalUltrafineDustIntakes)
+                      debugLog("일주일치 흡입량 가져오기 성공")
+                      debugLog(totalFineDustIntakes)
+                      debugLog(totalUltrafineDustIntakes)
                       completion(totalFineDustIntakes, totalUltrafineDustIntakes, nil)
                 }
             }
@@ -140,8 +140,8 @@ final class IntakeService: IntakeServiceType {
           fineDustIntakePerDate[date] = savedIntake.fineDust ?? 0
           ultrafineDustIntakePerDate[date] = savedIntake.ultrafineDust ?? 0
         }
-        print("일주일치 흡입량 가져오기 성공")
-        print("코어데이터에 주어진 날짜에 대한 데이터가 모두 있음")
+        debugLog("일주일치 흡입량 가져오기 성공")
+        debugLog("코어데이터에 주어진 날짜에 대한 데이터가 모두 있음")
         let totalFineDustIntakes = fineDustIntakePerDate.sortByDate().map { $0.value }
         let totalUltrafineDustIntakes = ultrafineDustIntakePerDate.sortByDate().map { $0.value }
         completion(totalFineDustIntakes, totalUltrafineDustIntakes, nil)

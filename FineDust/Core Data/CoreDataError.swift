@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// 코어데이터 에러 정의.
 enum CoreDataError: ServiceErrorType {
   
+  /// 저장된 User가 없음.
   case noUser
   
+  /// 에러 디스크립션.
   var localizedDescription: String {
     switch self {
     case .noUser:
