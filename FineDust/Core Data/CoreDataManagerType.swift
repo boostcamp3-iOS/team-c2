@@ -16,7 +16,7 @@ protocol CoreDataManagerType {
   /// 코어 데이터 컨텍스트.
   var context: NSManagedObjectContext { get }
   
-  /// CREATE
+  /// 전달한 딕셔너리 저장.
   func save(_ dictionary: [String: Any], completion: @escaping (Error?) -> Void)
 }
 

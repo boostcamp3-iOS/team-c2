@@ -77,7 +77,7 @@ final class HealthKitService: HealthKitServiceType {
                                          identifier: .distanceWalkingRunning
     ) { value, hour, error in
       if let error = error as? ServiceErrorType {
-        print("Healthkit Query Error: ", error.localizedDescription)
+        errorLog("Healthkit Query Error: \(error.localizedDescription)")
         for hour in 0...23 {
           hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
         }
@@ -109,7 +109,7 @@ final class HealthKitService: HealthKitServiceType {
     let interval = Calendar.current.dateComponents([.day], from: startDate, to: endDate)
     
     guard let day = interval.day, day >= 0 else {
-      print("Date 입력값을 잘못 입력하였습니다.")
+      errorLog("Date 입력값을 잘못 입력하였습니다.")
       completion(nil)
       return
     }
@@ -128,7 +128,7 @@ final class HealthKitService: HealthKitServiceType {
                                            identifier: .distanceWalkingRunning
       ) { value, hour, error in
         if let error = error as? ServiceErrorType {
-          print("HealthKit Query error: ", error.localizedDescription)
+          errorLog("HealthKit Query error: \(error.localizedDescription)")
           for hour in 0...23 {
             hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
             temp += 1

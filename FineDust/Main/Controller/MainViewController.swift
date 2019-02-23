@@ -128,7 +128,7 @@ extension MainViewController: LocationObserver {
           }
         }
       }
-      print(error.localizedDescription)
+      errorLog(error.localizedDescription)
       Toast.shared.show(error.localizedDescription)
     }
     updateHealthKitInfo()
@@ -187,9 +187,9 @@ extension MainViewController {
         self.coreDataService
           .saveLastSteps(Int(value)) { error in
             if error != nil {
-              print("마지막으로 요청한 걸음수가 저장되지 않음")
+              errorLog("마지막으로 요청한 걸음수가 저장되지 않음")
             } else {
-              print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
+              debugLog("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
             if self.healthKitService.isAuthorized {
               DispatchQueue.main.async {
@@ -214,9 +214,9 @@ extension MainViewController {
         self.coreDataService
           .saveLastDistance(value) { error in
             if error != nil {
-              print("마지막으로 요청한 걸음거리가 저장되지 않음")
+              errorLog("마지막으로 요청한 걸음거리가 저장되지 않음")
             } else {
-              print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
+              debugLog("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
         }
         if self.healthKitService.isAuthorized {
@@ -244,9 +244,9 @@ extension MainViewController {
                               info.fineDustGrade.rawValue,
                               info.fineDustValue) { error in
                                 if error != nil {
-                                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
+                                  errorLog("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
                                 } else {
-                                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
+                                  debugLog("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
                                 }
           }
           DispatchQueue.main.async {
@@ -273,9 +273,9 @@ extension MainViewController {
               .saveLastTodayIntake(fineDust,
                                    ultrafineDust) { error in
                                     if error != nil {
-                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
+                                      errorLog("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
                                     } else {
-                                      print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
+                                      debugLog("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
                                     }
             }
             // 마신 미세먼지양 Label들을 업데이트함.

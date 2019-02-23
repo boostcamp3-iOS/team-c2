@@ -87,6 +87,8 @@ enum Hour: Int, CaseIterable {
   case `default` 
 }
 
+// MARK: - Comparable 프로토콜 준수
+
 extension Hour: Comparable {
   static func < (lhs: Hour, rhs: Hour) -> Bool {
     return lhs.rawValue < rhs.rawValue
