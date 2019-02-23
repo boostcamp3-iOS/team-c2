@@ -11,14 +11,15 @@ import UIKit
 /// 비율 그래프의 막대 그래프 뷰.
 final class RatioStickGraphView: UIView {
   
-  enum Layer {
+  /// 레이어 관련 상수 모음.
+  private enum Layer {
     
     /// 그래프 모서리.
     static let radius: CGFloat = 2.0
   }
   
   /// 애니메이션 관련 상수 모음.
-  enum Animation {
+  private enum Animation {
     
     /// 애니메이션 기간.
     static let duration: TimeInterval = 1.0
@@ -36,11 +37,7 @@ final class RatioStickGraphView: UIView {
     static let options: UIView.AnimationOptions = [.curveEaseInOut]
   }
   
-  /// 일주일 평균 흡입량.
-  private var averageIntake: Int = 0
-  
-  /// 오늘의 흡입량.
-  private var todayIntake: Int = 0
+  // MARK: IBOutlet
   
   /// 평균 흡입량 레이블.
   @IBOutlet private weak var averageIntakeLabel: FDCountingLabel!
@@ -77,11 +74,15 @@ final class RatioStickGraphView: UIView {
   /// 오늘 레이블.
   @IBOutlet private weak var todayLabel: UILabel!
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    weeklyAverageLabel.text = L10n.weeklyAverage
-    todayLabel.text = L10n.today
-  }
+  // MARK: Property
+  
+  /// 일주일 평균 흡입량.
+  private var averageIntake: Int = 0
+  
+  /// 오늘의 흡입량.
+  private var todayIntake: Int = 0
+  
+  // MARK: Method
   
   /// 상태 설정하고 뷰 갱신.
   func setState(average: Int, today: Int) {
@@ -137,6 +138,8 @@ extension RatioStickGraphView: GraphDrawable {
   
   /// 레이블 설정하기.
   func setLabels() {
+    weeklyAverageLabel.text = L10n.weeklyAverage
+    todayLabel.text = L10n.today
     let tempRatio = Double(todayIntake) / Double(averageIntake) * 100
     let ratio = !tempRatio.canBecomeMultiplier ? 0 : tempRatio
     percentLabel.countFromZero(to: Int(ratio),

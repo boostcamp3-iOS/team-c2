@@ -11,27 +11,12 @@ import UIKit
 /// 비율 그래프의 원 그래프 뷰.
 final class RatioPieGraphView: UIView {
   
-  // MARK: Layer 관련 상수
-  
-  enum Layer {
+  /// 레이어 관련 상수 정의.
+  private enum Layer {
     
     /// 그래프 두께.
     static let lineWidth: CGFloat = 10.0
   }
-  
-  /// 타이머.
-  private var timer: Timer?
-  
-  // MARK: State
-  
-  /// 전체에 대한 부분의 비율.
-  private var ratio: Double = 0
-  
-  /// 원 그래프의 끝 각도. 라디안.
-  private var endAngle: Double = 0
-  
-  /// 그래프 뷰 높이.
-  private var graphHeight: Double = 0
   
   // MARK: View
   
@@ -47,6 +32,20 @@ final class RatioPieGraphView: UIView {
       ])
     return label
   }()
+  
+  // MARK: Property
+  
+  /// 타이머.
+  private var timer: Timer?
+  
+  /// 전체에 대한 부분의 비율.
+  private var ratio: Double = 0
+  
+  /// 원 그래프의 끝 각도. 라디안.
+  private var endAngle: Double = 0
+  
+  /// 그래프 뷰 높이.
+  private var graphHeight: Double = 0
   
   // MARK: Method
   

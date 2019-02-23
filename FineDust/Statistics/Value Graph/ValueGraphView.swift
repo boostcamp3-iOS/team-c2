@@ -11,11 +11,10 @@ import UIKit
 /// 지정 날짜 기준 일주일 그래프 관련 뷰.
 final class ValueGraphView: UIView {
 
-  // MARK: Constant
-  
   /// 레이어 관련 상수 모음.
   enum Layer {
     
+    /// 
     static let radius: CGFloat = 2.0
     
     /// 경계선 두께.
@@ -46,7 +45,37 @@ final class ValueGraphView: UIView {
   /// Value Graph View Data Source.
   weak var dataSource: ValueGraphViewDataSource?
   
-  // MARK: Private Properties
+  // MARK: IBOutlets
+  
+  /// 날짜 레이블.
+  @IBOutlet private weak var dateLabel: UILabel!
+
+  /// 제목 레이블.
+  @IBOutlet private weak var titleLabel: UILabel!
+  
+  /// 요일 레이블 모음.
+  @IBOutlet private var dayLabels: [UILabel]!
+  
+  /// 그래프 컨테이너 뷰.
+  @IBOutlet private weak var graphContainerView: UIView!
+  
+  /// 그래프 뷰 모음.
+  @IBOutlet private var graphViews: [UIView]! {
+    didSet {
+      for (index, view) in graphViews.enumerated() {
+        view.layer.setBorder(radius: Layer.radius)
+        view.backgroundColor = graphBackgroundColor(at: index)
+      }
+    }
+  }
+  
+  /// 단위 레이블 모음.
+  @IBOutlet private var unitLabels: [UILabel]!
+  
+  /// 그래프 높이 제약 모음.
+  @IBOutlet private var graphViewHeightConstraints: [NSLayoutConstraint]!
+  
+  // MARK: Property
   
   /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
   private var intakeAmounts: [Int] {
@@ -84,42 +113,7 @@ final class ValueGraphView: UIView {
     return reversed
   }
   
-  // MARK: IBOutlets
-  
-  /// 날짜 레이블.
-  @IBOutlet private weak var dateLabel: UILabel!
-
-  /// 제목 레이블.
-  @IBOutlet private weak var titleLabel: UILabel!
-  
-  /// 요일 레이블 모음.
-  @IBOutlet private var dayLabels: [UILabel]!
-  
-  /// 그래프 컨테이너 뷰.
-  @IBOutlet private weak var graphContainerView: UIView!
-  
-  /// 그래프 뷰 모음.
-  @IBOutlet private var graphViews: [UIView]! {
-    didSet {
-      for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(radius: Layer.radius)
-        view.backgroundColor = graphBackgroundColor(at: index)
-      }
-    }
-  }
-  
-  /// 단위 레이블 모음.
-  @IBOutlet private var unitLabels: [UILabel]!
-  
-  /// 그래프 높이 제약 모음.
-  @IBOutlet private var graphViewHeightConstraints: [NSLayoutConstraint]!
-  
   // MARK: Methods
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    titleLabel.text = L10n.weeklyInhalationDose
-  }
   
   /// 뷰 전체 설정.
   func setup() {
@@ -140,6 +134,7 @@ extension ValueGraphView: GraphDrawable {
   }
   
   func setLabels() {
+    titleLabel.text = L10n.weeklyInhalationDose
     setUnitLabels()
     setDayLabelsTitle()
     setDateLabel()

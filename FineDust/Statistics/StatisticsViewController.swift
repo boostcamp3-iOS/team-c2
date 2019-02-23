@@ -49,7 +49,7 @@ final class StatisticsViewController: UIViewController {
   
   var coreDataService: CoreDataServiceType?
   
-  // MARK: Stored Property
+  // MARK: Property
   
   /// 화면이 표시가 되었는가.
   private var isPresented: Bool = false
@@ -57,18 +57,16 @@ final class StatisticsViewController: UIViewController {
   /// 흡입량 데이터.
   private var intakeData: IntakeData = IntakeData()
   
-  // MARK: Computed Property
-  
-  /// 미세먼지의 전체에 대한 마지막 값의 비율
-  private var fineDustLastValueRatio: Double {
+  /// 미세먼지의 전체에 대한 오늘의 비율.
+  private var todayFineDustRatio: Double {
     let reduced = intakeData.weekFineDust.reduce(0, +)
     let sum = reduced == 0 ? 1 : reduced
     let last = intakeData.weekFineDust.last ?? 1
     return Double(last) / Double(sum)
   }
   
-  /// 초미세먼지의 전체에 대한 마지막 값의 비율
-  private var ultrafineDustLastValueRatio: Double {
+  /// 초미세먼지의 전체에 대한 오늘의 비율.
+  private var todayUltrafineDustRatio: Double {
     let reduced = intakeData.weekUltrafineDust.reduce(0, +)
     let sum = reduced == 0 ? 1 : reduced
     let last = intakeData.weekUltrafineDust.last ?? 1
@@ -82,18 +80,17 @@ final class StatisticsViewController: UIViewController {
     injectDependency(IntakeService(), CoreDataService())
     setupSubviews()
     createGraphViews()
-    setGraphViewConstraintsToSubviews()
+    setGraphViewConstraints()
     registerLocationObserver()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    initializeValueGraphView()
+    initializeGraphViews()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    initializeRatioGraphView()
     // 한번 보여진 이후로는 비즈니스 로직을 수행하지 않음
     if !isPresented {
       isPresented.toggle()
@@ -164,8 +161,8 @@ extension StatisticsViewController: RatioGraphViewDataSource {
   
   var intakeRatio: Double {
     return segmentedControl.selectedSegmentIndex == 0
-      ? fineDustLastValueRatio
-      : ultrafineDustLastValueRatio
+      ? todayFineDustRatio
+      : todayUltrafineDustRatio
   }
   
   var totalIntake: Int {
@@ -237,7 +234,7 @@ private extension StatisticsViewController {
   }
   
   /// 서브뷰에 오토레이아웃 설정.
-  func setGraphViewConstraintsToSubviews() {
+  func setGraphViewConstraints() {
     NSLayoutConstraint.activate([
       valueGraphView.anchor.top.equal(to: valueGraphBackgroundView.anchor.top),
       valueGraphView.anchor.leading.equal(to: valueGraphBackgroundView.anchor.leading),
@@ -250,19 +247,9 @@ private extension StatisticsViewController {
       ])
   }
   
-  /// 모든 서브뷰 초기화.
+  /// 모든 그래프 뷰 초기화.
   func initializeGraphViews() {
-    initializeValueGraphView()
-    initializeRatioGraphView()
-  }
-  
-  /// 값 그래프 뷰 초기화.
-  func initializeValueGraphView() {
     valueGraphView.setup()
-  }
-  
-  /// 비율 그래프 뷰 초기화.
-  func initializeRatioGraphView() {
     ratioGraphView.setup()
   }
   
