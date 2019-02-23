@@ -79,8 +79,8 @@ final class RatioStickGraphView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    weeklyAverageLabel.text = "Weekly\naverage".localized
-    todayLabel.text = "Today".localized
+    weeklyAverageLabel.text = L10n.weeklyAverage
+    todayLabel.text = L10n.today
   }
   
   /// 상태 설정하고 뷰 갱신.

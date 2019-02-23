@@ -80,7 +80,7 @@ final class ValueGraphView: UIView {
     var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
     // 마지막 값을 오늘로 바꿈
     reversed.removeLast()
-    reversed.append("Today".localized)
+    reversed.append(L10n.today)
     return reversed
   }
   
@@ -118,7 +118,7 @@ final class ValueGraphView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    titleLabel.text = "Weekly inhalation dose".localized
+    titleLabel.text = L10n.weeklyInhalationDose
   }
   
   /// 뷰 전체 설정.

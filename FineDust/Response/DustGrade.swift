@@ -27,15 +27,15 @@ enum DustGrade: Int, CustomStringConvertible {
   var description: String {
     switch self {
     case .good:
-      return "Good".localized
+      return L10n.good
     case .normal:
-      return "Normal".localized
+      return L10n.normal
     case .bad:
-      return "Bad".localized
+      return L10n.bad
     case .veryBad:
-      return "Very bad".localized
+      return L10n.veryBad
     case .default:
-      return "Unknown".localized
+      return L10n.unknown
     }
   }
 }

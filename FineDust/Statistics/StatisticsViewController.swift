@@ -236,8 +236,8 @@ private extension StatisticsViewController {
   /// 서브뷰 초기 설정.
   func setupSubviews() {
     scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
-    segmentedControl.setTitle("Fine dust".localized, forSegmentAt: 0)
-    segmentedControl.setTitle("Ultrafine dust".localized, forSegmentAt: 1)
+    segmentedControl.setTitle(L10n.fineDust, forSegmentAt: 0)
+    segmentedControl.setTitle(L10n.ultrafineDust, forSegmentAt: 1)
     segmentedControl.addTarget(self,
                                action: #selector(segmentedControlValueDidChange(_:)),
                                for: .valueChanged)

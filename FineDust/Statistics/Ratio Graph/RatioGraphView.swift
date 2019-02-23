@@ -45,7 +45,7 @@ final class RatioGraphView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    titleLabel.text = "Weekly rate of inhalation".localized
+    titleLabel.text = L10n.weeklyRateOfInhalation
   }
   
   /// 뷰 전체 설정.
