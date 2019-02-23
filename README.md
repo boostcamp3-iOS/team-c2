@@ -35,11 +35,15 @@
 
 ## 디자인
 
-### 현재까지 구현된 뷰
+### 스크린샷
 
-![1](./images/1.PNG)
-![2](./images/2.PNG)
-![3](./images/3.PNG)
+| 화면                 | 스크린샷             |
+| -------------------- | -------------------- |
+| 메인 탭              | ![1](./images/1.PNG) |
+| 통계 탭 - 미세먼지   | ![2](./images/2.PNG) |
+| 통계 탭 - 초미세먼지 | ![3](./images/3.PNG) |
+| 정보 탭              | ![4](./images/4.PNG) |
+| 통계 탭 세부         | ![5](./images/5.PNG) |
 
 ### 컬러칩
 
@@ -66,6 +70,7 @@ disabled_rules:
 excluded:
 - FineDust/Supporting Files/AppDelegate.swift
 - FineDust/Supporting Files/GeoConverter.swift
+- FineDustTests/
 - FineDust/SWXMLHash
 
 line_length:
@@ -76,7 +81,6 @@ identifier_name:
   excluded:
     - x
     - y
-    - dx
 ```
 
 - StyleShare의 **[Swift Style Guide](https://github.com/StyleShare/swift-style-guide)** 준수
