@@ -12,15 +12,17 @@ enum HealthKitError: ServiceErrorType {
   var localizedDescription: String {
     switch self {
     case .notMatchingArguments:
-      return "HealthKit 메소드의 입력인자가 서로 맞지 않습니다."
+      return L10n.anUnknownErrorHasOccurred
     case .unexpectedIdentifier:
-      return "예상치 못한 HealthKit identifier가 들어왔습니다."
+      return L10n.anUnknownErrorHasOccurred
     case .queryNotValid:
-      return "query문이 유효하지 않습니다.(권한이 설정되지 않았을 경우에도 발생)"
+      return L10n.healthAppPermissionsNotYetSet
     case .queryNotSearched:
-      return "query문의 검색결과가 없습니다.(권한이 없을 경우에도 발생)"
+      return L10n.doNotHaveHealthAppPrivileges
     case .queryExecutedFailed:
-      return "query문 실행이 실패했습니다."
+      return L10n.executionOfQueryStatementFailed
+    case .notAuthorized:
+      return L10n.doNotHaveHealthAppPrivileges
     }
   }
   
@@ -39,4 +41,7 @@ enum HealthKitError: ServiceErrorType {
   
   /// query는 만들어지긴 하나 결과가 없을때. 권한이 없을때도 발생.
   case queryNotSearched
+  
+  /// 권한이 없음.
+  case notAuthorized
 }

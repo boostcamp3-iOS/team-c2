@@ -34,12 +34,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     healthKitManager.requestAuthorization()
     LocationManager.shared.requestAuthorization()
     coreDataService.requestLastAccessedDate { date, error in
-      if let error = error {
-        Toast.shared.show(error.localizedDescription)
-        print(error.localizedDescription)
-        return
+      if let error = error as NSError? {
+        // 에러가 넘어온 경우
+        if error is CoreDataError {
+          debugLog("첫 실행!")
+          self.coreDataService.saveLastAccessedDate { error in
+            if let error = error {
+              errorLog("첫 접속 날짜 저장 실패: \(error.localizedDescription)")
+            } else {
+              debugLog("현재 Date로 첫 접속 날짜 갱신")
+            }
+          }
+        } else {
+          errorLog("첫 접속 날짜 관련 알 수 없는 에러: \(error.localizedDescription)")
+        }
+      } else {
+        // 에러가 없는 경우 날짜 로그를 찍어줌
+        debugLog("첫 접속 날짜가 이미 기록되어 있음: \(String(describing: date))")
       }
-      print("최신 접속 날짜 갱신: ", date ?? "?")
     }
     return true
   }

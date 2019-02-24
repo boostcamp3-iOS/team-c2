@@ -8,9 +8,9 @@
 
 import Foundation
 
-/// JSON Manager Type.
+/// JSON 매니저 프로토콜.
 protocol JSONManagerType {
 
-  /// DustFeedbacks.json을 파싱하여 데이터를 가져옴.
-  func fetchDustFeedbacks() -> [DustFeedback]
+  /// 주어진 데이터를 특정 타입으로 디코딩함.
+  func fetchJSONObject<T>(to type: T.Type, resourceName: String) -> [T] where T: Decodable
 }

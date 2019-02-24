@@ -17,31 +17,42 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주간 흡입량 비율" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOu-Vb-qjS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly rate of inhalation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOu-Vb-qjS">
                     <rect key="frame" x="16" y="16" width="343" height="18"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <color key="textColor" name="black45"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TK-MT-dTa">
-                    <rect key="frame" x="0.0" y="42" width="375" height="245"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TK-MT-dTa" customClass="RatioPieGraphView" customModule="FineDust" customModuleProvider="target">
+                    <rect key="frame" x="16" y="42" width="155.5" height="245"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bI-Gg-jxi">
+                    <rect key="frame" x="186.5" y="66.5" width="2" height="196"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="y6I-dL-P2D"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="1bI-Gg-jxi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6pJ-JO-SF0"/>
                 <constraint firstItem="UOu-Vb-qjS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="CXP-NW-UYs"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UOu-Vb-qjS" secondAttribute="trailing" constant="16" id="DXC-vt-fYm"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7TK-MT-dTa" secondAttribute="trailing" id="QZk-Qd-7jB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="centerX" secondItem="7TK-MT-dTa" secondAttribute="trailing" constant="16" id="QZk-Qd-7jB"/>
+                <constraint firstItem="1bI-Gg-jxi" firstAttribute="centerY" secondItem="7TK-MT-dTa" secondAttribute="centerY" id="QdQ-uD-eQF"/>
                 <constraint firstItem="7TK-MT-dTa" firstAttribute="top" secondItem="UOu-Vb-qjS" secondAttribute="bottom" constant="8" id="c43-Nm-wlQ"/>
-                <constraint firstItem="7TK-MT-dTa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="h9j-W8-24p"/>
+                <constraint firstItem="7TK-MT-dTa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="h9j-W8-24p"/>
                 <constraint firstItem="7TK-MT-dTa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="l7i-rq-rO7"/>
                 <constraint firstItem="UOu-Vb-qjS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="qvx-4M-A2G"/>
+                <constraint firstItem="1bI-Gg-jxi" firstAttribute="height" secondItem="7TK-MT-dTa" secondAttribute="height" multiplier="0.8" id="zwv-hV-HpZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="backgroundView" destination="7TK-MT-dTa" id="ceI-yq-a3w"/>
+                <outlet property="pieGraphView" destination="7TK-MT-dTa" id="ceI-yq-a3w"/>
+                <outlet property="titleLabel" destination="UOu-Vb-qjS" id="FPm-l9-ULk"/>
             </connections>
             <point key="canvasLocation" x="36" y="-120.98950524737631"/>
         </view>

@@ -21,12 +21,19 @@ final class MainViewController: UIViewController {
   @IBOutlet private weak var gradeLabel: UILabel!
   @IBOutlet private weak var fineDustLabel: FDCountingLabel!
   @IBOutlet private weak var fineDustImageView: UIImageView!
+  @IBOutlet private weak var currentDistance: UILabel!
+  @IBOutlet private weak var currentWalkingCount: UILabel!
+  @IBOutlet private weak var dataContainerView: UIView!
+  @IBOutlet private weak var todayFineDustContainerView: UIView!
+  @IBOutlet private weak var todayUltrafineDustContainerView: UIView!
+  @IBOutlet private weak var authorizationButton: UIButton!
   
   // MARK: - Properties
   
-  ///한번만 표시해주기 위한 프로퍼티
+  /// 한번만 표시해주기 위한 프로퍼티.
   private var isPresented: Bool = false
   
+  /// 미세먼지 애니메이션을 움직이게 할 타이머.
   private var timer: Timer?
   
   private let coreDataService = CoreDataService()
@@ -40,6 +47,30 @@ final class MainViewController: UIViewController {
     formatter.dateFormat = "a hh : mm"
     return formatter
   }()
+  
+  // MARK: IBAction
+  
+  @IBAction func authorizationButtonDidTap(_ sender: Any) {
+    let isHealthKitAuthorized = healthKitService.isAuthorized && healthKitService.isDetermined
+    let isLocationAuthorized = LocationManager.shared.authorizationStatus == .authorizedWhenInUse
+      || LocationManager.shared.authorizationStatus == .authorizedAlways
+    let healthKitAction = UIAlertAction(title: L10n.healthApp, style: .default) { _ in
+      self.openHealthApp()
+    }
+    let locationAction = UIAlertAction(title: L10n.location, style: .default) { _ in
+      self.openSettingApp()
+    }
+    let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
+    let title = L10n.donTYouHaveAnyInformation
+    let message = L10n.youMustAllowPermissionForHealthAppAndLocationToViewInformation
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: .actionSheet)
+    if !isHealthKitAuthorized { alert.addAction(healthKitAction) }
+    if !isLocationAuthorized { alert.addAction(locationAction) }
+    alert.addAction(cancelAction)
+    present(alert, animated: true, completion: nil)
+  }
   
   // MARK: - Life Cycle
   
@@ -69,6 +100,39 @@ extension MainViewController: LocationObserver {
   func handleIfSuccess(_ notification: Notification) {
     updateAPIInfo()
   }
+  
+  /// 데이터를 받아오는데 문제가 있으면 코어데이터에 마지막으로 저장된 값을 불러옴.
+  func handleIfFail(_ notification: Notification) {
+    if let error = notification.locationTaskError {
+      coreDataService.requestLastSavedData { lastSaveData, error in
+        if let data = lastSaveData {
+          DispatchQueue.main.async {
+            self.intakeFineDustLable.countFromZero(to: data.todayFineDust,
+                                                   unit: .microgram,
+                                                   interval: 1.0 /
+                                                    Double(data.todayFineDust))
+            
+            self.intakeUltrafineDustLabel.countFromZero(to: data.todayUltrafineDust,
+                                                        unit: .microgram,
+                                                        interval: 1.0 /
+                                                          Double(data.todayUltrafineDust))
+            self.fineDustImageView.image
+              = UIImage(named: IntakeGrade(intake: data.todayFineDust + data.todayUltrafineDust)
+                .imageName)
+            
+            self.locationLabel.text = data.address
+            self.gradeLabel.text = DustGrade(rawValue: data.grade)?.description
+            self.fineDustLabel.countFromZero(to: data.recentFineDust,
+                                             unit: .microgram,
+                                             interval: 1.0 / Double(data.recentFineDust))
+          }
+        }
+      }
+      errorLog(error.localizedDescription)
+      Toast.shared.show(error.localizedDescription)
+    }
+    updateHealthKitInfo()
+  }
 }
 
 // MARK: - HealthKitAuthorizationObserver
@@ -88,50 +152,77 @@ extension MainViewController {
     registerLocationObserver()
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
-    presentOpenHealthAppAlert()
+    //presentOpenHealthAppAlert()
     updateFineDustImageView()
+    
+    // InfoView들의 둥글 모서리와 shadow 추가
+    dataContainerView.layer
+      .applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 4, blur: 16, spread: 0)
+    dataContainerView.layer.cornerRadius = 10
+    
+    // 해상도 별 폰트 크기 조정.
+    let size = fontSizeByScreen(size: currentWalkingCount.font.pointSize)
+    currentWalkingCount.font = currentWalkingCount.font.withSize(size)
+    currentDistance.font = currentDistance.font.withSize(size)
+    
+    authorizationButton.setTitle(L10n.donTYouHaveAnyInformation, for: [])
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
   private func updateHealthKitInfo() {
     // 걸음 수 label에 표시
     healthKitService.requestTodayStepCount { value, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
+      if let error = error as? HealthKitError, error == .queryNotSearched {
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.stepCountLabel.text = "0 \(L10n.steps)"
+          }
+        } else {
+          error.presentToast()
+        }
         return
       }
+      
       if let value = value {
         self.coreDataService
           .saveLastSteps(Int(value)) { error in
             if error != nil {
-              print("마지막으로 요청한 걸음수가 저장되지 않음")
+              errorLog("마지막으로 요청한 걸음수가 저장되지 않음")
             } else {
-              print("마지막으로 요청한 걸음수가 성공적으로 저장됨")
+              debugLog("마지막으로 요청한 걸음수가 성공적으로 저장됨")
             }
-          }
-        DispatchQueue.main.async {
-          self.stepCountLabel.text = "\(Int(value)) 걸음"
+            if self.healthKitService.isAuthorized {
+              DispatchQueue.main.async {
+                self.stepCountLabel.text = "\(Int(value)) \(L10n.steps)"
+              }
+            }
         }
       }
     }
     
     // 걸은 거리 label에 표시
     healthKitService.requestTodayDistance { value, error in
-      if let error = error as? ServiceErrorType {
-        error.presentToast()
+      if let error = error as? HealthKitError, error == .queryNotSearched {
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.sync {
+            self.distanceLabel.text = "0.0 km"
+          }
+        }
         return
       }
       if let value = value {
         self.coreDataService
           .saveLastDistance(value) { error in
             if error != nil {
-              print("마지막으로 요청한 걸음거리가 저장되지 않음")
+              errorLog("마지막으로 요청한 걸음거리가 저장되지 않음")
             } else {
-              print("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
+              debugLog("마지막으로 요청한 걸음거리가 성공적으로 저장됨")
             }
+        }
+        if self.healthKitService.isAuthorized {
+          DispatchQueue.main.async {
+            self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
           }
-        DispatchQueue.main.async {
-          self.distanceLabel.text = String(format: "%.1f", value.kilometer) + " km"
         }
       }
     }
@@ -149,15 +240,14 @@ extension MainViewController {
         }
         if let info = info {
           self.coreDataService
-            .saveLastDustData(
-              (address: SharedInfo.shared.address,
-               grade: info.fineDustGrade.rawValue,
-               recentFineDust: info.fineDustValue)) { error in
-                if error != nil {
-                  print("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
-                } else {
-                  print("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
-                }
+            .saveLastDustData(SharedInfo.shared.address,
+                              info.fineDustGrade.rawValue,
+                              info.fineDustValue) { error in
+                                if error != nil {
+                                  errorLog("마지막으로 요청한 미세먼지 정보가 저장되지 않음")
+                                } else {
+                                  debugLog("마지막으로 요청한 미세먼지 정보가 성공적으로 저장됨")
+                                }
           }
           DispatchQueue.main.async {
             self.fineDustLabel.countFromZero(to: info.fineDustValue,
@@ -174,25 +264,27 @@ extension MainViewController {
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
+          if (error as? HealthKitError) != nil {
+            return
+          }
           error.presentToast()
           return
         }
         if let fineDust = fineDust, let ultrafineDust = ultrafineDust {
           if self.healthKitService.isAuthorized {
             self.coreDataService
-              .saveLastTodayIntake(
-                (todayFineDust: fineDust,
-                 todayUltrafineDust: ultrafineDust)) { error in
-                  if error != nil {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
-                  } else {
-                    print("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
-                  }
+              .saveLastTodayIntake(fineDust,
+                                   ultrafineDust) { error in
+                                    if error != nil {
+                                      errorLog("마지막으로 요청한 오늘의 먼지 흡입량 정보가 저장되지 않음")
+                                    } else {
+                                      debugLog("마지막으로 요청한 오늘의 먼지 흡입량 정보가 성공적으로 저장됨")
+                                    }
             }
             // 마신 미세먼지양 Label들을 업데이트함.
             DispatchQueue.main.async {
               self.fineDustImageView.image
-                = UIImage(named: IntakeGrade(intake: fineDust).imageName)
+                = UIImage(named: IntakeGrade(intake: fineDust + ultrafineDust).imageName)
               self.intakeFineDustLable.countFromZero(to: fineDust,
                                                      unit: .microgram,
                                                      interval: 1.0 /
@@ -208,6 +300,7 @@ extension MainViewController {
     }
   }
   
+  /// 미세먼지 애니메이션
   private func updateFineDustImageView() {
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5,
@@ -228,19 +321,43 @@ extension MainViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-    if !healthKitService.isAuthorized {
+
+    if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
-        .alert(title: "건강 App 권한이 없습니다.",
-               message: """
-          내안의먼지는 건강 App에 대한 권한이 필요합니다. 건강 App-> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 \
-          허용해주세요.
-          """
+        .alert(title: L10n.doNotHaveHealthAppPrivileges,
+               message: L10n.DustInsideMeNeedAuthorityToTheHealthApp
+                .healthAppDataSourcesDustInsideMeAllowAllWriteAndReadPermissions
         )
-        .action(title: "건강 App", style: .default) { _, _ in
-          UIApplication.shared.open(URL(string: "x-apple-health://")!)
+        .action(title: L10n.healthApp, style: .default) { _, _ in
+          self.openHealthApp()
         }
-        .action(title: "취소", style: .cancel)
+        .action(title: L10n.cancel, style: .cancel)
         .present(to: self)
     }
+  }
+  
+  private func openHealthApp() {
+    guard let url = URL(string: "x-apple-health://") else {
+      return
+    }
+    
+    if UIApplication.shared.canOpenURL(url) {
+      UIApplication.shared.open(url)
+    }
+  }
+  
+  private func openSettingApp() {
+    guard let url = URL(string: UIApplication.openSettingsURLString) else {
+      return
+    }
+    
+    if UIApplication.shared.canOpenURL(url) {
+      UIApplication.shared.open(url)
+    }
+  }
+  
+  private func fontSizeByScreen(size: CGFloat) -> CGFloat {
+    let value = size / 414
+    return UIScreen.main.bounds.width * value
   }
 }

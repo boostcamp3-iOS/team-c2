@@ -39,18 +39,16 @@ final class HealthKitManager: HealthKitManagerType {
     // 권한요청.
     healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, error in
       if let error = error {
-        print("request authorization error : \(error.localizedDescription)")
+        errorLog("request authorization error : \(error.localizedDescription)")
         Toast.shared.show(error.localizedDescription)
       } else {
         // 권한 요청이 끝난 후 실행되는 completion handler.
-        print("complete request HealthKit authorization")
+        debugLog("complete request HealthKit authorization")
         
         if self.authorizationStatus == (.sharingAuthorized, .sharingAuthorized) {
           NotificationCenter.default.post(
             name: .healthKitAuthorizationSharingAuthorized,
             object: nil)
-        } else {
-          Toast.shared.show("건강 App 권한 요청이 거부되었습니다.")
         }
       }
     }
@@ -64,14 +62,15 @@ final class HealthKitManager: HealthKitManagerType {
                           quantityFor: HKUnit,
                           identifier: HKQuantityTypeIdentifier,
                           completion: @escaping (Double?, Int?, Error?) -> Void) {
-    
     if !(identifier == .stepCount && quantityFor == .count() ||
       identifier == .distanceWalkingRunning && quantityFor == .meter()) {
+      errorLog("findHealthKitValue의 파라미터 값이 서로 맞지 않습니다.")
       completion(nil, nil, HealthKitError.notMatchingArguments)
       return
     }
     
     guard let quantityType = HKQuantityType.quantityType(forIdentifier: identifier) else {
+      errorLog("예상치 못한 findHealthKitValue의 파라미터값이 들어왔습니다.")
       completion(nil, nil, HealthKitError.unexpectedIdentifier)
       return
     }
@@ -97,19 +96,20 @@ final class HealthKitManager: HealthKitManagerType {
                                             anchorDate: startDate,
                                             intervalComponents: interval)
     
-    //query 첫 결과에 대한 hanlder
+    // query 첫 결과에 대한 hanlder
     query.initialResultsHandler = { query, results, error in
       // query가 유효하지 않을 경우.
       if let error = error {
+        errorLog("query문이 유효하지 않습니다.")
+        errorLog(error.localizedDescription)
         completion(nil, nil, HealthKitError.queryNotValid)
-        print(error.localizedDescription)
         return
       }
       
       if let results = results {
         // 쿼리가 검색되지 않을때. 대부분 권한이 없을때 실행된다.
         if results.statistics().count == 0 {
-          print("Healthkit Query: 검색 결과가 없음")
+          errorLog("query 결과가 없습니다.")
           completion(nil, nil, HealthKitError.queryNotSearched)
         } else {
           // 시작 날짜부터 종료 날짜까지의 시간 간격에 대한 통계 개체만큼 handler가 수행됨.
@@ -130,6 +130,7 @@ final class HealthKitManager: HealthKitManagerType {
         }
       } else {
         // query 실행이 실패하여 결과값이 없을 경우.
+        errorLog("query 실행에 실패하였습니다.")
         completion(nil, nil, HealthKitError.queryExecutedFailed)
       }
     }

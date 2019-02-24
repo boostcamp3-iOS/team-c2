@@ -21,6 +21,8 @@ class MockHealthKitService: HealthKitServiceType {
   
   var isAuthorized: Bool = false
   
+  var isDetermined: Bool = false
+  
   var error: Error?
 
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {

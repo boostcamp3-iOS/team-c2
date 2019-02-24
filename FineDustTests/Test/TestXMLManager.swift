@@ -20,12 +20,232 @@ class TestXMLManager: XCTestCase {
     xmlManager = XMLManager(xmlDecoder: mockXMLDecoder)
   }
   
-  func test_parse_headerResponse_error() {
+  func test_parse_headerResponse() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseSuccess.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.success)
+      XCTAssertNil(error)
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error1() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseApplicationError.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.applicationError)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error2() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseDBError.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.dbError)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error3() {
     let expect = expectation(description: "test")
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseNoData.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertNil(parsingType)
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noData)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error4() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseHTTPError.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.httpError)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error5() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseServiceTimeOut.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.serviceTimeOut)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error6() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseInvalidRequestParameter.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.invalidRequestParameter)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error7() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseNoRequiredRequestParameter.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noRequiredRequestParameter)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error8() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseNoServiceOrDeprecated.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noServiceOrDeprecated)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error9() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseAccessDenied.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.accessDenied)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error10() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseExceededRequestLimit.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.exceededRequestLimit)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error11() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseUnregisteredServiceKey.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.unregisteredServiceKey)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error12() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseExpiredServiceKey.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.expiredServiceKey)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error13() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseUnregisteredDomainOfIPAddress.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.unregisteredDomainOfIPAddress)
+      if let error = error as? DustError {
+        XCTAssertNotNil(error)
+      } else {
+        XCTFail()
+      }
+      expect.fulfill()
+    }
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
+  func test_parse_headerResponse_error14() {
+    let expect = expectation(description: "test")
+    mockXMLDecoder.error = nil
+    let data = DummyNetworkManager.dustInfoResponseDefault.data(using: .utf8)!
+    xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
+      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.default)
       if let error = error as? DustError {
         XCTAssertNotNil(error)
       } else {

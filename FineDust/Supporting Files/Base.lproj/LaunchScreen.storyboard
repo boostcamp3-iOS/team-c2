@@ -20,14 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dusts" translatesAutoresizingMaskIntoConstraints="NO" id="ewE-ct-Wa4">
-                                <rect key="frame" x="19" y="229" width="337.5" height="160"/>
+                                <rect key="frame" x="56.5" y="229" width="262.5" height="160"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="graph1"/>
                         <constraints>
                             <constraint firstItem="ewE-ct-Wa4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.9" id="7HD-bw-ew8"/>
                             <constraint firstItem="ewE-ct-Wa4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="QTf-FU-ZS9"/>
-                            <constraint firstItem="ewE-ct-Wa4" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.9" id="dZG-Mb-JVm"/>
+                            <constraint firstItem="ewE-ct-Wa4" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="dZG-Mb-JVm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -12,6 +12,9 @@ import Foundation
 /// Location Manager 프로토콜.
 protocol LocationManagerType: class {
   
+  /// 위치 권한.
+  var authorizationStatus: CLAuthorizationStatus { get }
+  
   /// 권한 상태 변경시 실행될 핸들러.
   var authorizationChangingHandler: ((CLAuthorizationStatus) -> Void)? { get }
   

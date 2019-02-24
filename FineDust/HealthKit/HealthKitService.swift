@@ -11,22 +11,24 @@ import Foundation
 /// HealthKit 서비스를 구현하는 클래스
 final class HealthKitService: HealthKitServiceType {
   
-  let healthKitManager: HealthKitManagerType? 
+  let healthKitManager: HealthKitManagerType
   
   init(healthKit: HealthKitManagerType) {
     self.healthKitManager = healthKit
   }
   
   var isAuthorized: Bool {
-    let status = healthKitManager?.authorizationStatus ?? (.notDetermined, .notDetermined)
-    return status == (.sharingAuthorized, .sharingAuthorized) ||
-      status == (.notDetermined, .notDetermined)
+    return healthKitManager.authorizationStatus == (.sharingAuthorized, .sharingAuthorized)
+  }
+  
+  var isDetermined: Bool {
+    return !(healthKitManager.authorizationStatus == (.notDetermined, .notDetermined))
   }
   
   /// 오늘 걸음 수 가져오는 함수
   func requestTodayStepCount(completion: @escaping (Double?, Error?) -> Void) {
     
-    healthKitManager?.findHealthKitValue(startDate: Date.start(),
+    healthKitManager.findHealthKitValue(startDate: Date.start(),
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .count(),
@@ -44,7 +46,7 @@ final class HealthKitService: HealthKitServiceType {
   
   /// 오늘 걸은 거리 가져오는 함수
   func requestTodayDistance(completion: @escaping (Double?, Error?) -> Void) {
-    healthKitManager?.findHealthKitValue(startDate: .start(),
+    healthKitManager.findHealthKitValue(startDate: .start(),
                                          endDate: Date(),
                                          hourInterval: 24,
                                          quantityFor: .meter(),
@@ -68,23 +70,19 @@ final class HealthKitService: HealthKitServiceType {
     let semaphore = DispatchSemaphore(value: 0)
     var temp = 0
     
-    healthKitManager?.findHealthKitValue(startDate: .start(),
+    healthKitManager.findHealthKitValue(startDate: .start(),
                                          endDate: .end(),
                                          hourInterval: 1,
                                          quantityFor: .meter(),
                                          identifier: .distanceWalkingRunning
     ) { value, hour, error in
       if let error = error as? ServiceErrorType {
-        print("Healthkit Query Error: ", error.localizedDescription)
-        Toast.shared.show(error.localizedDescription)
+        errorLog("Healthkit Query Error: \(error.localizedDescription)")
         for hour in 0...23 {
           hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
         }
-        completion(hourIntakePair)
-        return
-      }
-      
-      if let hour = hour {
+        semaphore.signal()
+      } else if let hour = hour {
         var value = Int(value ?? 0)
         // 걸음거리가 500 이하일때는 실내로 취급한다.
         value = value < 500 ? 0 : value
@@ -111,7 +109,8 @@ final class HealthKitService: HealthKitServiceType {
     let interval = Calendar.current.dateComponents([.day], from: startDate, to: endDate)
     
     guard let day = interval.day, day >= 0 else {
-      print("Input date error")
+      errorLog("Date 입력값을 잘못 입력하였습니다.")
+      completion(nil)
       return
     }
     
@@ -122,15 +121,14 @@ final class HealthKitService: HealthKitServiceType {
     
     for index in 0...day {
       let indexDate = startDate.after(days: index)
-      healthKitManager?.findHealthKitValue(startDate: indexDate.start,
+      healthKitManager.findHealthKitValue(startDate: indexDate.start,
                                            endDate: indexDate.end,
                                            hourInterval: 1,
                                            quantityFor: .meter(),
                                            identifier: .distanceWalkingRunning
       ) { value, hour, error in
         if let error = error as? ServiceErrorType {
-          print("HealthKit Query error: ", error.localizedDescription)
-          Toast.shared.show(error.localizedDescription)
+          errorLog("HealthKit Query error: \(error.localizedDescription)")
           for hour in 0...23 {
             hourIntakePair[Hour(rawValue: hour) ?? .default] = 0
             temp += 1
@@ -140,9 +138,7 @@ final class HealthKitService: HealthKitServiceType {
           if temp == (day + 1) * 24 {
             semaphore.signal()
           }
-        }
-        
-        if let hour = hour {
+        } else if let hour = hour {
           var value = Int(value ?? 0)
           // 걸음거리가 500 이하일때는 실내로 취급한다.
           value = value < 500 ? 0 : value

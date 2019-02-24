@@ -11,10 +11,11 @@ import UIKit
 /// 지정 날짜 기준 일주일 그래프 관련 뷰.
 final class ValueGraphView: UIView {
 
-  // MARK: Constant
-  
   /// 레이어 관련 상수 모음.
   enum Layer {
+    
+    /// 
+    static let radius: CGFloat = 2.0
     
     /// 경계선 두께.
     static let borderWidth: CGFloat = 1.0
@@ -44,55 +45,6 @@ final class ValueGraphView: UIView {
   /// Value Graph View Data Source.
   weak var dataSource: ValueGraphViewDataSource?
   
-  // MARK: Property
-  
-  /// `yyyy년 M월 d일 EEEE` 포맷을 갖는 DateFormatter 프로퍼티.
-  private lazy var dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.locale = .korea
-    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
-    return formatter
-  }()
-  
-  // MARK: Private Properties
-  
-  /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
-  private var intakeAmounts: [CGFloat] {
-    return dataSource?.intakes ?? []
-  }
-  
-  /// 미세먼지 흡입량의 최대값.
-  private var maxValue: CGFloat {
-    let max = intakeAmounts.max() ?? 0.0
-    return max + 1.0
-  }
-  
-  /// 흡입량 모음을 최대값에 대한 비율로 산출. `1.0 - (비율)`.
-  private var intakeRatios: [CGFloat] {
-    return intakeAmounts.map { 1.0 - $0 / maxValue }
-  }
-  
-  /// 주축 레이블.
-  private var axisTexts: [String] {
-    return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
-  }
-  
-  /// 일 텍스트.
-  private var dateTexts: [String] {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .korea
-    dateFormatter.dateFormat = "d"
-    var array = [Date](repeating: Date(), count: 7)
-    for (index, element) in array.enumerated() {
-      array[index] = element.before(days: index)
-    }
-    var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
-    // 마지막 값을 오늘로 바꿈
-    reversed.removeLast()
-    reversed.append("오늘")
-    return reversed
-  }
-  
   // MARK: IBOutlets
   
   /// 날짜 레이블.
@@ -104,11 +56,14 @@ final class ValueGraphView: UIView {
   /// 요일 레이블 모음.
   @IBOutlet private var dayLabels: [UILabel]!
   
+  /// 그래프 컨테이너 뷰.
+  @IBOutlet private weak var graphContainerView: UIView!
+  
   /// 그래프 뷰 모음.
   @IBOutlet private var graphViews: [UIView]! {
     didSet {
       for (index, view) in graphViews.enumerated() {
-        view.layer.setBorder(radius: 2.0)
+        view.layer.setBorder(radius: Layer.radius)
         view.backgroundColor = graphBackgroundColor(at: index)
       }
     }
@@ -120,23 +75,73 @@ final class ValueGraphView: UIView {
   /// 그래프 높이 제약 모음.
   @IBOutlet private var graphViewHeightConstraints: [NSLayoutConstraint]!
   
-  // MARK: Methods
+  // MARK: Property
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
+  /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
+  private var intakeAmounts: [Int] {
+    return dataSource?.intakes ?? []
   }
+  
+  /// 미세먼지 흡입량의 최대값.
+  private var maxValue: Int {
+    let max = intakeAmounts.max() ?? 1
+    return max
+  }
+  
+  /// 흡입량 모음을 최대값에 대한 비율로 산출. `1.0 - (비율)`.
+  private var intakeRatios: [Double] {
+    return intakeAmounts.map { 1.0 - Double($0) / Double(maxValue) }
+      .map { !$0.canBecomeMultiplier ? 0.01 : $0 }
+  }
+  
+  /// 주축 레이블.
+  private var axisTexts: [String] {
+    return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
+  }
+  
+  /// 일 텍스트.
+  private var dayTexts: [String] {
+    let dateFormatter = DateFormatter.day
+    var array = [Date](repeating: Date(), count: 7)
+    for (index, element) in array.enumerated() {
+      array[index] = element.before(days: index)
+    }
+    var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
+    // 마지막 값을 오늘로 바꿈
+    reversed.removeLast()
+    reversed.append(L10n.today)
+    return reversed
+  }
+  
+  // MARK: Methods
   
   /// 뷰 전체 설정.
   func setup() {
+    reloadGraphView()
+  }
+}
+
+// MARK: - GraphDrawable 구현
+
+extension ValueGraphView: GraphDrawable {
+  
+  func deinitializeSubviews() {
     initializeHeights()
+  }
+  
+  func drawGraph() {
     animateHeights()
+  }
+  
+  func setLabels() {
+    titleLabel.text = L10n.weeklyInhalationDose
     setUnitLabels()
     setDayLabelsTitle()
     setDateLabel()
   }
 }
 
-// MARK: - Private Extension
+// MARK: - Private Method
 
 private extension ValueGraphView {
   
@@ -160,7 +165,7 @@ private extension ValueGraphView {
           initialSpringVelocity: Animation.springVelocity,
           options: Animation.options,
           animations: { [weak self] in
-            heightConstraint = heightConstraint.changedMultiplier(to: ratio)
+            heightConstraint = heightConstraint.changedMultiplier(to: CGFloat(ratio))
             self?.layoutIfNeeded()
           },
           completion: nil
@@ -171,21 +176,17 @@ private extension ValueGraphView {
   
   /// 주축 레이블 설정.
   func setUnitLabels() {
-    zip(unitLabels, axisTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(unitLabels, axisTexts).forEach { $0.text = $1 }
   }
   
   /// 요일 레이블 텍스트 설정.
   func setDayLabelsTitle() {
-    zip(dayLabels, dateTexts).forEach { label, text in
-      label.text = text
-    }
+    zip(dayLabels, dayTexts).forEach { $0.text = $1 }
   }
   
   /// 날짜 레이블 설정.
   func setDateLabel() {
-    dateLabel.text = dateFormatter.string(from: Date())
+    dateLabel.text = DateFormatter.localizedDateWithDay.string(from: Date())
   }
   
   /// 그래프 색상 구하기.

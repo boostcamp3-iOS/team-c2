@@ -13,34 +13,32 @@ final class FeedbackListService: FeedbackListServiceType {
   
   // MARK: - Properties
   
-  let jsonManager: JSONManagerType
-  private let userDefaultsKey: String = "isBookmarkedByTitle"
+  private let jsonManager: JSONManagerType?
   private var dustFeedbacks: [DustFeedback] = []
-  private var isBookmarkedByTitle: [String: Bool] = [:]
+  private let userDefaultsKey = "isBookmarkedByTitle"
+  private let resourceName = "DustFeedback"
+  var isBookmarkedByTitle: [String: Bool] {
+    get {
+      return UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] ?? [:]
+    }
+    set {
+      UserDefaults.standard.set(newValue, forKey: userDefaultsKey)
+    }
+  }
   
-  init(jsonManager: JSONManagerType) {
+  init(jsonManager: JSONManagerType = JSONManager()) {
     self.jsonManager = jsonManager
-    dustFeedbacks =  jsonManager.fetchDustFeedbacks()
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] ?? [:]
+    dustFeedbacks = jsonManager.fetchJSONObject(to: DustFeedback.self, resourceName: resourceName)
   }
   
   // MARK: - Functions
   
   /// 피드백 정보의 개수를 반환함.
-  func fetchFeedbackCount() throws -> Int {
+  func fetchFeedbackCount() -> Int {
     let count = dustFeedbacks.count
-    if count == 0 {
-      throw NSError(domain: "nanana", code: 0, userInfo: nil)
-    }
     return count
   }
-  
-  /// 해당 인덱스의 피드백 정보를 반환함.
-  func fetchFeedback(at index: Int) -> DustFeedback {
-    return dustFeedbacks[index]
-  }
-  
+
   /// 피드백 정보를 최신순으로 반환함.
   func fetchFeedbacksByRecentDate() -> [DustFeedback] {
     return dustFeedbacks.sorted { $0.date > $1.date }
@@ -66,32 +64,56 @@ final class FeedbackListService: FeedbackListServiceType {
     return resultFeedbacks
   }
   
-  /// 즐겨찾기한 글의 제목을 저장하여 배열 처리함.
+  /// 즐겨찾기한 글의 제목을 저장함.
   func saveBookmark(by title: String) {
-    if let isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] {
-      var newDictionary = isBookmarkedByTitle
-      newDictionary[title] = true
-      UserDefaults.standard.set(newDictionary, forKey: userDefaultsKey)
-    } else {
-      UserDefaults.standard.set([title: true], forKey: userDefaultsKey)
-    }
     isBookmarkedByTitle[title] = true
   }
   
   /// 저장했던 즐겨찾기 정보 제목을 삭제함.
   func deleteBookmark(by title: String) {
     isBookmarkedByTitle[title] = false
-    if let isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] {
-      var newDictionary = isBookmarkedByTitle
-      newDictionary[title] = false
-      UserDefaults.standard.set(newDictionary, forKey: userDefaultsKey)
-    }
   }
   
-  /// 제목으로 피드백 전체 정보를 가져옴.
+  /// 제목으로 피드백 정보를 가져옴.
   func fetchFeedback(by title: String) -> DustFeedback? {
     return dustFeedbacks.filter { $0.title == title }.first
+  }
+  
+  /// 현재 상태로 피드백 정보를 가져옴.
+  func fetchRecommededFeedbacks(by currentState: IntakeGrade) -> [DustFeedback] {
+    var recommendCount: [ImportanceGrade: Int] = [:] // 중요도별 개수
+    switch currentState {
+    case .veryGood:
+      recommendCount = [.important: 2, .normal: 1]
+    case .good:
+      recommendCount = [.important: 3]
+    case .normal:
+      recommendCount = [.veryImportant: 1, .important: 2]
+    case .bad:
+      recommendCount = [.veryImportant: 2, .important: 1]
+    case .veryBad:
+      recommendCount = [.veryImportant: 3]
+    default:
+      recommendCount = [.important: 2, .normal: 1]
+    }
+    var importantDustFeedbacks: [DustFeedback] = [] // 중요도별 전체 정보
+ 
+    var recommendFeedbacks: [DustFeedback] = []
+    for (key, _) in recommendCount {
+      importantDustFeedbacks = fetchFeedbacks(by: key)
+      // 중요도별 개수로 추천 정보 결정
+      if let importanceCount = recommendCount[key] {
+        for count in 0..<importanceCount {
+          recommendFeedbacks.append(importantDustFeedbacks[count])
+        }
+      }
+    }
+    return recommendFeedbacks
+  }
+  
+  /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
+  func fetchFeedbacks(by importance: ImportanceGrade) -> [DustFeedback] {
+    let feedbacks = dustFeedbacks.filter { $0.importance == importance.rawValue }
+    return feedbacks.shuffled()
   }
 }

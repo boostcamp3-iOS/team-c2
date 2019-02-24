@@ -14,9 +14,11 @@
         <attribute name="steps" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="todayFineDust" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="todayUltrafineDust" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weekFineDust" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="weekUltrafineDust" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
         <element name="Intake" positionX="237.65625" positionY="11.390625" width="128" height="88"/>
-        <element name="User" positionX="-63" positionY="-27" width="128" height="165"/>
+        <element name="User" positionX="-63" positionY="-27" width="128" height="195"/>
     </elements>
 </model>

@@ -17,36 +17,57 @@ final class FeedbackListViewController: UIViewController {
   
   // MARK: - Properties
   
-  var feedbackListService = FeedbackListService(jsonManager: JSONManager())
+  var feedbackListService = FeedbackListService()
   private let reuseIdentifiers = ["recommendTableCell", "feedbackListCell"]
   private var feedbackCount = 0
   private var newDustFeedbacks: [DustFeedback]?
   private var isBookmarkedByTitle: [String: Bool] = [:]
+  private var recommendFeedbacks: [DustFeedback] = []
+  private let defaults = UserDefaults(suiteName: "group.kr.co.boostcamp3rd.FineDust")
+  private var fineDustIntake: Int = 0
+  private var ultrafineDustIntake: Int = 0
+  private var currentState: IntakeGrade = .good
+  private let sectionToReload: IndexSet = [1]
   
   // MARK: - LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "먼지 정보".localized
-
-    do {
-      feedbackCount = try feedbackListService.fetchFeedbackCount()
-    } catch {
-      print(error.localizedDescription)
-    }
     
-    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    setup()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    isBookmarkedByTitle
-      = UserDefaults.standard.dictionary(forKey: "isBookmarkedByTitle") as? [String: Bool] ?? [:]
-    
-    feedbackListTableView.reloadData()
+    loadFeedback()
   }
   
   // MARK: - Function
   
+  private func setup() {
+    feedbackCount = feedbackListService.fetchFeedbackCount()
+    // back swipe
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+  
+  private func loadFeedback() {
+    isBookmarkedByTitle = feedbackListService.isBookmarkedByTitle
+    feedbackListTableView.reloadSections(sectionToReload, with: .none)
+    calculateState()
+    recommendFeedbacks = feedbackListService.fetchRecommededFeedbacks(by: currentState)
+  }
+  
+  /// 미세먼지 섭취량으로 현재 상태를 계산함.
+  private func calculateState() {
+    if let defaults = defaults {
+      fineDustIntake = defaults.integer(forKey: "fineDustIntake")
+      ultrafineDustIntake = defaults.integer(forKey: "ultrafineDustIntake")
+      
+      let totalIntake = fineDustIntake + ultrafineDustIntake
+      currentState = IntakeGrade(intake: totalIntake)
+    }
+  }
+  
+  /// 상세정보 화면으로 이동함.
   private func pushDetailViewController(feedbackTitle: String) {
     if let viewController = storyboard?
       .instantiateViewController(withIdentifier: FeedbackDetailViewController.classNameToString)
@@ -60,24 +81,23 @@ final class FeedbackListViewController: UIViewController {
   /// 미세먼지 정보 정렬 액션시트
   @objc func settingButtonDidTap(_ sender: UIButton) {
     
-    let sectionToReload = 1
-    let indexSet: IndexSet = [sectionToReload]
-    
     UIAlertController
-      .alert(title: "정렬방식 선택", message: "미세먼지 관련 정보를 어떤 순서로 정렬할까요?", style: .actionSheet)
-      .action(title: "최신순") { _, _ in
+      .alert(title: L10n.sortingMethod,
+             message: L10n.pleaseChooseHowToSortInformation,
+             style: .actionSheet)
+      .action(title: L10n.byRecent) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "제목순") { _, _ in
+      .action(title: L10n.byTitle) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "즐겨찾기순") { _, _ in
+      .action(title: L10n.byBookmark) { _, _ in
         self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
-        self.feedbackListTableView.reloadSections(indexSet, with: .none)
+        self.feedbackListTableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: "취소", style: .cancel)
+      .action(title: L10n.cancel, style: .cancel)
       .present(to: self)
   }
 }
@@ -106,15 +126,14 @@ extension FeedbackListViewController: UITableViewDataSource {
                            for: indexPath) as? FeedbackListTableViewCell
       else { return UITableViewCell() }
     cell.delegate = self
-    let feedback = feedbackListService.fetchFeedback(at: indexPath.row)
     
     if let newDustFeedbacks = newDustFeedbacks {
       cell.setTableViewCellProperties(dustFeedback: newDustFeedbacks[indexPath.row])
     } else {
-      cell.setTableViewCellProperties(dustFeedback: feedback)
+      let feedback = feedbackListService.fetchFeedbacksByBookmark()
+      cell.setTableViewCellProperties(dustFeedback: feedback[indexPath.row])
     }
     cell.setBookmarkButtonState(isBookmarkedByTitle: isBookmarkedByTitle)
-    
     return cell
   }
 }
@@ -136,7 +155,7 @@ extension FeedbackListViewController: UITableViewDelegate {
     
     guard let currentCell = feedbackListTableView.cellForRow(at: indexPath)
       as? FeedbackListTableViewCell else { return }
- 
+    
     pushDetailViewController(feedbackTitle: currentCell.title)
   }
   
@@ -178,10 +197,10 @@ extension FeedbackListViewController: UITableViewDelegate {
                      for: .touchUpInside)
     if section == 1 {
       button.isHidden = false
-      label.text = "전체 목록"
+      label.text = L10n.fullList
     } else {
       button.isHidden = true
-      label.text = "맞춤 정보 추천"
+      label.text = L10n.optimizedInformation
     }
     
     return headerView
@@ -201,7 +220,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return feedbackCount > 2 ? 3 : feedbackCount
+    return recommendFeedbacks.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -212,7 +231,7 @@ extension FeedbackListViewController: UICollectionViewDataSource {
                            for: indexPath) as? RecommendCollectionViewCell
       else { return UICollectionViewCell() }
     
-    let feedback = feedbackListService.fetchFeedback(at: indexPath.item)
+    let feedback = recommendFeedbacks[indexPath.item]
     cell.setCollectionViewCellProperties(dustFeedback: feedback)
     return cell
   }
@@ -245,5 +264,7 @@ extension FeedbackListViewController: FeedbackListCellDelegate {
       isBookmarkedByTitle[title] = false
       feedbackListService.deleteBookmark(by: title)
     }
+    self.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
+    self.feedbackListTableView.reloadSections(sectionToReload, with: .none)
   }
 }
