@@ -264,6 +264,9 @@ extension MainViewController {
       guard let self = self else { return }
       self.intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
         if let error = error as? ServiceErrorType {
+          if (error as? HealthKitError) != nil {
+            return
+          }
           error.presentToast()
           return
         }
