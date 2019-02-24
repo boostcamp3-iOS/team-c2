@@ -23,7 +23,7 @@ final class GeocoderManager: GeocoderManagerType {
                       completion: @escaping (String?, Error?) -> Void) {
     CLGeocoder()
       .reverseGeocodeLocation(location,
-                              preferredLocale: .korea) { placemarks, error in
+                              preferredLocale: .preferredLocale) { placemarks, error in
                                 if let error = error {
                                   completion(nil, error)
                                   return

@@ -25,8 +25,9 @@ extension DateFormatter {
   /// `2019년 1월 1일 일요일`
   static let localizedDateWithDay: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = .korea
-    formatter.dateFormat = "yyyy년 M월 d일 EEEE"
+    formatter.locale = .preferredLocale
+    formatter.dateStyle = .long
+    formatter.timeStyle = .none
     return formatter
   }()
   
