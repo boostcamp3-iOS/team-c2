@@ -32,7 +32,7 @@ class TestDateFormatterExtension: XCTestCase {
   
   func  test_localizedDateWithDay() {
     let formatter = DateFormatter.localizedDateWithDay
-    XCTAssertEqual(formatter.string(from: date), "2019년 2월 19일 화요일")
+    XCTAssertEqual(formatter.string(from: date), "2019년 2월 19일")
   }
   
   func  test_dateForDust() {
