@@ -12,4 +12,9 @@ extension Locale {
   
   /// 대한민국 로케일.
   static let korea = Locale(identifier: "ko_KR")
+  
+  static var preferredLocale: Locale {
+    let deviceLanguage = Locale.current.languageCode
+    return deviceLanguage == "ko" ? .korea : .current
+  }
 }
