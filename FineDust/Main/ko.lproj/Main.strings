@@ -6,7 +6,7 @@
 "6aD-dS-mao.text" = "-";
 
 /* Class = "UILabel"; text = "현재 걸은 거리"; ObjectID = "Akz-ud-YeW"; */
-"Akz-ud-YeW.text" = "현재 걸은 거리";
+"Akz-ud-YeW.text" = "오늘 걸은 거리";
 
 /* Class = "UILabel"; text = "오늘 마신"; ObjectID = "C5o-N1-C5n"; */
 "C5o-N1-C5n.text" = "오늘 마신";
@@ -27,7 +27,7 @@
 "Os6-Ee-Kik.text" = "-";
 
 /* Class = "UILabel"; text = "현재 걸음 수"; ObjectID = "Wcm-Sj-Egu"; */
-"Wcm-Sj-Egu.text" = "현재 걸음 수";
+"Wcm-Sj-Egu.text" = "오늘 걸음 수";
 
 /* Class = "UILabel"; text = "오늘 마신"; ObjectID = "XaE-Bf-rSy"; */
 "XaE-Bf-rSy.text" = "오늘 마신";
