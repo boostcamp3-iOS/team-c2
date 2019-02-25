@@ -13,17 +13,7 @@ final class FDCountingLabel: UILabel {
   
   /// 타이머.
   private var timer: Timer?
-  
-  // MARK: Initializer
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
+
   /// 값이 없을 때 설정.
   func setNoValue(_ defaultText: String = "-") {
     text = defaultText
