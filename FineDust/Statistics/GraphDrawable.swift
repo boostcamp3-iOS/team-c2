@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// 그래프를 그리는 프로토콜.
 protocol GraphDrawable: class {

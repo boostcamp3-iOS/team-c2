@@ -121,7 +121,7 @@ extension StatisticsViewController: IntakeRequestable {
         return
       }
       guard let intakeData = intakeData else { return }
-      self.intakeData.reset(intakeData)
+      self.intakeData.reset(to: intakeData)
       DispatchQueue.main.async {
         self.initializeGraphViews()
       }
@@ -194,7 +194,7 @@ private extension StatisticsViewController {
                                     weekUltrafineDust: lastSavedData.weekUltrafineDust,
                                     todayFineDust: lastSavedData.todayFineDust,
                                     todayUltrafineDust: lastSavedData.todayUltrafineDust)
-        self.intakeData.reset(intakeData)
+        self.intakeData.reset(to: intakeData)
         DispatchQueue.main.async {
           self.initializeGraphViews()
         }

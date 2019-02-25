@@ -24,7 +24,7 @@ struct IntakeData {
   var todayUltrafineDust: Int = 1
   
   /// 초기화.
-  mutating func reset(_ intakeData: IntakeData) {
+  mutating func reset(to intakeData: IntakeData) {
     self = intakeData
   }
 }
