@@ -17,13 +17,13 @@
 
 ## 팀원 정보
 
-**[intmain](https://github.com/intmain)**
+⭐️ 튜터 오진성 [@intmain](https://github.com/intmain)
 
-[Jae-eun](https://github.com/Jae-eun)
+이재은 [@Jae-eun](https://github.com/Jae-eun)
 
-[zunzunzun](https://github.com/zunzunzun)
+이준상 [@zunzunzun](https://github.com/zunzunzun)
 
-[presto95](https://github.com/presto95)
+이한결 [@presto95](https://github.com/presto95)
 
 ## 기획
 

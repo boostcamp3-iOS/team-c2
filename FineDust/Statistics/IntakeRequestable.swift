@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// 흡입량을 호출하는 프로토콜.
 protocol IntakeRequestable: class {
@@ -30,7 +31,9 @@ protocol IntakeRequestable: class {
   var requestIntakeHandler: (IntakeData?, Error?) -> Void { get }
 }
 
-extension IntakeRequestable {
+// MARK: - IntakeRequestable 프로토콜 초기 구현
+
+extension IntakeRequestable where Self: UIViewController {
   
   func injectDependency(_ intakeService: IntakeServiceType,
                         _ coreDataService: CoreDataServiceType) {
