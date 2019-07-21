@@ -1,9 +1,0 @@
-
-/* Class = "UITabBarItem"; title = "통계"; ObjectID = "BxE-pT-soT"; */
-"BxE-pT-soT.title" = "통계";
-
-/* Class = "UISegmentedControl"; kP2-MY-egO.segmentTitles[0] = "미세먼지"; ObjectID = "kP2-MY-egO"; */
-"kP2-MY-egO.segmentTitles[0]" = "미세먼지";
-
-/* Class = "UISegmentedControl"; kP2-MY-egO.segmentTitles[1] = "초미세먼지"; ObjectID = "kP2-MY-egO"; */
-"kP2-MY-egO.segmentTitles[1]" = "초미세먼지";

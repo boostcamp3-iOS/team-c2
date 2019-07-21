@@ -1,0 +1,91 @@
+PODS:
+  - Alamofire (4.8.2)
+  - Carte (2.2.0)
+  - Differentiator (4.0.1)
+  - MarqueeLabel (4.0.0)
+  - NotificationBannerSwift (2.3.0):
+    - MarqueeLabel (~> 4.0.0)
+    - SnapKit (~> 5.0.0)
+  - Realm (3.17.0):
+    - Realm/Headers (= 3.17.0)
+  - Realm/Headers (3.17.0)
+  - RealmSwift (3.17.0):
+    - Realm (= 3.17.0)
+  - RxAlamofire (5.0.0):
+    - RxAlamofire/Core (= 5.0.0)
+  - RxAlamofire/Core (5.0.0):
+    - Alamofire (~> 4.8)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxOptional (4.0.0):
+    - RxCocoa (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
+  - SnapKit (5.0.0)
+  - SVProgressHUD (2.2.5)
+  - SWXMLHash (4.9.0)
+  - Then (2.5.0)
+
+DEPENDENCIES:
+  - Carte
+  - NotificationBannerSwift
+  - RealmSwift
+  - RxAlamofire
+  - RxDataSources
+  - RxOptional
+  - RxSwift
+  - SnapKit
+  - SVProgressHUD
+  - SWXMLHash
+  - Then
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Carte
+    - Differentiator
+    - MarqueeLabel
+    - NotificationBannerSwift
+    - Realm
+    - RealmSwift
+    - RxAlamofire
+    - RxCocoa
+    - RxDataSources
+    - RxOptional
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - SVProgressHUD
+    - SWXMLHash
+    - Then
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Carte: bca44c5112fac5866c2fa3da9fa018fa54eb8ba7
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
+  NotificationBannerSwift: fdc44b934be7a8175f7a7170a75a11c672990e70
+  Realm: b30db41ff34fc858ffc25ba8d44a82c164e7ccd0
+  RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
+  RxAlamofire: e7875a012aff55345672d0f70a2a9cd6aeb0f211
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxOptional: 9904e2219d59260c3c171273d475b2126de187e8
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SWXMLHash: 87b0006848a548b7f9485b40bc71721b3ae39add
+  Then: 0157115e883545c77967b452fe74a1d25fb796e1
+
+PODFILE CHECKSUM: f8212e1822f3716552eda9b81b2d21e501c68c76
+
+COCOAPODS: 1.7.3

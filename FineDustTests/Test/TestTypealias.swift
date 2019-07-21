@@ -39,7 +39,7 @@ class TestTypealias: XCTestCase {
   func test_sortedByDate_ascending() {
     let referenceDate = Date()
     let dict: DateHourIntakePair = [referenceDate.before(days: 1): [.zero: 0, .one: 1], referenceDate.before(days: 2): [.zero: 0, .one: 1]]
-    let sorted = dict.sortByDate()
+    let sorted = dict.sort()
     let compared: [(key: Date, value: HourIntakePair)] = [(key: referenceDate.before(days: 2), value: [.zero: 0, .one: 1]), (key: referenceDate.before(days: 1), value: [.zero: 0, .one: 1])]
     for index in sorted.indices {
       let sortedElement = sorted[index]
@@ -52,7 +52,7 @@ class TestTypealias: XCTestCase {
   func test_sortedByDate_descending() {
     let referenceDate = Date()
     let dict: DateHourIntakePair = [referenceDate.before(days: 1): [.zero: 0, .one: 1], referenceDate.before(days: 2): [.zero: 0, .one: 1]]
-    let sorted = dict.sortByDate(isAscending: false)
+    let sorted = dict.sort(byAscending: false)
     let compared: [(key: Date, value: HourIntakePair)] = [(key: referenceDate.before(days: 1), value: [.zero: 0, .one: 1]), (key: referenceDate.before(days: 2), value: [.zero: 0, .one: 1])]
     for index in sorted.indices {
       let sortedElement = sorted[index]

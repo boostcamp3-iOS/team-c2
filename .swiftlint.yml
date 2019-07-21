@@ -3,10 +3,11 @@ disabled_rules:
 - trailing_whitespace
 
 excluded:
-- FineDust/Supporting Files/AppDelegate.swift
-- FineDust/Supporting Files/GeoConverter.swift
+- FineDust/Supports/AppDelegate.swift
+- FineDust/Sources/GeoConverter.swift
 - FineDustTests/
 - FineDust/SWXMLHash
+- Pods/
 
 line_length:
   warning: 99

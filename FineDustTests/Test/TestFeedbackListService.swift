@@ -12,12 +12,12 @@ import Foundation
 
 class FeedbackListServiceTest: XCTestCase {
   
-  var feedbackListService: FeedbackListService!
+  var feedbackListService: FeedbackService!
   let mockJSONManager = MockJSONManager()
   
   override func setUp() {
     mockJSONManager.dustFeedbacks = DummyJSONManager.JSONData
-    feedbackListService = FeedbackListService(jsonManager: mockJSONManager)
+    feedbackListService = FeedbackService(jsonManager: mockJSONManager)
   }
   
   /// 오늘 피드백 데이터 개수 받아오는 함수 테스트

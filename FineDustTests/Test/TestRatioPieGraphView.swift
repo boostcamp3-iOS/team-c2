@@ -12,7 +12,7 @@ import XCTest
 
 class TestGraphView: XCTestCase {
   
-  let valueGraphView: ValueGraphView! = UIView.instantiate(fromXib: ValueGraphView.classNameToString) as? ValueGraphView
+  let valueGraphView: StickGraphView! = UIView.instantiate(fromXib: StickGraphView.classNameToString) as? StickGraphView
   let pieGraphView = RatioPieGraphView()
   let stickGraphView: RatioStickGraphView! = UIView.instantiate(fromXib: RatioStickGraphView.classNameToString) as? RatioStickGraphView
   

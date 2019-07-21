@@ -102,7 +102,7 @@ class TestCoreDataService: XCTestCase {
     coreDataService.requestLastSavedData { lastSavedData, error in
       XCTAssertNotNil(lastSavedData)
       XCTAssertEqual(lastSavedData?.todayFineDust, 0)
-      XCTAssertEqual(lastSavedData?.todayUltrafineDust, 0)
+      XCTAssertEqual(lastSavedData?.todayUltraFineDust, 0)
       XCTAssertEqual(lastSavedData?.distance, 0)
       XCTAssertEqual(lastSavedData?.steps, 0)
       XCTAssertEqual(lastSavedData?.address, "")

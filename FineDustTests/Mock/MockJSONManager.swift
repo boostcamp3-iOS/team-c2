@@ -12,8 +12,8 @@ import Foundation
 final class MockJSONManager: JSONManagerType {
 
   var resourceName = "DustFeedback"
-  var dustFeedbacks: [DustFeedback] = []
-  var emptyDustFeedback: [DustFeedback] = []
+  var dustFeedbacks: [FeedbackContents] = []
+  var emptyDustFeedback: [FeedbackContents] = []
   var error: Error?
 
   func fetchJSONObject<T>(to type: T.Type, resourceName: String) -> [T] where T : Decodable {

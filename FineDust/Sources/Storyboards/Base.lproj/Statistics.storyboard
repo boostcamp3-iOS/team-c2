@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rIq-fy-EBz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Stats-->
+        <scene sceneID="hxl-bi-pes">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="rIq-fy-EBz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Stats" image="barChartTabIcon" id="BxE-pT-soT"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jS4-sl-2dd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yLH-07-419" kind="relationship" relationship="rootViewController" id="D49-lV-vix"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXt-UJ-L0O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-914" y="-5"/>
+        </scene>
+        <!--Statistics View Controller-->
+        <scene sceneID="f1b-0h-AEP">
+            <objects>
+                <viewController storyboardIdentifier="StatisticsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yLH-07-419" customClass="StatisticsViewController" customModule="FineDust" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cAa-p0-7jU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kP2-MY-egO">
+                                <rect key="frame" x="16" y="36" width="343" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="cPh-D0-4aF"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="미세먼지"/>
+                                    <segment title="초미세먼지"/>
+                                </segments>
+                            </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vK-Nk-thK">
+                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
+                                        <rect key="frame" x="19" y="0.0" width="337.5" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="I02-Cs-tPr"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
+                                        <rect key="frame" x="19" y="308" width="337.5" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="ZQI-79-uGB"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="b6f-az-Uoz" secondAttribute="bottom" id="3NW-sV-B8y"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="top" secondItem="Sca-OT-FiC" secondAttribute="bottom" constant="8" id="aPH-uy-k1x"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="top" secondItem="1vK-Nk-thK" secondAttribute="top" id="arq-Zk-AVO"/>
+                                    <constraint firstItem="b6f-az-Uoz" firstAttribute="centerX" secondItem="1vK-Nk-thK" secondAttribute="centerX" id="hKQ-Fl-4Ul"/>
+                                    <constraint firstItem="Sca-OT-FiC" firstAttribute="centerX" secondItem="1vK-Nk-thK" secondAttribute="centerX" id="slO-u6-Bjt"/>
+                                    <constraint firstAttribute="trailing" secondItem="b6f-az-Uoz" secondAttribute="trailing" id="wn3-jx-ghU"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="1vK-Nk-thK" secondAttribute="trailing" id="3BC-7o-Cdc"/>
+                            <constraint firstItem="kP2-MY-egO" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" constant="16" id="L6Y-gJ-lSU"/>
+                            <constraint firstItem="1vK-Nk-thK" firstAttribute="leading" secondItem="66h-Qh-c5I" secondAttribute="leading" id="Rfn-8P-MYq"/>
+                            <constraint firstItem="b6f-az-Uoz" firstAttribute="width" secondItem="cAa-p0-7jU" secondAttribute="width" multiplier="0.9" id="cZm-PP-Hcn"/>
+                            <constraint firstItem="Sca-OT-FiC" firstAttribute="width" secondItem="cAa-p0-7jU" secondAttribute="width" multiplier="0.9" id="mKl-no-tfI"/>
+                            <constraint firstItem="1vK-Nk-thK" firstAttribute="top" secondItem="kP2-MY-egO" secondAttribute="bottom" constant="8" id="mwa-pY-kqk"/>
+                            <constraint firstItem="kP2-MY-egO" firstAttribute="top" secondItem="66h-Qh-c5I" secondAttribute="top" constant="16" id="p42-sg-cdo"/>
+                            <constraint firstItem="66h-Qh-c5I" firstAttribute="trailing" secondItem="kP2-MY-egO" secondAttribute="trailing" constant="16" id="p6O-bs-pC9"/>
+                            <constraint firstItem="1vK-Nk-thK" firstAttribute="bottom" secondItem="66h-Qh-c5I" secondAttribute="bottom" id="toU-fL-TxB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="66h-Qh-c5I"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="q9l-Ys-TA3"/>
+                    <connections>
+                        <outlet property="ratioGraphBackgroundView" destination="b6f-az-Uoz" id="8jY-xt-nWU"/>
+                        <outlet property="scrollView" destination="1vK-Nk-thK" id="1cc-sI-bKj"/>
+                        <outlet property="segmentedControl" destination="kP2-MY-egO" id="Q31-f6-dau"/>
+                        <outlet property="stickGraphBackgroundView" destination="Sca-OT-FiC" id="aA3-rP-Vwm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ktn-rj-baA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-208.80000000000001" y="-7.6461769115442282"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="barChartTabIcon" width="21.333333969116211" height="21.333333969116211"/>
+    </resources>
+</document>

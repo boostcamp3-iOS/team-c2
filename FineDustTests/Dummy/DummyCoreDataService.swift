@@ -11,7 +11,7 @@ import Foundation
 
 struct DummyCoreDataService {
   
-  static let intakePerDateFull: DateIntakePair = [Date.before(days: 6).start: (10, 10), Date.before(days: 5).start: (10, 10), Date.before(days: 4).start: (10, 10), Date.before(days: 3).start: (10, 10), Date.before(days: 2).start: (10, 10), Date.before(days: 1).start: (10, 10)]
+  static let intakePerDateFull: DateIntakeValuePair = [Date.before(days: 6).start: (10, 10), Date.before(days: 5).start: (10, 10), Date.before(days: 4).start: (10, 10), Date.before(days: 3).start: (10, 10), Date.before(days: 2).start: (10, 10), Date.before(days: 1).start: (10, 10)]
   
-  static let intakePerDateHalf: DateIntakePair = [Date.before(days: 6).start: (10, 10), Date.before(days: 5).start: (10, 10), Date.before(days: 4).start: (10, 10)]
+  static let intakePerDateHalf: DateIntakeValuePair = [Date.before(days: 6).start: (10, 10), Date.before(days: 5).start: (10, 10), Date.before(days: 4).start: (10, 10)]
 }

@@ -13,7 +13,7 @@ class MockCoreDataService: CoreDataServiceType {
   
   var lastAccessedDate: Date?
   
-  var coreDataIntakePerDate: DateIntakePair?
+  var coreDataIntakePerDate: DateIntakeValuePair?
   
   var lastSavedData: LastSavedData?
   
@@ -27,7 +27,7 @@ class MockCoreDataService: CoreDataServiceType {
     completion(error)
   }
   
-  func requestIntakes(from startDate: Date, to endDate: Date, completion: @escaping (DateIntakePair?, Error?) -> Void) {
+  func requestIntakes(from startDate: Date, to endDate: Date, completion: @escaping (DateIntakeValuePair?, Error?) -> Void) {
     completion(coreDataIntakePerDate, error)
   }
   
