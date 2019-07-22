@@ -8,15 +8,13 @@
 
 import UIKit
 
-import Then
-
 final class HomeViewController: UIViewController {
   
   // MARK: - IBOutlet
   
-  @IBOutlet private weak var fineDustSpeechBalloonView: IntakeSpeechBubbleView!
+  @IBOutlet private weak var fineDustSpeechBalloonBackgroundView: UIView!
   
-  @IBOutlet private weak var ultraFineDustSpeechBalloonView: IntakeSpeechBubbleView!
+  @IBOutlet private weak var ultraFineDustSpeechBalloonBackgroundView: UIView!
   
   @IBOutlet private weak var distanceLabel: UILabel!
   @IBOutlet private weak var stepCountLabel: UILabel!
@@ -29,6 +27,12 @@ final class HomeViewController: UIViewController {
   @IBOutlet private weak var currentWalkingCount: UILabel!
   @IBOutlet private weak var dataContainerView: UIView!
   @IBOutlet private weak var authorizationButton: UIButton!
+  
+  private let fineDustSpeechBalloonView
+    = UIView.instantiate(fromType: IntakeSpeechBubbleView.self)
+  
+  private let ultraFineDustSpeechBalloonView
+    = UIView.instantiate(fromType: IntakeSpeechBubbleView.self)
   
   // MARK: - Properties
   
@@ -56,15 +60,15 @@ final class HomeViewController: UIViewController {
     let isHealthKitAuthorized = healthKitService.isAuthorized && healthKitService.isDetermined
     let isLocationAuthorized = LocationManager.shared.authorizationStatus == .authorizedWhenInUse
       || LocationManager.shared.authorizationStatus == .authorizedAlways
-    let healthKitAction = UIAlertAction(title: L10n.healthApp, style: .default) { _ in
+    let healthKitAction = UIAlertAction(title: "건강 APP", style: .default) { _ in
       self.openHealthApp()
     }
-    let locationAction = UIAlertAction(title: L10n.location, style: .default) { _ in
+    let locationAction = UIAlertAction(title: "위치 정보", style: .default) { _ in
       self.openSettingApp()
     }
-    let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
-    let title = L10n.donTYouHaveAnyInformation
-    let message = L10n.youMustAllowPermissionForHealthAppAndLocationToViewInformation
+    let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+    let title = "정보가 표시되지 않나요?"
+    let message = "정보를 확인하려면 건강 앱 및 위치에 대한 권한을 허용해야 합니다."
     let alert = UIAlertController(title: title,
                                   message: message,
                                   preferredStyle: .actionSheet)
@@ -111,15 +115,15 @@ extension HomeViewController: LocationObserver {
           DispatchQueue.main.async {
             self.fineDustSpeechBalloonView.rx.value.onNext(data.todayFineDust)
             self.ultraFineDustSpeechBalloonView.rx.value.onNext(data.todayUltraFineDust)
-//            self.intakeFineDustLable.countFromZero(to: data.todayFineDust,
-//                                                   unit: .microgram,
-//                                                   interval: 1.0 /
-//                                                    Double(data.todayFineDust))
+            //            self.intakeFineDustLable.countFromZero(to: data.todayFineDust,
+            //                                                   unit: .microgram,
+            //                                                   interval: 1.0 /
+            //                                                    Double(data.todayFineDust))
             
-//            self.intakeUltrafineDustLabel.countFromZero(to: data.todayUltrafineDust,
-//                                                        unit: .microgram,
-//                                                        interval: 1.0 /
-//                                                          Double(data.todayUltrafineDust))
+            //            self.intakeUltrafineDustLabel.countFromZero(to: data.todayUltrafineDust,
+            //                                                        unit: .microgram,
+            //                                                        interval: 1.0 /
+            //                                                          Double(data.todayUltrafineDust))
             self.fineDustImageView.image
               = UIImage(named: IntakeGrade(intake: data.todayFineDust + data.todayUltraFineDust)
                 .imageName)
@@ -140,6 +144,7 @@ extension HomeViewController: LocationObserver {
 // MARK: - HealthKitAuthorizationObserver
 
 extension HomeViewController: HealthKitAuthorizationObserver {
+  
   func authorizationSharingAuthorized(_ notification: Notification) {
     updateHealthKitInfo()
     updateAPIInfo()
@@ -151,6 +156,13 @@ extension HomeViewController: HealthKitAuthorizationObserver {
 extension HomeViewController {
   /// MainViewController 초기 설정 메소드.
   private func setUp() {
+    fineDustSpeechBalloonBackgroundView.addSubview(fineDustSpeechBalloonView) {
+      $0.edges.equalToSuperview()
+    }
+    ultraFineDustSpeechBalloonBackgroundView.addSubview(ultraFineDustSpeechBalloonView) {
+      $0.edges.equalToSuperview()
+    }
+    
     registerLocationObserver()
     registerHealthKitAuthorizationObserver()
     timeLabel.text = dateFormatter.string(from: Date())
@@ -167,7 +179,7 @@ extension HomeViewController {
     currentWalkingCount.font = currentWalkingCount.font.withSize(size)
     currentDistance.font = currentDistance.font.withSize(size)
     
-    authorizationButton.setTitle(L10n.donTYouHaveAnyInformation, for: [])
+    authorizationButton.setTitle("정보가 표시되지 않나요?", for: [])
   }
   
   /// HealthKit의 걸음 수, 걸은 거리 값 업데이트하는 메소드.
@@ -177,7 +189,7 @@ extension HomeViewController {
       if let error = error as? HealthKitError, error == .queryNotSearched {
         if self.healthKitService.isAuthorized {
           DispatchQueue.main.async {
-            self.stepCountLabel.text = "0 \(L10n.steps)"
+            self.stepCountLabel.text = "0 걸음"
           }
         } else {
           error.presentToast()
@@ -195,7 +207,7 @@ extension HomeViewController {
             }
             if self.healthKitService.isAuthorized {
               DispatchQueue.main.async {
-                self.stepCountLabel.text = "\(Int(value)) \(L10n.steps)"
+                self.stepCountLabel.text = "\(Int(value)) 걸음"
               }
             }
         }
@@ -287,14 +299,14 @@ extension HomeViewController {
                 = UIImage(named: IntakeGrade(intake: fineDust + ultrafineDust).imageName)
               self.fineDustSpeechBalloonView.rx.value.onNext(fineDust)
               self.ultraFineDustSpeechBalloonView.rx.value.onNext(ultrafineDust)
-//              self.intakeFineDustLable.countFromZero(to: fineDust,
-//                                                     unit: .microgram,
-//                                                     interval: 1.0 /
-//                                                      Double(fineDust))
-//              self.intakeUltrafineDustLabel.countFromZero(to: ultrafineDust,
-//                                                          unit: .microgram,
-//                                                          interval: 1.0 /
-//                                                            Double(ultrafineDust))
+              //              self.intakeFineDustLable.countFromZero(to: fineDust,
+              //                                                     unit: .microgram,
+              //                                                     interval: 1.0 /
+              //                                                      Double(fineDust))
+              //              self.intakeUltrafineDustLabel.countFromZero(to: ultrafineDust,
+              //                                                          unit: .microgram,
+              //                                                          interval: 1.0 /
+              //                                                            Double(ultrafineDust))
             }
           }
         }
@@ -323,17 +335,20 @@ extension HomeViewController {
   
   /// 권한이 없을시 권한설정을 도와주는 AlertController.
   private func presentOpenHealthAppAlert() {
-
+    
     if !healthKitService.isAuthorized && healthKitService.isDetermined {
       UIAlertController
-        .alert(title: L10n.doNotHaveHealthAppPrivileges,
-               message: L10n.DustInsideMeNeedAuthorityToTheHealthApp
-                .healthAppDataSourcesDustInsideMeAllowAllWriteAndReadPermissions
+        .alert(title: "건강 앱 접근 권한이 없습니다.",
+               message:
+          """
+          걸음 수와 걸음거리를 얻기 위해 건강 앱에 대한 권한이 필요합니다.
+          건강 앱 -> 데이터소스 -> 내안의먼지 -> 모든 쓰기, 읽기 권한을 허용해주세요.
+          """
         )
-        .action(title: L10n.healthApp, style: .default) { _, _ in
+        .action(title: "건강 APP", style: .default) { _, _ in
           self.openHealthApp()
         }
-        .action(title: L10n.cancel, style: .cancel)
+        .action(title: "취소", style: .cancel)
         .present(to: self)
     }
   }

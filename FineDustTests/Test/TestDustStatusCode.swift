@@ -12,10 +12,10 @@ import XCTest
 
 class TestDustStatusCode: XCTestCase {
   
-  var code: DustStatusCode!
+  var code: DustAPIResultCode!
   
   func test_success_error() {
-    code = DustStatusCode.success
+    code = DustAPIResultCode.success
     XCTAssertNil(code.error)
   }
 }

@@ -50,7 +50,6 @@ final class FeedbackCell: UITableViewCell {
     dateLabel.text = feedbackContents.date
   }
   
-  /// 북마크 버튼 이미지 설정
   func setBookmarkButtonState(isBookmarkedByTitle: [String: Bool]) {
     let isBookmarked = isBookmarkedByTitle[title] ?? false
     bookmarkButton.imageView?.image

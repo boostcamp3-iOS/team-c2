@@ -25,7 +25,7 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseSuccess.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.success)
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.success)
       XCTAssertNil(error)
       expect.fulfill()
     }
@@ -37,8 +37,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseApplicationError.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.applicationError)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.applicationError)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -53,8 +53,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseDBError.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.dbError)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.dbError)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -69,8 +69,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseNoData.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noData)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.noData)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -85,8 +85,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseHTTPError.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.httpError)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.httpError)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -101,8 +101,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseServiceTimeOut.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.serviceTimeOut)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.serviceTimeOut)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -117,8 +117,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseInvalidRequestParameter.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.invalidRequestParameter)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.invalidRequestParameter)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -133,8 +133,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseNoRequiredRequestParameter.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noRequiredRequestParameter)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.noRequiredRequestParameter)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -149,8 +149,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseNoServiceOrDeprecated.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.noServiceOrDeprecated)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.noServiceOrDeprecated)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -165,8 +165,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseAccessDenied.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.accessDenied)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.accessDenied)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -181,8 +181,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseExceededRequestLimit.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.exceededRequestLimit)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.exceededRequestLimit)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -197,8 +197,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseUnregisteredServiceKey.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.unregisteredServiceKey)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.unregisteredServiceKey)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -213,8 +213,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseExpiredServiceKey.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.expiredServiceKey)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.expiredServiceKey)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -229,8 +229,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseUnregisteredDomainOfIPAddress.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.unregisteredDomainOfIPAddress)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.unregisteredDomainOfIPAddress)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -245,8 +245,8 @@ class TestXMLManager: XCTestCase {
     mockXMLDecoder.error = nil
     let data = DummyNetworkManager.dustInfoResponseDefault.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: ResponseHeader?, error) in
-      XCTAssertEqual(parsingType?.statusCode, DustStatusCode.default)
-      if let error = error as? DustError {
+      XCTAssertEqual(parsingType?.statusCode, DustAPIResultCode.default)
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()
@@ -262,7 +262,7 @@ class TestXMLManager: XCTestCase {
     let data = DummyNetworkManager.dustInfoResponseNoData.data(using: .utf8)!
     xmlManager.decode(data) { (parsingType: DustResponse?, error) in
       XCTAssertNil(parsingType)
-      if let error = error as? DustError {
+      if let error = error as? DustAPIError {
         XCTAssertNotNil(error)
       } else {
         XCTFail()

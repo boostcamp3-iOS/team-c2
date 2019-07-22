@@ -48,14 +48,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vK-Nk-thK">
                                 <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-OT-FiC" customClass="StickGraphView" customModule="FineDust" customModuleProvider="target">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="I02-Cs-tPr"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-az-Uoz" customClass="RatioGraphView" customModule="FineDust" customModuleProvider="target">
                                         <rect key="frame" x="19" y="308" width="337.5" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -89,10 +89,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="q9l-Ys-TA3"/>
                     <connections>
-                        <outlet property="ratioGraphBackgroundView" destination="b6f-az-Uoz" id="8jY-xt-nWU"/>
+                        <outlet property="ratioGraphView" destination="b6f-az-Uoz" id="8jY-xt-nWU"/>
                         <outlet property="scrollView" destination="1vK-Nk-thK" id="1cc-sI-bKj"/>
                         <outlet property="segmentedControl" destination="kP2-MY-egO" id="Q31-f6-dau"/>
-                        <outlet property="stickGraphBackgroundView" destination="Sca-OT-FiC" id="aA3-rP-Vwm"/>
+                        <outlet property="stickGraphView" destination="Sca-OT-FiC" id="aA3-rP-Vwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktn-rj-baA" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,23 +14,29 @@ final class PersistenceService: PersistenceServiceType {
   
   private let realm = try! Realm()
   
+  private var user: UserModel? {
+    guard let object = realm.objects(UserModel.self).last else { return nil }
+    return object
+  }
+  
+  private var intakes: Results<IntakeModel> {
+    return realm.objects(IntakeModel.self)
+  }
+  
   func fetchLastAccessedDate() -> Date? {
-    guard let result = realm.objects(UserModel.self).last else { return nil }
-    return result.lastAccessedDate
+    return user?.lastAccessedDate
   }
   
   func saveLastAccessedDate(_ date: Date) {
-    guard let result = realm.objects(UserModel.self).last else { return }
     try! realm.write {
-      result.lastAccessedDate = .init()
+      user?.lastAccessedDate = .init()
     }
   }
   
   func fetchIntakes(from startDate: Date, to endDate: Date) -> DateIntakeValuePair {
-    let results = realm.objects(IntakeModel.self)
     var dateIntakeValuePair = DateIntakeValuePair()
     let dates = Date.between(startDate.start, endDate.end)
-    let intakesInDates = Array(results.filter { (startDate...endDate).contains($0.date) })
+    let intakesInDates = Array(intakes.filter { (startDate...endDate).contains($0.date) })
     dates.forEach { date in
       let intakeInCurrentDate = intakesInDates.filter { $0.date.start == date }.first
       if let currentIntake = intakeInCurrentDate {
@@ -40,7 +46,7 @@ final class PersistenceService: PersistenceServiceType {
     return dateIntakeValuePair
   }
   
-  func saveIntake(_ intake: IntakeValue, at date: Date) {
+  func saveIntake(_ intake: DustIntake, at date: Date) {
     let object = IntakeModel().then {
       $0.fineDust = intake.fineDust
       $0.ultraFineDust = intake.ultraFineDust
@@ -51,7 +57,7 @@ final class PersistenceService: PersistenceServiceType {
     }
   }
   
-  func saveIntakes(_ intakes: [IntakeValue], at dates: [Date]) {
+  func saveIntakes(_ intakes: [DustIntake], at dates: [Date]) {
     zip(intakes, dates).forEach { intakeValue, date in
       let object = IntakeModel().then {
         $0.fineDust = intakeValue.fineDust
@@ -65,61 +71,56 @@ final class PersistenceService: PersistenceServiceType {
   }
   
   func fetchLastSavedData() -> LastSavedData? {
-    guard let result = realm.objects(UserModel.self).last else { return nil }
+    guard let user = user else { return nil }
     let lastSavedData = LastSavedData(
-      todayFineDust: Int(result.todayFineDust),
-      todayUltraFineDust: Int(result.todayUltraFineDust),
-      distance: result.distance,
-      steps: result.steps,
-      address: result.address,
-      grade: result.grade,
-      recentFineDust: result.recentFineDust,
-      weekFineDust: Array(result.weekFineDust),
-      weekUltraFineDust: Array(result.weekUltraFineDust)
+      todayFineDust: Int(user.todayFineDust),
+      todayUltraFineDust: Int(user.todayUltraFineDust),
+      distance: user.distance,
+      steps: user.steps,
+      address: user.address,
+      grade: user.grade,
+      recentFineDust: user.recentFineDust,
+      weekFineDust: Array(user.weekFineDust),
+      weekUltraFineDust: Array(user.weekUltraFineDust)
     )
     return lastSavedData
   }
   
   func saveLastSteps(_ steps: Int) {
-    guard let result = realm.objects(UserModel.self).last else { return }
     try! realm.write {
-      result.steps = steps
+      user?.steps = steps
     }
   }
   
   func saveLastDistance(_ distance: Double) {
-    guard let result = realm.objects(UserModel.self).last else { return }
     try! realm.write {
-      result.distance = distance
+      user?.distance = distance
     }
   }
   
   func saveLastDustData(address: String, grade: Int, recentFineDust: Int) {
-    guard let result = realm.objects(UserModel.self).last else { return }
     try! realm.write {
-      result.address = address
-      result.grade = grade
-      result.recentFineDust = recentFineDust
+      user?.address = address
+      user?.grade = grade
+      user?.recentFineDust = recentFineDust
     }
   }
   
-  func saveLastTodayIntake(_ intake: IntakeValue) {
-    guard let result = realm.objects(UserModel.self).last else { return }
+  func saveLastTodayIntake(_ intake: DustIntake) {
     try! realm.write {
-      result.todayFineDust = intake.fineDust
-      result.todayUltraFineDust = intake.ultraFineDust
+      user?.todayFineDust = intake.fineDust
+      user?.todayUltraFineDust = intake.ultraFineDust
     }
   }
   
-  func saveLastWeekIntake(_ intakes: [IntakeValue]) {
-    guard let result = realm.objects(UserModel.self).last else { return }
+  func saveLastWeekIntake(_ intakes: [DustIntake]) {
     let fineDusts = intakes.map { $0.fineDust }
     let ultraFineDusts = intakes.map { $0.ultraFineDust }
     try! realm.write {
-      result.weekFineDust.removeAll()
-      result.weekUltraFineDust.removeAll()
-      result.weekFineDust.append(objectsIn: fineDusts)
-      result.weekUltraFineDust.append(objectsIn: ultraFineDusts)
+      user?.weekFineDust.removeAll()
+      user?.weekUltraFineDust.removeAll()
+      user?.weekFineDust.append(objectsIn: fineDusts)
+      user?.weekUltraFineDust.append(objectsIn: ultraFineDusts)
     }
   }
 }

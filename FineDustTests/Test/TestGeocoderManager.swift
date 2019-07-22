@@ -13,7 +13,7 @@ import CoreLocation
 
 class TestGeocoderManager: XCTestCase {
   
-  let geocoderManager = GeocoderManager.shared
+  let geocoderManager = GeocodeManager.shared
   
 //  func test_requestAddress() {
 //    let expect = expectation(description: "test")

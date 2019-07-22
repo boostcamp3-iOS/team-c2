@@ -67,7 +67,7 @@
                         <constraint firstAttribute="height" constant="14.5" id="EGa-OO-HTV"/>
                     </constraints>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly inhalation dose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGk-lF-LjL">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주간 흡입량" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGk-lF-LjL">
                     <rect key="frame" x="16" y="16" width="343" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="NLG-6c-MZI"/>

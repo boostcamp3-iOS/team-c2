@@ -12,16 +12,16 @@ import XCTest
 
 class TestHTTPStatusCode: XCTestCase {
   
-  var code: HTTPStatusCode!
+  var code: StatusCode!
   
   func test_error_success() {
-    code = HTTPStatusCode.success
+    code = StatusCode.success
     XCTAssertNil(code.error)
   }
   
   func test_error_default() {
-    code = HTTPStatusCode.default
+    code = StatusCode.default
     XCTAssertNotNil(code.error)
-    XCTAssertEqual(code.error?.localizedDescription, HTTPStatusCode.default.error?.localizedDescription)
+    XCTAssertEqual(code.error?.localizedDescription, StatusCode.default.error?.localizedDescription)
   }
 }

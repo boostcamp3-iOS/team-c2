@@ -1,18 +1,11 @@
 xcassets:
-  inputs: FineDust/Supporting Files/Assets.xcassets
+  inputs: FineDust/Resources/Assets.xcassets
   outputs:
     templateName: swift4
-    output: FineDust/SwiftGen/Assets.swift
+    output: FineDust/Supports/Assets.swift
 
 ib:
   inputs: FineDust
   outputs:
     templateName: scenes-swift4
-    output: FineDust/SwiftGen/Storyboard.swift
-
-strings:
-  inputs:
-    - FineDust/Supporting Files/ko.lproj/Localizable.strings
-  outputs:
-    templateName: structured-swift4
-    output: FineDust/SwiftGen/Strings.swift
+    output: FineDust/Supports/Storyboard.swift

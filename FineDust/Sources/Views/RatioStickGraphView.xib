@@ -61,14 +61,14 @@
                         <constraint firstItem="aWD-00-ga0" firstAttribute="trailing" secondItem="ZQ1-sG-HYQ" secondAttribute="centerX" constant="-16" id="weW-Mk-AcJ"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly  average" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
-                    <rect key="frame" x="52" y="210.5" width="39" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주간 평균" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-6g-svc">
+                    <rect key="frame" x="63" y="210.5" width="17.5" height="24"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDI-ZM-jPg">
-                    <rect key="frame" x="99" y="210.5" width="29" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDI-ZM-jPg">
+                    <rect key="frame" x="104.5" y="210.5" width="18" height="12"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -109,11 +109,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="averageIntakeGraphView" destination="aWD-00-ga0" id="lRZ-jZ-rB0"/>
-                <outlet property="averageIntakeGraphViewHeightConstraint" destination="1pw-Zp-Fab" id="RqI-hD-bnM"/>
                 <outlet property="averageIntakeLabel" destination="Wex-hJ-7DP" id="8EH-4c-RsZ"/>
                 <outlet property="percentLabel" destination="KNY-30-FwY" id="uvX-GT-pf5"/>
                 <outlet property="todayIntakeGraphView" destination="hzh-JZ-DYj" id="3Jj-uz-clr"/>
-                <outlet property="todayIntakeGraphViewHeightConstraint" destination="b6J-dH-DxJ" id="ur0-PX-hn4"/>
                 <outlet property="todayIntakeLabel" destination="dJZ-rW-0dI" id="YNh-hm-DwK"/>
                 <outlet property="todayLabel" destination="rDI-ZM-jPg" id="9yZ-Dq-CUD"/>
                 <outlet property="weeklyAverageLabel" destination="yMn-6g-svc" id="Ffb-d9-JBW"/>

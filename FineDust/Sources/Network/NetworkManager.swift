@@ -22,7 +22,7 @@ final class NetworkManager: NetworkManagerType {
                method: HTTPMethod,
                parameters: [String: Any]? = nil,
                headers: [String: String] = [:],
-               completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void) {
+               completion: @escaping (Data?, StatusCode?, Error?) -> Void) {
     let session = URLSession(configuration: .default)
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = method.rawValue
@@ -41,7 +41,7 @@ final class NetworkManager: NetworkManagerType {
         }
       }
       let statusCodeRawValue = (response as? HTTPURLResponse)?.statusCode ?? 0
-      let statusCode = HTTPStatusCode(rawValue: statusCodeRawValue) ?? .default
+      let statusCode = StatusCode(rawValue: statusCodeRawValue) ?? .default
       completion(data, statusCode, error)
     }
     task.resume()

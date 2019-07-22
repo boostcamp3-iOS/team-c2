@@ -17,7 +17,7 @@ class MockDustInfoManager: DustInfoManagerType {
   
   var error: Error?
   
-  func request(dataTerm: DataTerm, numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (DustResponse?, Error?) -> Void) {
+  func request(dataTerm: DustDataTerm, numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (DustResponse?, Error?) -> Void) {
     completion(dustResponse, error)
   }
 }

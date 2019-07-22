@@ -17,6 +17,7 @@ target 'FineDust' do
   pod 'RxAlamofire'
   pod 'RxDataSources'
   pod 'Carte'
+  pod 'RxCoreLocation'
 
   target 'FineDustTests' do
     inherit! :search_paths

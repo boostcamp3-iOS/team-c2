@@ -19,8 +19,8 @@ class TestServiceErrorType: XCTestCase {
   }
   
   func test_dustError() {
-    let error: ServiceErrorType = DustError.default
-    XCTAssertEqual(error.localizedDescription, DustError.default.localizedDescription)
+    let error: ServiceErrorType = DustAPIError.default
+    XCTAssertEqual(error.localizedDescription, DustAPIError.default.localizedDescription)
   }
   
   func test_healthKitError() {

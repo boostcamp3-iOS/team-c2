@@ -19,6 +19,11 @@ PODS:
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
+  - RxCoreLocation (1.4.0):
+    - RxCoreLocation/Core (= 1.4.0)
+  - RxCoreLocation/Core (1.4.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
@@ -39,6 +44,7 @@ DEPENDENCIES:
   - NotificationBannerSwift
   - RealmSwift
   - RxAlamofire
+  - RxCoreLocation
   - RxDataSources
   - RxOptional
   - RxSwift
@@ -58,6 +64,7 @@ SPEC REPOS:
     - RealmSwift
     - RxAlamofire
     - RxCocoa
+    - RxCoreLocation
     - RxDataSources
     - RxOptional
     - RxRelay
@@ -77,6 +84,7 @@ SPEC CHECKSUMS:
   RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
   RxAlamofire: e7875a012aff55345672d0f70a2a9cd6aeb0f211
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxCoreLocation: ac3a3d97dc5f4e779058f43c9327534f1e3fb95a
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxOptional: 9904e2219d59260c3c171273d475b2126de187e8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
@@ -86,6 +94,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 87b0006848a548b7f9485b40bc71721b3ae39add
   Then: 0157115e883545c77967b452fe74a1d25fb796e1
 
-PODFILE CHECKSUM: f8212e1822f3716552eda9b81b2d21e501c68c76
+PODFILE CHECKSUM: 5780d4d61c7dbe3290786b18dcce481f0a39a3be
 
 COCOAPODS: 1.7.3

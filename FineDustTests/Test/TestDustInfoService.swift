@@ -33,10 +33,10 @@ class TestDustInfoService: XCTestCase {
     mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponse
     dustService?.requestRecentTimeInfo { dustInfo, error in
       XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.good)
-      XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.good)
+      XCTAssertEqual(dustInfo?.ultraFineDustGrade ?? .default, DustGrade.good)
       XCTAssertEqual(dustInfo?.fineDustValue ?? 0, 1)
-      XCTAssertEqual(dustInfo?.ultrafineDustValue ?? 0, 1)
-      XCTAssertEqual(dustInfo?.updatingTime ?? Date(),
+      XCTAssertEqual(dustInfo?.ultraFineDustValue ?? 0, 1)
+      XCTAssertEqual(dustInfo?.updatedTime ?? Date(),
                      self.dateFormatter.date(from: "2018-01-23 17:00"))
       expect.fulfill()
     }
@@ -48,10 +48,10 @@ class TestDustInfoService: XCTestCase {
     mockDustInfoManager.dustResponse = DummyDustInfoManager.dustResponseWeird
     dustService?.requestRecentTimeInfo { dustInfo, error in
       XCTAssertEqual(dustInfo?.fineDustGrade ?? .default, DustGrade.default)
-      XCTAssertEqual(dustInfo?.ultrafineDustGrade ?? .default, DustGrade.default)
+      XCTAssertEqual(dustInfo?.ultraFineDustGrade ?? .default, DustGrade.default)
       XCTAssertEqual(dustInfo?.fineDustValue ?? 0, 0)
-      XCTAssertEqual(dustInfo?.ultrafineDustValue ?? 0, 0)
-      XCTAssertEqual(dustInfo?.updatingTime ?? Date(),
+      XCTAssertEqual(dustInfo?.ultraFineDustValue ?? 0, 0)
+      XCTAssertEqual(dustInfo?.updatedTime ?? Date(),
                      self.dateFormatter.date(from: "2018-01-23 17:00"))
       expect.fulfill()
     }

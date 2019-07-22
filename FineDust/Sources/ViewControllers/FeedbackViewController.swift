@@ -60,22 +60,22 @@ private extension FeedbackViewController {
   
   func presentSettingActionSheet() {
     UIAlertController
-      .alert(title: L10n.sortingMethod,
-             message: L10n.pleaseChooseHowToSortInformation,
+      .alert(title: "정렬 방법",
+             message: "정렬 방법을 선택해 주세요.",
              style: .actionSheet)
-      .action(title: L10n.byRecent) { [weak self] _, _ in
+      .action(title: "최신순") { [weak self] _, _ in
         self?.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByRecentDate()
         self?.tableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: L10n.byTitle) { [weak self] _, _ in
+      .action(title: "제목순") { [weak self] _, _ in
         self?.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByTitle()
         self?.tableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: L10n.byBookmark) { [weak self] _, _ in
+      .action(title: "북마크") { [weak self] _, _ in
         self?.newDustFeedbacks = self.feedbackListService.fetchFeedbacksByBookmark()
         self?.tableView.reloadSections(self.sectionToReload, with: .none)
       }
-      .action(title: L10n.cancel, style: .cancel)
+      .action(title: "취소", style: .cancel)
       .present(to: self)
   }
   
@@ -188,7 +188,7 @@ extension FeedbackViewController: UITableViewDelegate {
       $0.height.equalTo(44)
     }
     button.isHidden = section != 1
-    headerLabel.text = section == 1 ? L10n.fullList : L10n.optimizedInformation
+    headerLabel.text = section == 1 ? "전체 목록" : "맞춤 정보 추천"
     return headerView
   }
   

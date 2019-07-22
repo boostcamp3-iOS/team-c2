@@ -33,7 +33,7 @@ final class StickGraphView: UIView {
     static let options: UIView.AnimationOptions = [.curveEaseInOut]
   }
   
-  weak var dataSource: ValueGraphViewDataSource?
+  weak var dataSource: StickGraphViewDataSource?
   
   @IBOutlet private weak var dateLabel: UILabel!
   
@@ -73,12 +73,10 @@ final class StickGraphView: UIView {
       .map { !$0.canBecomeMultiplier ? 0.01 : $0 }
   }
   
-  /// 주축 레이블.
   private var axisTexts: [String] {
     return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
   }
   
-  /// 일 텍스트.
   private var dayTexts: [String] {
     let dateFormatter = DateFormatter.day
     var array = [Date](repeating: Date(), count: 7)
@@ -88,19 +86,16 @@ final class StickGraphView: UIView {
     var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
     // 마지막 값을 오늘로 바꿈
     reversed.removeLast()
-    reversed.append(L10n.today)
+    reversed.append("오늘")
     return reversed
   }
   
-  // MARK: Methods
-  
-  /// 뷰 전체 설정.
   func setup() {
     reloadGraphView()
   }
 }
 
-// MARK: - GraphDrawable 구현
+// MARK: - Implement GraphDrawable
 
 extension StickGraphView: GraphDrawable {
   
@@ -113,7 +108,6 @@ extension StickGraphView: GraphDrawable {
   }
   
   func setLabels() {
-    titleLabel.text = L10n.weeklyInhalationDose
     setUnitLabels()
     setDayLabelsTitle()
     setDateLabel()
@@ -124,7 +118,6 @@ extension StickGraphView: GraphDrawable {
 
 private extension StickGraphView {
   
-  /// 그래프 뷰 높이 초기화.
   func initializeHeights() {
     for graphView in graphViews {
       graphView.snp.updateConstraints { $0.height.equalTo(1) }
@@ -132,7 +125,6 @@ private extension StickGraphView {
     layoutIfNeeded()
   }
   
-  /// 그래프 뷰 높이 제약에 애니메이션 효과 설정.
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
       let graphView = graphViews[index]
@@ -153,26 +145,22 @@ private extension StickGraphView {
     }
   }
   
-  /// 주축 레이블 설정.
   func setUnitLabels() {
     zip(unitLabels, axisTexts).forEach { $0.text = $1 }
   }
   
-  /// 요일 레이블 텍스트 설정.
   func setDayLabelsTitle() {
     zip(dayLabels, dayTexts).forEach { $0.text = $1 }
   }
   
-  /// 날짜 레이블 설정.
   func setDateLabel() {
     dateLabel.text = DateFormatter.localizedDateWithDay.string(from: Date())
   }
   
-  /// 그래프 색상 구하기.
   func graphBackgroundColor(at index: Int) -> UIColor? {
     if index == 6 {
       return Asset.graphToday.color
     }
-    return index % 2 == 0 ? Asset.graph1.color : Asset.graph2.color
+    return index.isMultiple(of: 2) ? Asset.graph1.color : Asset.graph2.color
   }
 }

@@ -23,8 +23,8 @@ class TestGraphView: XCTestCase {
   func test_setState() {
     valueGraphView.awakeFromNib()
     valueGraphView.reloadGraphView()
-    pieGraphView.setState(ratio: 10, endAngle: 10)
+    pieGraphView.setup(ratio: 10, endAngle: 10)
     stickGraphView.awakeFromNib()
-    stickGraphView.setState(average: 10, today: 10)
+    stickGraphView.setup(average: 10, today: 10)
   }
 }

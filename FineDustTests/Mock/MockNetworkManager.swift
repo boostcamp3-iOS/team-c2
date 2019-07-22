@@ -13,7 +13,7 @@ class MockNetworkManager: NetworkManagerType {
   
   var data: Data?
   
-  var httpStatusCode: HTTPStatusCode?
+  var httpStatusCode: StatusCode?
   
   var error: Error?
   
@@ -21,7 +21,7 @@ class MockNetworkManager: NetworkManagerType {
                method: HTTPMethod,
                parameters: [String: Any]?,
                headers: [String: String],
-               completion: @escaping (Data?, HTTPStatusCode?, Error?) -> Void) {
+               completion: @escaping (Data?, StatusCode?, Error?) -> Void) {
     completion(data, httpStatusCode, error)
   }
 }

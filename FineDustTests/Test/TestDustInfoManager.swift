@@ -22,7 +22,7 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponse.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
@@ -35,7 +35,7 @@ class TestDustInfoManager: XCTestCase {
 
   func test_request_noDataError() {
     mockNetworkManager.data = nil
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.default
+    mockNetworkManager.httpStatusCode = StatusCode.default
     mockNetworkManager.error = NSError(domain: "", code: 0, userInfo: nil)
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
@@ -48,7 +48,7 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_httpError() {
     mockNetworkManager.data = nil
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.default
+    mockNetworkManager.httpStatusCode = StatusCode.default
     mockNetworkManager.error = HTTPError.default
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
@@ -63,13 +63,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError1() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseApplicationError.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.applicationError)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.applicationError)
       } else {
         XCTFail()
       }
@@ -80,13 +80,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError2() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseDBError.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.dbError)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.dbError)
       } else {
         XCTFail()
       }
@@ -97,13 +97,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError3() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseNoData.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.noData)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.noData)
       } else {
         XCTFail()
       }
@@ -114,13 +114,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError4() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseHTTPError.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.httpError)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.httpError)
       } else {
         XCTFail()
       }
@@ -131,13 +131,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError5() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseServiceTimeOut.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.serviceTimeOut)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.serviceTimeOut)
       } else {
         XCTFail()
       }
@@ -148,13 +148,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError6() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseInvalidRequestParameter.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.invalidRequestParameter)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.invalidRequestParameter)
       } else {
         XCTFail()
       }
@@ -165,13 +165,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError7() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseNoRequiredRequestParameter.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.noRequiredRequestParameter)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.noRequiredRequestParameter)
       } else {
         XCTFail()
       }
@@ -182,13 +182,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError8() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseNoServiceOrDeprecated.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.noServiceOrDeprecated)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.noServiceOrDeprecated)
       } else {
         XCTFail()
       }
@@ -199,13 +199,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError9() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseAccessDenied.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.accessDenied)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.accessDenied)
       } else {
         XCTFail()
       }
@@ -216,13 +216,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError10() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseExceededRequestLimit.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.exceededRequestLimit)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.exceededRequestLimit)
       } else {
         XCTFail()
       }
@@ -233,13 +233,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError11() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseUnregisteredServiceKey.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.unregisteredServiceKey)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.unregisteredServiceKey)
       } else {
         XCTFail()
       }
@@ -250,13 +250,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError12() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseExpiredServiceKey.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.expiredServiceKey)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.expiredServiceKey)
       } else {
         XCTFail()
       }
@@ -267,13 +267,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError13() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseUnregisteredDomainOfIPAddress.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.unregisteredDomainOfIPAddress)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.unregisteredDomainOfIPAddress)
       } else {
         XCTFail()
       }
@@ -284,13 +284,13 @@ class TestDustInfoManager: XCTestCase {
   
   func test_request_dustError14() {
     mockNetworkManager.data = DummyNetworkManager.dustInfoResponseDefault.data(using: .utf8)
-    mockNetworkManager.httpStatusCode = HTTPStatusCode.success
+    mockNetworkManager.httpStatusCode = StatusCode.success
     mockNetworkManager.error = nil
     let expect = expectation(description: "test")
     dustInfoManager.request(dataTerm: .daily, numberOfRows: 1, pageNumber: 1) { response, error in
       XCTAssertNil(response)
-      if let error = error as? DustError {
-        XCTAssertEqual(error, DustError.default)
+      if let error = error as? DustAPIError {
+        XCTAssertEqual(error, DustAPIError.default)
       } else {
         XCTFail()
       }

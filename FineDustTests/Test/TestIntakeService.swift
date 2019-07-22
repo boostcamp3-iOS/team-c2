@@ -79,7 +79,7 @@ class TestIntakeService: XCTestCase {
   }
   
   func test_requestTodayIntake_error_dust() {
-    mockDustInfoService.error = DustError.accessDenied
+    mockDustInfoService.error = DustAPIError.accessDenied
     let expect = expectation(description: "test")
     intakeService.requestTodayIntake { fineDust, ultrafineDust, error in
       XCTAssertNil(fineDust)
@@ -121,7 +121,7 @@ class TestIntakeService: XCTestCase {
   }
   
   func test_requestIntakesInWeek_error_dust() {
-    mockDustInfoService.error = DustError.accessDenied
+    mockDustInfoService.error = DustAPIError.accessDenied
     mockCoreDataService.coreDataIntakePerDate = DummyCoreDataService.intakePerDateHalf
     mockCoreDataService.error = nil
     let expect = expectation(description: "test")

@@ -24,13 +24,9 @@ final class StatisticsViewController: UIViewController {
   
   @IBOutlet private weak var segmentedControl: UISegmentedControl!
   
-  @IBOutlet private weak var stickGraphBackgroundView: UIView!
+  @IBOutlet private weak var stickGraphView: StickGraphView!
   
-  @IBOutlet private weak var ratioGraphBackgroundView: UIView!
-  
-  private var stickGraphView: StickGraphView!
-  
-  private var ratioGraphView: RatioGraphView!
+  @IBOutlet private weak var ratioGraphView: RatioGraphView!
   
   var intakeService: IntakeServiceType?
   
@@ -129,7 +125,7 @@ extension StatisticsViewController: LocationObserver {
 
 // MARK: - ValueGraphView Delegate 구현
 
-extension StatisticsViewController: ValueGraphViewDataSource {
+extension StatisticsViewController: StickGraphViewDataSource {
   
   var intakes: [Int] {
     return segmentedControl.selectedSegmentIndex == 0
@@ -192,16 +188,14 @@ private extension StatisticsViewController {
   
   /// 서브뷰 초기 설정.
   func setupSubviews() {
-    scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
-    segmentedControl.setTitle(L10n.fineDust, forSegmentAt: 0)
-    segmentedControl.setTitle(L10n.ultrafineDust, forSegmentAt: 1)
+    scrollView.contentInset = .init(top: 8, left: 0, bottom: 16, right: 0)
     segmentedControl.addTarget(self,
                                action: #selector(segmentedControlValueDidChange(_:)),
                                for: .valueChanged)
-    stickGraphBackgroundView.layer.applyBorder(color: Asset.graphBorder.color,
+    stickGraphView.layer.applyBorder(color: Asset.graphBorder.color,
                                              width: Layer.borderWidth,
                                              radius: Layer.cornerRadius)
-    ratioGraphBackgroundView.layer.applyBorder(color: Asset.graphBorder.color,
+    ratioGraphView.layer.applyBorder(color: Asset.graphBorder.color,
                                              width: Layer.borderWidth,
                                              radius: Layer.cornerRadius)
   }
@@ -212,14 +206,14 @@ private extension StatisticsViewController {
     ratioGraphView = UIView.instantiate(fromType: RatioGraphView.self)
     stickGraphView.dataSource = self
     ratioGraphView.dataSource = self
-    stickGraphBackgroundView.addSubview(stickGraphView)
-    ratioGraphBackgroundView.addSubview(ratioGraphView)
+    stickGraphView.addSubview(stickGraphView)
+    ratioGraphView.addSubview(ratioGraphView)
   }
   
   /// 서브뷰에 오토레이아웃 설정.
   func setGraphViewConstraints() {
-    stickGraphView.snp.makeConstraints { $0.edges.equalTo(stickGraphBackgroundView.snp.edges) }
-    ratioGraphView.snp.makeConstraints { $0.edges.equalTo(ratioGraphBackgroundView.snp.edges) }
+    stickGraphView.snp.makeConstraints { $0.edges.equalTo(stickGraphView.snp.edges) }
+    ratioGraphView.snp.makeConstraints { $0.edges.equalTo(ratioGraphView.snp.edges) }
   }
   
   /// 모든 그래프 뷰 초기화.
@@ -227,11 +221,4 @@ private extension StatisticsViewController {
     stickGraphView.setup()
     ratioGraphView.setup()
   }
-  
-//  /// GraphDrawable 프로토콜을 준수하는 그래프 뷰 instantiate.
-//  func instantiateGraphView<T>(_ view: T.Type) -> T where T: GraphDrawable, T: UIView {
-//    let graphView = UIView.instantiate(fromXib: T.classNameToString) as? T ?? T()
-//    graphView.translatesAutoresizingMaskIntoConstraints = false
-//    return graphView
-//  }
 }

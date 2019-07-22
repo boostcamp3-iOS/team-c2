@@ -12,4 +12,4 @@ typealias HourIntakePair = [Hour: Int]
 
 typealias DateHourIntakePair = [Date: HourIntakePair]
 
-typealias DateIntakeValuePair = [Date: IntakeValue]
+typealias DateIntakeValuePair = [Date: DustIntake]

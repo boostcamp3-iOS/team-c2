@@ -16,9 +16,9 @@ protocol PersistenceServiceType: class {
   
   func fetchIntakes(from startDate: Date, to endDate: Date) -> DateIntakeValuePair
   
-  func saveIntake(_ intake: IntakeValue, at date: Date)
+  func saveIntake(_ intake: DustIntake, at date: Date)
   
-  func saveIntakes(_ intakes: [IntakeValue], at dates: [Date])
+  func saveIntakes(_ intakes: [DustIntake], at dates: [Date])
   
   func fetchLastSavedData() -> LastSavedData?
   
@@ -28,7 +28,7 @@ protocol PersistenceServiceType: class {
   
   func saveLastDustData(address: String, grade: Int, recentFineDust: Int)
   
-  func saveLastTodayIntake(_ intake: IntakeValue)
+  func saveLastTodayIntake(_ intake: DustIntake)
   
-  func saveLastWeekIntake(_ intakes: [IntakeValue])
+  func saveLastWeekIntake(_ intakes: [DustIntake])
 }

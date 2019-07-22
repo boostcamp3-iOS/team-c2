@@ -19,7 +19,7 @@ class TestNetworkManager: XCTestCase {
     let url = URL(string: "http://")!
     manager.request(url, method: .get, parameters: [:], headers: [:]) { data, statusCode, error in
       XCTAssertNil(data)
-      XCTAssertEqual(statusCode, HTTPStatusCode.default)
+      XCTAssertEqual(statusCode, StatusCode.default)
       XCTAssertNotNil(error)
       expect.fulfill()
     }

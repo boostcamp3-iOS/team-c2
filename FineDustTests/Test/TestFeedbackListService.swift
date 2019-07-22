@@ -105,7 +105,7 @@ class FeedbackListServiceTest: XCTestCase {
   
   /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞는 함수 테스트
   func testFetchImportantFeedbacks() {
-    let importance = ImportanceGrade.normal
+    let importance = FeedbackImportance.normal
     var result = feedbackListService.fetchFeedbacks(by: importance)
     result = result.filter { $0.importance == importance.rawValue }
     XCTAssertNotNil(result)
