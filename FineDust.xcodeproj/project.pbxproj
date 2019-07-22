@@ -39,6 +39,8 @@
 		19FDFED422E4961A006500F8 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDFED322E4961A006500F8 /* Banner.swift */; };
 		19FDFED622E49B06006500F8 /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDFED522E49B06006500F8 /* Dictionary+.swift */; };
 		19FDFED822E49D91006500F8 /* IntakeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDFED722E49D91006500F8 /* IntakeValue.swift */; };
+		19FDFEDC22E545CC006500F8 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDFEDB22E545CC006500F8 /* PersistenceService.swift */; };
+		19FDFEDE22E551CD006500F8 /* PersistenceServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDFEDD22E551CD006500F8 /* PersistenceServiceType.swift */; };
 		1B17056B0A8890610CA8F86D26F55DAD /* TestNSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C97DEAF96336B82C7C589DE239BFD7 /* TestNSObject+.swift */; };
 		1D3B268EAA047941610A7A9C51B78C26 /* TestRatioPieGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A6EB50A2D651B9AEE270F6542C576 /* TestRatioPieGraphView.swift */; };
 		1EC47F935503F3B4FA05CF16449D7563 /* LastSavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033EA9C18FE338D4FD4245B2F65FFA1 /* LastSavedData.swift */; };
@@ -234,6 +236,8 @@
 		19FDFED322E4961A006500F8 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		19FDFED522E49B06006500F8 /* Dictionary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		19FDFED722E49D91006500F8 /* IntakeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeValue.swift; sourceTree = "<group>"; };
+		19FDFEDB22E545CC006500F8 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		19FDFEDD22E551CD006500F8 /* PersistenceServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceServiceType.swift; sourceTree = "<group>"; };
 		1BA0A52F0ED2A919EC586D53EA6365F7 /* UnitTestREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = UnitTestREADME.md; sourceTree = "<group>"; };
 		1DED1451920338300257F93C31D78C6A /* TestDustStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDustStatusCode.swift; sourceTree = "<group>"; };
 		1E26FB8E681522D59A6D20304C6C35C8 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -593,6 +597,8 @@
 		191EFBA322E4448000AEB08D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				19FDFEDB22E545CC006500F8 /* PersistenceService.swift */,
+				19FDFEDD22E551CD006500F8 /* PersistenceServiceType.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1093,6 +1099,7 @@
 				E59BB0B0FBA7D57D24E6E247BE01272A /* Double+.swift in Sources */,
 				19FDFED822E49D91006500F8 /* IntakeValue.swift in Sources */,
 				F2B9A6C9CEBF51011FE2C037DFACC5D8 /* DustError.swift in Sources */,
+				19FDFEDC22E545CC006500F8 /* PersistenceService.swift in Sources */,
 				9DBFC7AB6704D4E8983F2F1DAF56E373 /* FeedbackContents.swift in Sources */,
 				8A850213B84E4BADA60BA0AFF9518D5D /* DustGrade.swift in Sources */,
 				945F8AE930CB66E8CF13E3ADC970C3D4 /* DustInfoManager.swift in Sources */,
@@ -1163,6 +1170,7 @@
 				5EE4CA05CA601AABFDC6F3D1989D135F /* RecommendCollectionViewCell.swift in Sources */,
 				D43BB431919BE5B182944EBAA03278BA /* ResponseHeader.swift in Sources */,
 				585EA738C1263AEEE97962712EA4788B /* ServiceErrorType.swift in Sources */,
+				19FDFEDE22E551CD006500F8 /* PersistenceServiceType.swift in Sources */,
 				191EFBAF22E45EA600AEB08D /* MainViewModel.swift in Sources */,
 				C921D4C99DA13AEB953E512F475F15C2 /* SharedInfo.swift in Sources */,
 				28C9DFA76618224E645C133EFD9B1794 /* StatisticsViewController.swift in Sources */,

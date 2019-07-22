@@ -27,8 +27,11 @@ final class FeedbackViewController: UIViewController {
   private var newDustFeedbacks: [FeedbackContents]?
   private var isBookmarkedByTitle: [String: Bool] = [:]
   private var recommendFeedbacks: [FeedbackContents] = []
-  private var fineDustIntake: Int = 0
-  private var ultrafineDustIntake: Int = 0
+  
+  private var fineDustIntake: Int = 30
+  
+  private var ultrafineDustIntake: Int = 20
+  
   private var currentState: IntakeGrade = .good
   private let sectionToReload: IndexSet = [1]
   

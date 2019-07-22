@@ -8,16 +8,11 @@
 
 import Foundation
 
-/// 코어데이터 서비스 클래스.
 final class CoreDataService: CoreDataServiceType {
   
-  /// 코어데이터 유저 매니저 프로퍼티.
   let userManager: CoreDataUserManagerType
   
-  /// 코어데이터 흡입량 매니저 프로퍼티.
   let intakeManager: CoreDataIntakeManagerType
-  
-  // MARK: Dependency Injection
   
   init(userManager: CoreDataUserManagerType = CoreDataUserManager(),
        intakeManager: CoreDataIntakeManagerType = CoreDataIntakeManager()) {

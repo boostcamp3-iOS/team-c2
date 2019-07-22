@@ -8,52 +8,56 @@
 
 import Foundation
 
-/// FeedbackListService를 구현하는 클래스
 final class FeedbackService: FeedbackServiceType {
   
-  // MARK: - Properties
+  private enum Constant {
+    
+    static let resourceName = "DustFeedback"
+    
+    static let userDefaultsKey = "isBookmarkedByTitle"
+  }
   
-  private let jsonManager: JSONManagerType?
-  private var dustFeedbacks: [FeedbackContents] = []
-  private let userDefaultsKey = "isBookmarkedByTitle"
-  private let resourceName = "DustFeedback"
+  private let jsonManager = JSONManager()
+  
+  var feedbackContents: [FeedbackContents] = []
+  
   var isBookmarkedByTitle: [String: Bool] {
     get {
-      return UserDefaults.standard.dictionary(forKey: userDefaultsKey) as? [String: Bool] ?? [:]
+      return UserDefaults.standard.dictionary(forKey: Constant.userDefaultsKey) as? [String: Bool] ?? [:]
     }
     set {
-      UserDefaults.standard.set(newValue, forKey: userDefaultsKey)
+      UserDefaults.standard.set(newValue, forKey: Constant.userDefaultsKey)
     }
   }
   
-  init(jsonManager: JSONManagerType = JSONManager()) {
-    self.jsonManager = jsonManager
-    dustFeedbacks = jsonManager.fetchJSONObject(to: FeedbackContents.self, resourceName: resourceName)
+  init() {
+    guard let feedbackContents = jsonManager.parse(Constant.resourceName, to: [FeedbackContents].self) else { return }
+    self.feedbackContents = feedbackContents
   }
   
   // MARK: - Functions
   
   /// 피드백 정보의 개수를 반환함.
   func fetchFeedbackCount() -> Int {
-    let count = dustFeedbacks.count
+    let count = feedbackContents.count
     return count
   }
 
   /// 피드백 정보를 최신순으로 반환함.
   func fetchFeedbacksByRecentDate() -> [FeedbackContents] {
-    return dustFeedbacks.sorted { $0.date > $1.date }
+    return feedbackContents.sorted { $0.date > $1.date }
   }
   
   /// 피드백 정보를 제목순으로 반환함.
   func fetchFeedbacksByTitle() -> [FeedbackContents] {
-    return dustFeedbacks.sorted { $0.title < $1.title }
+    return feedbackContents.sorted { $0.title < $1.title }
   }
   
   /// 피드백 정보를 즐겨찾기순으로 반환함.
   func fetchFeedbacksByBookmark() -> [FeedbackContents] {
     var tempFeedbacks: [FeedbackContents] = []
     var resultFeedbacks: [FeedbackContents] = []
-    for feedback in dustFeedbacks {
+    for feedback in feedbackContents {
       if isBookmarkedByTitle[feedback.title] ?? false {
         tempFeedbacks.append(feedback)
       } else {
@@ -76,7 +80,7 @@ final class FeedbackService: FeedbackServiceType {
   
   /// 제목으로 피드백 정보를 가져옴.
   func fetchFeedback(by title: String) -> FeedbackContents? {
-    return dustFeedbacks.filter { $0.title == title }.first
+    return feedbackContents.filter { $0.title == title }.first
   }
   
   /// 현재 상태로 피드백 정보를 가져옴.
@@ -113,7 +117,7 @@ final class FeedbackService: FeedbackServiceType {
   
   /// 피드백 정보에서 해당 중요도를 가진 정보를 가져와서 섞음.
   func fetchFeedbacks(by importance: ImportanceGrade) -> [FeedbackContents] {
-    let feedbacks = dustFeedbacks.filter { $0.importance == importance.rawValue }
+    let feedbacks = feedbackContents.filter { $0.importance == importance.rawValue }
     return feedbacks.shuffled()
   }
 }
