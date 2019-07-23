@@ -8,7 +8,6 @@
 
 import CoreLocation
 
-/// Core Location Error가 ServiceErrorType을 준수하게 함.
 extension CLError.Code: ServiceErrorType {
   
   var localizedDescription: String {

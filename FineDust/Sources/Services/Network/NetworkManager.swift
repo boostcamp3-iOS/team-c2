@@ -10,10 +10,8 @@ import Foundation
 
 import SVProgressHUD
 
-/// 네트워크 요청 관련 클래스.
 final class NetworkManager: NetworkManagerType {
   
-  /// Singleton Object.
   static let shared = NetworkManager()
   
   private init() { }

@@ -11,11 +11,11 @@ import Foundation
 
 class MockDustObservatoryManager: DustObservatoryManagerType {
   
-  var observatoryResponse: ObservatoryResponse?
+  var observatoryResponse: DustAPIObservatoryResponse?
   
   var error: Error?
   
-  func requestObservatory(numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (ObservatoryResponse?, Error?) -> Void) {
+  func requestObservatory(numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (DustAPIObservatoryResponse?, Error?) -> Void) {
     completion(observatoryResponse, error)
   }
 }

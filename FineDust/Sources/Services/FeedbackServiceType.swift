@@ -8,11 +8,6 @@
 
 protocol FeedbackServiceType: class {
   
-  associatedtype Contents: Decodable
-  
-  var feedbackContents: [Contents] { get set }
-  
-  
   /// 정보의 제목으로 즐겨찾기 여부를 저장함.
   var isBookmarkedByTitle: [String: Bool] { get set }
   

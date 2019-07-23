@@ -26,12 +26,12 @@ class TestDateFormatterExtension: XCTestCase {
   }
   
   func test_dateAndTimeForDust() {
-    let formatter = DateFormatter.dateAndTimeForDust
+    let formatter = DateFormatter.dateTime
     XCTAssertEqual(formatter.string(from: date), "2019-02-19 03:03")
   }
   
   func  test_dateForDust() {
-    let formatter = DateFormatter.dateForDust
+    let formatter = DateFormatter.date
     XCTAssertEqual(formatter.string(from: date), "2019-02-19")
   }
   

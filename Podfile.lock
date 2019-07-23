@@ -3,6 +3,11 @@ PODS:
   - Carte (2.2.0)
   - Differentiator (4.0.1)
   - MarqueeLabel (4.0.0)
+  - Moya (13.0.1):
+    - Moya/Core (= 13.0.1)
+  - Moya/Core (13.0.1):
+    - Alamofire (~> 4.1)
+    - Result (~> 4.1)
   - NotificationBannerSwift (2.3.0):
     - MarqueeLabel (~> 4.0.0)
     - SnapKit (~> 5.0.0)
@@ -11,6 +16,7 @@ PODS:
   - Realm/Headers (3.17.0)
   - RealmSwift (3.17.0):
     - Realm (= 3.17.0)
+  - Result (4.1.0)
   - RxAlamofire (5.0.0):
     - RxAlamofire/Core (= 5.0.0)
   - RxAlamofire/Core (5.0.0):
@@ -41,6 +47,7 @@ PODS:
 
 DEPENDENCIES:
   - Carte
+  - Moya
   - NotificationBannerSwift
   - RealmSwift
   - RxAlamofire
@@ -59,9 +66,11 @@ SPEC REPOS:
     - Carte
     - Differentiator
     - MarqueeLabel
+    - Moya
     - NotificationBannerSwift
     - Realm
     - RealmSwift
+    - Result
     - RxAlamofire
     - RxCocoa
     - RxCoreLocation
@@ -79,9 +88,11 @@ SPEC CHECKSUMS:
   Carte: bca44c5112fac5866c2fa3da9fa018fa54eb8ba7
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
+  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   NotificationBannerSwift: fdc44b934be7a8175f7a7170a75a11c672990e70
   Realm: b30db41ff34fc858ffc25ba8d44a82c164e7ccd0
   RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAlamofire: e7875a012aff55345672d0f70a2a9cd6aeb0f211
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxCoreLocation: ac3a3d97dc5f4e779058f43c9327534f1e3fb95a
@@ -94,6 +105,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 87b0006848a548b7f9485b40bc71721b3ae39add
   Then: 0157115e883545c77967b452fe74a1d25fb796e1
 
-PODFILE CHECKSUM: 5780d4d61c7dbe3290786b18dcce481f0a39a3be
+PODFILE CHECKSUM: ffee8b0b665ebc9da345edd81fcfde8823518e5d
 
 COCOAPODS: 1.7.3

@@ -20,21 +20,29 @@ final class StatisticsViewController: UIViewController {
     static let borderWidth: CGFloat = 1.0
   }
   
+  private let disposeBag = DisposeBag()
+  
+  private let viewModel = StatisticsViewModel()
+  
   @IBOutlet private weak var scrollView: UIScrollView!
   
   @IBOutlet private weak var segmentedControl: UISegmentedControl!
   
-  @IBOutlet private weak var stickGraphView: StickGraphView!
+  @IBOutlet private weak var stickGraphBackgroundView: UIView!
   
-  @IBOutlet private weak var ratioGraphView: RatioGraphView!
+  @IBOutlet private weak var ratioGraphBackgroundView: UIView!
   
-  var intakeService: IntakeServiceType?
+  private let stickGraphView = UIView.instantiate(fromType: StickGraphView.self)
   
-  var coreDataService: CoreDataServiceType?
+  private let ratioGraphView = UIView.instantiate(fromType: RatioGraphView.self)
+  
+  private let intakeService = IntakeService()
+  
+  private let persistenceService = PersistenceService()
   
   private var isPresented: Bool = false
   
-  private var intakeData: IntakeData = IntakeData()
+  private var intakeData = IntakeData()
   
   /// 미세먼지의 전체에 대한 오늘의 비율.
   private var todayFineDustRatio: Double {
@@ -56,10 +64,8 @@ final class StatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    injectDependency(IntakeService(), CoreDataService())
     setupSubviews()
     createGraphViews()
-    setGraphViewConstraints()
     registerLocationObserver()
   }
   
@@ -81,9 +87,19 @@ final class StatisticsViewController: UIViewController {
     unregisterLocationObserver()
   }
   
-  /// 세그먼티드 컨트롤 값이 바뀌었을 때 호출됨.
-  @objc private func segmentedControlValueDidChange(_ sender: UISegmentedControl) {
-    initializeGraphViews()
+  func bindViewModel() {
+    segmentedControl.rx.selectedSegmentIndex.asDriver()
+      .drive(onNext: { [weak self] index in
+        self?.viewModel.selectSegmentedControl(at: index)
+      })
+      .disposed(by: disposeBag)
+    
+    viewModel.selectedSegmentedControlIndex.asDriver(onErrorJustReturn: 0)
+      .distinctUntilChanged()
+      .drive(onNext: { [weak self] index in
+        self?.initializeGraphViews()
+      })
+      .disposed(by: disposeBag)
   }
 }
 
@@ -186,34 +202,22 @@ private extension StatisticsViewController {
 
 private extension StatisticsViewController {
   
-  /// 서브뷰 초기 설정.
   func setupSubviews() {
     scrollView.contentInset = .init(top: 8, left: 0, bottom: 16, right: 0)
-    segmentedControl.addTarget(self,
-                               action: #selector(segmentedControlValueDidChange(_:)),
-                               for: .valueChanged)
-    stickGraphView.layer.applyBorder(color: Asset.graphBorder.color,
-                                             width: Layer.borderWidth,
-                                             radius: Layer.cornerRadius)
-    ratioGraphView.layer.applyBorder(color: Asset.graphBorder.color,
-                                             width: Layer.borderWidth,
-                                             radius: Layer.cornerRadius)
+    stickGraphBackgroundView.layer.applyBorder(color: Asset.graphBorder.color,
+                                               width: Layer.borderWidth,
+                                               radius: Layer.cornerRadius)
+    ratioGraphBackgroundView.layer.applyBorder(color: Asset.graphBorder.color,
+                                               width: Layer.borderWidth,
+                                               radius: Layer.cornerRadius)
   }
   
   /// 서브뷰 생성하여 프로퍼티에 할당.
   func createGraphViews() {
-    stickGraphView = UIView.instantiate(fromType: StickGraphView.self)
-    ratioGraphView = UIView.instantiate(fromType: RatioGraphView.self)
     stickGraphView.dataSource = self
     ratioGraphView.dataSource = self
-    stickGraphView.addSubview(stickGraphView)
-    ratioGraphView.addSubview(ratioGraphView)
-  }
-  
-  /// 서브뷰에 오토레이아웃 설정.
-  func setGraphViewConstraints() {
-    stickGraphView.snp.makeConstraints { $0.edges.equalTo(stickGraphView.snp.edges) }
-    ratioGraphView.snp.makeConstraints { $0.edges.equalTo(ratioGraphView.snp.edges) }
+    stickGraphBackgroundView.addSubview(stickGraphBackgroundView) { $0.edges.equalToSuperview() }
+    ratioGraphBackgroundView.addSubview(ratioGraphBackgroundView) { $0.edges.equalToSuperview() }
   }
   
   /// 모든 그래프 뷰 초기화.

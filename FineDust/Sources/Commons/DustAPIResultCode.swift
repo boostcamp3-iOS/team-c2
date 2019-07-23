@@ -36,7 +36,7 @@ enum DustAPIResultCode: Int {
   
   case unregisteredDomainOfIPAddress = 32
   
-  case `default`
+  case none
 }
 
 extension DustAPIResultCode {
@@ -71,9 +71,8 @@ extension DustAPIResultCode {
       return .expiredServiceKey
     case .unregisteredDomainOfIPAddress:
       return .unregisteredDomainOfIPAddress
-    case .default:
-      return .default
+    case .none:
+      return .none
     }
   }
-
 }

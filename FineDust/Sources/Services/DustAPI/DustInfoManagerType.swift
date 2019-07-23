@@ -17,5 +17,5 @@ protocol DustInfoManagerType: DustManagerType {
   func request(dataTerm: DustDataTerm,
                numberOfRows numOfRows: Int,
                pageNumber pageNo: Int,
-               completion: @escaping (DustResponse?, Error?) -> Void)
+               completion: @escaping (DustAPIInfoResponse?, Error?) -> Void)
 }

@@ -34,7 +34,7 @@ enum DustAPIError: ServiceErrorType {
   
   case unregisteredDomainOfIPAddress
   
-  case `default`
+  case none
 }
 
 extension DustAPIError {
@@ -61,7 +61,7 @@ extension DustAPIError {
       return "API 사용기간이 만료되었습니다."
     case .unregisteredDomainOfIPAddress:
       return "활용신청한 서버의 IP와 실제 Open API를 호출한 서버가 다릅니다."
-    case .default:
+    case .none:
       return "미세먼지 정보를 가져오지 못했습니다."
     }
   }

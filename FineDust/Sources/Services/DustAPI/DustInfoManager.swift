@@ -1,5 +1,5 @@
 //
-//  DustObservatoryManager.swift
+//  DustInfoManager.swift
 //  FineDust
 //
 //  Created by Presto on 03/02/2019.
@@ -8,9 +8,10 @@
 
 import Foundation
 
-/// 관측소 관련 Dust Manager 클래스.
-final class DustObservatoryManager: DustObservatoryManagerType {
-  
+/// 미세먼지 정보 관련 Dust Manager 클래스.
+final class DustInfoManager: DustInfoManagerType {
+
+  /// 네트워크 매니저.
   let networkManager: NetworkManagerType
   
   // MARK: Dependency Injection
@@ -19,22 +20,25 @@ final class DustObservatoryManager: DustObservatoryManagerType {
     self.networkManager = networkManager
   }
   
-  func requestObservatory(numberOfRows numOfRows: Int,
-                          pageNumber pageNo: Int,
-                          completion: @escaping (ObservatoryResponse?, Error?) -> Void) {
+  func request(dataTerm: DustDataTerm,
+               numberOfRows numOfRows: Int,
+               pageNumber pageNo: Int,
+               completion: @escaping (DustAPIInfoResponse?, Error?) -> Void) {
+    let observatory = SharedInfo.shared.observatory.percentEncoded
     let urlString = baseURL
-      .appending("/MsrstnInfoInqireSvc/getNearbyMsrstnList")
-      .appending("?tmX=\(SharedInfo.shared.x)")
-      .appending("&tmY=\(SharedInfo.shared.y)")
-      .appending("&numOfRows=\(numOfRows)")
+      .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")
+      .appending("?stationName=\(observatory)")
+      .appending("&dataTerm=\(dataTerm.rawValue)")
       .appending("&pageNo=\(pageNo)")
+      .appending("&numOfRows=\(numOfRows)")
       .appending("&serviceKey=\(serviceKey)")
+      .appending("&ver=1.1")
     guard let url = URL(string: urlString) else { return }
     networkManager
       .request(url,
                method: .get,
                parameters: nil,
-               headers: [:]) { data, status, error in
+               headers: [:]) { data, status, _ in
                 // 네트워크 상태 코드가 success가 아니면 HTTP 에러를 던짐
                 guard status == .success else {
                   completion(nil, status?.error)

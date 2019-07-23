@@ -11,5 +11,5 @@ import Foundation
 
 struct DummyDustObservatoryManager {
   
-  static let observatoryResponse: ObservatoryResponse = ObservatoryResponse(result: ObservatoryResponse.Result(code: 0, message: "wow"), totalCount: 1, items: [ObservatoryResponse.Item(address: "강남구 강남대로", observatory: "강남대로", distance: 10.0)])
+  static let observatoryResponse: DustAPIObservatoryResponse = DustAPIObservatoryResponse(result: DustAPIObservatoryResponse.Result(code: 0, message: "wow"), totalCount: 1, items: [DustAPIObservatoryResponse.Item(address: "강남구 강남대로", observatory: "강남대로", distance: 10.0)])
 }

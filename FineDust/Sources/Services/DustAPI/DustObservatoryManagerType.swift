@@ -17,7 +17,7 @@ protocol DustObservatoryManagerType: DustManagerType {
   /// numberOfRows는 1, pageNumber는 1.
   func requestObservatory(numberOfRows numOfRows: Int,
                           pageNumber pageNo: Int,
-                          completion: @escaping (ObservatoryResponse?, Error?) -> Void)
+                          completion: @escaping (DustAPIObservatoryResponse?, Error?) -> Void)
   
-  func requestObservatory() -> Observable<ObservatoryResponse>
+  func requestObservatory() -> Observable<DustAPIObservatoryResponse>
 }

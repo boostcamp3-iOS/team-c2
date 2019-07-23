@@ -12,14 +12,10 @@ final class FeedbackService: FeedbackServiceType {
   
   private enum Constant {
     
-    static let resourceName = "DustFeedback"
-    
     static let userDefaultsKey = "isBookmarkedByTitle"
   }
   
-  private let jsonManager: JSONManagerType
-  
-  var feedbackContents: [FeedbackContents] = []
+  private var feedbackContents: [FeedbackContents] = []
   
   var isBookmarkedByTitle: [String: Bool] {
     get {
@@ -30,11 +26,19 @@ final class FeedbackService: FeedbackServiceType {
     }
   }
   
-  init(jsonManager: JSONManagerType = JSONManager()) {
-    self.jsonManager = jsonManager
-    // Todo: 로직 분리
-    guard let feedbackContents = jsonManager.parse(Constant.resourceName, to: [FeedbackContents].self) else { return }
-    self.feedbackContents = feedbackContents
+  init() {
+    fetchFeedbackContents()
+  }
+  
+  func fetchFeedbackContents() {
+    let jsonDecoder = JSONDecoder()
+    guard let path
+      = Bundle.main.path(forResource: "FeedbackContents", ofType: "json") else { return }
+    guard let optionalData = try? String(contentsOfFile: path).data(using: .utf8) else { return }
+    guard let data = optionalData else { return }
+    guard let jsonObject
+      = try? jsonDecoder.decode([FeedbackContents].self, from: data) else { return }
+    feedbackContents = jsonObject
   }
   
   // MARK: - Functions

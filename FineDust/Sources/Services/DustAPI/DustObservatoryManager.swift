@@ -1,5 +1,5 @@
 //
-//  DustInfoManager.swift
+//  DustObservatoryManager.swift
 //  FineDust
 //
 //  Created by Presto on 03/02/2019.
@@ -8,10 +8,9 @@
 
 import Foundation
 
-/// 미세먼지 정보 관련 Dust Manager 클래스.
-final class DustInfoManager: DustInfoManagerType {
-
-  /// 네트워크 매니저.
+/// 관측소 관련 Dust Manager 클래스.
+final class DustObservatoryManager: DustObservatoryManagerType {
+  
   let networkManager: NetworkManagerType
   
   // MARK: Dependency Injection
@@ -20,25 +19,22 @@ final class DustInfoManager: DustInfoManagerType {
     self.networkManager = networkManager
   }
   
-  func request(dataTerm: DustDataTerm,
-               numberOfRows numOfRows: Int,
-               pageNumber pageNo: Int,
-               completion: @escaping (DustResponse?, Error?) -> Void) {
-    let observatory = SharedInfo.shared.observatory.percentEncoded
+  func requestObservatory(numberOfRows numOfRows: Int,
+                          pageNumber pageNo: Int,
+                          completion: @escaping (DustAPIObservatoryResponse?, Error?) -> Void) {
     let urlString = baseURL
-      .appending("/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty")
-      .appending("?stationName=\(observatory)")
-      .appending("&dataTerm=\(dataTerm.rawValue)")
-      .appending("&pageNo=\(pageNo)")
+      .appending("/MsrstnInfoInqireSvc/getNearbyMsrstnList")
+      .appending("?tmX=\(SharedInfo.shared.x)")
+      .appending("&tmY=\(SharedInfo.shared.y)")
       .appending("&numOfRows=\(numOfRows)")
+      .appending("&pageNo=\(pageNo)")
       .appending("&serviceKey=\(serviceKey)")
-      .appending("&ver=1.1")
     guard let url = URL(string: urlString) else { return }
     networkManager
       .request(url,
                method: .get,
                parameters: nil,
-               headers: [:]) { data, status, _ in
+               headers: [:]) { data, status, error in
                 // 네트워크 상태 코드가 success가 아니면 HTTP 에러를 던짐
                 guard status == .success else {
                   completion(nil, status?.error)

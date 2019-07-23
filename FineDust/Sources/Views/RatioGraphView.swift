@@ -16,20 +16,26 @@ final class RatioGraphView: UIView {
   
   @IBOutlet private weak var titleLabel: UILabel!
   
-  @IBOutlet private weak var pieGraphView: RatioPieGraphView!
+  @IBOutlet private weak var separatorView: UIView!
   
-  private lazy var stickGraphView: RatioStickGraphView! = {
-    let view = UIView.instantiate(fromType: RatioStickGraphView.self)
-    addSubview(view) {
+  private let pieGraphView = UIView.instantiate(fromType: RatioPieGraphView.self)
+  
+  private let stickGraphView = UIView.instantiate(fromType: RatioStickGraphView.self)
+  
+  func setup() {
+    addSubview(pieGraphView) {
+      $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+      $0.bottom.equalTo(snp.bottom)
+      $0.leading.equalTo(snp.leading).offset(16)
+      $0.trailing.equalTo(separatorView.snp.leading).offset(16)
+    }
+    addSubview(stickGraphView) {
       $0.top.equalTo(pieGraphView.snp.top)
-      $0.leading.equalTo(pieGraphView.snp.trailing).offset(16)
+      $0.leading.equalTo(separatorView.snp.trailing).offset(16)
       $0.bottom.equalTo(pieGraphView.snp.bottom)
       $0.trailing.equalTo(snp.trailing).offset(16)
     }
-    return view
-  }()
-  
-  func setup() {
+    
     let ratio = dataSource?.intakeRatio ?? .leastNonzeroMagnitude
     let endAngle = ratio * 2 * .pi - .pi / 2
     let averageIntake = Int(Double((dataSource?.totalIntake ?? 1)) / 7)
@@ -38,7 +44,3 @@ final class RatioGraphView: UIView {
     stickGraphView.setup(average: averageIntake, today: todayIntake)
   }
 }
-
-// MARK: - Implement GraphDrawable
-
-extension RatioGraphView: GraphDrawable { }

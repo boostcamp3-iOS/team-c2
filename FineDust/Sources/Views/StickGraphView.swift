@@ -35,59 +35,54 @@ final class StickGraphView: UIView {
   
   weak var dataSource: StickGraphViewDataSource?
   
-  @IBOutlet private weak var dateLabel: UILabel!
-  
   @IBOutlet private weak var titleLabel: UILabel!
-
-  @IBOutlet private var dayLabels: [UILabel]!
   
-  @IBOutlet private weak var graphContainerView: UIView!
-  
-  @IBOutlet private var graphViews: [UIView]! {
-    didSet {
-      for (index, view) in graphViews.enumerated() {
-        view.layer.applyBorder(radius: Layer.radius)
-        view.backgroundColor = graphBackgroundColor(at: index)
-      }
-    }
-  }
+  @IBOutlet private weak var dateLabel: UILabel!
   
   @IBOutlet private var unitLabels: [UILabel]!
   
-  // MARK: Property
+  @IBOutlet private var graphViews: [UIView]!
+
+  @IBOutlet private var dayLabels: [UILabel]!
   
-  /// 기준 날짜로부터 7일간의 미세먼지 흡입량.
+  
   private var intakeAmounts: [Int] {
     return dataSource?.intakes ?? []
   }
   
-  /// 미세먼지 흡입량의 최대값.
-  private var maxValue: Int {
+  private var maxIntakeAmount: Int {
     let max = intakeAmounts.max() ?? 1
     return max
   }
   
-  /// 흡입량 모음을 최대값에 대한 비율로 산출. `1.0 - (비율)`.
   private var intakeRatios: [Double] {
-    return intakeAmounts.map { 1.0 - Double($0) / Double(maxValue) }
+    return intakeAmounts
+      .map { 1.0 - Double($0) / Double(maxIntakeAmount) }
       .map { !$0.canBecomeMultiplier ? 0.01 : $0 }
   }
   
   private var axisTexts: [String] {
-    return ["\(Int(maxValue))", "\(Int(maxValue / 2))", "0"]
+    return ["\(Int(maxIntakeAmount))", "\(Int(maxIntakeAmount / 2))", "0"]
   }
   
   private var dayTexts: [String] {
     let dateFormatter = DateFormatter.day
-    var array = [Date](repeating: Date(), count: 7)
+    var array = [Date](repeating: .init(), count: 7)
     for (index, element) in array.enumerated() {
       array[index] = element.before(days: index)
     }
     var reversed = Array(array.map { dateFormatter.string(from: $0) }.reversed())
-    // 마지막 값을 오늘로 바꿈
     reversed.removeLast()
     reversed.append("오늘")
     return reversed
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    for (index, view) in graphViews.enumerated() {
+      view.layer.applyBorder(radius: Layer.radius)
+      view.backgroundColor = graphBackgroundColor(at: index)
+    }
   }
   
   func setup() {
@@ -127,21 +122,18 @@ private extension StickGraphView {
   
   func animateHeights() {
     for (index, ratio) in intakeRatios.enumerated() {
-      let graphView = graphViews[index]
-      DispatchQueue.main.async {
-        UIView.animate(
-          withDuration: Animation.duration,
-          delay: Animation.delay,
-          usingSpringWithDamping: Animation.damping,
-          initialSpringVelocity: Animation.springVelocity,
-          options: Animation.options,
-          animations: { [weak self] in
-            graphView.snp.updateConstraints { $0.height.equalTo(ratio) }
-            self?.layoutIfNeeded()
-          },
-          completion: nil
-        )
-      }
+      UIView.animate(
+        withDuration: Animation.duration,
+        delay: Animation.delay,
+        usingSpringWithDamping: Animation.damping,
+        initialSpringVelocity: Animation.springVelocity,
+        options: Animation.options,
+        animations: { [weak self] in
+          self?.graphViews[index].snp.updateConstraints { $0.height.equalTo(ratio) }
+          self?.layoutIfNeeded()
+        },
+        completion: nil
+      )
     }
   }
   
@@ -154,10 +146,10 @@ private extension StickGraphView {
   }
   
   func setDateLabel() {
-    dateLabel.text = DateFormatter.localizedDateWithDay.string(from: Date())
+    dateLabel.text = DateFormatter.dateDay.string(from: Date())
   }
   
-  func graphBackgroundColor(at index: Int) -> UIColor? {
+  func graphBackgroundColor(at index: Int) -> UIColor {
     if index == 6 {
       return Asset.graphToday.color
     }

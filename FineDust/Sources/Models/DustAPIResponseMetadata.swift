@@ -8,19 +8,19 @@
 
 import SWXMLHash
 
-struct ResponseHeader: XMLParsingType {
+struct DustAPIResponseMetadata: XMLParsingType {
   
   let code: Int
   
   let message: String
   
-  static func deserialize(_ node: XMLIndexer) throws -> ResponseHeader {
+  static func deserialize(_ node: XMLIndexer) throws -> DustAPIResponseMetadata {
     let headerNode = node["response"]["header"]
     return try .init(code: headerNode["resultCode"].value(),
                      message: headerNode["resultMsg"].value())
   }
   
-  var statusCode: DustAPIResultCode {
+  var resultCode: DustAPIResultCode {
     return DustAPIResultCode(rawValue: code) ?? .default
   }
 }

@@ -30,6 +30,8 @@ final class RatioStickGraphView: UIView {
     static let options: UIView.AnimationOptions = [.curveEaseInOut]
   }
   
+  @IBOutlet private weak var percentLabel: UILabel!
+  
   @IBOutlet private weak var averageIntakeLabel: UILabel!
   
   @IBOutlet private weak var todayIntakeLabel: UILabel!
@@ -38,7 +40,6 @@ final class RatioStickGraphView: UIView {
     
   @IBOutlet private weak var todayIntakeGraphView: UIView!
   
-  @IBOutlet private weak var percentLabel: UILabel!
   
   @IBOutlet private weak var weeklyAverageLabel: UILabel!
   
@@ -108,14 +109,5 @@ extension RatioStickGraphView: GraphDrawable {
     percentLabel.text = "\(Int(ratio))%"
     averageIntakeLabel.text = "\(averageIntake)"
     todayIntakeLabel.text = "\(todayIntake)"
-  }
-}
-
-// MARK: - Private Method
-
-private extension RatioStickGraphView {
-  
-  func animateGraphViews() {
-    
   }
 }

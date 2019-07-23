@@ -236,7 +236,6 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="dateLabel" destination="jWV-sT-069" id="4Zd-DL-ibJ"/>
-                <outlet property="graphContainerView" destination="czD-Mk-e1B" id="7pR-PN-Bdi"/>
                 <outlet property="titleLabel" destination="zGk-lF-LjL" id="uGg-to-hLd"/>
                 <outletCollection property="dayLabels" destination="SlF-r1-i3D" collectionClass="NSMutableArray" id="JIF-Ya-FgF"/>
                 <outletCollection property="dayLabels" destination="AyM-rU-hZW" collectionClass="NSMutableArray" id="y3n-xh-UXh"/>
@@ -248,13 +247,6 @@
                 <outletCollection property="unitLabels" destination="TNY-bg-eYG" collectionClass="NSMutableArray" id="dus-ss-J2I"/>
                 <outletCollection property="unitLabels" destination="uoD-Vs-whU" collectionClass="NSMutableArray" id="GV5-H3-LDp"/>
                 <outletCollection property="unitLabels" destination="71e-Yt-tP4" collectionClass="NSMutableArray" id="XOP-2I-soC"/>
-                <outletCollection property="graphViewHeightConstraints" destination="6gS-O2-ag2" collectionClass="NSMutableArray" id="Ljt-nw-V14"/>
-                <outletCollection property="graphViewHeightConstraints" destination="Q4f-Jj-onM" collectionClass="NSMutableArray" id="eVV-rg-TrL"/>
-                <outletCollection property="graphViewHeightConstraints" destination="bsT-r8-yXb" collectionClass="NSMutableArray" id="tbn-wE-OmR"/>
-                <outletCollection property="graphViewHeightConstraints" destination="25b-jm-0n9" collectionClass="NSMutableArray" id="hGL-dN-dU3"/>
-                <outletCollection property="graphViewHeightConstraints" destination="nZV-Ol-BP8" collectionClass="NSMutableArray" id="4Vk-JR-mhu"/>
-                <outletCollection property="graphViewHeightConstraints" destination="MZe-CI-15e" collectionClass="NSMutableArray" id="aJW-6A-BCW"/>
-                <outletCollection property="graphViewHeightConstraints" destination="FIz-HZ-EQX" collectionClass="NSMutableArray" id="cAK-bb-Ifd"/>
                 <outletCollection property="graphViews" destination="IIM-JL-cY6" collectionClass="NSMutableArray" id="XXO-vi-SmN"/>
                 <outletCollection property="graphViews" destination="8Xw-k6-T3B" collectionClass="NSMutableArray" id="603-yF-nj9"/>
                 <outletCollection property="graphViews" destination="gjd-4Y-DFt" collectionClass="NSMutableArray" id="IL1-I5-Umg"/>

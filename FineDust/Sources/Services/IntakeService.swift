@@ -17,14 +17,26 @@ final class IntakeService: IntakeServiceType {
   
   private let dustInfoService: DustInfoServiceType
   
-  private let coreDataService: CoreDataServiceType
+  private let persistenceService: PersistenceServiceType
   
   init(healthKitService: HealthKitServiceType = HealthKitService(),
        dustInfoService: DustInfoServiceType = DustInfoService(),
-       coreDataService: CoreDataServiceType = CoreDataService()) {
+       persistenceService: PersistenceServiceType = PersistenceService()) {
     self.healthKitService = healthKitService
     self.dustInfoService = dustInfoService
-    self.coreDataService = coreDataService
+    self.persistenceService = persistenceService
+  }
+  
+  func requestTodayIntake() -> Observable<DustIntake> {
+    return .create { observer in
+      return Disposables.create()
+    }
+  }
+  
+  func requestIntakesInWeek() -> Observable<[DustIntake]> {
+    return .create { observer in
+      return Disposables.create()
+    }
   }
   
   func requestTodayIntake(completion: @escaping (Int?, Int?, Error?) -> Void) {

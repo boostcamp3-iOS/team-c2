@@ -41,7 +41,7 @@ final class DustInfoService: DustInfoServiceType {
             fineDustGrade: DustGrade(rawValue: recentResponse.fineDustGrade) ?? .default,
             ultraFineDustGrade: DustGrade(rawValue: recentResponse.ultrafineDustGrade) ?? .default,
             updatedTime: DateFormatter
-              .dateAndTimeForDust.date(from: recentResponse.dataTime) ?? Date()
+              .dateTime.date(from: recentResponse.dataTime) ?? Date()
           )
           debugLog("최신 대기 오염 데이터 가져오기 성공.")
           debugLog(dustInfo)
@@ -128,7 +128,7 @@ private extension DustInfoService {
   ///
   /// 24시가 오면 0시로 바꿈.
   func hourInDustDate(_ dateString: String) -> (hour: Hour, isMidnight: Bool) {
-    if let dataTimeToDate = DateFormatter.dateAndTimeForDust.date(from: dateString) {
+    if let dataTimeToDate = DateFormatter.dateTime.date(from: dateString) {
       let hourToString = DateFormatter.hour.string(from: dataTimeToDate)
       let hourToInt = Int(hourToString) ?? 0
       return (Hour(rawValue: hourToInt) ?? .default, false)
@@ -139,11 +139,11 @@ private extension DustInfoService {
   
   /// 미세먼지 `dataTime`으로부터 키값에 사용할 기준 `Date`를 뽑아냄.
   func referenceDate(_ dateString: String) -> Date {
-    if let dateTimeToDate = DateFormatter.dateAndTimeForDust.date(from: dateString) {
+    if let dateTimeToDate = DateFormatter.dateTime.date(from: dateString) {
       return dateTimeToDate.start
     } else {
       let halfDataTime = dateString.components(separatedBy: " ").first ?? ""
-      let halfDataTimeToDate = DateFormatter.dateForDust.date(from: halfDataTime)
+      let halfDataTimeToDate = DateFormatter.date.date(from: halfDataTime)
       let nextHalfDataTime = halfDataTimeToDate?.after(days: 1)
       return nextHalfDataTime?.start ?? Date()
     }

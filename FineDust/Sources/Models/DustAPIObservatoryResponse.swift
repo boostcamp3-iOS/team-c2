@@ -8,7 +8,7 @@
 
 import SWXMLHash
 
-struct ObservatoryResponse: XMLParsingType {
+struct DustAPIObservatoryResponse: XMLParsingType {
   
   struct Result: XMLIndexerDeserializable {
     
@@ -43,7 +43,7 @@ struct ObservatoryResponse: XMLParsingType {
   
   let items: [Item]
   
-  static func deserialize(_ node: XMLIndexer) throws -> ObservatoryResponse {
+  static func deserialize(_ node: XMLIndexer) throws -> DustAPIObservatoryResponse {
     let responseNode = node["response"]
     let bodyNode = responseNode["body"]
     return try .init(result: responseNode["header"].value(),
@@ -55,7 +55,7 @@ struct ObservatoryResponse: XMLParsingType {
     return items.first?.observatory
   }
   
-  var statusCode: DustAPIResultCode {
-    return DustAPIResultCode(rawValue: result.code) ?? .default
+  var resultCode: DustAPIResultCode {
+    return DustAPIResultCode(rawValue: result.code) ?? .none
   }
 }

@@ -9,25 +9,10 @@
 import Foundation
 import UIKit
 
-/// 흡입량을 호출하는 프로토콜.
 protocol IntakeRequestable: class {
-  
-  /// IntakeServiceType 프로토콜을 준수하는 모듈.
-  var intakeService: IntakeServiceType? { get set }
-  
-  /// CoreDataServiceType 프로토콜을 준수하는 모듈.
-  var coreDataService: CoreDataServiceType? { get set }
-  
-  /// 의존성 주입.
-  func injectDependency(_ intakeService: IntakeServiceType,
-                        _ coreDataService: CoreDataServiceType)
-  
-  /// 흡입량 요청.
-  ///
-  /// - Parameter completion: 일주일 미세먼지 / 일주일 초미세먼지 / 오늘 미세먼지 / 오늘 초미세먼지 / 에러
+
   func requestIntake(completion: @escaping (IntakeData?, Error?) -> Void)
   
-  /// 흡입량 요청 핸들러.
   var requestIntakeHandler: (IntakeData?, Error?) -> Void { get }
 }
 

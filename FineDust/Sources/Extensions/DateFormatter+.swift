@@ -10,47 +10,29 @@ import Foundation
 
 extension DateFormatter {
   
-  /// 미세먼지 API의 날짜 파싱을 위한 날짜 및 시간 데이트 포매터. `yyyy-MM-dd HH:mm`
-  ///
-  /// `2019-01-01 12:00`
-  static let dateAndTimeForDust: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    return formatter
-  }()
+  /// `yyyy-MM-dd HH:mm`
+  static let dateTime = DateFormatter().then {
+    $0.dateFormat = "yyyy-MM-dd HH:mm"
+  }
   
-  /// 요일을 포함하여 로컬라이징된 데이트 포매터. `yyyy년 M월 d일 EEEE`
-  ///
-  /// `2019년 1월 1일 일요일`
-  static let localizedDateWithDay: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    formatter.timeStyle = .none
-    return formatter
-  }()
+  /// `yyyy년 M월 d일 EEEE`
+  static let dateDay = DateFormatter().then {
+    $0.dateStyle = .long
+    $0.timeStyle = .none
+  }
   
-  /// 미세먼지 API의 날짜 파싱을 위한 날짜 데이트 포매터. `yyyy-MM-dd`
-  ///
-  /// `2019-01-01`
-  static let dateForDust: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter
-  }()
+  /// `yyyy-MM-dd`
+  static let date = DateFormatter().then {
+    $0.dateFormat = "yyyy-MM-dd"
+  }
   
-  /// 시간 데이트 포매터. `HH`
-  ///
-  /// `12`
-  static let hour: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH"
-    return formatter
-  }()
+  /// `HH`
+  static let hour = DateFormatter().then {
+    $0.dateFormat = "HH"
+  }
   
-  /// 요일 데이터 포매터. `d`
-  static let day: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "d"
-    return formatter
-  }()
+  /// `d`
+  static let day = DateFormatter().then {
+    $0.dateFormat = "d"
+  }
 }

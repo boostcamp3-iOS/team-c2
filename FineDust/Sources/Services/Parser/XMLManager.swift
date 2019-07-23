@@ -21,16 +21,16 @@ final class XMLManager: XMLManagerType {
     do {
       // 먼저 헤더 정보를 파싱하여 미세먼지 에러 정보를 빼냄
       // 성공이 아니면 그에 해당하는 에러를 내려줌
-      let headerResponse: ResponseHeader = try xmlDecoder.parse(data)
-      guard headerResponse.statusCode == .success else {
-        completion(headerResponse as? T, headerResponse.statusCode.error)
+      let headerResponse: DustAPIResponseMetadata = try xmlDecoder.parse(data)
+      guard headerResponse.resultCode == .success else {
+        completion(headerResponse as? T, headerResponse.resultCode.error)
         return
       }
       // 특정 타입으로 파싱함
       // 성공이 아니면 그에 해당하는 에러를 내려줌
       let response: T = try xmlDecoder.parse(data)
-      guard response.statusCode == .success else {
-        completion(response, response.statusCode.error)
+      guard response.resultCode == .success else {
+        completion(response, response.resultCode.error)
         return
       }
       // 모두 성공하면 파싱된 데이터를 내려줌

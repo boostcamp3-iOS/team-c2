@@ -15,9 +15,7 @@ final class RatioPieGraphView: UIView {
     static let lineWidth: CGFloat = 10.0
   }
   
-  private let percentLabel = UILabel().then {
-    $0.font = .systemFont(ofSize: 20, weight: .semibold)
-  }
+  @IBOutlet private weak var percentLabel: UILabel!
   
   private var ratio: Double = 0
   
@@ -60,9 +58,7 @@ private extension RatioPieGraphView {
   
   func makeEntireShapeLayer() -> CAShapeLayer {
     let shapeLayer = makeCircleLayer(fillColor: .clear,
-                                     strokeColor: Asset.graph1.color,
-                                     strokeEnd: 1,
-                                     ratio: 1)
+                                     strokeColor: Asset.graph1.color)
     return shapeLayer
   }
   
@@ -82,8 +78,8 @@ private extension RatioPieGraphView {
   
   func makeCircleLayer(fillColor: UIColor,
                        strokeColor: UIColor,
-                       strokeEnd: CGFloat,
-                       ratio: CGFloat) -> CAShapeLayer {
+                       strokeEnd: CGFloat = 1,
+                       ratio: CGFloat = 1) -> CAShapeLayer {
     let graphViewHeight = bounds.width * 0.8
     let path = UIBezierPath(arcCenter: .init(x: bounds.width / 2,
                                              y: bounds.height / 2),

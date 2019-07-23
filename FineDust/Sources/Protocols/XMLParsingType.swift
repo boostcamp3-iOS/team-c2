@@ -10,5 +10,5 @@ import SWXMLHash
 
 protocol XMLParsingType: XMLIndexerDeserializable {
   
-  var statusCode: DustAPIResultCode { get }
+  var resultCode: DustAPIResultCode { get }
 }

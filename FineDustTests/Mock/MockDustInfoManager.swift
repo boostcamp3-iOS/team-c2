@@ -13,11 +13,11 @@ class MockDustInfoManager: DustInfoManagerType {
   
   var networkManager: NetworkManagerType?
   
-  var dustResponse: DustResponse?
+  var dustResponse: DustAPIInfoResponse?
   
   var error: Error?
   
-  func request(dataTerm: DustDataTerm, numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (DustResponse?, Error?) -> Void) {
+  func request(dataTerm: DustDataTerm, numberOfRows numOfRows: Int, pageNumber pageNo: Int, completion: @escaping (DustAPIInfoResponse?, Error?) -> Void) {
     completion(dustResponse, error)
   }
 }
